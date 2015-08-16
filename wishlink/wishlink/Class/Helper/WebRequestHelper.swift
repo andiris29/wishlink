@@ -15,122 +15,68 @@ import Foundation
 }
 
 import UIKit
+
 let SERVICE_ROOT_PATH = "http://idphoto.edonesoft.com/clientapi/"
 class WebRequestHelper:NSObject {
     
     var mydelegate:WebRequestDelegate?
     
-    func generateRequest(relative:String)->NSMutableURLRequest
-    {
-        var oriUrl = SERVICE_ROOT_PATH + relative
-        var strUrl = oriUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        var url:NSURL = NSURL(string: strUrl!)!
-        var token = AppConfig.sharedAppConfig.getAuthorizationString()
-        
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        //添加请求header
-        request.setValue("application/json;charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.addValue(token, forHTTPHeaderField: "Authorization")
-        
-        NSLog("Request URL: %@", url);
-        NSLog("Request Authorization: %@", token);
-        return request;
-    }
     
-    func httpPostApi(apiname:String,body:String,tag:Int)
+    let encoding = ParameterEncoding.JSON;
+    let headers = [
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "SCLE8FC355DFBB31468392958EE5A16F7C2C"
+    ];
+    
+    /*
+    执行一个Post方式的Http请求
+    */
+    func httpPostApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int)
     {
-        
-        var request:NSMutableURLRequest = self.generateRequest(apiname);
-        request.HTTPMethod = "POST";
-        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true);
-        NSLog("Request Body: %@", body);
-        
-        //跳过证书认证
-        var securityPolicy : AFSecurityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.None)
-        securityPolicy.allowInvalidCertificates = true;
-        //创建请求操作
-        var operation:AFHTTPRequestOperation = AFHTTPRequestOperation(request: request);
-        //设置安全级别
-        operation.securityPolicy = securityPolicy;
-        
-        operation.setCompletionBlockWithSuccess({
-            (operation:AFHTTPRequestOperation! , responseObject:AnyObject!) in
+        var apiurl = SERVICE_ROOT_PATH + apiName
+        request(.POST, apiurl, parameters: parameters, encoding: self.encoding, headers: self.headers).responseJSON() {
+            (_, _, data, error) in
             
-            self.handleHttpResponse(responseObject, tag: tag)
-            
-            },
-            failure: {
-                (operation:AFHTTPRequestOperation! , error:NSError!) in
+            if(error == nil)
+            {
+                self.handleHttpResponse(data!, tag: tag)
+            }
+            else
+            {
                 self.mydelegate?.requestDataFailed("网络不给力哦");
-                
-        })
-        operation.start()
+            }
+            
+        }
     }
-    
-    func httpGetApi(apiname:String,tag:Int)
+    /*
+    执行一个Get方式的Http请求
+    */
+    func httpGetApi(apiName:String,tag:Int)
     {
-        var request:NSMutableURLRequest = self.generateRequest(apiname);
-        request.HTTPMethod = "GET";
-        
-        //跳过证书认证
-        var securityPolicy : AFSecurityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.None)
-        securityPolicy.allowInvalidCertificates = true;
-        //创建请求操作
-        var operation:AFHTTPRequestOperation = AFHTTPRequestOperation(request: request);
-        //设置安全级别
-        operation.securityPolicy = securityPolicy;
-        
-        operation.setCompletionBlockWithSuccess({
-            (operation:AFHTTPRequestOperation! , responseObject:AnyObject!) in
+        var apiurl = SERVICE_ROOT_PATH + apiName
+        request(.GET, apiurl, parameters: nil, encoding: self.encoding, headers: self.headers).responseJSON() {
+            (_, _, data, error) in
             
-         
-            self.handleHttpResponse(responseObject, tag: tag)
-            
-            },
-            failure: {
-                (operation:AFHTTPRequestOperation! , error:NSError!) in
+            if(error == nil)
+            {
+                self.handleHttpResponse(data!, tag: tag)
+            }
+            else
+            {
                 self.mydelegate?.requestDataFailed("网络不给力哦");
-                
-        })
-        operation.start()
-    }
-    
-    func uploadImage(imageData:NSData,tag:Int)
-    {
-        var request:NSMutableURLRequest = self.generateRequest("system/upload/image?ext=png");
-        request.HTTPMethod = "POST";
-        request.HTTPBody = imageData;
-        //跳过证书认证
-        var securityPolicy : AFSecurityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.None)
-        securityPolicy.allowInvalidCertificates = true;
-        //创建请求操作
-        var operation:AFHTTPRequestOperation = AFHTTPRequestOperation(request: request);
-        //设置安全级别
-        operation.securityPolicy = securityPolicy;
-        
-        operation.setCompletionBlockWithSuccess({
-            (operation:AFHTTPRequestOperation! , responseObject:AnyObject!) in
+            }
             
-            self.handleHttpResponse(responseObject, tag: tag)
-            
-            },
-            failure: {
-                (operation:AFHTTPRequestOperation! , error:NSError!) in
-                self.mydelegate?.requestDataFailed("网络不给力哦");
-                
-        })
-        operation.start()
+        }
+
     }
+    /*
+    请求成功后，解析结果JSON公共部分
     
-    
+    */
     func handleHttpResponse(body:AnyObject,tag:Int)
     {
-        
-        
-        var varData = body as! NSData;
-        var datastring = NSString(data:varData, encoding:NSUTF8StringEncoding) as! String
-        println("response:\r\n"+datastring);
-        let dataDir:NSDictionary = datastring.objectFromJSONString() as! NSDictionary
+        println(body);
+        let dataDir:NSDictionary = body as! NSDictionary
         
         
         if(dataDir.count == 0 || dataDir.objectForKey("Code") == nil)
@@ -162,70 +108,15 @@ class WebRequestHelper:NSObject {
         }
         
     }
-    func downloadImg(url:String,tag:Int)
-    {
-        var  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-        //判断文件路径是否存在，不存在则创建
-        var imagepath:String = UIHelper.getCachedFilePath("cachedimages");
-        
-        var fm:NSFileManager = NSFileManager.defaultManager();
-        if(!fm.fileExistsAtPath(imagepath))
-        {
-            fm.createDirectoryAtPath(imagepath, withIntermediateDirectories: true, attributes: nil, error: nil)
-        }
-        //检测本读是否有该图片缓存
-        imagepath = imagepath+"/"+encodeName
-        var image = UIImage(contentsOfFile: imagepath);
-        if (image != nil) {
-            
-            self.mydelegate?.complateImgDownload!(tag, downloadImg: image!)
-            //iv.image = image;
-            return;
-        }
-        
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url)!);
-        request.HTTPMethod = "GET";
-        
-        //跳过证书认证
-        var securityPolicy : AFSecurityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.None)
-        securityPolicy.allowInvalidCertificates = true;
-        //创建请求操作
-        var operation:AFHTTPRequestOperation = AFHTTPRequestOperation(request: request);
-        //设置安全级别
-        operation.securityPolicy = securityPolicy;
-        
-        operation.setCompletionBlockWithSuccess({
-            
-            
-            (operation:AFHTTPRequestOperation! , responseObject:AnyObject!) in
-            
-            (responseObject as! NSData).writeToFile(imagepath, atomically: true)
-            
-            var image = UIImage(data: responseObject as! NSData)
-            NSLog("Write to file:%@", imagepath);
-            //显示图片
-            if (image != nil) {
-                self.mydelegate?.complateImgDownload!(tag, downloadImg: image!)
-                
-            } else {
-                self.mydelegate?.requestDataFailed("下载的图片格式有问题！")
-            }
-            },
-            failure: {
-                
-                (operation:AFHTTPRequestOperation! , error:NSError!) in
-                self.mydelegate?.requestDataFailed(error.description)
-                NSLog("Download image failed: %@", error.description);
-                
-        })
-        operation.start()
-        
-        
-        
-    }
     
     /*
-    下载网络图片并加载ImageView中，仅第一次下载，第二次开始读区缓存
+    下载网络图片并加载ImageView中，
+    仅第一次下载，第二次开始读区缓存
+    
+    参数：
+    iv:显示下载后图片的UIimageView
+    url:图片的url
+    defaultName：如果下载失败，则所加载的默认图片名称
     
     */
     func renderImageView(iv:UIImageView,url:String,defaultName:String)
@@ -247,48 +138,25 @@ class WebRequestHelper:NSObject {
             return;
         }
         
-        
-        
-        
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: url)!);
-        request.HTTPMethod = "GET";
-        
-        //跳过证书认证
-        var securityPolicy : AFSecurityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.None)
-        securityPolicy.allowInvalidCertificates = true;
-        //创建请求操作
-        var operation:AFHTTPRequestOperation = AFHTTPRequestOperation(request: request);
-        //设置安全级别
-        operation.securityPolicy = securityPolicy;
-        
-        operation.setCompletionBlockWithSuccess({
+        request(.GET, url, parameters: nil, encoding: self.encoding, headers: self.headers).responseJSON() {
+            (_, _, data, error) in
             
-            
-            (operation:AFHTTPRequestOperation! , responseObject:AnyObject!) in
-            
-            (responseObject as! NSData).writeToFile(imagepath, atomically: true)
-            
-            var image = UIImage(data: responseObject as! NSData)
-            NSLog("Write to file:%@", imagepath);
-            //显示图片
-            if (image != nil) {
-                iv.image = image;
-            } else {
-                iv.image = UIHelper.getBundledImage(defaultName)
+            if(error == nil)
+            {
+                var image = UIImage(data: data as! NSData)
+                NSLog("Write to file:%@", imagepath);
+                //显示图片
+                if (image != nil) {
+                    iv.image = image;
+                } else {
+                    iv.image = UIHelper.getBundledImage(defaultName)
+                }
             }
-            },
-            failure: {
-                
-                (operation:AFHTTPRequestOperation! , error:NSError!) in
-                
+            else
+            {
                 iv.image = UIImage(named: defaultName) //UIHelper.getBundledImage(defaultName)
-                NSLog("Download image failed: %@", error.description);
-                
-        })
-        operation.start()
-        
+                NSLog("Download image failed: %@", error!.description);
+            }
+        }
     }
-    
-    
-    
 }

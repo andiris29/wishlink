@@ -7,18 +7,24 @@
 //
 
 import Foundation
+import UIKit
 class UIHelper {
     
     
     //系统主色调{大部分字体颜色 }
     static var mainColor:UIColor = UIColor(red: 88.0/255.0, green: 140.0/255.0, blue: 236.0/255.0, alpha: 1)
     
-    
+    /*
+    将图片转换成64位编码
+    */
     static func imageToBase64(image:UIImage )->String {
         var imageData:NSData = UIImageJPEGRepresentation(image, 1)
         return imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
     }
 
+    /*
+    获取缓存路径
+    */
     static func getCachedFilePath(relative:String)->String!
     {
         var strResult = "";
@@ -28,6 +34,9 @@ class UIHelper {
         return strResult
         
     }
+    /*
+    根据图片名称在bundle中搜索该图片
+    */
     static func getBundledImage(name:String)->UIImage
     {
         

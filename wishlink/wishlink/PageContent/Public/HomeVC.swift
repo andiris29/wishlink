@@ -46,12 +46,13 @@ class HomeVC: RootVC,WebRequestDelegate {
     //请求成功的回调
     func requestDataComplete(response:AnyObject,tag:Int)
     {
+        
         if(tag == 10)
         {
             println("处理后的数据："+response.description);
-         
         }
     }
+    
     /*
     请求失败的回调
     */
