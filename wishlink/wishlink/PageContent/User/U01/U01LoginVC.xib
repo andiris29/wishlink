@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U01LoginVC" customModule="wishlink" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u01-BG" translatesAutoresizingMaskIntoConstraints="NO" id="IvB-nj-5A2" userLabel="bgImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u01-logo" translatesAutoresizingMaskIntoConstraints="NO" id="6q7-WB-P53" userLabel="wishLink">
+                    <rect key="frame" x="73" y="131" width="229" height="32"/>
+                </imageView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02x-8d-Pby" userLabel="centerLine">
+                    <rect key="frame" x="0.0" y="333" width="375" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="0Fh-HS-Sci"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1se-59-LEa" userLabel="weiXin">
+                    <rect key="frame" x="95" y="314" width="185" height="44"/>
+                    <state key="normal" backgroundImage="u01-weixin">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="u01-weixinW"/>
+                    <connections>
+                        <action selector="weiXinLoginAction:" destination="-1" eventType="touchUpInside" id="W0P-yH-bXI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYF-d1-EpW">
+                    <rect key="frame" x="128" y="582" width="119" height="30"/>
+                    <state key="normal" title="跳过，随便看看 &gt;">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="skipAction:" destination="-1" eventType="touchUpInside" id="EHC-En-VC1"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzS-U2-3Ii" userLabel="weiBo">
+                    <rect key="frame" x="95" y="393" width="185" height="44"/>
+                    <state key="normal" backgroundImage="u01-weibo">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="u01-weiboW"/>
+                    <connections>
+                        <action selector="weiBoLoginAction:" destination="-1" eventType="touchUpInside" id="TVz-RP-9ne"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="IvB-nj-5A2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BbQ-KK-B7g"/>
+                <constraint firstAttribute="trailing" secondItem="02x-8d-Pby" secondAttribute="trailing" id="EGJ-jL-FeC"/>
+                <constraint firstItem="02x-8d-Pby" firstAttribute="top" secondItem="6q7-WB-P53" secondAttribute="bottom" constant="170" id="FeF-21-jVh"/>
+                <constraint firstAttribute="bottom" secondItem="IvB-nj-5A2" secondAttribute="bottom" id="NTE-4t-Hg1"/>
+                <constraint firstItem="IvB-nj-5A2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="R3c-7d-c1S"/>
+                <constraint firstAttribute="centerX" secondItem="mYF-d1-EpW" secondAttribute="centerX" id="RZf-p2-nmQ"/>
+                <constraint firstAttribute="centerX" secondItem="xzS-U2-3Ii" secondAttribute="centerX" id="Tzg-jJ-wPn"/>
+                <constraint firstItem="xzS-U2-3Ii" firstAttribute="top" secondItem="1se-59-LEa" secondAttribute="bottom" constant="35" id="XeL-ey-BmI"/>
+                <constraint firstAttribute="centerX" secondItem="6q7-WB-P53" secondAttribute="centerX" id="Yac-K4-uJR"/>
+                <constraint firstAttribute="bottom" secondItem="mYF-d1-EpW" secondAttribute="bottom" constant="55" id="Z0f-C8-CnM"/>
+                <constraint firstAttribute="centerY" secondItem="02x-8d-Pby" secondAttribute="centerY" id="ZRk-Jj-xRe"/>
+                <constraint firstAttribute="centerX" secondItem="1se-59-LEa" secondAttribute="centerX" id="b98-Yk-2IA"/>
+                <constraint firstItem="1se-59-LEa" firstAttribute="top" secondItem="02x-8d-Pby" secondAttribute="bottom" constant="-20" id="j14-tg-4e5"/>
+                <constraint firstItem="02x-8d-Pby" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jsf-rp-ob9"/>
+                <constraint firstAttribute="trailing" secondItem="IvB-nj-5A2" secondAttribute="trailing" id="uc6-5M-naY"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="u01-BG" width="320" height="568"/>
+        <image name="u01-logo" width="229" height="32"/>
+        <image name="u01-weibo" width="185" height="44"/>
+        <image name="u01-weiboW" width="185" height="44"/>
+        <image name="u01-weixin" width="185" height="44"/>
+        <image name="u01-weixinW" width="185" height="44"/>
+    </resources>
+</document>
