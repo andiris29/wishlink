@@ -42,6 +42,7 @@ class TabBarVC: UITabBarController {
         searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "search")!, selectedImage: UIImage(named: "search-p")!);
 
         var mineVC = U02UserVC(nibName: "U02UserVC", bundle: NSBundle.mainBundle())
+        var mineNav = NavigationPageVC(rootViewController: mineVC)
         mineVC.tabBarItem = UITabBarItem.tabBarItem("我的", image: UIImage(named: "me")!, selectedImage: UIImage(named: "me-p")!)
 
         
@@ -49,7 +50,7 @@ class TabBarVC: UITabBarController {
         self.addChildViewController(hotVC)
         self.addChildViewController(releaseVC)
         self.addChildViewController(searchVC)
-        self.addChildViewController(mineVC)
+        self.addChildViewController(mineNav)
         
     }
     /*

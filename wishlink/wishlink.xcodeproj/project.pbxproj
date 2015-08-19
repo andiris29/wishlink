@@ -18,6 +18,8 @@
 		76B992511B8338D100834747 /* U02TradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B9924F1B8338D100834747 /* U02TradeCell.xib */; };
 		76B992541B833AB900834747 /* U02ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B992521B833AB900834747 /* U02ItemCell.swift */; };
 		76B992551B833AB900834747 /* U02ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76B992531B833AB900834747 /* U02ItemCell.xib */; };
+		76F061621B84CC5F00776EF6 /* U03SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F061601B84CC5F00776EF6 /* U03SettingVC.swift */; };
+		76F061631B84CC5F00776EF6 /* U03SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F061611B84CC5F00776EF6 /* U03SettingVC.xib */; };
 		A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1043DF91B7F787A007A237C /* AppDelegate.swift */; };
 		A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1043E021B7F787A007A237C /* LaunchScreen.xib */; };
 		A1043E101B7F787A007A237C /* wishlinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1043E0F1B7F787A007A237C /* wishlinkTests.swift */; };
@@ -65,6 +67,8 @@
 		76B9924F1B8338D100834747 /* U02TradeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02TradeCell.xib; sourceTree = "<group>"; };
 		76B992521B833AB900834747 /* U02ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02ItemCell.swift; sourceTree = "<group>"; };
 		76B992531B833AB900834747 /* U02ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02ItemCell.xib; sourceTree = "<group>"; };
+		76F061601B84CC5F00776EF6 /* U03SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03SettingVC.swift; sourceTree = "<group>"; };
+		76F061611B84CC5F00776EF6 /* U03SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03SettingVC.xib; sourceTree = "<group>"; };
 		A1043DF41B7F787A007A237C /* wishlink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wishlink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1043DF81B7F787A007A237C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1043DF91B7F787A007A237C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		769C76FE1B81E9C500A7FF9E /* U03 */ = {
 			isa = PBXGroup;
 			children = (
+				76F061601B84CC5F00776EF6 /* U03SettingVC.swift */,
+				76F061611B84CC5F00776EF6 /* U03SettingVC.xib */,
 			);
 			path = U03;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F061631B84CC5F00776EF6 /* U03SettingVC.xib in Resources */,
 				A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */,
 				769C77061B820CA800A7FF9E /* Images.xcassets in Resources */,
 				76B992511B8338D100834747 /* U02TradeCell.xib in Resources */,
@@ -437,6 +444,7 @@
 				A15D893D1B806F6400BC66DE /* Upload.swift in Sources */,
 				769C77091B8210BF00A7FF9E /* U02UserVC.swift in Sources */,
 				769C77011B8209D900A7FF9E /* U01LoginVC.swift in Sources */,
+				76F061621B84CC5F00776EF6 /* U03SettingVC.swift in Sources */,
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,

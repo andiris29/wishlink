@@ -31,6 +31,7 @@ class U02UserVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegateFlo
     let itemCellIde = "U02ItemCell"
     let tradeCellIde = "U02TradeCell"
     var cellType: CollectionViewCellType = .CollectionViewCellTypeTrade
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,11 @@ class U02UserVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegateFlo
 //        self.selectedBtn = self.sellerBtn
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.hidden = true
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
@@ -117,6 +123,10 @@ class U02UserVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegateFlo
         self.collectionView.reloadData()
     }
     
+    @IBAction func settingBtnAction(sender: AnyObject) {
+        var vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     // MARK: - prive method
     
     func prepareCollectionView() {
