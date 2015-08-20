@@ -26,6 +26,8 @@ class RootVC: UIViewController {
             self.edgesForExtendedLayout = UIRectEdge.None
             self.automaticallyAdjustsScrollViewInsets = false;
         }
+        
+
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {

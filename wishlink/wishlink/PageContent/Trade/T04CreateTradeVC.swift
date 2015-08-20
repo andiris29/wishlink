@@ -12,10 +12,14 @@ class T04CreateTradeVC: RootVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+      self.navigationController?.navigationBarHidden = true;
+    }
+
 
     /*
     // MARK: - Navigation
@@ -27,4 +31,10 @@ class T04CreateTradeVC: RootVC {
     }
     */
 
+    @IBAction func btnAction(sender: UIButton) {
+    
+        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+        self.navigationController?.pushViewController(vc, animated: true);
+
+    }
 }

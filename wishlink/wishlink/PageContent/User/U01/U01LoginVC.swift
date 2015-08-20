@@ -46,6 +46,8 @@ class U01LoginVC: RootVC {
     
     @IBAction func skipAction(sender: AnyObject) {
         println("跳过")
+        APPCONFIG.AccessToken = "temp_token";
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     // MARK: - prive method

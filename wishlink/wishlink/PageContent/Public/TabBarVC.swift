@@ -27,16 +27,18 @@ class TabBarVC: UITabBarController {
     
     func addAllChildControllers() {
         
-        var hotVC =  HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
+        var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         hotVC.view.backgroundColor = UIColor.yellowColor()
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
         var hotNav =  NavigationPageVC(rootViewController: hotVC)
         
         
-        var releaseVC = UIViewController();
-        releaseVC.view.backgroundColor = UIColor.redColor()
+        var releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
+//        releaseVC.view.backgroundColor = UIColor.redColor()
         releaseVC.tabBarItem.title = "发布"
         releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "Release")!, selectedImage: UIImage(named: "Release-p")!);
+        var createNav =  NavigationPageVC(rootViewController: releaseVC)
+        
         
         var searchVC = UIViewController()
         searchVC.view.backgroundColor = UIColor.blueColor()
@@ -50,7 +52,7 @@ class TabBarVC: UITabBarController {
         
         
         self.addChildViewController(hotNav)
-        self.addChildViewController(releaseVC)
+        self.addChildViewController(createNav)
         self.addChildViewController(searchVC)
         self.addChildViewController(mineNav)
         

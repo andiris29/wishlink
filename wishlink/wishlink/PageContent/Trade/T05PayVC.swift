@@ -22,7 +22,8 @@ class T05PayVC: RootVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.navigationController?.navigationBarHidden = true;
         // Do any additional setup after loading the view.
     }
 
@@ -34,6 +35,10 @@ class T05PayVC: RootVC {
         } else if sender.tag == selectedButtonZFBTag {
             
         }
+    }
+    @IBAction func btnPayTapped(sender: UIButton) {
+        var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+        self.navigationController?.pushViewController(vc, animated: true);
     }
     
     @IBAction func incrlineOrDecreingButtonPay(sender: UIButton) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T02HotListVC: UIViewController {
+class T02HotListVC: RootVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,13 @@ class T02HotListVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        if(APPCONFIG.isUserLogin() == false)
+        {
+            var loginPage = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
+            self.presentViewController(loginPage, animated: true, completion: nil);
+       }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
