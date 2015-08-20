@@ -22,13 +22,6 @@ class HomeVC: RootVC,WebRequestDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewWillAppear(animated: Bool) {
         
@@ -39,6 +32,18 @@ class HomeVC: RootVC,WebRequestDelegate {
 
     @IBAction func btnAction(sender: AnyObject) {
         self.httpObj.httpGetApi("system/config/mobile", tag: 10)
+        
+        var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle())
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        var vc = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     

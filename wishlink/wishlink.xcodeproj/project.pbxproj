@@ -31,6 +31,22 @@
 		A15D893C1B806F6400BC66DE /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89321B806F6400BC66DE /* ServerTrustPolicy.swift */; };
 		A15D893D1B806F6400BC66DE /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89331B806F6400BC66DE /* Upload.swift */; };
 		A15D893E1B806F6400BC66DE /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89341B806F6400BC66DE /* Validation.swift */; };
+		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
+		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
+		D25073591B81FAD6002DFF0B /* testTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25073571B81FAD6002DFF0B /* testTableViewController.swift */; };
+		D250735A1B81FAD6002DFF0B /* testTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25073581B81FAD6002DFF0B /* testTableViewController.xib */; };
+		D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25A352F1B80821A000CCD7C /* T06TradeVC.swift */; };
+		D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25A35301B80821A000CCD7C /* T06TradeVC.xib */; };
+		D2744B2E1B84A01C00746229 /* TradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */; };
+		D2744B2F1B84A01C00746229 /* TradeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B2D1B84A01C00746229 /* TradeTableViewCell.xib */; };
+		D2744B321B84B9CE00746229 /* TradeTableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B301B84B9CE00746229 /* TradeTableViewCellHeader.swift */; };
+		D2744B331B84B9CE00746229 /* TradeTableViewCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B311B84B9CE00746229 /* TradeTableViewCellHeader.xib */; };
+		D2744B361B84B9E900746229 /* TradeTableViewCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B341B84B9E900746229 /* TradeTableViewCellFooter.swift */; };
+		D2744B371B84B9E900746229 /* TradeTableViewCellFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B351B84B9E900746229 /* TradeTableViewCellFooter.xib */; };
+		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
+		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
+		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };
+		D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +91,22 @@
 		A15D89321B806F6400BC66DE /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		A15D89331B806F6400BC66DE /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		A15D89341B806F6400BC66DE /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
+		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
+		D25073571B81FAD6002DFF0B /* testTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testTableViewController.swift; sourceTree = "<group>"; };
+		D25073581B81FAD6002DFF0B /* testTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testTableViewController.xib; sourceTree = "<group>"; };
+		D25A352F1B80821A000CCD7C /* T06TradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06TradeVC.swift; sourceTree = "<group>"; };
+		D25A35301B80821A000CCD7C /* T06TradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06TradeVC.xib; sourceTree = "<group>"; };
+		D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableViewCell.swift; sourceTree = "<group>"; };
+		D2744B2D1B84A01C00746229 /* TradeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeTableViewCell.xib; sourceTree = "<group>"; };
+		D2744B301B84B9CE00746229 /* TradeTableViewCellHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableViewCellHeader.swift; sourceTree = "<group>"; };
+		D2744B311B84B9CE00746229 /* TradeTableViewCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeTableViewCellHeader.xib; sourceTree = "<group>"; };
+		D2744B341B84B9E900746229 /* TradeTableViewCellFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableViewCellFooter.swift; sourceTree = "<group>"; };
+		D2744B351B84B9E900746229 /* TradeTableViewCellFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeTableViewCellFooter.xib; sourceTree = "<group>"; };
+		D2DE57711B84D049000DD691 /* T05PayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T05PayVC.swift; sourceTree = "<group>"; };
+		D2DE57721B84D049000DD691 /* T05PayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T05PayVC.xib; sourceTree = "<group>"; };
+		D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T04CreateTradeVC.swift; sourceTree = "<group>"; };
+		D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T04CreateTradeVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +209,7 @@
 		A1043E1B1B7F7902007A237C /* PageContent */ = {
 			isa = PBXGroup;
 			children = (
+				D25A352E1B8081DF000CCD7C /* Trade */,
 				A1043E451B7F804B007A237C /* Public */,
 			);
 			path = PageContent;
@@ -260,6 +293,46 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
+		D25A352E1B8081DF000CCD7C /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				D2744B241B849AE200746229 /* Nibs */,
+				D2744B251B849AE200746229 /* TableViewCells */,
+				D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */,
+				D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */,
+				D2DE57711B84D049000DD691 /* T05PayVC.swift */,
+				D2DE57721B84D049000DD691 /* T05PayVC.xib */,
+				D25A352F1B80821A000CCD7C /* T06TradeVC.swift */,
+				D25A35301B80821A000CCD7C /* T06TradeVC.xib */,
+				D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */,
+				D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */,
+				D25073571B81FAD6002DFF0B /* testTableViewController.swift */,
+				D25073581B81FAD6002DFF0B /* testTableViewController.xib */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		D2744B241B849AE200746229 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Nibs;
+			path = NIbs;
+			sourceTree = "<group>";
+		};
+		D2744B251B849AE200746229 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */,
+				D2744B2D1B84A01C00746229 /* TradeTableViewCell.xib */,
+				D2744B301B84B9CE00746229 /* TradeTableViewCellHeader.swift */,
+				D2744B311B84B9CE00746229 /* TradeTableViewCellHeader.xib */,
+				D2744B341B84B9E900746229 /* TradeTableViewCellFooter.swift */,
+				D2744B351B84B9E900746229 /* TradeTableViewCellFooter.xib */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,9 +413,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */,
+				D2744B331B84B9CE00746229 /* TradeTableViewCellHeader.xib in Resources */,
 				A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */,
+				D250735A1B81FAD6002DFF0B /* testTableViewController.xib in Resources */,
+				D2744B371B84B9E900746229 /* TradeTableViewCellFooter.xib in Resources */,
 				A1043E491B7F804B007A237C /* HomeVC.xib in Resources */,
+				D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */,
 				A1043E011B7F787A007A237C /* Images.xcassets in Resources */,
+				D2744B2F1B84A01C00746229 /* TradeTableViewCell.xib in Resources */,
+				D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */,
+				D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,18 +448,26 @@
 				A1043E7C1B7F86ED007A237C /* WebRequestHelper.swift in Sources */,
 				A15D893D1B806F6400BC66DE /* Upload.swift in Sources */,
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
+				D25073591B81FAD6002DFF0B /* testTableViewController.swift in Sources */,
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */,
+				D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */,
 				A15D893C1B806F6400BC66DE /* ServerTrustPolicy.swift in Sources */,
 				A15D893B1B806F6400BC66DE /* ResponseSerialization.swift in Sources */,
 				A15D89371B806F6400BC66DE /* Manager.swift in Sources */,
 				A1043E411B7F7F85007A237C /* UIhelper.swift in Sources */,
+				D2744B321B84B9CE00746229 /* TradeTableViewCellHeader.swift in Sources */,
+				D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */,
+				D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */,
 				A15D89351B806F6400BC66DE /* Alamofire.swift in Sources */,
 				A15D89361B806F6400BC66DE /* Download.swift in Sources */,
 				A15D89391B806F6400BC66DE /* ParameterEncoding.swift in Sources */,
+				D2744B361B84B9E900746229 /* TradeTableViewCellFooter.swift in Sources */,
+				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
 				A15D893E1B806F6400BC66DE /* Validation.swift in Sources */,
+				D2744B2E1B84A01C00746229 /* TradeTableViewCell.swift in Sources */,
 				A1043E6E1B7F80E4007A237C /* GTMBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
