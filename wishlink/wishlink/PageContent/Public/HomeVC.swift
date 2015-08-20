@@ -31,7 +31,7 @@ class HomeVC: RootVC,WebRequestDelegate {
  
 
     @IBAction func btnAction(sender: AnyObject) {
-        self.httpObj.httpGetApi("system/config/mobile", tag: 10)
+//        self.httpObj.httpGetApi("system/config/mobile", tag: 10)
         
         var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
         self.navigationController?.pushViewController(vc, animated: true)
