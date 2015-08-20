@@ -19,7 +19,7 @@ class RootVC: UIViewController {
         
         super.viewDidLoad()
         httpObj =  WebRequestHelper();
-        self.navigationController?.navigationBar.hidden = true;
+
         
         if((UIDevice.currentDevice().systemVersion as NSString).floatValue >= 7.0)
         {

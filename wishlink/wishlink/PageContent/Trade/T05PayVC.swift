@@ -23,10 +23,45 @@ class T05PayVC: RootVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBarHidden = true;
+        self.preparePage();
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false;
+    }
+    @IBAction func btnBackAction(sender: UIButton) {
+        self.navigationController?.popViewControllerAnimated(true);
+    }
+    func preparePage() {
+        
+        let leftBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
+        leftBtn.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
+        leftBtn.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Highlighted)
+        
+        leftBtn.addTarget(self, action: "leftBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        let leftItem : UIBarButtonItem = UIBarButtonItem(customView: leftBtn)
+        self.navigationItem.leftBarButtonItem = leftItem;
+        
+        
+        
+        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
+        titleLabel.text = "我要跟单发布"
+        titleLabel.textColor = UIHelper.mainColor;
+        titleLabel.font = UIFont.boldSystemFontOfSize(15)
+        titleLabel.textAlignment = NSTextAlignment.Center
+        
+        
+        
+        self.navigationItem.titleView = titleLabel
+        self.navigationController?.navigationBarHidden = false;
+        
+    }
+    
+    func leftBtnClicked(button: UIButton){
+        
+        self.navigationController?.popViewControllerAnimated(true);
+    }
+    
     @IBAction func selectedButtonPay(sender: UIButton) {
         sender.selected = !sender.selected
         

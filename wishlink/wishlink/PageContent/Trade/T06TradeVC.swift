@@ -21,11 +21,44 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.tradeTableView.registerNib(UINib(nibName: "TradeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         self.tradeTableView.registerNib(UINib(nibName: "TradeTableViewCellHeader", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
         self.tradeTableView.registerNib(UINib(nibName: "TradeTableViewCellFooter", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
+        
+
+        self.navigationController?.navigationBarHidden = true;
     }
+    
+    func preparePage() {
+        
+        let leftBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
+        leftBtn.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
+        leftBtn.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Highlighted)
+        
+        leftBtn.addTarget(self, action: "leftBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        let leftItem : UIBarButtonItem = UIBarButtonItem(customView: leftBtn)
+        self.navigationItem.leftBarButtonItem = leftItem;
+        
+        
+        
+        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
+        titleLabel.text = "我要跟单发布"
+        titleLabel.textColor = UIHelper.mainColor;
+        titleLabel.font = UIFont.boldSystemFontOfSize(15)
+        titleLabel.textAlignment = NSTextAlignment.Center
+        
+        
+        
+        self.navigationItem.titleView = titleLabel
+        self.navigationController?.navigationBarHidden = false;
+        
+    }
+    
+//    func leftBtnClicked(button: UIButton){
+//        
+//        self.navigationController?.popViewControllerAnimated(true);
+//    }
     
 //    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        
@@ -66,7 +99,10 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! TradeTableViewCellHeader
+           var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! TradeTableViewCellHeader
+            tCell.btnBack.addTarget(self, action: "banBtnAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            
+           cell = tCell;
         case last:
             cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! TradeTableViewCellFooter
         default:
@@ -74,6 +110,11 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func banBtnAction(button: UIButton){
+        
+        self.navigationController?.popViewControllerAnimated(true);
     }
     
 

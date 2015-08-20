@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -14,11 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="QuI-aN-rdg">
-                        <rect key="frame" x="8" y="8" width="304" height="48.5"/>
+                    <view opaque="NO" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QuI-aN-rdg">
+                        <rect key="frame" x="8" y="8" width="304" height="49"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-k0-twT">
-                                <rect key="frame" x="81.5" y="5.5" width="141" height="38"/>
+                                <rect key="frame" x="82" y="6" width="141" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="CDJ-ot-brE"/>
                                     <constraint firstAttribute="width" constant="141" id="xNT-8q-CMG"/>

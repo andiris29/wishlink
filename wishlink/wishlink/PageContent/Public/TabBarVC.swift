@@ -13,8 +13,6 @@ class TabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.backgroundColor = UIColor.whiteColor()
-//        self.tabBar.barTintColor = UIColor.whiteColor()
-//        self.tabBar.tintColor = UIColor.redColor()
         self.addAllChildControllers()
         // Do any additional setup after loading the view.
     }
@@ -27,8 +25,10 @@ class TabBarVC: UITabBarController {
     
     func addAllChildControllers() {
         
+//        var hotVC =  T02HotVC(nibName: "T02HotVC", bundle: NSBundle.mainBundle())
         var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        hotVC.view.backgroundColor = UIColor.yellowColor()
+//        var hotVC = UIViewController();
+        
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
         var hotNav =  NavigationPageVC(rootViewController: hotVC)
         

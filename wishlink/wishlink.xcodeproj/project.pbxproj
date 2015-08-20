@@ -368,8 +368,9 @@
 		D25A352E1B8081DF000CCD7C /* Trade */ = {
 			isa = PBXGroup;
 			children = (
-				D2744B241B849AE200746229 /* Nibs */,
 				D2744B251B849AE200746229 /* TableViewCells */,
+				A132BBA81B863448004EAB47 /* T02HotListVC.swift */,
+				A132BBA91B863448004EAB47 /* T02HotListVC.xib */,
 				D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */,
 				D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */,
 				D2DE57711B84D049000DD691 /* T05PayVC.swift */,
@@ -380,18 +381,8 @@
 				D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */,
 				D25073571B81FAD6002DFF0B /* testTableViewController.swift */,
 				D25073581B81FAD6002DFF0B /* testTableViewController.xib */,
-				A132BBA81B863448004EAB47 /* T02HotListVC.swift */,
-				A132BBA91B863448004EAB47 /* T02HotListVC.xib */,
 			);
 			path = Trade;
-			sourceTree = "<group>";
-		};
-		D2744B241B849AE200746229 /* Nibs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Nibs;
-			path = NIbs;
 			sourceTree = "<group>";
 		};
 		D2744B251B849AE200746229 /* TableViewCells */ = {
