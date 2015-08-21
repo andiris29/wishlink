@@ -33,8 +33,8 @@ class HomeVC: RootVC,WebRequestDelegate {
     @IBAction func btnAction(sender: AnyObject) {
 //        self.httpObj.httpGetApi("system/config/mobile", tag: 10)
         
-        var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
-        self.navigationController?.pushViewController(vc, animated: true)
+//        var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+//        self.navigationController?.pushViewController(vc, animated: true)
         
 //        var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle())
 //        self.navigationController?.pushViewController(vc, animated: true)
@@ -43,6 +43,9 @@ class HomeVC: RootVC,WebRequestDelegate {
 //        self.navigationController?.pushViewController(vc, animated: true)
         
 //        var vc = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        var vc = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
 //        self.navigationController?.pushViewController(vc, animated: true)
     }
 

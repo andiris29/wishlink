@@ -40,8 +40,8 @@ class TabBarVC: UITabBarController {
         var createNav =  NavigationPageVC(rootViewController: releaseVC)
         
         
-        var searchVC = UIViewController()
-        searchVC.view.backgroundColor = UIColor.blueColor()
+        var searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
+//        searchVC.view.backgroundColor = UIColor.blueColor()
         searchVC.tabBarItem.title = "搜索"
         searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "Search")!, selectedImage: UIImage(named: "Search-p")!);
 

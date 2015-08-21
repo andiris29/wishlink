@@ -14,5 +14,5 @@ class SearchCollectionReusableViewHeader: UICollectionReusableView {
         super.awakeFromNib()
         // Initialization code
     }
-    
+   
 }

@@ -47,8 +47,10 @@
 		A15D893E1B806F6400BC66DE /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89341B806F6400BC66DE /* Validation.swift */; };
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
 		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
-		D25073591B81FAD6002DFF0B /* testTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25073571B81FAD6002DFF0B /* testTableViewController.swift */; };
-		D250735A1B81FAD6002DFF0B /* testTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25073581B81FAD6002DFF0B /* testTableViewController.xib */; };
+		D25576121B86E80C00B3C733 /* T03SearchHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25576101B86E80C00B3C733 /* T03SearchHelperVC.swift */; };
+		D25576131B86E80C00B3C733 /* T03SearchHelperVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25576111B86E80C00B3C733 /* T03SearchHelperVC.xib */; };
+		D255761B1B86EC4400B3C733 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25576191B86EC4400B3C733 /* SearchCollectionViewCell.swift */; };
+		D255761C1B86EC4400B3C733 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D255761A1B86EC4400B3C733 /* SearchCollectionViewCell.xib */; };
 		D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25A352F1B80821A000CCD7C /* T06TradeVC.swift */; };
 		D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25A35301B80821A000CCD7C /* T06TradeVC.xib */; };
 		D2744B2E1B84A01C00746229 /* TradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */; };
@@ -57,6 +59,8 @@
 		D2744B331B84B9CE00746229 /* TradeTableViewCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B311B84B9CE00746229 /* TradeTableViewCellHeader.xib */; };
 		D2744B361B84B9E900746229 /* TradeTableViewCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B341B84B9E900746229 /* TradeTableViewCellFooter.swift */; };
 		D2744B371B84B9E900746229 /* TradeTableViewCellFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B351B84B9E900746229 /* TradeTableViewCellFooter.xib */; };
+		D2D1B9A71B87668800EAC8DE /* SearchCollectionReusableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D1B9A51B87668800EAC8DE /* SearchCollectionReusableViewHeader.swift */; };
+		D2D1B9A81B87668800EAC8DE /* SearchCollectionReusableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D1B9A61B87668800EAC8DE /* SearchCollectionReusableViewHeader.xib */; };
 		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
 		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
 		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };
@@ -121,8 +125,10 @@
 		A15D89341B806F6400BC66DE /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
 		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
-		D25073571B81FAD6002DFF0B /* testTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testTableViewController.swift; sourceTree = "<group>"; };
-		D25073581B81FAD6002DFF0B /* testTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testTableViewController.xib; sourceTree = "<group>"; };
+		D25576101B86E80C00B3C733 /* T03SearchHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03SearchHelperVC.swift; sourceTree = "<group>"; };
+		D25576111B86E80C00B3C733 /* T03SearchHelperVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchHelperVC.xib; sourceTree = "<group>"; };
+		D25576191B86EC4400B3C733 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		D255761A1B86EC4400B3C733 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		D25A352F1B80821A000CCD7C /* T06TradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06TradeVC.swift; sourceTree = "<group>"; };
 		D25A35301B80821A000CCD7C /* T06TradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06TradeVC.xib; sourceTree = "<group>"; };
 		D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableViewCell.swift; sourceTree = "<group>"; };
@@ -131,6 +137,8 @@
 		D2744B311B84B9CE00746229 /* TradeTableViewCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeTableViewCellHeader.xib; sourceTree = "<group>"; };
 		D2744B341B84B9E900746229 /* TradeTableViewCellFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableViewCellFooter.swift; sourceTree = "<group>"; };
 		D2744B351B84B9E900746229 /* TradeTableViewCellFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeTableViewCellFooter.xib; sourceTree = "<group>"; };
+		D2D1B9A51B87668800EAC8DE /* SearchCollectionReusableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableViewHeader.swift; sourceTree = "<group>"; };
+		D2D1B9A61B87668800EAC8DE /* SearchCollectionReusableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionReusableViewHeader.xib; sourceTree = "<group>"; };
 		D2DE57711B84D049000DD691 /* T05PayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T05PayVC.swift; sourceTree = "<group>"; };
 		D2DE57721B84D049000DD691 /* T05PayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T05PayVC.xib; sourceTree = "<group>"; };
 		D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T04CreateTradeVC.swift; sourceTree = "<group>"; };
@@ -365,11 +373,25 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
+		D25576181B86EC1800B3C733 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D25576191B86EC4400B3C733 /* SearchCollectionViewCell.swift */,
+				D255761A1B86EC4400B3C733 /* SearchCollectionViewCell.xib */,
+				D2D1B9A51B87668800EAC8DE /* SearchCollectionReusableViewHeader.swift */,
+				D2D1B9A61B87668800EAC8DE /* SearchCollectionReusableViewHeader.xib */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
 		D25A352E1B8081DF000CCD7C /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				D25576181B86EC1800B3C733 /* CollectionViewCells */,
 				D2744B241B849AE200746229 /* Nibs */,
 				D2744B251B849AE200746229 /* TableViewCells */,
+				D25576101B86E80C00B3C733 /* T03SearchHelperVC.swift */,
+				D25576111B86E80C00B3C733 /* T03SearchHelperVC.xib */,
 				D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */,
 				D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */,
 				D2DE57711B84D049000DD691 /* T05PayVC.swift */,
@@ -378,8 +400,6 @@
 				D25A35301B80821A000CCD7C /* T06TradeVC.xib */,
 				D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */,
 				D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */,
-				D25073571B81FAD6002DFF0B /* testTableViewController.swift */,
-				D25073581B81FAD6002DFF0B /* testTableViewController.xib */,
 				A132BBA81B863448004EAB47 /* T02HotListVC.swift */,
 				A132BBA91B863448004EAB47 /* T02HotListVC.xib */,
 			);
@@ -491,13 +511,15 @@
 				A132BBA11B863342004EAB47 /* U02ItemCell.xib in Resources */,
 				D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */,
 				D2744B331B84B9CE00746229 /* TradeTableViewCellHeader.xib in Resources */,
+				D2D1B9A81B87668800EAC8DE /* SearchCollectionReusableViewHeader.xib in Resources */,
 				A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
-				D250735A1B81FAD6002DFF0B /* testTableViewController.xib in Resources */,
 				D2744B371B84B9E900746229 /* TradeTableViewCellFooter.xib in Resources */,
+				D25576131B86E80C00B3C733 /* T03SearchHelperVC.xib in Resources */,
 				A132BBA31B863342004EAB47 /* U02TradeCell.xib in Resources */,
 				A1043E491B7F804B007A237C /* HomeVC.xib in Resources */,
 				D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */,
+				D255761C1B86EC4400B3C733 /* SearchCollectionViewCell.xib in Resources */,
 				A132BB9F1B863342004EAB47 /* U01LoginVC.xib in Resources */,
 				A1043E011B7F787A007A237C /* Images.xcassets in Resources */,
 				D2744B2F1B84A01C00746229 /* TradeTableViewCell.xib in Resources */,
@@ -529,7 +551,6 @@
 				A15D893D1B806F6400BC66DE /* Upload.swift in Sources */,
 				A132BB9E1B863342004EAB47 /* U01LoginVC.swift in Sources */,
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
-				D25073591B81FAD6002DFF0B /* testTableViewController.swift in Sources */,
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */,
@@ -552,10 +573,13 @@
 				D2744B361B84B9E900746229 /* TradeTableViewCellFooter.swift in Sources */,
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
+				D25576121B86E80C00B3C733 /* T03SearchHelperVC.swift in Sources */,
 				A132BBAA1B863448004EAB47 /* T02HotListVC.swift in Sources */,
+				D2D1B9A71B87668800EAC8DE /* SearchCollectionReusableViewHeader.swift in Sources */,
 				A15D893E1B806F6400BC66DE /* Validation.swift in Sources */,
 				A132BBA41B863342004EAB47 /* U02UserVC.swift in Sources */,
 				D2744B2E1B84A01C00746229 /* TradeTableViewCell.swift in Sources */,
+				D255761B1B86EC4400B3C733 /* SearchCollectionViewCell.swift in Sources */,
 				A1043E6E1B7F80E4007A237C /* GTMBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
