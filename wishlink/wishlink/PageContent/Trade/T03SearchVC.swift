@@ -30,7 +30,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource  {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 180;
+        return 190;
         
     }
     
