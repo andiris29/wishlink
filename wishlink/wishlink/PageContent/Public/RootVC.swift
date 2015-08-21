@@ -49,7 +49,43 @@ class RootVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: reDesign Navigation
+    func loadComNavTitle(strTitle:String)
+    {
+        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
+        titleLabel.text = strTitle
+        titleLabel.textColor = UIHelper.mainColor;
+        titleLabel.font = UIFont.boldSystemFontOfSize(15)
+        titleLabel.textAlignment = NSTextAlignment.Center
+        self.navigationItem.titleView = titleLabel
+        self.navigationController?.navigationBarHidden = false;
+    }
+    
+    func loadSpecNaviLeftBtn(imNormal:String,imgHighLight:String,_selecotr:Selector)
+    {
+        let leftBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
+        leftBtn.setImage(UIImage(named: imNormal), forState: UIControlState.Normal)
+        leftBtn.setImage(UIImage(named: imgHighLight), forState: UIControlState.Highlighted)
+        leftBtn.backgroundColor = UIColor.clearColor();
+        leftBtn.addTarget(self, action: _selecotr, forControlEvents: UIControlEvents.TouchUpInside)
+        let leftItem : UIBarButtonItem = UIBarButtonItem(customView: leftBtn)
+        
+        self.navigationItem.leftBarButtonItem = leftItem;
+    }
+    
 
+    
+    
+    
+    func loadComNaviLeftBtn()
+    {   
+        self.loadSpecNaviLeftBtn("u02-back", imgHighLight: "u02-back-w", _selecotr: "leftNavBtnAction:");
+    }
+    
+    func leftNavBtnAction(button: UIButton){
+        
+        self.navigationController?.popViewControllerAnimated(true);
+    }
     
     func syncUserInfo(notification:NSNotification)
     {

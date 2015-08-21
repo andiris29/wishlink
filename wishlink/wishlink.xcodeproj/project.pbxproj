@@ -47,8 +47,6 @@
 		A15D893E1B806F6400BC66DE /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89341B806F6400BC66DE /* Validation.swift */; };
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
 		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
-		D25073591B81FAD6002DFF0B /* testTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25073571B81FAD6002DFF0B /* testTableViewController.swift */; };
-		D250735A1B81FAD6002DFF0B /* testTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25073581B81FAD6002DFF0B /* testTableViewController.xib */; };
 		D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25A352F1B80821A000CCD7C /* T06TradeVC.swift */; };
 		D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25A35301B80821A000CCD7C /* T06TradeVC.xib */; };
 		D2744B2E1B84A01C00746229 /* TradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */; };
@@ -121,8 +119,6 @@
 		A15D89341B806F6400BC66DE /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
 		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
-		D25073571B81FAD6002DFF0B /* testTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testTableViewController.swift; sourceTree = "<group>"; };
-		D25073581B81FAD6002DFF0B /* testTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testTableViewController.xib; sourceTree = "<group>"; };
 		D25A352F1B80821A000CCD7C /* T06TradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06TradeVC.swift; sourceTree = "<group>"; };
 		D25A35301B80821A000CCD7C /* T06TradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06TradeVC.xib; sourceTree = "<group>"; };
 		D2744B2C1B84A01C00746229 /* TradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableViewCell.swift; sourceTree = "<group>"; };
@@ -379,8 +375,6 @@
 				D25A35301B80821A000CCD7C /* T06TradeVC.xib */,
 				D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */,
 				D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */,
-				D25073571B81FAD6002DFF0B /* testTableViewController.swift */,
-				D25073581B81FAD6002DFF0B /* testTableViewController.xib */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -484,7 +478,6 @@
 				D2744B331B84B9CE00746229 /* TradeTableViewCellHeader.xib in Resources */,
 				A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
-				D250735A1B81FAD6002DFF0B /* testTableViewController.xib in Resources */,
 				D2744B371B84B9E900746229 /* TradeTableViewCellFooter.xib in Resources */,
 				A132BBA31B863342004EAB47 /* U02TradeCell.xib in Resources */,
 				A1043E491B7F804B007A237C /* HomeVC.xib in Resources */,
@@ -520,7 +513,6 @@
 				A15D893D1B806F6400BC66DE /* Upload.swift in Sources */,
 				A132BB9E1B863342004EAB47 /* U01LoginVC.swift in Sources */,
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
-				D25073591B81FAD6002DFF0B /* testTableViewController.swift in Sources */,
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */,

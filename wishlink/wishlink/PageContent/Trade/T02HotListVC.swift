@@ -8,49 +8,6 @@
 
 import UIKit
 
-//class T02HotListVC: RootVC {
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//    }
-//
-//
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-//    
-//
-//    /*
-//    // MARK: - Navigation
-//
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//    }
-//    */
-//    
-//    
-//
-//}
-
-//
-//  U02UserVC.swift
-//  wishlink
-//
-//  Created by Yue Huang on 8/17/15.
-//  Copyright (c) 2015 edonesoft. All rights reserved.
-//
-
-//import UIKit
-//
-//enum CollectionViewCellType: Int {
-//    case CollectionViewCellTypeTrade = 0, CollectionViewCellTypeItem = 1
-//}
-
 class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -68,15 +25,13 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = false;
         
         if(!APPCONFIG.isUserLogin())
         {
             var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
             self.presentViewController(loginVC, animated: true, completion: nil)
         }
-        
-    
-
     }
     override func viewDidAppear(animated: Bool) {
             UIHelper.loadLeftItem(self.navigationController! , imgNormal: "u02-back", imgHightLight: "u02-back-w", btnAction: "leftBtnClicked:")
@@ -86,12 +41,10 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    //MARK: collectionView Delegete
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         var width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
         var height: CGFloat = 250.0
-        
- 
         
         return CGSize(width: width, height: height)
     }
@@ -105,50 +58,27 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         return cell!
     }
     
-
-    
-
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+        self.navigationController?.pushViewController(vc, animated: true);
+    }
     // MARK: - prive method
     
     func preparePage() {
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 7.5, right: 10)
-       
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
-        
         self.collectionView.scrollEnabled = true;
-    
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor();
-//        self.navigationController?.navigationItem.set = UIColor.clearColor();
         
-        let leftBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
-        leftBtn.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
-        leftBtn.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Highlighted)
-        leftBtn.backgroundColor = UIColor.clearColor();
-        leftBtn.addTarget(self, action: "leftBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftItem : UIBarButtonItem = UIBarButtonItem(customView: leftBtn)
-    
-       self.navigationItem.leftBarButtonItem = leftItem;
-
-        
-        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
-        titleLabel.text = "热门"
-        titleLabel.textColor = UIHelper.mainColor;
-        titleLabel.font = UIFont.boldSystemFontOfSize(15)
-        titleLabel.textAlignment = NSTextAlignment.Center
-        self.navigationItem.titleView = titleLabel
-        self.navigationController?.navigationBarHidden = false;
-
+        self.loadComNaviLeftBtn()
+        self.loadComNavTitle("热门")
     }
     
-    func leftBtnClicked(button: UIButton){
+   override func leftNavBtnAction(button: UIButton){
         
         var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
         self.presentViewController(loginVC, animated: true, completion: nil)
     }
-    
- 
-
-    
+        
 }
 
 

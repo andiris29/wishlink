@@ -30,43 +30,6 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         self.navigationController?.navigationBarHidden = true;
     }
     
-    func preparePage() {
-        
-        let leftBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
-        leftBtn.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
-        leftBtn.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Highlighted)
-        
-        leftBtn.addTarget(self, action: "leftBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftItem : UIBarButtonItem = UIBarButtonItem(customView: leftBtn)
-        self.navigationItem.leftBarButtonItem = leftItem;
-        
-        
-        
-        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
-        titleLabel.text = "我要跟单发布"
-        titleLabel.textColor = UIHelper.mainColor;
-        titleLabel.font = UIFont.boldSystemFontOfSize(15)
-        titleLabel.textAlignment = NSTextAlignment.Center
-        
-        
-        
-        self.navigationItem.titleView = titleLabel
-        self.navigationController?.navigationBarHidden = false;
-        
-    }
-    
-//    func leftBtnClicked(button: UIButton){
-//        
-//        self.navigationController?.popViewControllerAnimated(true);
-//    }
-    
-//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        
-//        let nibs: NSArray = NSBundle.mainBundle().loadNibNamed("T06TradeCellHeads", owner: self, options: nil)
-//        
-//        return nibs.firstObject as? UIView
-//    }
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         var last: Int = itemContents.count - 1
@@ -91,7 +54,6 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         return itemContents.count
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
@@ -100,7 +62,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         switch indexPath.row {
         case 0:
            var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! TradeTableViewCellHeader
-            tCell.btnBack.addTarget(self, action: "banBtnAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            tCell.btnBack.addTarget(self, action: "leftNavBtnAction:", forControlEvents: UIControlEvents.TouchUpInside)
             
            cell = tCell;
         case last:
@@ -111,21 +73,6 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         
         return cell
     }
-    
-    func banBtnAction(button: UIButton){
-        
-        self.navigationController?.popViewControllerAnimated(true);
-    }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
