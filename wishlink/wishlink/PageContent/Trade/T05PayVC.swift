@@ -34,6 +34,7 @@ class T05PayVC: RootVC {
     }
     
     @IBAction func selectedButtonPay(sender: UIButton) {
+        
         sender.selected = !sender.selected
         
         if sender.tag == selectedButtonWXTag {
@@ -43,8 +44,20 @@ class T05PayVC: RootVC {
         }
     }
     @IBAction func btnPayTapped(sender: UIButton) {
-        var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
-        self.navigationController?.pushViewController(vc, animated: true);
+        
+        
+        var tag = sender.tag;
+        if(tag == 11)
+        {
+            var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+            self.navigationController?.pushViewController(vc, animated: true);
+        }
+        else
+        {
+            var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle());
+            self.presentViewController(vc, animated: true, completion: nil);
+            
+        }
     }
     
     @IBAction func incrlineOrDecreingButtonPay(sender: UIButton) {

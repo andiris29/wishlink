@@ -30,11 +30,15 @@ class U01LoginVC: RootVC {
     
     @IBAction func weiXinLoginAction(sender: AnyObject) {
         println("微信登入")
+        APPCONFIG.AccessToken = "temp_token";
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     
     @IBAction func weiBoLoginAction(sender: AnyObject) {
         println("微博登入")
+        APPCONFIG.AccessToken = "temp_token";
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     
