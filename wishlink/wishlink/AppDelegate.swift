@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         var vc = HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
         
-//        self.window!.rootViewController = NavigationPageVC(rootViewController: vc)
         self.window!.rootViewController = TabBarVC();
         self.window!.makeKeyAndVisible()
         

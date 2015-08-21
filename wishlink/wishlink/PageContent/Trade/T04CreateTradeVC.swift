@@ -13,23 +13,14 @@ class T04CreateTradeVC: RootVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+  
     }
     
     override func viewWillAppear(animated: Bool) {
-        
-      self.navigationController?.navigationBarHidden = true;
+      self.navigationController?.navigationBarHidden = false;
+        self.loadComNaviLeftBtn()
+        self.loadComNavTitle("发布新订单")
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func btnAction(sender: UIButton) {
     

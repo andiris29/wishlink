@@ -10,6 +10,7 @@ import UIKit
 
 class TradeTableViewCellHeader: UITableViewCell {
 
+    @IBOutlet weak var btnBack: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

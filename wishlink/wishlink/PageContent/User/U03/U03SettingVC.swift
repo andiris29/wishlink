@@ -19,6 +19,9 @@ class U03SettingVC: RootVC {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.hidden = false
+        
+        self.loadComNaviLeftBtn()
+        self.loadComNavTitle("个人设置")
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -29,6 +32,15 @@ class U03SettingVC: RootVC {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @IBAction func btnAction(sender: UIButton) {
+        var tag = sender.tag ; 
+        if(tag == 10)
+        {
+            var vc =  T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+           // self.navigationController?.pushViewController(vc, animated: true);
+            self.presentViewController(vc, animated: true, completion: nil);
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

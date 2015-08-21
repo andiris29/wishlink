@@ -12,7 +12,10 @@ class UIHelper {
     
     
     //系统主色调{大部分字体颜色 }
-    static var mainColor:UIColor = UIColor(red: 88.0/255.0, green: 140.0/255.0, blue: 236.0/255.0, alpha: 1)
+    static var mainColor:UIColor = UIColor(red: 124/255.0, green: 0/255.0, blue: 90.0/255.0, alpha: 1)
+    
+    // 列表背景色
+    static var listBgColor:UIColor = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1)
     
     /*
     将图片转换成64位编码
@@ -44,4 +47,15 @@ class UIHelper {
         return UIImage(contentsOfFile:strResure!)!
         //    return [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:nil]];
     }
+    
+   static func loadLeftItem(navi:UINavigationController, imgNormal:String,imgHightLight:String,btnAction:Selector)
+    {
+    
+        
+        
+        
+        
+        
+    }
+
 }

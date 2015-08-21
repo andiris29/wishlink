@@ -9,5 +9,17 @@
 import UIKit
 /*等待自定义*/
 class NavigationPageVC: UINavigationController {
-
+    
+//    override init(rootViewController: UIViewController) {
+//        super.init(rootViewController: rootViewController);
+//    }
+//    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+//        super.init(nibName: "NavigationPageVC", bundle: MainBundle)
+//    }
+//    required init(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    
 }
