@@ -10,9 +10,9 @@ import UIKit
 
 class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
 
-    let cellIdentifier = "tradeTableViewcell"
-    let cellIdentifierHeader = "tradeTableViewcellHeader"
-    let cellIdentifierFooter = "tradeTableViewcellFooter"
+    let cellIdentifier = "T06Cell"
+    let cellIdentifierHeader = "T06CellHeader"
+    let cellIdentifierFooter = "T06CellFooter"
     
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tradeTableView: UITableView!
@@ -22,9 +22,9 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tradeTableView.registerNib(UINib(nibName: "TradeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
-        self.tradeTableView.registerNib(UINib(nibName: "TradeTableViewCellHeader", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
-        self.tradeTableView.registerNib(UINib(nibName: "TradeTableViewCellFooter", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
+        self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+        self.tradeTableView.registerNib(UINib(nibName: cellIdentifierHeader, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
+        self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
 
         self.navigationController?.navigationBarHidden = true;
@@ -61,14 +61,14 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-           var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! TradeTableViewCellHeader
+           var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
             tCell.btnBack.addTarget(self, action: "leftNavBtnAction:", forControlEvents: UIControlEvents.TouchUpInside)
             
            cell = tCell;
         case last:
-            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! TradeTableViewCellFooter
+            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
         default:
-            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TradeTableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
         }
         
         return cell

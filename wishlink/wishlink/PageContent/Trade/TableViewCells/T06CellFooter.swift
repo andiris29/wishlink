@@ -1,5 +1,5 @@
 //
-//  TradeTableViewCellHeader.swift
+//  TradeTableViewCellFooter.swift
 //  wishlink
 //
 //  Created by whj on 15/8/19.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class TradeTableViewCellHeader: UITableViewCell {
+class T06CellFooter: UITableViewCell {
 
-    @IBOutlet weak var btnBack: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
