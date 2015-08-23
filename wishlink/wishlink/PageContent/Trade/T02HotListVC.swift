@@ -27,11 +27,11 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false;
         
-        if(!APPCONFIG.isUserLogin())
-        {
-            var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-            self.presentViewController(loginVC, animated: true, completion: nil)
-        }
+//        if(!APPCONFIG.isUserLogin())
+//        {
+//            var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+//            self.presentViewController(loginVC, animated: true, completion: nil)
+//        }
     }
     override func viewDidAppear(animated: Bool) {
             UIHelper.loadLeftItem(self.navigationController! , imgNormal: "u02-back", imgHightLight: "u02-back-w", btnAction: "leftBtnClicked:")

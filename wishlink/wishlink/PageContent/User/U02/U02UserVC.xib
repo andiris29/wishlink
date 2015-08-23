@@ -10,6 +10,8 @@
                 <outlet property="collectionBtn" destination="16n-Ja-XGU" id="6VH-2Q-saM"/>
                 <outlet property="collectionView" destination="LKp-02-9lw" id="uy7-dg-DTj"/>
                 <outlet property="collectionViewFlowLayout" destination="Qdl-cT-DHE" id="9sj-av-QoL"/>
+                <outlet property="filterView" destination="B9e-0I-Yo9" id="hKx-4v-McI"/>
+                <outlet property="filterViewHeightConstraint" destination="HbE-Ee-M1F" id="QzG-rq-fkb"/>
                 <outlet property="recommendBtn" destination="OZE-0A-WLl" id="cxh-2b-ofM"/>
                 <outlet property="sellerBtn" destination="HVM-vc-SWe" id="ArB-ci-rNU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -43,13 +45,13 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="西雅图不眠夜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xts-Fw-eK5">
                             <rect key="frame" x="100" y="6" width="78" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JON-ID-wW5">
                             <rect key="frame" x="100" y="22" width="26" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gW-Ny-x2c">
@@ -177,7 +179,7 @@
                     <rect key="frame" x="0.0" y="245" width="375" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SM-Pd-8Nf">
-                            <rect key="frame" x="280" y="-1" width="80" height="35"/>
+                            <rect key="frame" x="280" y="0.0" width="80" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="Xcu-p1-eMy"/>
                                 <constraint firstAttribute="height" constant="35" id="v0f-ve-6Ao"/>
@@ -198,7 +200,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="6SM-Pd-8Nf" secondAttribute="trailing" constant="15" id="GaV-B8-9Yk"/>
                         <constraint firstAttribute="height" constant="35" id="HbE-Ee-M1F"/>
-                        <constraint firstAttribute="centerY" secondItem="6SM-Pd-8Nf" secondAttribute="centerY" constant="1" id="PQi-vI-d6q"/>
+                        <constraint firstAttribute="centerY" secondItem="6SM-Pd-8Nf" secondAttribute="centerY" id="PQi-vI-d6q"/>
                         <constraint firstAttribute="height" secondItem="6SM-Pd-8Nf" secondAttribute="height" id="Vtg-0X-h76"/>
                     </constraints>
                 </view>

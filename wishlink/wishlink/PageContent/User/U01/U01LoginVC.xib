@@ -60,6 +60,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="6q7-WB-P53" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="131" id="1Eo-Sj-B4B"/>
                 <constraint firstItem="IvB-nj-5A2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BbQ-KK-B7g"/>
                 <constraint firstAttribute="trailing" secondItem="02x-8d-Pby" secondAttribute="trailing" id="EGJ-jL-FeC"/>
                 <constraint firstItem="02x-8d-Pby" firstAttribute="top" secondItem="6q7-WB-P53" secondAttribute="bottom" constant="170" id="FeF-21-jVh"/>
@@ -77,6 +78,11 @@
                 <constraint firstAttribute="trailing" secondItem="IvB-nj-5A2" secondAttribute="trailing" id="uc6-5M-naY"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="FeF-21-jVh"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

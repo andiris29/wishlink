@@ -32,14 +32,14 @@ class TabBarVC: UITabBarController {
         
         var releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
         releaseVC.tabBarItem.title = "发布"
-        releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "Release")!, selectedImage: UIImage(named: "Release-p")!);
+        releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release")!, selectedImage: UIImage(named: "release-p")!);
         var createNav =  NavigationPageVC(rootViewController: releaseVC)
         
         
         var searchVC = UIViewController()
         searchVC.view.backgroundColor = UIColor.blueColor()
         searchVC.tabBarItem.title = "搜索"
-        searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "Search")!, selectedImage: UIImage(named: "Search-p")!);
+        searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "search")!, selectedImage: UIImage(named: "search-p")!);
         var searchNav =  NavigationPageVC(rootViewController: searchVC)
 
 
