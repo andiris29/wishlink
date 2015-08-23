@@ -16,6 +16,8 @@
 		76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */; };
 		76CD0E911B89657200B04453 /* U02FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */; };
 		76CD0E921B89657200B04453 /* U02FavoriteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E901B89657200B04453 /* U02FavoriteVC.xib */; };
+		76DC96641B8992D500270969 /* U02FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC96631B8992D500270969 /* U02FilterButton.swift */; };
+		76DC96661B8993E100270969 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC96651B8993E100270969 /* UIView.swift */; };
 		A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1043DF91B7F787A007A237C /* AppDelegate.swift */; };
 		A1043E011B7F787A007A237C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1043E001B7F787A007A237C /* Images.xcassets */; };
 		A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1043E021B7F787A007A237C /* LaunchScreen.xib */; };
@@ -100,6 +102,8 @@
 		76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02RecommendVC.xib; sourceTree = "<group>"; };
 		76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02FavoriteVC.swift; sourceTree = "<group>"; };
 		76CD0E901B89657200B04453 /* U02FavoriteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02FavoriteVC.xib; sourceTree = "<group>"; };
+		76DC96631B8992D500270969 /* U02FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02FilterButton.swift; sourceTree = "<group>"; };
+		76DC96651B8993E100270969 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		A1043DF41B7F787A007A237C /* wishlink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wishlink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1043DF81B7F787A007A237C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1043DF91B7F787A007A237C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 			children = (
 				A132BB8E1B863328004EAB47 /* TabBarItem.swift */,
 				A1043E3C1B7F7CBA007A237C /* String.swift */,
+				76DC96651B8993E100270969 /* UIView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */,
 				76CD0E901B89657200B04453 /* U02FavoriteVC.xib */,
 				769D4B0F1B8812680011A4A0 /* U02LogisticsTipView.swift */,
+				76DC96631B8992D500270969 /* U02FilterButton.swift */,
 			);
 			path = U02;
 			sourceTree = "<group>";
@@ -541,23 +547,17 @@
 				A132BBA71B863342004EAB47 /* U03SettingVC.xib in Resources */,
 				A132BBA11B863342004EAB47 /* U02ItemCell.xib in Resources */,
 				D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */,
-<<<<<<< HEAD
-				D2744B331B84B9CE00746229 /* TradeTableViewCellHeader.xib in Resources */,
+				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
 				76CD0E8A1B8964B000B04453 /* U02SellerTradeVC.xib in Resources */,
-=======
 				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
 				A1C36CB01B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib in Resources */,
->>>>>>> a3b0e375162137833c4b8f5df13f9bba2fa4f7e0
 				A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */,
 				76CD0E921B89657200B04453 /* U02FavoriteVC.xib in Resources */,
 				76CD0E861B89649000B04453 /* U02BuyerTradeVC.xib in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
-<<<<<<< HEAD
 				76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */,
-				D2744B371B84B9E900746229 /* TradeTableViewCellFooter.xib in Resources */,
-=======
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
->>>>>>> a3b0e375162137833c4b8f5df13f9bba2fa4f7e0
+				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				A132BBA31B863342004EAB47 /* U02TradeCell.xib in Resources */,
 				A1043E491B7F804B007A237C /* HomeVC.xib in Resources */,
 				D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */,
@@ -592,6 +592,7 @@
 				A15D893A1B806F6400BC66DE /* Request.swift in Sources */,
 				A1043E481B7F804B007A237C /* HomeVC.swift in Sources */,
 				A15D89381B806F6400BC66DE /* MultipartFormData.swift in Sources */,
+				76DC96641B8992D500270969 /* U02FilterButton.swift in Sources */,
 				769D4B101B8812680011A4A0 /* U02LogisticsTipView.swift in Sources */,
 				A1043E7C1B7F86ED007A237C /* WebRequestHelper.swift in Sources */,
 				A15D893D1B806F6400BC66DE /* Upload.swift in Sources */,
@@ -613,6 +614,7 @@
 				D2744B321B84B9CE00746229 /* T06CellHeader.swift in Sources */,
 				D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */,
 				76CD0E911B89657200B04453 /* U02FavoriteVC.swift in Sources */,
+				76DC96661B8993E100270969 /* UIView.swift in Sources */,
 				D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */,
 				A15D89351B806F6400BC66DE /* Alamofire.swift in Sources */,
 				A15D89361B806F6400BC66DE /* Download.swift in Sources */,

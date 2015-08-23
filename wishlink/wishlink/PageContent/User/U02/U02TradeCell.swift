@@ -12,14 +12,16 @@ enum TradeCellType {
     case Buyer, Seller
 }
 
-enum TradeCellButtonClickType {
+enum TradeCellButtonClickType{
     case Revoke, Confirm, CheckComplain, CheckLogistics,
     EditItemInfo, SendOut
 }
 
+
 protocol U02TradeCellDelegate: NSObjectProtocol {
-    func tradeCell(cell: U02TradeCell, buttonClickType: TradeCellButtonClickType)
+    func tradeCell(cell: U02TradeCell, clickType: TradeCellButtonClickType)
 }
+
 
 class U02TradeCell: UICollectionViewCell {
 
@@ -68,26 +70,28 @@ class U02TradeCell: UICollectionViewCell {
     }
     
     @IBAction func revokeBtnAction(sender: AnyObject) {
-        
+        self.delegate?.tradeCell(self, clickType: .Revoke)
+
     }
     @IBAction func confirmBtnAction(sender: AnyObject) {
-        
+        self.delegate?.tradeCell(self, clickType: .Confirm)
+
     }
     @IBAction func checkComplainBtnAction(sender: AnyObject) {
-        
+        self.delegate?.tradeCell(self, clickType: .CheckComplain)
+
     }
     @IBAction func checkLogisticsBtnAction(sender: AnyObject) {
-        if let delegate = self.delegate {
-            if delegate.respondsToSelector("tradeCell:buttonClickType:") {
-                delegate.tradeCell(self, buttonClickType: .CheckLogistics)
-            }
-        }
+        
+        self.delegate?.tradeCell(self, clickType: .CheckLogistics)
     }
     @IBAction func editItemInfoBtnAction(sender: AnyObject) {
-        
+        self.delegate?.tradeCell(self, clickType: .EditItemInfo)
+
     }
     @IBAction func sendOutBtnAction(sender: AnyObject) {
-        
+        self.delegate?.tradeCell(self, clickType: .SendOut)
+
     }
     
     

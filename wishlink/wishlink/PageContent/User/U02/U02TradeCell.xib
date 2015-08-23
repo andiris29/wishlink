@@ -294,6 +294,13 @@
                                     <constraint firstAttribute="width" constant="60" id="79L-a0-1nQ"/>
                                 </constraints>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dkS-aD-7SF">
+                                <rect key="frame" x="5" y="101" width="365" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="QcA-Tz-ryO"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -308,6 +315,9 @@
                             <constraint firstAttribute="centerY" secondItem="GXY-0y-Jss" secondAttribute="centerY" id="PgZ-59-qPy"/>
                             <constraint firstItem="MqA-3i-awq" firstAttribute="leading" secondItem="GXY-0y-Jss" secondAttribute="trailing" constant="15" id="XM7-0t-z4I"/>
                             <constraint firstAttribute="bottom" secondItem="GXY-0y-Jss" secondAttribute="bottom" constant="10" id="ZBz-1Z-klS"/>
+                            <constraint firstAttribute="bottom" secondItem="dkS-aD-7SF" secondAttribute="bottom" id="j2Y-BM-kEp"/>
+                            <constraint firstItem="dkS-aD-7SF" firstAttribute="leading" secondItem="oJI-7G-kCG" secondAttribute="leading" constant="5" id="okr-Js-BG2"/>
+                            <constraint firstAttribute="trailing" secondItem="dkS-aD-7SF" secondAttribute="trailing" constant="5" id="qlo-kI-HCn"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

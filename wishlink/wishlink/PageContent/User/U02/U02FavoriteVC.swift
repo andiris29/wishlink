@@ -8,9 +8,8 @@
 
 import UIKit
 
-class U02FavoriteVC: RootVC {
+class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
-    let itemCellIde = "U02ItemCell"
 
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,7 +18,9 @@ class U02FavoriteVC: RootVC {
     
     var clearView: UIView!
     var clearBtn: UIButton!
-    
+    let itemCellIde = "U02ItemCell"
+    weak var userVC: U02UserVC!
+
     // MARK: - life cycle
 
     override func viewDidLoad() {
@@ -51,12 +52,13 @@ class U02FavoriteVC: RootVC {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 8
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
+        cell.cellType = .Favorite
         return cell
     }
     
@@ -95,7 +97,7 @@ class U02FavoriteVC: RootVC {
         var clearBtnY = (CGRectGetHeight(self.clearView.frame) - clearBtnH) * 0.5
         self.clearBtn = UIButton.buttonWithType(.Custom) as! UIButton
         self.clearBtn.frame = CGRectMake(clearBtnX, clearBtnY, clearBtnW, clearBtnH)
-        self.clearBtn.setTitle("清空推荐", forState: .Normal)
+        self.clearBtn.setTitle("清空收藏", forState: .Normal)
         self.clearBtn.setBackgroundImage(UIImage(named: "u02-clearcollection"), forState: .Normal)
         self.clearBtn.addTarget(self, action: "clearBtnAction:", forControlEvents: .TouchUpInside)
         self.clearView.addSubview(self.clearBtn)

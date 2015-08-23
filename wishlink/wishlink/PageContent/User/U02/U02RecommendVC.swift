@@ -8,9 +8,7 @@
 
 import UIKit
 
-class U02RecommendVC: RootVC {
-
-    let itemCellIde = "U02ItemCell"
+class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,7 +16,10 @@ class U02RecommendVC: RootVC {
     
     var clearView: UIView!
     var clearBtn: UIButton!
-    
+    let itemCellIde = "U02ItemCell"
+    var cellCount: Int = 7
+    weak var userVC: U02UserVC!
+
     // MARK: - life cycle
 
     override func viewDidLoad() {
@@ -51,7 +52,7 @@ class U02RecommendVC: RootVC {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return cellCount
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -79,9 +80,15 @@ class U02RecommendVC: RootVC {
         var inset = self.collectionView.contentInset
         inset.top = 0
         self.collectionView.contentInset = inset
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+
+        
+        UIView.animateWithDuration(Double(0.5), animations: { () -> Void in
             self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
-        })
+            }) { (xxx: Bool) -> Void in
+                
+                self.cellCount = 0
+                self.collectionView.reloadData()
+        }
     }
     
     // MARK: - prive method

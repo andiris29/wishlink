@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -33,6 +33,7 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cCw-gI-4vr" userLabel="horizontalLine">
                                 <rect key="frame" x="5" y="159" width="190" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="3co-ji-rJM"/>
                                 </constraints>
@@ -97,6 +98,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="u02-collection-p"/>
+                                <connections>
+                                    <action selector="favoriteBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="aRJ-Bk-Te1"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31289件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-hn-qzO">
                                 <rect key="frame" x="29" y="3" width="156" height="21"/>
@@ -137,6 +141,9 @@
                 <constraint firstAttribute="bottom" secondItem="TVt-jv-p6W" secondAttribute="bottom" id="wHx-Uv-5Fs"/>
                 <constraint firstAttribute="trailing" secondItem="IIY-4H-9ZA" secondAttribute="trailing" id="xpu-vv-C6s"/>
             </constraints>
+            <connections>
+                <outlet property="favoriteBtn" destination="m0L-E6-rID" id="hR3-69-uVN"/>
+            </connections>
             <point key="canvasLocation" x="189" y="342"/>
         </collectionViewCell>
     </objects>

@@ -90,6 +90,11 @@ class U02LogisticsTipView: UIView {
         confirmBtn.setTitle("确定", forState: .Normal)
         confirmBtn.addTarget(self, action: "confirmBtnAction:", forControlEvents: .TouchUpInside)
         tipView.addSubview(confirmBtn)
+        
+        var horizontalLine = UIView(frame: CGRectMake(0, 0, btnWidth, 0.5))
+        horizontalLine.backgroundColor = UIColor.lightGrayColor()
+        confirmBtn.addSubview(horizontalLine)
+        
     }
     
 }
