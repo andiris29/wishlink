@@ -1,5 +1,5 @@
 //
-//  TradeTableViewCell.swift
+//  TradeTableViewCellHeader.swift
 //  wishlink
 //
 //  Created by whj on 15/8/19.
@@ -8,20 +8,14 @@
 
 import UIKit
 
-class TradeTableViewCell: UITableViewCell {
+class T06CellHeader: UITableViewCell {
 
-    @IBOutlet weak var selectedButton: UIButton!
-    
+    @IBOutlet weak var btnBack: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    @IBAction func selectedButtonAction(sender: UIButton) {
-        
-        sender.selected = !sender.selected
-    }
-    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

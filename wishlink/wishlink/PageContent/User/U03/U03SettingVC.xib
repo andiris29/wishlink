@@ -47,7 +47,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="Slq-Tn-wDr">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="Slq-Tn-wDr">
                             <rect key="frame" x="305" y="17" width="10" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="Lzy-ek-Ier"/>
@@ -75,7 +75,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmL-Ed-ubp" userLabel="bgView">
                     <rect key="frame" x="0.0" y="83" width="320" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="yao-Hi-kzg">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="yao-Hi-kzg">
                             <rect key="frame" x="305" y="17" width="10" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="3KU-kP-hbi"/>
@@ -115,7 +115,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCp-jR-Od4" userLabel="addressView">
                     <rect key="frame" x="0.0" y="183" width="320" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="Tdx-k0-lzc">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="Tdx-k0-lzc">
                             <rect key="frame" x="305" y="17" width="10" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="964-gp-NjC"/>
@@ -152,7 +152,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P87-aR-eun" userLabel="questionView">
                     <rect key="frame" x="0.0" y="233" width="320" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="Po6-3E-ksf">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u02-next" translatesAutoresizingMaskIntoConstraints="NO" id="Po6-3E-ksf">
                             <rect key="frame" x="305" y="17" width="10" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="GAD-kA-bJ7"/>

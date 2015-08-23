@@ -37,7 +37,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="pvO-Zv-FBF"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEE-jy-EMw">
+                                        <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEE-jy-EMw">
                                             <rect key="frame" x="246" y="15" width="40" height="40"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -47,6 +47,9 @@
                                             <state key="normal" image="T04aaa">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="gjP-2R-juJ"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传产品图片" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mr7-4l-X7O">
                                             <rect key="frame" x="22" y="18" width="104" height="21"/>
@@ -56,7 +59,7 @@
                                                 <constraint firstAttribute="height" constant="21" id="vus-rN-dNe"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片需清晰，产品鲜明，1- 4张" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9x-4o-Pc0">
@@ -82,7 +85,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="LkR-f3-Irr" firstAttribute="leading" secondItem="3Wx-8h-K4E" secondAttribute="leading" id="1BV-bL-w2X"/>
                                         <constraint firstItem="mr7-4l-X7O" firstAttribute="top" secondItem="3Wx-8h-K4E" secondAttribute="top" constant="18" id="4gc-cZ-til"/>
@@ -636,7 +639,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHF-1B-PNj" userLabel="View8">
                                     <rect key="frame" x="0.0" y="472" width="320" height="72"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoR-5v-IRQ">
+                                        <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoR-5v-IRQ">
                                             <rect key="frame" x="48" y="17" width="225" height="38"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <state key="normal" title="确定发布" backgroundImage="T04ccc">
@@ -655,7 +658,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="43V-Y5-hPt" secondAttribute="trailing" id="03b-tP-qay"/>
                                 <constraint firstItem="5ez-QV-dEh" firstAttribute="top" secondItem="43V-Y5-hPt" secondAttribute="bottom" id="2hM-Os-OkY"/>
