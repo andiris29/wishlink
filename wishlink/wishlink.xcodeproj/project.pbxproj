@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7654247D1B8B5861001C607C /* U03AddAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654247B1B8B5861001C607C /* U03AddAddressVC.swift */; };
+		7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654247C1B8B5861001C607C /* U03AddAddressVC.xib */; };
+		765424811B8B5A56001C607C /* U03AddressManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654247F1B8B5A56001C607C /* U03AddressManagerVC.swift */; };
+		765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765424801B8B5A56001C607C /* U03AddressManagerVC.xib */; };
+		765424851B8B5A9E001C607C /* U03AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765424831B8B5A9E001C607C /* U03AddressCell.swift */; };
+		765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765424841B8B5A9E001C607C /* U03AddressCell.xib */; };
 		769D4B101B8812680011A4A0 /* U02LogisticsTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769D4B0F1B8812680011A4A0 /* U02LogisticsTipView.swift */; };
 		76CD0E851B89649000B04453 /* U02BuyerTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD0E831B89649000B04453 /* U02BuyerTradeVC.swift */; };
 		76CD0E861B89649000B04453 /* U02BuyerTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E841B89649000B04453 /* U02BuyerTradeVC.xib */; };
@@ -93,6 +99,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7654247B1B8B5861001C607C /* U03AddAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddAddressVC.swift; sourceTree = "<group>"; };
+		7654247C1B8B5861001C607C /* U03AddAddressVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddAddressVC.xib; sourceTree = "<group>"; };
+		7654247F1B8B5A56001C607C /* U03AddressManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddressManagerVC.swift; sourceTree = "<group>"; };
+		765424801B8B5A56001C607C /* U03AddressManagerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddressManagerVC.xib; sourceTree = "<group>"; };
+		765424831B8B5A9E001C607C /* U03AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddressCell.swift; sourceTree = "<group>"; };
+		765424841B8B5A9E001C607C /* U03AddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddressCell.xib; sourceTree = "<group>"; };
 		769D4B0F1B8812680011A4A0 /* U02LogisticsTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02LogisticsTipView.swift; sourceTree = "<group>"; };
 		76CD0E831B89649000B04453 /* U02BuyerTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02BuyerTradeVC.swift; sourceTree = "<group>"; };
 		76CD0E841B89649000B04453 /* U02BuyerTradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02BuyerTradeVC.xib; sourceTree = "<group>"; };
@@ -385,6 +397,12 @@
 			children = (
 				A132BB9C1B863342004EAB47 /* U03SettingVC.swift */,
 				A132BB9D1B863342004EAB47 /* U03SettingVC.xib */,
+				7654247B1B8B5861001C607C /* U03AddAddressVC.swift */,
+				7654247C1B8B5861001C607C /* U03AddAddressVC.xib */,
+				7654247F1B8B5A56001C607C /* U03AddressManagerVC.swift */,
+				765424801B8B5A56001C607C /* U03AddressManagerVC.xib */,
+				765424831B8B5A9E001C607C /* U03AddressCell.swift */,
+				765424841B8B5A9E001C607C /* U03AddressCell.xib */,
 			);
 			path = U03;
 			sourceTree = "<group>";
@@ -556,9 +574,12 @@
 				76CD0E861B89649000B04453 /* U02BuyerTradeVC.xib in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
 				76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */,
+				765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */,
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
+				765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */,
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				A132BBA31B863342004EAB47 /* U02TradeCell.xib in Resources */,
+				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
 				A1043E491B7F804B007A237C /* HomeVC.xib in Resources */,
 				D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */,
 				A132BB9F1B863342004EAB47 /* U01LoginVC.xib in Resources */,
@@ -587,6 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7654247D1B8B5861001C607C /* U03AddAddressVC.swift in Sources */,
 				A1C36CA81B87A4E300EFCB57 /* T03SearchHelperVC.swift in Sources */,
 				A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */,
 				A15D893A1B806F6400BC66DE /* Request.swift in Sources */,
@@ -615,6 +637,7 @@
 				D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */,
 				76CD0E911B89657200B04453 /* U02FavoriteVC.swift in Sources */,
 				76DC96661B8993E100270969 /* UIView.swift in Sources */,
+				765424851B8B5A9E001C607C /* U03AddressCell.swift in Sources */,
 				D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */,
 				A15D89351B806F6400BC66DE /* Alamofire.swift in Sources */,
 				A15D89361B806F6400BC66DE /* Download.swift in Sources */,
@@ -625,6 +648,7 @@
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
 				A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */,
+				765424811B8B5A56001C607C /* U03AddressManagerVC.swift in Sources */,
 				A1C36CAF1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.swift in Sources */,
 				A132BBAA1B863448004EAB47 /* T02HotListVC.swift in Sources */,
 				76CD0E851B89649000B04453 /* U02BuyerTradeVC.swift in Sources */,

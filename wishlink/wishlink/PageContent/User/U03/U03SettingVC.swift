@@ -9,19 +9,25 @@
 import UIKit
 
 class U03SettingVC: RootVC {
-
+    
+    // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.hidden = false
         
         self.loadComNaviLeftBtn()
         self.loadComNavTitle("个人设置")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -32,19 +38,34 @@ class U03SettingVC: RootVC {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @IBAction func btnAction(sender: UIButton) {
-        var tag = sender.tag ; 
-        if(tag == 10)
-        {
-            var vc =  T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
-           // self.navigationController?.pushViewController(vc, animated: true);
-            self.presentViewController(vc, animated: true, completion: nil);
-        }
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - delegate
+    // MARK: - response event
+    
+    @IBAction func btnAction(sender: UIButton) {
+        var tag = sender.tag ;
+        if(tag == 102)
+        {
+            var vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+            
+            self.navigationController?.pushViewController(vc, animated: true);
+        }
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - prive method
+    // MARK: - setter and getter
+    
+    
+    
+    
     
 
     /*
