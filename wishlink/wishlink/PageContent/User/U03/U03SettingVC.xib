@@ -6,6 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U03SettingVC" customModule="wishlink" customModuleProvider="target">
             <connections>
+                <outlet property="bgImageView" destination="vGR-pb-MRx" id="G3P-1P-Gzv"/>
+                <outlet property="headImageView" destination="xat-ND-WEL" id="mDe-XO-JFd"/>
+                <outlet property="nicknameTextField" destination="jBK-F7-vMP" id="0ge-dX-s1T"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -256,7 +259,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW4-JW-RUc">
-                    <rect key="frame" x="181" y="333" width="130" height="23"/>
+                    <rect key="frame" x="181" y="342" width="130" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="130" id="Vta-85-DHI"/>
                         <constraint firstAttribute="height" constant="23" id="g0c-kZ-7vW"/>
@@ -268,19 +271,30 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客服电话4001231234" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeA-C8-EW5">
-                    <rect key="frame" x="50" y="333" width="90" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZH-4X-TZg">
+                    <rect key="frame" x="10" y="342" width="130" height="23"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="90" id="28m-QM-i2m"/>
-                        <constraint firstAttribute="height" constant="40" id="d9q-rv-hat"/>
+                        <constraint firstAttribute="width" constant="130" id="G8i-f9-ep4"/>
+                        <constraint firstAttribute="height" constant="23" id="pG0-Z5-i3b"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u03-phone" translatesAutoresizingMaskIntoConstraints="NO" id="vvv-wg-Vk9">
-                    <rect key="frame" x="23" y="333" width="22" height="23"/>
-                </imageView>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="客服电话" image="u03-phone">
+                        <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9X1-Uv-Bnw">
+                    <rect key="frame" x="15" y="398" width="290" height="35"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="CTL-9P-xqN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="退出登录">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -290,36 +304,39 @@
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="height" secondItem="XCp-jR-Od4" secondAttribute="height" id="7ok-4a-7VZ"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="centerX" secondItem="P87-aR-eun" secondAttribute="centerX" id="8BB-Jo-agb"/>
                 <constraint firstItem="XCp-jR-Od4" firstAttribute="top" secondItem="2eM-Ua-XUw" secondAttribute="bottom" id="8aH-Yf-dNW"/>
-                <constraint firstItem="s4d-T1-wXX" firstAttribute="top" secondItem="LeA-C8-EW5" secondAttribute="top" id="CX5-9J-2wD"/>
+                <constraint firstItem="9X1-Uv-Bnw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="DOF-Sc-Gcv"/>
                 <constraint firstItem="see-r1-c5b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FS2-R2-kYZ"/>
                 <constraint firstItem="dmL-Ed-ubp" firstAttribute="height" secondItem="VfF-dP-4tP" secondAttribute="height" id="GNo-TR-lR5"/>
+                <constraint firstItem="s4d-T1-wXX" firstAttribute="leading" secondItem="GZH-4X-TZg" secondAttribute="trailing" constant="20" id="Hms-8J-bUo"/>
+                <constraint firstItem="s4d-T1-wXX" firstAttribute="centerY" secondItem="GZH-4X-TZg" secondAttribute="centerY" id="Jbk-IX-eSW"/>
+                <constraint firstItem="9X1-Uv-Bnw" firstAttribute="top" secondItem="s4d-T1-wXX" secondAttribute="bottom" constant="25" id="Jm8-kt-EbA"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="width" secondItem="P87-aR-eun" secondAttribute="width" id="JvC-Ev-AZM"/>
                 <constraint firstAttribute="trailing" secondItem="see-r1-c5b" secondAttribute="trailing" id="LKU-RR-clu"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="centerX" secondItem="2eM-Ua-XUw" secondAttribute="centerX" id="Lq2-xc-XPF"/>
                 <constraint firstItem="CW4-JW-RUc" firstAttribute="leading" secondItem="s4d-T1-wXX" secondAttribute="trailing" constant="20" id="Lt9-Vb-cQc"/>
-                <constraint firstItem="LeA-C8-EW5" firstAttribute="top" secondItem="vvv-wg-Vk9" secondAttribute="top" id="PvK-BW-5DE"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="height" secondItem="P87-aR-eun" secondAttribute="height" id="SNF-HN-dYX"/>
                 <constraint firstItem="CW4-JW-RUc" firstAttribute="top" secondItem="s4d-T1-wXX" secondAttribute="top" id="U8V-Tp-NI4"/>
                 <constraint firstItem="2eM-Ua-XUw" firstAttribute="top" secondItem="dmL-Ed-ubp" secondAttribute="bottom" id="Vk2-U4-mGK"/>
                 <constraint firstAttribute="centerX" secondItem="s4d-T1-wXX" secondAttribute="centerX" id="WyH-54-gmd"/>
                 <constraint firstItem="dmL-Ed-ubp" firstAttribute="centerX" secondItem="VfF-dP-4tP" secondAttribute="centerX" id="Yhl-08-zcR"/>
-                <constraint firstItem="s4d-T1-wXX" firstAttribute="leading" secondItem="LeA-C8-EW5" secondAttribute="trailing" constant="20" id="Zml-SS-KSj"/>
                 <constraint firstAttribute="trailing" secondItem="see-r1-c5b" secondAttribute="trailing" id="ZpP-fe-tZq"/>
+                <constraint firstAttribute="trailing" secondItem="9X1-Uv-Bnw" secondAttribute="trailing" constant="15" id="d5F-Kn-kLY"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="width" secondItem="2eM-Ua-XUw" secondAttribute="width" id="dLR-hG-zCc"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="top" secondItem="see-r1-c5b" secondAttribute="bottom" id="eHc-KR-aMT"/>
                 <constraint firstItem="dmL-Ed-ubp" firstAttribute="top" secondItem="VfF-dP-4tP" secondAttribute="bottom" id="eoA-Kn-LSd"/>
+                <constraint firstItem="s4d-T1-wXX" firstAttribute="centerY" secondItem="CW4-JW-RUc" secondAttribute="centerY" id="ic9-9q-iK8"/>
                 <constraint firstItem="P87-aR-eun" firstAttribute="top" secondItem="XCp-jR-Od4" secondAttribute="bottom" id="jrT-XU-Qe1"/>
                 <constraint firstItem="s4d-T1-wXX" firstAttribute="top" secondItem="P87-aR-eun" secondAttribute="bottom" constant="50" id="kPZ-Tq-mMh"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="centerX" secondItem="XCp-jR-Od4" secondAttribute="centerX" id="lqg-5V-VI9"/>
                 <constraint firstItem="dmL-Ed-ubp" firstAttribute="width" secondItem="VfF-dP-4tP" secondAttribute="width" id="nHI-v5-8a0"/>
                 <constraint firstItem="see-r1-c5b" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="s3k-7R-3ST"/>
-                <constraint firstItem="LeA-C8-EW5" firstAttribute="leading" secondItem="vvv-wg-Vk9" secondAttribute="trailing" constant="5" id="wFR-fp-7YC"/>
                 <constraint firstItem="VfF-dP-4tP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yNm-f0-6aJ"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="LKU-RR-clu"/>
+                    <exclude reference="U8V-Tp-NI4"/>
                 </mask>
             </variation>
         </view>
