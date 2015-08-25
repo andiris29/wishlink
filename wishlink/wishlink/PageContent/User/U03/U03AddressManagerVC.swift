@@ -8,13 +8,19 @@
 
 import UIKit
 
-class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource {
+class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource,
+U03AddressCellDelegate{
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var addressArray = [AnyObject]()
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
+        self.addressArray.append(["111": "1111"])
+        self.addressArray.append(["222": "2222"])
         // Do any additional setup after loading the view.
     }
     
@@ -40,20 +46,33 @@ class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
-        vc.operationType = .Edit
-        self.navigationController!.pushViewController(vc, animated: true)
+        
     }
     
     // MARK: tableView dataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.addressArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("U03AddressCell", forIndexPath: indexPath) as! U03AddressCell
         cell.selectionStyle = .None
+        cell.indexPath = indexPath
+        cell.delegate = self
         return cell
+    }
+    
+    func addressCell(cell: U03AddressCell, btnClickWithTag tag: NSInteger, indexPath: NSIndexPath) {
+        if tag == 0 {
+            var vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
+            vc.operationType = .Edit
+            self.navigationController!.pushViewController(vc, animated: true)
+        }
+        else {
+            // 删除收货地址
+            self.addressArray.removeAtIndex(indexPath.row)
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - response event

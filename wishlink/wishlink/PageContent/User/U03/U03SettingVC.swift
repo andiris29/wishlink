@@ -8,7 +8,13 @@
 
 import UIKit
 
-class U03SettingVC: RootVC {
+class U03SettingVC: RootVC, UIImagePickerControllerDelegate,
+UINavigationControllerDelegate{
+    
+    @IBOutlet weak var headImageView: UIImageView!
+    @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var nicknameTextField: UITextField!
+    var isUploadHeadImage: Bool!
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -30,6 +36,14 @@ class U03SettingVC: RootVC {
         self.view.endEditing(true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.headImageView.layer.cornerRadius = CGRectGetWidth(self.headImageView.frame) * 0.5
+        self.headImageView.layer.masksToBounds = true
+        self.bgImageView.layer.cornerRadius = CGRectGetWidth(self.headImageView.frame) * 0.5
+        self.bgImageView.layer.masksToBounds = true
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
@@ -44,15 +58,45 @@ class U03SettingVC: RootVC {
     }
     
     // MARK: - delegate
+    
+    //MARK: UIImagePickerController delegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if self.isUploadHeadImage == true {
+            self.headImageView.image = gotImage
+        }
+        else {
+            self.bgImageView.image = gotImage
+        }
+        picker.dismissViewControllerAnimated(true, completion: {
+            () -> Void in
+            
+            //            UIHelper.saveEditImageToLocal(gotImage, strName: "UserHead.jpg")
+            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
+        })
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: - response event
     
     @IBAction func btnAction(sender: UIButton) {
         var tag = sender.tag ;
-        if(tag == 102)
-        {
+        switch tag {
+        case 100:
+            self.isUploadHeadImage = true
+            self.imgHeadChange()
+        case 101:
+            self.isUploadHeadImage = false
+            self.imgHeadChange()
+        case 102:
             var vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
             
             self.navigationController?.pushViewController(vc, animated: true);
+        default:
+            println("1111")
         }
     }
     
@@ -63,6 +107,42 @@ class U03SettingVC: RootVC {
     // MARK: - prive method
     // MARK: - setter and getter
     
+    
+    //MARK:弹出图片上传选择框
+    func imgHeadChange()
+    {
+        var alertController = UIAlertController(title: "选择产品图片", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler:  {
+            (action: UIAlertAction!) -> Void in
+            
+        })
+        var deleteAction = UIAlertAction(title: "拍照上传", style: UIAlertActionStyle.Default, handler: {
+            (action: UIAlertAction!) -> Void in
+            
+            var imagePicker = UIImagePickerController()
+            if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+            {
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                imagePicker.delegate = self;
+                self.presentViewController(imagePicker, animated: true, completion: nil);
+            }
+        })
+        var archiveAction = UIAlertAction(title: "从相册中选择", style: UIAlertActionStyle.Default, handler: {
+            (action: UIAlertAction!) -> Void in
+            
+            var imagePicker = UIImagePickerController()
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.delegate = self;
+            self.presentViewController(imagePicker, animated: true, completion: nil);
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        alertController.addAction(archiveAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
     
     
     
