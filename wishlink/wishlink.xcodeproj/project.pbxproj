@@ -72,6 +72,8 @@
 		A1FD283C1B878DF4006535E0 /* T03SearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */; };
 		A1FD283F1B87968D006535E0 /* T03Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD283D1B87968D006535E0 /* T03Cell.swift */; };
 		A1FD28401B87968D006535E0 /* T03Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FD283E1B87968D006535E0 /* T03Cell.xib */; };
+		D20B90831B8C8D470017F89C /* T08ComplaintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20B90811B8C8D470017F89C /* T08ComplaintVC.swift */; };
+		D20B90841B8C8D470017F89C /* T08ComplaintVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20B90821B8C8D470017F89C /* T08ComplaintVC.xib */; };
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
 		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
 		D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25A352F1B80821A000CCD7C /* T06TradeVC.swift */; };
@@ -171,6 +173,8 @@
 		A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchVC.xib; sourceTree = "<group>"; };
 		A1FD283D1B87968D006535E0 /* T03Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03Cell.swift; sourceTree = "<group>"; };
 		A1FD283E1B87968D006535E0 /* T03Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03Cell.xib; sourceTree = "<group>"; };
+		D20B90811B8C8D470017F89C /* T08ComplaintVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T08ComplaintVC.swift; sourceTree = "<group>"; };
+		D20B90821B8C8D470017F89C /* T08ComplaintVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T08ComplaintVC.xib; sourceTree = "<group>"; };
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
 		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
 		D25A352F1B80821A000CCD7C /* T06TradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06TradeVC.swift; sourceTree = "<group>"; };
@@ -469,6 +473,8 @@
 				D25A35301B80821A000CCD7C /* T06TradeVC.xib */,
 				D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */,
 				D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */,
+				D20B90811B8C8D470017F89C /* T08ComplaintVC.swift */,
+				D20B90821B8C8D470017F89C /* T08ComplaintVC.xib */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				A1C36CB21B87A50100EFCB57 /* SearchCollectionViewCell.xib in Resources */,
 				A132BBA71B863342004EAB47 /* U03SettingVC.xib in Resources */,
 				D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */,
+				D20B90841B8C8D470017F89C /* T08ComplaintVC.xib in Resources */,
 				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
 				76CD0E8A1B8964B000B04453 /* U02SellerTradeVC.xib in Resources */,
 				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
@@ -619,6 +626,7 @@
 				7654247D1B8B5861001C607C /* U03AddAddressVC.swift in Sources */,
 				A1C36CA81B87A4E300EFCB57 /* T03SearchHelperVC.swift in Sources */,
 				A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */,
+				D20B90831B8C8D470017F89C /* T08ComplaintVC.swift in Sources */,
 				A15D893A1B806F6400BC66DE /* Request.swift in Sources */,
 				A1043E481B7F804B007A237C /* HomeVC.swift in Sources */,
 				A15D89381B806F6400BC66DE /* MultipartFormData.swift in Sources */,
