@@ -10,9 +10,14 @@ import UIKit
 
 class T09CellTextLeft: UITableViewCell {
 
+    @IBOutlet weak var headImageView: UIImageView!
+    @IBOutlet weak var contextLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        self.contextLabel.layer.masksToBounds = true
+        self.contextLabel.layer.cornerRadius = 5
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

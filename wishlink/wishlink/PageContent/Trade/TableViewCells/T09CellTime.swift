@@ -10,9 +10,13 @@ import UIKit
 
 class T09CellTime: UITableViewCell {
 
+    @IBOutlet weak var timeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        self.timeLabel.layer.masksToBounds = true
+        self.timeLabel.layer.cornerRadius = 3
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
