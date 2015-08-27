@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -160,7 +160,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZ4-3n-XaC" userLabel="View1">
-                                                    <rect key="frame" x="69" y="0.0" width="68.5" height="50"/>
+                                                    <rect key="frame" x="69" y="0.0" width="69" height="50"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQs-hv-uPL" userLabel="Button1">
                                                             <rect key="frame" x="9" y="0.0" width="50" height="50"/>
@@ -181,7 +181,7 @@
                                                         <constraint firstItem="gQs-hv-uPL" firstAttribute="top" secondItem="vZ4-3n-XaC" secondAttribute="top" id="uCo-xn-dpR"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qew-sq-W4V" userLabel="View2">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qew-sq-W4V" userLabel="View2">
                                                     <rect key="frame" x="137" y="0.0" width="69" height="50"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFG-Ff-bqt" userLabel="Button2">
@@ -204,7 +204,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdX-ni-BY5" userLabel="View3">
-                                                    <rect key="frame" x="206" y="0.0" width="68.5" height="50"/>
+                                                    <rect key="frame" x="206" y="0.0" width="69" height="50"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wj3-Ef-uD4" userLabel="Button3">
                                                             <rect key="frame" x="9" y="0.0" width="50" height="50"/>
