@@ -29,6 +29,7 @@ var entitySchema = Schema({
     weight : Number,
     spec : String,      //TODO 这个是啥
     price : Number,
+    comment : String,
     create : {
         'type' : Date,
         'default' : Date.now

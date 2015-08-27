@@ -12,6 +12,8 @@ var path = require('path');
 var _ = require('underscore');
 var winston = require('winston');
 
+var ftp = require('../runtime/ftp');
+
 //Services Name
 var servicesNames = ['user'];
 var services = servicesNames.map(function (path) {
@@ -50,7 +52,7 @@ var mkdirUploads = function (config) {
             mkdirUploads(value);
         } else {
             if (value.indexOf('http://') !== 0) {
-                qsftp.getConnection().mkdir(value, true, function (err){});
+                ftp.getConnection().mkdir(value, true, function (err){});
             }
         }
     }
@@ -63,9 +65,8 @@ module.exports = function (config, qsdb) {
     global.qsConfig = config;
     app.listen(config.server.port);
 
-    // Upload
-    //TODO
-//    mkdirUploads(config.uploads);
+    // TODO Upload
+    //mkdirUploads(config.uploads);
 
     // Cross domain
     app.use(function (req, res, next) {

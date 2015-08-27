@@ -1,6 +1,5 @@
 var util = require('util');
-var winston = require('winston')
-
+var winston = require('winston');
 
 var ServerError = function(errorCode, description, err) {
     Error.call(this, 'server error');
@@ -31,6 +30,7 @@ util.inherits(ServerError, Error);
 ServerError.ServerError = 1000;
 ServerError.IncorrectMailOrPassword = 1001;
 ServerError.SessionExpired = 1002;
+ServerError.NeedLogin = 1003;
 
 var _codeToString = function(code) {
     switch (code) {
@@ -40,6 +40,8 @@ var _codeToString = function(code) {
             return "IncorrectMailOrPassword";
         case 1002 :
             return "SessionExpired";
+        case 1003 :
+            return "NeedLogin";
     }
 };
 

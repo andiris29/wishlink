@@ -43,7 +43,7 @@ var _validate = function(req, res, next) {
 };
 
 var _builtInValidators = {
-    'loginValidator' : function(req, res, callback) {
+    'validateLogin' : function(req, res, callback) {
         if (req.qsCurrentUserId) {
             callback(null);
         } else {
