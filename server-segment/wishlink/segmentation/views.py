@@ -18,9 +18,5 @@ def segment(request):
             inputStr = request.GET['input']
         except KeyError:
             pass
-    seg_list = jieba.cut(inputStr, cut_all=True)
+    seg_list = jieba.cut_for_search(inputStr)
     return HttpResponse(json.dumps({'result': list(seg_list)}, ensure_ascii=False))
-
-@csrf_exempt
-def index(request):
-    return HttpResponse("Hello, world")
