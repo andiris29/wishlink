@@ -59,6 +59,7 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.cellType = .Favorite
+        
         return cell
     }
     
@@ -87,6 +88,7 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     }
     
     // MARK: - prive method
+    
     func prepareCollectionView() {
         self.clearView = UIView(frame: CGRectMake(0, -40, UIScreen.mainScreen().bounds.size.width, 40))
         self.clearView.userInteractionEnabled = true

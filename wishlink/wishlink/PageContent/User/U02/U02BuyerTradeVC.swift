@@ -8,7 +8,7 @@
 
 import UIKit
 
-class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, U02TradeCellDelegate {
+class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, U02TradeCellDelegate, WebRequestDelegate {
     
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -39,6 +39,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
+        self.prepareData()
         // Do any additional setup after loading the view.
     }
 
@@ -77,7 +78,18 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     }
     
     // MARK: - delegate
-
+    
+    func requestDataFailed(error: String) {
+        
+    }
+    
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+    }
+    
+    
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         var width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
         var height: CGFloat = 223
@@ -105,6 +117,8 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             println("撤单")
         case .CheckComplain:
             println("查看投诉")
+            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .CheckLogistics:
             var tipView = U02LogisticsTipView(name: "物流公司：韵达快递", orderNumber: "物流单号：18815287600")
             tipView.show()
@@ -133,6 +147,10 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
 
     // MARK: - private method
     
+    func loadData() {
+        
+    }
+    
     func isCoverTabBar(isCover: Bool) {
         self.coverTabBarView.hidden = !isCover
     }
@@ -147,6 +165,10 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         self.coverTabBarView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
         self.coverTabBarView.hidden = true
         UIApplication.sharedApplication().keyWindow!.addSubview(self.coverTabBarView)
+    }
+    
+    func prepareData() {
+        self.httpObj.mydelegate = self
     }
     
     func prepareCollectionView() {

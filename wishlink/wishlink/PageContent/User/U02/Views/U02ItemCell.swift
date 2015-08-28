@@ -12,9 +12,15 @@ enum ItemCellType {
     case Recommand, Favorite
 }
 
+
+
 class U02ItemCell: UICollectionViewCell {
 
     @IBOutlet weak var favoriteBtn: UIButton!
+    
+    var indexPath: NSIndexPath!
+    
+    var closure: (NSIndexPath -> ())?
     
     var cellType: ItemCellType = .Recommand {
         didSet {
@@ -36,6 +42,9 @@ class U02ItemCell: UICollectionViewCell {
     @IBAction func favoriteBtnAction(sender: AnyObject) {
         var btn = sender as! UIButton
         btn.selected = !btn.selected
+        if let c = self.closure {
+            c(self.indexPath)
+        }
     }
 
 }
