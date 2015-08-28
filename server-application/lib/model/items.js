@@ -7,6 +7,7 @@ require('./categories');
 
 var entitySchema = Schema({
     status : Number,
+    images : [string],
     name : String,
     countryWords : [String],
     country : String,
@@ -29,7 +30,7 @@ var entitySchema = Schema({
     weight : Number,
     spec : String,      //TODO 这个是啥
     price : Number,
-    comment : String,
+    notes: String,
     create : {
         'type' : Date,
         'default' : Date.now
