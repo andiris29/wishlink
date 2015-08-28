@@ -19,7 +19,7 @@ def segment(request):
         except KeyError:
             pass
     seg_list = jieba.cut(inputStr, cut_all=True)
-    return HttpResponse(json.dumps({'result': list(seg_list)}))
+    return HttpResponse(json.dumps({'result': list(seg_list)}, ensure_ascii=False))
 
 @csrf_exempt
 def index(request):
