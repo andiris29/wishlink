@@ -100,3 +100,29 @@ RequestHelper.parseFile = function (req, uploadPath, resizeOptions, callback) {
     });
 };
 
+RequestHelper.parseFiles = function(req, uploadPath, resizeOptions, callback) {
+    var formidable = require('formidable');
+    var form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.parse(req, function(err, fields, files) {
+        if (err) {
+            callback(err);
+        }
+
+        var task = files.map(function(file) {
+            return function(callback) {
+                var savedName = path.basename(file.path);
+                var fullPath = path.join(uploadPath, savedName);
+
+                ftp.uploadPath(file.path, savedName, uploadPath, resizeOptions, function(err) {
+                    file.path = fullPath;
+                    callback(err, fields);
+                });
+            };
+        });
+
+        async.parallel(task, function(error) {
+            callback(error, files);
+        });
+    });
+};

@@ -40,7 +40,7 @@ item.create = {
             country : req.country,
             spec : req.spen,
             price : RequestHelper.parseNumber(req.price),
-            comment :req.comment
+            notes :req.notes
         });
 
         async.waterfall([function(callback) {
@@ -54,8 +54,27 @@ item.create = {
                 }
             });
         }, function(item, callback) {
-            // TODO upload image
-            callback(null, item);
+            RequestHelper.parseFiles(req, res, global.uploads.item.image.ftpPath, resizeOptions, function(error, files) {
+                if (error) {
+                    callback(error);
+                } else {
+                    item.images = [];
+                    files.forEach(function(file) {
+                        var path = global.uploads.item.image.exposeToUrl + '/' + path.relative(global.uploads.item.image.ftpPath, file.path);
+                        item.images.push(path);
+                    });
+
+                    item.save(function(error, item) {
+                        if (error) {
+                            callabck(error);
+                        } else if (!item) {
+                            callback(ServerError.ServerError);
+                        } else {
+                            callback(null, item);
+                        }
+                    });
+                }
+            });
         }], function(error, item) {
             ResponseHelper.response(res, error, {
                 'item' : item
