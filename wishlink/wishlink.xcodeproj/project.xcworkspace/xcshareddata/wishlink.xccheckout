@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>58398B6B-92FB-499B-82C8-A842276A1E6C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>wishlink</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C21BCD4C55F5C4BF0F43984E7D9882077126AFA0</key>
 		<string>https://github.com/andiris29/com.wishlink.kelp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>wishlink/wishlink.xcodeproj/project.xcworkspace</string>
+	<string>wishlink/wishlink.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C21BCD4C55F5C4BF0F43984E7D9882077126AFA0</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>C21BCD4C55F5C4BF0F43984E7D9882077126AFA0</string>
 			<key>IDESourceControlWCCName</key>
-			<string>wishlink</string>
+			<string>com.wishlink.kelp</string>
 		</dict>
 	</array>
 </dict>
