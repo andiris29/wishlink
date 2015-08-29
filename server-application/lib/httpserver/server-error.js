@@ -31,6 +31,7 @@ ServerError.ServerError = 1000;
 ServerError.IncorrectMailOrPassword = 1001;
 ServerError.SessionExpired = 1002;
 ServerError.NeedLogin = 1003;
+ServerError.NotEnoughParam = 1004;
 
 var _codeToString = function(code) {
     switch (code) {

@@ -60,9 +60,9 @@ var mkdirUploads = function (config) {
 
 
 
-module.exports = function (config, qsdb) {
+module.exports = function (config, db) {
     var app = express();
-    global.qsConfig = config;
+    global.config = config;
     app.listen(config.server.port);
 
     // TODO Upload
@@ -85,7 +85,7 @@ module.exports = function (config, qsdb) {
     var session = require('express-session')({
         store : new SessionStore({
             interval : 24 * 60 * 60 * 1000,
-            connection : qsdb.getConnection(),
+            connection : db.getConnection(),
             modelName : "sessionStores"
         }),
         cookie : {
