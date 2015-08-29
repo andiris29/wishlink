@@ -128,11 +128,8 @@ SearchBuildService._syncWords = function(type, fromWords, toWords, weight, callb
  * @param {string} err
  */
 SearchBuildService._syncWeight = function(type, words, fromWeight, toWeight) {
+
+
 };
-
-
-
-
-
 
 module.exports = SearchBuildService;

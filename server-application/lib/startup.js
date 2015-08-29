@@ -27,6 +27,10 @@ async.waterfall([
         // Load handle
         winston.info(config);
 
+        // config service
+        var segmentService = require('./httpserver/service/SegmentService');
+        segmentService.setConfig(config.segment);
+
         //Database Connection
         var runtimeDb = require('./runtime/db');
         runtimeDb.connect(config.mongodb);
