@@ -123,6 +123,12 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             var tipView = U02LogisticsTipView(name: "物流公司：韵达快递", orderNumber: "物流单号：18815287600")
             tipView.show()
             println("查看物流")
+        case .Chat:
+            var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
+        case .Complain:
+            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
         default:
             println("error")
         }

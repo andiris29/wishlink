@@ -123,7 +123,7 @@ class WebRequestHelper:NSObject {
     {
         var  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
         //判断文件路径是否存在，不存在则创建
-        var imagepath:String = UIHelper.getCachedFilePath("cachedimages");
+        var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
         
         var fm:NSFileManager = NSFileManager.defaultManager();
         if(!fm.fileExistsAtPath(imagepath))
@@ -149,7 +149,7 @@ class WebRequestHelper:NSObject {
                 if (image != nil) {
                     iv.image = image;
                 } else {
-                    iv.image = UIHelper.getBundledImage(defaultName)
+                    iv.image = UIHEPLER.getBundledImage(defaultName)
                 }
             }
             else

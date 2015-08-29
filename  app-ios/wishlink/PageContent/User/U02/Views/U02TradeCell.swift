@@ -14,7 +14,7 @@ enum TradeCellType {
 
 enum TradeCellButtonClickType{
     case Revoke, Confirm, CheckComplain, CheckLogistics,
-    EditItemInfo, SendOut
+    EditItemInfo, SendOut,Complain,Chat
 }
 
 
@@ -50,6 +50,8 @@ class U02TradeCell: UICollectionViewCell {
     @IBOutlet weak var buyerCheckComplaintBtn: UIButton!
     @IBOutlet weak var buyerCheckLogisticsBtn: UIButton!
     
+    @IBOutlet weak var btnComplain: UIButton!
+    @IBOutlet weak var btnChat: UIButton!
     
     
     @IBOutlet weak var sellerTopView: UIView!
@@ -91,6 +93,15 @@ class U02TradeCell: UICollectionViewCell {
     }
     @IBAction func sendOutBtnAction(sender: AnyObject) {
         self.delegate?.tradeCell(self, clickType: .SendOut)
+
+    }
+    @IBAction func btnChatAction(sender: AnyObject) {
+        self.delegate?.tradeCell(self, clickType: .Chat)
+
+    }
+    
+    @IBAction func btnComplainAction(sender: AnyObject) {
+        self.delegate?.tradeCell(self, clickType: .Complain)
 
     }
     

@@ -43,7 +43,7 @@
                                                         <rect key="frame" x="304" y="0.0" width="304" height="170"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFD-SU-Vey">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFD-SU-Vey">
                                                         <rect key="frame" x="8" y="8" width="28" height="26"/>
                                                         <state key="normal" image="u02-back">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -395,6 +395,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnBack" destination="oFD-SU-Vey" id="Sat-l9-mOM"/>
+                <outlet property="btnFlow" destination="Rd0-Ng-yZU" id="edw-Bm-eKL"/>
             </connections>
         </tableViewCell>
     </objects>

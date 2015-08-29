@@ -33,11 +33,12 @@ class U02UserVC: RootVC {
         self.prepareSubVC()
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
+        
+        self.navigationController!.navigationBar.hidden = true
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,15 +50,7 @@ class U02UserVC: RootVC {
         self.headImageView.layer.cornerRadius = self.headImageView.w * 0.5
         self.headImageView.layer.masksToBounds = true
     }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

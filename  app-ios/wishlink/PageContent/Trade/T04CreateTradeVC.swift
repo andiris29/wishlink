@@ -18,16 +18,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     
     override func viewWillAppear(animated: Bool) {
       self.navigationController?.navigationBarHidden = false;
-        self.loadComNaviLeftBtn()
-//        self.loadComNavTitle("发布新订单")
-        
         
         let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
         titleLabel.text = "发布新订单"
-        titleLabel.textColor = UIHelper.mainColor;
+        titleLabel.textColor = UIHEPLER.mainColor;
         titleLabel.font = UIFont.boldSystemFontOfSize(15)
         titleLabel.textAlignment = NSTextAlignment.Center
-//        self.navigationItem.titleView = titleLabel
+        
         
         let txtRemark: UILabel = UILabel(frame: CGRectMake(0, 20, 80, 20))
         txtRemark.text = "(*为必填项)"
@@ -42,9 +39,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         titleView.addSubview(txtRemark);
         self.navigationItem.titleView = titleView;
         
-        
-        
-        
         self.navigationController?.navigationBarHidden = false;
         
     }
@@ -54,8 +48,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         var tag = sender.tag;
         if(tag==11)
         {
-        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-        self.navigationController?.pushViewController(vc, animated: true);
+            var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            self.navigationController?.pushViewController(vc, animated: true);
         }
         else
         {
@@ -106,7 +100,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
             
-            //            UIHelper.saveEditImageToLocal(gotImage, strName: "UserHead.jpg")
             var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
         })
     }

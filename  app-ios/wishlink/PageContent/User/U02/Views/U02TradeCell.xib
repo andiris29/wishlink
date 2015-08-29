@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -348,6 +348,9 @@
                                     <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnComplainAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wqX-Cc-LPf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oz7-eg-bN7">
                                 <rect key="frame" x="20" y="14" width="60" height="50"/>
@@ -358,6 +361,9 @@
                                 <state key="normal" image="u02-contactbuy">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnChatAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="w1B-1g-EvW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -406,6 +412,8 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="btnChat" destination="oz7-eg-bN7" id="OxH-bt-eyU"/>
+                <outlet property="btnComplain" destination="cJe-UN-tXf" id="ECu-E2-BYJ"/>
                 <outlet property="buyerCheckComplaintBtn" destination="kSu-vJ-EwY" id="Dvh-6H-j9v"/>
                 <outlet property="buyerCheckLogisticsBtn" destination="nLR-fh-Tsk" id="pLA-wz-kzV"/>
                 <outlet property="buyerConfirmBtn" destination="Haq-xH-9R5" id="mBi-15-L6N"/>

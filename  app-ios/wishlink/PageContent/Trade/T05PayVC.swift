@@ -23,8 +23,6 @@ class T05PayVC: RootVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,15 +45,32 @@ class T05PayVC: RootVC {
         
         
         var tag = sender.tag;
-        if(tag == 11)
+        if(tag == 11)//跳转到个人中心
         {
-            var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
-            self.navigationController?.pushViewController(vc, animated: true);
+            self.navigationController?.popToRootViewControllerAnimated(true);
+           
+            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+                var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+                
+                
+                var vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
+                if(vc != nil)
+                {
+                    
+                    vc.sellerBtnAction(vc.sellerBtn);
+                }
+                
+                tababarController.selectedIndex = 3;
+            }
+
         }
         else
         {
-            var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle());
-            self.presentViewController(vc, animated: true, completion: nil);
+            
+            
+            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle());
+            self.navigationController?.pushViewController(vc, animated: true);
+
             
         }
     }

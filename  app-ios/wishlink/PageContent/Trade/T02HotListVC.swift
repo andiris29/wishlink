@@ -14,6 +14,8 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     let itemCellIde = "U02ItemCell"
 
+    var isNeedShowNavi = false;
+    var isNeedShowLoin = true;
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -27,10 +29,11 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false;
     }
-    
     override func viewDidAppear(animated: Bool) {
-            UIHelper.loadLeftItem(self.navigationController! , imgNormal: "u02-back", imgHightLight: "u02-back-w", btnAction: "leftBtnClicked:")
+        
+        self.navigationController?.navigationBarHidden = false;
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,23 +60,32 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
         self.navigationController?.pushViewController(vc, animated: true);
     }
-    // MARK: - prive method
     
+    
+    // MARK: - prive method
     func preparePage() {
+        
+        
+        
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 7.5, right: 10)
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
         self.collectionView.scrollEnabled = true;
-        
-        self.loadComNaviLeftBtn()
+        if(isNeedShowNavi)
+        {
+            self.loadComNaviLeftBtn()
+        }
         self.loadComNavTitle("热门")
+        
+        if(isNeedShowLoin)
+        {
+            var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+            self.presentViewController(loginVC, animated: true, completion: nil)
+        }
+        
     }
+
+
     
-   override func leftNavBtnAction(button: UIButton){
-        
-        var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-        self.presentViewController(loginVC, animated: true, completion: nil)
-    }
-        
 }
 
 

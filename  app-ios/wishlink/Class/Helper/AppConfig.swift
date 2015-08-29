@@ -22,17 +22,24 @@ enum LanguageVersion:Int
 
 let CURR_DEVICE = UIDevice.currentDevice()
 //常用系统函数简写
+
+
+//常用系统函数简写
 let IOS_VERSION = (UIDevice.currentDevice().systemVersion as NSString).intValue;
-
 let NotificationCenter = NSNotificationCenter.defaultCenter()
-
 let UserDefaults = NSUserDefaults.standardUserDefaults();
-let Application = UIApplication.sharedApplication()
+let APPLICATION = UIApplication.sharedApplication()
 let MainBundle = NSBundle.mainBundle();
+let ScreenWidth = UIScreen.mainScreen().bounds.width
+let ScreenHeight = UIScreen.mainScreen().bounds.height
+
 
 func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a) }
 func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1) }
-let APPCONFIG = AppConfig.sharedAppConfig;
+
+let UIHEPLER = UIHelper();
+let APPCONFIG =  AppConfig.sharedAppConfig;
+
 
 
 

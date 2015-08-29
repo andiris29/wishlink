@@ -18,7 +18,6 @@ class T07DeliverEditVC: RootVC {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
@@ -30,7 +29,7 @@ class T07DeliverEditVC: RootVC {
         }
         else if(btnTag == 11)//提交
         {
-            
+             self.dismissViewControllerAnimated(true, completion: nil);
         }
     }
 

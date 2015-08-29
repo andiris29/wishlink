@@ -12,11 +12,20 @@ class T03Cell: UITableViewCell {
 
     @IBOutlet weak var lbTitle: UILabel!
     
+    @IBOutlet weak var iv_mid: UIImageView!
+    @IBOutlet weak var constratins_Right: NSLayoutConstraint!
+    @IBOutlet weak var consraion_Left: NSLayoutConstraint!
     var isShowBottonLine = false;
     @IBOutlet weak var marginSpan: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        var width = self.iv_mid.frame.width;
+       var result = (ScreenWidth - 5*width) / 6
+        constratins_Right.constant = result;
+        consraion_Left.constant = result;
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

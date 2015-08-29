@@ -27,7 +27,9 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
 
-        self.navigationController?.navigationBarHidden = true;
+        self.navigationController?.navigationBarHidden = false;
+        self.loadComNaviLeftBtn()
+        self.loadComNavTitle("订单详情")
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -63,16 +65,35 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         case 0:
            var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
             tCell.btnBack.addTarget(self, action: "leftNavBtnAction:", forControlEvents: UIControlEvents.TouchUpInside)
-            
+           
+           tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
+           
            cell = tCell;
         case last:
-            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
+           var  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
+           fcell.btnGrabOrder.addTarget(self, action: "btnGrabOrderAction:", forControlEvents: UIControlEvents.TouchUpInside)
+           cell = fcell;
         default:
             cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
         }
         
         return cell
     }
+    
+    
+    func btnFollowAction(sernder:UIButton)
+    {
+         var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true);
+    }
+    func btnGrabOrderAction(sernder:UIButton)
+    {
+        self.navigationController?.popToRootViewControllerAnimated(true);
+        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+            var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+            tababarController.selectedIndex = 3;
+        }
 
+    }
 
 }

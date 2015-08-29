@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        var vc = HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
+//        var vc = HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
         
         self.window!.rootViewController = TabBarVC();
         self.window!.makeKeyAndVisible()

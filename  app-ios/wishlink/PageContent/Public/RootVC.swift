@@ -54,7 +54,7 @@ class RootVC: UIViewController {
     {
         let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
         titleLabel.text = strTitle
-        titleLabel.textColor = UIHelper.mainColor;
+        titleLabel.textColor = UIHEPLER.mainColor;
         titleLabel.font = UIFont.boldSystemFontOfSize(15)
         titleLabel.textAlignment = NSTextAlignment.Center
         self.navigationItem.titleView = titleLabel

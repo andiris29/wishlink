@@ -46,10 +46,10 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to3_img_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="ARY-31-w8s">
                         <rect key="frame" x="8" y="37" width="74" height="74"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to3_img_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-Jv-OI3">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="to3_img_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-Jv-OI3">
                         <rect key="frame" x="89" y="37" width="74" height="74"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to3_img_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="o7Y-S4-QzI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="to3_img_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="o7Y-S4-QzI">
                         <rect key="frame" x="249" y="37" width="74" height="74"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to3_img_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="ktA-gV-QjJ">
@@ -61,7 +61,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美国" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NF-qX-kL8">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="美国" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NF-qX-kL8">
                         <rect key="frame" x="109" y="121" width="34" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,7 +73,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美国" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGa-CR-FKT">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="美国" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGa-CR-FKT">
                         <rect key="frame" x="269" y="121" width="34" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -115,7 +115,7 @@
                     <constraint firstItem="o7Y-S4-QzI" firstAttribute="width" secondItem="ktA-gV-QjJ" secondAttribute="width" id="BIc-gD-OGM"/>
                     <constraint firstAttribute="centerX" secondItem="v5G-RZ-Ruw" secondAttribute="centerX" id="BgZ-VE-0QP"/>
                     <constraint firstItem="lGa-CR-FKT" firstAttribute="centerY" secondItem="fpk-pE-gGQ" secondAttribute="centerY" id="CvC-Gx-BbB"/>
-                    <constraint firstItem="o7Y-S4-QzI" firstAttribute="leading" secondItem="v5G-RZ-Ruw" secondAttribute="trailing" constant="6" id="HgQ-T7-Ftt"/>
+                    <constraint firstItem="o7Y-S4-QzI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v5G-RZ-Ruw" secondAttribute="trailing" constant="6" id="HgQ-T7-Ftt"/>
                     <constraint firstItem="u2V-tO-cR0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="J55-iA-auS"/>
                     <constraint firstItem="O3V-Jv-OI3" firstAttribute="centerX" secondItem="1NF-qX-kL8" secondAttribute="centerX" constant="0.5" id="Kw6-4u-VUW"/>
                     <constraint firstItem="zfN-U4-yMP" firstAttribute="top" secondItem="ARY-31-w8s" secondAttribute="bottom" constant="10" id="Oll-Qy-9KZ"/>
@@ -137,7 +137,7 @@
                     <constraint firstItem="ktA-gV-QjJ" firstAttribute="centerX" secondItem="fpk-pE-gGQ" secondAttribute="centerX" constant="0.5" id="rnk-6r-VSD"/>
                     <constraint firstItem="u2V-tO-cR0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="rw0-dy-e2M"/>
                     <constraint firstItem="Rfq-OO-fQx" firstAttribute="centerY" secondItem="u2V-tO-cR0" secondAttribute="centerY" id="vAF-1w-b1o"/>
-                    <constraint firstItem="v5G-RZ-Ruw" firstAttribute="leading" secondItem="O3V-Jv-OI3" secondAttribute="trailing" constant="6" id="waI-i0-doU"/>
+                    <constraint firstItem="v5G-RZ-Ruw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O3V-Jv-OI3" secondAttribute="trailing" constant="6" id="waI-i0-doU"/>
                     <constraint firstItem="ARY-31-w8s" firstAttribute="centerY" secondItem="O3V-Jv-OI3" secondAttribute="centerY" id="y8r-Wg-wuz"/>
                     <constraint firstItem="ARY-31-w8s" firstAttribute="height" secondItem="O3V-Jv-OI3" secondAttribute="height" id="y9a-SR-Fks"/>
                     <constraint firstItem="ARY-31-w8s" firstAttribute="centerY" secondItem="v5G-RZ-Ruw" secondAttribute="centerY" id="yJT-uB-XAZ"/>
@@ -154,6 +154,9 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="consraion_Left" destination="waI-i0-doU" id="FDM-0w-mce"/>
+                <outlet property="constratins_Right" destination="HgQ-T7-Ftt" id="XTf-n5-5Of"/>
+                <outlet property="iv_mid" destination="v5G-RZ-Ruw" id="PqO-3L-jbg"/>
                 <outlet property="lbTitle" destination="Rfq-OO-fQx" id="Aos-57-QgD"/>
                 <outlet property="marginSpan" destination="HgQ-T7-Ftt" id="3PR-y9-ZdP"/>
             </connections>

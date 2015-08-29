@@ -10,6 +10,7 @@ import UIKit
 
 class T06CellFooter: UITableViewCell {
 
+    @IBOutlet weak var btnGrabOrder: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

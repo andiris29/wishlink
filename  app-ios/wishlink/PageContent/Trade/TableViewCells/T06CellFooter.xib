@@ -44,6 +44,9 @@
                     <constraint firstItem="QuI-aN-rdg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="iyj-ub-Cpt"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="btnGrabOrder" destination="e2G-k0-twT" id="shi-g8-2tT"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

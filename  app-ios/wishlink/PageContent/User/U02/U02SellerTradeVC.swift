@@ -123,6 +123,12 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         case .SendOut:
             println("发货")
             msg = "发货"
+        case .Chat:
+            var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
+        case .Complain:
+            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
         default:
             println("error")
         }

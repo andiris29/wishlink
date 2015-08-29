@@ -34,12 +34,15 @@
                         <constraint firstAttribute="height" constant="45" id="scJ-HY-FWG"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="scJ-HY-FWG"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="75U-2W-lAs"/>
+                    </connections>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CMI-2D-gAy">
                     <rect key="frame" x="0.0" y="70" width="375" height="597"/>

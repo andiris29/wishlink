@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarVC: UITabBarController {
+class TabBarVC: UITabBarController,UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,18 @@ class TabBarVC: UITabBarController {
         self.addAllChildControllers()
         // Do any additional setup after loading the view.
     }
+
+    
+//    class var shareTVC : TabBarVC {
+//        struct Static {
+//            static var instance : TabBarVC?
+//            static var token : dispatch_once_t = 0
+//        }
+//        dispatch_once(&Static.token) {
+//            Static.instance = TabBarVC()
+//        }
+//        return Static.instance!
+//    }
 
     
     override func didReceiveMemoryWarning() {
@@ -44,8 +56,8 @@ class TabBarVC: UITabBarController {
 
 
         var mineVC = U02UserVC(nibName: "U02UserVC", bundle: NSBundle.mainBundle())
-        var mineNav = NavigationPageVC(rootViewController: mineVC)
         mineVC.tabBarItem = UITabBarItem.tabBarItem("我的", image: UIImage(named: "me")!, selectedImage: UIImage(named: "me-p")!)
+        var mineNav = NavigationPageVC(rootViewController: mineVC)
         
         self.addChildViewController(hotNav)
         self.addChildViewController(createNav)
@@ -53,6 +65,9 @@ class TabBarVC: UITabBarController {
         self.addChildViewController(mineNav)
         
     }
-
-
+    
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+      
+            self.selectedViewController!.navigationController?.popToRootViewControllerAnimated(true);
+    }
 }
