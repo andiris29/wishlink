@@ -48,7 +48,7 @@ item.create = {
                 if (err) {
                     callback(err);
                 } else if (!item) {
-                    callback(ServerError.ServerError);
+                    callback(ServerError.ERR_UNKOWN);
                 } else {
                     callback(null, item);
                 }
@@ -68,7 +68,7 @@ item.create = {
                         if (error) {
                             callabck(error);
                         } else if (!item) {
-                            callback(ServerError.ServerError);
+                            callback(ServerError.ERR_UNKOWN);
                         } else {
                             callback(null, item);
                         }
