@@ -207,6 +207,11 @@ user.loginViaWeixin = {
                         country : user.country,
                         headimgurl : user.headimgurl,
                         unionid : user.unionid
+                    },
+                    receivers : [],
+                    unread : {
+                        tradeRef : [],
+                        itemRecommendationRef : []
                     }
                 });
 
@@ -332,6 +337,11 @@ user.loginViaWeibo = {
                         country : user.country,
                         gender : user.gender,
                         avatar_large : user.avatar_large
+                    },
+                    receivers : [],
+                    unread : {
+                        tradeRef : [],
+                        itemRecommendationRef : []
                     }
                 });
 
@@ -391,6 +401,46 @@ user.logout = {
  * @return {db.user} res.data.user
  */
 user.update = {
+    method : 'post',
+    permissionValidator : ['validateLogin'];
+    func : function(req, res) {
+        async.waterfall([function(callback) {
+            Users.findOne({
+                _id : req.currentUserId
+            }, function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            var param = req.body;
+            if (param.nickname !== null && param.nickname.length !== 0) {
+                user.nickname = param.nickname;
+            }
+            if (param['alipay.id'] !== null && param['alipay.id'].length !== 0) {
+                user.alipay = {
+                    id : param['alipay.id']
+                };
+            }
+            user.save(function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_UNKOWN);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user : user
+            });
+        });
+    }
 };
 
 /**

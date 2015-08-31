@@ -31,6 +31,7 @@ ServerError.ERR_UNKOWN = 1000;
 ServerError.ERR_NOT_LOGGED_IN = 1001;
 ServerError.ERR_PERMISSION_DENIED = 1002;
 ServerError.ERR_NOT_ENOUGH_PARAM = 1003;
+ServerError.ERR_USER_NOT_EXIST = 1004;
 
 var _codeToString = function(code) {
     switch (code) {
@@ -42,6 +43,8 @@ var _codeToString = function(code) {
             return "ERR_PERMISSION_DENIED";
         case 1003 :
             return "ERR_NOT_ENOUGH_PARAM";
+        case 1004 :
+            return "ERR_USER_NOT_EXIST";
     }
 };
 
