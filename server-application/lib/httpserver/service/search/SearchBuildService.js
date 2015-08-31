@@ -148,8 +148,54 @@ SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callbac
  * 类似 SearchBuildService.rebuildCountry
  */
 SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback) {
-    //TODO
-    callback(null, item);
+    var brandName = item.brand;
+    async.waterfall([
+        function (callback) {
+            brands.findOne({
+                'words' : brandName
+            }, callback);
+        }, function (brand, callback) {
+            if (!brand) {
+                async.waterfall([
+                    function (callback) {
+                        new brands({
+                            name : brandName,
+                            words : [brandName]
+                        }).save(callback);
+                    }, function (b, callback) {
+                        _syncWords('brands', b._id, null, b.words, function (err) {
+                            callback(err, b);
+                        })
+                    }
+                ], callback)
+            } else {
+                callback(null, brand);
+            }
+        }, function (brand, callback) {
+            //update item
+            item.brandRef = brand._id;
+            item.brandWords = brand.words;
+            item.save(function (err, item) {
+                callback(err, brand);
+            });
+        }, function (brand, callback) {
+            //update country word weight
+            //query old country weight
+            words.findOne({
+                type : 'brands',
+                word : brand.name,
+                ref : brand._id
+            }, function (err, word) {
+                //update new country weight
+                //TODO handle word === null
+                var oldBrandWeight = word.weight || 0;
+                var newBrandWeight = oldBrandWeight + newWeight - oldWeight;
+                _syncWeight('brands', brand._id, brand.words, newBrandWeight, callback);
+            });
+        }
+    ], function (err) {
+        callback(err, item);
+    });
 };
 
 /**
