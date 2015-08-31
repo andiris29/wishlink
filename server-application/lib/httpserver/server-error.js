@@ -17,32 +17,31 @@ ServerError.fromCode = function(code) {
     return new ServerError(code);
 };
 ServerError.fromDescription = function(description) {
-    return new ServerError(ServerError.ServerError, description, new Error());
+    return new ServerError(ServerError.ERR_UNKOWN, description, new Error());
 };
 ServerError.fromError = function(err) {
-    return new ServerError(ServerError.ServerError, 'Server Error: ' + err.toString(), err);
+    return new ServerError(ServerError.ERR_UNKOWN, 'ERR_UNKOWN: ' + err.toString(), err);
 };
 
 util.inherits(ServerError, Error);
 
 //TODO just some sample
 //ErrorCode
-ServerError.ServerError = 1000;
-ServerError.IncorrectMailOrPassword = 1001;
-ServerError.SessionExpired = 1002;
-ServerError.NeedLogin = 1003;
-ServerError.NotEnoughParam = 1004;
+ServerError.ERR_UNKOWN = 1000;
+ServerError.ERR_NOT_LOGGED_IN = 1001;
+ServerError.ERR_PERMISSION_DENIED = 1002;
+ServerError.ERR_NOT_ENOUGH_PARAM = 1003;
 
 var _codeToString = function(code) {
     switch (code) {
         case 1000 :
-            return "ServerError";
+            return "ERR_UNKOWN";
         case 1001 :
-            return "IncorrectMailOrPassword";
+            return "ERR_NOT_LOGGED_IN";
         case 1002 :
-            return "SessionExpired";
+            return "ERR_PERMISSION_DENIED";
         case 1003 :
-            return "NeedLogin";
+            return "ERR_NOT_ENOUGH_PARAM";
     }
 };
 

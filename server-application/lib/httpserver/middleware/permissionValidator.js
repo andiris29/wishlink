@@ -47,7 +47,14 @@ var _builtInValidators = {
         if (req.currentUserId) {
             callback(null);
         } else {
-            callback(ServerError.NeedLogin);
+            callback(ServerError.ERR_NOT_LOGGED_IN);
+        }
+    },
+    'validateAdmin' : function(req, res, callabck) {
+        if (req.currentUserId) {
+            callback(null);
+        } else {
+            callback(ServerError.ERR_PERMISSION_DENIED);
         }
     }
 };
