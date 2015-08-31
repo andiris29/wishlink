@@ -2,6 +2,8 @@
 var SegmentService = require('../SegmentService');
 var async = require('async');
 var words = require('../../../model/words');
+var trades = require('../../../model/trades');
+var mongoose = require('mongoose');
 
 var SearchBuildService = {};
 
@@ -59,20 +61,23 @@ SearchBuildService.enableSearch = function(item, callback) {
  * @param {db.item} item
  */
 SearchBuildService.rebuildName = function(item, callback) {
-    //TODO
+    var newWords = null;
     async.waterfall([
         function (callback) {
             SegmentService.segment(item.name, callback);
         }, function (words, callback) {
+            newWords = words;
+            var oldNameWords = item.nameWords
             item.nameWords = words;
-            callback(null, item);
-
+            _syncWords('items', item._id, oldNameWords, words, callback);
+        }, function (callback) {
+            _calculateWeight(item, callback);
+        }, function (weight, callback) {
+            _syncWeight('item', item._id, newWords, weight, callback);
         }
     ], function (err) {
-
+        callback(err, item);
     });
-
-    callback(null, item);
 };
 
 /**
@@ -122,10 +127,9 @@ SearchBuildService.rebuildCategory = function(item, callback) {
     callback(null, item);
 };
 
+
 /**
- * 查询 item 所对应的 trades 的数量，作为 A
- * 查询 item 所对应的交易成功的 trades 的数量，作为 B
- * weight = A * 1 + B * 4
+
  * 通过 _syncWeight 将计算结果同步到 db.words 中
  *
  * @param {db.item} item
@@ -137,6 +141,44 @@ SearchBuildService.rebuildCategory = function(item, callback) {
  * @param {db.item} item
  */
 SearchBuildService.recalculateWeight = function(item, callback) {
+};
+
+
+/**
+ * 计算item当前的重量
+ * 查询 item 所对应的 trades 的数量，作为 A
+ * 查询 item 所对应的交易成功的 trades 的数量，作为 B
+ * weight = A * 1 + B * 4
+ * @param item
+ * @param callback
+ * @private
+ */
+/**
+ * @callback _calculateWeight~callback
+ * @param {int} weight
+ * @param callback
+ * @private
+ */
+var _calculateWeight = function (item, callback) {
+    async.waterfall([
+        function (callback) {
+            trades.find({
+                itemRef : item._id
+            }, callback)
+        }, function (tradeEntities, callback) {
+            var aCount = tradeEntities.length;
+            var bCount = 0;
+
+            tradeEntities.forEach(function (t){
+                if (t.status === 5 || t.status === 6) {
+                    ++bCount;
+                }
+            });
+
+            var weight = aCount + bCount * 4;
+            callback(null, weight);
+        }
+    ], callback);
 };
 
 /**
@@ -152,7 +194,7 @@ SearchBuildService.recalculateWeight = function(item, callback) {
  * @callback _syncWords~callback
  * @param {string} err
  */
-SearchBuildService._syncWords = function(type, ref, fromWords, toWords, callback) {
+var _syncWords = function(type, ref, fromWords, toWords, callback) {
     var wordsToBeRemoved = fromWords && fromWords.filter(function (w) {
         return toWords.indexOf(w) === -1;
     });
@@ -180,7 +222,7 @@ SearchBuildService._syncWords = function(type, ref, fromWords, toWords, callback
                     }
                 }
             ], function (err) {
-                callback();
+                callback(err);
             });
         };
         tasks.push(task);
@@ -208,12 +250,14 @@ SearchBuildService._syncWords = function(type, ref, fromWords, toWords, callback
                     }
                 }
             ], function (err) {
-                callback();
+                callback(err);
             });
         };
         tasks.push(task);
     });
-    async.parallel(tasks, callback);
+    async.parallel(tasks, function (err) {
+        callback(err);
+    });
 };
 
 /**
@@ -229,7 +273,7 @@ SearchBuildService._syncWords = function(type, ref, fromWords, toWords, callback
  * @callback _syncWeight~callback
  * @param {string} err
  */
-SearchBuildService._syncWeight = function(type, ref, words, weight) {
+var _syncWeight = function(type, ref, words, weight, callback) {
     var tasks = [];
 
     words && words.forEach(function (w) {
@@ -255,13 +299,15 @@ SearchBuildService._syncWeight = function(type, ref, words, weight) {
                     }
                 }
             ], function (err) {
-                callback();
+                callback(err);
             })
         };
         tasks.push(task);
     });
 
-    async.parallel(tasks, callback);
+    async.parallel(tasks, function (err) {
+        callback(err);
+    });
 };
 
 module.exports = SearchBuildService;
