@@ -21,6 +21,7 @@ var SearchTrendService = {};
  * @param {int} trends[].weight
  */
 SearchTrendService.queryXxx = function(pageNo, pageSize, callback) {
+
 };
 /**
  * 并发调用
@@ -40,6 +41,8 @@ SearchTrendService.queryKeywords = function(pageNo, pageSize, callback) {
 SearchTrendService.queryItems = function(pageNo, pageSize, callback) {
 };
 
+
+
 /**
  * 查询 db.words 中 type 为国家的数据，根据 ref 做数据聚集，按照 weight 排序
  * Populate ref
@@ -48,11 +51,16 @@ SearchTrendService.queryItems = function(pageNo, pageSize, callback) {
 SearchTrendService.queryCounties = function(pageNo, pageSize, callback) {
 };
 
+
+
+
 /**
  * 类似 SearchTrendService.queryCounties
  */
 SearchTrendService.queryBrands = function(pageNo, pageSize, callback) {
 };
+
+
 
 /**
  * 类似 SearchTrendService.queryBrands

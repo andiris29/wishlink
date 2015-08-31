@@ -11,6 +11,10 @@ var ResponseHelper = require('../helper/ResponseHelper');
 
 var Item = require('../../model/items');
 
+//Services
+var SearchBuildService = require('../service/search/SearchBuildService');
+
+
 var item = module.exports;
 
 var itemImageResizeOptions = [
@@ -38,7 +42,7 @@ item.create = {
             name : req.name,
             brand : RequestHelper.parseId(req.brand),
             country : req.country,
-            spec : req.spen,
+            spec : req.spec,
             price : RequestHelper.parseNumber(req.price),
             notes :req.notes
         });
@@ -75,6 +79,8 @@ item.create = {
                     });
                 }
             });
+        }, function (item, callback) {
+            SearchBuildService.enableSearch(item, callback);
         }], function(error, item) {
             ResponseHelper.response(res, error, {
                 'item' : item

@@ -1,9 +1,9 @@
-/**
- * Created by wxy325 on 8/28/15.
- */
-var SearchBuildService = {};
 
-//TODO
+var SegmentService = require('../SegmentService');
+var async = require('async');
+
+
+var SearchBuildService = {};
 
 /**
  * 并发调用
@@ -21,6 +21,29 @@ var SearchBuildService = {};
  * @param {db.item} item
  */
 SearchBuildService.enableSearch = function(item, callback) {
+    async.waterfall([
+        function (callback) {
+
+        }, function (callback) {
+
+        }
+    ], function (err) {
+
+    });
+    async.parallel([
+        function (callback) {
+            SearchBuildService.rebuildName(item, callback);
+        }, function (callback) {
+            SearchBuildService.rebuildCountry(item, callback);
+        }, function (callback) {
+            SearchBuildService.rebuildBrand(item, callback);
+        }, function (callback) {
+            SearchBuildService.rebuildCategory(item, callback);
+        }
+    ], function (err) {
+        callback(err, item);
+    });
+
 };
 
 /**
@@ -36,6 +59,20 @@ SearchBuildService.enableSearch = function(item, callback) {
  * @param {db.item} item
  */
 SearchBuildService.rebuildName = function(item, callback) {
+    //TODO
+    async.waterfall([
+        function (callback) {
+            SegmentService.segment(item.name, callback);
+        }, function (words, callback) {
+            item.nameWords = words;
+            callback(null, item);
+
+        }
+    ], function (err) {
+
+    });
+
+    callback(null, item);
 };
 
 /**
@@ -53,12 +90,16 @@ SearchBuildService.rebuildName = function(item, callback) {
  * @param {db.item} item
  */
 SearchBuildService.rebuildCountry = function(item, callback) {
+    //TODO
+    callback(null, item);
 };
 
 /**
  * 类似 SearchBuildService.rebuildCountry
  */
 SearchBuildService.rebuildBrand = function(item, callback) {
+    //TODO
+    callback(null, item);
 };
 
 /**
@@ -77,6 +118,8 @@ SearchBuildService.rebuildBrand = function(item, callback) {
  * @param {db.item} item
  */
 SearchBuildService.rebuildCategory = function(item, callback) {
+    //TODO
+    callback(null, item);
 };
 
 /**
