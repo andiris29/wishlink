@@ -1,7 +1,7 @@
 
 var SegmentService = require('../SegmentService');
 var async = require('async');
-
+var words = require('../../../model/words');
 
 var SearchBuildService = {};
 
@@ -140,39 +140,128 @@ SearchBuildService.recalculateWeight = function(item, callback) {
 };
 
 /**
- * 比较 fromWords 和 toWords 以找出减少／增加的 word
- * 调整 db.words 中相应数据的 weight
+ * 比较 fromWords 和 toWords 以找出减少／增加的 word, 并创建或删除
  *
  * @param {int} type
+ * @param {ObjectId} ref
  * @param {string[]} fromWords
  * @param {string[]} toWords
- * @param {int} weight
  * @param {_syncWords~callback} callback
  */
 /**
  * @callback _syncWords~callback
  * @param {string} err
  */
-SearchBuildService._syncWords = function(type, fromWords, toWords, weight, callback) {
+SearchBuildService._syncWords = function(type, ref, fromWords, toWords, callback) {
+    var wordsToBeRemoved = fromWords && fromWords.filter(function (w) {
+        return toWords.indexOf(w) === -1;
+    });
+    var wordsToBeAdded = toWords && toWords.filter(function (w) {
+        return fromWords.indexOf(w) === -1;
+    });
+
+    var tasks = [];
+
+    //Remove old words
+    wordsToBeRemoved && wordsToBeRemoved.forEach(function (w) {
+        var task = function (callback) {
+            async.waterfall([
+                function (callback) {
+                    words.findOne({
+                        type : type,
+                        word : w,
+                        ref : ref
+                    }, callback);
+                }, function (word, callback) {
+                    if (word) {
+                        word.remove(callback);
+                    } else {
+                        callback();
+                    }
+                }
+            ], function (err) {
+                callback();
+            });
+        };
+        tasks.push(task);
+    });
+
+    //Create new words
+    wordsToBeAdded && wordsToBeAdded.forEach(function (w) {
+        var task = function (callback) {
+            async.waterfall([
+                function (callback) {
+                    words.findOne({
+                        type : type,
+                        word : w,
+                        ref : ref
+                    }, callback);
+                }, function (word, callback) {
+                    if (word) {
+                        callback();
+                    } else {
+                        new words({
+                            type : type,
+                            word : w,
+                            ref : ref
+                        }).save(callback);
+                    }
+                }
+            ], function (err) {
+                callback();
+            });
+        };
+        tasks.push(task);
+    });
+    async.parallel(tasks, callback);
 };
 
 /**
- * 比较 fromWords 和 toWords 以找出减少／增加的 word
  * 调整 db.words 中相应数据的 weight
  *
  * @param {int} type
+ * @param {ObjectId} ref
  * @param {string[]} words
- * @param {int} fromWeight
- * @param {int} toWeight
+ * @param {int} weight
  * @param {_syncWeight~callback} callback
  */
 /**
  * @callback _syncWeight~callback
  * @param {string} err
  */
-SearchBuildService._syncWeight = function(type, words, fromWeight, toWeight) {
+SearchBuildService._syncWeight = function(type, ref, words, weight) {
+    var tasks = [];
 
+    words && words.forEach(function (w) {
+        var task = function (callback) {
+            async.waterfall([
+                function (callback) {
+                    words.findOne({
+                        type : type,
+                        word : w,
+                        ref : ref
+                    }, callback);
+                }, function (word, callback) {
+                    if (!word) {
+                        new words({
+                            type : type,
+                            word : w,
+                            ref : ref,
+                            weight : weight
+                        }).save(callback);
+                    } else {
+                        word.weight = weight;
+                        word.save(callback);
+                    }
+                }
+            ], function (err) {
+                callback();
+            })
+        };
+        tasks.push(task);
+    });
 
+    async.parallel(tasks, callback);
 };
 
 module.exports = SearchBuildService;
