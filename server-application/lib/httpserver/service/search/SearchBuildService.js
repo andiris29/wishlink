@@ -1,8 +1,12 @@
 
 var SegmentService = require('../SegmentService');
 var async = require('async');
+
 var words = require('../../../model/words');
 var trades = require('../../../model/trades');
+var countries = require('../../../model/countries');
+var brands = require('../../../model/brands');
+
 var mongoose = require('mongoose');
 
 var SearchBuildService = {};
@@ -25,27 +29,24 @@ var SearchBuildService = {};
 SearchBuildService.enableSearch = function(item, callback) {
     async.waterfall([
         function (callback) {
-
-        }, function (callback) {
-
+            _calculateWeight(item, callback);
+        }, function (newWeight, callback) {
+            var oldWeight = item.weight || 0;
+            async.parallel([
+                function (callback) {
+                    SearchBuildService.rebuildName(item, oldWeight, newWeight, callback);
+                }, function (callback) {
+                    SearchBuildService.rebuildCountry(item, oldWeight, newWeight, callback);
+                }, function (callback) {
+                    SearchBuildService.rebuildBrand(item, oldWeight, newWeight, callback);
+                }, function (callback) {
+                    SearchBuildService.rebuildCategory(item, oldWeight, newWeight, callback);
+                }
+            ], function (err) {
+                callback(err, item);
+            });
         }
-    ], function (err) {
-
-    });
-    async.parallel([
-        function (callback) {
-            SearchBuildService.rebuildName(item, callback);
-        }, function (callback) {
-            SearchBuildService.rebuildCountry(item, callback);
-        }, function (callback) {
-            SearchBuildService.rebuildBrand(item, callback);
-        }, function (callback) {
-            SearchBuildService.rebuildCategory(item, callback);
-        }
-    ], function (err) {
-        callback(err, item);
-    });
-
+    ], callback);
 };
 
 /**
@@ -60,7 +61,7 @@ SearchBuildService.enableSearch = function(item, callback) {
  * @param {string} err
  * @param {db.item} item
  */
-SearchBuildService.rebuildName = function(item, callback) {
+SearchBuildService.rebuildName = function(item, oldWeight, newWeight, callback) {
     var newWords = null;
     async.waterfall([
         function (callback) {
@@ -71,9 +72,7 @@ SearchBuildService.rebuildName = function(item, callback) {
             item.nameWords = words;
             _syncWords('items', item._id, oldNameWords, words, callback);
         }, function (callback) {
-            _calculateWeight(item, callback);
-        }, function (weight, callback) {
-            _syncWeight('item', item._id, newWords, weight, callback);
+            _syncWeight('item', item._id, newWords, newWeight, callback);
         }
     ], function (err) {
         callback(err, item);
@@ -94,15 +93,61 @@ SearchBuildService.rebuildName = function(item, callback) {
  * @param {string} err
  * @param {db.item} item
  */
-SearchBuildService.rebuildCountry = function(item, callback) {
-    //TODO
-    callback(null, item);
+SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callback) {
+    var countryName = item.country;
+    async.waterfall([
+        function (callback) {
+            countries.findOne({
+                'words' : countryName
+            }, callback);
+        }, function (country, callback) {
+            if (!country) {
+                async.waterfall([
+                    function (callback) {
+                        new countries({
+                            name : countryName,
+                            words : [countryName]
+                        }).save(callback);
+                    }, function (c, callback) {
+                        _syncWords('countries', c._id, null, c.words, function (err) {
+                            callback(err, c);
+                        })
+                    }
+                ], callback)
+            } else {
+                callback(null, country);
+            }
+        }, function (country, callback) {
+            //update item
+            item.countryRef = country._id;
+            item.countryWords = country.words;
+            item.save(function (err, item) {
+                callback(err, country);
+            });
+        }, function (country, callback) {
+            //update country word weight
+            //query old country weight
+            words.findOne({
+                type : 'countries',
+                word : country.name,
+                ref : country._id
+            }, function (err, word) {
+                //update new country weight
+                //TODO handle word === null
+                var oldCountryWeight = word.weight || 0;
+                var newCountryWeight = oldCountryWeight + newWeight - oldWeight;
+                _syncWeight('countries', country._id, country.words, newCountryWeight, callback);
+            });
+        }
+    ], function (err) {
+        callback(err, item);
+    });
 };
 
 /**
  * 类似 SearchBuildService.rebuildCountry
  */
-SearchBuildService.rebuildBrand = function(item, callback) {
+SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback) {
     //TODO
     callback(null, item);
 };
@@ -122,7 +167,7 @@ SearchBuildService.rebuildBrand = function(item, callback) {
  * @param {string} err
  * @param {db.item} item
  */
-SearchBuildService.rebuildCategory = function(item, callback) {
+SearchBuildService.rebuildCategory = function(item, oldWeight, newWeight, callback) {
     //TODO
     callback(null, item);
 };
@@ -195,17 +240,19 @@ var _calculateWeight = function (item, callback) {
  * @param {string} err
  */
 var _syncWords = function(type, ref, fromWords, toWords, callback) {
-    var wordsToBeRemoved = fromWords && fromWords.filter(function (w) {
+    fromWords = fromWords || [];
+    toWords = toWords || [];
+    var wordsToBeRemoved = fromWords.filter(function (w) {
         return toWords.indexOf(w) === -1;
     });
-    var wordsToBeAdded = toWords && toWords.filter(function (w) {
+    var wordsToBeAdded = toWords.filter(function (w) {
         return fromWords.indexOf(w) === -1;
     });
 
     var tasks = [];
 
     //Remove old words
-    wordsToBeRemoved && wordsToBeRemoved.forEach(function (w) {
+    wordsToBeRemoved.forEach(function (w) {
         var task = function (callback) {
             async.waterfall([
                 function (callback) {
@@ -229,7 +276,7 @@ var _syncWords = function(type, ref, fromWords, toWords, callback) {
     });
 
     //Create new words
-    wordsToBeAdded && wordsToBeAdded.forEach(function (w) {
+    wordsToBeAdded.forEach(function (w) {
         var task = function (callback) {
             async.waterfall([
                 function (callback) {
