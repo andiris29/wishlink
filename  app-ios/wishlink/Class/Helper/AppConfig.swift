@@ -151,6 +151,17 @@ class AppConfig: NSObject
         var strFullToken = String(format: "iPhone<>%@<>%f<>%f<>%d",AppConfig.sharedAppConfig.AccessToken,AppConfig.sharedAppConfig.Latitude,AppConfig.sharedAppConfig.Longitude,AppConfig.sharedAppConfig.languageVer.rawValue)
         return strFullToken
     }
+    
+    //给btn假圆角
+    func buildButtonFilletStyleWithRadius(btn:UIButton,borderColor:UIColor,titleColor:UIColor,radius:CGFloat)
+    {
+        btn.layer.cornerRadius = radius;
+        btn.layer.masksToBounds=true
+        btn.layer.borderWidth = 1;
+        btn.layer.borderColor = borderColor.CGColor;
+        btn.setTitleColor(titleColor, forState: UIControlState.Normal)
+        
+    }
 
     
     

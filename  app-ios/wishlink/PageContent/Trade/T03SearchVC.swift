@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate  {
+class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,t03CellDelegate  {
 
     @IBOutlet weak var myTableView: UITableView!
     var cellIdentifier = "T03Cell"
@@ -27,7 +27,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 190;
+        return 150;
         
     }
     
@@ -37,24 +37,65 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         
         return 3
     }
+    var countryArr = ["美国","日本","韩国","法国","英国"]
+    var categoryArr = ["包袋","化妆品","服装","母婴","配饰"]
+    var nameArr = ["bur","her","MCM","tod","VAL"]
+    var index0=2
+    var index1=2
+    var index2 = 2;
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:T03Cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T03Cell
-        cell.awakeFromNib();
-        if(indexPath.row == 1)
+        var cell:T03Cell =  tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T03Cell
+       
+        if(indexPath.row == 0)
         {
+            cell.dataArr = self.countryArr;
+            cell.lodaData(indexPath.row,selectindex:index0);
+        }
+        else if(indexPath.row == 1)
+        {
+            
+            cell.dataArr = self.categoryArr;
             cell.lbTitle.text  = "种类"
+        
+            cell.lodaData(indexPath.row,selectindex:index1);
         }
         else if(indexPath.row == 2)
         {
+            cell.dataArr = self.nameArr;
             cell.lbTitle.text  = "热门品牌"
-        }
         
+            cell.lodaData(indexPath.row,selectindex:index2);
+        }
+        cell.myDelegate = self;
+
         cell.selectionStyle = UITableViewCellSelectionStyle.None;
         
         
         return cell
+    }
+    
+     func btnAction(btnindex:Int,rowIndex:Int)
+    {
+        if(rowIndex == 0)
+        {
+            self.index0 = btnindex;
+        }
+        if(rowIndex == 1)
+        {
+            self.index1 = btnindex;
+        }
+        if(rowIndex == 2)
+        {
+            self.index2 = btnindex;
+        }
+ 
+//         self.myTableView.remov
+//        self.myTableView!.reloadData();
+         self.myTableView!.reloadRowsAtIndexPaths([NSIndexPath(forRow: rowIndex, inSection: 0)], withRowAnimation: .Automatic)
+    
+    
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
