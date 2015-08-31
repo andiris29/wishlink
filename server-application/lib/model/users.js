@@ -34,6 +34,9 @@ var entitySchema = Schema({
         gender : String,
         avatar_large : String
     },
+    alipay : {
+        id : String;
+    },
     receivers : [{
         uuid: String,
         name : String,
