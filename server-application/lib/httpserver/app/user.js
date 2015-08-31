@@ -3,6 +3,7 @@ var async = require('async');
 var mongosee = require('mongoose');
 var crypto = require('crypto');
 var fs = require('fs');
+var uuid = require('node-uuid');
 
 // model
 var Users = require('../../model/users');
@@ -46,6 +47,25 @@ var _downloadHeadIcon = function (path, callback) {
         .on('error', function (err) {
             callback(err);
         });
+};
+
+var _upload = function(req, res, config, keyword, resizeOptions) {
+    ResponseHelper.parseFile(req, config.ftpPath, resizeOptions, function(error, fields, file) {
+        if (error) {
+            ResponseHelper.response(res, error);
+            return;
+        }
+        Users.findOne({
+            _id : req.currentUserId
+        }, function(error, user) {
+            user.set(keyword, config.exposeToUrl + '/' + path.relative(config.ftpPath, file.path));
+            user.save(function(error, user) {
+                ResponseHelper.response(res, error, {
+                    user : user
+                });
+            });
+        });
+    });
 };
 
 /**
@@ -380,7 +400,7 @@ user.loginViaWeibo = {
  */
 user.logout = {
     method : 'post',
-    permissionValidator : ['validateLogin'],
+    permissionValidators : ['validateLogin'],
     func : function(req, res) {
         var _id = req.currentUserId;
         delete req.session.userId;
@@ -402,7 +422,7 @@ user.logout = {
  */
 user.update = {
     method : 'post',
-    permissionValidator : ['validateLogin'];
+    permissionValidators : ['validateLogin'],
     func : function(req, res) {
         async.waterfall([function(callback) {
             Users.findOne({
@@ -450,6 +470,11 @@ user.update = {
  * @return {db.user} res.data.user
  */
 user.updatePortrait = {
+    method : 'post',
+    permissionValidators : ['validateLogin'],
+    func : function(req, res) {
+        _upload(req, res, global.config.uploads.user.portrait, 'portrait', userPortraitResizeOptions);
+    }
 };
 
 /**
@@ -459,6 +484,11 @@ user.updatePortrait = {
  * @return {db.user} res.data.user
  */
 user.updateBackground = {
+    method : 'post',
+    permissionValidators : ['validateLogin'],
+    func : function(req, res) {
+        _upload(req, res, global.config.uploads.user.background, 'background');
+    }
 };
 
 /**
@@ -475,6 +505,71 @@ user.updateBackground = {
  * @return {string} res.data.uuid
  */
 user.saveReceiver = {
+    method : 'post',
+    permissionValidators : ['validateLogin'],
+    func : function(req, res) {
+        var param = req.body;
+        var i = 0;
+        async.waterfall([function(callback) {
+            Users.findOne({
+                _id : req.currentUserId
+            }, function(error, user) {
+                if (!error && !user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            var receiver = {
+                name : param.name,
+                phone : param.phone,
+                province : param.province,
+                address : param.address,
+                isDefault : param.isDefault
+            };
+
+            if (!param.uuid || param.uuid.length === 0) {
+                receiver.uuid = uuid.v1();
+            } else {
+                receiver.uuid = param.uuid;
+            }
+
+            user.receivers = user.receivers || [];
+            var isExists = false;
+            var hitIndex = -1;
+            for (i = 0; i < user.receivers.length; i++) {
+                if (user.receivers[i].uuid === receiver.uuid) {
+                    user.receivers[i] = receiver;
+                    isExists = true;
+                    hitIndex = i;
+                    break;
+                }
+            }
+
+            if (!isExists) {
+                user.receivers.push(receiver);
+                hitIndex = user.receivers.length - 1;
+            }
+
+            if (receiver.isDefault) {
+                for (i = 0; i < user.receivers.length; i++) {
+                    if (hitIndex !== i) {
+                        user.receivers[i].isDefault = false;
+                    }
+                }
+            }
+
+            user.save(function(error, user) {
+                callback(error, user, receiver.uuid);
+            });
+        }], function(error, user,uuid) {
+            ResponseHelper.response(res, error, {
+                user : user,
+                uuid : uuid
+            });
+        });
+    }
 };
 
 /**
@@ -485,4 +580,46 @@ user.saveReceiver = {
  * @return {db.user} res.data.user
  */
 user.removeReceiver = {
+    method : 'post',
+    permissionValidators : ['validateLogin'],
+    func : function(req, res) {
+        var param = req.body;
+        async.waterfall([function(callback) {
+            Users.findOne({
+                _id : req.currentUserId
+            }, function(error, user) {
+                if (!error && !user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            user.receivers = user.receivers || [];
+            var index = -1;
+            var isDefault = false;
+            for (i = 0; i < user.receivers.length; i++) {
+                if (user.receivers[i].uuid === param.uuid) {
+                    index = i;
+                    isDefault = user.receivers[i].isDefault;
+                    break;
+                }
+            }
+
+            if (index > -1) {
+                user.receivers.splice(index, 1);
+                if (isDefault && user.receivers.length > 0) {
+                    user.receivers[0].isDefault = true;
+                }
+            }
+            user.save(function(error, user) {
+                callback(error, user);
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user : user
+            });
+        });
+    }
 };
+
