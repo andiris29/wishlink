@@ -104,6 +104,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(tradeCellIde, forIndexPath: indexPath) as! U02TradeCell
         cell.delegate = self
         cell.cellType = .Seller
+        cell.indexPath = indexPath
         return cell
         
     }

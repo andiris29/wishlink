@@ -27,6 +27,11 @@ class U02TradeCell: UICollectionViewCell {
 
     let kCornerRadius: CGFloat = 5
     let kBorderWidth: CGFloat = 0.5
+    var indexPath: NSIndexPath! {
+        didSet {
+            self.adjustUI()
+        }
+    }
     var cellType: TradeCellType! {
         didSet {
             if cellType == .Buyer {
@@ -105,7 +110,119 @@ class U02TradeCell: UICollectionViewCell {
 
     }
     
+    @IBAction func complaintBtnAction(sender: AnyObject) {
+        
+    }
     
+    
+    func adjustUI() {
+        if self.cellType == .Buyer {
+            self.adjustBuyerTopView()
+        } else {
+            self.adjustSellerTopView()
+        }
+        
+    }
+    
+    func adjustBuyerTopView() {
+        let row = self.indexPath.row % 5
+        self.hideAllBtns()
+        if row == 0 {
+            // 已接单
+            self.buyerStatusLabel.text = "已接单"
+            self.isRead(false)
+            self.buyerRevokeBtn.hidden = false
+            self.btnComplain.hidden = false
+        }else if row == 1 {
+            // 已发货
+            self.buyerStatusLabel.text = "已发货"
+            self.isRead(false)
+            self.buyerCheckLogisticsBtn.hidden = false
+            self.buyerConfirmBtn.hidden = false
+            self.btnComplain.hidden = false
+        }else if row == 2 {
+            // 未接单
+            self.buyerStatusLabel.text = "未接单"
+            self.buyerRevokeBtn.hidden = false
+            self.isRead(true)
+            
+        }else if row == 3 {
+            // 投诉处理中
+            self.buyerStatusLabel.text = "投诉处理中"
+            self.buyerCheckComplaintBtn.hidden = false
+            self.isRead(true)
+            
+        }else {
+            // 已完成
+            self.buyerStatusLabel.text = "已完成"
+            self.btnComplain.hidden = false
+            self.isRead(true)
+        }
+    }
+    
+    func adjustSellerTopView() {
+        let row = self.indexPath.row % 5
+        self.hideAllBtns()
+        if row == 0 {
+            // 已接单
+            self.sellerStatusLabel.text = "已抢单"
+            self.isRead(false)
+            self.sellerRevokeBtn.hidden = false
+            self.sellerSendOutBtn.hidden = false
+            self.btnComplain.hidden = false
+        }else if row == 1 {
+            // 已发货
+            self.sellerStatusLabel.text = "买家要求退单"
+            self.isRead(false)
+            self.sellerRevokeBtn.hidden = false
+            self.btnComplain.hidden = false
+        }else if row == 2 {
+            // 未接单
+            self.sellerStatusLabel.text = "已发货"
+            self.sellerEditItemInfoBtn.hidden = false
+            self.isRead(true)
+            
+        }else if row == 3 {
+            // 投诉处理中
+            self.sellerStatusLabel.text = "投诉处理中"
+            self.sellerCheckComplaintBtn.hidden = false
+            self.isRead(true)
+            
+        }else {
+            // 已完成
+            self.sellerStatusLabel.text = "已完成"
+            self.btnComplain.hidden = false
+            self.isRead(true)
+        }
+    }
+    
+    
+    func isRead(isRead: Bool) {
+        if isRead {
+            self.buyerTopView.backgroundColor = UIColor.whiteColor()
+            self.buyerRoundImageView.hidden = true
+            self.sellerTopView.backgroundColor = UIColor.whiteColor()
+            self.sellerRoundImageView.hidden = true
+        }
+        else {
+            self.buyerTopView.backgroundColor = RGB(253, 234, 237)
+            self.buyerRoundImageView.hidden = false
+            self.sellerTopView.backgroundColor = RGB(253, 234, 237)
+            self.sellerRoundImageView.hidden = false
+        }
+    }
+    
+    func hideAllBtns() {
+        self.buyerRevokeBtn.hidden = true
+        self.buyerConfirmBtn.hidden = true
+        self.buyerCheckComplaintBtn.hidden = true
+        self.buyerCheckLogisticsBtn.hidden = true
+        self.sellerRevokeBtn.hidden = true
+        self.sellerSendOutBtn.hidden = true
+        self.sellerCheckComplaintBtn.hidden = true
+        self.sellerEditItemInfoBtn.hidden = true
+        self.btnComplain.hidden = true
+    }
     
     func prepareBuyerTopView() {
         self.buyerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.buyerRoundImageView.frame) * 0.5

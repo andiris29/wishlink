@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -89,6 +89,13 @@
                                     <action selector="checkLogisticsBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="9kn-1x-Iye"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Wp-ol-nuo">
+                                <rect key="frame" x="5" y="43" width="365" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="lPD-RO-Y9o"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.91764705882352937" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -100,12 +107,15 @@
                             <constraint firstAttribute="height" constant="44" id="TUm-Pc-TI3"/>
                             <constraint firstAttribute="centerY" secondItem="u0q-k8-W8T" secondAttribute="centerY" id="UKt-vw-qUI"/>
                             <constraint firstItem="kSu-vJ-EwY" firstAttribute="top" secondItem="cpm-BQ-uID" secondAttribute="top" constant="8" id="YQW-IM-HjR"/>
+                            <constraint firstAttribute="bottom" secondItem="2Wp-ol-nuo" secondAttribute="bottom" id="bAf-H9-fn7"/>
                             <constraint firstAttribute="trailing" secondItem="u0q-k8-W8T" secondAttribute="trailing" constant="10" id="fuB-PL-iCb"/>
                             <constraint firstAttribute="trailing" secondItem="Haq-xH-9R5" secondAttribute="trailing" constant="10" id="gpK-FW-y7U"/>
                             <constraint firstItem="Ku8-Bf-0Ib" firstAttribute="top" secondItem="cpm-BQ-uID" secondAttribute="top" constant="5" id="jbl-mI-Isn"/>
                             <constraint firstItem="Taj-x1-O8W" firstAttribute="leading" secondItem="Ku8-Bf-0Ib" secondAttribute="trailing" constant="2" id="kyY-Lc-d4R"/>
+                            <constraint firstItem="2Wp-ol-nuo" firstAttribute="leading" secondItem="cpm-BQ-uID" secondAttribute="leading" constant="5" id="nCa-yX-SSy"/>
                             <constraint firstItem="Taj-x1-O8W" firstAttribute="top" secondItem="Ku8-Bf-0Ib" secondAttribute="bottom" id="oDT-MI-Sfc"/>
                             <constraint firstItem="u0q-k8-W8T" firstAttribute="leading" secondItem="nLR-fh-Tsk" secondAttribute="trailing" constant="10" id="pZ0-mP-NT3"/>
+                            <constraint firstAttribute="trailing" secondItem="2Wp-ol-nuo" secondAttribute="trailing" constant="5" id="rPm-vp-ozY"/>
                             <constraint firstItem="Ku8-Bf-0Ib" firstAttribute="leading" secondItem="cpm-BQ-uID" secondAttribute="leading" constant="5" id="vaG-94-GQv"/>
                         </constraints>
                         <variation key="default">
@@ -192,9 +202,17 @@
                                     <action selector="sendOutBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="zrt-aJ-3No"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QJp-jl-7qK">
+                                <rect key="frame" x="5" y="43" width="365" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="9PR-rZ-JiD"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.91764705879999997" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="QJp-jl-7qK" secondAttribute="bottom" id="1Id-hD-DOp"/>
                             <constraint firstAttribute="trailing" secondItem="VUZ-1r-gLg" secondAttribute="trailing" constant="10" id="25g-47-rJe"/>
                             <constraint firstItem="7av-Jq-gzN" firstAttribute="top" secondItem="Aql-15-RJi" secondAttribute="bottom" id="5Ic-zT-BnX"/>
                             <constraint firstItem="kHO-QA-liz" firstAttribute="top" secondItem="MK0-dU-U2Y" secondAttribute="top" constant="8" id="6wK-N8-fFG"/>
@@ -202,6 +220,7 @@
                             <constraint firstItem="7av-Jq-gzN" firstAttribute="leading" secondItem="Aql-15-RJi" secondAttribute="trailing" constant="2" id="HmV-dG-DWJ"/>
                             <constraint firstItem="Aql-15-RJi" firstAttribute="leading" secondItem="MK0-dU-U2Y" secondAttribute="leading" constant="5" id="RTe-2i-zWN"/>
                             <constraint firstItem="TW6-RG-IwH" firstAttribute="leading" secondItem="21T-Zy-oKn" secondAttribute="trailing" constant="10" id="SoT-bn-7NT"/>
+                            <constraint firstAttribute="trailing" secondItem="QJp-jl-7qK" secondAttribute="trailing" constant="5" id="cgY-CT-QJc"/>
                             <constraint firstAttribute="centerY" secondItem="TW6-RG-IwH" secondAttribute="centerY" id="dYD-B6-ir4"/>
                             <constraint firstAttribute="centerY" secondItem="kHO-QA-liz" secondAttribute="centerY" id="eiM-ke-hIl"/>
                             <constraint firstAttribute="centerY" secondItem="21T-Zy-oKn" secondAttribute="centerY" id="hOs-vE-OkS"/>
@@ -210,6 +229,7 @@
                             <constraint firstItem="Aql-15-RJi" firstAttribute="top" secondItem="MK0-dU-U2Y" secondAttribute="top" constant="5" id="sZ1-e6-lf6"/>
                             <constraint firstAttribute="centerY" secondItem="VUZ-1r-gLg" secondAttribute="centerY" id="swc-wd-GyQ"/>
                             <constraint firstAttribute="height" constant="44" id="vbB-lq-vwO"/>
+                            <constraint firstItem="QJp-jl-7qK" firstAttribute="leading" secondItem="MK0-dU-U2Y" secondAttribute="leading" constant="5" id="vea-NP-YeA"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -349,7 +369,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnComplainAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wqX-Cc-LPf"/>
+                                    <action selector="complaintBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xtm-rA-uuJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oz7-eg-bN7">
@@ -413,7 +433,7 @@
             </variation>
             <connections>
                 <outlet property="btnChat" destination="oz7-eg-bN7" id="OxH-bt-eyU"/>
-                <outlet property="btnComplain" destination="cJe-UN-tXf" id="ECu-E2-BYJ"/>
+                <outlet property="btnComplain" destination="cJe-UN-tXf" id="nOk-aa-sbu"/>
                 <outlet property="buyerCheckComplaintBtn" destination="kSu-vJ-EwY" id="Dvh-6H-j9v"/>
                 <outlet property="buyerCheckLogisticsBtn" destination="nLR-fh-Tsk" id="pLA-wz-kzV"/>
                 <outlet property="buyerConfirmBtn" destination="Haq-xH-9R5" id="mBi-15-L6N"/>
