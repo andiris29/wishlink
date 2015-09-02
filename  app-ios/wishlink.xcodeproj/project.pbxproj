@@ -98,6 +98,11 @@
 		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
 		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };
 		D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */; };
+		D2E6BE871B96D36D0050C177 /* T11SearchSuggestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6BE851B96D36D0050C177 /* T11SearchSuggestionVC.swift */; };
+		D2E6BE881B96D36D0050C177 /* T11SearchSuggestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E6BE861B96D36D0050C177 /* T11SearchSuggestionVC.xib */; };
+		D2E6BE931B96D62F0050C177 /* T11SearchSuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6BE911B96D62F0050C177 /* T11SearchSuggestionCell.swift */; };
+		D2E6BE941B96D62F0050C177 /* T11SearchSuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */; };
+		D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6BE961B96E70A0050C177 /* CSImageRollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +214,11 @@
 		D2DE57721B84D049000DD691 /* T05PayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T05PayVC.xib; sourceTree = "<group>"; };
 		D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T04CreateTradeVC.swift; sourceTree = "<group>"; };
 		D2E327A51B8399E80063CC95 /* T04CreateTradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T04CreateTradeVC.xib; sourceTree = "<group>"; };
+		D2E6BE851B96D36D0050C177 /* T11SearchSuggestionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T11SearchSuggestionVC.swift; sourceTree = "<group>"; };
+		D2E6BE861B96D36D0050C177 /* T11SearchSuggestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T11SearchSuggestionVC.xib; sourceTree = "<group>"; };
+		D2E6BE911B96D62F0050C177 /* T11SearchSuggestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T11SearchSuggestionCell.swift; sourceTree = "<group>"; };
+		D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T11SearchSuggestionCell.xib; sourceTree = "<group>"; };
+		D2E6BE961B96E70A0050C177 /* CSImageRollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSImageRollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,6 +496,7 @@
 		D25A352E1B8081DF000CCD7C /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				D2E6BE951B96E6BA0050C177 /* CustomViews */,
 				A1C36CA61B87A4E300EFCB57 /* T03SearchHelperVC.swift */,
 				A1C36CA71B87A4E300EFCB57 /* T03SearchHelperVC.xib */,
 				D2744B251B849AE200746229 /* TableViewCells */,
@@ -507,6 +518,8 @@
 				D24485C71B8DE88300CD97D5 /* T09ComplaintStatusVC.xib */,
 				D24485D61B8E10B500CD97D5 /* T10MessagingVC.swift */,
 				D24485D71B8E10B500CD97D5 /* T10MessagingVC.xib */,
+				D2E6BE851B96D36D0050C177 /* T11SearchSuggestionVC.swift */,
+				D2E6BE861B96D36D0050C177 /* T11SearchSuggestionVC.xib */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -529,8 +542,18 @@
 				D24485CF1B8E028B00CD97D5 /* T09CellTextLeft.xib */,
 				D24485D21B8E02A200CD97D5 /* T09CellTextRight.swift */,
 				D24485D31B8E02A200CD97D5 /* T09CellTextRight.xib */,
+				D2E6BE911B96D62F0050C177 /* T11SearchSuggestionCell.swift */,
+				D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		D2E6BE951B96E6BA0050C177 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				D2E6BE961B96E70A0050C177 /* CSImageRollView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -631,11 +654,13 @@
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
 				76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */,
 				765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */,
+				D2E6BE941B96D62F0050C177 /* T11SearchSuggestionCell.xib in Resources */,
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */,
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
+				D2E6BE881B96D36D0050C177 /* T11SearchSuggestionVC.xib in Resources */,
 				D24485D11B8E028B00CD97D5 /* T09CellTextLeft.xib in Resources */,
 				D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */,
 				A132BB9F1B863342004EAB47 /* U01LoginVC.xib in Resources */,
@@ -680,8 +705,10 @@
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */,
+				D2E6BE871B96D36D0050C177 /* T11SearchSuggestionVC.swift in Sources */,
 				D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */,
 				A132BB8F1B863328004EAB47 /* TabBarItem.swift in Sources */,
+				D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */,
 				A1C36CB11B87A50100EFCB57 /* SearchCollectionViewCell.swift in Sources */,
 				A15D893C1B806F6400BC66DE /* ServerTrustPolicy.swift in Sources */,
 				A1FD283F1B87968D006535E0 /* T03Cell.swift in Sources */,
@@ -701,6 +728,7 @@
 				A15D89361B806F6400BC66DE /* Download.swift in Sources */,
 				A132BB8D1B863310004EAB47 /* TabBarVC.swift in Sources */,
 				A15D89391B806F6400BC66DE /* ParameterEncoding.swift in Sources */,
+				D2E6BE931B96D62F0050C177 /* T11SearchSuggestionCell.swift in Sources */,
 				D24485D01B8E028B00CD97D5 /* T09CellTextLeft.swift in Sources */,
 				D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */,
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,

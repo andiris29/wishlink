@@ -64,8 +64,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         switch indexPath.row {
         case 0:
            var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
-            tCell.btnBack.addTarget(self, action: "leftNavBtnAction:", forControlEvents: UIControlEvents.TouchUpInside)
-           
+   
            tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
            
            cell = tCell;

@@ -19,10 +19,14 @@ class T05PayVC: RootVC {
     var goodsNumbers: Int = 0
 
     @IBOutlet weak var numbersTextField: UITextField!
+    @IBOutlet weak var imageRollView: CSImageRollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageRollView.initWithImages(["c1_0047","c1_0047","c1_0047","c1_0047"])
+        imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
+        imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
     }
     
     override func viewWillAppear(animated: Bool) {
