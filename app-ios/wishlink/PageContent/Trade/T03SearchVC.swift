@@ -37,9 +37,14 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         
         return 3
     }
-    var countryArr = ["美国","日本","韩国","法国","英国"]
-    var categoryArr = ["包袋","化妆品","服装","母婴","配饰"]
+    var countryArr_name = ["美国","日本","韩国","法国","英国"]
+    var categoryArr_name = ["包袋","化妆品","服装","母婴","配饰"]
+    var nameArr_name = ["BURBERRY","HERMES","MCM","TODS","VALENTINO"]
+    
+    var countryArr = ["american","japan","korea","france","english"]
+    var categoryArr = ["bag","cosmetics","clothing","baby","ormament"]
     var nameArr = ["bur","her","MCM","tod","VAL"]
+    
     var index0=2
     var index1=2
     var index2 = 2;
@@ -50,27 +55,30 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
        
         if(indexPath.row == 0)
         {
-            cell.dataArr = self.countryArr;
-            cell.lodaData(indexPath.row,selectindex:index0);
+            cell.dataArr = self.countryArr
+            cell.dataArr_Name = self.countryArr_name
+            cell.lodaData(indexPath.row,selectindex:index0)
         }
         else if(indexPath.row == 1)
         {
             
-            cell.dataArr = self.categoryArr;
+            cell.dataArr = self.categoryArr
+            cell.dataArr_Name = self.categoryArr_name
             cell.lbTitle.text  = "种类"
         
-            cell.lodaData(indexPath.row,selectindex:index1);
+            cell.lodaData(indexPath.row,selectindex:index1)
         }
         else if(indexPath.row == 2)
         {
-            cell.dataArr = self.nameArr;
+            cell.dataArr = self.nameArr
+            cell.dataArr_Name = self.nameArr_name
             cell.lbTitle.text  = "热门品牌"
         
-            cell.lodaData(indexPath.row,selectindex:index2);
+            cell.lodaData(indexPath.row,selectindex:index2)
         }
         cell.myDelegate = self;
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.None;
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         
         return cell

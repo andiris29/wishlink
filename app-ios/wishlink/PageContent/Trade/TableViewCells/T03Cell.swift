@@ -23,6 +23,7 @@ class T03Cell: UITableViewCell {
     var myDelegate:t03CellDelegate!
     var selectIndex = 2;
     var dataArr:[String]!;
+    var dataArr_Name:[String]!;
     var rowIndex = 0;
     
     
@@ -49,7 +50,7 @@ class T03Cell: UITableViewCell {
         self.rowIndex = rowindex;
         self.selectIndex = selectindex;
         var imgWidth = ScreenWidth / 6;
-        var spance = (ScreenWidth - 5*imgWidth)/6
+        var spance = (ScreenWidth - 5 * imgWidth)/6
         
         if(self.sv.subviews.count>0)
         {
@@ -75,7 +76,7 @@ class T03Cell: UITableViewCell {
             btn.tag = index;
             var lRect = CGRectMake(rectX, imgWidth+10+martop, imgWidth, imgWidth/2)
             var lbName = UILabel(frame: lRect)
-            lbName.text = imgName_u;
+            lbName.text = self.dataArr_Name[index];
             lbName.textAlignment = NSTextAlignment.Center;
             
             var currColor = UIColor.grayColor();
