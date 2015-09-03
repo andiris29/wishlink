@@ -14,7 +14,7 @@
 		<string>https://github.com/andiris29/com.wishlink.kelp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string> app-ios/wishlink.xcodeproj</string>
+	<string>app-ios/wishlink.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C21BCD4C55F5C4BF0F43984E7D9882077126AFA0</key>
