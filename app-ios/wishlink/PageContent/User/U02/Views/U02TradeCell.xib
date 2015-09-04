@@ -369,7 +369,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="complaintBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xtm-rA-uuJ"/>
+                                    <action selector="btnComplainAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="jRx-8m-SA8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oz7-eg-bN7">

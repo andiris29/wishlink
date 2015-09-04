@@ -113,8 +113,9 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         var msg = ""
         switch clickType {
         case .EditItemInfo:
-            println("编辑发货信息")
-            msg = "编辑发货信息"
+            var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+            vc.hidesBottomBarWhenPushed = true
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Revoke:
             println("撤单")
             msg = "撤单"
@@ -133,8 +134,10 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         default:
             println("error")
         }
-        var alertView = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
-        alertView.show()
+        if msg.length > 0 {
+            var alertView = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+            alertView.show()
+        }
     }
     
     // MARK: - response event

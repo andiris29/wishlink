@@ -109,10 +109,7 @@ class U02TradeCell: UICollectionViewCell {
         self.delegate?.tradeCell(self, clickType: .Complain)
 
     }
-    
-    @IBAction func complaintBtnAction(sender: AnyObject) {
-        
-    }
+
     
     
     func adjustUI() {
