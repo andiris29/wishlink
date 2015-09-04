@@ -47,8 +47,8 @@
                         <color key="textColor" red="0.41176470588235292" green="0.0" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqn-7c-ejo">
-                        <rect key="frame" x="-8" y="36" width="420" height="134"/>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqn-7c-ejo">
+                        <rect key="frame" x="0.0" y="36" width="412" height="134"/>
                     </scrollView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -58,25 +58,15 @@
                     <constraint firstAttribute="trailingMargin" secondItem="IVp-zj-v5w" secondAttribute="trailing" constant="1" id="7cE-1J-nfW"/>
                     <constraint firstAttribute="bottom" secondItem="aqn-7c-ejo" secondAttribute="bottom" constant="8" id="7ub-pr-fik"/>
                     <constraint firstItem="IVp-zj-v5w" firstAttribute="centerY" secondItem="u2V-tO-cR0" secondAttribute="centerY" id="8en-sF-A0W"/>
-                    <constraint firstItem="Rfq-OO-fQx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="9zl-nN-CON"/>
                     <constraint firstItem="u2V-tO-cR0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="J55-iA-auS"/>
-                    <constraint firstItem="IVp-zj-v5w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="UIy-zO-Yo2"/>
                     <constraint firstItem="IVp-zj-v5w" firstAttribute="height" secondItem="u2V-tO-cR0" secondAttribute="height" id="UKo-cw-U8j"/>
                     <constraint firstItem="Rfq-OO-fQx" firstAttribute="centerY" secondItem="u2V-tO-cR0" secondAttribute="centerY" id="cVR-rQ-AzY"/>
-                    <constraint firstItem="aqn-7c-ejo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="fZM-EX-Qh5"/>
+                    <constraint firstItem="aqn-7c-ejo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fZM-EX-Qh5"/>
                     <constraint firstAttribute="centerX" secondItem="Rfq-OO-fQx" secondAttribute="centerX" id="qYn-76-uoT"/>
                     <constraint firstItem="aqn-7c-ejo" firstAttribute="top" secondItem="u2V-tO-cR0" secondAttribute="bottom" constant="17" id="qkv-28-eIc"/>
                     <constraint firstItem="u2V-tO-cR0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="rw0-dy-e2M"/>
-                    <constraint firstItem="Rfq-OO-fQx" firstAttribute="centerY" secondItem="u2V-tO-cR0" secondAttribute="centerY" id="vAF-1w-b1o"/>
                     <constraint firstAttribute="centerX" secondItem="IVp-zj-v5w" secondAttribute="leading" constant="-35" id="zAO-fN-qeB"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="9zl-nN-CON"/>
-                        <exclude reference="vAF-1w-b1o"/>
-                        <exclude reference="UIy-zO-Yo2"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
             <connections>

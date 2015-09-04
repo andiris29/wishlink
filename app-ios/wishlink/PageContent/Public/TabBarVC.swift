@@ -39,6 +39,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
         var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
+        
         var hotNav =  NavigationPageVC(rootViewController: hotVC)
         
         

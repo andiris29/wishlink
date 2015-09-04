@@ -3,6 +3,32 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
+        </mutableArray>
+        <mutableArray key="HelveticaInserat-Roman-SemiBold.ttf">
+            <string>HelveticaInserat-Roman-SemiBold</string>
+            <string>HelveticaInserat-Roman-SemiBold</string>
+            <string>HelveticaInserat-Roman-SemiBold</string>
+            <string>HelveticaInserat-Roman-SemiBold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T05PayVC" customModule="wishlink" customModuleProvider="target">
             <connections>
@@ -45,17 +71,17 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="piD-68-TD0"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="规格：250ML" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svr-Ne-tyU">
-                                            <rect key="frame" x="20" y="41" width="153" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="规格：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svr-Ne-tyU">
+                                            <rect key="frame" x="20" y="41" width="45" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="gAg-fH-L8N"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -65,17 +91,17 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="phS-Id-9NN"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出价：¥ 272.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9A-dc-tdc">
-                                            <rect key="frame" x="20" y="65" width="284" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出价：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9A-dc-tdc">
+                                            <rect key="frame" x="20" y="65" width="45" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="oWK-h1-ICN"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -85,7 +111,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="6RT-zk-FQ0"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -111,7 +137,7 @@
                                                 <constraint firstAttribute="height" constant="28" id="oF9-ec-etJ"/>
                                             </constraints>
                                             <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaInserat-Roman-SemiBold" family="HelveticaInserat-Roman-SemiBold" pointSize="20"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" tag="2001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Bo-Rw-ptW">
@@ -128,6 +154,18 @@
                                                 <action selector="incrlineOrDecreingButtonPay:" destination="-1" eventType="touchUpInside" id="ndz-VZ-D1E"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥ 272.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ud-cr-IPg">
+                                            <rect key="frame" x="65" y="67" width="60" height="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaInserat-Roman-SemiBold" family="HelveticaInserat-Roman-SemiBold" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="205ML" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2X-cy-zL1">
+                                            <rect key="frame" x="65" y="43" width="43" height="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaInserat-Roman-SemiBold" family="HelveticaInserat-Roman-SemiBold" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -136,10 +174,13 @@
                                         <constraint firstItem="t15-3u-maW" firstAttribute="leading" secondItem="Svr-Ne-tyU" secondAttribute="trailing" id="GUw-AS-IAD"/>
                                         <constraint firstItem="dkr-Qg-v5Z" firstAttribute="leading" secondItem="z8X-WT-EBe" secondAttribute="leading" id="L7v-fE-Lsi"/>
                                         <constraint firstItem="10U-LL-Ijw" firstAttribute="leading" secondItem="z8X-WT-EBe" secondAttribute="leading" constant="20" id="LMd-Nb-xYO"/>
+                                        <constraint firstItem="t15-3u-maW" firstAttribute="leading" secondItem="U2X-cy-zL1" secondAttribute="trailing" id="O4Z-lB-duj"/>
                                         <constraint firstItem="T6U-Vr-LEO" firstAttribute="centerY" secondItem="hX8-vz-eGS" secondAttribute="centerY" constant="1" id="Ohv-pL-2p3"/>
+                                        <constraint firstItem="U2X-cy-zL1" firstAttribute="centerY" secondItem="Svr-Ne-tyU" secondAttribute="centerY" id="Pt3-ws-1MM"/>
                                         <constraint firstAttribute="trailing" secondItem="B9A-dc-tdc" secondAttribute="trailing" constant="16" id="Rwd-Zc-KXf"/>
                                         <constraint firstItem="dkr-Qg-v5Z" firstAttribute="top" secondItem="z8X-WT-EBe" secondAttribute="top" id="TRJ-63-Sas"/>
                                         <constraint firstItem="hX8-vz-eGS" firstAttribute="leading" secondItem="T6U-Vr-LEO" secondAttribute="trailing" id="Vsd-la-pIf"/>
+                                        <constraint firstItem="0Ud-cr-IPg" firstAttribute="centerY" secondItem="B9A-dc-tdc" secondAttribute="centerY" id="Wly-gl-eWi"/>
                                         <constraint firstItem="Svr-Ne-tyU" firstAttribute="leading" secondItem="z8X-WT-EBe" secondAttribute="leading" constant="20" id="ZNw-bR-ITq"/>
                                         <constraint firstItem="t15-3u-maW" firstAttribute="top" secondItem="Svr-Ne-tyU" secondAttribute="top" id="aJG-dr-ejG"/>
                                         <constraint firstItem="T6U-Vr-LEO" firstAttribute="top" secondItem="z8X-WT-EBe" secondAttribute="top" constant="86" id="bDa-Ht-N44"/>
@@ -149,12 +190,21 @@
                                         <constraint firstAttribute="height" constant="140" id="jJC-fQ-aXd"/>
                                         <constraint firstItem="l5x-uJ-LyK" firstAttribute="top" secondItem="z8X-WT-EBe" secondAttribute="top" constant="95" id="jgY-0H-q9h"/>
                                         <constraint firstItem="l5x-uJ-LyK" firstAttribute="leading" secondItem="z8X-WT-EBe" secondAttribute="leading" constant="20" id="kKN-5s-vwM"/>
+                                        <constraint firstItem="U2X-cy-zL1" firstAttribute="leading" secondItem="Svr-Ne-tyU" secondAttribute="trailing" id="pcS-QL-cVT"/>
                                         <constraint firstItem="T6U-Vr-LEO" firstAttribute="leading" secondItem="z8X-WT-EBe" secondAttribute="leading" constant="53" id="s5a-WN-JmE"/>
+                                        <constraint firstItem="B9A-dc-tdc" firstAttribute="trailing" secondItem="0Ud-cr-IPg" secondAttribute="leading" id="seW-fe-bdA"/>
                                         <constraint firstItem="7Bo-Rw-ptW" firstAttribute="leading" secondItem="hX8-vz-eGS" secondAttribute="trailing" id="ucb-s8-Pue"/>
                                         <constraint firstAttribute="trailing" secondItem="dkr-Qg-v5Z" secondAttribute="trailing" id="vX7-aq-2Dd"/>
                                         <constraint firstItem="B9A-dc-tdc" firstAttribute="top" secondItem="t15-3u-maW" secondAttribute="bottom" constant="3" id="vwO-BJ-W0O"/>
                                         <constraint firstItem="Svr-Ne-tyU" firstAttribute="top" secondItem="10U-LL-Ijw" secondAttribute="bottom" id="zVt-78-Qof"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Rwd-Zc-KXf"/>
+                                            <exclude reference="GUw-AS-IAD"/>
+                                            <exclude reference="O4Z-lB-duj"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhu-nK-gDg" userLabel="View2">
                                     <rect key="frame" x="0.0" y="305" width="320" height="100"/>
@@ -172,7 +222,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="RWs-o3-Qah"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -183,6 +233,7 @@
                                                 <constraint firstAttribute="width" constant="64" id="IgM-7T-I5p"/>
                                                 <constraint firstAttribute="height" constant="25" id="qL1-wm-4XZ"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
                                             <state key="normal" image="T05ddd">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -207,7 +258,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="cy9-LD-Uip"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -239,7 +290,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="bZf-Et-rHa"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -271,7 +322,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="aGs-WT-J3h"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -332,7 +383,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="N5I-Jm-ItO"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -342,7 +393,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="hC8-fd-i9f"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -406,7 +457,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="d1O-QI-UdJ"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -416,7 +467,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Oib-d1-6bM"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -474,7 +525,7 @@
                                             </constraints>
                                             <string key="text">这里写提示买家支付时遇到的问题如何操作，文字请
 各位大神斟酌，别写太多放不下</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -485,7 +536,7 @@
                                                 <constraint firstAttribute="height" constant="35" id="WOb-Jf-zhK"/>
                                                 <constraint firstAttribute="width" constant="60" id="fA2-w9-vhE"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="20"/>
                                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -496,6 +547,7 @@
                                                 <constraint firstAttribute="height" constant="35" id="XFj-XL-Yws"/>
                                                 <constraint firstAttribute="width" constant="113" id="sLJ-K2-2L6"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
                                             <state key="normal" title="确认付款" backgroundImage="T05jjj">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -504,12 +556,12 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥11544.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-Cr-Vwt">
-                                            <rect key="frame" x="76" y="61" width="104" height="35"/>
+                                            <rect key="frame" x="76" y="61" width="88" height="35"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="W2t-PG-ogq"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaInserat-Roman-SemiBold" family="HelveticaInserat-Roman-SemiBold" pointSize="20"/>
                                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>

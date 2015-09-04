@@ -14,7 +14,7 @@ extension UITabBarItem {
         var tabBarItem = UITabBarItem(title: title, image: image.imageWithRenderingMode(.AlwaysOriginal), selectedImage: selectedImage.imageWithRenderingMode(.AlwaysOriginal))
         NSFontAttributeName
         let selectedDic = [
-            NSFontAttributeName : UIFont.systemFontOfSize(12),
+            NSFontAttributeName : UIHEPLER.getCustomFont(true, fontSsize: 12),
             NSForegroundColorAttributeName : UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0),
             
         ]

@@ -22,14 +22,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
         titleLabel.text = "发布新订单"
         titleLabel.textColor = UIHEPLER.mainColor;
-        titleLabel.font = UIFont.boldSystemFontOfSize(15)
+        titleLabel.font =  UIHEPLER.mainChineseFont15
         titleLabel.textAlignment = NSTextAlignment.Center
         
         
         let txtRemark: UILabel = UILabel(frame: CGRectMake(0, 20, 80, 20))
         txtRemark.text = "(*为必填项)"
         txtRemark.textColor = UIColor.redColor();
-        txtRemark.font = UIFont.boldSystemFontOfSize(11)
+        txtRemark.font = UIHEPLER.getCustomFont(true, fontSsize: 11);
         txtRemark.textAlignment = NSTextAlignment.Center
   
         
