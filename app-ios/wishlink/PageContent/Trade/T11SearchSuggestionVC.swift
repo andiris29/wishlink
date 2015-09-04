@@ -17,7 +17,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var cannelButton: UIButton!
     @IBOutlet weak var searchView: UIView!
     
-    var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
+    var itemData: NSMutableArray = ["sk II", "sk II神仙水", "sk II光彩粉饼", "斯凯奇运动女鞋", "sikaqi慢跑鞋"]
+    var itemContents: NSArray = NSArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T11SearchSuggestionCell
-
+        cell.labelName.text = itemContents[indexPath.row] as? String
+        
         return cell
     }
 
@@ -78,4 +80,22 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
     @IBAction func cannelButtonAction(sender: UIButton!) {
         
     }
+    
+    @IBAction func searchTexfieldValueChange(sender: UITextField) {
+        
+        var dataArray: NSMutableArray = NSMutableArray()
+        
+        if (sender.text == nil || sender.text.length <= 0) {return}
+        
+        itemData.enumerateObjectsUsingBlock { (title, index, stop) -> Void in
+            
+            if title.hasPrefix(sender.text) {
+                dataArray.addObject(title)
+            }
+        }
+        
+        itemContents = dataArray
+        self.searchTableView.reloadData()
+    }
+    
 }

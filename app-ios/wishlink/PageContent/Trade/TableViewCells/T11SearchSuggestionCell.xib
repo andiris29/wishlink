@@ -30,7 +30,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="历史搜索" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyG-sh-PSa">
-                                <rect key="frame" x="7" y="0.0" width="306" height="31"/>
+                                <rect key="frame" x="15" y="0.0" width="298" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="neQ-vx-dOm"/>
                                 </constraints>
@@ -46,7 +46,7 @@
                             <constraint firstAttribute="trailing" secondItem="lyG-sh-PSa" secondAttribute="trailing" constant="7" id="RGk-j0-xgl"/>
                             <constraint firstAttribute="bottom" secondItem="E1Z-qz-SRV" secondAttribute="bottom" id="bJh-dY-1ZY"/>
                             <constraint firstAttribute="trailing" secondItem="E1Z-qz-SRV" secondAttribute="trailing" constant="7" id="oHT-f2-fN3"/>
-                            <constraint firstItem="lyG-sh-PSa" firstAttribute="leading" secondItem="exy-ru-kip" secondAttribute="leading" constant="7" id="pOx-7o-wQZ"/>
+                            <constraint firstItem="lyG-sh-PSa" firstAttribute="leading" secondItem="exy-ru-kip" secondAttribute="leading" constant="15" id="pOx-7o-wQZ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -57,6 +57,9 @@
                     <constraint firstItem="exy-ru-kip" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="fKU-IK-q83"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="labelName" destination="lyG-sh-PSa" id="dEt-dX-8qW"/>
+            </connections>
             <point key="canvasLocation" x="269" y="284.5"/>
         </tableViewCell>
     </objects>
