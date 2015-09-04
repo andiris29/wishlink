@@ -94,6 +94,8 @@
 		D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B311B84B9CE00746229 /* T06CellHeader.xib */; };
 		D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B341B84B9E900746229 /* T06CellFooter.swift */; };
 		D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B351B84B9E900746229 /* T06CellFooter.xib */; };
+		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
+		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
 		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
 		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
 		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };
@@ -210,6 +212,8 @@
 		D2744B311B84B9CE00746229 /* T06CellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06CellHeader.xib; sourceTree = "<group>"; };
 		D2744B341B84B9E900746229 /* T06CellFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06CellFooter.swift; sourceTree = "<group>"; };
 		D2744B351B84B9E900746229 /* T06CellFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06CellFooter.xib; sourceTree = "<group>"; };
+		D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZLanTingHeiS-EL-GB.ttf"; sourceTree = "<group>"; };
+		D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaInserat-Roman-SemiBold.ttf"; sourceTree = "<group>"; };
 		D2DE57711B84D049000DD691 /* T05PayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T05PayVC.swift; sourceTree = "<group>"; };
 		D2DE57721B84D049000DD691 /* T05PayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T05PayVC.xib; sourceTree = "<group>"; };
 		D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T04CreateTradeVC.swift; sourceTree = "<group>"; };
@@ -277,6 +281,7 @@
 				A1043E1A1B7F7902007A237C /* Library */,
 				A1043E191B7F7902007A237C /* Class */,
 				A1043E1B1B7F7902007A237C /* PageContent */,
+				D2A150D71B99771200F9A433 /* Recourses */,
 				A1043DF91B7F787A007A237C /* AppDelegate.swift */,
 				A1043E001B7F787A007A237C /* Images.xcassets */,
 				A1043E021B7F787A007A237C /* LaunchScreen.xib */,
@@ -548,6 +553,23 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		D2A150D71B99771200F9A433 /* Recourses */ = {
+			isa = PBXGroup;
+			children = (
+				D2A150D81B99771200F9A433 /* UIFont */,
+			);
+			path = Recourses;
+			sourceTree = "<group>";
+		};
+		D2A150D81B99771200F9A433 /* UIFont */ = {
+			isa = PBXGroup;
+			children = (
+				D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */,
+				D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */,
+			);
+			path = UIFont;
+			sourceTree = "<group>";
+		};
 		D2E6BE951B96E6BA0050C177 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +658,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */,
+				D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */,
 				A1C36CB21B87A50100EFCB57 /* SearchCollectionViewCell.xib in Resources */,
 				A132BBA71B863342004EAB47 /* U03SettingVC.xib in Resources */,
 				D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */,

@@ -19,7 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //        var vc = HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
-        
+        //遍历字体UIFont
+        for fontfamilyname in UIFont.familyNames() {
+            println("fontfamilyname==>>: \(fontfamilyname)")
+            for fontName in UIFont.fontNamesForFamilyName(fontfamilyname as! String) {
+                println("fontName: \(fontName)")
+            }
+        }
         self.window!.rootViewController = TabBarVC();
         self.window!.makeKeyAndVisible()
         
