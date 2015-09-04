@@ -103,6 +103,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         self.clearBtn = UIButton.buttonWithType(.Custom) as! UIButton
         self.clearBtn.frame = CGRectMake(clearBtnX, clearBtnY, clearBtnW, clearBtnH)
         self.clearBtn.setTitle("清空推荐", forState: .Normal)
+        self.clearBtn.titleLabel!.font = UIHelper().getCustomFont(true, fontSsize: 14)
         self.clearBtn.setBackgroundImage(UIImage(named: "u02-clearcollection"), forState: .Normal)
         self.clearBtn.addTarget(self, action: "clearBtnAction:", forControlEvents: .TouchUpInside)
         self.clearView.addSubview(self.clearBtn)
