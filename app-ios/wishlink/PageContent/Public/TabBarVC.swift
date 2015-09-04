@@ -37,15 +37,10 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
     
     func addAllChildControllers() {
         
-//        var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-//        hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
-//        
-//        var hotNav =  NavigationPageVC(rootViewController: hotVC)
-        var hotVC =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+        var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
         
         var hotNav =  NavigationPageVC(rootViewController: hotVC)
-        
         
         var releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
         releaseVC.tabBarItem.title = "发布"
