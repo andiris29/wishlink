@@ -6,7 +6,7 @@ var words = require('../../../model/words');
 var trades = require('../../../model/trades');
 var countries = require('../../../model/countries');
 var brands = require('../../../model/brands');
-
+var categories = require('../../../model/categories');
 var mongoose = require('mongoose');
 
 var SearchBuildService = {};
@@ -111,7 +111,7 @@ SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callbac
                     }, function (c, callback) {
                         _syncWords('countries', c._id, null, c.words, function (err) {
                             callback(err, c);
-                        })
+                        });
                     }
                 ], callback)
             } else {
@@ -199,8 +199,6 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
 };
 
 /**
- * 查询 db.categories 以获得 category，
- *      如果查询失败则创建一个新的 category
  * 查询每一级 category.parentRef
  * 保存 item.categoryRef, 并将 category.name 以及所有 parentRef.name 保存为 item.categoryWords
  * 通过 _syncWords 将分词结果同步到 db.words
@@ -214,7 +212,53 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
  * @param {db.item} item
  */
 SearchBuildService.rebuildCategory = function(item, oldWeight, newWeight, callback) {
-    //TODO
+    callback(item);
+    return;
+
+    //TODO 目前design有问题, 无法减少原来category的words的weight
+    var oldWords = item.categoryWords || [];
+
+    async.waterfall([
+        function (callback) {
+            var newCategories = [];
+            var _queryNextCategory = function (categoryId, innerCallback) {
+                async.waterfall([
+                    function (asyncCallback) {
+                        categories.findOne({
+                            '_id' : categoryId
+                        }, asyncCallback);
+                    }
+                ], function (err, item) {
+                    if (err) {
+                        innerCallback(err, newCategories);
+                    } else {
+                        var parentRef = null;
+                        if (item) {
+                            newCategories.push(item);
+                            parentRef = item.parentRef;
+                        }
+                        if (parentRef) {
+                            _queryNextCategory(parentRef, innerCallback);
+                        } else {
+                            innerCallback(null, newCategories);
+                        }
+                    }
+                })
+            };
+            _queryNextCategory(item.categoryRef, callback);
+        }, function (newCategories, callback) {
+            var newWords = newCategories.map(function (c) {
+                return c.name;
+            });
+            //TODO
+            //_syncWords('countries', c._id, null, c.words, function (err) {
+            //    callback(err, c);
+            //});
+        }
+    ], function (err) {
+
+    });
+
     callback(null, item);
 };
 
