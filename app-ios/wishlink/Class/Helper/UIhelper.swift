@@ -17,6 +17,15 @@ class UIHelper {
     // 列表背景色
      var listBgColor:UIColor = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1)
     
+    var mainChineseFont15:UIFont = UIFont(name: "FZLanTingHeiS-EL-GB", size: 15)!;
+    /*
+    获取自定义字体
+    */
+    func getCustomFont(isChinese:Bool,fontSsize:CGFloat)->UIFont
+    {
+        return isChinese ? UIFont(name: "FZLanTingHeiS-EL-GB", size: fontSsize)! : UIFont(name: "HelveticaInserat-Roman-SemiBold", size: fontSsize)!
+    }
+    
     /*
     将图片转换成64位编码
     */
