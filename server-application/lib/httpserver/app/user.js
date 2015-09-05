@@ -77,7 +77,7 @@ var _upload = function(req, res, config, keyword, resizeOptions) {
  * @return {db.user} res.data.user
  */
 user.get = {
-    method : get,
+    method : 'get',
     func : function(req, res) {
         var param = req.queryString;
         async.waterfall([function(callback) {

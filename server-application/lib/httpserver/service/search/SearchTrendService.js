@@ -1,7 +1,6 @@
-/**
- * Created by wxy325 on 8/28/15.
- */
+var async = require('async');
 
+var words = require('../../../model/words');
 
 //TODO
 var SearchTrendService = {};
@@ -39,6 +38,7 @@ SearchTrendService.queryKeywords = function(pageNo, pageSize, callback) {
  * 将 items 包装成 object 返回
  */
 SearchTrendService.queryItems = function(pageNo, pageSize, callback) {
+
 };
 
 
@@ -49,6 +49,15 @@ SearchTrendService.queryItems = function(pageNo, pageSize, callback) {
  * 将 countries 包装成 object 返回
  */
 SearchTrendService.queryCounties = function(pageNo, pageSize, callback) {
+    async.waterfall([
+        function (callback) {
+            _queryWithType('countries', callback);
+        }, function (callback) {
+
+        }], function (err) {
+
+    });
+
 };
 
 
@@ -66,6 +75,40 @@ SearchTrendService.queryBrands = function(pageNo, pageSize, callback) {
  * 类似 SearchTrendService.queryBrands
  */
 SearchTrendService.queryCategories = function(pageNo, pageSize, callback) {
+};
+
+var _queryWithType = function (type, pageNo, pageSize, callback) {
+    async.waterfall([
+        function (callback) {
+            words.aggregate([{
+                $match : {type : type}
+            },{
+                $group: {
+                    word: 'word',
+                    refs : {
+                        $push: '$ref'
+                    },
+                    weight: {
+                        $avg: '$weight'
+                    }
+                }
+            },{
+                $sort : {
+                    'weight' : -1
+                }
+            }, {
+                $skip : pageNo * pageSize
+            }, {
+                $limit : pageSize
+            }
+            ]).exec(callback);
+        }, function (callback, results) {
+            callback(null, results);
+        }
+    ], function (err, results) {
+        callback(err, results);
+
+    });
 };
 
 module.exports = SearchTrendService;

@@ -7,7 +7,7 @@ require('./categories');
 
 var entitySchema = Schema({
     status : Number,
-    images : [string],
+    images : [String],
     name : String,
     nameWords : [String],
 

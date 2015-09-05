@@ -11,8 +11,9 @@ var jPushAudiences = require('../../model/jPushAudiences');
 var NotificationService = module.exports;
 
 // get appkey and master key from config.properties
-var config = global.config.notification.jpush.sdk;
-var client = JPush.buildClient(config.appkey, config.masterkey);
+//TODO @Hashmap 编译时global.config还没设置，需要延迟读取
+//var config = global.config.notification.jpush.sdk;
+//var client = JPush.buildClient(config.appkey, config.masterkey);
 
 /**
  * 绑定用户与极光推送的 registrationId
