@@ -51,7 +51,7 @@ SearchTrendService.queryItems = function(pageNo, pageSize, callback) {
 SearchTrendService.queryCounties = function(pageNo, pageSize, callback) {
     async.waterfall([
         function (callback) {
-            _queryWithType('countries', callback);
+            _queryWithType('countries', pageNo, pageSize, callback, callback);
         }, function (callback) {
 
         }], function (err) {
@@ -84,7 +84,7 @@ var _queryWithType = function (type, pageNo, pageSize, callback) {
                 $match : {type : type}
             },{
                 $group: {
-                    word: 'word',
+                    _id: '$word',
                     refs : {
                         $push: '$ref'
                     },
@@ -102,10 +102,15 @@ var _queryWithType = function (type, pageNo, pageSize, callback) {
                 $limit : pageSize
             }
             ]).exec(callback);
-        }, function (callback, results) {
+        }, function (results, callback) {
             callback(null, results);
         }
     ], function (err, results) {
+        console.log(err);
+        /*
+        * [ { _id: '日本', refs: [], weight: 40 },
+         { _id: '中国', refs: [], weight: 25 } ]
+        * */
         callback(err, results);
 
     });

@@ -1,5 +1,8 @@
+var async = require('async');
+
 var SearchTrendService = require('../service/search/SearchTrendService');
 var ResponseHelper = require('../helper/ResponseHelper');
+
 var trend = module.exports;
 
 /**
