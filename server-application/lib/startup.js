@@ -24,6 +24,11 @@ async.waterfall([
             variables : true
         }, callback);
     }, function (config, callback) {
+        var ftp = require('./runtime/ftp');
+        ftp.connect(config.ftp, function () {
+            callback(null, config);
+        });
+    }, function (config, callback) {
         // Load handle
         winston.info(config);
 

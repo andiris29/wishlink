@@ -1,4 +1,4 @@
-var ftpClient = require('ftp');
+var FtpClient = require('ftp');
 var winston = require('winston');
 var async = require('async');
 
