@@ -66,7 +66,7 @@ module.exports = function (config, db) {
     app.listen(config.server.port);
 
     // TODO Upload
-    //mkdirUploads(config.uploads);
+    mkdirUploads(config.uploads);
 
     // Cross domain
     app.use(function (req, res, next) {
