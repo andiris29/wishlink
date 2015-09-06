@@ -23,10 +23,9 @@ var SearchTrendService = {};
  * @param {string} trends[].icon
  * @param {int} trends[].weight
  */
-//TODO 这个是啥
-SearchTrendService.queryXxx = function(pageNo, pageSize, callback) {
 
-};
+
+
 /**
  * 并发调用
  *      SearchTrendService.queryItems, 占 pageSize 的 30%
