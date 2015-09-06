@@ -7,34 +7,19 @@ var MongoHelper = module.exports;
 /**
  *
  * @param {Object} query
- * @param {Object} queryCount
  * @param {Object} pageNo
  * @param {Object} pageSize
- * @param {Object} callback function(err, models, count)
+ * @param {Object} callback function(err, models)
  */
-MongoHelper.queryPaging = function(query, queryCount, pageNo, pageSize, callback) {
+MongoHelper.queryPaging = function(query, pageNo, pageSize, callback) {
     async.waterfall([
         function(callback) {
-            // Count
-            queryCount.count(function(err, count) {
-                if (err) {
-                    callback(ServerError.fromDescription(err));
-                } else {
-                    if ((pageNo - 1) * pageSize >= count) {
-                        callback(ServerError.fromCode(ServerError.PAGING_NOT_EXIST));
-                    } else {
-                        callback(null, count);
-                    }
-                }
-            });
-        },
-        function(count, callback) {
             // Query
             query.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
                 if (err) {
                     callback(ServerError.fromDescription(err));
                 } else {
-                    callback(err, models, count);
+                    callback(err, models);
                 }
             });
         }], callback);
@@ -43,26 +28,12 @@ MongoHelper.queryPaging = function(query, queryCount, pageNo, pageSize, callback
 MongoHelper.aggregatePaging =  function(aggregate, pageNo, pageSize, callback) {
     async.waterfall([
         function(callback) {
-            // Count
-            aggregate.exec(function(err, data) {
-                if (err) {
-                    callback(ServerError.fromDescription(err));
-                } else {
-                    if ((pageNo - 1) * pageSize >= data.length) {
-                        callback(ServerError.fromCode(ServerError.PAGING_NOT_EXIST));
-                    } else {
-                        callback(null, data.length);
-                    }
-                }
-            });
-        },
-        function(count, callback) {
             // Query
             aggregate.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
                 if (err) {
                     callback(ServerError.fromDescription(err));
                 } else {
-                    callback(err, models, count);
+                    callback(err, models);
                 }
             });
         }], callback);
@@ -71,6 +42,7 @@ MongoHelper.aggregatePaging =  function(aggregate, pageNo, pageSize, callback) {
 /**
  *
  * @param {Object} query
+ * @param {Object} queryCount
  * @param {Object} size
  * @param {Object} callback function(err, models)
  */
