@@ -25,7 +25,6 @@ ServerError.fromError = function(err) {
 
 util.inherits(ServerError, Error);
 
-//TODO just some sample
 //ErrorCode
 ServerError.ERR_UNKOWN = 1000;
 ServerError.ERR_NOT_LOGGED_IN = 1001;
@@ -35,6 +34,7 @@ ServerError.ERR_USER_NOT_EXIST = 1004;
 ServerError.ERR_ITEM_NOT_EXIST = 1005;
 ServerError.ALREADY_RELATED = 1006;
 ServerError.ALREADY_UNRELATED = 1007;
+ServerError.PAGING_NOT_EXIST = 1008;
 
 var _codeToString = function(code) {
     switch (code) {
@@ -54,6 +54,8 @@ var _codeToString = function(code) {
             return "ALREADY_RELATED";
         case 1007:
             return "ALREADY_UNRELATED";
+        case 1008:
+            return "PAGING_NOT_EXIST";
     }
 };
 
