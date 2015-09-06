@@ -33,7 +33,7 @@ var entitySchema = Schema({
     categoryWords : [String],
 
     weight : Number,
-    spec : String,      //TODO 这个是啥
+    spec : String,
     price : Number,
     notes: String,
     create : {
