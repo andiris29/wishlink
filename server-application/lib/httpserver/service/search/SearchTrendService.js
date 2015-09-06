@@ -6,6 +6,8 @@ var items = require('../../../model/items');
 var countries = require('../../../model/countries');
 var brands = require('../../../model/brands');
 var categories = require('../../../model/categories');
+var MongoHelper = require('../../helper/MongoHelper');
+
 
 var SearchTrendService = {};
 /**
@@ -144,7 +146,7 @@ SearchTrendService.queryCategories = function(pageNo, pageSize, callback) {
 var _aggregateWithRef = function (type, pageNo, pageSize, callback) {
     async.waterfall([
         function (callback) {
-            words.aggregate([{
+            var aggr = words.aggregate([{
                 $match : {type : type}
             },{
                 $group: {
@@ -157,12 +159,10 @@ var _aggregateWithRef = function (type, pageNo, pageSize, callback) {
                 $sort : {
                     'weight' : -1
                 }
-            }, {
-                $skip : pageNo * pageSize
-            }, {
-                $limit : pageSize
             }
-            ]).exec(callback);
+            ]);
+
+            MongoHelper.aggregatePaging(aggr, pageNo, pageSize, callback);
         }
     ], callback);
 };
@@ -203,7 +203,7 @@ var _postHandleCountryAndBrands = function (rawData, Model, callback) {
 var _aggregateWithName = function (type, pageNo, pageSize, callback) {
     async.waterfall([
         function (callback) {
-            words.aggregate([{
+            var aggr = words.aggregate([{
                 $match : {type : type}
             },{
                 $group: {
@@ -219,12 +219,9 @@ var _aggregateWithName = function (type, pageNo, pageSize, callback) {
                 $sort : {
                     'weight' : -1
                 }
-            }, {
-                $skip : pageNo * pageSize
-            }, {
-                $limit : pageSize
             }
-            ]).exec(callback);
+            ]);
+            MongoHelper.aggregatePaging(aggr, pageNo, pageSize, callback);
         }
     ], callback);
 };

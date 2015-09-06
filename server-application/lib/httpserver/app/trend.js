@@ -56,7 +56,7 @@ trend.category = {
 
 var _handleTrendWithService = function (serviceMethod, req, res) {
     var param = req.queryString;
-    var pageNo = parseInt(param.pageNo || 0);
+    var pageNo = parseInt(param.pageNo || 1);
     var pageSize = parseInt(param.pageSize || 10);
 
     async.waterfall([
