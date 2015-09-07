@@ -281,12 +281,7 @@ item.updateCategory = {
                 }
             });
         }, function(item, callback) {
-            item.categoryRef = RequestHelper.parseId(param._categoryId);
-            item.save(function(error, item) {
-                callbck(error, item);
-            });
-        }, function(item, callback) {
-            SearchBuildService.rebuildCategory(item, item.weight, 0, callback);
+            SearchBuildService.changeToNewCategory(item, RequestHelper.parseId(param._categoryId), callback);
         }], function(error, item) {
             ResponseHelper.response(res, error, {
                 item : item 

@@ -108,7 +108,7 @@ SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callbac
                             name : countryName,
                             words : [countryName]
                         }).save(callback);
-                    }, function (c, callback) {
+                    }, function (c, count, callback) {
                         _syncWords('countries', c._id, null, c.words, function (err) {
                             callback(err, c);
                         });
@@ -133,10 +133,13 @@ SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callbac
                 ref : country._id
             }, function (err, word) {
                 //update new country weight
-                //TODO handle word === null
-                var oldCountryWeight = word.weight || 0;
-                var newCountryWeight = oldCountryWeight + newWeight - oldWeight;
-                _syncWeight('countries', country._id, country.words, newCountryWeight, callback);
+                if (!err && word) {
+                    var oldCountryWeight = word.weight || 0;
+                    var newCountryWeight = oldCountryWeight + newWeight - oldWeight;
+                    _syncWeight('countries', country._id, country.words, newCountryWeight, callback);
+                } else {
+                    callback(err);
+                }
             });
         }
     ], function (err) {
@@ -162,7 +165,7 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
                             name : brandName,
                             words : [brandName]
                         }).save(callback);
-                    }, function (b, callback) {
+                    }, function (b, count, callback) {
                         _syncWords('brands', b._id, null, b.words, function (err) {
                             callback(err, b);
                         })
@@ -179,7 +182,7 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
                 callback(err, brand);
             });
         }, function (brand, callback) {
-            //update country word weight
+            //update brand word weight
             //query old country weight
             words.findOne({
                 type : 'brands',
@@ -187,15 +190,40 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
                 ref : brand._id
             }, function (err, word) {
                 //update new country weight
-                //TODO handle word === null
-                var oldBrandWeight = word.weight || 0;
-                var newBrandWeight = oldBrandWeight + newWeight - oldWeight;
-                _syncWeight('brands', brand._id, brand.words, newBrandWeight, callback);
+                if (!err && word) {
+                    var oldBrandWeight = word.weight || 0;
+                    var newBrandWeight = oldBrandWeight + newWeight - oldWeight;
+                    _syncWeight('brands', brand._id, brand.words, newBrandWeight, callback);
+                } else {
+                    callback(err);
+                }
             });
         }
     ], function (err) {
         callback(err, item);
     });
+};
+
+SearchBuildService.changeToNewCategory = function (item, newCategoryRef, callback) {
+    async.waterfall([
+        function (callback) {
+            SearchBuildService.clearOldCategory(item, callback);
+        }, function (item, callback) {
+            item.categoryRef = newCategoryRef;
+            item.save(callback);
+        }, function (item, count, callback) {
+            SearchBuildService.rebuildCategory(item, 0, item.weight, callback);
+        }
+    ], callback);
+};
+
+SearchBuildService.clearOldCategory = function(item, callback) {
+    if (!item.categoryRef) {
+        callback(null, item);
+        return;
+    }
+    //TODO
+    callback(null, item);
 };
 
 /**
@@ -212,56 +240,84 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
  * @param {db.item} item
  */
 SearchBuildService.rebuildCategory = function(item, oldWeight, newWeight, callback) {
-    callback(item);
-    return;
-
-    //TODO 目前design有问题, 无法减少原来category的words的weight
-    var oldWords = item.categoryWords || [];
-
+    var categories = null;
     async.waterfall([
         function (callback) {
-            var newCategories = [];
-            var _queryNextCategory = function (categoryId, innerCallback) {
-                async.waterfall([
-                    function (asyncCallback) {
-                        categories.findOne({
-                            '_id' : categoryId
-                        }, asyncCallback);
-                    }
-                ], function (err, item) {
-                    if (err) {
-                        innerCallback(err, newCategories);
-                    } else {
-                        var parentRef = null;
-                        if (item) {
-                            newCategories.push(item);
-                            parentRef = item.parentRef;
-                        }
-                        if (parentRef) {
-                            _queryNextCategory(parentRef, innerCallback);
-                        } else {
-                            innerCallback(null, newCategories);
-                        }
-                    }
-                })
-            };
-            _queryNextCategory(item.categoryRef, callback);
+            _queryAllParentCategories(item.categoryRef, callback);
         }, function (newCategories, callback) {
+            categories = newCategories;
+
             var newWords = newCategories.map(function (c) {
                 return c.name;
+            }).filter(function (c) {
+                return c && c.length;
             });
-            //TODO
-            //_syncWords('countries', c._id, null, c.words, function (err) {
-            //    callback(err, c);
-            //});
+            item.categoryWords = newWords;
+            item.save(callback);
+        }, function (i, count, callback) {
+            var tasks = [];
+            categories.forEach(function (c) {
+                var task = function(callback) {
+                    //update brand word weight
+                    //query old country weight
+                    words.findOne({
+                        type : 'categories',
+                        word : c.name,
+                        ref : c._id
+                    }, function (err, word) {
+                        if (!err && word) {
+                            var oldCategoryWeight = word.weight || 0;
+                            var newCategoryWeight = oldCategoryWeight + newWeight - oldWeight;
+                            _syncWeight('categories', c._id, c.words, newCategoryWeight, function (err) {
+                                //TODO 失败暂不处理
+                                callback();
+                            });
+                        } else {
+                            //TODO 失败暂不处理
+                            callback();
+                        }
+                    });
+                };
+                tasks.push(task);
+            });
+            async.parallel(tasks, callback);
         }
     ], function (err) {
-
+        callback(err, item);
     });
-
-    callback(null, item);
 };
 
+
+var _queryAllParentCategories = function (childCategoryId, callback) {
+    var newCategories = [];
+    var _queryNextCategory = function (categoryId, innerCallback) {
+        async.waterfall([
+            function (asyncCallback) {
+                categories.findOne({
+                    '_id' : categoryId
+                }, asyncCallback);
+            }
+        ], function (err, item) {
+            if (err) {
+                innerCallback(err, newCategories);
+            } else {
+                var parentRef = null;
+                if (item) {
+                    newCategories.push(item);
+                    parentRef = item.parentRef;
+                }
+                if (parentRef) {
+                    _queryNextCategory(parentRef, innerCallback);
+                } else {
+                    innerCallback(null, newCategories);
+                }
+            }
+        })
+    };
+    _queryNextCategory(childCategoryId, function (err, c) {
+        callback(err, newCategories);
+    });
+};
 
 /**
 
@@ -276,6 +332,7 @@ SearchBuildService.rebuildCategory = function(item, oldWeight, newWeight, callba
  * @param {db.item} item
  */
 SearchBuildService.recalculateWeight = function(item, callback) {
+    //TODO
 };
 
 
