@@ -76,6 +76,16 @@ RequestHelper.parseNumbers =  function (string) {
     });
 };
 
+RequestHelper.parseInt = function(string) {
+    return string === undefined ? undefined : parseInt(string);
+};
+
+RequestHelper.parseInts =  function (string) {
+    return RequestHelper.parseArray(string).map(function(element) {
+        return RequestHelper.parseInt(element);
+    });
+};
+
 RequestHelper.parseFile = function (req, uploadPath, resizeOptions, callback) {
     var formidable = require('formidable');
 

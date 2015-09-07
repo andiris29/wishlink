@@ -23,6 +23,20 @@ tradeFeeding.asSeller = {
     method : 'get',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        ServiceHelper.queryPaging(req, res, function(param, callback) {
+            var criteria = {
+                assigneeRef : req.currentUserId,
+                status : {
+                    '$in' : RequestHelper.parseInts(param.statuses)
+                }
+            };
+            MongoHelper.queryRandom(Trades.find(criteria), param.pageSize, callback);
+        }, function(trades) {
+            return {
+                'trades' : trades 
+            };
+        }, {
+        });
     }
 };
 
@@ -35,8 +49,22 @@ tradeFeeding.asBuyer = {
     method : 'get',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        ServiceHelper.queryPaging(req, res, function(param, callback) {
+            var criteria = {
+                ownerRef : req.currentUserId,
+                status : {
+                    '$in' : RequestHelper.parseInts(param.statuses)
+                }
+            };
+            MongoHelper.queryRandom(Trades.find(criteria), param.pageSize, callback);
+        }, function(trades) {
+            return {
+                'trades' : trades 
+            };
+        }, {
+        });
     }
-}
+};
 
 /**
  * 查询该商品对应的交易
@@ -47,5 +75,16 @@ tradeFeeding.byItem = {
     method : 'get',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        ServiceHelper.queryPaging(req, res, function(param, callback) {
+            var criteria = {
+                itemRef : RequestHelper.parseId(param._id),
+            };
+            MongoHelper.queryRandom(Trades.find(criteria), param.pageSize, callback);
+        }, function(trades) {
+            return {
+                'trades' : trades 
+            };
+        }, {
+        });
     }
-}
+};
