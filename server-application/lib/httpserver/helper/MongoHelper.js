@@ -18,6 +18,8 @@ MongoHelper.queryPaging = function(query, pageNo, pageSize, callback) {
             query.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
                 if (err) {
                     callback(ServerError.fromDescription(err));
+                } else if (!models || !models.length) {
+                    callback(ServerError.fromDescription(ServerError.PAGING_NOT_EXIST));
                 } else {
                     callback(err, models);
                 }
@@ -32,6 +34,8 @@ MongoHelper.aggregatePaging =  function(aggregate, pageNo, pageSize, callback) {
             aggregate.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
                 if (err) {
                     callback(ServerError.fromDescription(err));
+                } else if (!models || !models.length){
+                    callback(ServerError.fromDescription(ServerError.PAGING_NOT_EXIST));
                 } else {
                     callback(err, models);
                 }
