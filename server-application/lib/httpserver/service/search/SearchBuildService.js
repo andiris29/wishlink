@@ -73,6 +73,8 @@ SearchBuildService.rebuildName = function(item, oldWeight, newWeight, callback) 
             _syncWords('items', item._id, oldNameWords, words, callback);
         }, function (callback) {
             _syncWeight('item', item._id, newWords, newWeight, callback);
+        }, function (callback) {
+            item.save(callback);
         }
     ], function (err) {
         callback(err, item);
