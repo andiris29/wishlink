@@ -10,6 +10,8 @@ import UIKit
 
 class T11SearchSuggestionCell: UITableViewCell {
 
+    @IBOutlet weak var labelName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

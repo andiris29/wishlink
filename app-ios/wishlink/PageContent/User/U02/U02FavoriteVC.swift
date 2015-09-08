@@ -100,7 +100,6 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         self.clearBtn = UIButton.buttonWithType(.Custom) as! UIButton
         self.clearBtn.frame = CGRectMake(clearBtnX, clearBtnY, clearBtnW, clearBtnH)
         self.clearBtn.setTitle("清空收藏", forState: .Normal)
-        self.clearBtn.titleLabel!.font = UIHelper().getCustomFont(true, fontSsize: 14)
         self.clearBtn.setBackgroundImage(UIImage(named: "u02-clearcollection"), forState: .Normal)
         self.clearBtn.addTarget(self, action: "clearBtnAction:", forControlEvents: .TouchUpInside)
         self.clearView.addSubview(self.clearBtn)

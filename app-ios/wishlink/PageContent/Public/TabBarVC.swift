@@ -42,7 +42,6 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
         var hotNav =  NavigationPageVC(rootViewController: hotVC)
         
-        
         var releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
         releaseVC.tabBarItem.title = "发布"
         releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
