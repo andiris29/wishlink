@@ -65,7 +65,7 @@ item.create = {
                 } else {
                     item.images = [];
                     files.forEach(function(file) {
-                        var path = global.uploads.item.image.exposeToUrl + '/' + path.relative(global.uploads.item.image.ftpPath, file.path);
+                        var path = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
                         item.images.push(path);
                     });
 
