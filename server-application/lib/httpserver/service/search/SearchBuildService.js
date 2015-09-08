@@ -2,11 +2,11 @@
 var SegmentService = require('../SegmentService');
 var async = require('async');
 
-var words = require('../../../model/words');
-var trades = require('../../../model/trades');
-var countries = require('../../../model/countries');
-var brands = require('../../../model/brands');
-var categories = require('../../../model/categories');
+var Words = require('../../../model/words');
+var Trades = require('../../../model/trades');
+var Countries = require('../../../model/countries');
+var Brands = require('../../../model/brands');
+var Categories = require('../../../model/categories');
 var mongoose = require('mongoose');
 
 var SearchBuildService = {};
@@ -97,14 +97,14 @@ SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callbac
     var countryName = item.country;
     async.waterfall([
         function (callback) {
-            countries.findOne({
+            Countries.findOne({
                 'words' : countryName
             }, callback);
         }, function (country, callback) {
             if (!country) {
                 async.waterfall([
                     function (callback) {
-                        new countries({
+                        new Countries({
                             name : countryName,
                             words : [countryName]
                         }).save(callback);
@@ -127,7 +127,7 @@ SearchBuildService.rebuildCountry = function(item, oldWeight, newWeight, callbac
         }, function (country, callback) {
             //update country word weight
             //query old country weight
-            words.findOne({
+            Words.findOne({
                 type : 'countries',
                 word : country.name,
                 ref : country._id
@@ -154,14 +154,14 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
     var brandName = item.brand;
     async.waterfall([
         function (callback) {
-            brands.findOne({
+            Brands.findOne({
                 'words' : brandName
             }, callback);
         }, function (brand, callback) {
             if (!brand) {
                 async.waterfall([
                     function (callback) {
-                        new brands({
+                        new Brands({
                             name : brandName,
                             words : [brandName]
                         }).save(callback);
@@ -184,7 +184,7 @@ SearchBuildService.rebuildBrand = function(item, oldWeight, newWeight, callback)
         }, function (brand, callback) {
             //update brand word weight
             //query old country weight
-            words.findOne({
+            Words.findOne({
                 type : 'brands',
                 word : brand.name,
                 ref : brand._id
@@ -260,7 +260,7 @@ SearchBuildService.rebuildCategory = function(item, oldWeight, newWeight, callba
                 var task = function(callback) {
                     //update brand word weight
                     //query old country weight
-                    words.findOne({
+                    Words.findOne({
                         type : 'categories',
                         word : c.name,
                         ref : c._id
@@ -293,7 +293,7 @@ var _queryAllParentCategories = function (childCategoryId, callback) {
     var _queryNextCategory = function (categoryId, innerCallback) {
         async.waterfall([
             function (asyncCallback) {
-                categories.findOne({
+                Categories.findOne({
                     '_id' : categoryId
                 }, asyncCallback);
             }
@@ -354,7 +354,7 @@ SearchBuildService.recalculateWeight = function(item, callback) {
 var _calculateWeight = function (item, callback) {
     async.waterfall([
         function (callback) {
-            trades.find({
+            Trades.find({
                 itemRef : item._id
             }, callback)
         }, function (tradeEntities, callback) {
@@ -403,7 +403,7 @@ var _syncWords = function(type, ref, fromWords, toWords, callback) {
         var task = function (callback) {
             async.waterfall([
                 function (callback) {
-                    words.findOne({
+                    Words.findOne({
                         type : type,
                         word : w,
                         ref : ref
@@ -427,7 +427,7 @@ var _syncWords = function(type, ref, fromWords, toWords, callback) {
         var task = function (callback) {
             async.waterfall([
                 function (callback) {
-                    words.findOne({
+                    Words.findOne({
                         type : type,
                         word : w,
                         ref : ref
@@ -436,7 +436,7 @@ var _syncWords = function(type, ref, fromWords, toWords, callback) {
                     if (word) {
                         callback();
                     } else {
-                        new words({
+                        new Words({
                             type : type,
                             word : w,
                             ref : ref
@@ -474,14 +474,14 @@ var _syncWeight = function(type, ref, words, weight, callback) {
         var task = function (callback) {
             async.waterfall([
                 function (callback) {
-                    words.findOne({
+                    Words.findOne({
                         type : type,
                         word : w,
                         ref : ref
                     }, callback);
                 }, function (word, callback) {
                     if (!word) {
-                        new words({
+                        new Words({
                             type : type,
                             word : w,
                             ref : ref,
