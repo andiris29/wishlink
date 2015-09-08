@@ -38,17 +38,18 @@ item.create = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        var param = req.body;
         var newItem = new Items({
-            name : req.name,
-            brand : RequestHelper.parseId(req.brand),
-            country : req.country,
-            spec : req.spec,
-            price : RequestHelper.parseNumber(req.price),
-            notes :req.notes
+            name : param.name,
+            brand : param.brand,
+            country : param.country,
+            spec : param.spec,
+            price : RequestHelper.parseNumber(param.price),
+            notes :param.notes
         });
 
         async.waterfall([function(callback) {
-            newItem.save(function(error, item) {
+            newItem.save(function(err, item) {
                 if (err) {
                     callback(err);
                 } else if (!item) {
@@ -58,7 +59,7 @@ item.create = {
                 }
             });
         }, function(item, callback) {
-            RequestHelper.parseFiles(req, res, global.uploads.item.image.ftpPath, resizeOptions, function(error, files) {
+            RequestHelper.parseFiles(req, res, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, files) {
                 if (error) {
                     callback(error);
                 } else {
