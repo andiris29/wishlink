@@ -59,7 +59,10 @@ item.create = {
                 }
             });
         }, function(item, callback) {
-            RequestHelper.parseFiles(req, res, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, files) {
+            //TODO For Test, RequestHelper.parseFiles doesn't work now
+            callback(null, item);
+            return;
+            RequestHelper.parseFiles(req, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, files) {
                 if (error) {
                     callback(error);
                 } else {
