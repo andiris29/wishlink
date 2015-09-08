@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 
 // model
-var Trades = require('../../model/Trades');
+var Trades = require('../../model/trades');
 
 // helper
 var ServerError = require('../server-error');
