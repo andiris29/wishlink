@@ -119,6 +119,9 @@ RequestHelper.parseFiles = function(req, uploadPath, resizeOptions, callback) {
             callback(err);
         }
 
+        callback(null, []);
+        return;
+        //TODO @HashMap files不是array
         var task = files.map(function(file) {
             return function(callback) {
                 var savedName = path.basename(file.path);

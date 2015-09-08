@@ -59,7 +59,7 @@ item.create = {
                 }
             });
         }, function(item, callback) {
-            RequestHelper.parseFiles(req, res, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, files) {
+            RequestHelper.parseFiles(req, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, files) {
                 if (error) {
                     callback(error);
                 } else {
