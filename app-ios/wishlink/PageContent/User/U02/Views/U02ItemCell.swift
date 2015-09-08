@@ -12,7 +12,14 @@ enum ItemCellType {
     case Recommand, Favorite
 }
 
+enum ItemCellButtonClickType {
+    case Favorite, Delete
+}
 
+
+protocol U02ItemCellDelegate: NSObjectProtocol {
+    func itemCell(cell: U02ItemCell, clickType: ItemCellButtonClickType)
+}
 
 class U02ItemCell: UICollectionViewCell {
 
@@ -20,7 +27,7 @@ class U02ItemCell: UICollectionViewCell {
     
     var indexPath: NSIndexPath!
     
-    var closure: (NSIndexPath -> ())?
+    var closure: ((ItemCellButtonClickType, NSIndexPath) -> ())?
     
     var cellType: ItemCellType = .Recommand {
         didSet {
@@ -43,8 +50,18 @@ class U02ItemCell: UICollectionViewCell {
         var btn = sender as! UIButton
         btn.selected = !btn.selected
         if let c = self.closure {
-            c(self.indexPath)
+            c(ItemCellButtonClickType.Favorite, self.indexPath)
+//            c(self.indexPath, ItemCellType.Favorite)
         }
     }
-
+    @IBAction func deleteBtnAction(sender: AnyObject) {
+        if let c = self.closure {
+            c(ItemCellButtonClickType.Delete, self.indexPath)
+            //            c(self.indexPath, ItemCellType.Favorite)
+        }
+    }
+    
+    
+    
+    
 }

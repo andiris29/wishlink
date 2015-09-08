@@ -40,6 +40,9 @@
                                 <state key="normal" image="u02-close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deleteBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="aqy-I8-9cp"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cCw-gI-4vr" userLabel="horizontalLine">
                                 <rect key="frame" x="5" y="159" width="190" height="1"/>
@@ -83,7 +86,7 @@
                                     <constraint firstAttribute="width" constant="19" id="JGI-by-ZCM"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥272.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjL-qw-Yo2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="￥272.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjL-qw-Yo2">
                                 <rect key="frame" x="5" y="66" width="145" height="15"/>
                                 <fontDescription key="fontDescription" name="HelveticaInserat-Roman-SemiBold" family="HelveticaInserat-Roman-SemiBold" pointSize="15"/>
                                 <color key="textColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -19,7 +19,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     let itemCellIde = "U02ItemCell"
     var cellCount: Int = 7
     weak var userVC: U02UserVC!
-
+    var dataArray: NSMutableArray = NSMutableArray(array: ["1", "2", "3", "4", "5", "6"])
     // MARK: - life cycle
 
     override func viewDidLoad() {
@@ -52,12 +52,23 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellCount
+        return dataArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
+        cell.indexPath = indexPath;
+        cell.closure = {
+            (type: ItemCellButtonClickType, selectedIndexPath: NSIndexPath) in
+            if type == ItemCellButtonClickType.Favorite {
+                
+            }
+            else {
+                self.dataArray.removeObjectAtIndex(selectedIndexPath.row)
+                self.collectionView.reloadData()
+            }
+        };
         return cell
     }
     
@@ -85,8 +96,6 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         UIView.animateWithDuration(Double(0.5), animations: { () -> Void in
             self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
             }) { (xxx: Bool) -> Void in
-                
-                self.cellCount = 0
                 self.collectionView.reloadData()
         }
     }

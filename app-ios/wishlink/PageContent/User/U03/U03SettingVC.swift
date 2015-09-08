@@ -9,7 +9,7 @@
 import UIKit
 
 class U03SettingVC: RootVC, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate{
+UINavigationControllerDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var bgImageView: UIImageView!
@@ -40,7 +40,7 @@ UINavigationControllerDelegate{
         super.viewDidLayoutSubviews()
         self.headImageView.layer.cornerRadius = CGRectGetWidth(self.headImageView.frame) * 0.5
         self.headImageView.layer.masksToBounds = true
-        self.bgImageView.layer.cornerRadius = CGRectGetWidth(self.headImageView.frame) * 0.5
+        self.bgImageView.layer.cornerRadius = CGRectGetWidth(self.bgImageView.frame) * 0.5
         self.bgImageView.layer.masksToBounds = true
     }
     
@@ -58,6 +58,12 @@ UINavigationControllerDelegate{
     }
     
     // MARK: - delegate
+    
+    // MARK: -- UITextField delegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
@@ -86,15 +92,23 @@ UINavigationControllerDelegate{
         var tag = sender.tag ;
         switch tag {
         case 100:
+            // 上传头像
             self.isUploadHeadImage = true
             self.imgHeadChange()
         case 101:
+            // 上传背景图片
             self.isUploadHeadImage = false
             self.imgHeadChange()
         case 102:
+            // 地址管理
             var vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
             
             self.navigationController?.pushViewController(vc, animated: true);
+        case 103:
+            println("常见问题")
+        case 104:
+            // 退出登录
+            self.logout();
         default:
             println("1111")
         }
@@ -105,6 +119,20 @@ UINavigationControllerDelegate{
     }
     
     // MARK: - prive method
+    
+    func logout() {
+        AppConfig().userLogout()
+    }
+    
+    // MARK: 上传图片
+    func uploadImage () {
+        if self.isUploadHeadImage == true {
+            // 上传头像
+        }else {
+            // 上传背景图片
+        }
+    }
+    
     // MARK: - setter and getter
     
     

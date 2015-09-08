@@ -19,7 +19,9 @@ class U02UserVC: RootVC {
     @IBOutlet weak var collectionBtn: UIButton!
     @IBOutlet weak var subVCView: UIView!
     @IBOutlet weak var headImageView: UIImageView!
-
+    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var contryLabel: UILabel!
+    
     
     var selectedBtn: UIButton!
     
@@ -33,12 +35,12 @@ class U02UserVC: RootVC {
         self.prepareSubVC()
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
-        
-        self.navigationController!.navigationBar.hidden = true
+        self.fillDataForUI()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -101,15 +103,12 @@ class U02UserVC: RootVC {
     
     // MARK: - prive method
     
-    func handleBuyerEvent(type: TradeCellButtonClickType) {
-
+    // 根据用户数据填充界面
+    func fillDataForUI() {
+        self.nicknameLabel.text = "YeoHuang";
+        self.contryLabel.text = "上海杨浦区国和路555弄"
     }
     
-    func handleSellerEvent(type: TradeCellButtonClickType) {
-        
-    }
-    
-    // MARK: - setter and getter
     func prepareSubVC() {
         self.buyerTradeVC = U02BuyerTradeVC(nibName: "U02BuyerTradeVC", bundle: NSBundle.mainBundle())
         self.buyerTradeVC.userVC = self
@@ -118,16 +117,18 @@ class U02UserVC: RootVC {
         self.sellerTradeVC = U02SellerTradeVC(nibName: "U02SellerTradeVC", bundle: NSBundle.mainBundle())
         self.sellerTradeVC.userVC = self
         self.view.addSubview(self.sellerTradeVC.view)
-
+        
         self.recommendVC = U02RecommendVC(nibName: "U02RecommendVC", bundle: NSBundle.mainBundle())
         self.recommendVC.userVC = self
         self.view.addSubview(self.recommendVC.view)
-
+        
         self.favoriteVC = U02FavoriteVC(nibName: "U02FavoriteVC", bundle: NSBundle.mainBundle())
         self.favoriteVC.userVC = self
         self.view.addSubview(self.favoriteVC.view)
-
+        
     }
+    // MARK: - setter and getter
+
 }
 
 
