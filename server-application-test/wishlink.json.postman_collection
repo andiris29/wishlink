@@ -1,0 +1,203 @@
+{
+	"id": "8e9c0975-3582-8c76-ad6c-330c66def56f",
+	"name": "wishlink",
+	"description": "",
+	"order": [
+		"ebfe1ea9-a38b-5029-d49c-1915bf84699e",
+		"510958c2-45a7-b02d-147f-b90a43efbd9a",
+		"82bdfaf0-9717-7aeb-3c8b-278b1062e0fd"
+	],
+	"folders": [],
+	"timestamp": 1441639613482,
+	"owner": "",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "510958c2-45a7-b02d-147f-b90a43efbd9a",
+			"headers": "",
+			"url": "http://121.41.162.102:30001/services/suggestion/any?keyword=x",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "name",
+					"value": "瑞士卡片军刀",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "brand",
+					"value": "Victorinox",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "country",
+					"value": "瑞士",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "price",
+					"value": "93.11",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "spec",
+					"value": "0.7200.T",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "notes",
+					"value": "维氏Victorinox原装正品瑞士军刀刀卡卡片刀0.7200.T多用改锥型",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "pic1",
+					"value": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1441697946182,
+			"name": "suggestion/any",
+			"description": "",
+			"collectionId": "8e9c0975-3582-8c76-ad6c-330c66def56f",
+			"responses": []
+		},
+		{
+			"id": "82bdfaf0-9717-7aeb-3c8b-278b1062e0fd",
+			"headers": "",
+			"url": "http://121.41.162.102:30001/services/item/create",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "瑞士卡片军刀",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "brand",
+					"value": "Victorinox",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "country",
+					"value": "瑞士",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "price",
+					"value": "93.11",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "spec",
+					"value": "0.7200.T",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "notes",
+					"value": "维氏Victorinox原装正品瑞士军刀刀卡卡片刀0.7200.T多用改锥型",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "pic1",
+					"value": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "pic2",
+					"value": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1441699129651,
+			"name": "item/create",
+			"description": "",
+			"collectionId": "8e9c0975-3582-8c76-ad6c-330c66def56f",
+			"responses": []
+		},
+		{
+			"id": "ebfe1ea9-a38b-5029-d49c-1915bf84699e",
+			"headers": "",
+			"url": "http://121.41.162.102:30003/segmentation/segment?input=维氏Victorinox原装正品瑞士军刀刀卡卡片刀0.7200.T多用改锥型",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "name",
+					"value": "瑞士卡片军刀",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "brand",
+					"value": "Victorinox",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "country",
+					"value": "瑞士",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "price",
+					"value": "93.11",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "spec",
+					"value": "0.7200.T",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "notes",
+					"value": "维氏Victorinox原装正品瑞士军刀刀卡卡片刀0.7200.T多用改锥型",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1441697757926,
+			"name": "分词服务",
+			"description": "",
+			"collectionId": "8e9c0975-3582-8c76-ad6c-330c66def56f",
+			"responses": []
+		}
+	]
+}
