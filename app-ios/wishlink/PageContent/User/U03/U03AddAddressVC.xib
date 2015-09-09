@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U03AddAddressVC" customModule="wishlink" customModuleProvider="target">
             <connections>
+                <outlet property="addressTextField" destination="L6W-Nb-Ke6" id="acO-Co-TmS"/>
+                <outlet property="nameTextField" destination="iAf-G1-c4B" id="8S0-B1-wrU"/>
+                <outlet property="phoneTextField" destination="nTD-T7-wCA" id="PIU-QE-uhQ"/>
+                <outlet property="provinceTextField" destination="VfS-EF-bXl" id="Eny-aF-ObJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,7 +24,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="收货人姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iAf-G1-c4B">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="FZ9-WV-LDb"/>
                             </connections>
@@ -48,8 +52,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="kPz-af-2K2"/>
                             <exclude reference="KB0-sy-V9w"/>
+                            <exclude reference="kPz-af-2K2"/>
                         </mask>
                     </variation>
                 </view>
@@ -59,7 +63,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="收货人电话" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTD-T7-wCA">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="feU-jA-8jD"/>
                             </connections>
@@ -87,8 +91,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="o1n-nm-AHq"/>
                             <exclude reference="DJH-Rd-ebr"/>
+                            <exclude reference="o1n-nm-AHq"/>
                         </mask>
                     </variation>
                 </view>
@@ -136,8 +140,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="jPE-PM-nIx"/>
                             <exclude reference="Zqs-Ta-OdK"/>
+                            <exclude reference="jPE-PM-nIx"/>
                         </mask>
                     </variation>
                 </view>
@@ -147,7 +151,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="详细地址" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-Nb-Ke6">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="go"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="8hD-fM-k6K"/>
                             </connections>

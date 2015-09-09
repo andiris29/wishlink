@@ -12,14 +12,36 @@ enum AddAddressVCOperationType {
     case Add, Edit
 }
 
-class U03AddAddressVC: RootVC {
+class U03AddAddressVC: RootVC, UITextFieldDelegate {
     
-    var operationType: AddAddressVCOperationType = .Add
+    @IBOutlet weak var nameTextField: UITextField!
+    
+    @IBOutlet weak var phoneTextField: UITextField!
+    
+    @IBOutlet weak var provinceTextField: UITextField!
+
+    @IBOutlet weak var addressTextField: UITextField!
+    
+    var saveBtn: UIButton!
+    
+    var operationType: AddAddressVCOperationType! {
+        didSet {
+            if self.operationType == .Add {
+                self.receiver = Receiver();
+            }
+        }
+    }
+    var receiver: Receiver!
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareNav()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.fillDataForUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,9 +57,30 @@ class U03AddAddressVC: RootVC {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField == self.nameTextField {
+            self.phoneTextField.becomeFirstResponder()
+        }else if textField == self.phoneTextField {
+//            self.provinceTextField.becomeFirstResponder()
+
+        }else if textField == self.provinceTextField {
+            self.addressTextField.becomeFirstResponder()
+
+        }
+        else {
+            self.saveBtnAction(self.saveBtn)
+        }
+        return true
+    }
+    
     // MARK: - response event
     func saveBtnAction(sender: AnyObject) {
-        
+        if self.validateContent() == false {
+            return
+        }
+        self.saveAddress()
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -45,6 +88,23 @@ class U03AddAddressVC: RootVC {
     }
     
     // MARK: - prive method
+    
+    func saveAddress() {
+        var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
+        alertView.show()
+        self.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    func validateContent() -> Bool {
+        return true
+    }
+    
+    func fillDataForUI() {
+        self.nameTextField.text = self.receiver.name
+        self.phoneTextField.text = self.receiver.phone
+        self.provinceTextField.text = self.receiver.province
+        self.addressTextField.text = self.receiver.address
+    }
     
     func prepareNav() {
         if self.operationType == .Add {
@@ -63,7 +123,7 @@ class U03AddAddressVC: RootVC {
         rightBtn.contentHorizontalAlignment = .Right
         rightBtn.addTarget(self, action: "saveBtnAction:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBtn)
-        
+        self.saveBtn = rightBtn
     }
     
     // MARK: - setter and getter
