@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate {
 
     var window: UIWindow?
 
@@ -23,9 +23,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = TabBarVC();
         self.window!.makeKeyAndVisible()
         
+//        WeiboSDK.enableDebugMode(true)
+//        WeiboSDK.registerApp("1234")
+        WXApi.registerApp("1234", withDescription: "wishlink")
         return true
     }
 
+    // MARK: --WeiBo delegate--
+    func didReceiveWeiboRequest(request: WBBaseRequest!) {
+        
+    }
+    
+    
+    func didReceiveWeiboResponse(response: WBBaseResponse!) {
+        
+    }
+    // MARK: --WeiXin delegate--
+    func onReq(req: BaseReq!) {
+        
+    }
+    
+    func onResp(resp: BaseResp!) {
+        
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        if sourceApplication == "com.tencent.xin" {
+            return WXApi.handleOpenURL(url, delegate: self)
+        }else if sourceApplication == "com.sina.weibo" {
+            return WeiboSDK.handleOpenURL(url, delegate: self)
+        }
+        else {
+            return true
+        }
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

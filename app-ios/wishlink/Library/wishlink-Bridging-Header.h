@@ -10,3 +10,5 @@
 //#include "JSONKit.h"
 //#include "AFNetworking.h"
 #include "GTMBase64.h"
+#import "WeiboSDK.h"
+#import "WXApi.h"
