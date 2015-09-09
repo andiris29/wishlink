@@ -25,6 +25,7 @@ class U02ItemCell: UICollectionViewCell {
 
     @IBOutlet weak var favoriteBtn: UIButton!
     
+    @IBOutlet weak var btnDelete: UIButton!
     var indexPath: NSIndexPath!
     
     var closure: ((ItemCellButtonClickType, NSIndexPath) -> ())?
@@ -61,6 +62,13 @@ class U02ItemCell: UICollectionViewCell {
         }
     }
     
+    
+    //从热门列表中加载的时候调用此方法
+    func loadFromhotVC()
+    {
+        self.btnDelete.hidden = true;
+        
+    }
     
     
     
