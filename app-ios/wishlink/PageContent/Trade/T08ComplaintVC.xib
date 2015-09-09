@@ -392,17 +392,30 @@
                                                     <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" tag="22" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-cW-iTh">
+                                                    <rect key="frame" x="60" y="5" width="46" height="30"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="p0I-tz-Yui"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="A01-gd-myv" secondAttribute="bottom" constant="8" id="A7u-XW-0cn"/>
                                                 <constraint firstItem="A01-gd-myv" firstAttribute="leading" secondItem="bRO-fJ-Zj8" secondAttribute="leading" constant="10" id="ODn-W4-hVi"/>
                                                 <constraint firstItem="A01-gd-myv" firstAttribute="top" secondItem="bRO-fJ-Zj8" secondAttribute="top" constant="8" id="U7n-nm-eXp"/>
+                                                <constraint firstAttribute="centerX" secondItem="AbB-cW-iTh" secondAttribute="centerX" id="XA0-oW-9W5"/>
                                                 <constraint firstItem="uzc-gu-cEN" firstAttribute="leading" secondItem="A01-gd-myv" secondAttribute="trailing" id="aWL-Fs-9B7"/>
                                                 <constraint firstAttribute="trailing" secondItem="uzc-gu-cEN" secondAttribute="trailing" constant="13" id="hfM-WL-Bb1"/>
                                                 <constraint firstAttribute="height" constant="40" id="lHi-J9-yDF"/>
                                                 <constraint firstItem="uzc-gu-cEN" firstAttribute="top" secondItem="bRO-fJ-Zj8" secondAttribute="top" id="nnR-ya-Q0t"/>
+                                                <constraint firstItem="AbB-cW-iTh" firstAttribute="width" secondItem="bRO-fJ-Zj8" secondAttribute="width" id="nuF-po-MJF"/>
                                                 <constraint firstAttribute="bottom" secondItem="uzc-gu-cEN" secondAttribute="bottom" id="oCJ-bF-Rmg"/>
+                                                <constraint firstAttribute="centerY" secondItem="AbB-cW-iTh" secondAttribute="centerY" id="piU-V4-sfw"/>
+                                                <constraint firstItem="AbB-cW-iTh" firstAttribute="height" secondItem="bRO-fJ-Zj8" secondAttribute="height" id="xG2-dQ-7A1"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -464,7 +477,7 @@
                         <constraint firstAttribute="trailing" secondItem="yCc-zr-567" secondAttribute="trailing" id="rq4-ge-ltH"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pm7-e7-cwz">
+                <button opaque="NO" tag="10" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pm7-e7-cwz">
                     <rect key="frame" x="346" y="5" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -474,6 +487,9 @@
                     <state key="normal" image="T07-closebtnimg">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="3vN-AD-alJ"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -36,11 +36,16 @@ class U02UserVC: RootVC {
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
         self.fillDataForUI()
+        
+        self.navigationController!.navigationBar.hidden = false
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.hidden = true
+        self.navigationController!.navigationBar.hidden = true;
+//        self.navigationController?.navigationBar.frame = CGRectMake(0, -100.0, ScreenWidth, 44)
+        self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,7 +105,6 @@ class U02UserVC: RootVC {
         self.navigationController!.pushViewController(vc, animated: true)
     }
 
-    
     // MARK: - prive method
     
     // 根据用户数据填充界面

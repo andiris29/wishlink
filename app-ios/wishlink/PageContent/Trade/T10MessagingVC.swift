@@ -24,17 +24,27 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
         
         self.loadComNaviLeftBtn();
-        self.navigationController?.navigationBarHidden = false;
+//        self.navigationController?.navigationBarHidden = false;
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTime, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTime)
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTextLeft, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTextLeft)
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTextRight, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTextRight)
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        self.loadComNaviLeftBtn();
-        self.navigationController?.navigationBarHidden = false;
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
+                self.hidesBottomBarWhenPushed = true;
     }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.hidden = false
+           self.hidesBottomBarWhenPushed = true;
+        self.loadComNaviLeftBtn()
+    }
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         switch indexPath.row {
