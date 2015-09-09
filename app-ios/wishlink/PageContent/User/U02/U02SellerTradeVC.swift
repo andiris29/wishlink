@@ -127,11 +127,13 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             self.userVC.presentViewController(vc, animated: true, completion: nil)
         case .Chat:
+            
+            self.userVC.navigationController?.navigationBarHidden = false;
             var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Complain:
-            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.pushViewController(vc, animated: true)
+            var vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.presentViewController(vc, animated: true, completion: nil);
         default:
             println("error")
         }

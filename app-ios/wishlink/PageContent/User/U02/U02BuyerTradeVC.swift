@@ -125,11 +125,12 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             tipView.show()
             println("查看物流")
         case .Chat:
+            self.userVC.navigationController?.navigationBarHidden = false;
             var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Complain:
-            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.pushViewController(vc, animated: true)
+            var vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.presentViewController(vc, animated: true, completion: nil);
         default:
             println("error")
         }
