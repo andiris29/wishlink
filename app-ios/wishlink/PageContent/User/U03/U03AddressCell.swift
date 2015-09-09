@@ -20,6 +20,15 @@ class U03AddressCell: UITableViewCell {
     
     @IBOutlet weak var deleteBtn: UIButton!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var provinceLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    var receiver: Receiver! {
+        didSet {
+            self.fillDataForUI()
+        }
+    }
     var indexPath: NSIndexPath!
 
     weak var delegate: U03AddressCellDelegate?
@@ -55,7 +64,12 @@ class U03AddressCell: UITableViewCell {
         }
     }
     
-    
+    func fillDataForUI() {
+        self.nameLabel.text = self.receiver.name
+        self.phoneLabel.text = self.receiver.phone
+        self.provinceLabel.text = self.receiver.province
+        self.addressLabel.text = self.receiver.address
+    }
     
 }
 

@@ -13,14 +13,13 @@ U03AddressCellDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
-    var addressArray = [AnyObject]()
+    var addressArray = [Receiver]()
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
-        self.addressArray.append(["111": "1111"])
-        self.addressArray.append(["222": "2222"])
+        self.loadAddressList()
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +58,8 @@ U03AddressCellDelegate{
         cell.selectionStyle = .None
         cell.indexPath = indexPath
         cell.delegate = self
+        var receiver = self.addressArray[indexPath.row]
+        cell.receiver = receiver
         return cell
     }
     
@@ -66,6 +67,7 @@ U03AddressCellDelegate{
         if tag == 0 {
             var vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
             vc.operationType = .Edit
+            vc.receiver = self.addressArray[indexPath.row]
             self.navigationController!.pushViewController(vc, animated: true)
         }
         else {
@@ -84,6 +86,21 @@ U03AddressCellDelegate{
     }
     
     // MARK: - prive method
+    
+    func loadAddressList() {
+        for i in 0 ... 5 {
+            var dic = [
+                "name" : "kelly",
+                "phone" : "18815287600",
+                "province" : "上海",
+                "address" : "国和路555弄",
+                "isDefault" : 0
+            ]
+            var reciver: Receiver = Receiver(dic: dic)
+            self.addressArray.append(reciver)
+        }
+        self.tableView.reloadData()
+    }
     
     func prepareUI() {
         self.prepareNav()
