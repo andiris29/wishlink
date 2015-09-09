@@ -11,7 +11,7 @@ var _init = function(services) {
         for (var id in module) {
             var validators = module[id].permissionValidators;
             if (validators) {
-                _validatorsMap['/app/' + path + '/' + id] = validators;
+                _validatorsMap['/services/' + path + '/' + id] = validators;
             }
         }
     });
@@ -47,7 +47,9 @@ var _builtInValidators = {
         if (req.currentUserId) {
             callback(null);
         } else {
-            callback(ServerError.ERR_NOT_LOGGED_IN);
+            // TODO now nologin
+            //callback(ServerError.ERR_NOT_LOGGED_IN);
+            callback(null);
         }
     },
     'validateAdmin' : function(req, res, callabck) {

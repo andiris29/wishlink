@@ -1,5 +1,7 @@
+// third party library
 var mongoose = require('mongoose');
 var async = require('async');
+var path = require('path');
 
 // helper
 var ServerError = require('../server-error');
@@ -38,47 +40,36 @@ item.create = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
-        var param = req.body;
-        var newItem = new Items({
-            name : param.name,
-            brand : param.brand,
-            country : param.country,
-            spec : param.spec,
-            price : RequestHelper.parseNumber(param.price),
-            notes :param.notes
-        });
-
         async.waterfall([function(callback) {
-            newItem.save(function(err, item) {
-                if (err) {
-                    callback(err);
-                } else if (!item) {
-                    callback(ServerError.ERR_UNKOWN);
-                } else {
-                    callback(null, item);
-                }
-            });
-        }, function(item, callback) {
             //TODO For Test, RequestHelper.parseFiles doesn't work now
             //callback(null, item);
             //return;
-            RequestHelper.parseFiles(req, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, files) {
+            RequestHelper.parseFiles(req, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, fields, files) {
                 if (error) {
                     callback(error);
                 } else {
-                    item.images = [];
+                    var param = fields;
+                    var newItem = new Items({
+                        name : param.name,
+                        brand : param.brand,
+                        country : param.country,
+                        spec : param.spec,
+                        price : RequestHelper.parseNumber(param.price),
+                        notes :param.notes,
+                        images : []
+                    });
                     files.forEach(function(file) {
-                        var path = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
-                        item.images.push(path);
+                        var imagePath = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
+                        newItem.images.push(imagePath);
                     });
 
-                    item.save(function(error, item) {
+                    newItem.save(function(error, newItem) {
                         if (error) {
                             callabck(error);
-                        } else if (!item) {
+                        } else if (!newItem) {
                             callback(ServerError.ERR_UNKOWN);
                         } else {
-                            callback(null, item);
+                            callback(null, newItem);
                         }
                     });
                 }

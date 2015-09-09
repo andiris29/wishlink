@@ -119,23 +119,25 @@ RequestHelper.parseFiles = function(req, uploadPath, resizeOptions, callback) {
             callback(err);
         }
 
+        var uploadFiles = [];
         //callback(null, []);
         //return;
         //TODO @HashMap files不是array
         var task = _.map(files, function(file) {
-            return function(callback) {
+            return function(cb) {
                 var savedName = path.basename(file.path);
                 var fullPath = path.join(uploadPath, savedName);
 
                 ftp.uploadWithResize(file.path, savedName, uploadPath, resizeOptions, function(err) {
                     file.path = fullPath;
-                    callback(err, fields);
+                    uploadFiles.push(file);
+                    cb(err);
                 });
             };
         });
 
         async.parallel(task, function(error) {
-            callback(error, files);
+            callback(error, fields, uploadFiles);
         });
     });
 };
