@@ -8,15 +8,38 @@
 
 import UIKit
 
-class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate {
 
+    @IBOutlet weak var sv: UIScrollView!
+    @IBOutlet weak var txtCategory: UITextField!
+    @IBOutlet weak var txtName: UITextField!
+    @IBOutlet weak var txtPrice: UITextField!
+    @IBOutlet weak var txtRemark: UITextView!
+    @IBOutlet weak var txtCount: UITextField!
+    @IBOutlet weak var txtSize: UITextField!
+    @IBOutlet weak var txtBuyArea: UITextField!
+    //顶部标题View的高度约束
+    @IBOutlet weak var constraint_topViewHieght: NSLayoutConstraint!
+    //通用View高度约束
+    @IBOutlet weak var constraint_viewHeight: NSLayoutConstraint!
+
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.sv.delegate = self;
   
+        self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
     }
+
     
     override func viewWillAppear(animated: Bool) {
+        
+        self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(60.0);
+        self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(75);
+ 
       self.navigationController?.navigationBarHidden = false;
         
         let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
@@ -40,6 +63,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.navigationItem.titleView = titleView;
         
         self.navigationController?.navigationBarHidden = false;
+        
         
     }
 
@@ -93,6 +117,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }
+    
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
@@ -105,5 +130,21 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func dismissKeyboard()
+    {
+        self.txtCategory.resignFirstResponder();
+        self.txtName.resignFirstResponder();
+        self.txtPrice.resignFirstResponder();
+        self.txtRemark.resignFirstResponder();
+        self.txtCount.resignFirstResponder();
+        self.txtSize.resignFirstResponder();
+        self.txtBuyArea.resignFirstResponder();
+        
+    }
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        
+        self.dismissKeyboard();
     }
 }
