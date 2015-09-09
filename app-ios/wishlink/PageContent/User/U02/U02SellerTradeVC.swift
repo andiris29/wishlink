@@ -124,7 +124,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             msg = "查看投诉"
         case .SendOut:
             println("发货")
-            msg = "发货"
+            var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+            self.userVC.presentViewController(vc, animated: true, completion: nil)
         case .Chat:
             var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
