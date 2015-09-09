@@ -256,6 +256,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		769564D11BA02A1C00A6AD10 /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		769564D21BA02A1C00A6AD10 /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		A1043DEB1B7F787A007A237C = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +363,8 @@
 		A1043E371B7F7B4D007A237C /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				769564D11BA02A1C00A6AD10 /* Trade */,
+				769564D21BA02A1C00A6AD10 /* User */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
