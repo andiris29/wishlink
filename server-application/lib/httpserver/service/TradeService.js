@@ -109,8 +109,21 @@ TradeService.statusTo = function(userRef, trade, toStatus, comment, callback) {
         comment : comment
     };
 
+    trade.status = toStatus;
+    trade.statusOrder = TradeService.findOrderAndNameByCode(toStatus).order;
+    trade.update = new Date();
     trade.statusLog.push(newLog);
     trade.save(function(error, trade) {
         callback(error, trade);
     });
+};
+
+TradeService.findOrderAndNameByCode = function(code) {
+    var targetKey
+    _.each(TradeService.Status, function(value, key) {
+        if (value.code === code) {
+            targetKey = key;
+        }
+    });
+    return TradeService.Status[targetKey];
 };

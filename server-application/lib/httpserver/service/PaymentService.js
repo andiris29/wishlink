@@ -3,6 +3,7 @@ var async = require('async');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var request = require('request');
+var winston = require('winston');
 
 // model
 var Trades = require('../../model/Trades');
@@ -19,7 +20,22 @@ var PaymentService = module.exports;
  * 参考倾秀
  * 调用支付服务 wechat/prepay
  */
-PaymentService.getPrepayId = function(trade, callback) {
+PaymentService.getPrepayId = function(trade, ip, callback) {
+    var orderName = trade.itemSnapshot.name;
+    var url = 'http://localhost:8080/wishilink-payment/wechat/prepay?id=' + trade._id.toString() + '&totalFee=' + trade.totalFee + '&orderName=' + encodeURIComponent(orderName) + '&clientIp=' + ip;
+    winston.info(new Date(), 'call weixin prepay url=' + url);
+    request.get(url, function(error, response, body) {
+        var jsonObject = JSON.parse(body);
+        winston.info(new Date(), 'weixin prepayid response :', jsonObject);
+        if (jsonObject.metadata) {
+            callback(jsonObject.metadata, trade);
+        } else {
+            trade.pay.weixin['prepayid'] = jsonObject.data.prepay_id;
+            trade.save(function(err) {
+                callback(err, trade);
+            });
+        }
+    });
 };
 
 /** 

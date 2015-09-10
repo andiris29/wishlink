@@ -35,6 +35,8 @@ ServerError.ERR_ITEM_NOT_EXIST = 1005;
 ServerError.ALREADY_RELATED = 1006;
 ServerError.ALREADY_UNRELATED = 1007;
 ServerError.PAGING_NOT_EXIST = 1008;
+ServerError.ERR_INCORRECT_ID_OR_PASSWD = 1009;
+ServerError.ERR_TRADE_NOT_EXIST = 1010;
 
 var _codeToString = function(code) {
     switch (code) {
@@ -56,6 +58,10 @@ var _codeToString = function(code) {
             return "ALREADY_UNRELATED";
         case 1008:
             return "PAGING_NOT_EXIST";
+        case 1009:
+            return "ERR_INCORRECT_ID_OR_PASSWD";
+        case 1010:
+            return "ERR_TRADE_NOT_EXIST";
     }
 };
 

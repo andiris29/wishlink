@@ -623,3 +623,39 @@ user.removeReceiver = {
     }
 };
 
+user.login = {
+    method : 'post',
+    func : function(req, res) {
+        var param = req.body;
+        var nickname = param.nickname || '';
+        var password = param.password || '';
+        Users.findOne({
+            '$and' : [{
+                nickname : nickname
+            }, {
+                '$or' : [{
+                    password : password
+                }, {
+                    encryptedPassword : _encrypt(password)
+                }]
+            }]
+        }, function(error, user) {
+            if (error) {
+                ResponseHelper.response(res, error);
+            } else if (user) {
+                //login succeed
+                req.session.userId = user._id;
+                req.session.loginDate = new Date();
+                ResponseHelper.response(res, error, {
+                    user : user
+                });
+            } else {
+                //login fail
+                delete req.session.userId;
+                delete req.session.loginDate;
+                ResponseHelper.response(res, ServerError.ERR_INCORRECT_ID_OR_PASSWD);
+            }
+        });
+    }
+};
+
