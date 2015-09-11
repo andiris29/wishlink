@@ -55,7 +55,6 @@ class WebRequestHelper:NSObject {
         
         request(.GET, apiurl, parameters: parameters, encoding: self.encoding, headers: nil)
             
-            .re
                 .responseString() {
                     (_, _, data, error) in
                     
