@@ -59,6 +59,55 @@ trade.create = {
 };
 
 /**
+ * 保存收获地址
+ *
+ * @param {string} req.receiver.name
+ * @param {string} req.receiver.phone
+ * @param {string} req.receiver.province
+ * @param {string} req.receiver.address
+ */
+trade.updateReceiver = {
+    method : 'post',
+    permissionValidators : ['validateLogin'],
+    func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            trade.receiver = {
+                name : req.body.receiver.name,
+                phone : req.body.receiver.phone,
+                province : req.body.receiver.province,
+                address : req.body.receiver.address
+            };
+
+            trade.save(function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else (!trade) {
+                    callback(ServerError.ERR_UNKOWN);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
+    }
+};
+
+/**
  * 调用 PaymentService.getPrepayId 更新交易
  */
 trade.prepay = {
@@ -78,24 +127,16 @@ trade.prepay = {
                 }
             });
         }, function(trade, callback) {
-            var trade.receiver = {
-                name : req.body.receiver.name,
-                phone : req.body.receiver.phone,
-                province : req.body.receiver.province,
-                address : req.body.receiver.address
-            }
-            var totalFee = Math.max(0.01, RequestHelper.parseNumber(req.body.totalFee)).toFixed(2);
-
-            trade.save(function(err, trade) {
-                if (err) {
-                    callback(err);
-                } else {
-                    callback(null, trade);
-                }
-            });
-        }, function(trade, callback) {
             if (req.body.pay || req.body.pay['weixin']) {
-                PaymentService.getPrepayId(trade, RequestHelper.getIp(req), callback);
+                PaymentService.getPrepayId(trade, RequestHelper.getIp(req), function(error, trade) {
+                    if (error) {
+                        callback(error);
+                    } else if (!trade) {
+                        callback(ServerError.ERR_UNKOWN);
+                    } else {
+                        callback(null, trade);
+                    }
+                });
             } else {
                 callback(null, trade);
             }
