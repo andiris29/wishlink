@@ -16,7 +16,7 @@ import Foundation
 
 import UIKit
 
-let SERVICE_ROOT_PATH = "http://idphoto.edonesoft.com/clientapi/"
+let SERVICE_ROOT_PATH = "http://121.41.162.102/services/"
 class WebRequestHelper:NSObject {
     
     var mydelegate:WebRequestDelegate?
@@ -24,8 +24,8 @@ class WebRequestHelper:NSObject {
     
     let encoding = ParameterEncoding.JSON;
     let headers = [
-        "Content-Type": "application/json;charset=utf-8",
-        "Authorization": "SCLE8FC355DFBB31468392958EE5A16F7C2C"
+        "Content-Type": "application/json;charset=utf-8"
+//        "Authorization": "SCLE8FC355DFBB31468392958EE5A16F7C2C"
     ];
     
     /*
@@ -48,13 +48,32 @@ class WebRequestHelper:NSObject {
             
         }
     }
-    /*
-    执行一个Get方式的Http请求
-    */
-    func httpGetApi(apiName:String,tag:Int)
+    func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int)
     {
         var apiurl = SERVICE_ROOT_PATH + apiName
-        request(.GET, apiurl, parameters: nil, encoding: self.encoding, headers: self.headers).responseJSON() {
+        NSLog("request url: %@", apiurl)
+        
+        request(.GET, apiurl, parameters: parameters, encoding: self.encoding, headers: nil)
+            
+            .re
+                .responseString() {
+                    (_, _, data, error) in
+                    
+                    if(error == nil)
+                    {
+                        
+                        print(data);
+                        //self.handleHttpResponse(data!, tag: tag)
+                    }
+                    else
+                    {
+                        self.mydelegate?.requestDataFailed("网络不给力哦");
+                    }
+                    
+                }
+
+                
+            .responseJSON() {
             (_, _, data, error) in
             
             if(error == nil)
@@ -67,7 +86,6 @@ class WebRequestHelper:NSObject {
             }
             
         }
-
     }
     /*
     请求成功后，解析结果JSON公共部分
@@ -78,34 +96,45 @@ class WebRequestHelper:NSObject {
         println(body);
         let dataDir:NSDictionary = body as! NSDictionary
         
-        
-        if(dataDir.count == 0 || dataDir.objectForKey("Code") == nil)
+        if( dataDir.objectForKey("data") != nil)
         {
-            self.mydelegate?.requestDataFailed("网络异常,无效的响应.");
-            return ;
-        }
-        var strCode = dataDir.objectForKey("Code") as! Int
-        if(strCode == 10000)//code为1000正常的响应
-        {
-            var strDetail:AnyObject = dataDir.objectForKey("Detail")!
+            self.mydelegate?.requestDataComplete(dataDir.objectForKey("data")!, tag: tag);
             
-            self.mydelegate?.requestDataComplete(strDetail, tag: tag)
-        }
-        else if(strCode == 20000)//Code为20000,token令牌失效
-        {
-            if(AppConfig.sharedAppConfig.isUserLogin())
-            {
-                AppConfig.sharedAppConfig.userLogout()
-            }
-            return
         }
         else
         {
-            var strErr = dataDir.objectForKey("Message") as! String
-            println("Response Error:"+strErr);
-            self.mydelegate?.requestDataFailed(strErr)
-            
+            //解析metadata
+            self.mydelegate?.requestDataFailed("返回数据无效")
         }
+        
+        
+//        if(dataDir.count == 0 || dataDir.objectForKey("Code") == nil)
+//        {
+//            self.mydelegate?.requestDataFailed("网络异常,无效的响应.");
+//            return ;
+//        }
+//        var strCode = dataDir.objectForKey("Code") as! Int
+//        if(strCode == 10000)//code为1000正常的响应
+//        {
+//            var strDetail:AnyObject = dataDir.objectForKey("Detail")!
+//            
+//            self.mydelegate?.requestDataComplete(strDetail, tag: tag)
+//        }
+//        else if(strCode == 20000)//Code为20000,token令牌失效
+//        {
+//            if(AppConfig.sharedAppConfig.isUserLogin())
+//            {
+//                AppConfig.sharedAppConfig.userLogout()
+//            }
+//            return
+//        }
+//        else
+//        {
+//            var strErr = dataDir.objectForKey("Message") as! String
+//            println("Response Error:"+strErr);
+//            self.mydelegate?.requestDataFailed(strErr)
+//            
+//        }
         
     }
     

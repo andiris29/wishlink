@@ -8,10 +8,12 @@
 
 import UIKit
 
-class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,t03CellDelegate  {
+class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,t03CellDelegate,WebRequestDelegate  {
 
     @IBOutlet weak var myTableView: UITableView!
     var cellIdentifier = "T03Cell"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadComNavTitle("搜索");
@@ -19,6 +21,13 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         self.myTableView.dataSource = self;
         self.myTableView.separatorStyle = UITableViewCellSeparatorStyle.None;
         self.myTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+        
+        self.httpObj.mydelegate = self;
+        var para = ["req.pageNo":1,
+        "req.pageSize":10]
+//        para = nil
+        self.httpObj.httpGetApi("trend/country", parameters: para, tag: 10);
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,8 +109,6 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
             self.index2 = btnindex;
         }
  
-//         self.myTableView.remov
-//        self.myTableView!.reloadData();
          self.myTableView!.reloadRowsAtIndexPaths([NSIndexPath(forRow: rowIndex, inSection: 0)], withRowAnimation: .Automatic)
     
     
@@ -117,5 +124,35 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         return true;
     }
 
+    //MARK:Request delegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+     
+        if(tag == 10)
+        {
+            if let trendDic = response as? NSDictionary
+            {
+                var trendArr:NSArray! = trendDic.objectForKey("trends") as! NSArray
+                if(trendArr != nil && trendArr.count>0)
+                {
+                    if(self.dataArr.count>0)
+                    {
+                        self.dataArr.removeAll(keepCapacity: false);
+                    }
+                    
+                    for itemObj in trendArr
+                    {
+                        var itemdic = itemObj as! NSDictionary;
+                        var item =  TrendModel(dict: itemdic);
+                        self.dataArr.append(item);
+                    }
+                    self.myTableView.reloadData();
+                }
+                
+            }
+        }
+    }
+    func requestDataFailed(error: String) {
+        
+    }
 
 }

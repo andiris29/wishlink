@@ -13,6 +13,7 @@ class RootVC: UIViewController {
     var userStatusChangeKey = "login-status-changed"
     var userLogOutKey = "user-login-logout"
     var httpObj:WebRequestHelper!
+    var dataArr:[AnyObject]! = []
 
     
     override func viewDidLoad() {
