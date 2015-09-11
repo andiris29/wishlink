@@ -72,6 +72,13 @@
 		A1C36CB01B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C36CAC1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib */; };
 		A1C36CB11B87A50100EFCB57 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C36CAD1B87A50100EFCB57 /* SearchCollectionViewCell.swift */; };
 		A1C36CB21B87A50100EFCB57 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C36CAE1B87A50100EFCB57 /* SearchCollectionViewCell.xib */; };
+		A1F0E2751BA313F7005379CD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2741BA313F7005379CD /* Social.framework */; };
+		A1F0E2771BA3146D005379CD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2761BA3146D005379CD /* CFNetwork.framework */; };
+		A1F0E2791BA31592005379CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2781BA31592005379CD /* SystemConfiguration.framework */; };
+		A1F0E27B1BA315A1005379CD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E27A1BA315A1005379CD /* libz.dylib */; };
+		A1F0E27D1BA315B0005379CD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E27C1BA315B0005379CD /* libsqlite3.0.dylib */; };
+		A1F0E2811BA315D2005379CD /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2801BA315D2005379CD /* libc++.dylib */; };
+		A1F0E2831BA315F3005379CD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2821BA315F3005379CD /* CoreTelephony.framework */; };
 		A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD28391B878DF4006535E0 /* T03SearchVC.swift */; };
 		A1FD283C1B878DF4006535E0 /* T03SearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */; };
 		A1FD283F1B87968D006535E0 /* T03Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD283D1B87968D006535E0 /* T03Cell.swift */; };
@@ -206,6 +213,14 @@
 		A1C36CAC1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionReusableViewHeader.xib; sourceTree = "<group>"; };
 		A1C36CAD1B87A50100EFCB57 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1C36CAE1B87A50100EFCB57 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1F0E2741BA313F7005379CD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		A1F0E2761BA3146D005379CD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A1F0E2781BA31592005379CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A1F0E27A1BA315A1005379CD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A1F0E27C1BA315B0005379CD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		A1F0E27E1BA315C2005379CD /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libc.dylib; path = usr/lib/libc.dylib; sourceTree = SDKROOT; };
+		A1F0E2801BA315D2005379CD /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A1F0E2821BA315F3005379CD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A1FD28391B878DF4006535E0 /* T03SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03SearchVC.swift; sourceTree = "<group>"; };
 		A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchVC.xib; sourceTree = "<group>"; };
 		A1FD283D1B87968D006535E0 /* T03Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03Cell.swift; sourceTree = "<group>"; };
@@ -250,6 +265,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1F0E2831BA315F3005379CD /* CoreTelephony.framework in Frameworks */,
+				A1F0E2811BA315D2005379CD /* libc++.dylib in Frameworks */,
+				A1F0E27D1BA315B0005379CD /* libsqlite3.0.dylib in Frameworks */,
+				A1F0E27B1BA315A1005379CD /* libz.dylib in Frameworks */,
+				A1F0E2791BA31592005379CD /* SystemConfiguration.framework in Frameworks */,
+				A1F0E2771BA3146D005379CD /* CFNetwork.framework in Frameworks */,
+				A1F0E2751BA313F7005379CD /* Social.framework in Frameworks */,
 				7695653F1BA08A4900A6AD10 /* libWeChatSDK.a in Frameworks */,
 				769565391BA0891E00A6AD10 /* libWeiboSDK.a in Frameworks */,
 			);
@@ -467,6 +489,14 @@
 		A1043E831B7F8D25007A237C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1F0E2821BA315F3005379CD /* CoreTelephony.framework */,
+				A1F0E2801BA315D2005379CD /* libc++.dylib */,
+				A1F0E27E1BA315C2005379CD /* libc.dylib */,
+				A1F0E27C1BA315B0005379CD /* libsqlite3.0.dylib */,
+				A1F0E27A1BA315A1005379CD /* libz.dylib */,
+				A1F0E2781BA31592005379CD /* SystemConfiguration.framework */,
+				A1F0E2761BA3146D005379CD /* CFNetwork.framework */,
+				A1F0E2741BA313F7005379CD /* Social.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
