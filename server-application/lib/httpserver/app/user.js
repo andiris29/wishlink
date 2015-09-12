@@ -81,21 +81,17 @@ user.get = {
     func : function(req, res) {
         var param = req.queryString;
         async.waterfall([function(callback) {
-            if (param.registrationId === null || param.registrationId.length === 0) {
-                callback(ServerError.ERR_NOT_ENOUGH_PARAM);
-            }
-        }, function(callback) {
             if (req.currentUserId) {
                 callback();
                 return;
             }
-            NotificationService.unbind(param.registrationId, null, function(error) {
-                if (error) {
-                    callback(error);
-                } else {
-                    callback(ServerError.ERR_NOT_LOGGED_IN);
-                }
-            });
+            if (param && param.registrationId) {
+                NotificationService.unbind(param.registrationId, null, function(error) {
+                    callback(error || ServerError.ERR_NOT_LOGGED_IN);
+                });
+            } else {
+                callback(ServerError.ERR_NOT_LOGGED_IN);
+            }
         }, function(callback) {
             Users.findOne({
                 '_id' : req.currentUserId
@@ -273,7 +269,7 @@ user.loginViaWeibo = {
     method : 'post',
     func : function(req, res) {
         var config = global.config;
-        var param = reg.body;
+        var param = req.body;
         var token = param.access_token;
         var uid = param.uid;
         if (!toke || !uid || !registrationId) {
@@ -653,7 +649,7 @@ user.login = {
                 //login fail
                 delete req.session.userId;
                 delete req.session.loginDate;
-                ResponseHelper.response(res, ServerError.ERR_INCORRECT_ID_OR_PASSWD);
+                ResponseHelper.response(res, ServerError.ERR_INCORRECT_ID_OR_PASSWORD);
             }
         });
     }
