@@ -15,4 +15,7 @@ class SearchCollectionReusableViewHeader: UICollectionReusableView {
         // Initialization code
     }
    
+    func initData() {
+    
+    }
 }

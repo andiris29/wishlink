@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
@@ -15,7 +16,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFg-gl-67u">
                         <rect key="frame" x="0.0" y="0.0" width="64" height="110"/>
                         <subviews>
-                            <button opaque="NO" contentMode="center" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S8-0z-VhZ">
+                            <button opaque="NO" tag="200" contentMode="center" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S8-0z-VhZ">
                                 <rect key="frame" x="5" y="10" width="54" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="A1L-Px-ba1"/>
@@ -25,9 +26,13 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="T03eee1" backgroundImage="T03aaa"/>
+                                <connections>
+                                    <action selector="buttonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="W7x-Ug-QJi"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="香包" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-PG-7kS">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="香包" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-PG-7kS">
                                 <rect key="frame" x="0.0" y="64" width="64" height="30"/>
+                                <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MXe-wy-cAv"/>
                                 </constraints>
@@ -55,6 +60,10 @@
                 <constraint firstItem="XFg-gl-67u" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZIF-oC-sGT"/>
                 <constraint firstItem="XFg-gl-67u" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bQ1-Jr-t5A"/>
             </constraints>
+            <connections>
+                <outlet property="iconButton" destination="3S8-0z-VhZ" id="aA3-Tv-gpc"/>
+                <outlet property="nameLabel" destination="aMA-PG-7kS" id="zfK-KK-OU8"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

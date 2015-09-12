@@ -8,11 +8,32 @@
 
 import UIKit
 
+protocol SearchCollectionViewCellDelegate: NSObjectProtocol {
+    
+    func searchCollectionViewCell(cell: SearchCollectionViewCell, buttonIndex: Int)
+}
+
 class SearchCollectionViewCell: UICollectionViewCell {
 
+    weak var delegate: SearchCollectionViewCellDelegate?
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var iconButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
+    func initData(model: TrendModel) {
+        
+        self.nameLabel.text = model.name;
+    }
+    
+    //MARK: - Action
+    
+    @IBAction func buttonAction(sender: UIButton) {
+        
+        self.delegate?.searchCollectionViewCell(self, buttonIndex: sender.tag)
+    }
 }

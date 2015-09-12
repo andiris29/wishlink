@@ -8,7 +8,6 @@
 import Foundation
 @objc protocol WebRequestDelegate  {
     
-    
     func requestDataComplete(response:AnyObject,tag:Int)
     func requestDataFailed(error:String)
     optional func complateImgDownload(tag:Int,downloadImg:UIImage)
@@ -17,12 +16,13 @@ import Foundation
 import UIKit
 
 let SERVICE_ROOT_PATH = "http://121.41.162.102/services/"
+
 class WebRequestHelper:NSObject {
     
     var mydelegate:WebRequestDelegate?
     
     
-    let encoding = ParameterEncoding.JSON;
+    let encoding = ParameterEncoding.URL;
     let headers = [
         "Content-Type": "application/json;charset=utf-8"
 //        "Authorization": "SCLE8FC355DFBB31468392958EE5A16F7C2C"
@@ -31,9 +31,10 @@ class WebRequestHelper:NSObject {
     /*
     执行一个Post方式的Http请求
     */
-    func httpPostApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int)
-    {
+    func httpPostApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
+        
         var apiurl = SERVICE_ROOT_PATH + apiName
+        
         request(.POST, apiurl, parameters: parameters, encoding: self.encoding, headers: self.headers).responseJSON() {
             (_, _, data, error) in
             
@@ -48,30 +49,13 @@ class WebRequestHelper:NSObject {
             
         }
     }
-    func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int)
-    {
+    
+    func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
+        
         var apiurl = SERVICE_ROOT_PATH + apiName
         NSLog("request url: %@", apiurl)
         
         request(.GET, apiurl, parameters: parameters, encoding: self.encoding, headers: nil)
-            
-                .responseString() {
-                    (_, _, data, error) in
-                    
-                    if(error == nil)
-                    {
-                        
-                        print(data);
-                        //self.handleHttpResponse(data!, tag: tag)
-                    }
-                    else
-                    {
-                        self.mydelegate?.requestDataFailed("网络不给力哦");
-                    }
-                    
-                }
-
-                
             .responseJSON() {
             (_, _, data, error) in
             
@@ -86,13 +70,13 @@ class WebRequestHelper:NSObject {
             
         }
     }
+    
     /*
     请求成功后，解析结果JSON公共部分
     
     */
-    func handleHttpResponse(body:AnyObject,tag:Int)
-    {
-        println(body);
+    func handleHttpResponse(body:AnyObject,tag:Int) {
+
         let dataDir:NSDictionary = body as! NSDictionary
         
         if( dataDir.objectForKey("data") != nil)
@@ -147,8 +131,7 @@ class WebRequestHelper:NSObject {
     defaultName：如果下载失败，则所加载的默认图片名称
     
     */
-    func renderImageView(iv:UIImageView,url:String,defaultName:String)
-    {
+    func renderImageView(iv:UIImageView,url:String,defaultName:String) {
         var  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
         //判断文件路径是否存在，不存在则创建
         var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");

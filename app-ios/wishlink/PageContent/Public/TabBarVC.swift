@@ -48,8 +48,8 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         var createNav =  NavigationPageVC(rootViewController: releaseVC)
         
         
-//        var searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
-        var searchVC = T03SearchVC(nibName: "T03SearchVC", bundle: NSBundle.mainBundle())
+        var searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
+//        var searchVC = T03SearchVC(nibName: "T03SearchVC", bundle: NSBundle.mainBundle())
         searchVC.tabBarItem.title = "搜索"
         searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "search_unselect")!, selectedImage: UIImage(named: "search_select")!);
         var searchNav =  NavigationPageVC(rootViewController: searchVC)

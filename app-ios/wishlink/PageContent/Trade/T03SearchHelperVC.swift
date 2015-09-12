@@ -6,23 +6,28 @@
 //  Copyright (c) 2015年 edonesoft. All rights reserved.
 //
 
+let HttpTag: Int = 1000
+
 import UIKit
 
-class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, WebRequestDelegate, SearchCollectionViewCellDelegate {
 
     let cellIdentifier = "SearchCollectionViewCell"
     let cellHeaderIdentifier = "SearchCollectionReusableViewHeader"
     
-    var goods: NSArray!
+    var marks: NSArray!
+    var titles: NSArray!
+    var goods: NSMutableDictionary!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        goods = ["国家地区", "种类", "热门品牌"]
-        
         collectionCellRegisterNib()
+        initWithData()
+        initWithView()
+        httpRequest()
     }
     
     func collectionCellRegisterNib() {
@@ -33,6 +38,29 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
 //        self.collectionView!.registerClass(SearchCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
 //        self.collectionView!.registerClass(SearchCollectionReusableViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: cellHeaderIdentifier)
 
+    }
+    
+    func httpRequest() {
+        
+        self.httpObj.mydelegate = self;
+        var parameter = ["req.pageNo":1, "req.pageSize":10]
+        
+        for var index = 0; index < marks.count; index++ {
+            
+            self.httpObj.httpGetApi("trend/\(marks[index])", parameters: parameter, tag: HttpTag + index);
+        }
+    }
+    
+    func initWithData() {
+     
+        marks = ["country", "category", "brand"]
+        titles = ["国家和地区", "种类", "热门品牌"]
+        goods = NSMutableDictionary(capacity: marks.count);
+    }
+    
+    func initWithView() {
+    
+        self.loadComNavTitle("搜索");
     }
 
     //MARK: - UICollectionViewDataSource
@@ -46,34 +74,86 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
             reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellHeaderIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
             
             var label: UILabel = reusableView.viewWithTag(100) as! UILabel
-            label.text = goods[indexPath.section] as? String
+            label.text = titles[indexPath.section] as? String
         }
         return reusableView
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 3
+        
+        return self.marks.count
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        
+        var num: Int = 0
+        var key: String = marks[section] as! String
+        if self.goods[key] == nil { num = 0 } else { num = self.goods[key]!.count }
+        
+        return num
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         var cell: SearchCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! SearchCollectionViewCell
+        cell.delegate = self
+        
+        var key: String = marks[indexPath.section] as! String
+        if self.goods[key] != nil {
+            var array: NSArray = self.goods[key] as! NSArray
+            cell.initData(array[indexPath.row] as! TrendModel)
+        }
         
         return cell
     }
     
-    /*
+    //MARK: - WebRequestDelegate 
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        if tag < HttpTag || tag >= HttpTag + marks.count {return }
+        
+        if let trendDic = response as? NSDictionary {
+            
+            modelConversionFormData(trendDic.objectForKey("trends") as! NSArray, tag: tag)
+        }
+    }
+    
+    func requestDataFailed(error: String) {
+        
+    }
+    
+    //MARK: - Unit
+    
+    func modelConversionFormData(dataArray: NSArray!, tag: Int) {
+       
+        if (dataArray != nil && dataArray.count > 0) {
+            
+            var temp: NSMutableArray = NSMutableArray();
+            
+            for itemObj in dataArray {
+                
+                var itemdic = itemObj as! NSDictionary;
+                var item =  TrendModel(dict: itemdic);
+                temp.addObject(item);
+            }
+            var key: String = marks[tag - HttpTag] as! String
+            self.goods[key] = temp
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
+    //MARK: - SearchCollectionViewCellDelegate 
+    
+    func searchCollectionViewCell(cell: SearchCollectionViewCell, buttonIndex: Int) {
+        
+    }
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
     }
-    */
 
 }
