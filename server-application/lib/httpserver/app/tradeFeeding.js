@@ -8,9 +8,12 @@ var Trades = require('../../model/trades');
 
 // helper
 var ServerError = require('../server-error');
+
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var RelationshipHelper = require('../helper/RelationshipHelper');
+var ServiceHelper = require('../helper/ServiceHelper');
+var MongoHelper = require('../helper/MongoHelper');
 
 var tradeFeeding = module.exports;
 
@@ -26,11 +29,13 @@ tradeFeeding.asSeller = {
         ServiceHelper.queryPaging(req, res, function(param, callback) {
             var criteria = {
                 assigneeRef : req.currentUserId,
-                status : {
-                    '$in' : RequestHelper.parseInts(param.statuses)
-                }
             };
-            MongoHelper.queryRandom(Trades.find(criteria), param.pageSize, callback);
+            if (param.statuses) {
+                criteria.status = {
+                    '$in' : RequestHelper.parseInts(param.statuses)
+                };
+            }
+            MongoHelper.queryPaging(Trades.find(criteria), param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
@@ -52,11 +57,13 @@ tradeFeeding.asBuyer = {
         ServiceHelper.queryPaging(req, res, function(param, callback) {
             var criteria = {
                 ownerRef : req.currentUserId,
-                status : {
-                    '$in' : RequestHelper.parseInts(param.statuses)
-                }
             };
-            MongoHelper.queryRandom(Trades.find(criteria), param.pageSize, callback);
+            if (param.statuses) {
+                criteria.status = {
+                    '$in' : RequestHelper.parseInts(param.statuses)
+                };
+            }
+            MongoHelper.queryPaging(Trades.find(criteria), param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
@@ -79,7 +86,7 @@ tradeFeeding.byItem = {
             var criteria = {
                 itemRef : RequestHelper.parseId(param._id),
             };
-            MongoHelper.queryRandom(Trades.find(criteria), param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria), param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
