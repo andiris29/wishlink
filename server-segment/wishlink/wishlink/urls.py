@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^segmentation/', include('segmentation.urls'))
+    #url(r'^admin/', include(admin.site.urls)),
+    url(r'^services/segmentation/', include('segmentation.urls'))
 ]
