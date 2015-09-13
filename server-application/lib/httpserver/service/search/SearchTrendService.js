@@ -180,11 +180,14 @@ var _postHandleCountryAndBrands = function (rawData, Model, callback) {
                         _id : row._id
                     }, callback);
                 }, function (m, callback) {
-                    retData[index] = {
-                        name : m.name,
-                        icon : m.icon,
-                        weight : row.weight
-                    };
+                    if (m) {
+                        retData[index] = {
+                            name : m.name,
+                            icon : m.icon,
+                            weight : row.weight
+                        };
+                    }
+
                     callback();
                 }
             ], callback);
@@ -243,11 +246,13 @@ var _postHandleItem = function (rawData, Model, callback) {
                     }, callback);
 
                 }, function (m, callback) {
-                    retData[index] = {
-                        name : row._id,
-                        icon : m.images && m.images[0],
-                        weight : row.weight
-                    };
+                    if (m) {
+                        retData[index] = {
+                            name : row._id,
+                            icon : m.images && m.images[0],
+                            weight : row.weight
+                        };
+                    }
                     callback();
                 }
             ], callback);
