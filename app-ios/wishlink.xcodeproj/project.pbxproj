@@ -23,17 +23,6 @@
 		769565391BA0891E00A6AD10 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695652D1BA0891E00A6AD10 /* libWeiboSDK.a */; };
 		7695653A1BA0891E00A6AD10 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 769565361BA0891E00A6AD10 /* WeiboSDK.bundle */; };
 		7695653F1BA08A4900A6AD10 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695653C1BA08A4900A6AD10 /* libWeChatSDK.a */; };
-		769565411BA08C5500A6AD10 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565401BA08C5500A6AD10 /* QuartzCore.framework */; };
-		769565431BA08C5E00A6AD10 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565421BA08C5E00A6AD10 /* ImageIO.framework */; };
-		769565451BA08C6700A6AD10 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565441BA08C6600A6AD10 /* SystemConfiguration.framework */; };
-		769565471BA08C6F00A6AD10 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565461BA08C6F00A6AD10 /* Security.framework */; };
-		769565491BA08C7800A6AD10 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565481BA08C7800A6AD10 /* CoreTelephony.framework */; };
-		7695654B1BA08C7E00A6AD10 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695654A1BA08C7E00A6AD10 /* CoreText.framework */; };
-		7695654D1BA08C8500A6AD10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695654C1BA08C8500A6AD10 /* UIKit.framework */; };
-		7695654F1BA08C9300A6AD10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695654E1BA08C9300A6AD10 /* Foundation.framework */; };
-		769565511BA08C9900A6AD10 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565501BA08C9900A6AD10 /* CoreGraphics.framework */; };
-		769565531BA08CA100A6AD10 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565521BA08CA100A6AD10 /* libz.dylib */; };
-		769565551BA08CA900A6AD10 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565541BA08CA900A6AD10 /* libsqlite3.dylib */; };
 		769565581BA0910800A6AD10 /* LoginHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 769565571BA0910800A6AD10 /* LoginHelper.mm */; };
 		76CD0E851B89649000B04453 /* U02BuyerTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD0E831B89649000B04453 /* U02BuyerTradeVC.swift */; };
 		76CD0E861B89649000B04453 /* U02BuyerTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E841B89649000B04453 /* U02BuyerTradeVC.xib */; };
@@ -119,6 +108,10 @@
 		D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B311B84B9CE00746229 /* T06CellHeader.xib */; };
 		D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B341B84B9E900746229 /* T06CellFooter.swift */; };
 		D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B351B84B9E900746229 /* T06CellFooter.xib */; };
+		D276A98F1BA6E69D005CC047 /* T01HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276A98D1BA6E69D005CC047 /* T01HomePageVC.swift */; };
+		D276A9901BA6E69D005CC047 /* T01HomePageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D276A98E1BA6E69D005CC047 /* T01HomePageVC.xib */; };
+		D276A9A71BA6F795005CC047 /* PFGoldenSectionSpiral.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A01BA6F795005CC047 /* PFGoldenSectionSpiral.m */; };
+		D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A61BA6F795005CC047 /* ZYQSphereView.m */; };
 		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
 		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
 		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
@@ -276,6 +269,17 @@
 		D2744B311B84B9CE00746229 /* T06CellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06CellHeader.xib; sourceTree = "<group>"; };
 		D2744B341B84B9E900746229 /* T06CellFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06CellFooter.swift; sourceTree = "<group>"; };
 		D2744B351B84B9E900746229 /* T06CellFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06CellFooter.xib; sourceTree = "<group>"; };
+		D276A98D1BA6E69D005CC047 /* T01HomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T01HomePageVC.swift; sourceTree = "<group>"; };
+		D276A98E1BA6E69D005CC047 /* T01HomePageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T01HomePageVC.xib; sourceTree = "<group>"; };
+		D276A99E1BA6F795005CC047 /* PFAxisDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAxisDirection.h; sourceTree = "<group>"; };
+		D276A99F1BA6F795005CC047 /* PFGoldenSectionSpiral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGoldenSectionSpiral.h; sourceTree = "<group>"; };
+		D276A9A01BA6F795005CC047 /* PFGoldenSectionSpiral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGoldenSectionSpiral.m; sourceTree = "<group>"; };
+		D276A9A11BA6F795005CC047 /* PFMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMatrix.h; sourceTree = "<group>"; };
+		D276A9A21BA6F795005CC047 /* PFMatrixTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMatrixTransform.h; sourceTree = "<group>"; };
+		D276A9A31BA6F795005CC047 /* PFPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFPoint.h; sourceTree = "<group>"; };
+		D276A9A41BA6F795005CC047 /* PFRadian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFRadian.h; sourceTree = "<group>"; };
+		D276A9A51BA6F795005CC047 /* ZYQSphereView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQSphereView.h; sourceTree = "<group>"; };
+		D276A9A61BA6F795005CC047 /* ZYQSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQSphereView.m; sourceTree = "<group>"; };
 		D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZLanTingHeiS-EL-GB.ttf"; sourceTree = "<group>"; };
 		D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaInserat-Roman-SemiBold.ttf"; sourceTree = "<group>"; };
 		D2DE57711B84D049000DD691 /* T05PayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T05PayVC.swift; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 		A1043E1A1B7F7902007A237C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D276A99D1BA6F795005CC047 /* SphereView */,
 				A1043E7A1B7F85F3007A237C /* wishlink-Bridging-Header.h */,
 				A15D89271B806DC400BC66DE /* SwiftyJSON */,
 				A15D89291B806DC400BC66DE /* Alamofire */,
@@ -669,6 +674,8 @@
 				D24485D71B8E10B500CD97D5 /* T10MessagingVC.xib */,
 				D2E6BE851B96D36D0050C177 /* T11SearchSuggestionVC.swift */,
 				D2E6BE861B96D36D0050C177 /* T11SearchSuggestionVC.xib */,
+				D276A98D1BA6E69D005CC047 /* T01HomePageVC.swift */,
+				D276A98E1BA6E69D005CC047 /* T01HomePageVC.xib */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -695,6 +702,22 @@
 				D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		D276A99D1BA6F795005CC047 /* SphereView */ = {
+			isa = PBXGroup;
+			children = (
+				D276A99E1BA6F795005CC047 /* PFAxisDirection.h */,
+				D276A99F1BA6F795005CC047 /* PFGoldenSectionSpiral.h */,
+				D276A9A01BA6F795005CC047 /* PFGoldenSectionSpiral.m */,
+				D276A9A11BA6F795005CC047 /* PFMatrix.h */,
+				D276A9A21BA6F795005CC047 /* PFMatrixTransform.h */,
+				D276A9A31BA6F795005CC047 /* PFPoint.h */,
+				D276A9A41BA6F795005CC047 /* PFRadian.h */,
+				D276A9A51BA6F795005CC047 /* ZYQSphereView.h */,
+				D276A9A61BA6F795005CC047 /* ZYQSphereView.m */,
+			);
+			path = SphereView;
 			sourceTree = "<group>";
 		};
 		D2A150D71B99771200F9A433 /* Recourses */ = {
@@ -812,6 +835,7 @@
 				76CD0E8A1B8964B000B04453 /* U02SellerTradeVC.xib in Resources */,
 				D24485D51B8E02A200CD97D5 /* T09CellTextRight.xib in Resources */,
 				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
+				D276A9901BA6E69D005CC047 /* T01HomePageVC.xib in Resources */,
 				D24485CD1B8E027000CD97D5 /* T09CellTime.xib in Resources */,
 				A1C36CB01B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib in Resources */,
 				7684F3C11B8DFA4D00B7D7DC /* U02ItemCell.xib in Resources */,
@@ -860,10 +884,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */,
 				7654247D1B8B5861001C607C /* U03AddAddressVC.swift in Sources */,
 				A1C36CA81B87A4E300EFCB57 /* T03SearchHelperVC.swift in Sources */,
+				D276A98F1BA6E69D005CC047 /* T01HomePageVC.swift in Sources */,
 				A1F0E2861BA31E83005379CD /* TrendModel.swift in Sources */,
 				A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */,
+				D276A9A71BA6F795005CC047 /* PFGoldenSectionSpiral.m in Sources */,
 				D20B90831B8C8D470017F89C /* T08ComplaintVC.swift in Sources */,
 				A15D893A1B806F6400BC66DE /* Request.swift in Sources */,
 				A15D89381B806F6400BC66DE /* MultipartFormData.swift in Sources */,
