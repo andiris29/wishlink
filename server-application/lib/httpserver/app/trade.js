@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 
 // model
-var Trades = require('../../model/Trades');
+var Trades = require('../../model/trades');
+var Items = require('../../model/items');
+var Users = require('../../model/users');
 
 // helper
 var ServerError = require('../server-error');
@@ -159,8 +161,130 @@ trade.prepay = {
  */
 trade.payCallback = {
     method : 'post',
-    permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            // find target trade
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            // update trade's pay info
+            if (req.body.type === 'alipay') {
+                // update alipay
+                trade.pay.alipay['trade_no'] = req.body['trade_no'];
+                trade.pay.alipay['trade_status'] = req.body['trade_status'];
+                trade.pay.alipay['total_fee'] = req.body['total_fee'];
+                trade.pay.alipay['refund_status'] = req.body['refund_status'];
+                trade.pay.alipay['gmt_refund'] = req.body['gmt_refund'];
+                trade.pay.alipay['seller_id'] = req.body['seller_id'];
+                trade.pay.alipay['seller_email'] = req.body['seller_email'];
+                trade.pay.alipay['buyer_id'] = req.body['buyer_id'];
+                trade.pay.alipay['buyer_email'] = req.body['buyer_email'];
+
+                trade.pay.alipay.notifyLogs = trade.pay.alipay.notifyLogs || [];
+                trade.pay.alipay.notifyLogs.push({
+                    'notify_type' : req.body['notify_type'],
+                    'notify_id' : req.body['notify_id'],
+                    'trade_status' : req.body['trade_status'],
+                    'refund_status' : req.body['refund_status'],
+                });
+            } else if (req.body.type === 'wechat') {
+                // update wechat
+                trade.pay.weixin['trade_mode'] = req.body['trade_type'];
+                trade.pay.weixin['partner'] = req.body['mch_id'];
+                trade.pay.weixin['total_fee'] = req.body['total_fee'] / 100;
+                trade.pay.weixin['transaction_id'] = req.body['transaction_id'];
+                trade.pay.weixin['time_end'] = req.body['time_end'];
+                trade.pay.weixin['appId'] = req.body['appid'];
+                trade.pay.weixin['openId'] = req.body['openid'];
+                trade.pay.weixin.notifyLogs = trade.pay.weixin.notifyLogs || [];
+                trade.pay.weixin.notifyLogs.push({
+                    //'trade_state' : req.body['trade_state'],
+                    //'date' : Date.now
+                });
+            } else {
+                callback(ServerError.ERR_UNKOWN);
+                return;
+            }
+
+            trade.save(function(error, trade) {
+                callback(error, trade);
+            });
+        }, function(trade, callback) {
+            // find item by itemRef
+            Items.findOne({
+                _id : trade.itemRef
+            }, function(error, item) {
+                if (error) {
+                    callback(error);
+                } else (!item) {
+                    callback(ServerError.ERR_ITEM_NOT_EXIST);
+                } else {
+                    callback(null, trade, item);
+                }
+            });
+        }, function(trade, item, callback) {
+            // update trade status
+            var newStatus = TradeService.Status.PAID.code;
+            if (item.status === 0 ) {
+                // 如果对应 item.status 为审核中，则新状态为 审核中
+                newStatus = TradeService.Status.PAID.code;
+            } else if (item.status === 1) {
+                // 如果对应 item.status 为审核通过，则新状态为 审核通过
+                newStatus = TradeService.Status.UN_ORDER_RECEIVE.code;
+            } else if (item.status === 2) {
+                // 如果对应 item.status 为审核失败，则新状态为 审核失败
+                newStatus = TradeService.Status.ITEM_REVIEW_REJECTED.code;
+            }
+            TradeService.statusTo(null, trade, newStatus, 'trade/payCallback', function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_UNKOWN);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            // find people 
+            Users.findOne({
+                _id : trade.ownerRef
+            }, function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, trade, user);
+                }
+            });
+        }, function(trade, user, callback) {
+            // update alipay id
+            if (req.body.type === 'alipay') {
+                if (user.alipay === null || user.alipay.id === null || user.alipay.id.length === 0) {
+                    user.alipay.id = trade.pay.alipay.buyer_id;
+                    user.save(function(error, user) {
+                        callback(null, trade);
+                    });
+                } else {
+                    callback(null, trade);
+                }
+            } else {
+                callback(null, trade);
+            }
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
@@ -183,6 +307,32 @@ trade.cancel = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            var newStatus = TradeService.Status.CANCELED.code;
+            if (trade.assigneeRef !== null) {
+                newStatus = TradeService.Status.REQUEST_CANCEL.code;
+            }
+
+            TradeService.statusTo(req.currentUserId, trade, newStatus, 'trade/cancel', function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
