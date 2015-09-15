@@ -59,6 +59,34 @@ PaymentService.getPrepayId = function(trade, ip, callback) {
  * 调用支付服务 wechat/queryOrder
  */
 PaymentService.syncStatus = function(trade, callback) {
+    // pay with wechat
+    var url = 'http://localhost:8080/wishlink-payment/wechat/queryOrder?id=' + trade._id.toString;
+    winston.info(new Date(), ' call wechat/queryOrder url=', url);
+    request.get(url, function(error, response, body) {
+        var jsonObject = JSON.parse(body);
+        if (jsonObject.metadata) {
+            callback(jsonObject.metadata, trade);
+        } else {
+            var orderInfo = jsonObject.data;
+            trade.pay.weixin['trade_mode'] = orderInfo['trade_type'];
+            trade.pay.weixin['partner'] = orderInfo['mch_id'];
+            trade.pay.weixin['total_fee'] = orderInfo['total_fee'];
+            trade.pay.weixin['fee_type'] = orderInfo['fee_type'];
+            trade.pay.weixin['transaction_id'] = orderInfo['transaction_id'];
+            trade.pay.weixin['time_end'] = orderInfo['time_end'];
+            //trade.pay.weixin['AppId'] = orderInfo['appid'];
+            trade.pay.weixin['OpenId'] = orderInfo['openId'];
+
+            trade.pay.weixin.notifyLogs = trade.pay.weixin.notifyLogs || [];
+            if (trade.pay.weixin.notifyLogs.length > 0) {
+                trade.pay.weixin.notifyLogs[trade.pay.weixin.notifyLogs.length - 1].trade_state = orderInfo['trade_state'];
+            }
+
+            trade.save(function(error, trade) {
+                callback(error, trade);
+            });
+        }
+    });
 };
 
 /** 
@@ -66,6 +94,7 @@ PaymentService.syncStatus = function(trade, callback) {
  * 调用支付服务 wechat/deliverNotify
  */
 PaymentService.reverseSyncDelivery = function(trade, callback) {
+
 };
 
 /**
