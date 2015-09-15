@@ -3,6 +3,7 @@ var async = require('async');
 var Words = require('../../model/words');
 var Items = require('../../model/Items');
 var SearchBuildService = require('../service/search/SearchBuildService');
+var ResponseHelper = require('../helper/ResponseHelper');
 
 var maintenance = module.exports;
 
@@ -14,7 +15,7 @@ maintenance.rebuildCountries = {
     method : 'get',
     func : function(req, res) {
         _rebuildModelWords('countries', SearchBuildService.rebuildCountry, function (err) {
-            //TODO response
+            ResponseHelper.response(res, err, {});
         });
     }
 };
@@ -26,7 +27,7 @@ maintenance.rebuildBrands = {
     method : 'get',
     func : function(req, res) {
         _rebuildModelWords('brands', SearchBuildService.rebuildBrand, function (err) {
-            //TODO response
+            ResponseHelper.response(res, err, {});
         });
     }
 };
@@ -38,7 +39,7 @@ maintenance.rebuildCategories = {
     method : 'get',
     func : function(req, res) {
         _rebuildModelWords('categories', SearchBuildService.rebuildCategory, function (err) {
-            //TODO response
+            ResponseHelper.response(res, err, {});
         });
     }
 };

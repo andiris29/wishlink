@@ -41,9 +41,6 @@ item.create = {
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
         async.waterfall([function(callback) {
-            //TODO For Test, RequestHelper.parseFiles doesn't work now
-            //callback(null, item);
-            //return;
             RequestHelper.parseFiles(req, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, fields, files) {
                 if (error) {
                     callback(error);
