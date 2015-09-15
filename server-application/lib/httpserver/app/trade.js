@@ -295,6 +295,27 @@ trade.postpay = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            PaymentService.syncStatus(trade, function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
