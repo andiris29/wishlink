@@ -60,10 +60,12 @@ SearchTrendService.queryKeywords = function(pageNo, pageSize, callback) {
         var nextValue = previousValue + currentValue;
         var task = function (callback) {
             serviceMethods[index](pageNo, currentValue, function (err, results) {
-                for (var i = previousValue; i < nextValue; i++ ) {
-                    retResults[i] = results[i - previousValue];
+                if (!err && results) {
+                    for (var i = previousValue; i < nextValue; i++ ) {
+                        retResults[i] = results[i - previousValue];
+                    }
                 }
-                callback(err);
+                callback();
             });
         };
         tasks.push(task);
