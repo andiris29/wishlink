@@ -19,7 +19,7 @@
 		7684F3C21B8DFA4D00B7D7DC /* U02LogisticsTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684F3BC1B8DFA4D00B7D7DC /* U02LogisticsTipView.swift */; };
 		7684F3C31B8DFA4D00B7D7DC /* U02TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684F3BD1B8DFA4D00B7D7DC /* U02TradeCell.swift */; };
 		7684F3C41B8DFA4D00B7D7DC /* U02TradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7684F3BE1B8DFA4D00B7D7DC /* U02TradeCell.xib */; };
-		769564D41BA02ACE00A6AD10 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769564D31BA02ACE00A6AD10 /* Receiver.swift */; };
+		769564D41BA02ACE00A6AD10 /* ReceiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769564D31BA02ACE00A6AD10 /* ReceiverModel.swift */; };
 		769565391BA0891E00A6AD10 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695652D1BA0891E00A6AD10 /* libWeiboSDK.a */; };
 		7695653A1BA0891E00A6AD10 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 769565361BA0891E00A6AD10 /* WeiboSDK.bundle */; };
 		7695653F1BA08A4900A6AD10 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7695653C1BA08A4900A6AD10 /* libWeChatSDK.a */; };
@@ -32,6 +32,7 @@
 		76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */; };
 		76CD0E911B89657200B04453 /* U02FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */; };
 		76CD0E921B89657200B04453 /* U02FavoriteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E901B89657200B04453 /* U02FavoriteVC.xib */; };
+		76DC3B7A1BA85997005DFA23 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC3B791BA85997005DFA23 /* UserModel.swift */; };
 		76DC96661B8993E100270969 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC96651B8993E100270969 /* UIView.swift */; };
 		A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1043DF91B7F787A007A237C /* AppDelegate.swift */; };
 		A1043E011B7F787A007A237C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1043E001B7F787A007A237C /* Images.xcassets */; };
@@ -148,7 +149,7 @@
 		7684F3BC1B8DFA4D00B7D7DC /* U02LogisticsTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02LogisticsTipView.swift; sourceTree = "<group>"; };
 		7684F3BD1B8DFA4D00B7D7DC /* U02TradeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02TradeCell.swift; sourceTree = "<group>"; };
 		7684F3BE1B8DFA4D00B7D7DC /* U02TradeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02TradeCell.xib; sourceTree = "<group>"; };
-		769564D31BA02ACE00A6AD10 /* Receiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
+		769564D31BA02ACE00A6AD10 /* ReceiverModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverModel.swift; sourceTree = "<group>"; };
 		7695652D1BA0891E00A6AD10 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		7695652E1BA0891E00A6AD10 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		7695652F1BA0891E00A6AD10 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -185,6 +186,7 @@
 		76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02RecommendVC.xib; sourceTree = "<group>"; };
 		76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02FavoriteVC.swift; sourceTree = "<group>"; };
 		76CD0E901B89657200B04453 /* U02FavoriteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02FavoriteVC.xib; sourceTree = "<group>"; };
+		76DC3B791BA85997005DFA23 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		76DC96651B8993E100270969 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		A1043DF41B7F787A007A237C /* wishlink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wishlink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1043DF81B7F787A007A237C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -336,7 +338,8 @@
 		769564D21BA02A1C00A6AD10 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				769564D31BA02ACE00A6AD10 /* Receiver.swift */,
+				769564D31BA02ACE00A6AD10 /* ReceiverModel.swift */,
+				76DC3B791BA85997005DFA23 /* UserModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */,
 				A132BB8F1B863328004EAB47 /* TabBarItem.swift in Sources */,
 				D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */,
+				76DC3B7A1BA85997005DFA23 /* UserModel.swift in Sources */,
 				A1C36CB11B87A50100EFCB57 /* SearchCollectionViewCell.swift in Sources */,
 				A15D893C1B806F6400BC66DE /* ServerTrustPolicy.swift in Sources */,
 				A1FD283F1B87968D006535E0 /* T03Cell.swift in Sources */,
@@ -930,7 +934,7 @@
 				D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */,
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
-				769564D41BA02ACE00A6AD10 /* Receiver.swift in Sources */,
+				769564D41BA02ACE00A6AD10 /* ReceiverModel.swift in Sources */,
 				7684F3C21B8DFA4D00B7D7DC /* U02LogisticsTipView.swift in Sources */,
 				A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */,
 				7684F3BF1B8DFA4D00B7D7DC /* U02FilterButton.swift in Sources */,

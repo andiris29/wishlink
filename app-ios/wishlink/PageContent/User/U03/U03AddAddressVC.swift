@@ -27,11 +27,11 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
     var operationType: AddAddressVCOperationType! {
         didSet {
             if self.operationType == .Add {
-                self.receiver = Receiver();
+                self.receiver = ReceiverModel();
             }
         }
     }
-    var receiver: Receiver!
+    var receiver: ReceiverModel!
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()

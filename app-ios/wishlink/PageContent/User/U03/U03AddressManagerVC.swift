@@ -13,7 +13,7 @@ U03AddressCellDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
-    var addressArray = [Receiver]()
+    var addressArray = [ReceiverModel]()
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -96,7 +96,7 @@ U03AddressCellDelegate{
                 "address" : "国和路555弄",
                 "isDefault" : 0
             ]
-            var reciver: Receiver = Receiver(dic: dic)
+            var reciver: ReceiverModel = ReceiverModel(dic: dic)
             self.addressArray.append(reciver)
         }
         self.tableView.reloadData()

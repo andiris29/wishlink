@@ -24,7 +24,7 @@ class U03AddressCell: UITableViewCell {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var provinceLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    var receiver: Receiver! {
+    var receiver: ReceiverModel! {
         didSet {
             self.fillDataForUI()
         }
