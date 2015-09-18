@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate {
+class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate, CSActionSheetDelegate {
 
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var txtCategory: UITextField!
@@ -23,7 +23,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     //通用View高度约束
     @IBOutlet weak var constraint_viewHeight: NSLayoutConstraint!
 
-    
+    var actionSheet: CSActionSheet!
     
     
     override func viewDidLoad() {
@@ -32,6 +32,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.sv.delegate = self;
   
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
+        
+        csActionSheet()
     }
 
     
@@ -67,6 +69,12 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
     }
 
+    func csActionSheet() {
+        
+        var titles: Array<String> = ["取消", "从手机相册中选择", "拍照"]
+        actionSheet = CSActionSheet(frame: CGRectMake(0, 0, 200, 100), titles: titles, delegate: self)
+    }
+    
     @IBAction func btnAction(sender: UIButton) {
     
         var tag = sender.tag;
@@ -77,45 +85,29 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
         else
         {
-            self.imgHeadChange();
+            actionSheet.show(true)
         }
 
     }
     
     //MARK:弹出图片上传选择框
-    func imgHeadChange()
-    {
-        var alertController = UIAlertController(title: "选择产品图片", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler:  {
-            (action: UIAlertAction!) -> Void in
-            
-        })
-        var deleteAction = UIAlertAction(title: "拍照上传", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction!) -> Void in
-            
-            var imagePicker = UIImagePickerController()
-            if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
-            {
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-                imagePicker.delegate = self;
-                self.presentViewController(imagePicker, animated: true, completion: nil);
-            }
-        })
-        var archiveAction = UIAlertAction(title: "从相册中选择", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction!) -> Void in
+    func imgHeadChange(index: Int) {
+        
+        if index == 1001 {
             
             var imagePicker = UIImagePickerController()
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             imagePicker.delegate = self;
             self.presentViewController(imagePicker, animated: true, completion: nil);
+        } else if index == 1002 {
             
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(deleteAction)
-        alertController.addAction(archiveAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
+            var imagePicker = UIImagePickerController()
+            if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                imagePicker.delegate = self;
+                self.presentViewController(imagePicker, animated: true, completion: nil);
+            }
+        }
     }
     
     //MARK: UIImagePickerController delegate
@@ -146,5 +138,12 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         
         self.dismissKeyboard();
+    }
+    
+    //MARK: - CSActionSheetDelegate
+    
+    func csActionSheetAction(view: CSActionSheet, selectedIndex index: Int) {
+        
+        imgHeadChange(index)
     }
 }

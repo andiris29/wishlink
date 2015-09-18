@@ -8,12 +8,12 @@
 
 import UIKit
 
-class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
+class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHeaderDelegate {
 
     let cellIdentifier = "T06Cell"
     let cellIdentifierHeader = "T06CellHeader"
     let cellIdentifierFooter = "T06CellFooter"
-    
+
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tradeTableView: UITableView!
     
@@ -66,6 +66,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
            var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
    
            tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
+           tCell.delegate = self
            
            cell = tCell;
         case last:
@@ -85,6 +86,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
          var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
         self.navigationController?.pushViewController(vc, animated: true);
     }
+    
     func btnGrabOrderAction(sernder:UIButton)
     {
         self.navigationController?.popToRootViewControllerAnimated(true);
@@ -93,6 +95,12 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource {
             tababarController.selectedIndex = 3;
         }
 
+    }
+    
+    //MARK: - T06CellHeaderDelegate
+    
+    func dorpListButtonAction(sender: UIButton) {
+    
     }
 
 }

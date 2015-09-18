@@ -186,5 +186,9 @@ extension UIView {
         self.addConstraintMultiple(multiplier, item: view1, toItem: view2, attribute: NSLayoutAttribute.Height)
     }
     
+    //Width : Height = Multiple
+    func addConstraintWidthAndHeightMultiple(multiplier: CGFloat, item view1: AnyObject) {
+        self.addConstraint(NSLayoutConstraint(item: view1, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: view1, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 0))
+    }
 }
 
