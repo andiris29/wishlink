@@ -365,6 +365,28 @@ trade.assignToMe = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            trade.assigneeRef = req.currentUserId;
+            TradeService.statusTo(req.currentUserId, trade, TradeService.Status.ORDER_RECEIVED.code, 'trade/assignToMe', function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
@@ -376,6 +398,37 @@ trade.unassign = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            // find trade
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id);
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            var newStatus == 0;
+            if (trade.status === TradeService.Status.ORDER_RECEIVED.code) {
+                newStatus = TradeService.Status.UN_ORDER_RECEIVE;
+            } else {
+                callback(ServerError.ERR_TRADE_STATUS);
+                return;
+            }
+
+            trade.assigneeRef = null;
+            TradeService.statusTo(req.currentUserId, trade, newStatus, 'trade/unassign', function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 

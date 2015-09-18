@@ -37,6 +37,7 @@ ServerError.ALREADY_UNRELATED = 1007;
 ServerError.PAGING_NOT_EXIST = 1008;
 ServerError.ERR_INCORRECT_ID_OR_PASSWORD = 1009;
 ServerError.ERR_TRADE_NOT_EXIST = 1010;
+ServerError.ERR_TRADE_STATUS = 1011;
 
 var _codeToString = function(code) {
     switch (code) {
@@ -62,6 +63,8 @@ var _codeToString = function(code) {
             return "ERR_INCORRECT_ID_OR_PASSWORD";
         case 1010:
             return "ERR_TRADE_NOT_EXIST";
+        case 1011:
+            return "ERR_TRADE_STATUS";
     }
 };
 
