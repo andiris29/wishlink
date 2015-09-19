@@ -450,7 +450,7 @@ trade.deliver = {
             }, function(error, trade) {
                 if (error) {
                     callback(error);
-                } else if (!error) {
+                } else if (!trade) {
                     callback(ServerError.ERR_TRADE_NOT_EXIST);
                 } else {
                     callback(null, trade);
@@ -480,6 +480,27 @@ trade.receipt = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            trade.deliver = trade.deliver || {};
+            trade.deliver.receiptDate = new Date();
+
+            TradeService.statusTo(req.currentUserId, trade, TradeService.Status.RECEIVED.code, 'trade/receipt', function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+        });
     }
 };
 
