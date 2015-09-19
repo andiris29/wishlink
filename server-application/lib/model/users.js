@@ -46,14 +46,14 @@ var entitySchema = Schema({
         isDefault : Boolean
     }],
     unread : {
-        tradeRefs : {
-            type : [Schema.Types.ObjectId],
+        tradeRefs : [{
+            type : Schema.Types.ObjectId,
             ref : 'trades'
-        },
-        itemRecommendationRefs : {
-            type : [Schema.Types.ObjectId],
+        }],
+        itemRecommendationRefs : [{
+            type : Schema.Types.ObjectId,
             ref : 'items'
-        }
+        }]
     },
     create : {
         type : Date,

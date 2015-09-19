@@ -85,6 +85,25 @@ var entitySchema = Schema({
             'default' : Date.now
         }
     }],
+    complaints : [{
+        problem : String,
+        images : [String],
+        create : {
+            type : Date,
+            'default' : Date.now
+        },
+        resolution : {
+            staffRef : {
+                type : Schema.Types.ObjectId,
+                ref : 'users'
+            },
+            notes : String,
+            update : {
+                type : Date,
+                'default' : Date.now
+            }
+        }
+    }],
     create : {
         type : Date,
         'default' : Date.now

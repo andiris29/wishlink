@@ -78,7 +78,7 @@ trade.updateReceiver = {
             }, function(error, trade) {
                 if (error) {
                     callback(error);
-                } else (!trade) {
+                } else if (!trade) {
                     callback(ServerError.ERR_TRADE_NOT_EXIST);
                 } else {
                     callback(null, trade);
@@ -95,7 +95,7 @@ trade.updateReceiver = {
             trade.save(function(error, trade) {
                 if (error) {
                     callback(error);
-                } else (!trade) {
+                } else if (!trade) {
                     callback(ServerError.ERR_UNKOWN);
                 } else {
                     callback(null, trade);
@@ -129,7 +129,7 @@ trade.prepay = {
                 }
             });
         }, function(trade, callback) {
-            if (req.body.pay || req.body.pay['weixin']) {
+            if (req.body.pay || req.body.pay.weixin) {
                 PaymentService.getPrepayId(trade, RequestHelper.getIp(req), function(error, trade) {
                     if (error) {
                         callback(error);
@@ -144,7 +144,7 @@ trade.prepay = {
             }
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade;
+                trade : trade
             });
         });
     }
@@ -169,7 +169,7 @@ trade.payCallback = {
             }, function(error, trade) {
                 if (error) {
                     callback(error);
-                } else {
+                } else if (!trade) {
                     callback(ServerError.ERR_TRADE_NOT_EXIST);
                 } else {
                     callback(null, trade);
@@ -179,32 +179,32 @@ trade.payCallback = {
             // update trade's pay info
             if (req.body.type === 'alipay') {
                 // update alipay
-                trade.pay.alipay['trade_no'] = req.body['trade_no'];
-                trade.pay.alipay['trade_status'] = req.body['trade_status'];
-                trade.pay.alipay['total_fee'] = req.body['total_fee'];
-                trade.pay.alipay['refund_status'] = req.body['refund_status'];
-                trade.pay.alipay['gmt_refund'] = req.body['gmt_refund'];
-                trade.pay.alipay['seller_id'] = req.body['seller_id'];
-                trade.pay.alipay['seller_email'] = req.body['seller_email'];
-                trade.pay.alipay['buyer_id'] = req.body['buyer_id'];
-                trade.pay.alipay['buyer_email'] = req.body['buyer_email'];
+                trade.pay.alipay.trade_no = req.body.trade_no;
+                trade.pay.alipay.trade_status = req.body.trade_status;
+                trade.pay.alipay.total_fee = req.body.total_fee;
+                trade.pay.alipay.refund_status = req.body.refund_status;
+                trade.pay.alipay.gmt_refund = req.body.gmt_refund;
+                trade.pay.alipay.seller_id = req.body.seller_id;
+                trade.pay.alipay.seller_email = req.body.seller_email;
+                trade.pay.alipay.buyer_id = req.body.buyer_id;
+                trade.pay.alipay.buyer_email = req.body.buyer_email;
 
                 trade.pay.alipay.notifyLogs = trade.pay.alipay.notifyLogs || [];
                 trade.pay.alipay.notifyLogs.push({
-                    'notify_type' : req.body['notify_type'],
-                    'notify_id' : req.body['notify_id'],
-                    'trade_status' : req.body['trade_status'],
-                    'refund_status' : req.body['refund_status'],
+                    'notify_type' : req.body.notify_type,
+                    'notify_id' : req.body.notify_id,
+                    'trade_status' : req.body.trade_status,
+                    'refund_status' : req.body.refund_status,
                 });
             } else if (req.body.type === 'wechat') {
                 // update wechat
-                trade.pay.weixin['trade_mode'] = req.body['trade_type'];
-                trade.pay.weixin['partner'] = req.body['mch_id'];
-                trade.pay.weixin['total_fee'] = req.body['total_fee'] / 100;
-                trade.pay.weixin['transaction_id'] = req.body['transaction_id'];
-                trade.pay.weixin['time_end'] = req.body['time_end'];
-                trade.pay.weixin['appId'] = req.body['appid'];
-                trade.pay.weixin['openId'] = req.body['openid'];
+                trade.pay.weixin.trade_mode = req.body.trade_type;
+                trade.pay.weixin.partner = req.body.mch_id;
+                trade.pay.weixin.total_fee = req.body.total_fee / 100;
+                trade.pay.weixin.transaction_id = req.body.transaction_id;
+                trade.pay.weixin.time_end = req.body.time_end;
+                trade.pay.weixin.appId = req.body.appid;
+                trade.pay.weixin.openId = req.body.openid;
                 trade.pay.weixin.notifyLogs = trade.pay.weixin.notifyLogs || [];
                 trade.pay.weixin.notifyLogs.push({
                     //'trade_state' : req.body['trade_state'],
@@ -225,7 +225,7 @@ trade.payCallback = {
             }, function(error, item) {
                 if (error) {
                     callback(error);
-                } else (!item) {
+                } else if (!item) {
                     callback(ServerError.ERR_ITEM_NOT_EXIST);
                 } else {
                     callback(null, trade, item);
@@ -401,7 +401,7 @@ trade.unassign = {
         async.waterfall([function(callback) {
             // find trade
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id);
+                _id : RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -412,7 +412,7 @@ trade.unassign = {
                 }
             });
         }, function(trade, callback) {
-            var newStatus == 0;
+            var newStatus = 0;
             if (trade.status === TradeService.Status.ORDER_RECEIVED.code) {
                 newStatus = TradeService.Status.UN_ORDER_RECEIVE;
             } else {
@@ -515,6 +515,46 @@ trade.complaint = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            trade.complaints = trade.complaints || [];
+            RequestHelper.parseFiles(req, global.config.uploads.trade.complaint.ftpPath, null, function(error, fields, files) {
+                if (error) {
+                    callback(error);
+                    return;
+                }
+
+                var complaint = {
+                    problem : fields.problem,
+                    images : [],
+                    resolution : {}
+                };
+
+                files.forEach(function(file) {
+                    var imagePath = global.config.uploads.trade.complaint.exposeToUrl + '/' + path.relative(global.config.uploads.trade.complaint.ftpPath, file.path);
+                    complaint.images.push(imagePath);
+                });
+                
+                TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINING.code, 'trade/complaint', function(error, trade) {
+                    callback(error, trade);
+                });
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
@@ -530,6 +570,32 @@ trade.resolveComplaint = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callabck) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            trade.complaints[RequestHelper.parseInteger(req.body.index)].resolution = {
+                staffRef : req.currentUserId,
+                notes : req.body._id
+            };
+
+            TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINED.code, 'trade/resolveComplaint', function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
@@ -542,12 +608,14 @@ trade.resolveComplaint = {
  * @param {string} [req.weixin.transaction_id]
  * @param {string} [req.alipay.trade_no]
  */
+/*
 trade.markTransfered = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
     }
 };
+*/
 
 /**
  * 移除相关 user.unread.tradeRefs
@@ -556,6 +624,50 @@ trade.read = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callabck(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            Users.findOne({
+                _id : trade.ownerRef
+            }, function (error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callabck(null, trade, user);
+                }
+            });
+        }, function(trade, user, callback) {
+            user.unread.tradeRefs = user.unread.tradeRefs || [];
+            var tradeRefs = _.filter(user.unread.tradeRefs, function(e) {
+                return e.toString !== trade._id.toString();
+            });
+            user.unread.tradeRefs = tradeRefs;
+            user.save(function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_UNKOWN);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
