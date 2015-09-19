@@ -444,6 +444,32 @@ trade.deliver = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id : RequestHelper.parseId(req.body._id)
+            }, function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!error) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }, function(trade, callback) {
+            trade.delivery = {
+                company : req.body.company,
+                trackingId : req.body.trackingId
+            };
+
+            TradeService.statusTo(req.currentUserId, trade, TradeService.Status.DELIVERED.code, 'trade/deliver', function(error, trade) {
+                callback(error, trade);
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade : trade
+            });
+        });
     }
 };
 
