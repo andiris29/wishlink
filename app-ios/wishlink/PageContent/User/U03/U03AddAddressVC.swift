@@ -32,6 +32,9 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
         }
     }
     var receiver: ReceiverModel!
+    
+    var callBackClosure: ((AddAddressVCOperationType, ReceiverModel) -> Void)?
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,8 +93,16 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
     // MARK: - prive method
     
     func saveAddress() {
+        // TODO 本地数据
+        self.receiver.name = self.nameTextField.text
+        self.receiver.phone = self.phoneTextField.text
+        self.receiver.province = self.provinceTextField.text
+        self.receiver.address = self.addressTextField.text
         var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
         alertView.show()
+        if self.operationType == .Add {
+            self.callBackClosure!(.Add, self.receiver)
+        }
         self.navigationController!.popViewControllerAnimated(true)
     }
     

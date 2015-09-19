@@ -16,6 +16,9 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    var dataArray: NSMutableArray = NSMutableArray(array: ["1", "2", "3", "4", "5", "6"])
+
+    
     var clearView: UIView!
     var clearBtn: UIButton!
     let itemCellIde = "U02ItemCell"
@@ -52,14 +55,21 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return dataArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.cellType = .Favorite
-        
+        cell.indexPath = indexPath
+        cell.closure = {
+            (type: ItemCellButtonClickType, selectedIndexPath: NSIndexPath) in
+            if type == .Delete {
+                self.dataArray.removeObjectAtIndex(selectedIndexPath.row)
+                self.collectionView.reloadData()
+            }
+        }
         return cell
     }
     
@@ -82,6 +92,8 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         var inset = self.collectionView.contentInset
         inset.top = 0
         self.collectionView.contentInset = inset
+        self.dataArray.removeAllObjects()
+        self.collectionView.reloadData()
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
         })

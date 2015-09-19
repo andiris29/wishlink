@@ -13,6 +13,8 @@ U03AddressCellDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
+    var selectedReciver: ReceiverModel!
+    
     var addressArray = [ReceiverModel]()
     
     // MARK: - life cycle
@@ -21,6 +23,11 @@ U03AddressCellDelegate{
         self.prepareUI()
         self.loadAddressList()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,10 +77,22 @@ U03AddressCellDelegate{
             vc.receiver = self.addressArray[indexPath.row]
             self.navigationController!.pushViewController(vc, animated: true)
         }
-        else {
+        else if tag == 1{
             // 删除收货地址
             self.addressArray.removeAtIndex(indexPath.row)
             self.tableView.reloadData()
+        }else if tag == 2{
+            // 选中
+            var receiver = self.addressArray[indexPath.row]
+            if receiver == self.selectedReciver {
+                return
+            }
+            self.selectedReciver.isDefault = false
+            self.selectedReciver = receiver
+            self.selectedReciver.isDefault = true
+            self.tableView.reloadData()
+        }else {
+            
         }
     }
     
@@ -82,13 +101,20 @@ U03AddressCellDelegate{
     func addAddressBtnAction(sender: AnyObject) {
         var vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
         vc.operationType = .Add
+        vc.callBackClosure = {
+            [unowned self]
+            (type: AddAddressVCOperationType, receiver: ReceiverModel)
+            in
+            self.addressArray.append(receiver)
+            self.tableView.reloadData()
+        }
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
     // MARK: - prive method
     
     func loadAddressList() {
-        for i in 0 ... 5 {
+        for i in 0 ... 3 {
             var dic = [
                 "name" : "kelly",
                 "phone" : "18815287600",
@@ -97,6 +123,10 @@ U03AddressCellDelegate{
                 "isDefault" : 0
             ]
             var reciver: ReceiverModel = ReceiverModel(dic: dic)
+            if i == 0 {
+                reciver.isDefault = true
+                self.selectedReciver = reciver
+            }
             self.addressArray.append(reciver)
         }
         self.tableView.reloadData()
