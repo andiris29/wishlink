@@ -8,16 +8,18 @@
 
 import UIKit
 
-@objc protocol T06CellHeaderDelegate: NSObjectProtocol {
+protocol T06CellHeaderDelegate: NSObjectProtocol {
 
-    optional func dorpListButtonAction(sender: UIButton)
+    func dorpListButtonAction(sender: UIButton)
 }
 
-class T06CellHeader: UITableViewCell {
+class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
 
     @IBOutlet weak var btnDorp: UIButton!
     @IBOutlet weak var btnFlow: UIButton!
     @IBOutlet weak var imageRollView: CSImageRollView!
+    
+    var dorpListView: CSDorpListView!
     
     var delegate: T06CellHeaderDelegate?
     
@@ -27,19 +29,19 @@ class T06CellHeader: UITableViewCell {
         imageRollView.initWithImages(["c1_0047","c1_0047","c1_0047","c1_0047"])
         imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
         imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
+        
+        var titles: NSArray = ["选择同城0","选择同城1","选择同城2"]
+        dorpListView = CSDorpListView.sharedInstance
+        dorpListView.bindWithList(titles, delegate: self)
     }
     
     //MARK: - Action
     
     @IBAction func dorpListButtonAction(sender: UIButton) {
         
-        delegate?.dorpListButtonAction!(sender)
-        
-//        var buttonRect: CGRect! = sender.convertRect(sender.frame, toView: KeyWindow)
-//        println("====\(buttonRect)")
-//        var titles: NSArray = ["选择同城0","选择同城1","选择同城2"]
-//        var dorpListView: CSDorpListView = CSDorpListView(frame: buttonRect, titles: titles)
-//        dorpListView.showInWindow(dorpListView)
+//        delegate?.dorpListButtonAction(sender)
+    
+        dorpListView.show(sender)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -48,4 +50,10 @@ class T06CellHeader: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    //MARK: - CSDorpListViewDelegate
+    
+    func dorpListButtonItemAction(sender: UIButton!) {
+        
+        btnDorp.setTitle(sender.titleLabel?.text, forState: UIControlState.Normal)
+    }
 }

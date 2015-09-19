@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -22,6 +23,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T07DeliverEditVC" customModule="wishlink" customModuleProvider="target">
             <connections>
+                <outlet property="companyButton" destination="C4F-5c-dan" id="dLG-P6-5XK"/>
+                <outlet property="companyTextField" destination="Anf-2J-ktO" id="s8Q-dA-eaX"/>
+                <outlet property="scanButton" destination="O7r-lG-kqQ" id="fiw-ZG-6vT"/>
+                <outlet property="scanTextField" destination="eGx-Br-4bh" id="N1r-PN-PMf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -56,7 +61,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="dDQ-1E-Snz"/>
+                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="zYD-wI-Fuw"/>
                             </connections>
                         </button>
                     </subviews>
@@ -223,7 +228,7 @@
                                         <constraint firstAttribute="width" constant="44" id="pkV-LJ-5Ts"/>
                                     </constraints>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="韵达快运" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Anf-2J-ktO">
+                                <textField opaque="NO" clipsSubviews="YES" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="韵达快运" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Anf-2J-ktO">
                                     <rect key="frame" x="44" y="0.0" width="152" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -232,8 +237,11 @@
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="textFieldEditEnd:" destination="-1" eventType="editingDidEnd" id="LwF-Mj-qxO"/>
+                                    </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4F-5c-dan">
+                                <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4F-5c-dan">
                                     <rect key="frame" x="196" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="ryf-o7-Flx"/>
@@ -242,6 +250,9 @@
                                     <state key="normal" image="T07bbb">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="scancompanyTextFieldButtonAction:" destination="-1" eventType="touchUpInside" id="V8W-xJ-kt0"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -277,7 +288,7 @@
                                         <constraint firstAttribute="height" constant="44" id="HwA-oa-BAA"/>
                                     </constraints>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13888888888" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGx-Br-4bh">
+                                <textField opaque="NO" clipsSubviews="YES" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13888888888" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGx-Br-4bh">
                                     <rect key="frame" x="44" y="0.0" width="152" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="cWR-jp-qF3"/>
@@ -285,8 +296,11 @@
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="HelveticaInserat-Roman-SemiBold" family="HelveticaInserat-Roman-SemiBold" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="textFieldEditEnd:" destination="-1" eventType="editingDidEnd" id="eMs-Co-hBC"/>
+                                    </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7r-lG-kqQ">
+                                <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7r-lG-kqQ">
                                     <rect key="frame" x="196" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="1We-4y-RQZ"/>
@@ -295,6 +309,9 @@
                                     <state key="normal" image="T07ccc">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="scancompanyTextFieldButtonAction:" destination="-1" eventType="touchUpInside" id="0dE-aF-UX3"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -327,7 +344,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="q9C-pm-H57"/>
+                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="ahG-ZP-d5T"/>
                             </connections>
                         </button>
                     </subviews>

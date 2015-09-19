@@ -18,27 +18,33 @@ class CSActionSheet : UIWindow {
     let ButtonTag: Int = 1000
     var ButtonHeight: CGFloat = 45
     
+    class var sharedInstance : CSActionSheet {
+        struct Static {
+            static let instance: CSActionSheet = CSActionSheet(frame: CGRectZero)
+        }
+        return Static.instance
+    }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    init(frame: CGRect, titles: NSArray, delegate: CSActionSheetDelegate?) {
-        
+    override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    func bindWithData(titles: NSArray, delegate: CSActionSheetDelegate?) {
+        
+        if titles.count < 2 { return }
         
         self.titles = titles
         self.delegate = delegate
         
-        initViews(titles)
-    }
-    
-    func initViews(titles: NSArray) {
-        
-        if titles.count < 2 { return }
-    
-        var window: UIWindow = UIApplication.sharedApplication().keyWindow!
-        
-        self.frame = window.bounds
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+            
+        self.frame = KeyWindow.bounds
         self.windowLevel = UIWindowLevelStatusBar
         self.backgroundColor = RGBCA(0, 0.3)
         

@@ -10,6 +10,8 @@ import UIKit
 
 class T08ComplaintVC: RootVC {
 
+    @IBOutlet weak var contexTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +25,14 @@ class T08ComplaintVC: RootVC {
         self.loadComNaviLeftBtn();
         self.navigationController?.navigationBarHidden = false;
     }
+    
+    //MARK: - override
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        contexTextView.resignFirstResponder()
+    }
+    
     @IBAction func btnAction(sender: AnyObject) {
         
         var tag = (sender as! UIButton).tag
@@ -30,10 +40,16 @@ class T08ComplaintVC: RootVC {
         {
             self.dismissViewControllerAnimated(true, completion: nil);
         }
-        if(tag == 22)
+        else if(tag == 22)
         {
 //            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
 //            self.navigationController!.pushViewController(vc, animated: true)
+            
+
+        } else if(tag == 30) {
+            APPLICATION.openURL(NSURL(fileURLWithPath: "tel://10086")!)
+        } else if(tag == 31) {
+
         }
     }
 }

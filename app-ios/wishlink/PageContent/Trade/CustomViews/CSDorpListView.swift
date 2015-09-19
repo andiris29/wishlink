@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CSDorpListView: UIImageView {
+class CSDorpListView: UIWindow {
     
     private var scrollerView:  UIScrollView!
     private var containerView: UIView!
     private var titleView: UIView!
         
-    private var inputTextField: UITextField!
-    private var dorpButton: UIButton!
+//    private var inputTextField: UITextField!
+//    private var dorpButton: UIButton!
     
-    private var backguandView: UIView!
+    private var baseView: UIView!
     
     private var viewConstraints: Dictionary<String, NSObject>!
     private var titles: NSArray!
@@ -26,40 +26,62 @@ class CSDorpListView: UIImageView {
     
     var delegate: CSDorpListViewDelegate?
     
+    
+    class var sharedInstance : CSDorpListView {
+        
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : CSDorpListView? = nil
+        }
+        
+        dispatch_once(&Static.onceToken) {
+            Static.instance = CSDorpListView(frame: CGRectZero)
+        }
+        return Static.instance!
+    }
+    
     required init(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
     }
     
-    init(frame: CGRect, titles: NSArray) {
+    override init(frame: CGRect) {
         
         super.init(frame: frame)
         
         initViews()
-        bindWithList(titles)
     }
     
     func initViews() {
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.hidden = true
+        self.frame = KeyWindow.bounds
+        self.backgroundColor = RGBCA(0, 0.3)
+        self.windowLevel = UIWindowLevelStatusBar
+        
+        baseView = UIView()
+        baseView.userInteractionEnabled = true
+        baseView.backgroundColor = UIColor.whiteColor()
+//        baseView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.addSubview(baseView)
         
         titleView      = UIView()
         titleView.backgroundColor = UIColor.clearColor()
         titleView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.addSubview(titleView)
+        baseView.addSubview(titleView)
         
-        dorpButton     = UIButton()
-        dorpButton.backgroundColor = UIColor.clearColor()
-        dorpButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        dorpButton.setTitle("上", forState: UIControlState.Normal)
-        dorpButton.setTitle("下", forState: UIControlState.Selected)
-        dorpButton.addTarget(self, action: Selector("dorpButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-        titleView.addSubview(dorpButton)
-        
-        inputTextField = UITextField()
-        inputTextField.backgroundColor = UIColor.clearColor()
-        inputTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
-        titleView.addSubview(inputTextField)
+//        dorpButton     = UIButton()
+//        dorpButton.backgroundColor = UIColor.clearColor()
+//        dorpButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        dorpButton.setTitle("上", forState: UIControlState.Normal)
+//        dorpButton.setTitle("下", forState: UIControlState.Selected)
+//        dorpButton.addTarget(self, action: Selector("dorpButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+//        titleView.addSubview(dorpButton)
+//        
+//        inputTextField = UITextField()
+//        inputTextField.backgroundColor = UIColor.clearColor()
+//        inputTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        titleView.addSubview(inputTextField)
         
         containerView  = UIView()
         containerView.backgroundColor = UIColor.clearColor()
@@ -73,33 +95,39 @@ class CSDorpListView: UIImageView {
         scrollerView.showsHorizontalScrollIndicator = false
         scrollerView.setTranslatesAutoresizingMaskIntoConstraints(false)
         scrollerView.addSubview(containerView)
-        self.addSubview(scrollerView)
+        baseView.addSubview(scrollerView)
     }
     
-    func bindWithList(titles: NSArray) {
+    func bindWithList(titles: NSArray, delegate: CSDorpListViewDelegate?) {
 
         self.titles = titles
+        self.delegate = delegate
+
+        for view in containerView.subviews {
+            view.removeFromSuperview()
+        }
         
         viewConstraints = Dictionary<String, NSObject>()
-        viewConstraints["inputTextField"] = inputTextField
+//        viewConstraints["inputTextField"] = inputTextField
         viewConstraints["containerView"] = containerView
         viewConstraints["scrollerView"] = scrollerView
-        viewConstraints["dorpButton"] = dorpButton
+//        viewConstraints["dorpButton"] = dorpButton
         viewConstraints["titleView"] = titleView
+//        viewConstraints["baseView"] = baseView
         
         //titleView
-        self.addConstraintsVisualFormat("H:|[titleView]|", views: viewConstraints)
-        self.addConstraintsVisualFormat("V:|[titleView]", views: viewConstraints)
+        baseView.addConstraintsVisualFormat("H:|[titleView]|", views: viewConstraints)
+        baseView.addConstraintsVisualFormat("V:|[titleView]", views: viewConstraints)
         
         //dorpButton inputTextField
-        titleView.addConstraintWidthAndHeightMultiple(1.0, item: dorpButton)
-        titleView.addConstraintsVisualFormat("V:|[dorpButton]|", views: viewConstraints)
-        titleView.addConstraintsVisualFormat("V:|[inputTextField]|", views: viewConstraints)
-        titleView.addConstraintsVisualFormat("H:|-8-[inputTextField][dorpButton]|", views: viewConstraints)
+//        titleView.addConstraintWidthAndHeightMultiple(1.0, item: dorpButton)
+//        titleView.addConstraintsVisualFormat("V:|[dorpButton]|", views: viewConstraints)
+//        titleView.addConstraintsVisualFormat("V:|[inputTextField]|", views: viewConstraints)
+//        titleView.addConstraintsVisualFormat("H:|-8-[inputTextField][dorpButton]|", views: viewConstraints)
         
         //scrollerView
-        self.addConstraintsVisualFormat("H:|[scrollerView]|", views: viewConstraints)
-        self.addConstraintsVisualFormat("V:[titleView][scrollerView]", views: viewConstraints)
+        baseView.addConstraintsVisualFormat("H:|[scrollerView]|", views: viewConstraints)
+        baseView.addConstraintsVisualFormat("V:[titleView][scrollerView]", views: viewConstraints)
         
         //containerView
         scrollerView.addConstraintsVisualFormat("V:|[containerView]|", views: viewConstraints)
@@ -112,8 +140,10 @@ class CSDorpListView: UIImageView {
             let key: String = "button\(index)"
             var button: UIButton = UIButton()
             button.backgroundColor = UIColor.clearColor()
-            button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             button.setTranslatesAutoresizingMaskIntoConstraints(false)
+            button.titleLabel?.font = UIFont(name: "FZLanTingHeiS-EL-GB", size: 15)
+            button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             button.setTitle(self.titles[index] as? String, forState: UIControlState.Normal)
             button.addTarget(self, action: Selector("dorpListButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
             button.tag = buttonTag + index
@@ -132,58 +162,57 @@ class CSDorpListView: UIImageView {
             containerView.addConstraintsVisualFormat("H:|-8-[\(key)(containerView)]|", views: viewConstraints)
             containerView.addConstraintHeightMultiple(CGFloat(self.titles.count), item: containerView, toItem: button)
         }
-        
     }
     
-    func showInWindow(view: CSDorpListView) {
+    func show(view: UIView) {
         
-        backguandView = UIView(frame: KeyWindow.bounds)
-        backguandView.backgroundColor = RGBCA(0, 0.3)
-        backguandView.userInteractionEnabled = true
-        var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("tapGestureRecognizerFromBaseView:"))
-        backguandView.addGestureRecognizer(tapGestureRecognizer)
-        backguandView.addSubview(view)
-        KeyWindow.addSubview(backguandView)
+        self.hidden = false
+        //UIApplication.sharedApplication().windows.count
+        //将view在当前视图的Rect转换为目标师徒的Rect
+        baseView.frame = view.superview!.convertRect(view.frame, toView: KeyWindow)
+        baseView.frame.origin.y = baseView.frame.origin.y + baseView.frame.size.height
+        baseView.frame.size.height = CGFloat(titles.count + 1) * baseView.frame.size.height
     }
     
     //MARK: - Action
     
-    func dorpButtonAction(sender: UIButton) {
-        
-        sender.selected = !sender.selected
-        self.delegate?.dorpButtonAction!(sender)
-        
-        var viewHeight: CGFloat = 0.0
-        
-        if sender.selected {
-
-            viewHeight = self.frame.size.height * CGFloat(self.titles.count + 1)
-            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]|", views: viewConstraints)
-        } else {
-            viewHeight = self.frame.size.height / CGFloat(self.titles.count + 1)
-            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]", views: viewConstraints)
-        }
-        self.frame.size.height = viewHeight
-        self.setNeedsDisplay()
-    }
+//    func dorpButtonAction(sender: UIButton) {
+//        
+//        sender.selected = !sender.selected
+//        
+//        var viewHeight: CGFloat = 0.0
+//        
+//        if sender.selected {
+//
+//            viewHeight = self.frame.size.height * CGFloat(self.titles.count + 1)
+//            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]|", views: viewConstraints)
+//        } else {
+//            viewHeight = self.frame.size.height / CGFloat(self.titles.count + 1)
+//            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]", views: viewConstraints)
+//        }
+//        self.frame.size.height = viewHeight
+//        self.setNeedsDisplay()
+//    }
     
     func dorpListButtonAction(sender: UIButton) {
         
-        self.inputTextField.text = sender.titleLabel?.text
-        println("\(inputTextField.text)")
+        self.hidden = true
+        self.delegate?.dorpListButtonItemAction(sender)
     }
     
-    func tapGestureRecognizerFromBaseView(sender: AnyObject) {
+    //MARK: - override
     
-        backguandView.removeFromSuperview()
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        self.hidden = true
+        self.removeFromSuperview()
     }
-    
 }
 
 //MARK: - CSDorpListViewDelegate
 
-@objc protocol CSDorpListViewDelegate: NSObjectProtocol {
+protocol CSDorpListViewDelegate: NSObjectProtocol {
     
-    optional func dorpButtonAction(sender: UIButton!)
+    func dorpListButtonItemAction(sender: UIButton!)
 }
 

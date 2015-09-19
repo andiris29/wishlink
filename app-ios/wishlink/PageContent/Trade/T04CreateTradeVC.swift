@@ -72,7 +72,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     func csActionSheet() {
         
         var titles: Array<String> = ["取消", "从手机相册中选择", "拍照"]
-        actionSheet = CSActionSheet(frame: CGRectMake(0, 0, 200, 100), titles: titles, delegate: self)
+        actionSheet = CSActionSheet.sharedInstance
+        actionSheet.bindWithData(titles, delegate: self)
     }
     
     @IBAction func btnAction(sender: UIButton) {
