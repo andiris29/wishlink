@@ -107,7 +107,23 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
     }
     
     func validateContent() -> Bool {
-        return true
+        var msg = ""
+        if self.nameTextField.text.length == 0 {
+            msg = "姓名不能为空"
+        } else if self.phoneTextField.text.length == 0 {
+            msg = "电话不能为空"
+        } else if self.provinceTextField.text.length == 0 {
+            msg = "地区不能为空"
+        }else {
+            msg = "地址不能为空"
+        }
+        if msg.length == 0 {
+            return true
+        }else {
+            var alertView = UIAlertView(title: "温馨提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+            alertView.show()
+            return false
+        }
     }
     
     func fillDataForUI() {
