@@ -32,6 +32,9 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
         }
     }
     var receiver: ReceiverModel!
+    
+    var callBackClosure: ((AddAddressVCOperationType, ReceiverModel) -> Void)?
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,13 +93,37 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
     // MARK: - prive method
     
     func saveAddress() {
+        // TODO 本地数据
+        self.receiver.name = self.nameTextField.text
+        self.receiver.phone = self.phoneTextField.text
+        self.receiver.province = self.provinceTextField.text
+        self.receiver.address = self.addressTextField.text
         var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
         alertView.show()
+        if self.operationType == .Add {
+            self.callBackClosure!(.Add, self.receiver)
+        }
         self.navigationController!.popViewControllerAnimated(true)
     }
     
     func validateContent() -> Bool {
-        return true
+        var msg = ""
+        if self.nameTextField.text.length == 0 {
+            msg = "姓名不能为空"
+        } else if self.phoneTextField.text.length == 0 {
+            msg = "电话不能为空"
+        } else if self.provinceTextField.text.length == 0 {
+            msg = "地区不能为空"
+        }else {
+            msg = "地址不能为空"
+        }
+        if msg.length == 0 {
+            return true
+        }else {
+            var alertView = UIAlertView(title: "温馨提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+            alertView.show()
+            return false
+        }
     }
     
     func fillDataForUI() {

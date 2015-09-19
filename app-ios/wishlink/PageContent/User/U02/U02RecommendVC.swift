@@ -91,7 +91,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         var inset = self.collectionView.contentInset
         inset.top = 0
         self.collectionView.contentInset = inset
-
+        self.dataArray.removeAllObjects()
+        self.collectionView.reloadData()
         
         UIView.animateWithDuration(Double(0.5), animations: { () -> Void in
             self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)

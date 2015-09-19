@@ -139,7 +139,7 @@ UINavigationControllerDelegate, UITextFieldDelegate{
     //MARK:弹出图片上传选择框
     func imgHeadChange()
     {
-        var alertController = UIAlertController(title: "选择产品图片", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        var alertController = UIAlertController(title: "上传图片", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler:  {
             (action: UIAlertAction!) -> Void in
             

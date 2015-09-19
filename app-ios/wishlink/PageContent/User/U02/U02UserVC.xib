@@ -41,7 +41,7 @@
                         <constraint firstAttribute="height" constant="140" id="pr7-0a-YsG"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5l-Ys-p2A">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5l-Ys-p2A">
                     <rect key="frame" x="0.0" y="20" width="60" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="pyd-DS-3cZ"/>
