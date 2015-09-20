@@ -13,18 +13,20 @@ var MongoHelper = module.exports;
  */
 MongoHelper.queryPaging = function(query, pageNo, pageSize, callback) {
     async.waterfall([
-        function(callback) {
+        function(cb) {
             // Query
             query.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
                 if (err) {
-                    callback(ServerError.fromDescription(err));
+                    cb(ServerError.fromDescription(err));
                 } else if (!models || !models.length) {
-                    callback(ServerError.fromDescription(ServerError.PAGING_NOT_EXIST));
+                    cb(ServerError.PAGING_NOT_EXIST);
                 } else {
-                    callback(err, models);
+                    cb(err, models);
                 }
             });
-        }], callback);
+        }], function(error, models) {
+            callback(error, models);
+        });
 };
 
 MongoHelper.aggregatePaging =  function(aggregate, pageNo, pageSize, callback) {
@@ -35,7 +37,7 @@ MongoHelper.aggregatePaging =  function(aggregate, pageNo, pageSize, callback) {
                 if (err) {
                     callback(ServerError.fromDescription(err));
                 } else if (!models || !models.length){
-                    callback(ServerError.fromDescription(ServerError.PAGING_NOT_EXIST));
+                    callback(ServerError.PAGING_NOT_EXIST);
                 } else {
                     callback(err, models);
                 }
@@ -91,17 +93,17 @@ MongoHelper.querySchema = function(Model, qsParam) {
     var criteria = {};
     for (var key in qsParam) {
         var value = qsParam[key];
-        if (!qsParam[key] || qsParam[key].length == 0) {
+        if (!qsParam[key] || qsParam[key].length === 0) {
             continue;
         }
         if (key === '__context' || key === '__v' || key === 'pageNo' || key === 'pageSize') {
             continue;
         }
-        if (!value || value.length == 0) {
+        if (!value || value.length === 0) {
             continue;
         }
         var column = Model.schema.paths[key];
-        if (column == null) {
+        if (column === null) {
             continue;
         }
         var type = column.instance;
