@@ -79,8 +79,10 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         
         if(isNeedShowLoin)
         {
-            var loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-            self.presentViewController(loginVC, animated: true, completion: nil)
+//            var vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+            var vc = T01HomePageVC(nibName: "T01HomePageVC", bundle: MainBundle);
+            
+            self.presentViewController(vc, animated: true, completion: nil)
         }
         
     }

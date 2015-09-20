@@ -71,6 +71,8 @@ class T01HomePageVC: RootVC {
     
     func buttonAction(sender: UIButton) {
     
+        
+        self.dismissViewControllerAnimated(true, completion: nil);
         println("buttonAction:\(sender.tag)")
     }
     

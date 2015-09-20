@@ -130,7 +130,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Complain:
             var vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.presentViewController(vc, animated: true, completion: nil);
+            self.userVC.navigationController!.pushViewController(vc, animated: true);
         default:
             println("error")
         }

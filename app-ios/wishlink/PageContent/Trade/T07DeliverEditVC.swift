@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T07DeliverEditVC: RootVC, CSDorpListViewDelegate {
+class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate {
 
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var companyButton: UIButton!
@@ -45,11 +45,13 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate {
         var btnTag = sender.tag;
         if(btnTag == 10)//返回
         {
-            self.dismissViewControllerAnimated(true, completion: nil);
+            self.navigationController?.popViewControllerAnimated(true);
+//            self.dismissViewControllerAnimated(true, completion: nil);
         }
         else if(btnTag == 11)//提交
         {
-             self.dismissViewControllerAnimated(true, completion: nil);
+            self.navigationController?.popViewControllerAnimated(true);
+//             self.dismissViewControllerAnimated(true, completion: nil);
         }
     }
     
@@ -61,13 +63,26 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate {
     
     @IBAction func scancompanyTextFieldButtonAction(sender: UIButton) {
         
+        
+        
+        
         var btnTag = sender.tag;
         if(btnTag == 20) {//company
             dorpListView.show(companyTextField)
         } else if (btnTag == 21) {//scan
             
+            var vc = ScanVC(nibName: "ScanVC", bundle: NSBundle.mainBundle())
+            
+            vc.myDelegate = self;
+            self.navigationController?.pushViewController(vc, animated: true)
+ 
         }
     }
+    func scanCodeResult(code:String)
+    {
+        self.scanTextField.text = code;
+    }
+
 
     //MARK: - CSDorpListViewDelegate
     

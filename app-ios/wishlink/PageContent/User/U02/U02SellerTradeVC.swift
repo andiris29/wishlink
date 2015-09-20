@@ -125,7 +125,9 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         case .SendOut:
             println("发货")
             var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
-            self.userVC.presentViewController(vc, animated: true, completion: nil)
+            
+            vc.hidesBottomBarWhenPushed = true
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Chat:
             
             self.userVC.navigationController?.navigationBarHidden = false;
@@ -133,7 +135,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Complain:
             var vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.presentViewController(vc, animated: true, completion: nil);
+            self.userVC.navigationController!.pushViewController(vc, animated: true);
         default:
             println("error")
         }

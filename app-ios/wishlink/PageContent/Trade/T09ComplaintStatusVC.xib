@@ -126,7 +126,7 @@
                                         <constraint firstItem="SvK-SI-Yp6" firstAttribute="top" secondItem="cbc-jV-KO7" secondAttribute="top" id="Q0P-7T-55k"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ILn-g8-Lq9" userLabel="View2">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILn-g8-Lq9" userLabel="View2">
                                     <rect key="frame" x="108" y="0.0" width="54" height="50"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvI-TY-N8K" userLabel="Button2">
