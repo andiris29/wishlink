@@ -8,7 +8,7 @@
 
 import UIKit
 
-class U01LoginVC: RootVC {
+class U01LoginVC: RootVC,WebRequestDelegate {
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -29,6 +29,15 @@ class U01LoginVC: RootVC {
     // MARK: - response event
     
     @IBAction func weiXinLoginAction(sender: AnyObject) {
+        self.httpObj.mydelegate = self;
+        
+        let para = ["req.nickname":"testtest",
+                    "req.password":"testtest"]
+       
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+         //发送登录请求
+        self.httpObj.httpPostApi("user/login", parameters: para, tag: 10);
+        
         println("微信登入")
         APPCONFIG.AccessToken = "temp_token";
         self.dismissViewControllerAnimated(true, completion: nil);
@@ -51,5 +60,14 @@ class U01LoginVC: RootVC {
     // MARK: - prive method
     // MARK: - setter and getter
 
-
+    //MARK:WebRequestDelegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        SVProgressHUD.dismiss();
+    }
+    func requestDataFailed(error: String) {
+        UIHEPLER.alertErrMsg(error);
+        SVProgressHUD.dismiss();
+        
+    }
 }

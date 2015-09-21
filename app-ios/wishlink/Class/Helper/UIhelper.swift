@@ -129,5 +129,9 @@ class UIHelper {
         var newHeigt:Int = Int(height)
         return CGFloat(newHeigt);
     }
-
+    
+    func alertErrMsg(strMsg:String)
+    {
+        UIAlertView(title: "", message: strMsg, delegate: nil, cancelButtonTitle: "确定").show();
+    }
 }

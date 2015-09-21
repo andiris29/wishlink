@@ -15,14 +15,14 @@ import Foundation
 
 import UIKit
 
-let SERVICE_ROOT_PATH = "http://121.41.162.102/services/"
+let SERVICE_ROOT_PATH = "http://121.41.162.102:80/services/"
 
 class WebRequestHelper:NSObject {
     
     var mydelegate:WebRequestDelegate?
     
     
-    let encoding = ParameterEncoding.URL;
+    let encoding = ParameterEncoding.JSON;
     let headers = [
         "Content-Type": "application/json;charset=utf-8"
 //        "Authorization": "SCLE8FC355DFBB31468392958EE5A16F7C2C"
@@ -87,38 +87,24 @@ class WebRequestHelper:NSObject {
         else
         {
             //解析metadata
-            self.mydelegate?.requestDataFailed("返回数据无效")
+            var errorMsg = "返回数据无效";
+            var metaDic = dataDir.objectForKey("metadata")  as! NSDictionary
+            if(metaDic.count>0)
+            {
+//                var errCode = metaDic.objectForKey("error");
+                var errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
+                if(errDic.count>0)
+                {
+                    var errCode =  errDic.objectForKey("errorCode") as! Int;
+                    var errDesc =  errDic.objectForKey("description") as! String;
+                    errorMsg = "ErrorCode:\(errCode) \(errDesc)";
+                    
+                    
+                }
+            }
+            
+            self.mydelegate?.requestDataFailed(errorMsg)
         }
-        
-        
-//        if(dataDir.count == 0 || dataDir.objectForKey("Code") == nil)
-//        {
-//            self.mydelegate?.requestDataFailed("网络异常,无效的响应.");
-//            return ;
-//        }
-//        var strCode = dataDir.objectForKey("Code") as! Int
-//        if(strCode == 10000)//code为1000正常的响应
-//        {
-//            var strDetail:AnyObject = dataDir.objectForKey("Detail")!
-//            
-//            self.mydelegate?.requestDataComplete(strDetail, tag: tag)
-//        }
-//        else if(strCode == 20000)//Code为20000,token令牌失效
-//        {
-//            if(AppConfig.sharedAppConfig.isUserLogin())
-//            {
-//                AppConfig.sharedAppConfig.userLogout()
-//            }
-//            return
-//        }
-//        else
-//        {
-//            var strErr = dataDir.objectForKey("Message") as! String
-//            println("Response Error:"+strErr);
-//            self.mydelegate?.requestDataFailed(strErr)
-//            
-//        }
-        
     }
     
     /*
