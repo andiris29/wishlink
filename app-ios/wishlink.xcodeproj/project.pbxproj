@@ -392,17 +392,6 @@
 		A1043DEB1B7F787A007A237C = {
 			isa = PBXGroup;
 			children = (
-				769565541BA08CA900A6AD10 /* libsqlite3.dylib */,
-				769565521BA08CA100A6AD10 /* libz.dylib */,
-				769565501BA08C9900A6AD10 /* CoreGraphics.framework */,
-				7695654E1BA08C9300A6AD10 /* Foundation.framework */,
-				7695654C1BA08C8500A6AD10 /* UIKit.framework */,
-				7695654A1BA08C7E00A6AD10 /* CoreText.framework */,
-				769565481BA08C7800A6AD10 /* CoreTelephony.framework */,
-				769565461BA08C6F00A6AD10 /* Security.framework */,
-				769565441BA08C6600A6AD10 /* SystemConfiguration.framework */,
-				769565421BA08C5E00A6AD10 /* ImageIO.framework */,
-				769565401BA08C5500A6AD10 /* QuartzCore.framework */,
 				A1043DF61B7F787A007A237C /* wishlink */,
 				A1043E0C1B7F787A007A237C /* wishlinkTests */,
 				A1043DF51B7F787A007A237C /* Products */,
@@ -548,6 +537,17 @@
 		A1043E831B7F8D25007A237C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				769565541BA08CA900A6AD10 /* libsqlite3.dylib */,
+				769565521BA08CA100A6AD10 /* libz.dylib */,
+				769565501BA08C9900A6AD10 /* CoreGraphics.framework */,
+				7695654E1BA08C9300A6AD10 /* Foundation.framework */,
+				7695654C1BA08C8500A6AD10 /* UIKit.framework */,
+				7695654A1BA08C7E00A6AD10 /* CoreText.framework */,
+				769565481BA08C7800A6AD10 /* CoreTelephony.framework */,
+				769565461BA08C6F00A6AD10 /* Security.framework */,
+				769565441BA08C6600A6AD10 /* SystemConfiguration.framework */,
+				769565421BA08C5E00A6AD10 /* ImageIO.framework */,
+				769565401BA08C5500A6AD10 /* QuartzCore.framework */,
 				A1F0E2821BA315F3005379CD /* CoreTelephony.framework */,
 				A1F0E2801BA315D2005379CD /* libc++.dylib */,
 				A1F0E27E1BA315C2005379CD /* libc.dylib */,

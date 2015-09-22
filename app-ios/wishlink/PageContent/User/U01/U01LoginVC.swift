@@ -31,8 +31,8 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     @IBAction func weiXinLoginAction(sender: AnyObject) {
         self.httpObj.mydelegate = self;
         
-        let para = ["req.nickname":"testtest",
-                    "req.password":"testtest"]
+        let para = ["nickname":"testtest",
+                    "password":"testtest"]
        
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
          //发送登录请求

@@ -21,11 +21,8 @@ class WebRequestHelper:NSObject {
     
     var mydelegate:WebRequestDelegate?
     
-    
-    let encoding = ParameterEncoding.JSON;
     let headers = [
         "Content-Type": "application/json;charset=utf-8"
-//        "Authorization": "SCLE8FC355DFBB31468392958EE5A16F7C2C"
     ];
     
     /*
@@ -35,11 +32,13 @@ class WebRequestHelper:NSObject {
         
         var apiurl = SERVICE_ROOT_PATH + apiName
         
-        request(.POST, apiurl, parameters: parameters, encoding: self.encoding, headers: self.headers).responseJSON() {
+        request(.POST, apiurl, parameters: parameters, encoding: .JSON, headers: self.headers).responseJSON() {
             (_, _, data, error) in
+            
             
             if(error == nil)
             {
+                NSLog("respone:%@",data!.description)
                 self.handleHttpResponse(data!, tag: tag)
             }
             else
@@ -55,7 +54,7 @@ class WebRequestHelper:NSObject {
         var apiurl = SERVICE_ROOT_PATH + apiName
         NSLog("request url: %@", apiurl)
         
-        request(.GET, apiurl, parameters: parameters, encoding: self.encoding, headers: nil)
+        request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
             .responseJSON() {
             (_, _, data, error) in
             
@@ -135,7 +134,7 @@ class WebRequestHelper:NSObject {
             return;
         }
         
-        request(.GET, url, parameters: nil, encoding: self.encoding, headers: self.headers).responseJSON() {
+        request(.GET, url, parameters: nil, encoding: .URL, headers: self.headers).responseJSON() {
             (_, _, data, error) in
             
             if(error == nil)
