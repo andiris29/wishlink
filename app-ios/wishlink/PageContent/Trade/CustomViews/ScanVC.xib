@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanVC" customModule="wishlink" customModuleProvider="target">
+            <connections>
+                <outlet property="imageVIew_Mask" destination="jyF-Ym-B0L" id="Zy0-xU-ivX"/>
+                <outlet property="scan_input" destination="6E1-79-nQY" id="Aa5-Hz-pSc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_bg" translatesAutoresizingMaskIntoConstraints="NO" id="jyF-Ym-B0L" userLabel="mask">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_mask" translatesAutoresizingMaskIntoConstraints="NO" id="6E1-79-nQY" userLabel="input">
+                    <rect key="frame" x="225" y="225" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="9oA-1p-33P"/>
+                        <constraint firstAttribute="width" secondItem="6E1-79-nQY" secondAttribute="height" multiplier="1:1" id="BTJ-Pb-Qut"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jyF-Ym-B0L" secondAttribute="bottom" id="8Ge-6d-KzE"/>
+                <constraint firstItem="jyF-Ym-B0L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="INC-2F-Crj"/>
+                <constraint firstAttribute="trailing" secondItem="jyF-Ym-B0L" secondAttribute="trailing" id="TmK-xq-qEI"/>
+                <constraint firstItem="6E1-79-nQY" firstAttribute="centerY" secondItem="jyF-Ym-B0L" secondAttribute="centerY" id="YMr-Mw-szC"/>
+                <constraint firstItem="6E1-79-nQY" firstAttribute="centerX" secondItem="jyF-Ym-B0L" secondAttribute="centerX" id="bXQ-Ot-Hfo"/>
+                <constraint firstItem="jyF-Ym-B0L" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wme-qV-cFP"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="scan_bg" width="10" height="10"/>
+        <image name="scan_mask" width="254" height="254"/>
+    </resources>
+</document>

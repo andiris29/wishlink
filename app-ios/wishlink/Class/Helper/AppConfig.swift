@@ -32,10 +32,13 @@ let APPLICATION = UIApplication.sharedApplication()
 let MainBundle = NSBundle.mainBundle();
 let ScreenWidth = UIScreen.mainScreen().bounds.width
 let ScreenHeight = UIScreen.mainScreen().bounds.height
+let KeyWindow = APPLICATION.keyWindow!
 
 
 func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a) }
-func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1) }
+func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return RGBA(r, g, b, 1.0) }
+func RGBCA(c:CGFloat, a:CGFloat) -> UIColor { return RGBA(c, c, c, a)}
+func RGBC(c:CGFloat) -> UIColor { return RGBA(c, c, c, 1.0)}
 
 let UIHEPLER = UIHelper();
 let APPCONFIG =  AppConfig.sharedAppConfig;
