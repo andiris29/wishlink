@@ -55,6 +55,10 @@ var entitySchema = Schema({
             ref : 'items'
         }]
     },
+    countryRef : {
+        type : Schema.Types.ObjectId,
+        ref : 'countries'
+    },
     create : {
         type : Date,
         'default' : Date.now

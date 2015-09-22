@@ -4,6 +4,8 @@ var async = require('async');
 var _ = require('underscore');
 var request = require('request');
 
+var Countries = require('../../model/countries');
+
 var GeoService = module.exports;
 
 /**
@@ -21,6 +23,23 @@ var GeoService = module.exports;
  * @param {db.countries} country
  */
 GeoService.reverseGeocoding = function(location, callback) {
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=31.1576565,121.351368&result_type=country&language=zh-CN&key=' + global.config.api.google.appkey;
+    winston.info(new Date(), 'call google map api url=' + url);
+    request.get(url, function(error, response, body) {
+        var data = JSON.parse(body);
+        if (data.status !== 'OK') {
+            callback(data.error_message);
+            return;
+        }
+
+        var countryName = data.results[0].formatted_address;    
+     
+        Countries.findOne({
+            name : countryName
+        }, function(error, country) {
+            callback(error, country);
+        });
+    });
 };
 
 /**
@@ -40,6 +59,21 @@ GeoService.reverseGeocoding = function(location, callback) {
  * @param {db.country} country2
  */
 GeoService.differentCountries = function(location1, country1, location2, callback) {
+    var distance = _calcDistance(location1.lat, location1.lng, location2.lat, location2.lat);
+
+    // 距离大于500KM
+    if (distance < 500) {
+        callback(null, null);
+        return;
+    }
+
+    this.reverseGeocoding(location2, function(error, country) {
+        if (country1 == country._id) {
+            callback(error, null);
+        } else {
+            callback(error, country);
+        }
+    });
 };
 
 
