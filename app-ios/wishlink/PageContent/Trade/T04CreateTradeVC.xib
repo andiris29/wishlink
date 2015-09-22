@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
@@ -92,11 +93,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片需清晰，产品鲜明，1- 4张" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9x-4o-Pc0">
-                                            <rect key="frame" x="22" y="36" width="200" height="21"/>
+                                            <rect key="frame" x="22" y="36" width="150" height="21"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="YJo-v9-QSM"/>
-                                                <constraint firstAttribute="width" constant="200" id="foA-Tz-t3G"/>
+                                                <constraint firstAttribute="width" constant="150" id="foA-Tz-t3G"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="10"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,11 +114,19 @@
                                             <color key="textColor" red="0.97254901959999995" green="0.24313725489999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y2M-TQ-O32">
+                                            <rect key="frame" x="265" y="17" width="35" height="37"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="y2M-TQ-O32" secondAttribute="height" multiplier="34:35" id="tX9-Dp-tUi"/>
+                                                <constraint firstAttribute="width" constant="35" id="yaZ-Ib-DUE"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="LkR-f3-Irr" firstAttribute="leading" secondItem="3Wx-8h-K4E" secondAttribute="leading" id="1BV-bL-w2X"/>
                                         <constraint firstItem="mr7-4l-X7O" firstAttribute="top" secondItem="3Wx-8h-K4E" secondAttribute="top" constant="18" id="4gc-cZ-til"/>
+                                        <constraint firstItem="tEE-jy-EMw" firstAttribute="leading" secondItem="y2M-TQ-O32" secondAttribute="trailing" constant="1" id="6Z3-Es-gZK"/>
                                         <constraint firstItem="Gnt-sL-ZWQ" firstAttribute="top" secondItem="3Wx-8h-K4E" secondAttribute="top" id="6eP-SL-Ycu"/>
                                         <constraint firstAttribute="bottom" secondItem="LkR-f3-Irr" secondAttribute="bottom" constant="6" id="9K2-hb-Sr8"/>
                                         <constraint firstItem="Gnt-sL-ZWQ" firstAttribute="leading" secondItem="3Wx-8h-K4E" secondAttribute="leading" id="ABQ-Zi-HTd"/>
@@ -126,6 +135,7 @@
                                         <constraint firstItem="V9x-4o-Pc0" firstAttribute="leading" secondItem="3Wx-8h-K4E" secondAttribute="leading" constant="22" id="LyZ-oa-BOo"/>
                                         <constraint firstAttribute="trailing" secondItem="LkR-f3-Irr" secondAttribute="trailing" id="MOb-Cj-nft"/>
                                         <constraint firstAttribute="centerY" secondItem="tEE-jy-EMw" secondAttribute="centerY" id="dMz-RH-d7g"/>
+                                        <constraint firstItem="y2M-TQ-O32" firstAttribute="centerY" secondItem="tEE-jy-EMw" secondAttribute="centerY" constant="0.5" id="mS8-C4-0Pk"/>
                                         <constraint firstAttribute="trailing" secondItem="Gnt-sL-ZWQ" secondAttribute="trailing" id="oWG-dH-p54"/>
                                         <constraint firstItem="mr7-4l-X7O" firstAttribute="leading" secondItem="3Wx-8h-K4E" secondAttribute="leading" constant="22" id="r6Q-cY-h82"/>
                                         <constraint firstItem="V9x-4o-Pc0" firstAttribute="top" secondItem="mr7-4l-X7O" secondAttribute="bottom" constant="-3" id="sSb-UE-3Mt"/>
@@ -154,7 +164,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r0m-RX-DBV">
                                                     <rect key="frame" x="37" y="0.0" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -228,7 +238,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YOd-iz-oFV">
                                                     <rect key="frame" x="37" y="0.0" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -307,7 +317,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Oj-cU-ZNQ">
                                                     <rect key="frame" x="37" y="0.0" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -386,7 +396,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJW-CM-kB3">
                                                     <rect key="frame" x="37" y="0.0" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -478,7 +488,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zkw-3q-yQc">
                                                     <rect key="frame" x="37" y="0.0" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -570,7 +580,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YmE-1s-5Z1">
                                                     <rect key="frame" x="37" y="0.0" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -650,7 +660,7 @@
                                                     <rect key="frame" x="29" y="2" width="304" height="39"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

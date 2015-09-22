@@ -88,6 +88,7 @@
 		A1F0E2831BA315F3005379CD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2821BA315F3005379CD /* CoreTelephony.framework */; };
 		A1F0E2861BA31E83005379CD /* TrendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0E2851BA31E83005379CD /* TrendModel.swift */; };
 		A1F0E2881BA321C9005379CD /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0E2871BA321C9005379CD /* BaseModel.swift */; };
+		A1F7C1421BB1A6090045C125 /* itemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7C1411BB1A6090045C125 /* itemModel.swift */; };
 		A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD28391B878DF4006535E0 /* T03SearchVC.swift */; };
 		A1FD283C1B878DF4006535E0 /* T03SearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */; };
 		A1FD283F1B87968D006535E0 /* T03Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD283D1B87968D006535E0 /* T03Cell.swift */; };
@@ -259,6 +260,7 @@
 		A1F0E2821BA315F3005379CD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A1F0E2851BA31E83005379CD /* TrendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendModel.swift; sourceTree = "<group>"; };
 		A1F0E2871BA321C9005379CD /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		A1F7C1411BB1A6090045C125 /* itemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemModel.swift; sourceTree = "<group>"; };
 		A1FD28391B878DF4006535E0 /* T03SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03SearchVC.swift; sourceTree = "<group>"; };
 		A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchVC.xib; sourceTree = "<group>"; };
 		A1FD283D1B87968D006535E0 /* T03Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03Cell.swift; sourceTree = "<group>"; };
@@ -675,6 +677,7 @@
 			isa = PBXGroup;
 			children = (
 				A1F0E2851BA31E83005379CD /* TrendModel.swift */,
+				A1F7C1411BB1A6090045C125 /* itemModel.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -830,6 +833,11 @@
 				TargetAttributes = {
 					A1043DF31B7F787A007A237C = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					A1043E081B7F787A007A237C = {
 						CreatedOnToolsVersion = 6.4;
@@ -941,6 +949,7 @@
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
+				A1F7C1421BB1A6090045C125 /* itemModel.swift in Sources */,
 				A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */,
 				D2E6BE871B96D36D0050C177 /* T11SearchSuggestionVC.swift in Sources */,
 				D25A35311B80821A000CCD7C /* T06TradeVC.swift in Sources */,
@@ -1112,7 +1121,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: fangtao chen (P4L872579R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1128,7 +1137,7 @@
 				);
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47adb274-5000-4ae0-b075-41b8c3bf31ff";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1137,7 +1146,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: fangtao chen (P4L872579R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1153,7 +1162,7 @@
 				);
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47adb274-5000-4ae0-b075-41b8c3bf31ff";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 			};
 			name = Release;

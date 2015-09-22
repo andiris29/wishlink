@@ -31,7 +31,7 @@ class WebRequestHelper:NSObject {
     func httpPostApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
         
         var apiurl = SERVICE_ROOT_PATH + apiName
-        
+        NSLog(" request(POST) url: %@", apiurl)
         request(.POST, apiurl, parameters: parameters, encoding: .JSON, headers: self.headers).responseJSON() {
             (_, _, data, error) in
             
