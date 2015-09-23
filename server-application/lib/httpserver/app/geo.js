@@ -33,6 +33,7 @@ var geo = module.exports;
  */
 geo.trace = {
     method : 'post',
+    permissionValidators : ['validateLogin'],
     func : function(req, res) {
         async.waterfall([function(callback) {
             GeoTraces.find({
@@ -122,6 +123,9 @@ geo.trace = {
                     }
                 }
             });
+        }, function(trace, callback) {
+            // Push Notification
+            callback(null, trace);
         }], function(error, trace) {
             ResponseHelper.response(res, error, {
                 trace : trace
