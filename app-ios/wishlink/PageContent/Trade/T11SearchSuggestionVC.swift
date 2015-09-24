@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource {
+class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UITextFieldDelegate {
     
     let cellIdentifierSearch = "T11SearchSuggestionCell"
     
@@ -23,9 +23,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBarHidden = true
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
-        
+        self.searchTexfield.delegate = self;
         initView()
     }
 
@@ -35,7 +34,10 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
         self.searchView.layer.cornerRadius = 5
         
     }
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        self.navigationController?.navigationBarHidden = true
+    }
     // MARK: - Table view data source
 
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -78,7 +80,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
     //MARK: - Action
     
     @IBAction func cannelButtonAction(sender: UIButton!) {
-        
+        self.navigationController?.popViewControllerAnimated(true);
     }
     
     @IBAction func searchTexfieldValueChange(sender: UITextField) {
@@ -97,5 +99,14 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource 
         itemContents = dataArray
         self.searchTableView.reloadData()
     }
-    
+    //UITextFiledDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.searchTexfield.resignFirstResponder();
+        
+        var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true);
+        
+        
+        return false;
+    }
 }

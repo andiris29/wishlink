@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T01HomePageVC: RootVC {
+class T01HomePageVC: RootVC,UITextFieldDelegate {
     
     @IBOutlet weak var searchBgImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -20,15 +20,26 @@ class T01HomePageVC: RootVC {
     @IBOutlet weak var finishWishLabel: UILabel!
     
     var sphereView: ZYQSphereView!
-    
+    var isNeedShowLoin = true;
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.navigationBarHidden = true
+        if(isNeedShowLoin)
+        {
+            var vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        
+        self.searchTextField.delegate = self;
 
         initWithView()
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        
+   
+        
+        super.viewWillAppear(animated);
+        self.navigationController?.navigationBarHidden = true
+    }
     func initWithView() {
         
         var colorArray = [RGBA(234, 234, 234, 1.0), RGBA(254, 216, 222, 1.0),RGBA(229, 204, 222, 1.0)]
@@ -71,8 +82,12 @@ class T01HomePageVC: RootVC {
     
     func buttonAction(sender: UIButton) {
     
+        var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true);
         
-        self.dismissViewControllerAnimated(true, completion: nil);
+        
+        
+//        self.dismissViewControllerAnimated(true, completion: nil);
         println("buttonAction:\(sender.tag)")
     }
     
@@ -82,6 +97,18 @@ class T01HomePageVC: RootVC {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+    }
+    
+    //MARK:UItextFiledDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        self.searchTextField.resignFirstResponder();
+        return true;
+    }
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true);
+        return false;
     }
 
 }

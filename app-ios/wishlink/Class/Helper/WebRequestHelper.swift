@@ -47,6 +47,22 @@ class WebRequestHelper:NSObject {
             }
             
         }
+        .response({
+        (_, _, data, error) in
+
+           var result = NSString(data: data!, encoding:NSUTF8StringEncoding);
+            NSLog("respone:%@",result as! String)
+//            if(error == nil)
+//            {
+//                NSLog("respone:%@",data!.description)
+//                self.handleHttpResponse(data!, tag: tag)
+//            }
+//            else
+//            {
+//                self.mydelegate?.requestDataFailed("网络不给力哦");
+//            }
+
+        })
     }
     
     func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {

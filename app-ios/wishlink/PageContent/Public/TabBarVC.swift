@@ -37,7 +37,10 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
     
     func addAllChildControllers() {
         
-        var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        //var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        
+        
+        var hotVC =  T01HomePageVC(nibName: "T01HomePageVC", bundle: NSBundle.mainBundle())
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
         
         var hotNav =  NavigationPageVC(rootViewController: hotVC)
@@ -49,7 +52,6 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
         
         var searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
-//        var searchVC = T03SearchVC(nibName: "T03SearchVC", bundle: NSBundle.mainBundle())
         searchVC.tabBarItem.title = "搜索"
         searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "search_unselect")!, selectedImage: UIImage(named: "search_select")!);
         var searchNav =  NavigationPageVC(rootViewController: searchVC)
@@ -63,6 +65,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         self.addChildViewController(createNav)
         self.addChildViewController(searchNav)
         self.addChildViewController(mineNav)
+        self.selectedIndex = 0;
         
     }
     

@@ -13,6 +13,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
     @IBOutlet weak var myTableView: UITableView!
     var cellIdentifier = "T03Cell"
     
+    @IBOutlet weak var txtSearch: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         self.myTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         
         self.httpObj.mydelegate = self;
+        self.txtSearch.delegate = self;
         var para = ["req.pageNo":1,
         "req.pageSize":10]
 //        para = nil
@@ -118,7 +120,6 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         
         var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         hotVC.isNeedShowNavi = true;
-        hotVC.isNeedShowLoin = false;
         self.navigationController?.pushViewController(hotVC, animated: true);
         
         return true;
