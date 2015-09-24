@@ -11,6 +11,8 @@ var Countries = require('../../model/countries');
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 
+var RecommendationService = require('../service/RecommendationService');
+var NotificationService = require('../service/NotificationService');
 var GeoService = require('../service/GeoService');
 
 var geo = module.exports;
@@ -124,8 +126,11 @@ geo.trace = {
                 }
             });
         }, function(trace, callback) {
-            // Push Notification
-            callback(null, trace);
+            RecommendationService.recommendItemsInForeignCountry(req.currentUserId, function(error) {
+                var notifyType = NotificationService.notifyGotoForeignCountry;
+                NotificationService.notify([req.currentUserId], notifyType.command, notifyType.message, {}, null);
+                callbck(null);
+            });
         }], function(error, trace) {
             ResponseHelper.response(res, error, {
                 trace : trace
