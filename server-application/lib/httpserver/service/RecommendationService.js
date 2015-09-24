@@ -6,9 +6,16 @@ var _ = require('underscore');
 // model
 var Items = require('../../model/items');
 var Users = require('../../model/users');
+var Countries = require('../../model/countries');
+var rUserRecommendedItem = require('../../model/rUserRecommendedItem');
 
 // services
-var SearchTrendService = require('./SearchTrendService');
+var SearchTrendService = require('./search/SearchTrendService');
+var SearchService = require('./search/SearchService');
+
+// helpers
+var RelationshipHelper = require('../helper/RelationshipHelper');
+var ServerError = require('../server-error');
 
 var RecommendationService = module.exports;
 
@@ -24,6 +31,19 @@ var RecommendationService = module.exports;
  * @param {string} err
  */
 RecommendationService.recommendItems = function(_id, callback) {
+    SearchTrendService.queryItems(0, 10, function(error, trends) {
+        var tasks = _.map(trends, function(trend) {
+            return function(cb) {
+                RelationshipHelper.create(rUserRecommendedItem, _id, trend.name, function(error) {
+                    cb(error);
+                });
+            };
+        });
+
+        async.parallel(tasks, function(error) {
+            callback(error);
+        });
+    });
 };
 
 /**
@@ -38,4 +58,40 @@ RecommendationService.recommendItems = function(_id, callback) {
  * @param {string} err
  */
 RecommendationService.recommendItemsInForeignCountry = function(_id, callback) {
+    async.waterfall([function(cb) {
+        Users.findOne({
+            _id : _id
+        }, function(error, user) {
+            if (error) {
+                cb(error);
+            } else if (!user) {
+                cb(ServerError.ERR_USER_NOT_EXIST);
+            } else {
+                cb(null, user);
+            }
+        });
+    }, function(user, cb) {
+        Countries.findOne({
+            _id : user.countryRef
+        }, function(error, country) {
+            if (error) {
+                cb(error);
+            } else {
+                cb(null, country);
+            }
+        });
+    }, function(country, cb) {
+        SearchService.search(country.name, 0, 10, function(error, items) {
+            var tasks = _.map(items, function(item) {
+                return function(internal_cb) {
+                    RelationshipHelper.create(rUserRecommendedItem, _id, item._id, function(error) {
+                        internal_cb(error);
+                    });
+                };
+            });
+            async.parallel(tasks, cb);
+        });
+    }], function(error) {
+        callback(error);
+    });
 };
