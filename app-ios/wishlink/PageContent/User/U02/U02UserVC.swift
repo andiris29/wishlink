@@ -118,8 +118,8 @@ class U02UserVC: RootVC, WebRequestDelegate {
     // MARK: - prive method
     
     func getUser() {
-        var parameters = ["nickname": "Yeo", ""]
-        self.httpObj.httpGetApi("user/update", parameters: <#[String : AnyObject]?#>, tag: <#Int#>)
+//        var parameters = ["nickname": "Yeo", ""]
+//        self.httpObj.httpGetApi("user/update", parameters: <#[String : AnyObject]?#>, tag: <#Int#>)
     }
     
     func prepareData() {
