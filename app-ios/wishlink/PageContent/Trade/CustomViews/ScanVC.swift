@@ -49,6 +49,9 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     }
     
     
+    @IBAction func btnBackAction(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true);
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);

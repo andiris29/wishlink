@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
+            <string>FZLTXHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanVC" customModule="wishlink" customModuleProvider="target">
             <connections>
@@ -18,29 +22,66 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_bg" translatesAutoresizingMaskIntoConstraints="NO" id="jyF-Ym-B0L" userLabel="mask">
+                <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_bg" translatesAutoresizingMaskIntoConstraints="NO" id="jyF-Ym-B0L" userLabel="mask">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_mask" translatesAutoresizingMaskIntoConstraints="NO" id="6E1-79-nQY" userLabel="input">
-                    <rect key="frame" x="225" y="225" width="150" height="150"/>
+                    <rect key="frame" x="190" y="190" width="220" height="220"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="9oA-1p-33P"/>
                         <constraint firstAttribute="width" secondItem="6E1-79-nQY" secondAttribute="height" multiplier="1:1" id="BTJ-Pb-Qut"/>
+                        <constraint firstAttribute="width" constant="220" id="jgI-mn-55h"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9oA-1p-33P"/>
+                        </mask>
+                    </variation>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将条码放入框中即可自动扫描" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UO-6a-WvF">
+                    <rect key="frame" x="203" y="435" width="195" height="18"/>
+                    <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCx-sZ-e0h">
+                    <rect key="frame" x="20" y="35" width="40" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="KCx-sZ-e0h" secondAttribute="height" multiplier="2:1" id="7Rj-lp-Ngk"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="navi_back">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnBackAction:" destination="-1" eventType="touchUpInside" id="cmO-bw-Fhc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="6E1-79-nQY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="1sR-Sd-4HQ"/>
                 <constraint firstAttribute="bottom" secondItem="jyF-Ym-B0L" secondAttribute="bottom" id="8Ge-6d-KzE"/>
+                <constraint firstAttribute="trailing" secondItem="6E1-79-nQY" secondAttribute="trailing" constant="50" id="Hza-DB-Z1c"/>
                 <constraint firstItem="jyF-Ym-B0L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="INC-2F-Crj"/>
+                <constraint firstItem="KCx-sZ-e0h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Lys-KR-Nus"/>
                 <constraint firstAttribute="trailing" secondItem="jyF-Ym-B0L" secondAttribute="trailing" id="TmK-xq-qEI"/>
                 <constraint firstItem="6E1-79-nQY" firstAttribute="centerY" secondItem="jyF-Ym-B0L" secondAttribute="centerY" id="YMr-Mw-szC"/>
+                <constraint firstItem="KCx-sZ-e0h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="ZSM-9d-Keh"/>
                 <constraint firstItem="6E1-79-nQY" firstAttribute="centerX" secondItem="jyF-Ym-B0L" secondAttribute="centerX" id="bXQ-Ot-Hfo"/>
+                <constraint firstItem="6E1-79-nQY" firstAttribute="centerX" secondItem="5UO-6a-WvF" secondAttribute="centerX" id="iHH-bV-KwN"/>
+                <constraint firstItem="5UO-6a-WvF" firstAttribute="top" secondItem="6E1-79-nQY" secondAttribute="bottom" constant="25" id="lsh-1o-QVG"/>
                 <constraint firstItem="jyF-Ym-B0L" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wme-qV-cFP"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="1sR-Sd-4HQ"/>
+                    <exclude reference="Hza-DB-Z1c"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>
+        <image name="navi_back" width="30" height="20"/>
         <image name="scan_bg" width="10" height="10"/>
         <image name="scan_mask" width="254" height="254"/>
     </resources>
