@@ -15,7 +15,7 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
     let itemCellIde = "U02ItemCell"
 
     var isNeedShowNavi = false;
-    var isNeedShowLoin = true;
+//    var isNeedShowLoin = true;
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -75,16 +75,11 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
         {
             self.loadComNaviLeftBtn()
         }
+        
+        self.loadComNaviLeftBtn()
         self.loadComNavTitle("热门")
         
-        if(isNeedShowLoin)
-        {
-            var vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-//            var vc = T01HomePageVC(nibName: "T01HomePageVC", bundle: MainBundle);
-            
-            self.presentViewController(vc, animated: true, completion: nil)
-        }
-        
+
     }
 
 

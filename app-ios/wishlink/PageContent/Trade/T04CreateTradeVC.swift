@@ -103,20 +103,78 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             {
                 
                 
-                var para = ["name":txtName.text.trim(),
+                var para:[String:AnyObject] = ["name":txtName.text.trim(),
                     "brand":txtCategory.text.trim(),
                     "country":txtBuyArea.text.trim(),
-                    "price":txtPrice.text.trim(),
+                    "price":txtPrice.text.trim().toInt()!,
                     "spec":txtSize.text.trim(),
                     "comment":txtRemark.text.trim()
 //                    "file_a":(self.imagrArr.count>0?self.imagrArr[0]:"")
                 ]
                 
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
-                self.httpObj.httpPostApi("item/create", parameters: para, tag: 11);
+            
+              var apiurl = SERVICE_ROOT_PATH + "item/create"
+                
+                
+                let URL = NSURL(string: apiurl)!
+                var _request = NSURLRequest(URL: URL)
+                
+               
+       
+                
+                
+                
+                
+                
+//                 request_.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+//                request(request_).responseJSON() {
+//                    (_, _, data, error) in
+//
+//
+//                    if(error == nil)
+//                    {
+//                        NSLog("respone:%@",data!.description)
+//
+//                    }
+//                    else
+//                    {
+//                        
+//                    }
+//                    
+//                }
+
+                
+//                let custom: (URLRequestConvertible, [String: AnyObject]?) -> (NSURLRequest, NSError?) = {
+//                    (URLRequest, parameters) in
+//                    let mutableURLRequest = URLRequest.URLRequest.mutableCopy() as! NSMutableURLRequest
+//                    mutableURLRequest.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+//                    mutableURLRequest.HTTPBody = body
+//                    return (mutableURLRequest, nil)
+//                }
 //                
-//                var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-//                self.navigationController?.pushViewController(vc, animated: true);
+//                request(.POST, apiurl, parameters: nil, encoding: .Custom(custom)).responseJSON() {
+//                    (_, _, data, error) in
+//                    
+//                    
+//                    if(error == nil)
+//                    {
+//                        NSLog("respone:%@",data!.description)
+//                  
+//                    }
+//                    else
+//                    {
+//                        
+//                    }
+//                    
+//                }
+                
+
+                
+//                self.httpObj.httpPostApi("item/create", parameters: para, tag: 11);
+//
+                var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+                self.navigationController?.pushViewController(vc, animated: true);
             }
         }
         else

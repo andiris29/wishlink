@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T03SearchVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="myTableView" destination="CMI-2D-gAy" id="ZBS-Fe-YqV"/>
+                <outlet property="txtSearch" destination="5jK-4T-O3D" id="PFE-4f-9C4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

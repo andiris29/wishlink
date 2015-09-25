@@ -120,6 +120,9 @@ public enum ParameterEncoding {
 
             if let data = NSJSONSerialization.dataWithJSONObject(parameters!, options: options, error: &error) {
                 mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+                    NSLog("request Body:%@", NSString(data: data, encoding: NSUTF8StringEncoding)!);
+                
                 mutableURLRequest.HTTPBody = data
             }
         case .PropertyList(let (format, options)):
