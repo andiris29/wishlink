@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T01HomePageVC: RootVC,UITextFieldDelegate {
+class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
     
     @IBOutlet weak var searchBgImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -107,8 +107,18 @@ class T01HomePageVC: RootVC,UITextFieldDelegate {
     }
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
-        self.navigationController?.pushViewController(vc, animated: true);
+        vc.myDelegate = self;
+        self.presentViewController(vc, animated: true, completion: nil);
         return false;
     }
 
+    func GetSelectValue(inputValue:String)
+    {
+        self.searchTextField.text = inputValue;
+        
+        var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true);
+        //开始搜索
+//        self.httpObj.httpGetApi("", parameters: <#[String : AnyObject]?#>, tag: <#Int#>)
+    }
 }

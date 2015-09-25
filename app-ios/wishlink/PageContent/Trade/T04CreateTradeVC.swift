@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate, CSActionSheetDelegate,WebRequestDelegate {
+class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate, CSActionSheetDelegate,WebRequestDelegate,T11SearchSuggestionDelegate {
 
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var txtCategory: UITextField!
@@ -286,6 +286,22 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.dismissKeyboard();
         return true;
     }
+    var lastSelectTextFiledTag = -1;
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        
+        if(textField.tag>3)
+        {
+            return true;
+        }
+        else
+        {
+            self.lastSelectTextFiledTag = textField.tag;
+            var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+            vc.myDelegate = self;
+            self.presentViewController(vc, animated: true, completion: nil);
+            return false;
+        }
+    }
 
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n")
@@ -325,6 +341,24 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         SVProgressHUD.dismiss();
         UIHEPLER.alertErrMsg(error);
         
+    }
+    
+    //T11SelectSuggestionDelegate
+    func GetSelectValue(inputValue: String) {
+        if(self.lastSelectTextFiledTag == 1)
+        {
+            txtCategory.text = inputValue;
+        }
+        else if(self.lastSelectTextFiledTag == 2)
+        {
+            txtName.text =  inputValue;
+        }
+        else if(self.lastSelectTextFiledTag == 3)
+        {
+            txtBuyArea.text = inputValue;
+        }
+        
+        self.lastSelectTextFiledTag = -1;
     }
     
 }

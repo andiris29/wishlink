@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol T11SearchSuggestionDelegate
+{
+    func GetSelectValue(inputValue:String)
+}
+
 class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UITextFieldDelegate {
     
     let cellIdentifierSearch = "T11SearchSuggestionCell"
@@ -16,6 +21,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var searchTexfield: UITextField!
     @IBOutlet weak var cannelButton: UIButton!
     @IBOutlet weak var searchView: UIView!
+    var myDelegate:T11SearchSuggestionDelegate!;
     
     var itemData: NSMutableArray = ["sk II", "sk II神仙水", "sk II光彩粉饼", "斯凯奇运动女鞋", "sikaqi慢跑鞋"]
     var itemContents: NSArray = NSArray()
@@ -34,6 +40,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         self.searchView.layer.cornerRadius = 5
         
     }
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
@@ -80,7 +88,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     //MARK: - Action
     
     @IBAction func cannelButtonAction(sender: UIButton!) {
-        self.navigationController?.popViewControllerAnimated(true);
+//        self.navigationController?.popViewControllerAnimated(true);
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     @IBAction func searchTexfieldValueChange(sender: UITextField) {
@@ -103,9 +112,11 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.searchTexfield.resignFirstResponder();
         
-        var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        self.navigationController?.pushViewController(vc, animated: true);
-        
+        if(self.myDelegate != nil)
+        {
+            self.myDelegate!.GetSelectValue(textField.text);
+             self.dismissViewControllerAnimated(true, completion: nil);
+        }
         
         return false;
     }
