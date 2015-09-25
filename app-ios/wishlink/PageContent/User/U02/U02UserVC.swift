@@ -8,7 +8,7 @@
 
 import UIKit
 
-class U02UserVC: RootVC {
+class U02UserVC: RootVC, WebRequestDelegate {
 
     @IBOutlet weak var sellerBtn: UIButton!
     
@@ -32,11 +32,12 @@ class U02UserVC: RootVC {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.prepareData()
         self.prepareSubVC()
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
         self.fillDataForUI()
-        
+        self.getUser()
         self.navigationController!.navigationBar.hidden = false
     }
 
@@ -62,6 +63,15 @@ class U02UserVC: RootVC {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - delegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+    }
+    
+    func requestDataFailed(error: String) {
+        
     }
     
     // MARK: - response event
@@ -104,8 +114,17 @@ class U02UserVC: RootVC {
         var vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
         self.navigationController!.pushViewController(vc, animated: true)
     }
-
+    
     // MARK: - prive method
+    
+    func getUser() {
+        var parameters = ["nickname": "Yeo", ""]
+        self.httpObj.httpGetApi("user/update", parameters: <#[String : AnyObject]?#>, tag: <#Int#>)
+    }
+    
+    func prepareData() {
+        self.httpObj.mydelegate = self
+    }
     
     // 根据用户数据填充界面
     func fillDataForUI() {

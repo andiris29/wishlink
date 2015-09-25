@@ -121,7 +121,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             msg = "撤单"
         case .CheckComplain:
             println("查看投诉")
-            msg = "查看投诉"
+            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .SendOut:
             println("发货")
             var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())

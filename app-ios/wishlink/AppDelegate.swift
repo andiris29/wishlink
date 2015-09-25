@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         self.window!.rootViewController = TabBarVC();
         self.window!.makeKeyAndVisible()
         
-//        WeiboSDK.enableDebugMode(true)
-//        WeiboSDK.registerApp("1234")
+        WeiboSDK.enableDebugMode(true)
+        WeiboSDK.registerApp("1234")
         WXApi.registerApp("1234", withDescription: "wishlink")
         return true
     }
