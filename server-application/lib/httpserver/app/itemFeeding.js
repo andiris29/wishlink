@@ -8,7 +8,6 @@ var Items = require('../../model/items');
 var rUserFavoriteItems = require('../../model/rUserFavoriteItem');
 var rUserRecommendedItems = require('../../model/rUserRecommendedItem');
 
-
 // helper
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
@@ -22,7 +21,31 @@ var itemFeeding = module.exports;
  */
 itemFeeding.recommendation = {
     method : 'get',
+    permissionValidators : ['validateLogin'],
     func : function(req, res) {
+        ServiceHelper.queryPaging(req, res, function(param, callback) {
+            async.waterfall([function(cb) {
+                var criteria = {
+                    initiatorRef : req.currentUserId
+                };
+                MongoHelper.queryPaging(rUserRecommendedItems.find(criteria).populate('targetRef').sort({create : -1}), 
+                        param.pageNo, 
+                        param.pageSize, 
+                        function(error, models) {
+                    cb(error, models);
+                });
+            }, function(models, cb) {
+                var items = [];
+                models.forEach(function(relations) {
+                    items.push(relations.targetRef);
+                });
+                cb(null, items);
+            }], callback);
+        }, function(models) {
+            return {
+                items: models
+            };
+        });
     }
 };
 
@@ -50,7 +73,7 @@ itemFeeding.favorite = {
             }], callback);
         }, function (models) {
             return {
-                item : models
+                items : models
             };
         });
     }
