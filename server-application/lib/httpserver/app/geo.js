@@ -120,16 +120,17 @@ geo.trace = {
                     callback(null, trace);
                 } else {
                     if (country.iso3166 === 'CHN') {
-                        callback(null, trace);
-                        return;
+                        RecommendationService.recommendItemsInForeignCountry(req.currentUserId, function(error) {
+                            var notifyType = NotificationService.notifyGotoForeignCountry;
+                            NotificationService.notify([req.currentUserId], notifyType.command, notifyType.message, {}, null);
+                            callback(null, trace);
+                        });
+                    } else {
+                        RecommendationService.recommendItems(req.currentUserId, function(error) {
+                            callback(null, trace);
+                        });
                     }
                 }
-            });
-        }, function(trace, callback) {
-            RecommendationService.recommendItemsInForeignCountry(req.currentUserId, function(error) {
-                var notifyType = NotificationService.notifyGotoForeignCountry;
-                NotificationService.notify([req.currentUserId], notifyType.command, notifyType.message, {}, null);
-                callbck(null);
             });
         }], function(error, trace) {
             ResponseHelper.response(res, error, {
