@@ -67,6 +67,9 @@ public class AlipayPaymentController {
             return FAIL;
         }
         
+        // tell app-server, this is alipay's callback
+        params.put("type", "alipay");
+        
         log.debug("alipay TradeStatus=" + entity.getTrade_status());
         log.debug("alipay RefundStatus=" + StringUtils.trimToNull(entity.getRefund_status()));
         log.debug("qingshow-appserver-callback-url:" + appServerCallbackUrl);

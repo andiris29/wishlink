@@ -144,6 +144,9 @@ public class WeChatPaymentController {
         CallbackResBean resBean = new CallbackResBean();
         Map<String, Object> params = reqBean.toMap();
   
+        // tell app-server this is wechat's callback
+        params.put("type", "wechat");
+        
         RestTemplate restClient = new RestTemplate();
         ResponseJsonEntity appRes = restClient.postForObject(appServerCallbackUrl, params, ResponseJsonEntity.class);
         Gson gson = new Gson();
