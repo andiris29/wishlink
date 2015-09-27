@@ -58,7 +58,7 @@ geo.trace = {
                             if (error) {
                                 callback(error);
                             } else if (!trace) {
-                                callabck(ServerError.ERR_UNKOWN);
+                                callback(ServerError.ERR_UNKOWN);
                             } else {
                                 callback(null, trace);
                             }
@@ -78,7 +78,7 @@ geo.trace = {
                                 if (error) {
                                     callback(error);
                                 } else if (!trace) {
-                                    callabck(ServerError.ERR_UNKOWN);
+                                    callback(ServerError.ERR_UNKOWN);
                                 } else {
                                     callback(null, trace);
                                 }
@@ -96,12 +96,12 @@ geo.trace = {
                 if (error) {
                     callback(error);
                 } else if (!user) {
-                    callabck(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKOWN);
                 } else {
                     user.countryRef = trace.countryRef;
                     user.save(function(error, user) {
                         if (error) {
-                            callabck(error);
+                            callback(error);
                         } else if (!user) {
                             callback(ServerError.ERR_UNKOWN);
                         } else {

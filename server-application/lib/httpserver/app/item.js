@@ -62,7 +62,7 @@ item.create = {
 
                     newItem.save(function(error, newItem) {
                         if (error) {
-                            callabck(error);
+                            callback(error);
                         } else if (!newItem) {
                             callback(ServerError.ERR_UNKOWN);
                         } else {

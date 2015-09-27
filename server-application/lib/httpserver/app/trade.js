@@ -570,7 +570,7 @@ trade.resolveComplaint = {
     method : 'post',
     permissionValidators : ['validateLogin'],
     func : function(req, res) {
-        async.waterfall([function(callabck) {
+        async.waterfall([function(callback) {
             Trades.findOne({
                 _id : RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
@@ -633,7 +633,7 @@ trade.read = {
                 } else if (!trade) {
                     callback(ServerError.ERR_TRADE_NOT_EXIST);
                 } else {
-                    callabck(null, trade);
+                    callback(null, trade);
                 }
             });
         }, function(trade, callback) {
@@ -645,7 +645,7 @@ trade.read = {
                 } else if (!user) {
                     callback(ServerError.ERR_USER_NOT_EXIST);
                 } else {
-                    callabck(null, trade, user);
+                    callback(null, trade, user);
                 }
             });
         }, function(trade, user, callback) {

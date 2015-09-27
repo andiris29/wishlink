@@ -52,7 +52,7 @@ var _builtInValidators = {
             callback(null);
         }
     },
-    'validateAdmin' : function(req, res, callabck) {
+    'validateAdmin' : function(req, res, callback) {
         if (req.currentUserId) {
             callback(null);
         } else {

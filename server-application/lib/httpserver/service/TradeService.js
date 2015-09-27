@@ -119,7 +119,7 @@ TradeService.statusTo = function(userRef, trade, toStatus, comment, callback) {
 };
 
 TradeService.findOrderAndNameByCode = function(code) {
-    var targetKey
+    var targetKey;
     _.each(TradeService.Status, function(value, key) {
         if (value.code === code) {
             targetKey = key;
