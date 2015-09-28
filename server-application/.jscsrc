@@ -1,0 +1,10 @@
+{
+    "preset": "google",
+    "requireCurlyBraces": null, // or false
+    "maximumLineLength": {
+        "value": 200,
+        "allExcept": ["comments", "regex"]
+    },
+    "validateIndentation": 4,
+    "jsDoc": null
+}
