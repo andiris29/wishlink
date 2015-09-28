@@ -10,9 +10,9 @@ var TradeService = require('../../httpserver/service/TradeService');
 var _next = function(today, limit) {
     var halfMonthBefore = today.setDate(today.getDate() - limit);
     async.waterfall([function(callback) {
-        Trade.find({
-            status : {
-                '$in' : [TradeService.Status.DELIVERED.code]
+        Trades.find({
+            status: {
+                '$in': [TradeService.Status.DELIVERED.code]
             }
         }).exec(function(error, trades) {
             callback(error, trades);

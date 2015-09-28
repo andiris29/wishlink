@@ -60,7 +60,7 @@ RecommendationService.recommendItems = function(_id, callback) {
 RecommendationService.recommendItemsInForeignCountry = function(_id, callback) {
     async.waterfall([function(cb) {
         Users.findOne({
-            _id : _id
+            _id: _id
         }, function(error, user) {
             if (error) {
                 cb(error);
@@ -72,7 +72,7 @@ RecommendationService.recommendItemsInForeignCountry = function(_id, callback) {
         });
     }, function(user, cb) {
         Countries.findOne({
-            _id : user.countryRef
+            _id: user.countryRef
         }, function(error, country) {
             if (error) {
                 cb(error);
@@ -83,9 +83,9 @@ RecommendationService.recommendItemsInForeignCountry = function(_id, callback) {
     }, function(country, cb) {
         SearchService.search(country.name, 0, 10, function(error, items) {
             var tasks = _.map(items, function(item) {
-                return function(internal_cb) {
+                return function(internalCallback) {
                     RelationshipHelper.create(rUserRecommendedItem, _id, item._id, function(error) {
-                        internal_cb(error);
+                        internalCallback(error);
                     });
                 };
             });
