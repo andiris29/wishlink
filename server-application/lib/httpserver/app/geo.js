@@ -21,27 +21,27 @@ var geo = module.exports;
  * 将地理位置保存到 geoTraces 中
  * A，获取最后一次有 geoTrace.coutryRef 的数据
  * B，调用 GeoService.differentCountries 获取新国家信息
- * 
+ *
  * 如果 A 查询失败，或 B 获取到新国家信息成功
  *    更新当前 geoTrace.countryRef 以及 user.countryRef
  *    如果新国家 country.iso3166 不是 CHN，
- *      调用 RecommendationService.recommendInForeignCountry 
+ *      调用 RecommendationService.recommendInForeignCountry
  *      以及 NotificationService.notifyGotoForeignCountry
- * 
+ *
  * @method post
  * @param {number} req.device
  * @param {number} req.location.lat
  * @param {number} req.location.lng
  */
 geo.trace = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             GeoTraces.find({
-                device : req.body.device,
-                countryRef : { 
-                    '$exists' : true 
+                device: req.body.device,
+                countryRef: {
+                    '$exists': true
                 }
             }).sort({
             }).limit(1).exec(function(error, countries) {
@@ -50,9 +50,9 @@ geo.trace = {
                 } else if (countries.length === 0) {
                     GeoTraces.reverseGeocoding(req.body.location, function(error, country) {
                         var trace = new GeoTraces({
-                            device : req.body.device,
-                            location : req.body.location,
-                            countryRef : country._id
+                            device: req.body.device,
+                            location: req.body.location,
+                            countryRef: country._id
                         });
                         trace.save(function(error, trace) {
                             if (error) {
@@ -70,9 +70,9 @@ geo.trace = {
                             callback(error);
                         } else if (country) {
                             var trace = new GeoTraces({
-                                device : req.body.device,
-                                location : req.body.location,
-                                countryRef : country._id
+                                device: req.body.device,
+                                location: req.body.location,
+                                countryRef: country._id
                             });
                             trace.save(function(error, trace) {
                                 if (error) {
@@ -91,7 +91,7 @@ geo.trace = {
             });
         }, function(trace, callback) {
             User.findOne({
-                _id : req.currentUserId
+                _id: req.currentUserId
             }, function(error, user) {
                 if (error) {
                     callback(error);
@@ -112,7 +112,7 @@ geo.trace = {
             });
         }, function(trace, callback) {
             Countries.findOne({
-                _id : trace.countryRef
+                _id: trace.countryRef
             }, function(error, country) {
                 if (error) {
                     callback(error);
@@ -134,7 +134,7 @@ geo.trace = {
             });
         }], function(error, trace) {
             ResponseHelper.response(res, error, {
-                trace : trace
+                trace: trace
             });
         });
     }
