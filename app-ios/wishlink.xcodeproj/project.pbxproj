@@ -13,6 +13,8 @@
 		765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765424801B8B5A56001C607C /* U03AddressManagerVC.xib */; };
 		765424851B8B5A9E001C607C /* U03AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765424831B8B5A9E001C607C /* U03AddressCell.swift */; };
 		765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765424841B8B5A9E001C607C /* U03AddressCell.xib */; };
+		7661BD5F1BB983D700E01DBC /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661BD5E1BB983D700E01DBC /* libPushSDK-1.8.5.a */; };
+		7661BD611BB98F9000E01DBC /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7661BD601BB98F9000E01DBC /* PushConfig.plist */; };
 		7684F3BF1B8DFA4D00B7D7DC /* U02FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684F3B91B8DFA4D00B7D7DC /* U02FilterButton.swift */; };
 		7684F3C01B8DFA4D00B7D7DC /* U02ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684F3BA1B8DFA4D00B7D7DC /* U02ItemCell.swift */; };
 		7684F3C11B8DFA4D00B7D7DC /* U02ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7684F3BB1B8DFA4D00B7D7DC /* U02ItemCell.xib */; };
@@ -158,6 +160,9 @@
 		765424801B8B5A56001C607C /* U03AddressManagerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddressManagerVC.xib; sourceTree = "<group>"; };
 		765424831B8B5A9E001C607C /* U03AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddressCell.swift; sourceTree = "<group>"; };
 		765424841B8B5A9E001C607C /* U03AddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddressCell.xib; sourceTree = "<group>"; };
+		7661BD5D1BB983D700E01DBC /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		7661BD5E1BB983D700E01DBC /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
+		7661BD601BB98F9000E01DBC /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		7684F3B91B8DFA4D00B7D7DC /* U02FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02FilterButton.swift; sourceTree = "<group>"; };
 		7684F3BA1B8DFA4D00B7D7DC /* U02ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02ItemCell.swift; sourceTree = "<group>"; };
 		7684F3BB1B8DFA4D00B7D7DC /* U02ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02ItemCell.xib; sourceTree = "<group>"; };
@@ -340,6 +345,7 @@
 				A1F0E2771BA3146D005379CD /* CFNetwork.framework in Frameworks */,
 				A1F0E2751BA313F7005379CD /* Social.framework in Frameworks */,
 				7695653F1BA08A4900A6AD10 /* libWeChatSDK.a in Frameworks */,
+				7661BD5F1BB983D700E01DBC /* libPushSDK-1.8.5.a in Frameworks */,
 				769565391BA0891E00A6AD10 /* libWeiboSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +360,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7661BD5C1BB983D700E01DBC /* JPush-1.8-3.5 */ = {
+			isa = PBXGroup;
+			children = (
+				7661BD5D1BB983D700E01DBC /* APService.h */,
+				7661BD5E1BB983D700E01DBC /* libPushSDK-1.8.5.a */,
+			);
+			path = "JPush-1.8-3.5";
+			sourceTree = "<group>";
+		};
 		7684F3B81B8DFA4D00B7D7DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				A1043DF81B7F787A007A237C /* Info.plist */,
+				7661BD601BB98F9000E01DBC /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -477,6 +493,7 @@
 		A1043E1A1B7F7902007A237C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				7661BD5C1BB983D700E01DBC /* JPush-1.8-3.5 */,
 				A18A0DCF1BB0637200A09A0D /* SVProgressHUD */,
 				D276A99D1BA6F795005CC047 /* SphereView */,
 				A1043E7A1B7F85F3007A237C /* wishlink-Bridging-Header.h */,
@@ -902,6 +919,7 @@
 				76CD0E921B89657200B04453 /* U02FavoriteVC.xib in Resources */,
 				76CD0E861B89649000B04453 /* U02BuyerTradeVC.xib in Resources */,
 				7695653A1BA0891E00A6AD10 /* WeiboSDK.bundle in Resources */,
+				7661BD611BB98F9000E01DBC /* PushConfig.plist in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
 				76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */,
 				765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */,
@@ -1148,6 +1166,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wishlink/Library/libWeiboSDK",
 					"$(PROJECT_DIR)/wishlink/Library/WeChatSDK_1.5",
+					"$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5",
 				);
 				OTHER_LDFLAGS = (
 					"-Objc",
@@ -1156,6 +1175,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "78420032-b82a-48d1-b89d-2d58e8653695";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
 			name = Debug;
 		};
@@ -1176,6 +1196,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wishlink/Library/libWeiboSDK",
 					"$(PROJECT_DIR)/wishlink/Library/WeChatSDK_1.5",
+					"$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5",
 				);
 				OTHER_LDFLAGS = (
 					"-Objc",
@@ -1184,6 +1205,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "78420032-b82a-48d1-b89d-2d58e8653695";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
 			name = Release;
 		};

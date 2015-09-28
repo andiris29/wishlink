@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
 
         self.window!.rootViewController = TabBarVC();
         self.window!.makeKeyAndVisible()
-        
+        self.prepareJPush(launchOptions)
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp("1234")
         WXApi.registerApp("1234", withDescription: "wishlink")
@@ -80,6 +80,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        APService.registerDeviceToken(deviceToken)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        APService.handleRemoteNotification(userInfo)
+    }
+    
+    func prepareJPush(launchOptions: [NSObject: AnyObject]?) {
+        
+        if IOS_VERSION >= 8 {
+            //categories
+            APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
+        }else {
+            //categories nil
+            APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
+        }
+        APService.setupWithOption(launchOptions)
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
