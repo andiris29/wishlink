@@ -1,4 +1,4 @@
-// third library party
+// third party library
 var async = require('async');
 var _ = require('underscore');
 var winston = require('winston');

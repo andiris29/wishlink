@@ -17,14 +17,14 @@ var RelationshipHelper = require('../helper/RelationshipHelper');
 
 var PaymentService = module.exports;
 
-/** 
+/**
  * 参考倾秀
  * 调用支付服务 wechat/prepay
  */
 PaymentService.getPrepayId = function(trade, ip, callback) {
     async.waterfall([function(cb) {
         Items.findOne({
-            _id : trade.itemRef
+            _id: trade.itemRef
         }, function(error, item) {
             if (error) {
                 cb(error);
@@ -45,7 +45,7 @@ PaymentService.getPrepayId = function(trade, ip, callback) {
             if (jsonObject.metadata) {
                 cb(jsonObject.metadata, trade);
             } else {
-                trade.pay.weixin['prepayid'] = jsonObject.data.prepay_id;
+                trade.pay.weixin.prepayid = jsonObject.data.prepay_id;
                 trade.save(function(err) {
                     cb(err, trade);
                 });
@@ -54,7 +54,7 @@ PaymentService.getPrepayId = function(trade, ip, callback) {
     }], callback);
 };
 
-/** 
+/**
  * 参考倾秀
  * 调用支付服务 wechat/queryOrder
  */
@@ -68,14 +68,14 @@ PaymentService.syncStatus = function(trade, callback) {
             callback(jsonObject.metadata, trade);
         } else {
             var orderInfo = jsonObject.data;
-            trade.pay.weixin['trade_mode'] = orderInfo['trade_type'];
-            trade.pay.weixin['partner'] = orderInfo['mch_id'];
-            trade.pay.weixin['total_fee'] = orderInfo['total_fee'];
-            trade.pay.weixin['fee_type'] = orderInfo['fee_type'];
-            trade.pay.weixin['transaction_id'] = orderInfo['transaction_id'];
-            trade.pay.weixin['time_end'] = orderInfo['time_end'];
+            trade.pay.weixin.trade_mode = orderInfo['trade_type'];
+            trade.pay.weixin.partner = orderInfo['mch_id'];
+            trade.pay.weixin.total_fee = orderInfo['total_fee'];
+            trade.pay.weixin.fee_type = orderInfo['fee_type'];
+            trade.pay.weixin.transaction_id = orderInfo['transaction_id'];
+            trade.pay.weixin.time_end = orderInfo['time_end'];
             //trade.pay.weixin['AppId'] = orderInfo['appid'];
-            trade.pay.weixin['OpenId'] = orderInfo['openId'];
+            trade.pay.weixin.OpenId = orderInfo['openId'];
 
             trade.pay.weixin.notifyLogs = trade.pay.weixin.notifyLogs || [];
             if (trade.pay.weixin.notifyLogs.length > 0) {
@@ -89,7 +89,7 @@ PaymentService.syncStatus = function(trade, callback) {
     });
 };
 
-/** 
+/**
  * 参考倾秀
  * 调用支付服务 wechat/deliverNotify
  */
@@ -99,7 +99,7 @@ PaymentService.reverseSyncDelivery = function(trade, callback) {
 
 /**
  * 退款，将钱从平台账户转至买家账户。不会修改交易本身
- * 
+ *
  * @param {db.trade} trade
  * @param {refund~callback} callback
  */
@@ -112,7 +112,7 @@ PaymentService.refund = function(trade, callback) {
 
 /**
  * 支付，将钱从平台账户转至卖家账户。不会修改交易本身
- * 
+ *
  * @param {db.trade} trade
  * @param {pay~callback} callback
  */
