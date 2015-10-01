@@ -1,17 +1,19 @@
-// third party library
+// Third party library
 var async = require('async');
 var mongosee = require('mongoose');
 var crypto = require('crypto');
 var fs = require('fs');
 var uuid = require('node-uuid');
+var path = require('path');
+var request = require('request');
 
-// model
+// Model
 var Users = require('../../model/users');
 
-// service
+// Service
 var NotificationService = require('../service/NotificationService');
 
-// helper
+// Helper
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var ServerError = require('../server-error');
@@ -202,12 +204,12 @@ user.loginViaWeixin = {
         }, function(user, callback) {
             Users.findOne({
                 'weixin.openid' : user.openid
-            }, function(error, user) {
+            }, function(error, target) {
                 if (error) {
                     callback(error);
                     return;
-                } else if (user) {
-                    callback(null, user);
+                } else if (target) {
+                    callback(null, target);
                     return;
                 }
 
@@ -231,13 +233,13 @@ user.loginViaWeixin = {
                     }
                 });
 
-                newUser.save(function(error, user) {
+                newUser.save(function(error, target) {
                     if (error) {
                         callback(error);
-                    } else if (!user) {
+                    } else if (!target) {
                         callback(ServerError.ERR_UNKOWN);
                     } else {
-                        callback(null, user);
+                        callback(null, target);
                     }
                 });
             });
@@ -333,12 +335,12 @@ user.loginViaWeibo = {
             // find weibo user has existsed in owen system
             Users.findOne({
                 'weibo.id' : user.id
-            }, function(error, user) {
+            }, function(error, target) {
                 if (error) {
                     callback(error);
                     return;
-                } else if (user) {
-                    callback(null, user);
+                } else if (target) {
+                    callback(null, target);
                     return;
                 }
 
@@ -361,13 +363,13 @@ user.loginViaWeibo = {
                     }
                 });
 
-                newUser.save(function(error, user) {
+                newUser.save(function(error, target) {
                     if (error) {
                         callback(error);
-                    } else if (!user) {
+                    } else if (!target) {
                         callback(ServerError.ERR_UNKOWN);
                     } else {
-                        callback(null, user);
+                        callback(null, target);
                     }
                 });
             });

@@ -11,12 +11,10 @@ var jPushAudiences = require('../../model/jPushAudiences');
 var NotificationService = module.exports;
 
 // get appkey and master key from config.properties
-var _getJPushClient = function() {
-    var config = global.config.notification.jpush.sdk;
+var _getJPushClient = function(config) {
     return JPush.buildClient(config.appkey, config.masterkey);
 };
 
-var client = _getJPushClient();
 
 // Recommend's Push Notification
 NotificationService.notifyDailyInChina = {
@@ -145,6 +143,8 @@ NotificationService.unbind = function(registrationId, _id, callback) {
  * @param {string} err
  */
 NotificationService.notify = function(_ids, command, message, extras, callback) {
+    var config = global.config.notification.jpush.sdk;
+    var client = _getJPushClient(config);
     async.waterfall([function(cb) {
         jPushAudiences.find({
             userRef: {
