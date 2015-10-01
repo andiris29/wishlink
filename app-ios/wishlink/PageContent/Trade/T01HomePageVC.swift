@@ -46,11 +46,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
         var titles = ["英国", "美国", "法国", "日本", "德国", "澳洲", "Dior", "SKII", "科颜氏", "MK Selma 中号耳朵包", "ALBION 健康水 330ml", "Jurlique 玫瑰护手霜 30ML", " Lancome 真爱香水 50ml", " 娇韵诗活肤舒缓爽肤露 30ML", "Arcteryx 始祖鸟女士羽绒服", "雅诗兰黛修护精华 15ml", " 象印焖烧杯 200ML"]
         
         var window = UIApplication.sharedApplication().keyWindow
-        var windowWidth = window?.bounds.size.width
+//        var windowWidth = window?.bounds.size.width
+        var windowWidth = ScreenHeight
         
         sphereView = ZYQSphereView()
         sphereView.frame = CGRectMake(0, 0, 300, 300)
-        sphereView.frame.origin.x = (windowWidth! - sphereView.frame.size.width) / 2.0
+        sphereView.frame.origin.x = (windowWidth - sphereView.frame.size.width) / 2.0
         heartView.addSubview(sphereView)
         
         var views: NSMutableArray = NSMutableArray()

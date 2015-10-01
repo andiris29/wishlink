@@ -49,7 +49,11 @@ let APPCONFIG =  AppConfig.sharedAppConfig;
 class AppConfig: NSObject
 {
     static var  mapAPIKey:String = "64cb7cd4d44935d006e8d30d5684021a";
-    static var  wxAppKey:String = "64cb7cd4d44935d006e8d30d5684021a";
+    static var  wxAppKey:String = "wx7d2407c862aeda7b";
+    static var  wxAppSecret:String = "8f4bb1d0bf4d71024b9d11825e80c771"
+    static var  wbAppKey:String = "3764189536"
+    static var  wbAppSecret:String = "36bdb49defb6765bce3b831c7e18fa86"
+    static var  wbRedirectURI:String = "https://api.weibo.com/oauth2/default.html"
     
     var AccessToken:String!;
     var CurrentUID:Int = 0;

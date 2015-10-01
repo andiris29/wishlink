@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -24,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         self.window!.makeKeyAndVisible()
         self.prepareJPush(launchOptions)
         WeiboSDK.enableDebugMode(true)
-        WeiboSDK.registerApp("1234")
-        WXApi.registerApp("1234", withDescription: "wishlink")
+        WeiboSDK.registerApp(AppConfig.wbAppKey)
+        WXApi.registerApp(AppConfig.wxAppKey, withDescription: "wishlink")
         return true
     }
 
@@ -36,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     
     
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
-        
+        if response is WBAuthorizeResponse {
+            NSNotificationCenter.defaultCenter().postNotificationName(WBLoginSuccessNotification, object: response)
+        }
     }
     // MARK: --WeiXin delegate--
     func onReq(req: BaseReq!) {
@@ -44,18 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     }
     
     func onResp(resp: BaseResp!) {
-        
+        if resp is SendAuthResp {
+            NSNotificationCenter.defaultCenter().postNotificationName(WXLoginSuccessNotification, object: resp)
+
+        }
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        if sourceApplication == "com.tencent.xin" {
-            return WXApi.handleOpenURL(url, delegate: self)
-        }else if sourceApplication == "com.sina.weibo" {
-            return WeiboSDK.handleOpenURL(url, delegate: self)
-        }
-        else {
-            return true
-        }
+        return WXApi.handleOpenURL(url, delegate: self) || WeiboSDK.handleOpenURL(url, delegate: self)
     }
     
     func applicationWillResignActive(application: UIApplication) {
