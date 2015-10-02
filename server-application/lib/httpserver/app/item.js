@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var async = require('async');
 var path = require('path');
+var _ = require('underscore');
 
 // helper
 var ServerError = require('../server-error');
@@ -89,6 +90,7 @@ item.approve = {
     method: 'post',
     permissionValidators: ['validateLogin', 'validateAdmin'],
     func: function(req, res) {
+        var param = req.body;
         async.waterfall([function(callback) {
             Items.findOne({
                 '_id': RequestHelper.parseId(param._id)
@@ -140,6 +142,7 @@ item.disapprove = {
     method: 'post',
     permissionValidators: ['validateLogin', 'validateAdmin'],
     func: function(req, res) {
+        var param = req.body;
         async.waterfall([function(callback) {
             Items.findOne({
                 '_id': RequestHelper.parseId(param._id)
