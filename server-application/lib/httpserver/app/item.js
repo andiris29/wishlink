@@ -20,9 +20,9 @@ var TradeService = require('../service/TradeService');
 var item = module.exports;
 
 var itemImageResizeOptions = [
-    {'suffix' : '_640', 'width' : 640, 'height' : 640},
-    {'suffix' : '_320', 'width' : 320, 'height' : 320},
-    {'suffix' : '_160', 'width' : 160, 'height' : 160}
+    {'suffix': '_640', 'width': 640, 'height': 640},
+    {'suffix': '_320', 'width': 320, 'height': 320},
+    {'suffix': '_160', 'width': 160, 'height': 160}
 ];
 
 /**
@@ -37,9 +37,9 @@ var itemImageResizeOptions = [
  * @param {string} [req.comment]
  */
 item.create = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             RequestHelper.parseFiles(req, global.config.uploads.item.image.ftpPath, itemImageResizeOptions, function(error, fields, files) {
                 if (error) {
@@ -47,13 +47,13 @@ item.create = {
                 } else {
                     var param = fields;
                     var newItem = new Items({
-                        name : param.name,
-                        brand : param.brand,
-                        country : param.country,
-                        spec : param.spec,
-                        price : RequestHelper.parseNumber(param.price),
-                        notes :param.notes,
-                        images : []
+                        name: param.name,
+                        brand: param.brand,
+                        country: param.country,
+                        spec: param.spec,
+                        price: RequestHelper.parseNumber(param.price),
+                        notes: param.notes,
+                        images: []
                     });
                     files.forEach(function(file) {
                         var imagePath = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
@@ -71,11 +71,11 @@ item.create = {
                     });
                 }
             });
-        }, function (item, callback) {
+        }, function(item, callback) {
             SearchBuildService.enableSearch(item, callback);
         }], function(error, item) {
             ResponseHelper.response(res, error, {
-                'item' : item
+                'item': item
             });
         });
     }
@@ -86,12 +86,12 @@ item.create = {
  * 将 itemRef 为该 item 的 trade.status 更新为审核通过
  */
 item.approve = {
-    method : 'post',
-    permissionValidators : ['validateLogin', 'validateAdmin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin', 'validateAdmin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Items.findOne({
-                '_id' : RequestHelper.parseId(param._id)
+                '_id': RequestHelper.parseId(param._id)
             }, function(error, item) {
                 if (error) {
                     callback(error);
@@ -108,25 +108,25 @@ item.approve = {
             });
         }, function(item, callback) {
             Trades.find({
-                itemRef : item._id
+                itemRef: item._id
             }).exec(function(error, trades) {
                 callback(error, item, trades);
             });
         }, function(item, trades, callback) {
             var tasks = _.map(trades, function(trade) {
-                return function(internal_cb) {
-                    TradeService.statusTo(req.currentUserId, trade, 
-                            TradeService.UN_ORDER_RECEIVE.code, 
-                            '', internal_cb);
+                return function(internalCallback) {
+                    TradeService.statusTo(req.currentUserId, trade,
+                            TradeService.UN_ORDER_RECEIVE.code,
+                            '', internalCallback);
                 };
             });
-            
+
             async.parallel(tasks, function(error) {
                 callback(null, item);
             });
         }], function(error, item) {
             ResponseHelper.response(res, error, {
-                item : item
+                item: item
             });
         });
     }
@@ -137,12 +137,12 @@ item.approve = {
  * 将 itemRef 为该 item 的 trade.status 更新为审核未通过
  */
 item.disapprove = {
-    method : 'post',
-    permissionValidators : ['validateLogin', 'validateAdmin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin', 'validateAdmin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Items.findOne({
-                '_id' : RequestHelper.parseId(param._id)
+                '_id': RequestHelper.parseId(param._id)
             }, function(error, item) {
                 if (error) {
                     callback(error);
@@ -159,25 +159,25 @@ item.disapprove = {
             });
         }, function(item, callback) {
             Trades.find({
-                itemRef : item._id
+                itemRef: item._id
             }).exec(function(error, trades) {
                 callback(error, item, trades);
             });
         }, function(item, trades, callback) {
             var tasks = _.map(trades, function(trade) {
-                return function(internal_cb) {
-                    TradeService.statusTo(req.currentUserId, trade, 
-                            TradeService.ITEM_REVIEW_REJECTED.code, 
-                            '', internal_cb);
+                return function(internalCallback) {
+                    TradeService.statusTo(req.currentUserId, trade,
+                            TradeService.ITEM_REVIEW_REJECTED.code,
+                            '', internalCallback);
                 };
             });
-            
+
             async.parallel(tasks, function(error) {
                 callback(null, item);
             });
         }], function(error, item) {
             ResponseHelper.response(res, error, {
-                item : item
+                item: item
             });
         });
     }
@@ -187,9 +187,9 @@ item.disapprove = {
  * 创建 db.rUserFavoriteItem
  */
 item.favorite = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         var initiatorRef = req.currentUserId;
         var targetRef = RequestHelper.parseId(req.body._id);
         async.waterfall([function(callback) {
@@ -198,7 +198,7 @@ item.favorite = {
             });
         }, function(callback) {
             Items.findOne({
-                _id : targetRef
+                _id: targetRef
             }, function(error, item) {
                 if (error) {
                     callback(error);
@@ -210,7 +210,7 @@ item.favorite = {
             });
         }], function(error, item) {
             ResponseHelper.response(res, error, {
-                item : item
+                item: item
             });
         });
     }
@@ -220,9 +220,9 @@ item.favorite = {
  * 删除 db.rUserFavoriteItem
  */
 item.unfavorite = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         var initiatorRef = req.currentUserId;
         var targetRef = RequestHelper.parseId(req.body._id);
         async.waterfall([function(callback) {
@@ -231,7 +231,7 @@ item.unfavorite = {
             });
         }, function(callback) {
             Items.findOne({
-                _id : targetRef
+                _id: targetRef
             }, function(error, item) {
                 if (error) {
                     callback(error);
@@ -243,7 +243,7 @@ item.unfavorite = {
             });
         }], function(error, item) {
             ResponseHelper.response(res, error, {
-                item : item
+                item: item
             });
         });
     }
@@ -256,13 +256,13 @@ item.unfavorite = {
  * @param {db.category._id} _categoryId
  */
 item.updateCategory = {
-    method : 'post',
-    permissionValidators : ['validateLogin', 'validateAdmin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin', 'validateAdmin'],
+    func: function(req, res) {
         var param = req.body;
         async.waterfall([function(callback) {
             Items.findOne({
-                _id : RequestHelper.parseId(param._id)
+                _id: RequestHelper.parseId(param._id)
             }, function(error, item) {
                 if (error) {
                     callback(error);
@@ -276,7 +276,7 @@ item.updateCategory = {
             SearchBuildService.changeToNewCategory(item, RequestHelper.parseId(param._categoryId), callback);
         }], function(error, item) {
             ResponseHelper.response(res, error, {
-                item : item 
+                item: item
             });
         });
     }
