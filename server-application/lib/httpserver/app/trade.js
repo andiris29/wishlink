@@ -14,6 +14,9 @@ var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var RelationshipHelper = require('../helper/RelationshipHelper');
 
+// Service
+var TradeService = require('../service/TradeService');
+
 var trade = module.exports;
 
 /**
@@ -157,7 +160,6 @@ trade.prepay = {
  *   如果对应 item.status 为审核失败，则新状态为 审核失败
  * 调用 TradeService.statusTo 更新交易状态
  * 如果是支付宝交易，且 ownerRef.alipay.id 为空，则将 trade.pay.alipay.buyer_id 复制到 ownerRef.alipay.id
- * 
  */
 trade.payCallback = {
     method: 'post',
@@ -234,7 +236,7 @@ trade.payCallback = {
         }, function(trade, item, callback) {
             // update trade status
             var newStatus = TradeService.Status.PAID.code;
-            if (item.status === 0 ) {
+            if (item.status === 0) {
                 // 如果对应 item.status 为审核中，则新状态为 审核中
                 newStatus = TradeService.Status.PAID.code;
             } else if (item.status === 1) {
@@ -254,7 +256,7 @@ trade.payCallback = {
                 }
             });
         }, function(trade, callback) {
-            // find people 
+            // find people
             Users.findOne({
                 _id: trade.ownerRef
             }, function(error, user) {
