@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U03AddAddressVC" customModule="wishlink" customModuleProvider="target">
@@ -24,6 +24,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="收货人姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iAf-G1-c4B">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             <connections>
@@ -32,12 +33,14 @@
                         </textField>
                         <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IcJ-hE-yVd">
                             <rect key="frame" x="0.0" y="39" width="600" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="BBr-UG-6cw"/>
                             </constraints>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="IcJ-hE-yVd" secondAttribute="bottom" id="1ch-wT-9g8"/>
@@ -63,6 +66,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="收货人电话" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTD-T7-wCA">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             <connections>
@@ -71,12 +75,14 @@
                         </textField>
                         <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7IU-3F-Hzg">
                             <rect key="frame" x="0.0" y="39" width="600" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="eCT-Qg-lQo"/>
                             </constraints>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="7IU-3F-Hzg" secondAttribute="trailing" id="21m-yp-J0N"/>
@@ -102,6 +108,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="所在地区" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-EF-bXl">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -110,6 +117,7 @@
                         </textField>
                         <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KqA-yy-Cep">
                             <rect key="frame" x="0.0" y="39" width="600" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="lQc-ru-euG"/>
@@ -117,11 +125,13 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBH-7X-8dD">
                             <rect key="frame" x="0.0" y="0.0" width="590" height="40"/>
+                            <animations/>
                             <state key="normal" image="u02-next">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="38R-ME-gpj"/>
@@ -151,6 +161,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="详细地址" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-Nb-Ke6">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="go"/>
                             <connections>
@@ -159,12 +170,14 @@
                         </textField>
                         <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Ut-mG-CLi">
                             <rect key="frame" x="0.0" y="39" width="600" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="0I6-XH-7TP"/>
                             </constraints>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="L6W-Nb-Ke6" firstAttribute="height" secondItem="ERF-E8-M53" secondAttribute="height" constant="15" id="5lv-QI-522"/>
@@ -186,6 +199,7 @@
                     </variation>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="NCg-an-biP" secondAttribute="trailing" id="3mb-68-fUF"/>

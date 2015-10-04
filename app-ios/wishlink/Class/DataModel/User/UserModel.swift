@@ -25,21 +25,28 @@ class UserModel: BaseModel {
             self.fillData()
         }
     }
+    var isLogin: Bool = false
     var userId: String = ""
     var nickname: String = ""
     var password: String = ""
     var update: String = ""
     var create: String = ""
+    var portrait: String = ""
+    var backgroud: String = ""
     var itemRecommendationRefs: NSMutableArray!
     var tradeRefs: NSMutableArray!
     var receiversArray: NSMutableArray!
     
     func fillData() {
+        if self.userDic.count == 0 {
+            return  
+        }
+        self.isLogin = true
         self.userId = self.userDic["_id"] as! String
         self.nickname = self.userDic["nickname"] as! String
         self.update = self.userDic["update"] as! String
         self.create = self.userDic["create"] as! String
-        
+        self.portrait = self.userDic["portrait"] as! String
 //        var re
         for receiver in self.userDic["receivers"] as! [ReceiverModel] {
             

@@ -12,7 +12,7 @@ enum AddAddressVCOperationType {
     case Add, Edit
 }
 
-class U03AddAddressVC: RootVC, UITextFieldDelegate {
+class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     
@@ -61,6 +61,23 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
     }
     // MARK: - delegate
     
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        if tag == 10 {
+            var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
+            alertView.show()
+            if self.operationType == .Add {
+                self.callBackClosure!(.Add, self.receiver)
+            }else {
+                
+            }
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+    }
+    
+    func requestDataFailed(error: String) {
+        
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField == self.nameTextField {
@@ -94,16 +111,32 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate {
     
     func saveAddress() {
         // TODO 本地数据
-        self.receiver.name = self.nameTextField.text
-        self.receiver.phone = self.phoneTextField.text
-        self.receiver.province = self.provinceTextField.text
-        self.receiver.address = self.addressTextField.text
-        var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
-        alertView.show()
+        var dic: [String: AnyObject]
         if self.operationType == .Add {
-            self.callBackClosure!(.Add, self.receiver)
+            dic = [
+                "name": self.nameTextField.text,
+                "phone": self.phoneTextField.text,
+                "province": self.provinceTextField.text,
+                "address": self.addressTextField.text,
+                "isDefault": NSNumber(bool: true)]
         }
-        self.navigationController!.popViewControllerAnimated(true)
+        else {
+            dic = [
+                "uuid": "",
+                "name": self.nameTextField.text,
+                "phone": self.phoneTextField.text,
+                "province": self.provinceTextField.text,
+                "address": self.addressTextField.text,
+                "isDefault": NSNumber(bool: false)]
+        }
+        
+        
+        
+        self.httpObj.httpPostApi("user/saveReceiver", parameters: dic, tag: 10)
+//        self.receiver.name = self.nameTextField.text
+//        self.receiver.phone = self.phoneTextField.text
+//        self.receiver.province = self.provinceTextField.text
+//        self.receiver.address = self.addressTextField.text
     }
     
     func validateContent() -> Bool {

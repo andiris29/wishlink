@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wishlink/PageContent/User/U01/U01LoginVC.swift"
-            timestampString = "465405352.612253"
+            filePath = "wishlink/PageContent/User/U03/U03SettingVC.swift"
+            timestampString = "465521206.337202"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "wxLogin()"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "btnAction(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

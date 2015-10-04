@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U01LoginVC" customModule="wishlink" customModuleProvider="target">
@@ -16,12 +17,15 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u01-BG" translatesAutoresizingMaskIntoConstraints="NO" id="IvB-nj-5A2" userLabel="bgImageView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <animations/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u01-logo" translatesAutoresizingMaskIntoConstraints="NO" id="6q7-WB-P53" userLabel="wishLink">
                     <rect key="frame" x="73" y="131" width="229" height="32"/>
+                    <animations/>
                 </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02x-8d-Pby" userLabel="centerLine">
                     <rect key="frame" x="0.0" y="333" width="375" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="0Fh-HS-Sci"/>
@@ -29,6 +33,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1se-59-LEa" userLabel="weiXin">
                     <rect key="frame" x="95" y="314" width="185" height="44"/>
+                    <animations/>
                     <state key="normal" backgroundImage="u01-weixin">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -39,6 +44,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYF-d1-EpW">
                     <rect key="frame" x="128" y="582" width="119" height="30"/>
+                    <animations/>
                     <state key="normal" title="跳过，随便看看 &gt;">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,6 +55,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzS-U2-3Ii" userLabel="weiBo">
                     <rect key="frame" x="95" y="393" width="185" height="44"/>
+                    <animations/>
                     <state key="normal" backgroundImage="u01-weibo">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -58,6 +65,7 @@
                     </connections>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="6q7-WB-P53" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="131" id="1Eo-Sj-B4B"/>

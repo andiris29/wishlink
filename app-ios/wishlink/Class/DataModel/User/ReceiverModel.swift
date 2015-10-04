@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum ReceiverDicType {
+    case Add, Update
+}
+
 class ReceiverModel: BaseModel {
     var name: String = ""
     var phone: String = ""
@@ -25,4 +29,27 @@ class ReceiverModel: BaseModel {
         self.address = self.getStringValue("address", dic: dic)
         self.isDefault = self.getBoolValue("isDefault", dic: dic)
     }
+    
+    func keyValuesWithType(type: ReceiverDicType) -> [String: AnyObject]{
+        var dic: [String: AnyObject]
+        if type == .Add {
+             dic = [
+                "name": self.name,
+                "phone": self.phone,
+                "province": self.province,
+                "address": self.address,
+                "isDefault": NSNumber(bool: self.isDefault)]
+        }
+        else {
+            dic = [
+                "uuid": "",
+                "name": self.name,
+                "phone": self.phone,
+                "province": self.province,
+                "address": self.address,
+                "isDefault": NSNumber(bool: self.isDefault)]
+        }
+        return dic
+    }
+    
 }

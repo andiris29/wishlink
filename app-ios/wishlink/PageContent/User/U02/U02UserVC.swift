@@ -128,8 +128,12 @@ class U02UserVC: RootVC, WebRequestDelegate {
     
     // 根据用户数据填充界面
     func fillDataForUI() {
-        self.nicknameLabel.text = "YeoHuang";
-        self.contryLabel.text = "上海杨浦区国和路555弄"
+        if UserModel.shared.isLogin == true {
+            self.nicknameLabel.text = UserModel.shared.nickname;
+            
+            self.httpObj.renderImageView(self.headImageView, url: UserModel.shared.portrait, defaultName: "")
+            self.contryLabel.text = "上海杨浦区国和路555弄"
+        }
     }
     
     func prepareSubVC() {
