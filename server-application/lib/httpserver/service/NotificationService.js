@@ -15,7 +15,6 @@ var _getJPushClient = function(config) {
     return JPush.buildClient(config.appkey, config.masterkey);
 };
 
-
 // Recommend's Push Notification
 NotificationService.notifyDailyInChina = {
     command: 'recommend/dailyInChina',
@@ -126,7 +125,7 @@ NotificationService.unbind = function(registrationId, _id, callback) {
     if (_id) {
         criteria.userRef = _id;
     }
-    jPushAudiences.remove(criteria. callback);
+    jPushAudiences.remove(criteria, callback);
 };
 
 /**
