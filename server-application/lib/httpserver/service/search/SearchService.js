@@ -4,6 +4,8 @@ var MongoHelper = require('../../helper/MongoHelper');
 var Items = require('../../../model/items');
 var Users = require('../../../model/users');
 
+var SegmentService = require('../SegmentService');
+
 var SearchService = {};
 //TODO
 /**
@@ -23,14 +25,20 @@ var SearchService = {};
  * @param {db.item[]} items
  */
 SearchService.search = function(keyword, pageNo, pageSize, callback) {
-
-    var regex = RegExp(keyword);
-    var criteria = {
-        'name' : regex
-    };
     async.waterfall([
         function (callback) {
-            MongoHelper.queryPaging(Items.find(criteria), pageNo, pageSize, callback);
+            SegmentService.segment(keyword, callback);
+        }, function (segs, callback) {
+            var searchKeyword = segs.join(' ');
+            MongoHelper.queryPaging(Items.find({
+                    $text: {
+                        $search: searchKeyword
+                    }
+                }, {
+                    score: { $meta: "textScore"
+                    }
+                }
+            ).sort({ score: { $meta: "textScore" } } ), pageNo, pageSize, callback);
         }
     ], callback);
 };
