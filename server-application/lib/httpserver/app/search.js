@@ -18,7 +18,10 @@ search.search = {
 
         async.waterfall([
             function (callback) {
-                SearchService.saveHistory(keyword, req.currentUserId, callback);
+                SearchService.saveHistory(keyword, req.currentUserId, function (err) {
+                    //ignore error of save history
+                    callback();
+                });
             }, function (callback) {
                 SearchService.search(keyword, pageNo, pageSize, callback);
             }
