@@ -2,10 +2,8 @@ var async = require('async');
 
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
-var ServiceHelper = require('../helper/ServiceHelper');
-var MongoHelper = require('../helper/MongoHelper');
 
-var Items = require('../../model/items');
+var SearchService = require('../service/search/SearchService');
 
 var search = module.exports;
 
@@ -13,26 +11,21 @@ var search = module.exports;
 search.search = {
     method : 'get',
     func : function(req, res) {
-        ServiceHelper.queryPaging(req, res, function(param, callback) {
-            async.waterfall([function(cb) {
-                var keyword = param.keyword;
-                var regex = RegExp(keyword);
+        var param = req.queryString;
+        var keyword = param.keyword;
+        var pageNo = param.pageNo;
+        var pageSize = param.pageSize;
 
-                var criteria = {
-                    'name' : regex
-                };
-
-                MongoHelper.queryPaging(Items.find(criteria),
-                    param.pageNo,
-                    param.pageSize,
-                    function(error, models) {
-                        cb(error, models);
-                    });
-            }], callback);
-        }, function(models) {
-            return {
-                items: models
-            };
+        async.waterfall([
+            function (callback) {
+                SearchService.saveHistory(keyword, req.currentUserId, callback);
+            }, function (callback) {
+                SearchService.search(keyword, pageNo, pageSize, callback);
+            }
+        ], function (err, items) {
+            ResponseHelper.response(res, err, {
+                items : items
+            });
         });
     }
 };

@@ -66,6 +66,15 @@ var entitySchema = Schema({
     update : {
         type : Date,
         'default' : Date.now
+    },
+    searchHistory : {
+        entry : [{
+            keyword : String,
+            create : {
+                type : Date,
+                'default' : Date.now
+            }
+        }]
     }
 });
 

@@ -1,6 +1,7 @@
-/**
- * Created by wxy325 on 8/28/15.
- */
+var async = require('async');
+
+var MongoHelper = require('../../helper/MongoHelper');
+var Items = require('../../../model/items');
 
 var SearchService = {};
 //TODO
@@ -21,7 +22,25 @@ var SearchService = {};
  * @param {db.item[]} items
  */
 SearchService.search = function(keyword, pageNo, pageSize, callback) {
+
+    var regex = RegExp(keyword);
+    var criteria = {
+        'name' : regex
+    };
+    async.waterfall([
+        function (callback) {
+            MongoHelper.queryPaging(Items.find(criteria), pageNo, pageSize, callback);
+        }
+    ], callback);
 };
 
+SearchService.saveHistory = function(keyword, userId, callback) {
+    if (!userId) {
+        callback();
+        return;
+    }
+    callback();
+
+};
 
 module.exports = SearchService;
