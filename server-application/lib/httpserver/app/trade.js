@@ -23,13 +23,13 @@ var trade = module.exports;
  * @param {int} req.quantity
  */
 trade.create = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         var newTrade = new Trades({
-            itemRef : RequestHelper.parseId(req.body.itemRef),
-            quantity : RequestHelper.parseNumber(req.body.quantity),
-            ownerRef : req.currentUserId
+            itemRef: RequestHelper.parseId(req.body.itemRef),
+            quantity: RequestHelper.parseNumber(req.body.quantity),
+            ownerRef: req.currentUserId
         });
 
         async.waterfall([function(callback) {
@@ -54,7 +54,7 @@ trade.create = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -69,12 +69,12 @@ trade.create = {
  * @param {string} req.receiver.address
  */
 trade.updateReceiver = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -86,10 +86,10 @@ trade.updateReceiver = {
             });
         }, function(trade, callback) {
             trade.receiver = {
-                name : req.body.receiver.name,
-                phone : req.body.receiver.phone,
-                province : req.body.receiver.province,
-                address : req.body.receiver.address
+                name: req.body.receiver.name,
+                phone: req.body.receiver.phone,
+                province: req.body.receiver.province,
+                address: req.body.receiver.address
             };
 
             trade.save(function(error, trade) {
@@ -103,7 +103,7 @@ trade.updateReceiver = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -113,12 +113,12 @@ trade.updateReceiver = {
  * 调用 PaymentService.getPrepayId 更新交易
  */
 trade.prepay = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -144,7 +144,7 @@ trade.prepay = {
             }
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -160,12 +160,12 @@ trade.prepay = {
  * 
  */
 trade.payCallback = {
-    method : 'post',
-    func : function(req, res) {
+    method: 'post',
+    func: function(req, res) {
         async.waterfall([function(callback) {
             // find target trade
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -191,10 +191,10 @@ trade.payCallback = {
 
                 trade.pay.alipay.notifyLogs = trade.pay.alipay.notifyLogs || [];
                 trade.pay.alipay.notifyLogs.push({
-                    'notify_type' : req.body.notify_type,
-                    'notify_id' : req.body.notify_id,
-                    'trade_status' : req.body.trade_status,
-                    'refund_status' : req.body.refund_status,
+                    'notify_type': req.body.notify_type,
+                    'notify_id': req.body.notify_id,
+                    'trade_status': req.body.trade_status,
+                    'refund_status': req.body.refund_status,
                 });
             } else if (req.body.type === 'wechat') {
                 // update wechat
@@ -207,8 +207,8 @@ trade.payCallback = {
                 trade.pay.weixin.openId = req.body.openid;
                 trade.pay.weixin.notifyLogs = trade.pay.weixin.notifyLogs || [];
                 trade.pay.weixin.notifyLogs.push({
-                    //'trade_state' : req.body['trade_state'],
-                    //'date' : Date.now
+                    //'trade_state': req.body['trade_state'],
+                    //'date': Date.now
                 });
             } else {
                 callback(ServerError.ERR_UNKOWN);
@@ -221,7 +221,7 @@ trade.payCallback = {
         }, function(trade, callback) {
             // find item by itemRef
             Items.findOne({
-                _id : trade.itemRef
+                _id: trade.itemRef
             }, function(error, item) {
                 if (error) {
                     callback(error);
@@ -256,7 +256,7 @@ trade.payCallback = {
         }, function(trade, callback) {
             // find people 
             Users.findOne({
-                _id : trade.ownerRef
+                _id: trade.ownerRef
             }, function(error, user) {
                 if (error) {
                     callback(error);
@@ -282,7 +282,7 @@ trade.payCallback = {
             }
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -292,12 +292,12 @@ trade.payCallback = {
  * 调用 PaymentService.syncStatus 更新交易
  */
 trade.postpay = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -313,7 +313,7 @@ trade.postpay = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -325,12 +325,12 @@ trade.postpay = {
  * 调用 TradeService.statusTo 更新交易状态
  */
 trade.cancel = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -351,7 +351,7 @@ trade.cancel = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -362,12 +362,12 @@ trade.cancel = {
  * 调用 TradeService.statusTo 更新交易状态
  */
 trade.assignToMe = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -384,7 +384,7 @@ trade.assignToMe = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -395,13 +395,13 @@ trade.assignToMe = {
  * 调用 TradeService.statusTo 更新交易状态
  */
 trade.unassign = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             // find trade
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -426,7 +426,7 @@ trade.unassign = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -441,12 +441,12 @@ trade.unassign = {
  * @param {string} req.trackingId
  */
 trade.deliver = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -458,8 +458,8 @@ trade.deliver = {
             });
         }, function(trade, callback) {
             trade.delivery = {
-                company : req.body.company,
-                trackingId : req.body.trackingId
+                company: req.body.company,
+                trackingId: req.body.trackingId
             };
 
             TradeService.statusTo(req.currentUserId, trade, TradeService.Status.DELIVERED.code, 'trade/deliver', function(error, trade) {
@@ -467,7 +467,7 @@ trade.deliver = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -477,12 +477,12 @@ trade.deliver = {
  * 调用 TradeService.statusTo 更新交易状态
  */
 trade.receipt = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -508,16 +508,16 @@ trade.receipt = {
  * 保存上传的投诉图片
  * 往 trade.complaints 中添加一个元素
  * 调用 TradeService.statusTo 更新交易状态
- * 
+ *
  * @param {string} req.problem
  */
 trade.complaint = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -536,23 +536,22 @@ trade.complaint = {
                 }
 
                 var complaint = {
-                    problem : fields.problem,
-                    images : [],
-                    resolution : {}
+                    problem: fields.problem,
+                    images: [],
+                    resolution: {}
                 };
 
                 files.forEach(function(file) {
                     var imagePath = global.config.uploads.trade.complaint.exposeToUrl + '/' + path.relative(global.config.uploads.trade.complaint.ftpPath, file.path);
                     complaint.images.push(imagePath);
                 });
-                
                 TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINING.code, 'trade/complaint', function(error, trade) {
                     callback(error, trade);
                 });
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -562,17 +561,17 @@ trade.complaint = {
  * 更新 trade.complaints[]
  * trade.complaints[].staffRef 为当前登录用户
  * 调用 TradeService.statusTo 更新交易状态
- * 
+ *
  * @param {string} req.index
  * @param {string} req.notes
  */
 trade.resolveComplaint = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -584,8 +583,8 @@ trade.resolveComplaint = {
             });
         }, function(trade, callback) {
             trade.complaints[RequestHelper.parseInteger(req.body.index)].resolution = {
-                staffRef : req.currentUserId,
-                notes : req.body._id
+                staffRef: req.currentUserId,
+                notes: req.body._id
             };
 
             TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINED.code, 'trade/resolveComplaint', function(error, trade) {
@@ -593,7 +592,7 @@ trade.resolveComplaint = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
@@ -610,9 +609,9 @@ trade.resolveComplaint = {
  */
 /*
 trade.markTransfered = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
     }
 };
 */
@@ -621,12 +620,12 @@ trade.markTransfered = {
  * 移除相关 user.unread.tradeRefs
  */
 trade.read = {
-    method : 'post',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         async.waterfall([function(callback) {
             Trades.findOne({
-                _id : RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id)
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -638,8 +637,8 @@ trade.read = {
             });
         }, function(trade, callback) {
             Users.findOne({
-                _id : trade.ownerRef
-            }, function (error, user) {
+                _id: trade.ownerRef
+            }, function(error, user) {
                 if (error) {
                     callback(error);
                 } else if (!user) {
@@ -665,7 +664,7 @@ trade.read = {
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
-                trade : trade
+                trade: trade
             });
         });
     }
