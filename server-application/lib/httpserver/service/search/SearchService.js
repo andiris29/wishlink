@@ -2,6 +2,7 @@ var async = require('async');
 
 var MongoHelper = require('../../helper/MongoHelper');
 var Items = require('../../../model/items');
+var Users = require('../../../model/users');
 
 var SearchService = {};
 //TODO
@@ -39,8 +40,31 @@ SearchService.saveHistory = function(keyword, userId, callback) {
         callback();
         return;
     }
-    callback();
-
+    async.waterfall([
+        function (callback) {
+            Users.findOne({
+                '_id' : userId
+            },callback);
+        }, function (user, callback) {
+            var searchHistory = user.searchHistory = user.searchHistory || {};
+            var entry = searchHistory.entry = searchHistory.entry || [];
+            var i = 0;
+            //删除已有的重复keyword
+            for (i = 0; i < entry.length; i++ ) {
+                var e = entry[i];
+                if (e.keyword === keyword) {
+                    entry.splice(i, 1);
+                }
+            }
+            entry.unshift({
+                keyword : keyword,
+                create : new Date()
+            });
+            user.save(callback);
+        }
+    ], function (err) {
+        callback(err);
+    });
 };
 
 module.exports = SearchService;
