@@ -17,6 +17,7 @@ class ReceiverModel: BaseModel {
     var phone: String = ""
     var province: String = ""
     var address: String = ""
+    var uuid: String = ""
     var isDefault: Bool = false
     convenience override init() {
         self.init(dic: NSDictionary())
@@ -28,6 +29,7 @@ class ReceiverModel: BaseModel {
         self.province = self.getStringValue("province", dic: dic)
         self.address = self.getStringValue("address", dic: dic)
         self.isDefault = self.getBoolValue("isDefault", dic: dic)
+        self.uuid = self.getStringValue("uuid", dic: dic)
     }
     
     func keyValuesWithType(type: ReceiverDicType) -> [String: AnyObject]{
@@ -42,7 +44,7 @@ class ReceiverModel: BaseModel {
         }
         else {
             dic = [
-                "uuid": "",
+                "uuid": self.uuid,
                 "name": self.name,
                 "phone": self.phone,
                 "province": self.province,

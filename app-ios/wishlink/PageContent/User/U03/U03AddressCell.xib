@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -22,6 +22,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hz-7f-Fw5">
                                         <rect key="frame" x="0.0" y="5" width="40" height="40"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="8BT-PL-5Hx"/>
                                             <constraint firstAttribute="width" constant="40" id="fnQ-35-PG6"/>
@@ -36,6 +37,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBa-Oc-ACl">
                                         <rect key="frame" x="181" y="5" width="57" height="40"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="57" id="6Gx-vW-079"/>
                                             <constraint firstAttribute="height" constant="40" id="GLu-V3-nS4"/>
@@ -55,6 +57,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8p-d0-W3i">
                                         <rect key="frame" x="253" y="5" width="57" height="40"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="57" id="5Gg-Gl-1br"/>
                                             <constraint firstAttribute="height" constant="40" id="v2W-G6-QM6"/>
@@ -74,12 +77,14 @@
                                     </button>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LfQ-RV-yyd">
                                         <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="PbF-Kk-k0m"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="8hz-7f-Fw5" firstAttribute="leading" secondItem="f1G-Tc-jxa" secondAttribute="leading" id="5fi-ow-wcL"/>
@@ -99,6 +104,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1r-L8-wVF">
                                         <rect key="frame" x="15" y="20" width="40" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="4mR-qh-jCx"/>
                                             <constraint firstAttribute="height" constant="16" id="bee-qa-AHu"/>
@@ -109,6 +115,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kelly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jm5-cj-vmI">
                                         <rect key="frame" x="55" y="20" width="245" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="TH4-XT-LXN"/>
                                         </constraints>
@@ -118,6 +125,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCp-8l-b5h">
                                         <rect key="frame" x="15" y="41" width="40" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="6Yj-qa-es1"/>
                                             <constraint firstAttribute="width" constant="40" id="k7e-UV-Tme"/>
@@ -128,6 +136,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13800138088" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCu-YB-Krc">
                                         <rect key="frame" x="55" y="41" width="245" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="rcg-dT-kZf"/>
                                         </constraints>
@@ -137,6 +146,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地区：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wf-a2-bpS">
                                         <rect key="frame" x="15" y="62" width="40" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="5Yo-7h-fvN"/>
                                             <constraint firstAttribute="width" constant="40" id="E3h-s2-UEM"/>
@@ -147,6 +157,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市普陀区" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VU1-VO-2Hw">
                                         <rect key="frame" x="55" y="62" width="245" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="Jvd-by-qgK"/>
                                         </constraints>
@@ -156,6 +167,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsk-oe-SJE">
                                         <rect key="frame" x="15" y="83" width="40" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="4YW-jx-B4u"/>
                                             <constraint firstAttribute="width" constant="40" id="tbB-Up-Dfj"/>
@@ -166,6 +178,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中山北路2438号25楼" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQz-uE-aw5">
                                         <rect key="frame" x="55" y="83" width="245" height="16"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="SUC-eV-RdB"/>
                                         </constraints>
@@ -174,6 +187,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="lCp-8l-b5h" firstAttribute="leading" secondItem="P1r-L8-wVF" secondAttribute="leading" id="2s6-mo-h3x"/>
@@ -199,6 +213,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Y5W-0p-0Nl" secondAttribute="bottom" id="17c-7A-kfg"/>
@@ -211,6 +226,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <animations/>
                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="7FX-z6-b6q" secondAttribute="trailing" id="M9W-Dg-HNz"/>
@@ -219,6 +235,7 @@
                     <constraint firstItem="7FX-z6-b6q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="a3x-Nk-z2f"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="addressLabel" destination="uQz-uE-aw5" id="j3f-y8-pHG"/>
                 <outlet property="deleteBtn" destination="k8p-d0-W3i" id="WC2-Za-9c1"/>

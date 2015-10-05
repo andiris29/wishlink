@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wishlink/PageContent/User/U03/U03SettingVC.swift"
-            timestampString = "465521206.337202"
+            filePath = "wishlink/PageContent/User/U03/U03AddressManagerVC.swift"
+            timestampString = "465747184.122249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "btnAction(_:)"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "setDefaultReceiver(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

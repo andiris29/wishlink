@@ -38,8 +38,11 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.httpObj.mydelegate = self
         self.prepareNav()
         // Do any additional setup after loading the view.
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -62,20 +65,24 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
     // MARK: - delegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+        })
         if tag == 10 {
-            var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
-            alertView.show()
-            if self.operationType == .Add {
-                self.callBackClosure!(.Add, self.receiver)
-            }else {
-                
-            }
-            self.navigationController!.popViewControllerAnimated(true)
+            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
+                alertView.show()
+                self.navigationController!.popViewControllerAnimated(true)
+            })
+            
         }
     }
     
     func requestDataFailed(error: String) {
-        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+        })
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -117,8 +124,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
                 "name": self.nameTextField.text,
                 "phone": self.phoneTextField.text,
                 "province": self.provinceTextField.text,
-                "address": self.addressTextField.text,
-                "isDefault": NSNumber(bool: true)]
+                "address": self.addressTextField.text]
         }
         else {
             dic = [
@@ -131,7 +137,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         }
         
         
-        
+        SVProgressHUD.showSuccessWithStatusWithBlack("请稍等...")
         self.httpObj.httpPostApi("user/saveReceiver", parameters: dic, tag: 10)
 //        self.receiver.name = self.nameTextField.text
 //        self.receiver.phone = self.phoneTextField.text
@@ -147,8 +153,10 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
             msg = "电话不能为空"
         } else if self.provinceTextField.text.length == 0 {
             msg = "地区不能为空"
-        }else {
+        }else if self.addressTextField.text.length == 0{
             msg = "地址不能为空"
+        }else {
+            
         }
         if msg.length == 0 {
             return true
@@ -164,6 +172,12 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         self.phoneTextField.text = self.receiver.phone
         self.provinceTextField.text = self.receiver.province
         self.addressTextField.text = self.receiver.address
+        
+        // TODO test inputting
+        self.nameTextField.text = "黄悦"
+        self.provinceTextField.text = "上海"
+        self.phoneTextField.text = "18815287600"
+        self.addressTextField.text = "杨浦"
     }
     
     func prepareNav() {

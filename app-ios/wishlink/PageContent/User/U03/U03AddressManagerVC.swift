@@ -9,24 +9,35 @@
 import UIKit
 
 class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource,
-U03AddressCellDelegate{
+U03AddressCellDelegate, WebRequestDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
     var selectedReciver: ReceiverModel!
     
-    var addressArray = [ReceiverModel]()
+    var addressArray = [ReceiverModel]() {
+        didSet {
+            if self.addressArray.count > 0 {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.httpObj.mydelegate = self
+        self.tableView.registerNib(UINib(nibName: "U03AddressCell", bundle: MainBundle), forCellReuseIdentifier: "U03AddressCell")
         self.prepareUI()
-        self.loadAddressList()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if let array = UserModel.shared.receiversArray {
+            self.addressArray = array
+        }
         self.tableView.reloadData()
     }
     
@@ -67,6 +78,9 @@ U03AddressCellDelegate{
         cell.delegate = self
         var receiver = self.addressArray[indexPath.row]
         cell.receiver = receiver
+        if receiver.isDefault == true {
+            self.selectedReciver = receiver
+        }
         return cell
     }
     
@@ -79,21 +93,50 @@ U03AddressCellDelegate{
         }
         else if tag == 1{
             // 删除收货地址
-            self.addressArray.removeAtIndex(indexPath.row)
-            self.tableView.reloadData()
+            var receiver = self.addressArray[indexPath.row]
+            self.removeReceiver(receiver.uuid)
         }else if tag == 2{
             // 选中
             var receiver = self.addressArray[indexPath.row]
             if receiver == self.selectedReciver {
                 return
             }
-            self.selectedReciver.isDefault = false
-            self.selectedReciver = receiver
-            self.selectedReciver.isDefault = true
-            self.tableView.reloadData()
+            self.setDefaultReceiver(receiver)
         }else {
             
         }
+    }
+    
+    func requestDataFailed(error: String) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+        })
+    }
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+        })
+        if tag == 10 {
+            if let userDic = response["user"] as? [String: AnyObject] {
+                UserModel.shared.userDic = userDic
+                self.addressArray = UserModel.shared.receiversArray
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                })
+            }
+        }else if tag == 20 {
+            if let userDic = response["user"] as? [String: AnyObject] {
+                UserModel.shared.userDic = userDic
+                self.addressArray = UserModel.shared.receiversArray
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                })
+            }
+        }else {
+            
+        }
+        
     }
     
     // MARK: - response event
@@ -113,23 +156,22 @@ U03AddressCellDelegate{
     
     // MARK: - prive method
     
-    func loadAddressList() {
-        for i in 0 ... 3 {
-            var dic = [
-                "name" : "kelly",
-                "phone" : "18815287600",
-                "province" : "上海",
-                "address" : "国和路555弄",
-                "isDefault" : 0
-            ]
-            var reciver: ReceiverModel = ReceiverModel(dic: dic)
-            if i == 0 {
-                reciver.isDefault = true
-                self.selectedReciver = reciver
-            }
-            self.addressArray.append(reciver)
+    func setDefaultReceiver(receiver: ReceiverModel) {
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        receiver.isDefault = true
+        var dic = receiver.keyValuesWithType(.Update)
+        self.httpObj.httpPostApi("user/saveReceiver", parameters: dic, tag: 20)
+    }
+    
+    func removeReceiver(uuid: String) {
+        if uuid.length == 0 {
+            return
         }
-        self.tableView.reloadData()
+        var dic = [
+            "uuid": uuid
+        ]
+        SVProgressHUD.showInfoWithStatus("请稍等...")
+        self.httpObj.httpPostApi("user/removeReceiver", parameters: dic, tag: 10)
     }
     
     func prepareUI() {

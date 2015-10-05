@@ -9,16 +9,6 @@
 import UIKit
 
 class UserModel: BaseModel {
-    class var shared: UserModel {
-        dispatch_once(&Inner.token) {
-            Inner.instance = UserModel()
-        }
-        return Inner.instance!
-    }
-    struct Inner {
-        static var instance: UserModel?
-        static var token: dispatch_once_t = 0
-    }
     
     var userDic: [String : AnyObject]! {
         didSet {
@@ -35,21 +25,46 @@ class UserModel: BaseModel {
     var backgroud: String = ""
     var itemRecommendationRefs: NSMutableArray!
     var tradeRefs: NSMutableArray!
-    var receiversArray: NSMutableArray!
+    var receiversArray: [ReceiverModel]!
+    var alipayId: String = ""
+    
+    class var shared: UserModel {
+        dispatch_once(&Inner.token) {
+            Inner.instance = UserModel()
+        }
+        return Inner.instance!
+    }
+    struct Inner {
+        static var instance: UserModel?
+        static var token: dispatch_once_t = 0
+    }
+    
+    
     
     func fillData() {
         if self.userDic.count == 0 {
             return  
         }
         self.isLogin = true
-        self.userId = self.userDic["_id"] as! String
-        self.nickname = self.userDic["nickname"] as! String
-        self.update = self.userDic["update"] as! String
-        self.create = self.userDic["create"] as! String
-        self.portrait = self.userDic["portrait"] as! String
-//        var re
-        for receiver in self.userDic["receivers"] as! [ReceiverModel] {
-            
+        self.userId = getStringValue("_id", dic: self.userDic)
+        self.nickname = getStringValue("nickname", dic: self.userDic)
+        self.update = getStringValue("update", dic: self.userDic)
+        self.create = getStringValue("create", dic: self.userDic)
+        self.portrait = getStringValue("portrait", dic: self.userDic)
+
+        if let alipay = self.userDic["alipay"] as? NSDictionary {
+            self.alipayId = alipay["id"] as! String
+        }
+
+        
+        if let receivers = self.userDic["receivers"] as? NSArray {
+            if receivers.count > 0 {
+                self.receiversArray = []
+                for receiverDic in receivers {
+                    var receiverModel = ReceiverModel(dic: receiverDic as! NSDictionary)
+                    self.receiversArray.append(receiverModel)
+                }
+            }
         }
         
         var unreadDic = self.userDic["unread"] as! [String: AnyObject]

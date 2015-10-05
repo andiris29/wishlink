@@ -106,7 +106,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5py-VW-02v">
                     <rect key="frame" x="0.0" y="80" width="600" height="40"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="所在地区" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-EF-bXl">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="所在区域" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-EF-bXl">
                             <rect key="frame" x="15" y="0.0" width="585" height="40"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>

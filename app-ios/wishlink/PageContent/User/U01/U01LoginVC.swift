@@ -120,12 +120,17 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         }else if tag == 20 {
             self.parseUserData(response)
         }
-        SVProgressHUD.dismiss();
-        self.dismissViewControllerAnimated(true, completion: nil);
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss();
+            self.dismissViewControllerAnimated(true, completion: nil);
+        })
     }
     func requestDataFailed(error: String) {
-        UIHEPLER.alertErrMsg(error);
-        SVProgressHUD.dismiss();
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            UIHEPLER.alertErrMsg(error);
+            SVProgressHUD.dismiss();
+        })
+        
         
     }
 }
