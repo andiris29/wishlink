@@ -534,7 +534,11 @@ user.saveReceiver = {
             var hitIndex = -1;
             for (i = 0; i < user.receivers.length; i++) {
                 if (user.receivers[i].uuid === receiver.uuid) {
-                    user.receivers[i] = receiver;
+                    user.receivers[i].name = receiver.name;
+                    user.receivers[i].phone = receiver.phone;
+                    user.receivers[i].province = receiver.province;
+                    user.receivers[i].address = receiver.address;
+                    user.receivers[i].isDefault = receiver.isDefault;
                     isExists = true;
                     hitIndex = i;
                     break;
