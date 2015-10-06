@@ -495,13 +495,16 @@ trade.receipt = {
                 }
             });
         }, function(trade, callback) {
-            trade.deliver = trade.deliver || {};
-            trade.deliver.receiptDate = new Date();
+            trade.delivery = trade.delivery || {};
+            trade.delivery.receiptDate = new Date();
 
             TradeService.statusTo(req.currentUserId, trade, TradeService.Status.RECEIVED.code, 'trade/receipt', function(error, trade) {
                 callback(error, trade);
             });
         }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade: trade
+            });
         });
     }
 };
