@@ -44,7 +44,7 @@ public class AlipayPaymentController {
     @RequestMapping(value = "/callback", method = RequestMethod.POST)
     public Object callback(@ModelAttribute AlipayCallbackEntity entity, HttpServletRequest request,
             HttpServletResponse response) {
-        log.debug("alipay callback start");
+        log.info("==========================> alipay/callback start");
         
         // 获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
@@ -58,12 +58,13 @@ public class AlipayPaymentController {
             }
             // 乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
             // valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
-            log.debug("request[" + name + "]=" + valueStr);
+            log.debug("request.body." + name + "=" + valueStr);
             params.put(name, valueStr);
         }
         
         log.debug("verify request source is alipay!");
         if (!AlipayNotify.verify(params)) {
+            log.info("<========================== alipay/callback end");
             return FAIL;
         }
         
@@ -82,16 +83,18 @@ public class AlipayPaymentController {
             params.put("status", "5");
             ResponseJsonEntity appRes = restClient.postForObject(appServerCallbackUrl, params, ResponseJsonEntity.class);
             Gson gson = new Gson();
-            log.debug("app-server return:" + gson.toJson(appRes));
+            log.debug("app-server's return:" + gson.toJson(appRes));
             if ((appRes.getData() == null) || ((appRes.getMetadata() !=null) && StringUtils.isNotEmpty(appRes.getMetadata().getError()))) {
+                log.info("<========================== alipay/callback end");
                 return FAIL;
             }
         } else if (entity.getTrade_status().equals(TRADE_SUCCESS)) {
             params.put("status", "1");
             ResponseJsonEntity appRes = restClient.postForObject(appServerCallbackUrl, params, ResponseJsonEntity.class);
             Gson gson = new Gson();
-            log.debug("app-server return:" + gson.toJson(appRes));
+            log.debug("app-server's return:" + gson.toJson(appRes));
             if ((appRes.getData() == null) || ((appRes.getMetadata() !=null) && StringUtils.isNotEmpty(appRes.getMetadata().getError()))) {
+                log.info("<========================== alipay/callback end");
                 return FAIL;
             }
         } else if (entity.getTrade_status().equals(WAIT_BUYER_PAY)) {
@@ -102,13 +105,14 @@ public class AlipayPaymentController {
                 params.put("status", "9");
                 ResponseJsonEntity appRes = restClient.postForObject(appServerCallbackUrl, params, ResponseJsonEntity.class);
                 Gson gson = new Gson();
-                log.debug("app-server return:" + gson.toJson(appRes));
+                log.debug("app-server's return:" + gson.toJson(appRes));
                 if ((appRes.getData() == null) || ((appRes.getMetadata() !=null) && StringUtils.isNotEmpty(appRes.getMetadata().getError()))) {
+                    log.info("<========================== alipay/callback end");
                     return FAIL;
                 }
             }
         }
-
+        log.info("<========================== alipay/callback end");
         // ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
         return SUCCESS;
     }

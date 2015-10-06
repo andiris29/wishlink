@@ -73,14 +73,14 @@ public class WeChatPaymentController {
             @RequestParam(value= "clientIp", required = true) String clientIp,
             HttpServletRequest request,
             HttpServletResponse response) {
-        
-        log.info("wechat/prepay start");
-        
+
+        log.info("==========================> wechat/prepay start");
+
         ResponseJsonEntity returnEntity = new ResponseJsonEntity();
-        log.debug("id=" + id);
-        log.debug("totalFee=" + totalFee);
-        log.debug("orderName=" + orderName);
-        log.debug("clientIp=" + clientIp);
+        log.debug("request.body.id=" + id);
+        log.debug("request.body.totalFee=" + totalFee);
+        log.debug("request.body.orderName=" + orderName);
+        log.debug("request.body.clientIp=" + clientIp);
         
         try {
             UnifiedOrderReqBean bean = new UnifiedOrderReqBean();
@@ -104,18 +104,15 @@ public class WeChatPaymentController {
                 metadata.setError(ServerError.ERROR_GET_PREPAY_FAIL_CD);
                 metadata.setDevInfo(responseBody.getReturn_msg());
                 returnEntity.setMetadata(metadata);
-                return returnEntity;
-            } 
-            if (SUCCESS.compareTo(responseBody.getResult_code()) != 0) {
+            } else if (SUCCESS.compareTo(responseBody.getResult_code()) != 0) {
                 log.error("generate prepay_id error. err_code:[" + responseBody.getErr_code() + "],err_msg:[" + responseBody.getErr_code_des() + "]");
                 Metadata metadata = new Metadata();
                 metadata.setError(ServerError.ERROR_GET_PREPAY_FAIL_CD);
                 metadata.setDevInfo(responseBody.getErr_code() + "/" + responseBody.getErr_code_des());
                 returnEntity.setMetadata(metadata);
-                return returnEntity;
+            } else {
+                returnEntity.setData(responseBody);
             }
-            
-            returnEntity.setData(responseBody);
         } catch (Exception ex) {
             log.error("generate prepay_id exception.", ex);
             Metadata metadata = new Metadata();
@@ -123,7 +120,7 @@ public class WeChatPaymentController {
             metadata.setDevInfo(ServerError.ERROR_GET_PREPAY_FAIL_MSG);
             returnEntity.setMetadata(metadata);
         }
-        
+        log.info("<========================== wechat/prepay end");
         return returnEntity;
     }
     
@@ -138,8 +135,10 @@ public class WeChatPaymentController {
     public String callback(@RequestBody String postData,
             HttpServletRequest request, HttpServletResponse response) {
         
-        log.info("wechat callback start");        
+        log.info("==========================> wechat/callback start");
+        log.debug("weichat server's post data ======>");
         log.debug(postData);
+        log.debug("======> weichat server's post data");
         CallbackReqBean reqBean = (CallbackReqBean) Util.getObjectFromXML(postData, CallbackReqBean.class);
         CallbackResBean resBean = new CallbackResBean();
         Map<String, Object> params = reqBean.toMap();
@@ -150,18 +149,18 @@ public class WeChatPaymentController {
         RestTemplate restClient = new RestTemplate();
         ResponseJsonEntity appRes = restClient.postForObject(appServerCallbackUrl, params, ResponseJsonEntity.class);
         Gson gson = new Gson();
-        log.debug("app-server return:" + gson.toJson(appRes));
+        log.debug("app-server's return:" + gson.toJson(appRes));
         if ((appRes.getData() == null) || ((appRes.getMetadata() !=null) && StringUtils.isNotEmpty(appRes.getMetadata().getError()))) {
             resBean.setReturn_code(FAIL);
             resBean.setReturn_msg(appRes.getMetadata().getError());
-            log.debug("callback return:" + resBean.toString());
+            log.debug("wechat/callback's return:" + resBean.toString());
+            log.info("<========================== wechat/callback end");
             return resBean.toString();
         }
-        
-        
         resBean.setReturn_code(SUCCESS);
         resBean.setReturn_msg("OK");
-        log.debug("callback return:" + resBean.toString());
+        log.debug("wechat/callback's return:" + resBean.toString());
+        log.info("<========================== wechat/callback end");
         return resBean.toString();
     }
     
@@ -176,7 +175,7 @@ public class WeChatPaymentController {
     @RequestMapping(value = "/queryOrder", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object queryOrder(@RequestParam(value = "id", required = true) String id) {
 
-        log.info("wechat/querOrder start");
+        log.info("==========================> wechat/querOrder start");
 
         PayQueryReqBean requestBean = new PayQueryReqBean(StringUtils.EMPTY, id);
         ResponseJsonEntity returnEntity = new ResponseJsonEntity();
@@ -191,94 +190,24 @@ public class WeChatPaymentController {
                 metadata.setError(ServerError.ERROR_QUERY_ORDER_FAIL_CD);
                 metadata.setDevInfo(bean.getReturn_msg());
                 returnEntity.setMetadata(metadata);
-                return returnEntity;
-            }
-            if (SUCCESS.compareTo(bean.getResult_code()) != 0) {
+            } else if (SUCCESS.compareTo(bean.getResult_code()) != 0) {
                 log.error("generate order error. err_code:[" + bean.getErr_code() + "],err_msg:[" + bean.getErr_code_des() + "]");
                 Metadata metadata = new Metadata();
                 metadata.setError(ServerError.ERROR_GET_PREPAY_FAIL_CD);
                 metadata.setDevInfo(bean.getErr_code() + "/" + bean.getErr_code_des());
                 returnEntity.setMetadata(metadata);
-                return returnEntity;
+            } else {
+                returnEntity.setData(bean);
             }
-            
-            returnEntity.setData(bean);
         } catch (Exception e) {
             log.error("query order exception.", e);
             Metadata metadata = new Metadata();
             metadata.setError(ServerError.ERROR_QUERY_ORDER_FAIL_CD);
             metadata.setDevInfo(ServerError.ERROR_QUERY_ORDER_FAIL_MSG);
             returnEntity.setMetadata(metadata);
-        }        
+        }     
+        
+        log.info("<========================== wechat/querOrder end");
         return returnEntity;
     }
-
-    /**
-     * 向微信服务器发送发货通知
-     * 
-     * @param openid 购买用户的 OpenId
-     * @param transid 交易单号
-     * @param out_trade_no trade's id
-     * @param deliver_status 发货状态，1表示成功，0表示失败，失败时需要再在deliver_msg填上失败原因
-     * @param deliver_msg 发货状态信息，UTF8编码
-     * @param request Http Servlet Request
-     * @param response Http Servlet Response
-     * @return json object
-     */
-//    @RequestMapping(value = "deliverNotify", method = RequestMethod.GET)
-//    private Object deliverNotify(
-//            @RequestParam(value = "openid", required = true) String openid,
-//            @RequestParam(value = "transid", required = true) String transid,
-//            @RequestParam(value = "out_trade_no", required = true) String out_trade_no,
-//            @RequestParam(value = "deliver_status", required = false) String deliver_status,
-//            @RequestParam(value = "deliver_msg", required = false) String deliver_msg,
-//            HttpServletRequest request, HttpServletResponse response) {
-//
-//        log.info("wechat/deliverNotify start");
-//
-//        ResponseJsonEntity returnEntity = new ResponseJsonEntity();
-//
-//        initWechatApiSDK(request, response);
-//        this.getToken();
-//        
-//        String deliver_timestamp = Sha1Util.getTimeStamp();
-//
-//        SortedMap<String, String> params = new TreeMap<String, String>(); 
-//        params.put("appid", this.appId);
-//        params.put("deliver_msg", deliver_msg);
-//        params.put("deliver_status", deliver_status);
-//        params.put("deliver_timestamp", deliver_timestamp);
-//        params.put("openid", openid);
-//        params.put("out_trade_no", out_trade_no);
-//        params.put("transid", transid);
-//
-//        String sign = StringUtils.EMPTY;
-//
-//        try {
-//            sign = Sha1Util.createSHA1Sign(params);
-//            log.debug("sign app_signature result:[" + sign + "]");
-//        } catch (Exception e) {
-//            log.error("generate package error", e);
-//            Metadata metadata = new Metadata();
-//            metadata.setError(ServerError.ERROR_SIGN_PREPAY_PACKAGE_CD);
-//            metadata.setDevInfo(ServerError.ERROR_SIGN_PREPAY_PACKAGE_MSG);
-//            returnEntity.setMetadata(metadata);
-//            return returnEntity;
-//        }
-//        params.put("app_signature", sign);
-//        params.put("sign_method", "sha1");
-//
-//        Map<String, String> errorInfo = this.requestHandler.sendDeliverNotify(params);
-//        if (errorInfo == null) {
-//            Metadata metadata = new Metadata();
-//            metadata.setError(ServerError.ERROR_DELIVER_FAILURE_CD);
-//            metadata.setDevInfo(ServerError.ERROR_DELIVER_FAILURE_MSG);
-//            returnEntity.setMetadata(metadata);
-//            return returnEntity;
-//        }
-//        
-//        returnEntity.setData(errorInfo);
-//        return returnEntity;
-//    }
-//    
 }
