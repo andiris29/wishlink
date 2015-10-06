@@ -416,7 +416,7 @@ trade.unassign = {
         }, function(trade, callback) {
             var newStatus = 0;
             if (trade.status === TradeService.Status.ORDER_RECEIVED.code) {
-                newStatus = TradeService.Status.UN_ORDER_RECEIVE;
+                newStatus = TradeService.Status.UN_ORDER_RECEIVE.code;
             } else {
                 callback(ServerError.ERR_TRADE_STATUS);
                 return;
