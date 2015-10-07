@@ -19,6 +19,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var txtSize: UITextField!
     @IBOutlet weak var txtBuyArea: UITextField!
     
+    @IBOutlet weak var iv0: UIImageView!
+    @IBOutlet weak var iv1: UIImageView!
+    @IBOutlet weak var iv2: UIImageView!
+    @IBOutlet weak var iv3: UIImageView!
 
     //顶部标题View的高度约束
     @IBOutlet weak var constraint_topViewHieght: NSLayoutConstraint!
@@ -26,6 +30,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var constraint_viewHeight: NSLayoutConstraint!
 
     var actionSheet: CSActionSheet!
+    
+    var item:itemModel!
     
     //上传的图像列表
     var imagrArr:[UIImage] = [];
@@ -54,8 +60,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(60.0);
         self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(75);
- 
-      self.navigationController?.navigationBarHidden = false;
+       
+        self.navigationController?.navigationBarHidden = false;
+        
+         self.item = nil;
         
         let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
         titleLabel.text = "发布新订单"
@@ -94,7 +102,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         var tag = sender.tag;
         if(tag==11)//确认发布
         {
-            var errmsg = checkInput();
+            var errmsg = ""// checkInput();
             if(errmsg != "")
             {
                 UIHEPLER.alertErrMsg(errmsg);
@@ -103,78 +111,123 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             {
                 
                 
-                var para:[String:AnyObject] = ["name":txtName.text.trim(),
+                var para:[String:String] = ["name":txtName.text.trim(),
                     "brand":txtCategory.text.trim(),
                     "country":txtBuyArea.text.trim(),
-                    "price":txtPrice.text.trim().toInt()!,
+                    "price":txtPrice.text.trim(),
                     "spec":txtSize.text.trim(),
                     "comment":txtRemark.text.trim()
 //                    "file_a":(self.imagrArr.count>0?self.imagrArr[0]:"")
                 ]
+                
+  
                 
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
             
               var apiurl = SERVICE_ROOT_PATH + "item/create"
                 
                 
-                let URL = NSURL(string: apiurl)!
-                var _request = NSURLRequest(URL: URL)
-                
-               
-       
-                
-                
-                
-                
-                
-//                 request_.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-//                request(request_).responseJSON() {
-//                    (_, _, data, error) in
-//
-//
-//                    if(error == nil)
-//                    {
-//                        NSLog("respone:%@",data!.description)
-//
-//                    }
-//                    else
-//                    {
-//                        
-//                    }
-//                    
-//                }
+                   upload(
+                        .POST,
+                        URLString: "http://121.41.162.102/services/item/create",
+                        multipartFormData: {
+                            multipartFormData in
+                            
+                            multipartFormData.appendBodyPart(data: self.txtName.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "name")
+                            multipartFormData.appendBodyPart(data: self.txtCategory.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "brand")
+                            multipartFormData.appendBodyPart(data: self.txtBuyArea.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
+                            multipartFormData.appendBodyPart(data: self.txtPrice.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
+                            multipartFormData.appendBodyPart(data: self.txtSize.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
+                            multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "comment")
+                            if(self.imagrArr.count>0)
+                            {
+                                var imgData:NSData = UIImageJPEGRepresentation(self.imagrArr[0], 1)!
+                                print(imgData.length, terminator: "");
+                                var rate:CGFloat = 1
+                                while( imgData.length > 20 * 1000)
+                                {
+                                    rate-=0.1
+                                    imgData = UIImageJPEGRepresentation(self.imagrArr[0], rate)!
+                                    if(rate<=0.189)
+                                    {
+                                        break;
+                                    }
+                                }
+                                
+                                var finaleImage = UIImage(data: imgData);
+                                
+                                
+                                var resut = UIHEPLER.readImageFromLocalByName("tempImg01.jpg");
+                                
+                                var imgUrl = NSURL(fileURLWithPath: resut.path);
+//                                var imgUrl = MainBundle.URLForResource("scan_bg", withExtension: "png")
+//                                multipartFormData.appendBodyPart(fileURL: imgUrl!, name: "file_a")
+                                multipartFormData.appendBodyPart(data: imgData, name: "file_a", mimeType: "image/jpeg")
+//                                multipartFormData.appendBodyPart(fileURL: NSURL(fileURLWithPath: resut.path)!, name: "file_a", fileName: "tempImg01.jpg", mimeType: "image/jpeg")
+                            }
+                            if(self.imagrArr.count>1)
+                            {
+                                var imgData = UIImageJPEGRepresentation(self.imagrArr[1], 1.0)
+                                multipartFormData.appendBodyPart(data:imgData, name: "file_b")
+                            }
+                            if(self.imagrArr.count>2)
+                            {
+                                var imgData = UIImageJPEGRepresentation(self.imagrArr[2], 1.0)
+                                multipartFormData.appendBodyPart(data:imgData, name: "file_c")
+                            }
+                            if(self.imagrArr.count>3)
+                            {
+                                var imgData = UIImageJPEGRepresentation(self.imagrArr[3], 1.0)
+                                multipartFormData.appendBodyPart(data:imgData, name: "file_d")
+                            }
+                            
+                        },
+                        encodingCompletion: {
+                            encodingResult in
+                            switch encodingResult {
+                                
+                            case .Success(let _upload, _, _ ):
+                                
+                                _upload.responseJSON {
+                                    request, response, JSON, error in
+                                    
+                                    if(error == nil)
+                                    {
+                                        NSLog("Success:")
+                                        
+                                        var itemdic = JSON as! NSDictionary;
+                                        var itemData =  itemdic.objectForKey("data") as! NSDictionary
+                                        var itemObj =  itemData.objectForKey("item") as! NSDictionary
+                                        var item = itemModel(dict: itemObj);
+                                        self.item = item;
+                                        print(item);
+                                        if(item._id.length>0)
+                                        {
+                                            
+                                            var para  = ["itemRef":item._id,
+                                                "quantity":self.txtCount.text.trim()];
+                                            self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
+                                        }
 
+                                    }
+                                    else
+                                    {
+                                        
+                                        
+                                        SVProgressHUD.showErrorWithStatusWithBlack("上传图片失败！");
+                                        NSLog("Fail:")
+                                        
+                                    }
+                                    println(JSON)
+                                    
+                                }
+                            case .Failure(let encodingError):
+                                println("Failure")
+                                println(encodingError)
+                            }
+                        }
+                )
                 
-//                let custom: (URLRequestConvertible, [String: AnyObject]?) -> (NSURLRequest, NSError?) = {
-//                    (URLRequest, parameters) in
-//                    let mutableURLRequest = URLRequest.URLRequest.mutableCopy() as! NSMutableURLRequest
-//                    mutableURLRequest.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-//                    mutableURLRequest.HTTPBody = body
-//                    return (mutableURLRequest, nil)
-//                }
-//                
-//                request(.POST, apiurl, parameters: nil, encoding: .Custom(custom)).responseJSON() {
-//                    (_, _, data, error) in
-//                    
-//                    
-//                    if(error == nil)
-//                    {
-//                        NSLog("respone:%@",data!.description)
-//                  
-//                    }
-//                    else
-//                    {
-//                        
-//                    }
-//                    
-//                }
-                
-
-                
-//                self.httpObj.httpPostApi("item/create", parameters: para, tag: 11);
-//
-                var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-                self.navigationController?.pushViewController(vc, animated: true);
             }
         }
         else
@@ -184,7 +237,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     }
     
-    func checkInput()->String{
+      func checkInput()->String{
         
         var result = "";
         
@@ -246,11 +299,43 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
+        var icount = self.imagrArr.count;
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
+        
+            if(self.imagrArr.count<4)
+            {
+                
+                self.imagrArr.append(gotImage);
+                
+            }
             
-            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
+            if(self.imagrArr.count>0 && icount == 0)
+            {
+                
+                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg01.jpg")
+                self.iv0.image = self.imagrArr[0];
+            }
+            
+            if(self.imagrArr.count>1 && icount == 1)
+            {
+                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg02.jpg")
+                self.iv1.image = self.imagrArr[1];
+            }
+            if(self.imagrArr.count>2 && icount == 2)
+            {
+                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg03.jpg")
+                self.iv2.image = self.imagrArr[2];
+            }
+            if(self.imagrArr.count>3 && icount == 3)
+            {
+                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg04.jpg")
+                self.iv3.image = self.imagrArr[3];
+            }
+            
+//            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
         })
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -289,7 +374,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     var lastSelectTextFiledTag = -1;
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        if(textField.tag>3)
+        if(textField.tag>3 || textField.tag == 0)
         {
             return true;
         }
@@ -315,24 +400,19 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         return true;
     }
 
-    //WebrequestDelegate
+    //MAEK: WebrequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        if(tag == 11)//item创建成功,准备创建trade
+     if(tag == 12)//trade创建成功,准备页面跳转
         {
-            var itemdic = response as! NSDictionary;
-            var item = itemModel(dict: itemdic);
-            print(item);
-            if(item._id.length>0)
-            {
-                
-                var para  = ["itemRef":item._id,
-                    "quantity":self.txtCount.text];
-                self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
-            }
-        }
-        else if(tag == 12)//trade创建成功,准备页面跳转
-        {
+            
             SVProgressHUD.dismiss();
+            var dic = response as! NSDictionary;
+            var tradeItem = tradeModel(dict: dic);
+            
+            var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            vc.item = self.item;
+            vc.trade = tradeItem;
+            self.navigationController?.pushViewController(vc, animated: true);
             
         }
     }

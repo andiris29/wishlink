@@ -64,6 +64,7 @@
 		A132BBA71B863342004EAB47 /* U03SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A132BB9D1B863342004EAB47 /* U03SettingVC.xib */; };
 		A132BBAA1B863448004EAB47 /* T02HotListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132BBA81B863448004EAB47 /* T02HotListVC.swift */; };
 		A132BBAB1B863448004EAB47 /* T02HotListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A132BBA91B863448004EAB47 /* T02HotListVC.xib */; };
+		A13474FB1BC55DF0002CD7CB /* tradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13474FA1BC55DF0002CD7CB /* tradeModel.swift */; };
 		A140B0101B94B45500531546 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140B00E1B94B45500531546 /* DefaultCell.swift */; };
 		A140B0111B94B45500531546 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A140B00F1B94B45500531546 /* DefaultCell.xib */; };
 		A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89281B806DC400BC66DE /* SwiftyJSON.swift */; };
@@ -236,6 +237,7 @@
 		A132BB9D1B863342004EAB47 /* U03SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03SettingVC.xib; sourceTree = "<group>"; };
 		A132BBA81B863448004EAB47 /* T02HotListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T02HotListVC.swift; sourceTree = "<group>"; };
 		A132BBA91B863448004EAB47 /* T02HotListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T02HotListVC.xib; sourceTree = "<group>"; };
+		A13474FA1BC55DF0002CD7CB /* tradeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tradeModel.swift; sourceTree = "<group>"; };
 		A140B00E1B94B45500531546 /* DefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultCell.swift; path = cell/DefaultCell.swift; sourceTree = "<group>"; };
 		A140B00F1B94B45500531546 /* DefaultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultCell.xib; path = cell/DefaultCell.xib; sourceTree = "<group>"; };
 		A15D89281B806DC400BC66DE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 			children = (
 				A1F0E2851BA31E83005379CD /* TrendModel.swift */,
 				A1F7C1411BB1A6090045C125 /* itemModel.swift */,
+				A13474FA1BC55DF0002CD7CB /* tradeModel.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 		A1043DEC1B7F787A007A237C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = edonesoft;
 				TargetAttributes = {
@@ -1032,6 +1036,7 @@
 				76CD0E891B8964B000B04453 /* U02SellerTradeVC.swift in Sources */,
 				A132BBA41B863342004EAB47 /* U02UserVC.swift in Sources */,
 				A1F0E2881BA321C9005379CD /* BaseModel.swift in Sources */,
+				A13474FB1BC55DF0002CD7CB /* tradeModel.swift in Sources */,
 				D2744B2E1B84A01C00746229 /* T06Cell.swift in Sources */,
 				A1043E6E1B7F80E4007A237C /* GTMBase64.m in Sources */,
 				D24485CC1B8E027000CD97D5 /* T09CellTime.swift in Sources */,

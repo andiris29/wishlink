@@ -130,6 +130,40 @@ class UIHelper {
         return CGFloat(newHeigt);
     }
     
+    //读取本地图片
+    func readImageFromLocalByName(imgName:String)->(img:UIImage,path:String)
+    {
+        var strName = "tempEdit.png"
+        if(imgName.length>0)
+        {
+            strName = imgName
+        }
+        
+        strName = "/" + strName;
+        var docs=NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let filePath:String =  docs[0].stringByAppendingString(strName)//.stringByAppendingPathComponent(strName);
+        let img:UIImage = UIImage(contentsOfFile: filePath)!;
+        
+        return (img,filePath);
+    }
+    //保存图片到本地
+    func saveImageToLocal(img:UIImage,strName:String)
+    {
+        var imgName = strName
+        if(strName == "")
+        {
+            imgName = "tempEdit.png"
+        }
+        imgName = "/" + imgName;
+        //var paths:NSArray =
+        var docs=NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        
+        let filePath:String =   docs[0].stringByAppendingString(imgName)//docs[0].stringByAppendingPathComponent(imgName);
+        
+        print("save editImg to path:" + filePath);
+                var result:Bool = UIImagePNGRepresentation(img)!.writeToFile(filePath, atomically: true);
+    }
+    
     func alertErrMsg(strMsg:String)
     {
         UIAlertView(title: "", message: strMsg, delegate: nil, cancelButtonTitle: "确定").show();

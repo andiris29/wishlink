@@ -18,6 +18,15 @@ class T05PayVC: RootVC {
     
     var goodsNumbers: Int = 0
 
+    var item:itemModel!
+    var trade:tradeModel!
+    
+    
+    
+    @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbCountry: UILabel!
+    @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var lbSpec: UILabel!
     @IBOutlet weak var numbersTextField: UITextField!
     @IBOutlet weak var imageRollView: CSImageRollView!
     
@@ -27,6 +36,29 @@ class T05PayVC: RootVC {
         imageRollView.initWithImages(["c1_0047","c1_0047","c1_0047","c1_0047"])
         imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
         imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
+        self.loadData();
+       
+    }
+    func loadData()
+    {
+        self.lbName.text = "";
+        self.lbCountry.text = "";
+        self.lbSpec.text = "";
+        self.lbPrice.text = "";
+        self.numbersTextField.text = "0";
+        if(self.item != nil)
+        {
+            self.lbName.text = self.item.name;
+            self.lbCountry.text = self.item.country;
+            self.lbSpec.text = self.item.spec;
+//            self.lbPrice.text = self.item.price;
+            
+        }
+        if(self.trade != nil && self.trade._id != nil)
+        {
+            self.numbersTextField.text = String(self.trade.quantity)
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {

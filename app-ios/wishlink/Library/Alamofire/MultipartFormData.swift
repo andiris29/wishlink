@@ -153,6 +153,13 @@ public class MultipartFormData {
 
         appendBodyPart(stream: stream, length: length, headers: headers)
     }
+    public func appendBodyPart(#data: NSData, name: String, val:String) {
+        let headers = contentHeaders(name: name,value:val)
+        let stream = NSInputStream(data: data)
+        let length = UInt64(data.length)
+        
+        appendBodyPart(stream: stream, length: length, headers: headers)
+    }
 
     /**
         Creates a body part from the data and appends it to the multipart form data object.
@@ -650,7 +657,10 @@ public class MultipartFormData {
     private func contentHeaders(#name: String) -> [String: String] {
         return ["Content-Disposition": "form-data; name=\"\(name)\""]
     }
-
+    
+    private func contentHeaders(#name: String,value:String) -> [String: String] {
+        return ["Content-Disposition": "form-data; name=\"\(name)\"\r\n\r\n"+value+"\r\n"]
+    }
     private func contentHeaders(#name: String, mimeType: String) -> [String: String] {
         return [
             "Content-Disposition": "form-data; name=\"\(name)\"",

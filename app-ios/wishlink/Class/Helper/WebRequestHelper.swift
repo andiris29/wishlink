@@ -15,7 +15,7 @@ import Foundation
 
 import UIKit
 
-let SERVICE_ROOT_PATH = "http://121.41.162.102:80/services/"
+let SERVICE_ROOT_PATH = "http://121.41.162.102/services/"
 
 class WebRequestHelper:NSObject {
     
