@@ -383,6 +383,18 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             self.lastSelectTextFiledTag = textField.tag;
             var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
             vc.myDelegate = self;
+            if(textField.tag == 1)
+            {
+                vc.searchType = .brand;
+            }
+            else if(textField.tag == 2)
+            {
+                vc.searchType = .name;
+            }
+            else if(textField.tag == 3)
+            {
+                vc.searchType = .country;
+            }
             self.presentViewController(vc, animated: true, completion: nil);
             return false;
         }

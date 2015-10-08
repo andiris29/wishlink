@@ -65,9 +65,6 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         request.scope = "all"
         request.redirectURI = AppConfig.wbRedirectURI
         WeiboSDK.sendRequest(request)
-//        println("微博登入")
-//        APPCONFIG.AccessToken = "temp_token";
-//        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     
@@ -108,6 +105,9 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
         SVProgressHUD.dismiss();
         UserModel.shared.userDic = data["user"] as! [String: AnyObject]
+        
+        //存储用户ID
+        APPCONFIG.Uid = UserModel.shared.userId;
         println(data)
     }
     

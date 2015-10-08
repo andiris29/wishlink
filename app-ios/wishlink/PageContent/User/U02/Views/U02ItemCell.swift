@@ -23,6 +23,13 @@ protocol U02ItemCellDelegate: NSObjectProtocol {
 
 class U02ItemCell: UICollectionViewCell {
 
+    
+    @IBOutlet weak var lbCountry: UILabel!
+    @IBOutlet weak var lbIntro: UILabel!
+    @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var lbCount: UILabel!
+    
+    
     @IBOutlet weak var favoriteBtn: UIButton!
     
     @IBOutlet weak var btnDelete: UIButton!
@@ -64,8 +71,12 @@ class U02ItemCell: UICollectionViewCell {
     
     
     //从热门列表中加载的时候调用此方法
-    func loadFromhotVC()
+    func loadFromhotVC(item:ItemModel)
     {
+        self.lbCountry.text = item.country;
+        self.lbPrice.text = "￥" + item.price.format(".2");
+//        self.lbCount = 
+        self.lbIntro.text = item.name + " " + item.spec;
         self.btnDelete.hidden = true;
         
     }

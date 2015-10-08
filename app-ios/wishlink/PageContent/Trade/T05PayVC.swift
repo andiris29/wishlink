@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T05PayVC: RootVC {
+class T05PayVC: RootVC,WebRequestDelegate {
     
     let selectedButtonWXTag: Int = 1000
     let selectedButtonZFBTag: Int = 1001
@@ -20,14 +20,20 @@ class T05PayVC: RootVC {
 
     var item:ItemModel!
     var trade:TradeModel!
+//    var defaultAddress:ReceiverModel!
     
     
+    @IBOutlet weak var lbReceverName: UILabel!
+    @IBOutlet weak var lbReceverMobile: UILabel!
+    @IBOutlet weak var lbRecevierAddress: UILabel!
     
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var lbSpec: UILabel!
     @IBOutlet weak var numbersTextField: UITextField!
+   
+    @IBOutlet weak var lbTotalFree: UILabel!
     @IBOutlet weak var imageRollView: CSImageRollView!
     
     override func viewDidLoad() {
@@ -51,13 +57,21 @@ class T05PayVC: RootVC {
             self.lbName.text = self.item.name;
             self.lbCountry.text = self.item.country;
             self.lbSpec.text = self.item.spec;
-//            self.lbPrice.text = self.item.price;
+            self.lbPrice.text = self.item.price.format(".2");
             
         }
         if(self.trade != nil && self.trade._id != "")
         {
             self.numbersTextField.text = String(self.trade.quantity)
+            goodsNumbers = self.trade.quantity
         }
+        
+        self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
+        
+        self.httpObj.mydelegate = self;
+        var apiName = "user/get?registrationId=" + APPCONFIG.Uid;
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 10)
         
     }
     
@@ -87,12 +101,9 @@ class T05PayVC: RootVC {
            
             if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
                 var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                
-                
                 var vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
                 if(vc != nil)
                 {
-                    
                     vc.sellerBtnAction(vc.sellerBtn);
                 }
                 
@@ -102,13 +113,8 @@ class T05PayVC: RootVC {
         }
         else
         {
-            
             var vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
-            
             self.navigationController?.pushViewController(vc, animated: true);
-
-
-            
         }
     }
     
@@ -121,6 +127,40 @@ class T05PayVC: RootVC {
             goodsNumbers > 0 ? goodsNumbers-- : goodsNumbers
         }
         numbersTextField.text = "\(goodsNumbers)"
+        let totalfree = (self.item.price * Float(goodsNumbers)).format(".2")
+        self.lbTotalFree.text =  "¥\(totalfree)";
+    }
+    
+    //WebRequesrDelegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        SVProgressHUD.dismiss();
+        print(response);
+        UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+        
+        
+        let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+            return (itemObj as ReceiverModel).isDefault == true;
+        }
+        self.lbReceverName.text = "";
+        self.lbReceverMobile.text = "";
+        self.lbRecevierAddress.text = "";
+        if(result.count>0)
+        {
+            var defaultAddress = result[0] as ReceiverModel
+            
+            self.lbReceverName.text = defaultAddress.name
+            self.lbReceverMobile.text = defaultAddress.phone;
+            self.lbRecevierAddress.text = defaultAddress.address;
+
+        }
+        
+
+        
+        
+    }
+    func requestDataFailed(error: String) {
+        
+        SVProgressHUD.showErrorWithStatusWithBlack("获取用户地址失败！");
     }
 
 }

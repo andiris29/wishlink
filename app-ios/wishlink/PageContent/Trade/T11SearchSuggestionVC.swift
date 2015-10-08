@@ -7,13 +7,18 @@
 //
 
 import UIKit
+enum SearchModel {
+    
+    case any,country,brand,name
+}
+
 
 protocol T11SearchSuggestionDelegate
 {
     func GetSelectValue(inputValue:String)
 }
 
-class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UITextFieldDelegate {
+class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate,UITextFieldDelegate,WebRequestDelegate {
     
     let cellIdentifierSearch = "T11SearchSuggestionCell"
     
@@ -22,13 +27,16 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var cannelButton: UIButton!
     @IBOutlet weak var searchView: UIView!
     var myDelegate:T11SearchSuggestionDelegate!;
+    var searchType:SearchModel = .any
     
-    var itemData: NSMutableArray = ["sk II", "sk II神仙水", "sk II光彩粉饼", "斯凯奇运动女鞋", "sikaqi慢跑鞋"]
+//    var itemData: NSMutableArray = ["sk II", "sk II神仙水", "sk II光彩粉饼", "斯凯奇运动女鞋", "sikaqi慢跑鞋"]
     var itemContents: NSArray = NSArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.httpObj.mydelegate = self;
+        
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         self.searchTexfield.delegate = self;
         initView()
@@ -36,8 +44,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 
     func initView() {
         
-        self.searchView.layer.masksToBounds = true
-        self.searchView.layer.cornerRadius = 5
+//        self.searchView.layer.masksToBounds = true
+//        self.searchView.layer.cornerRadius = 5
         
     }
     
@@ -63,17 +71,22 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T11SearchSuggestionCell
         cell.labelName.text = itemContents[indexPath.row] as? String
-        
+        cell.selected = false;
+        cell.selectionStyle = UITableViewCellSelectionStyle.Default
         return cell
+        
     }
 
 
     // Override to support conditional rearranging of the table view.
-     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+//     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        // Return NO if you do not want the item to be re-orderable.
+//        return true
+//    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       self.searchTexfield.text = itemContents[indexPath.row] as? String
+        
     }
-
 
 
     // MARK: - Navigation
@@ -91,24 +104,32 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 //        self.navigationController?.popViewControllerAnimated(true);
         self.dismissViewControllerAnimated(true, completion: nil);
     }
-    
+    var lastKeyWord = "";
     @IBAction func searchTexfieldValueChange(sender: UITextField) {
         
-        var dataArray: NSMutableArray = NSMutableArray()
         
         if (sender.text == nil || sender.text.length <= 0) {return}
         
-        itemData.enumerateObjectsUsingBlock { (title, index, stop) -> Void in
-            
-            if title.hasPrefix(sender.text) {
-                dataArray.addObject(title)
-            }
+        var para = ["keyword":sender.text.trim()]
+        var apiName = "suggestion/any"
+        if(self.searchType == .country)
+        {
+            apiName = "suggestion/country"
         }
+        else if(self.searchType == .country)
+        {
+            apiName = "suggestion/brand"
+        }
+        else if(self.searchType == .name)
+        {
+            apiName = "suggestion/name"
+        }
+        self.httpObj.httpGetApi(apiName, parameters: para, tag: 10);
         
-        itemContents = dataArray
-        self.searchTableView.reloadData()
+      
     }
-    //UITextFiledDelegate
+    
+    //MARK: UITextFiledDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.searchTexfield.resignFirstResponder();
         
@@ -119,5 +140,37 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         }
         
         return false;
+    }
+    //MAEK: webrequestDelegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        if(tag  == 10)
+        {
+            let dic = response as! NSDictionary;
+            if (dic.objectForKey("suggestions") != nil)
+            {
+                var resultArr = dic.objectForKey("suggestions") as! NSArray;
+                if(self.searchTexfield.text.trim().length > 0  && resultArr.count > 0)
+                {
+                    
+                    var dataArray: NSMutableArray = NSMutableArray()
+                    for item in resultArr
+                    {
+                        dataArray.addObject(item as! String)
+                    }
+                    
+                    itemContents = dataArray
+                    self.searchTableView.reloadData()
+                }
+            }
+            else
+            {
+                itemContents = [];
+                self.searchTableView.reloadData()
+            }
+            
+        }
+    }
+    func requestDataFailed(error: String) {
+        
     }
 }

@@ -37,6 +37,7 @@ class ItemModel: BaseModel {
         self.country =  self.getStringValue("country", dic: dict);
         self.spec =  self.getStringValue("spec", dic: dict);
         self.create =  self.getStringValue("create", dic: dict);
+        self.price =  self.getFloatValue("price", dic: dict);
         if(dict.objectForKey("images") != nil)
         {
             if let imgArr = dict.objectForKey("images") as? NSArray

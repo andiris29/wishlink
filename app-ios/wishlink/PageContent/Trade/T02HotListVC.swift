@@ -8,26 +8,34 @@
 
 import UIKit
 
-class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     let itemCellIde = "U02ItemCell"
-
+    
+    var keyword = "奶粉";
     var isNeedShowNavi = false;
-//    var isNeedShowLoin = true;
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.preparePage()
 
+        self.httpObj.mydelegate = self;
     }
 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false;
+        
+        var para:[String : AnyObject] = ["req.pageNo":1,
+            "req.pageSize":10,
+        "keyword":self.keyword]
+        
+        self.httpObj.httpGetApi("search/search", parameters: para , tag: 10);
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
     }
     override func viewDidAppear(animated: Bool) {
         
@@ -48,12 +56,20 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        if(self.dataArr != nil && self.dataArr.count>0)
+        {
+            return self.dataArr.count;
+        }
+        else
+        {
+            return 0;
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
-        cell.loadFromhotVC();
+        var item = self.dataArr[indexPath.row] as! ItemModel
+        cell.loadFromhotVC(item);
         return cell as UICollectionViewCell
     }
     
@@ -82,6 +98,41 @@ class T02HotListVC: RootVC, UICollectionViewDataSource, UICollectionViewDelegate
 
     }
 
+    //MARK:WebRequestDelegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        SVProgressHUD.dismiss();
+        if(tag == 10)
+        {
+            if(response as! NSDictionary).objectForKey("items") != nil{
+            
+                
+                var itemArr = (response as! NSDictionary).objectForKey("items") as! NSArray;
+                if(itemArr.count>0)
+                {
+                    for itemObj in itemArr
+                    {
+                        var item = ItemModel(dict: itemObj as! NSDictionary);
+                        if(item._id != "")
+                        {
+                            self.dataArr.append(item);
+                        }
+                    }
+                    collectionView.reloadData();
+                    
+                }
+                else
+                {
+                    self.dataArr = [];
+                }
+            }
+            
+        }
+        
+    }
+    func requestDataFailed(error: String) {
+        SVProgressHUD.showErrorWithStatusWithBlack("获取数据出错");
+    }
 
     
 }

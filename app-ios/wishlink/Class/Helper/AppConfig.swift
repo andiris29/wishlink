@@ -55,8 +55,9 @@ class AppConfig: NSObject
     static var  wbAppSecret:String = "36bdb49defb6765bce3b831c7e18fa86"
     static var  wbRedirectURI:String = "https://api.weibo.com/oauth2/default.html"
     
+    
     var AccessToken:String!;
-    var CurrentUID:Int = 0;
+    var Uid = "";
     var CurrentLoginName:String = ""
     
     var profileDetailDictionary:NSDictionary!;
@@ -94,11 +95,11 @@ class AppConfig: NSObject
         }
         if(ud.objectForKey("Configuration_CurrentUID") != nil)
         {
-            self.CurrentUID = ud.objectForKey("Configuration_CurrentUID") as! Int;
+            self.Uid = ud.objectForKey("Configuration_CurrentUID") as! String;
         }
         else
         {
-            self.CurrentUID = 0;
+            self.Uid = "";
         }
         if(ud.objectForKey("Configuration_CurrentLoginName") != nil)
         {
@@ -121,8 +122,8 @@ class AppConfig: NSObject
             ud.removeObjectForKey("Configuration_Token")
         }
         
-        if (self.CurrentUID > 0) {
-            ud.setObject(self.CurrentUID, forKey: "Configuration_CurrentUID")
+        if (self.Uid != "" ) {
+            ud.setObject(self.Uid, forKey: "Configuration_CurrentUID")
             // [ud setObject:[NSNumber numberWithInteger:self.CurrentUID] forKey:@"Configuration_CurrentUID"];
         }else {
             ud.removeObjectForKey("Configuration_CurrentUID")
@@ -147,7 +148,7 @@ class AppConfig: NSObject
     func userLogout()
     {
         self.AccessToken = "";
-        self.CurrentUID  = 0;
+        self.Uid  = "";
         self.save();
         
         NSNotificationCenter.defaultCenter().postNotificationName("user-login-logout", object: nil, userInfo: nil)

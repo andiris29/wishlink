@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -49,12 +50,22 @@
                             <constraint firstItem="lyG-sh-PSa" firstAttribute="leading" secondItem="exy-ru-kip" secondAttribute="leading" constant="15" id="pOx-7o-wQZ"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nnj-TG-Rb3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="exy-ru-kip" secondAttribute="trailing" constant="-8" id="3Kj-Sd-YCd"/>
                     <constraint firstAttribute="bottomMargin" secondItem="exy-ru-kip" secondAttribute="bottom" constant="-8.5" id="Ryz-em-2WL"/>
+                    <constraint firstItem="exy-ru-kip" firstAttribute="centerY" secondItem="Nnj-TG-Rb3" secondAttribute="centerY" id="XFQ-yW-Yl8"/>
                     <constraint firstItem="exy-ru-kip" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Ye7-ib-ARU"/>
                     <constraint firstItem="exy-ru-kip" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="fKU-IK-q83"/>
+                    <constraint firstItem="exy-ru-kip" firstAttribute="height" secondItem="Nnj-TG-Rb3" secondAttribute="height" id="hmV-lh-AUf"/>
+                    <constraint firstItem="exy-ru-kip" firstAttribute="width" secondItem="Nnj-TG-Rb3" secondAttribute="width" id="jUI-vN-pG3"/>
+                    <constraint firstItem="exy-ru-kip" firstAttribute="centerX" secondItem="Nnj-TG-Rb3" secondAttribute="centerX" id="vXr-pb-a3N"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
