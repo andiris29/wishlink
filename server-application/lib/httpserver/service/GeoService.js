@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var async = require('async');
 var _ = require('underscore');
 var request = require('request');
+var winston = require('winston');
 
 var Countries = require('../../model/countries');
 
@@ -23,9 +24,16 @@ var GeoService = module.exports;
  * @param {db.countries} country
  */
 GeoService.reverseGeocoding = function(location, callback) {
-    var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=31.1576565,121.351368&result_type=country&language=zh-CN&key=' + global.config.api.google.appkey;
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + location.lat + ',' + location.lng + '&result_type=country&language=zh-CN&key=' + global.config.api.google.appkey;
     winston.info(new Date(), 'call google map api url=' + url);
-    request.get(url, function(error, response, body) {
+    request.get({
+        'url': url,
+        'proxy': 'http://192.168.11.1:8118/'
+    }, function(error, response, body) {
+        if (error) {
+            callback(error);
+            return;
+        }
         var data = JSON.parse(body);
         if (data.status !== 'OK') {
             callback(data.error_message);
