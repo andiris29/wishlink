@@ -31,7 +31,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     var actionSheet: CSActionSheet!
     
-    var item:itemModel!
+    var item:ItemModel!
     
     //上传的图像列表
     var imagrArr:[UIImage] = [];
@@ -198,7 +198,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                         var itemdic = JSON as! NSDictionary;
                                         var itemData =  itemdic.objectForKey("data") as! NSDictionary
                                         var itemObj =  itemData.objectForKey("item") as! NSDictionary
-                                        var item = itemModel(dict: itemObj);
+                                        var item = ItemModel(dict: itemObj);
                                         self.item = item;
                                         print(item);
                                         if(item._id.length>0)
@@ -407,7 +407,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
             SVProgressHUD.dismiss();
             var dic = response as! NSDictionary;
-            var tradeItem = tradeModel(dict: dic);
+            var tradeDic = dic.objectForKey("trade") as!  NSDictionary;
+            var tradeItem = TradeModel(dict: tradeDic);
             
             var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
             vc.item = self.item;

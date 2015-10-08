@@ -68,7 +68,7 @@ class UserModel: BaseModel {
         }
         
         var unreadDic = self.userDic["unread"] as! [String: AnyObject]
-        var itemRecommendationRefs = unreadDic["itemRecommendationRefs"] as! [itemModel]
+        var itemRecommendationRefs = unreadDic["itemRecommendationRefs"] as! [ItemModel]
         if itemRecommendationRefs.count != 0 {
             for item in itemRecommendationRefs {
                 

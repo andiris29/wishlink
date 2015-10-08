@@ -7,30 +7,33 @@
 //
 
 import UIKit
-
-class tradeModel: BaseModel {
+enum TradeStatusOrder {
+    case a0, b0, c0, d0
+}
+class TradeModel: BaseModel {
     
-    var _id:String!
+    var _id: String = ""
     
-    var statusOrder:String!
     var status:Int!
     var itemRef:String!
     var ownerRef:String!
     var create:String!
     var update:String!
+    var statusOrder: TradeStatusOrder = .a0
     
     var quantity:Int!
     
     
     init(dict:NSDictionary) {
         super.init()
-        self.tradeModel(dict);
+        self.TradeModel(dict);
     }
     
-    func tradeModel(dict:NSDictionary)
+    func TradeModel(dict:NSDictionary)
     {
         self._id =  self.getStringValue("_id", dic: dict);
-        self.statusOrder =  self.getStringValue("statusOrder", dic: dict);
+        
+        self.statusOrder =   self.statusOrderFromString(self.getStringValue("statusOrder", dic: dict))
         self.status =  self.getIntValue("status", dic: dict);
         self.itemRef =  self.getStringValue("itemRef", dic: dict);
         self.ownerRef =  self.getStringValue("ownerRef", dic: dict);
@@ -38,5 +41,17 @@ class tradeModel: BaseModel {
         self.update =  self.getStringValue("update", dic: dict);
         self.quantity =  self.getIntValue("quantity", dic: dict);
         
+    }
+    
+    private func statusOrderFromString(order: String) -> TradeStatusOrder {
+        if order == "a0" {
+            return .a0
+        }else if order == "b0" {
+            return .b0
+        }else if order == "c0" {
+            return .c0
+        }else {
+            return .d0
+        }
     }
 }

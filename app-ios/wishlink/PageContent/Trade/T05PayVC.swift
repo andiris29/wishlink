@@ -18,8 +18,8 @@ class T05PayVC: RootVC {
     
     var goodsNumbers: Int = 0
 
-    var item:itemModel!
-    var trade:tradeModel!
+    var item:ItemModel!
+    var trade:TradeModel!
     
     
     
@@ -54,7 +54,7 @@ class T05PayVC: RootVC {
 //            self.lbPrice.text = self.item.price;
             
         }
-        if(self.trade != nil && self.trade._id != nil)
+        if(self.trade != nil && self.trade._id != "")
         {
             self.numbersTextField.text = String(self.trade.quantity)
         }

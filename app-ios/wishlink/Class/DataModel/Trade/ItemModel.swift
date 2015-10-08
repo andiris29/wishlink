@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class itemModel: BaseModel {
+class ItemModel: BaseModel {
     
     
     var _id:String = "";
@@ -24,10 +24,10 @@ class itemModel: BaseModel {
     
     init(dict:NSDictionary) {
         super.init()
-        self.itemModel(dict);
+        self.ItemModel(dict);
     }
     
-    func itemModel(dict:NSDictionary)
+    func ItemModel(dict:NSDictionary)
     {
         self.name =  self.getStringValue("name", dic: dict);
         self._id =  self.getStringValue("_id", dic: dict);
