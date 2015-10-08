@@ -83,6 +83,7 @@
 		A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD11BB0637200A09A0D /* SVIndefiniteAnimatedView.m */; };
 		A18A0DD61BB0637200A09A0D /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A18A0DD21BB0637200A09A0D /* SVProgressHUD.bundle */; };
 		A18A0DD71BB0637200A09A0D /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD41BB0637200A09A0D /* SVProgressHUD.m */; };
+		A1C133D51BC6DC57001B6365 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C133D41BC6DC57001B6365 /* Float.swift */; };
 		A1C36CA81B87A4E300EFCB57 /* T03SearchHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C36CA61B87A4E300EFCB57 /* T03SearchHelperVC.swift */; };
 		A1C36CA91B87A4E300EFCB57 /* T03SearchHelperVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C36CA71B87A4E300EFCB57 /* T03SearchHelperVC.xib */; };
 		A1C36CAF1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C36CAB1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.swift */; };
@@ -258,6 +259,7 @@
 		A18A0DD21BB0637200A09A0D /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		A18A0DD31BB0637200A09A0D /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		A18A0DD41BB0637200A09A0D /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		A1C133D41BC6DC57001B6365 /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		A1C36CA61B87A4E300EFCB57 /* T03SearchHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03SearchHelperVC.swift; sourceTree = "<group>"; };
 		A1C36CA71B87A4E300EFCB57 /* T03SearchHelperVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchHelperVC.xib; sourceTree = "<group>"; };
 		A1C36CAB1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableViewHeader.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 		A1043E3B1B7F7CB2007A237C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A1C133D41BC6DC57001B6365 /* Float.swift */,
 				A132BB8E1B863328004EAB47 /* TabBarItem.swift */,
 				A1043E3C1B7F7CBA007A237C /* String.swift */,
 				76DC96651B8993E100270969 /* UIView.swift */,
@@ -1007,6 +1010,7 @@
 				765424851B8B5A9E001C607C /* U03AddressCell.swift in Sources */,
 				D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */,
 				A15D89351B806F6400BC66DE /* Alamofire.swift in Sources */,
+				A1C133D51BC6DC57001B6365 /* Float.swift in Sources */,
 				D24485D41B8E02A200CD97D5 /* T09CellTextRight.swift in Sources */,
 				A18A0DD71BB0637200A09A0D /* SVProgressHUD.m in Sources */,
 				A15D89361B806F6400BC66DE /* Download.swift in Sources */,
