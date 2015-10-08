@@ -98,7 +98,6 @@
 		A1F0E2831BA315F3005379CD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2821BA315F3005379CD /* CoreTelephony.framework */; };
 		A1F0E2861BA31E83005379CD /* TrendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0E2851BA31E83005379CD /* TrendModel.swift */; };
 		A1F0E2881BA321C9005379CD /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0E2871BA321C9005379CD /* BaseModel.swift */; };
-		A1F3A0EF1BC6C10F00C9E66F /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3A0EE1BC6C10F00C9E66F /* Float.swift */; };
 		A1F7C1421BB1A6090045C125 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7C1411BB1A6090045C125 /* ItemModel.swift */; };
 		A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD28391B878DF4006535E0 /* T03SearchVC.swift */; };
 		A1FD283C1B878DF4006535E0 /* T03SearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */; };
@@ -275,7 +274,6 @@
 		A1F0E2821BA315F3005379CD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A1F0E2851BA31E83005379CD /* TrendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendModel.swift; sourceTree = "<group>"; };
 		A1F0E2871BA321C9005379CD /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
-		A1F3A0EE1BC6C10F00C9E66F /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		A1F7C1411BB1A6090045C125 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		A1FD28391B878DF4006535E0 /* T03SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03SearchVC.swift; sourceTree = "<group>"; };
 		A1FD283A1B878DF4006535E0 /* T03SearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchVC.xib; sourceTree = "<group>"; };
@@ -546,7 +544,6 @@
 				A132BB8E1B863328004EAB47 /* TabBarItem.swift */,
 				A1043E3C1B7F7CBA007A237C /* String.swift */,
 				76DC96651B8993E100270969 /* UIView.swift */,
-				A1F3A0EE1BC6C10F00C9E66F /* Float.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1010,7 +1007,6 @@
 				765424851B8B5A9E001C607C /* U03AddressCell.swift in Sources */,
 				D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */,
 				A15D89351B806F6400BC66DE /* Alamofire.swift in Sources */,
-				A1F3A0EF1BC6C10F00C9E66F /* Float.swift in Sources */,
 				D24485D41B8E02A200CD97D5 /* T09CellTextRight.swift in Sources */,
 				A18A0DD71BB0637200A09A0D /* SVProgressHUD.m in Sources */,
 				A15D89361B806F6400BC66DE /* Download.swift in Sources */,
@@ -1163,7 +1159,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: fangtao chen (P4L872579R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1183,7 +1179,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78420032-b82a-48d1-b89d-2d58e8653695";
+				PROVISIONING_PROFILE = "a927c64a-76c7-4a88-b263-cc8f6f432113";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
@@ -1194,7 +1190,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: fangtao chen (P4L872579R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,7 +1210,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78420032-b82a-48d1-b89d-2d58e8653695";
+				PROVISIONING_PROFILE = "a927c64a-76c7-4a88-b263-cc8f6f432113";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};

@@ -47,7 +47,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
         
         var window = UIApplication.sharedApplication().keyWindow
 //        var windowWidth = window?.bounds.size.width
-        var windowWidth = ScreenHeight
+        var windowWidth = ScreenWidth
         
         sphereView = ZYQSphereView()
         sphereView.frame = CGRectMake(0, 0, 300, 300)
