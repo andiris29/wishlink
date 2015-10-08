@@ -3,6 +3,7 @@ var JPush = require('jpush-sdk');
 var winston = require('winston');
 var _ = require('underscore');
 var winston = require('winston');
+var async = require('async');
 
 // model
 var Users = require('../../model/users');
