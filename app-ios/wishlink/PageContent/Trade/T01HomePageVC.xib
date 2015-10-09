@@ -18,6 +18,8 @@
                 <outlet property="allWishLabel" destination="doE-wo-xdk" id="klE-GO-zVz"/>
                 <outlet property="finishWishLabel" destination="t2Q-a4-7KL" id="daU-67-P9R"/>
                 <outlet property="heartView" destination="Rd0-gb-8Gz" id="sfs-xP-0oC"/>
+                <outlet property="lbAllCount" destination="doE-wo-xdk" id="XXe-DQ-dGk"/>
+                <outlet property="lbComplateCount" destination="t2Q-a4-7KL" id="yMU-W2-qhg"/>
                 <outlet property="searchBgImageView" destination="Hij-Vh-Rb9" id="9Dv-FP-xyO"/>
                 <outlet property="searchButton" destination="g8U-B1-CdR" id="akY-Kf-5Pr"/>
                 <outlet property="searchTextField" destination="eRA-pn-G1u" id="azw-iT-e3F"/>

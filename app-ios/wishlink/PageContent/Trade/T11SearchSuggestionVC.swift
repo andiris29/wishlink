@@ -36,9 +36,14 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         super.viewDidLoad()
         
         self.httpObj.mydelegate = self;
+   
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 0)
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         self.searchTexfield.delegate = self;
+        
+        
         initView()
     }
 
@@ -143,7 +148,24 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     }
     //MAEK: webrequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        if(tag  == 10)
+        SVProgressHUD.dismiss();
+        if( tag == 0)
+        {
+            
+            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+            if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
+            {
+                var dataArray: NSMutableArray = NSMutableArray()
+                for item in UserModel.shared.searchHistory
+                {
+                    dataArray.addObject(item.keyword);
+                }
+                
+                itemContents = dataArray
+                self.searchTableView.reloadData()
+            }
+        }
+        else if(tag  == 10)
         {
             let dic = response as! NSDictionary;
             if (dic.objectForKey("suggestions") != nil)

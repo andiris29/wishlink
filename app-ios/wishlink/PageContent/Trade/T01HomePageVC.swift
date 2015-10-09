@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
+class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebRequestDelegate {
     
     @IBOutlet weak var searchBgImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -19,6 +19,9 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
     @IBOutlet weak var allWishLabel: UILabel!
     @IBOutlet weak var finishWishLabel: UILabel!
     
+    @IBOutlet weak var lbAllCount: UILabel!
+    
+    @IBOutlet weak var lbComplateCount: UILabel!
     var sphereView: ZYQSphereView!
     var isNeedShowLoin = true;
     override func viewDidLoad() {
@@ -30,60 +33,75 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
         }
         
         self.searchTextField.delegate = self;
-
         initWithView()
     }
     override func viewWillAppear(animated: Bool) {
         
-   
-        
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
+        
+        self.httpObj.mydelegate = self;
+        
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        getDataFromServer();
+        self.lbComplateCount.text = "0"
+        self.lbAllCount.text = "0"
+    }
+    
+    func getDataFromServer()
+    {
+        self.httpObj.httpGetApi("trend/keywords", parameters: nil, tag: 10)
+        self.httpObj.httpGetApi("report/numTrades", parameters: nil, tag: 11)
     }
     func initWithView() {
         
-        var colorArray = [RGBA(234, 234, 234, 1.0), RGBA(254, 216, 222, 1.0),RGBA(229, 204, 222, 1.0)]
-        var titles = ["英国", "美国", "法国", "日本", "德国", "澳洲", "Dior", "SKII", "科颜氏", "MK Selma 中号耳朵包", "ALBION 健康水 330ml", "Jurlique 玫瑰护手霜 30ML", " Lancome 真爱香水 50ml", " 娇韵诗活肤舒缓爽肤露 30ML", "Arcteryx 始祖鸟女士羽绒服", "雅诗兰黛修护精华 15ml", " 象印焖烧杯 200ML"]
+        if(self.dataArr.count>0)
+        {
         
-        var window = UIApplication.sharedApplication().keyWindow
-//        var windowWidth = window?.bounds.size.width
-        var windowWidth = ScreenWidth
-        
-        sphereView = ZYQSphereView()
-        sphereView.frame = CGRectMake(0, 0, 300, 300)
-        sphereView.frame.origin.x = (windowWidth - sphereView.frame.size.width) / 2.0
-        heartView.addSubview(sphereView)
-        
-        var views: NSMutableArray = NSMutableArray()
-        
-        for var index = 0; index < titles.count; index++ {
+            var colorArray = [RGBA(234, 234, 234, 1.0), RGBA(254, 216, 222, 1.0),RGBA(229, 204, 222, 1.0)]
+  
+            var window = UIApplication.sharedApplication().keyWindow
+            var windowWidth = ScreenWidth
+            if( self.sphereView == nil)
+            {
+                sphereView = ZYQSphereView()
+                sphereView.frame = CGRectMake(0, 0, 300, 300)
+                sphereView.frame.origin.x = (windowWidth - sphereView.frame.size.width) / 2.0
+                heartView.addSubview(sphereView)
+            }
             
-            var count: Int = Int(arc4random() % UInt32(colorArray.count))
-            var button: UIButton = UIButton(frame: CGRectMake(0, 0, 90, 90))
-            button.layer.masksToBounds = true;
-            button.layer.cornerRadius = button.frame.size.width / 2.0;
-            button.setTitle("\(titles[index])", forState: UIControlState.Normal)
-            button.setTitleColor(RGB(124, 0, 90), forState: UIControlState.Normal)
-            button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-            button.titleLabel?.font = UIFont(name: "FZLanTingHeiS-EL-GB", size: 13)
-            button.backgroundColor = colorArray[count]
-            button.titleLabel?.numberOfLines = 3
-            button.titleLabel?.textAlignment = NSTextAlignment.Center
-            button.addTarget(self, action: Selector("buttonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-            views.addObject(button)
+            var views: NSMutableArray = NSMutableArray()
+            
+            for var index = 0; index < self.dataArr.count; index++ {
+                
+                var count: Int = Int(arc4random() % UInt32(colorArray.count))
+                var button: UIButton = UIButton(frame: CGRectMake(0, 0, 90, 90))
+                button.layer.masksToBounds = true;
+                button.layer.cornerRadius = button.frame.size.width / 2.0;
+                button.setTitle("\(self.dataArr[index])", forState: UIControlState.Normal)
+                button.setTitleColor(RGB(124, 0, 90), forState: UIControlState.Normal)
+                button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+                button.titleLabel?.font = UIFont(name: "FZLanTingHeiS-EL-GB", size: 13)
+                button.backgroundColor = colorArray[count]
+                button.titleLabel?.numberOfLines = 3
+                button.titleLabel?.textAlignment = NSTextAlignment.Center
+                button.addTarget(self, action: Selector("buttonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+                views.addObject(button)
+            }
+         
+            sphereView.setItems(views as [AnyObject])
+            sphereView.isPanTimerStart = true;
+            sphereView.timerStart()
         }
-        
-        sphereView.setItems(views as [AnyObject])
-        sphereView.isPanTimerStart = true;
-        sphereView.timerStart()
 
     }
     
-    //MARK: - Action
+    //MARK: - 标签点击操作
     
     func buttonAction(sender: UIButton) {
     
         var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        vc.keyword = sender.titleLabel!.text!
         self.navigationController?.pushViewController(vc, animated: true);
         
         
@@ -106,20 +124,56 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate {
         self.searchTextField.resignFirstResponder();
         return true;
     }
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
         vc.myDelegate = self;
+        vc.searchType = .any
         self.presentViewController(vc, animated: true, completion: nil);
         return false;
     }
 
+    //MARK: 手动输入的搜索结果
     func GetSelectValue(inputValue:String)
     {
         self.searchTextField.text = inputValue;
         
         var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        vc.keyword = inputValue;
         self.navigationController?.pushViewController(vc, animated: true);
-        //开始搜索
-//        self.httpObj.httpGetApi("", parameters: <#[String : AnyObject]?#>, tag: <#Int#>)
+    }
+    //MARK:WebRequestDelegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        SVProgressHUD.dismiss();
+        
+        if(tag == 10)
+        {
+            var trendsArr = (response as! NSDictionary).objectForKey("trends") as! NSArray
+            if(trendsArr.count>0)
+            {
+                if(self.dataArr.count>0)
+                {
+                    self.dataArr.removeAll(keepCapacity: false);
+                }
+                self.dataArr = [];
+                for itemObj in trendsArr
+                {
+                    var item = TrendModel(dict: (itemObj as! NSDictionary));
+                    if(item.name != nil && item.name != "")
+                    {
+                        self.dataArr.append(item.name);
+                    }
+                }
+                self.initWithView();
+            }
+        }
+        else  if(tag == 11)
+        {
+            
+        }
+    }
+    
+    func requestDataFailed(error: String) {
+        NSLog("Error in page T01 :%@", error)
     }
 }

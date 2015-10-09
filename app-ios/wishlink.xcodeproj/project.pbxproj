@@ -90,6 +90,7 @@
 		A1C36CB01B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C36CAC1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib */; };
 		A1C36CB11B87A50100EFCB57 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C36CAD1B87A50100EFCB57 /* SearchCollectionViewCell.swift */; };
 		A1C36CB21B87A50100EFCB57 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C36CAE1B87A50100EFCB57 /* SearchCollectionViewCell.xib */; };
+		A1E08D3E1BC81D2C00F22A42 /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E08D3D1BC81D2C00F22A42 /* keywordModel.swift */; };
 		A1F0E2751BA313F7005379CD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2741BA313F7005379CD /* Social.framework */; };
 		A1F0E2771BA3146D005379CD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2761BA3146D005379CD /* CFNetwork.framework */; };
 		A1F0E2791BA31592005379CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0E2781BA31592005379CD /* SystemConfiguration.framework */; };
@@ -266,6 +267,7 @@
 		A1C36CAC1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionReusableViewHeader.xib; sourceTree = "<group>"; };
 		A1C36CAD1B87A50100EFCB57 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1C36CAE1B87A50100EFCB57 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1E08D3D1BC81D2C00F22A42 /* keywordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
 		A1F0E2741BA313F7005379CD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A1F0E2761BA3146D005379CD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A1F0E2781BA31592005379CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -526,6 +528,7 @@
 				A1F0E2841BA31E65005379CD /* Trade */,
 				769564D21BA02A1C00A6AD10 /* User */,
 				A1F0E2871BA321C9005379CD /* BaseModel.swift */,
+				A1E08D3D1BC81D2C00F22A42 /* keywordModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */,
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
+				A1E08D3E1BC81D2C00F22A42 /* keywordModel.swift in Sources */,
 				769564D41BA02ACE00A6AD10 /* ReceiverModel.swift in Sources */,
 				7684F3C21B8DFA4D00B7D7DC /* U02LogisticsTipView.swift in Sources */,
 				A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */,

@@ -10,7 +10,9 @@ import UIKit
 
 class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var maskView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var lbTipMessage: UILabel!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     let itemCellIde = "U02ItemCell"
     
@@ -33,6 +35,8 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
         var para:[String : AnyObject] = ["req.pageNo":1,
             "req.pageSize":10,
         "keyword":self.keyword]
+        self.maskView.hidden = false;
+        self.lbTipMessage.text = "正在搜索中..."
         
         self.httpObj.httpGetApi("search/search", parameters: para , tag: 10);
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
@@ -101,15 +105,17 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         
+        self.lbTipMessage.text = ""
         SVProgressHUD.dismiss();
         if(tag == 10)
         {
             if(response as! NSDictionary).objectForKey("items") != nil{
             
-                
                 var itemArr = (response as! NSDictionary).objectForKey("items") as! NSArray;
                 if(itemArr.count>0)
                 {
+                    
+                    self.maskView.hidden = true;
                     for itemObj in itemArr
                     {
                         var item = ItemModel(dict: itemObj as! NSDictionary);
@@ -125,6 +131,12 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
                 {
                     self.dataArr = [];
                 }
+            }
+            else
+            {
+                
+                self.maskView.hidden = false;
+                self.lbTipMessage.text = "没有搜索数据"
             }
             
         }
