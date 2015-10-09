@@ -29,7 +29,7 @@ report.numTrades = {
     func : function(req, res) {
         var mapReduce = {
             map : function() {
-                if (this.status === Trades.Status.TRANSFER_TO_BUYER.code || this.status === TradeService.Status.TRANSFER_TO_SELLER.code) {
+                if (this.status === 14 || this.status === 13) {
                     emit('numCompleteTrades', 1);
                 }
                 emit('numTrades', 1);
