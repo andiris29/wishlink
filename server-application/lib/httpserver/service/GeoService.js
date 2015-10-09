@@ -28,7 +28,7 @@ GeoService.reverseGeocoding = function(location, callback) {
     winston.info(new Date(), 'call google map api url=' + url);
     request.get({
         'url': url,
-        'proxy': 'http://192.168.11.1:8118/'
+        'proxy': 'http://47.88.23.92:8888'
     }, function(error, response, body) {
         if (error) {
             callback(error);

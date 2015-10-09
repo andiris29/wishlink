@@ -32,6 +32,10 @@ var RecommendationService = module.exports;
  */
 RecommendationService.recommendItems = function(_id, callback) {
     SearchTrendService.queryItems(0, 10, function(error, trends) {
+        if (error) {
+            callback(error);
+            return;
+        }
         var tasks = _.map(trends, function(trend) {
             return function(cb) {
                 RelationshipHelper.create(rUserRecommendedItem, _id, trend.name, function(error) {
@@ -82,6 +86,10 @@ RecommendationService.recommendItemsInForeignCountry = function(_id, callback) {
         });
     }, function(country, cb) {
         SearchService.search(country.name, 0, 10, function(error, items) {
+            if (error) {
+                cb(error);
+                return;
+            }
             var tasks = _.map(items, function(item) {
                 return function(internalCallback) {
                     RelationshipHelper.create(rUserRecommendedItem, _id, item._id, function(error) {
