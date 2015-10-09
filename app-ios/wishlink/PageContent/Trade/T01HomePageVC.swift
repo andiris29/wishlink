@@ -169,7 +169,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         }
         else  if(tag == 11)
         {
-            
+            var numTrades = (response as! NSDictionary).objectForKey("numTrades") as! Int
+            var numCompleteTrades = (response as! NSDictionary).objectForKey("numCompleteTrades") as! Int
+            self.lbAllCount.text = String(numTrades);
+            self.lbComplateCount.text = String(numCompleteTrades);
         }
     }
     
