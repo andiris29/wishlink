@@ -26,6 +26,7 @@ class UserModel: BaseModel {
     var itemRecommendationRefs: NSMutableArray!
     var tradeRefs: NSMutableArray!
     var receiversArray: [ReceiverModel]!
+    var searchHistory: [keywordModel]!
     var alipayId: String = ""
     
     class var shared: UserModel {
@@ -72,6 +73,19 @@ class UserModel: BaseModel {
         if itemRecommendationRefs.count != 0 {
             for item in itemRecommendationRefs {
                 
+            }
+        }
+        
+        if let receivers = self.userDic["searchHistory"] as? NSDictionary {
+             if let  itemArr = receivers.objectForKey("entry") as? NSArray
+             {
+                if itemArr.count > 0 {
+                    self.searchHistory = []
+                    for itemDic in itemArr {
+                        var item = keywordModel(dict: itemDic as! NSDictionary)
+                        self.searchHistory.append(item)
+                    }
+                }
             }
         }
         

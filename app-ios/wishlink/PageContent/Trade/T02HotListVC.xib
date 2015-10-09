@@ -4,11 +4,18 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
+            <string>FZLTXHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T02HotListVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="gwO-00-V21" id="rbM-5k-1zc"/>
                 <outlet property="collectionViewFlowLayout" destination="N3B-u1-kbI" id="87L-b1-1hl"/>
+                <outlet property="lbTipMessage" destination="O1G-0A-DWc" id="oNV-39-hgJ"/>
+                <outlet property="maskView" destination="XT0-Na-bTx" id="Qif-cw-38y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,12 +38,32 @@
                         <outlet property="delegate" destination="-1" id="CEr-fi-f9s"/>
                     </connections>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XT0-Na-bTx">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无索索结果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-0A-DWc">
+                            <rect key="frame" x="130" y="50" width="90" height="18"/>
+                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
+                            <color key="textColor" red="0.48627450980392156" green="0.0" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="O1G-0A-DWc" secondAttribute="centerX" constant="12.5" id="k7o-ZQ-go7"/>
+                        <constraint firstItem="O1G-0A-DWc" firstAttribute="top" secondItem="XT0-Na-bTx" secondAttribute="top" constant="50" id="sIe-Qj-8Bq"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="gwO-00-V21" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1XW-ar-vcG"/>
+                <constraint firstItem="XT0-Na-bTx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ExX-Eq-z5K"/>
                 <constraint firstAttribute="trailing" secondItem="gwO-00-V21" secondAttribute="trailing" id="FDQ-f3-Dxt"/>
+                <constraint firstAttribute="bottom" secondItem="XT0-Na-bTx" secondAttribute="bottom" id="Ykw-3m-XJn"/>
                 <constraint firstItem="gwO-00-V21" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dQl-fI-E0t"/>
+                <constraint firstAttribute="trailing" secondItem="XT0-Na-bTx" secondAttribute="trailing" id="fng-zW-aVC"/>
+                <constraint firstItem="XT0-Na-bTx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gPC-Lc-4nc"/>
                 <constraint firstAttribute="bottom" secondItem="gwO-00-V21" secondAttribute="bottom" id="hzq-YS-gdH"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
