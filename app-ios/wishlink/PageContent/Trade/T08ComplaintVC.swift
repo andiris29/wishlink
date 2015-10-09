@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T08ComplaintVC: RootVC,UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var contexTextView: UITextView!
     
@@ -17,13 +17,12 @@ class T08ComplaintVC: RootVC,UIActionSheetDelegate, UIImagePickerControllerDeleg
     @IBOutlet weak var btnImage3: UIButton!
     @IBOutlet weak var btnImage2: UIButton!
     @IBOutlet weak var btnImage1: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.httpObj.mydelegate = self;
     }
-
-    
     
     override func viewDidAppear(animated: Bool) {
         
@@ -55,6 +54,10 @@ class T08ComplaintVC: RootVC,UIActionSheetDelegate, UIImagePickerControllerDeleg
         {
             self.navigationController?.popViewControllerAnimated(true);
 //            self.dismissViewControllerAnimated(true, completion: nil);
+        }
+        else if(tag == 11)
+        {
+            self.httpObj.httpPostApi("trade/complaint", parameters: ["problem": contexTextView.text], tag: 80)
         }
         else if(tag == 22)
         {
@@ -135,4 +138,17 @@ class T08ComplaintVC: RootVC,UIActionSheetDelegate, UIImagePickerControllerDeleg
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    //MARK: - Request delegate
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        if(tag == 80) {
+            self.navigationController?.popViewControllerAnimated(true);
+            //             self.dismissViewControllerAnimated(true, completion: nil);
+        }
+    }
+    
+    func requestDataFailed(error: String) {
+        
+    }
 }

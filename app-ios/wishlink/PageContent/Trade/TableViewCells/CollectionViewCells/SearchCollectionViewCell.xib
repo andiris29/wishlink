@@ -16,16 +16,16 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFg-gl-67u">
                         <rect key="frame" x="0.0" y="0.0" width="64" height="110"/>
                         <subviews>
-                            <button opaque="NO" tag="200" contentMode="center" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S8-0z-VhZ">
+                            <button opaque="NO" tag="200" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S8-0z-VhZ">
                                 <rect key="frame" x="5" y="10" width="54" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="A1L-Px-ba1"/>
                                     <constraint firstAttribute="height" constant="54" id="wDT-u8-Qtk"/>
                                 </constraints>
-                                <state key="normal" image="T03eee0" backgroundImage="T03bbb">
+                                <state key="normal" image="T03eee1" backgroundImage="T03aaa">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="T03eee1" backgroundImage="T03aaa"/>
+                                <state key="highlighted" image="T03eee0" backgroundImage="T03bbb"/>
                                 <connections>
                                     <action selector="buttonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="W7x-Ug-QJi"/>
                                 </connections>

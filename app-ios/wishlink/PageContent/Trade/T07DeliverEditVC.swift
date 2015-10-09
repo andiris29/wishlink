@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate {
+class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestDelegate {
 
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var companyButton: UIButton!
@@ -24,6 +24,8 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate {
     }
     
     func initDorpListView() {
+        
+        self.httpObj.mydelegate = self;
         
         var titles: NSArray = ["韵达快递","顺风快递","天天快递"]
         dorpListView = CSDorpListView.sharedInstance
@@ -50,8 +52,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate {
         }
         else if(btnTag == 11)//提交
         {
-            self.navigationController?.popViewControllerAnimated(true);
-//             self.dismissViewControllerAnimated(true, completion: nil);
+            self.httpObj.httpPostApi("trade/deliver", parameters: ["company": companyTextField.text, "trackingId": scanTextField.text], tag: 70)
         }
     }
     
@@ -91,4 +92,17 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate {
         companyTextField.text = sender.titleLabel?.text
     }
     
+    //MARK: - Request delegate
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        if(tag == 70) {
+            self.navigationController?.popViewControllerAnimated(true);
+            //             self.dismissViewControllerAnimated(true, completion: nil);
+        }
+    }
+    
+    func requestDataFailed(error: String) {
+        
+    }
 }

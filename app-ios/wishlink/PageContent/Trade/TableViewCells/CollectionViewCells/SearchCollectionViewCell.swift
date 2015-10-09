@@ -10,7 +10,7 @@ import UIKit
 
 protocol SearchCollectionViewCellDelegate: NSObjectProtocol {
     
-    func searchCollectionViewCell(cell: SearchCollectionViewCell, buttonIndex: Int)
+    func searchCollectionViewCell(cell: SearchCollectionViewCell, title: NSString, buttonIndex: Int)
 }
 
 class SearchCollectionViewCell: UICollectionViewCell {
@@ -25,15 +25,16 @@ class SearchCollectionViewCell: UICollectionViewCell {
 
     }
 
-    func initData(model: TrendModel) {
+    func initData(model: TrendModel, indexPath: NSIndexPath) {
         
         self.nameLabel.text = model.name;
+        self.iconButton.tag = indexPath.row;
     }
     
     //MARK: - Action
     
     @IBAction func buttonAction(sender: UIButton) {
         
-        self.delegate?.searchCollectionViewCell(self, buttonIndex: sender.tag)
+        self.delegate?.searchCollectionViewCell(self, title: self.nameLabel.text!, buttonIndex: sender.tag)
     }
 }

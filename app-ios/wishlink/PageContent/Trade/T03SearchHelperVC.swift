@@ -19,6 +19,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     var titles: NSArray!
     var goods: NSMutableDictionary!
     
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -101,10 +102,27 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         var key: String = marks[indexPath.section] as! String
         if self.goods[key] != nil {
             var array: NSArray = self.goods[key] as! NSArray
-            cell.initData(array[indexPath.row] as! TrendModel)
+            cell.initData(array[indexPath.row] as! TrendModel, indexPath: indexPath)
         }
         
         return cell
+    }
+    
+    //MARK: - Action
+    
+    @IBAction func searchButtonAction(sender: AnyObject) {
+        
+        var vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
+        vc.keyword = self.searchTextField.text
+        self.navigationController?.pushViewController(vc, animated: true);
+    }
+    
+    @IBAction func searchTextFiledEndExit(sender: AnyObject) {
+        
+        var vc = T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle());
+        vc.searchContext = self.searchTextField.text
+        vc.searchType = .any
+        self.navigationController?.pushViewController(vc, animated: true);
     }
     
     //MARK: - WebRequestDelegate 
@@ -146,8 +164,9 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     
     //MARK: - SearchCollectionViewCellDelegate 
     
-    func searchCollectionViewCell(cell: SearchCollectionViewCell, buttonIndex: Int) {
+    func searchCollectionViewCell(cell: SearchCollectionViewCell, title: NSString, buttonIndex: Int) {
         
+        self.searchTextField.text = title as String
     }
     
     // MARK: - Navigation

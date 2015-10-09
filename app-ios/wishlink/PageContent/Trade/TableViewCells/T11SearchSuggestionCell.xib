@@ -50,7 +50,7 @@
                             <constraint firstItem="lyG-sh-PSa" firstAttribute="leading" secondItem="exy-ru-kip" secondAttribute="leading" constant="15" id="pOx-7o-wQZ"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nnj-TG-Rb3">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nnj-TG-Rb3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T03SearchHelperVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="p3X-iC-3Lq" id="Akv-2Q-oNd"/>
+                <outlet property="searchTextField" destination="iJm-lA-4SF" id="GK3-NA-Gcc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,6 +40,9 @@
                                     <state key="normal" image="T03ddd">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="searchButtonAction:" destination="-1" eventType="touchUpInside" id="EKN-n3-kMt"/>
+                                    </connections>
                                 </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="直接搜索您要的商品" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJm-lA-4SF">
                                     <rect key="frame" x="40" y="0.0" width="300" height="30"/>
@@ -47,7 +51,10 @@
                                         <constraint firstAttribute="height" constant="30" id="ABY-td-q5C"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                    <connections>
+                                        <action selector="searchTextFiledEndExit:" destination="-1" eventType="editingDidEndOnExit" id="oMd-wg-Nbh"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
