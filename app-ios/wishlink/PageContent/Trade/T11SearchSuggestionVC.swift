@@ -28,6 +28,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var searchView: UIView!
     var myDelegate:T11SearchSuggestionDelegate!;
     var searchType:SearchModel = .any
+    var searchContext:String = ""
     
 //    var itemData: NSMutableArray = ["sk II", "sk II神仙水", "sk II光彩粉饼", "斯凯奇运动女鞋", "sikaqi慢跑鞋"]
     var itemContents: NSArray = NSArray()
@@ -49,15 +50,16 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 
     func initView() {
         
-//        self.searchView.layer.masksToBounds = true
-//        self.searchView.layer.cornerRadius = 5
-        
+        self.searchView.layer.masksToBounds = true
+        self.searchView.layer.cornerRadius = 5
     }
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
+        self.searchTexfield.text = searchContext
+        self.searchTexfield.becomeFirstResponder()
     }
     // MARK: - Table view data source
 
@@ -106,7 +108,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     //MARK: - Action
     
     @IBAction func cannelButtonAction(sender: UIButton!) {
-//        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewControllerAnimated(true);
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     var lastKeyWord = "";
