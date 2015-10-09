@@ -33,25 +33,30 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         }
         
         self.searchTextField.delegate = self;
-        initWithView()
+        self.httpObj.mydelegate = self;
+        
+        self.lbComplateCount.text = "0"
+        self.lbAllCount.text = "0"
+        getKeyWordData();
+        getReportDate();
     }
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
         
-        self.httpObj.mydelegate = self;
-        
-        SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        getDataFromServer();
-        self.lbComplateCount.text = "0"
-        self.lbAllCount.text = "0"
+        self.startTimer();
     }
     
-    func getDataFromServer()
+    func getKeyWordData()
     {
         self.httpObj.httpGetApi("trend/keywords", parameters: nil, tag: 10)
+        
+    }
+    func getReportDate()
+    {
         self.httpObj.httpGetApi("report/numTrades", parameters: nil, tag: 11)
+        
     }
     func initWithView() {
         
@@ -103,7 +108,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         vc.keyword = sender.titleLabel!.text!
         self.navigationController?.pushViewController(vc, animated: true);
-        
+        self.removeTimer();
         
         
 //        self.dismissViewControllerAnimated(true, completion: nil);
@@ -178,5 +183,42 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func requestDataFailed(error: String) {
         NSLog("Error in page T01 :%@", error)
+    }
+    
+    //MARK: 定时器相关
+    var orderTimer:NSTimer!
+    var record = 0;
+    func startTimer()
+    {
+        orderTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target:self, selector:Selector("checkUpdate"), userInfo: nil, repeats: true)
+        orderTimer.fire()
+        record = 0;
+    }
+    
+    func checkUpdate()
+    {
+        if(record % 2 == 0)
+        {
+            getReportDate();
+            NSLog("select report Data")
+        }
+        if(record == 6)
+        {
+            
+            NSLog("select keyword Data")
+            record = 1;
+            getKeyWordData();
+        }
+        record += 1;
+    }
+    
+    
+    func removeTimer()
+    {
+        if(orderTimer != nil)
+        {
+            self.orderTimer.invalidate();
+            self.orderTimer = nil;
+        }
     }
 }
