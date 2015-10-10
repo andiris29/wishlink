@@ -75,6 +75,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 heartView.addSubview(sphereView)
             }
             
+            // clear
+            for btView in sphereView.subviews {
+                btView.removeFromSuperview()
+            }
+            
             var views: NSMutableArray = NSMutableArray()
             
             for var index = 0; index < self.dataArr.count; index++ {
