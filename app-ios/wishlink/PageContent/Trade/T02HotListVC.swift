@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var maskView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -71,6 +71,7 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
+        cell.delegate = self
         var item = self.dataArr[indexPath.row] as! ItemModel
         cell.loadFromhotVC(item);
         return cell as UICollectionViewCell
@@ -102,6 +103,17 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
 
     }
 
+    //MARK: - U02ItemCellDelegate 
+    
+    func itemCell(cell: U02ItemCell, clickType: ItemCellButtonClickType) {
+        
+        var urlSub: String = "item/favorite"
+        if (cell.favoriteBtn.selected) {
+            urlSub = "item/unfavorite"
+        }
+        self.httpObj.httpPostApi(urlSub , tag: 21);
+    }
+    
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         
@@ -139,9 +151,11 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
                 self.lbTipMessage.text = "没有搜索数据"
             }
             
-        }
+        } else if (tag == 21) {
         
+        }
     }
+    
     func requestDataFailed(error: String) {
         SVProgressHUD.showErrorWithStatusWithBlack("获取数据出错");
     }

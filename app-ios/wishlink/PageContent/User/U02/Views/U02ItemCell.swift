@@ -48,6 +48,8 @@ class U02ItemCell: UICollectionViewCell {
         }
     }
     
+    var delegate: U02ItemCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -61,6 +63,7 @@ class U02ItemCell: UICollectionViewCell {
             c(ItemCellButtonClickType.Favorite, self.indexPath)
 //            c(self.indexPath, ItemCellType.Favorite)
         }
+        self.delegate?.itemCell(self, clickType: ItemCellButtonClickType.Favorite)
     }
     @IBAction func deleteBtnAction(sender: AnyObject) {
         if let c = self.closure {
