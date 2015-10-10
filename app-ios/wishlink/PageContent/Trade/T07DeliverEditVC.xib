@@ -23,8 +23,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T07DeliverEditVC" customModule="wishlink" customModuleProvider="target">
             <connections>
+                <outlet property="addressLabel" destination="Whz-Td-jiT" id="89D-Fg-nm1"/>
                 <outlet property="companyButton" destination="C4F-5c-dan" id="dLG-P6-5XK"/>
                 <outlet property="companyTextField" destination="Anf-2J-ktO" id="s8Q-dA-eaX"/>
+                <outlet property="personLabel" destination="0z1-Fe-xEQ" id="DIx-S4-wvp"/>
+                <outlet property="phoneLabel" destination="r5X-QO-lj7" id="XZX-zu-rcz"/>
                 <outlet property="scanButton" destination="O7r-lG-kqQ" id="fiw-ZG-6vT"/>
                 <outlet property="scanTextField" destination="eGx-Br-4bh" id="N1r-PN-PMf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -131,8 +134,8 @@
                                     <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市普陀区中山北路2438号中瑞商务大厦13楼B座" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whz-Td-jiT">
-                                    <rect key="frame" x="117" y="0.0" width="220" height="50"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市普陀区中山北路2438号中瑞商务大厦13楼B座" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whz-Td-jiT">
+                                    <rect key="frame" x="118" y="8" width="219" height="30"/>
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
                                     <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -140,12 +143,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="Whz-Td-jiT" firstAttribute="top" secondItem="dsq-CE-sTz" secondAttribute="top" id="58O-3J-eQy"/>
+                                <constraint firstItem="Whz-Td-jiT" firstAttribute="top" secondItem="dsq-CE-sTz" secondAttribute="top" constant="8" id="58O-3J-eQy"/>
                                 <constraint firstAttribute="trailing" secondItem="Whz-Td-jiT" secondAttribute="trailing" constant="38" id="687-4D-UbF"/>
                                 <constraint firstItem="uqf-TQ-L7q" firstAttribute="leading" secondItem="dsq-CE-sTz" secondAttribute="leading" constant="44" id="HfT-cl-J8z"/>
                                 <constraint firstAttribute="height" constant="50" id="IZs-n4-ebp"/>
-                                <constraint firstAttribute="bottom" secondItem="Whz-Td-jiT" secondAttribute="bottom" id="Iev-pa-jY1"/>
-                                <constraint firstItem="Whz-Td-jiT" firstAttribute="leading" secondItem="uqf-TQ-L7q" secondAttribute="trailing" constant="-1" id="VCO-YC-tvj"/>
+                                <constraint firstItem="Whz-Td-jiT" firstAttribute="leading" secondItem="uqf-TQ-L7q" secondAttribute="trailing" id="VCO-YC-tvj"/>
                                 <constraint firstItem="uqf-TQ-L7q" firstAttribute="top" secondItem="dsq-CE-sTz" secondAttribute="top" id="e9M-lN-FZp"/>
                             </constraints>
                         </view>
