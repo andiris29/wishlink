@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol T06CellFooterDelegate: NSObjectProtocol {
+
+  func grabOrderButtonAction(sender: UIButton)
+}
+
 class T06CellFooter: UITableViewCell {
 
     @IBOutlet weak var btnGrabOrder: UIButton!
+    
+    var delegate: T06CellFooterDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,6 +28,10 @@ class T06CellFooter: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func grabOrderButtonAction(sender: UIButton) {
+        delegate!.grabOrderButtonAction(sender)
     }
     
 }

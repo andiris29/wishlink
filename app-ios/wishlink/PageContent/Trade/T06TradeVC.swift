@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHeaderDelegate {
+class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHeaderDelegate, T06CellFooterDelegate, WebRequestDelegate {
 
     let cellIdentifier = "T06Cell"
     let cellIdentifierHeader = "T06CellHeader"
@@ -19,6 +19,8 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
     
+    var product: ItemModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +29,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
 
+        self.httpObj.mydelegate = self;
         self.navigationController?.navigationBarHidden = false;
         self.loadComNaviLeftBtn()
         self.loadComNavTitle("订单详情")
@@ -67,11 +70,13 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
    
            tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
            tCell.delegate = self
+           tCell.initData(product)
            
            cell = tCell;
         case last:
            var  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
            fcell.btnGrabOrder.addTarget(self, action: "btnGrabOrderAction:", forControlEvents: UIControlEvents.TouchUpInside)
+           fcell.delegate = self
            cell = fcell;
         default:
             cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
@@ -80,21 +85,18 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         return cell
     }
     
+    //MARK: - Action
     
-    func btnFollowAction(sernder:UIButton)
-    {
-         var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+    func btnFollowAction(sernder:UIButton) {
+        
+        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
-    func btnGrabOrderAction(sernder:UIButton)
-    {
-        self.navigationController?.popToRootViewControllerAnimated(true);
-        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-            var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-            tababarController.selectedIndex = 3;
-        }
-
+    func btnGrabOrderAction(sernder:UIButton) {
+        
+        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+        self.navigationController?.pushViewController(vc, animated: true);
     }
     
     //MARK: - T06CellHeaderDelegate
@@ -102,5 +104,41 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func dorpListButtonAction(sender: UIButton) {
     
     }
+    
+    func orderButtonAction(sender: UIButton) {
 
+    }
+
+    //MARK: - T06CellFooterDelegate
+    
+    func grabOrderButtonAction(sender: UIButton) {
+        
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        self.httpObj.httpPostApi("trade/assignToMe", tag: 61)
+        
+        self.navigationController?.popToRootViewControllerAnimated(true);
+        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+            var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+            tababarController.selectedIndex = 3;
+        }
+    }
+    
+    //MARK: - Request delegate
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        print(response)
+        
+        if(tag == 60) {
+        } else if(tag == 61) {
+            
+            SVProgressHUD.dismiss();
+            //todo:
+        }
+    }
+    
+    func requestDataFailed(error: String) {
+        
+        SVProgressHUD.showErrorWithStatusWithBlack("获取用户信息失败！");
+    }
 }

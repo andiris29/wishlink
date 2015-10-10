@@ -39,14 +39,18 @@ class T05PayVC: RootVC,WebRequestDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageRollView.initWithImages(["c1_0047","c1_0047","c1_0047","c1_0047"])
+        self.loadData();
+    }
+    
+    func initImageRollView(images:[UIImage]) {
+        
+        imageRollView.initWithImages(images)
         imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
         imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
-        self.loadData();
-       
     }
-    func loadData()
-    {
+    
+    func loadData() {
+        
         self.lbName.text = "";
         self.lbCountry.text = "";
         self.lbSpec.text = "";
@@ -72,7 +76,6 @@ class T05PayVC: RootVC,WebRequestDelegate {
         var apiName = "user/get?registrationId=" + APPCONFIG.Uid;
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 10)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -151,13 +154,25 @@ class T05PayVC: RootVC,WebRequestDelegate {
             self.lbReceverName.text = defaultAddress.name
             self.lbReceverMobile.text = defaultAddress.phone;
             self.lbRecevierAddress.text = defaultAddress.address;
+            
+            if (item.images == nil) {return}
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                
+                var images: [UIImage] = [UIImage]()
+                for imageUrl in self.item.images {
+                    var url: NSURL = NSURL(string: imageUrl)!
+                    var image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                    images.append(image)
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.initImageRollView(images)
+                })
+            })
 
         }
         
-
-        
-        
     }
+    
     func requestDataFailed(error: String) {
         
         SVProgressHUD.showErrorWithStatusWithBlack("获取用户地址失败！");

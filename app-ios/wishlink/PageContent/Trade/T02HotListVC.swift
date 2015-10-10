@@ -27,7 +27,6 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
         self.httpObj.mydelegate = self;
     }
 
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false;
@@ -79,6 +78,7 @@ class T02HotListVC: RootVC,WebRequestDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+        vc.product = self.dataArr[indexPath.row] as! ItemModel
         self.navigationController?.pushViewController(vc, animated: true);
     }
     

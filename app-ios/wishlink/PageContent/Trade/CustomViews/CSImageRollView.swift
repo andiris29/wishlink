@@ -50,7 +50,7 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
         containerView.setTranslatesAutoresizingMaskIntoConstraints(false)
     }
     
-    func initWithImages(images: [String]?) {
+    func initWithImages(images: [UIImage]?) {
         
         self.images = images
     
@@ -72,8 +72,8 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
         for var tag = 0; tag < self.images.count; tag++ {
             
             let key: String = "imageView\(tag)"
-            var imageName: String = self.images[tag] as! String
-            var imageView: UIImageView = UIImageView(image: UIImage(named: imageName))
+            var image: UIImage = self.images[tag] as! UIImage
+            var imageView: UIImageView = UIImageView(image: image)
             
             imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
