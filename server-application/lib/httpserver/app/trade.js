@@ -1,20 +1,21 @@
-// third party library
+// Third party library
 var async = require('async');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 
-// model
+// Model
 var Trades = require('../../model/trades');
 var Items = require('../../model/items');
 var Users = require('../../model/users');
 
-// helper
+// Helper
 var ServerError = require('../server-error');
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var RelationshipHelper = require('../helper/RelationshipHelper');
 
 // Service
+var NotificationService = require('../service/NotificationService');
 var TradeService = require('../service/TradeService');
 
 var trade = module.exports;
@@ -253,6 +254,21 @@ trade.payCallback = {
                     callback(ServerError.ERR_UNKOWN);
                 } else {
                     callback(null, trade);
+                    if (newStatus === TradeService.Status.PAID.code) {
+                        return;
+                    }
+
+                    var command, message;
+                    if (newStatus === TradeService.Status.UN_ORDER_RECEIVE.code) {
+                        command = NotificationService.notifyItemApproved.command;
+                        message = NotificationService.notifyItemApproved.message;
+                    } else {
+                        command = NotificationService.notifyItemDisapproved.command;
+                        message = NotificationService.notifyItemDisapproved.message;
+                    }
+                    NotificationService.notify([trade.onwerRef], command, message, {
+                        _id: trade._id
+                    }, null);
                 }
             });
         }, function(trade, callback) {
