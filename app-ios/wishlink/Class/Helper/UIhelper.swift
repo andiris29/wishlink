@@ -168,4 +168,22 @@ class UIHelper {
     {
         UIAlertView(title: "", message: strMsg, delegate: nil, cancelButtonTitle: "确定").show();
     }
+    
+    func compressionImageToDate(img:UIImage)->NSData
+    {
+        var imageData:NSData = UIImageJPEGRepresentation(img, 1)!
+        print(imageData.length);
+        var rate:CGFloat = 1
+        while( imageData.length > 40 * 1000)
+        {
+            rate-=0.1
+            imageData = UIImageJPEGRepresentation(img, rate)!
+            if(rate<=0.189)
+            {
+                break;
+            }
+        }
+   
+        return imageData;
+    }
 }

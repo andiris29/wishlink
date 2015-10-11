@@ -119,10 +119,19 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     
     @IBAction func searchTextFiledEndExit(sender: AnyObject) {
         
-        var vc = T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle());
-        vc.searchContext = self.searchTextField.text
-        vc.searchType = .any
+        
+        
+        var vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
+        vc.keyword = self.searchTextField.text
         self.navigationController?.pushViewController(vc, animated: true);
+        
+        
+//        var vc = T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle());
+//        vc.searchContext = self.searchTextField.text
+//        vc.searchType = .any
+//        self.navigationController?.pushViewController(vc, animated: true);
+        
+        
     }
     
     //MARK: - WebRequestDelegate 

@@ -112,7 +112,27 @@
 	
 	[self rotateSphereByAngle:1 fromPoint:CGPointMake(0, 0) toPoint:CGPointMake(0, 1)];
 }
+- (void)appentItems:(NSArray *)items
+{
 
+    
+    NSArray *spherePoints = [PFGoldenSectionSpiral sphere:items.count];
+    for (int i=0; i<items.count; i++) {
+        PFPoint point;
+        NSValue *pointRep = [spherePoints objectAtIndex:i];
+        [pointRep getValue:&point];
+        
+        UIView *view = [items objectAtIndex:i];
+        view.tag = i;
+        [self layoutView:view withPoint:point];
+        [self addSubview:view];
+        
+        [pointMap setObject:pointRep forKey:[NSNumber numberWithInt:i]];
+    }
+    
+//    [self rotateSphereByAngle:1 fromPoint:CGPointMake(0, 0) toPoint:CGPointMake(0, 1)];
+    
+}
 - (void)setFrame:(CGRect)pFrame {
 	[super setFrame:pFrame];
 	

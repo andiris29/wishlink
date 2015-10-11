@@ -24,7 +24,8 @@
 @property(nonatomic,getter = isTimerStart,readonly)BOOL isTimerStart;
 
 - (void)setItems:(NSArray *)items;
-
+- (void)appentItems:(NSArray *)items;
+//- (void)setItems:(NSArray *)items isFirst:(BOOL)isfirstTime;
 -(void)timerStart;
 
 -(void)timerStop;

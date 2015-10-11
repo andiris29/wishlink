@@ -110,15 +110,15 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             else
             {
                 
-                
-                var para:[String:String] = ["name":txtName.text.trim(),
-                    "brand":txtCategory.text.trim(),
-                    "country":txtBuyArea.text.trim(),
-                    "price":txtPrice.text.trim(),
-                    "spec":txtSize.text.trim(),
-                    "comment":txtRemark.text.trim()
-//                    "file_a":(self.imagrArr.count>0?self.imagrArr[0]:"")
-                ]
+//                
+//                var para:[String:String] = ["name":txtName.text.trim(),
+//                    "brand":txtCategory.text.trim(),
+//                    "country":txtBuyArea.text.trim(),
+//                    "price":txtPrice.text.trim(),
+//                    "spec":txtSize.text.trim(),
+//                    "comment":txtRemark.text.trim()
+////                    "file_a":(self.imagrArr.count>0?self.imagrArr[0]:"")
+//                ]
                 
   
                 
@@ -129,7 +129,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 
                    upload(
                         .POST,
-                        URLString: "http://121.41.162.102/services/item/create",
+                        URLString: apiurl,
                         multipartFormData: {
                             multipartFormData in
                             
@@ -141,44 +141,52 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "comment")
                             if(self.imagrArr.count>0)
                             {
-                                var imgData:NSData = UIImageJPEGRepresentation(self.imagrArr[0], 1)!
-                                print(imgData.length, terminator: "");
-                                var rate:CGFloat = 1
-                                while( imgData.length > 20 * 1000)
-                                {
-                                    rate-=0.1
-                                    imgData = UIImageJPEGRepresentation(self.imagrArr[0], rate)!
-                                    if(rate<=0.189)
-                                    {
-                                        break;
-                                    }
-                                }
+                                var imgName = "item_a.jpg"
+                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var finaleImage = UIImage(data: imgData);
+                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
+                                var imgStream  = NSInputStream(data: imageData);
+                                var len =   UInt64(imageData.length)
                                 
-                                var resut = UIHEPLER.readImageFromLocalByName("tempImg01.jpg");
-                                
-                                var imgUrl = NSURL(fileURLWithPath: resut.path);
-//                                var imgUrl = MainBundle.URLForResource("scan_bg", withExtension: "png")
-//                                multipartFormData.appendBodyPart(fileURL: imgUrl!, name: "file_a")
-                                multipartFormData.appendBodyPart(data: imgData, name: "file_a", mimeType: "image/jpeg")
-//                                multipartFormData.appendBodyPart(fileURL: NSURL(fileURLWithPath: resut.path)!, name: "file_a", fileName: "tempImg01.jpg", mimeType: "image/jpeg")
+                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>1)
                             {
-                                var imgData = UIImageJPEGRepresentation(self.imagrArr[1], 1.0)
-                                multipartFormData.appendBodyPart(data:imgData, name: "file_b")
+                                
+                                var imgName = "item_b.jpg"
+                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                
+                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                
+                                var imgStream  = NSInputStream(data: imageData);
+                                var len =   UInt64(imageData.length)
+                                
+                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>2)
                             {
-                                var imgData = UIImageJPEGRepresentation(self.imagrArr[2], 1.0)
-                                multipartFormData.appendBodyPart(data:imgData, name: "file_c")
+                                var imgName = "item_c.jpg"
+                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                
+                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                
+                                var imgStream  = NSInputStream(data: imageData);
+                                var len =   UInt64(imageData.length)
+                                
+                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>3)
                             {
-                                var imgData = UIImageJPEGRepresentation(self.imagrArr[3], 1.0)
-                                multipartFormData.appendBodyPart(data:imgData, name: "file_d")
+                                var imgName = "item_d.jpg"
+                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                
+                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                
+                                var imgStream  = NSInputStream(data: imageData);
+                                var len =   UInt64(imageData.length)
+                                
+                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             
                         },
@@ -197,16 +205,27 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                         
                                         var itemdic = JSON as! NSDictionary;
                                         var itemData =  itemdic.objectForKey("data") as! NSDictionary
-                                        var itemObj =  itemData.objectForKey("item") as! NSDictionary
-                                        var item = ItemModel(dict: itemObj);
-                                        self.item = item;
-                                        print(item);
-                                        if(item._id.length>0)
+                                        if(itemData.objectForKey("item") != nil)
+                                        {
+                                            var itemObj =  itemData.objectForKey("item") as! NSDictionary
+                                            var item = ItemModel(dict: itemObj);
+                                            self.item = item;
+                                            print(item);
+                                            if(item._id.length>0)
+                                            {
+                                                
+                                                var para  = ["itemRef":item._id,
+                                                    "quantity":self.txtCount.text.trim()];
+                                                self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
+                                            }
+                                        }
+                                        else
                                         {
                                             
-                                            var para  = ["itemRef":item._id,
-                                                "quantity":self.txtCount.text.trim()];
-                                            self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
+                                            
+                                            SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                            NSLog("Fail:")
+                                            
                                         }
 
                                     }
@@ -214,7 +233,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                     {
                                         
                                         
-                                        SVProgressHUD.showErrorWithStatusWithBlack("上传图片失败！");
+                                        SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
                                         NSLog("Fail:")
                                         
                                     }
@@ -315,23 +334,24 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             if(self.imagrArr.count>0 && icount == 0)
             {
                 
-                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg01.jpg")
+                
+                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "item_a.jpg")
                 self.iv0.image = self.imagrArr[0];
             }
             
             if(self.imagrArr.count>1 && icount == 1)
             {
-                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg02.jpg")
+                UIHEPLER.saveImageToLocal(self.imagrArr[1], strName: "item_b.jpg")
                 self.iv1.image = self.imagrArr[1];
             }
             if(self.imagrArr.count>2 && icount == 2)
             {
-                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg03.jpg")
+                UIHEPLER.saveImageToLocal(self.imagrArr[2], strName: "item_c.jpg")
                 self.iv2.image = self.imagrArr[2];
             }
             if(self.imagrArr.count>3 && icount == 3)
             {
-                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "tempImg04.jpg")
+                UIHEPLER.saveImageToLocal(self.imagrArr[3], strName: "item_d.jpg")
                 self.iv3.image = self.imagrArr[3];
             }
             

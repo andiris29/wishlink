@@ -22,6 +22,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     @IBOutlet weak var lbAllCount: UILabel!
     
     @IBOutlet weak var lbComplateCount: UILabel!
+    var lastDataArr:[AnyObject]! = []
     var sphereView: ZYQSphereView!
     var isNeedShowLoin = true;
     override func viewDidLoad() {
@@ -67,8 +68,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
   
             var window = UIApplication.sharedApplication().keyWindow
             var windowWidth = ScreenWidth
+            var isfirstTime = false;
             if( self.sphereView == nil)
             {
+                isfirstTime = true;
                 sphereView = ZYQSphereView()
                 sphereView.frame = CGRectMake(0, 0, 300, 300)
                 sphereView.frame.origin.x = (windowWidth - sphereView.frame.size.width) / 2.0
@@ -99,9 +102,20 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 views.addObject(button)
             }
          
-            sphereView.setItems(views as [AnyObject])
-            sphereView.isPanTimerStart = true;
-            sphereView.timerStart()
+//            sphereView.setItems(views as [AnyObject])
+            if(isfirstTime)
+            {
+                
+                sphereView.setItems(views as [AnyObject])
+                sphereView.isPanTimerStart = true;
+                sphereView.timerStart()
+            }
+            else
+            {
+                
+                
+                sphereView.appentItems(views as [AnyObject])
+            }
         }
 
     }
