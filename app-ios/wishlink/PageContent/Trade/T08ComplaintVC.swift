@@ -18,6 +18,8 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     @IBOutlet weak var btnImage2: UIButton!
     @IBOutlet weak var btnImage1: UIButton!
     
+    var currentButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,13 +39,12 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         contexTextView.resignFirstResponder()
     }
     
-    var selectImgTag = 0;
     @IBAction func btnAction(sender: AnyObject) {
-        selectImgTag = 0;
+        
+        currentButton = sender as! UIButton
         var tag = (sender as! UIButton).tag
-        if(tag >= 1 && tag <= 5)
-        {
-            selectImgTag = tag
+        
+        if(tag >= 1 && tag <= 5) {
             
             var actionSheet: UIActionSheet = UIActionSheet(title: "上传照片", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(self.view)
@@ -107,31 +108,9 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
-            
-            var btn:UIButton!;
-            if(self.selectImgTag == 1)
-            {
-                btn = self.btnImage1;
-                self.btnImage1.setBackgroundImage(gotImage, forState: UIControlState.Normal);
-            }
-            else if(self.selectImgTag == 2)
-            {
-                btn = self.btnImage2;
-            }
-            else if(self.selectImgTag == 3)
-            {
-                btn = self.btnImage3;
-            }
-            else if(self.selectImgTag == 4)
-            {
-                btn = self.btnImage4;
-            }
-            else if(self.selectImgTag == 5)
-            {
-                btn = self.btnImage5;
-            }
-            btn.setBackgroundImage(gotImage, forState: UIControlState.Normal);
-//            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
+    
+            self.currentButton.setBackgroundImage(gotImage, forState: UIControlState.Normal);
+            UIHEPLER.saveImageToLocal(gotImage, strName: "T08Complaint_\(self.currentButton.tag).jpg")
         })
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

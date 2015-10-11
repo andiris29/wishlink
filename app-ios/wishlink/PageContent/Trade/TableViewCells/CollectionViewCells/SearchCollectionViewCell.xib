@@ -22,10 +22,10 @@
                                     <constraint firstAttribute="width" constant="54" id="A1L-Px-ba1"/>
                                     <constraint firstAttribute="height" constant="54" id="wDT-u8-Qtk"/>
                                 </constraints>
-                                <state key="normal" image="T03eee1" backgroundImage="T03aaa">
+                                <state key="normal" image="T03eee0" backgroundImage="T03bbb">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="T03eee0" backgroundImage="T03bbb"/>
+                                <state key="highlighted" image="T03eee1" backgroundImage="T03aaa"/>
                                 <connections>
                                     <action selector="buttonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="W7x-Ug-QJi"/>
                                 </connections>
