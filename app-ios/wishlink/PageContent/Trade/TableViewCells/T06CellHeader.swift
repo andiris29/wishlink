@@ -35,7 +35,7 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        var titles: NSArray = ["选择同城0","选择同城1","选择同城2"]
+        let titles: NSArray = ["选择同城0","选择同城1","选择同城2"]
         dorpListView = CSDorpListView.sharedInstance
         dorpListView.bindWithList(titles, delegate: self)
 
@@ -71,8 +71,8 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
             
             var images: [UIImage] = [UIImage]()
             for imageUrl in item.images {
-                var url: NSURL = NSURL(string: imageUrl)!
-                var image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                let url: NSURL = NSURL(string: imageUrl)!
+                let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
                 images.append(image)
             }
             dispatch_async(dispatch_get_main_queue(), {

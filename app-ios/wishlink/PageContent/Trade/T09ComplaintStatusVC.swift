@@ -61,10 +61,10 @@ class T09ComplaintStatusVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            var  leftCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierTime, forIndexPath: indexPath) as! T09CellTime
+            let  leftCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierTime, forIndexPath: indexPath) as! T09CellTime
             cell = leftCell;
         case 1:
-            var  rightCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierTextRight, forIndexPath: indexPath) as! T09CellTextRight
+            let  rightCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierTextRight, forIndexPath: indexPath) as! T09CellTextRight
             cell = rightCell;
         default:
             cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierTextLeft, forIndexPath: indexPath) as! T09CellTextLeft

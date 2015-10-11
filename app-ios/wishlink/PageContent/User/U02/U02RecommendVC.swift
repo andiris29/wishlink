@@ -37,7 +37,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,8 +46,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     // MARK: - delegate
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
-        var height: CGFloat = 250.0
+        let width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
+        let height: CGFloat = 250.0
         return CGSize(width: width, height: height)
     }
     
@@ -57,7 +57,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.indexPath = indexPath;
         cell.closure = {
             (type: ItemCellButtonClickType, selectedIndexPath: NSIndexPath) in
@@ -106,11 +106,11 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         self.clearView = UIView(frame: CGRectMake(0, -40, UIScreen.mainScreen().bounds.size.width, 40))
         self.clearView.userInteractionEnabled = true
         self.collectionView.addSubview(self.clearView)
-        var clearBtnW = CGRectGetWidth(self.clearView.frame) * 0.6
-        var clearBtnH = CGFloat(30)
-        var clearBtnX = (CGRectGetWidth(self.clearView.frame) - clearBtnW) * 0.5
-        var clearBtnY = (CGRectGetHeight(self.clearView.frame) - clearBtnH) * 0.5
-        self.clearBtn = UIButton.buttonWithType(.Custom) as! UIButton
+        let clearBtnW = CGRectGetWidth(self.clearView.frame) * 0.6
+        let clearBtnH = CGFloat(30)
+        let clearBtnX = (CGRectGetWidth(self.clearView.frame) - clearBtnW) * 0.5
+        let clearBtnY = (CGRectGetHeight(self.clearView.frame) - clearBtnH) * 0.5
+        self.clearBtn = UIButton(type: .Custom)
         self.clearBtn.frame = CGRectMake(clearBtnX, clearBtnY, clearBtnW, clearBtnH)
         self.clearBtn.setTitle("清空推荐", forState: .Normal)
         self.clearBtn.setBackgroundImage(UIImage(named: "u02-clearcollection"), forState: .Normal)

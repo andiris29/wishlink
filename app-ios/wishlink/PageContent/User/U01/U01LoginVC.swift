@@ -21,13 +21,13 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         super.viewDidLoad()
 
         self.httpObj.mydelegate = self
-        NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification!) in
+        NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
             let temp = noti.object as! WBAuthorizeResponse
             self.wbToekn = temp.accessToken
             self.wbUserID = temp.userID
             self.wbLogin()
         }
-        NSNotificationCenter.defaultCenter().addObserverForName(WXLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification!) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(WXLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
             let temp = noti.object as! SendAuthResp
             self.wxCode = temp.code
             self.wxLogin()
@@ -48,7 +48,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     @IBAction func weiXinLoginAction(sender: AnyObject) {
 
-        var req = SendAuthReq()
+        let req = SendAuthReq()
         req.scope = "snsapi_userinfo,snsapi_base"
         req.state = "wishlink"
         WXApi.sendReq(req)
@@ -61,7 +61,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         self.httpObj.httpPostApi("user/login", parameters: ["nickname": "testtest", "password": "testtest"], tag: 10)
         
         return
-        var request = WBAuthorizeRequest()
+        let request = WBAuthorizeRequest()
         request.scope = "all"
         request.redirectURI = AppConfig.wbRedirectURI
         WeiboSDK.sendRequest(request)
@@ -69,7 +69,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     
     @IBAction func skipAction(sender: AnyObject) {
-        println("跳过")
+        print("跳过")
         APPCONFIG.AccessToken = "temp_token";
         self.dismissViewControllerAnimated(true, completion: nil);
     }
@@ -95,7 +95,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         if APService.registrationID().length != 0 {
             registrationId = APService.registrationID()
         }
-        var parametersDic = [
+        let parametersDic = [
             "code" : self.wxCode,
             "registrationId" : registrationId]
         self.httpObj.httpPostApi("user/loginViaWeixin", parameters: parametersDic, tag: 20)
@@ -108,7 +108,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         
         //存储用户ID
         APPCONFIG.Uid = UserModel.shared.userId;
-        println(data)
+        print(data)
     }
     
     // MARK: - setter and getter

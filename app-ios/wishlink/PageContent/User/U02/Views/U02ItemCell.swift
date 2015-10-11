@@ -57,7 +57,7 @@ class U02ItemCell: UICollectionViewCell {
         self.layer.borderWidth = 1
     }
     @IBAction func favoriteBtnAction(sender: AnyObject) {
-        var btn = sender as! UIButton
+        let btn = sender as! UIButton
         btn.selected = !btn.selected
         if let c = self.closure {
             c(ItemCellButtonClickType.Favorite, self.indexPath)

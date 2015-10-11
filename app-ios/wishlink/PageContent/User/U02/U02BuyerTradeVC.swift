@@ -47,7 +47,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
@@ -91,8 +91,8 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
-        var height: CGFloat = 223
+        let width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
+        let height: CGFloat = 223
         return CGSize(width: width, height: height)
     }
 
@@ -102,7 +102,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(tradeCellIde, forIndexPath: indexPath) as! U02TradeCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(tradeCellIde, forIndexPath: indexPath) as! U02TradeCell
         cell.delegate = self
         cell.cellType = .Buyer
         cell.indexPath = indexPath
@@ -113,26 +113,26 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     func tradeCell(cell: U02TradeCell, clickType: TradeCellButtonClickType) {
         switch clickType {
         case .Confirm:
-            println("确认")
+            print("确认")
         case .Revoke:
-            println("撤单")
+            print("撤单")
         case .CheckComplain:
-            println("查看投诉")
-            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            print("查看投诉")
+            let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .CheckLogistics:
-            var tipView = U02LogisticsTipView(name: "物流公司：韵达快递", orderNumber: "物流单号：18815287600")
+            let tipView = U02LogisticsTipView(name: "物流公司：韵达快递", orderNumber: "物流单号：18815287600")
             tipView.show()
-            println("查看物流")
+            print("查看物流")
         case .Chat:
             self.userVC.navigationController?.navigationBarHidden = false;
-            var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
+            let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Complain:
-            var vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true);
         default:
-            println("error")
+            print("error")
         }
     }
     // MARK: - response event
@@ -144,7 +144,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     }
     
     @IBAction func conditionBtnAction(sender: AnyObject) {
-        var btn = sender as! UIButton
+        let btn = sender as! UIButton
         if btn !== self.seletedConditionBtn {
             self.seletedConditionBtn.selected = false
             self.seletedConditionBtn = btn

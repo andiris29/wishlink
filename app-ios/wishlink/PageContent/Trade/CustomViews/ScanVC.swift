@@ -79,12 +79,12 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
         if(!UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
         {
             UIAlertView(title: "", message: "设备不支持拍照功能!", delegate: nil, cancelButtonTitle: "确定")
-            print("设备不支持拍照功能!");
+            print("设备不支持拍照功能!", terminator: "");
 //            SVProgressHUD.showErrorWithStatusWithBlack("设备不支持拍照功能!")
             return;
         }
         device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        input = AVCaptureDeviceInput(device: self.device, error: nil)
+        input = try? AVCaptureDeviceInput(device: self.device)
         output = AVCaptureMetadataOutput();
         output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
         
@@ -116,9 +116,9 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
         var strValue:String!
         if(metadataObjects.count > 0)
         {
-            var metadataObject:AVMetadataMachineReadableCodeObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject;
+            let metadataObject:AVMetadataMachineReadableCodeObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject;
             strValue = metadataObject.stringValue
-            println(strValue);
+            print(strValue);
             
             if(self.myDelegate != nil)
             {

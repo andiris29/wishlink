@@ -50,7 +50,7 @@ U03AddressCellDelegate, WebRequestDelegate{
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -72,11 +72,11 @@ U03AddressCellDelegate, WebRequestDelegate{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("U03AddressCell", forIndexPath: indexPath) as! U03AddressCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("U03AddressCell", forIndexPath: indexPath) as! U03AddressCell
         cell.selectionStyle = .None
         cell.indexPath = indexPath
         cell.delegate = self
-        var receiver = self.addressArray[indexPath.row]
+        let receiver = self.addressArray[indexPath.row]
         cell.receiver = receiver
         if receiver.isDefault == true {
             self.selectedReciver = receiver
@@ -86,18 +86,18 @@ U03AddressCellDelegate, WebRequestDelegate{
     
     func addressCell(cell: U03AddressCell, btnClickWithTag tag: NSInteger, indexPath: NSIndexPath) {
         if tag == 0 {
-            var vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
+            let vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
             vc.operationType = .Edit
             vc.receiver = self.addressArray[indexPath.row]
             self.navigationController!.pushViewController(vc, animated: true)
         }
         else if tag == 1{
             // 删除收货地址
-            var receiver = self.addressArray[indexPath.row]
+            let receiver = self.addressArray[indexPath.row]
             self.removeReceiver(receiver.uuid)
         }else if tag == 2{
             // 选中
-            var receiver = self.addressArray[indexPath.row]
+            let receiver = self.addressArray[indexPath.row]
             if receiver == self.selectedReciver {
                 return
             }
@@ -142,7 +142,7 @@ U03AddressCellDelegate, WebRequestDelegate{
     // MARK: - response event
     
     func addAddressBtnAction(sender: AnyObject) {
-        var vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
+        let vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
         vc.operationType = .Add
         vc.callBackClosure = {
             [unowned self]
@@ -159,7 +159,7 @@ U03AddressCellDelegate, WebRequestDelegate{
     func setDefaultReceiver(receiver: ReceiverModel) {
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         receiver.isDefault = true
-        var dic = receiver.keyValuesWithType(.Update)
+        let dic = receiver.keyValuesWithType(.Update)
         self.httpObj.httpPostApi("user/saveReceiver", parameters: dic, tag: 20)
     }
     
@@ -167,7 +167,7 @@ U03AddressCellDelegate, WebRequestDelegate{
         if uuid.length == 0 {
             return
         }
-        var dic = [
+        let dic = [
             "uuid": uuid
         ]
         SVProgressHUD.showInfoWithStatus("请稍等...")
@@ -183,7 +183,7 @@ U03AddressCellDelegate, WebRequestDelegate{
     func prepareNav() {
         self.loadComNavTitle("收货地址管理")
         self.loadComNaviLeftBtn()
-        var rightBtn = UIButton.buttonWithType(.Custom) as! UIButton
+        let rightBtn = UIButton(type: .Custom)
         rightBtn.frame = CGRectMake(0, 0, 60, 44)
         rightBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
         rightBtn.setTitle("新增地址", forState: .Normal)

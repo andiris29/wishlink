@@ -67,7 +67,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
@@ -90,8 +90,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     // MARK: - delegate
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
-        var height: CGFloat = 223
+        let width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
+        let height: CGFloat = 223
         return CGSize(width: width, height: height)
     }
     
@@ -101,7 +101,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(tradeCellIde, forIndexPath: indexPath) as! U02TradeCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(tradeCellIde, forIndexPath: indexPath) as! U02TradeCell
         cell.delegate = self
         cell.cellType = .Seller
         cell.indexPath = indexPath
@@ -113,35 +113,35 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         var msg = ""
         switch clickType {
         case .EditItemInfo:
-            var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+            let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             vc.hidesBottomBarWhenPushed = true
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Revoke:
-            println("撤单")
+            print("撤单")
             msg = "撤单"
         case .CheckComplain:
-            println("查看投诉")
-            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            print("查看投诉")
+            let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .SendOut:
-            println("发货")
-            var vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+            print("发货")
+            let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             
             vc.hidesBottomBarWhenPushed = true
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Chat:
             
             self.userVC.navigationController?.navigationBarHidden = false;
-            var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
+            let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Complain:
-            var vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true);
         default:
-            println("error")
+            print("error")
         }
         if msg.length > 0 {
-            var alertView = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+            let alertView = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
             alertView.show()
         }
     }
@@ -155,7 +155,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     }
     
     @IBAction func conditionBtnAction(sender: AnyObject) {
-        var btn = sender as! UIButton
+        let btn = sender as! UIButton
         if btn !== self.seletedConditionBtn {
             self.seletedConditionBtn.selected = false
             self.seletedConditionBtn = btn

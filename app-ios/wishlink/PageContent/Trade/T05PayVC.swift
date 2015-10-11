@@ -97,14 +97,14 @@ class T05PayVC: RootVC,WebRequestDelegate {
     @IBAction func btnPayTapped(sender: UIButton) {
         
         
-        var tag = sender.tag;
+        let tag = sender.tag;
         if(tag == 11)//跳转到个人中心
         {
             self.navigationController?.popToRootViewControllerAnimated(true);
            
             if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                var vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
+                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+                let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
                 if(vc != nil)
                 {
                     vc.sellerBtnAction(vc.sellerBtn);
@@ -116,7 +116,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
         }
         else
         {
-            var vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+            let vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
             self.navigationController?.pushViewController(vc, animated: true);
         }
     }
@@ -137,7 +137,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
     //WebRequesrDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         SVProgressHUD.dismiss();
-        print(response);
+        print(response, terminator: "");
         UserModel.shared.userDic = response["user"] as! [String: AnyObject]
         
         
@@ -149,7 +149,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
         self.lbRecevierAddress.text = "";
         if(result.count>0)
         {
-            var defaultAddress = result[0] as ReceiverModel
+            let defaultAddress = result[0] as ReceiverModel
             
             self.lbReceverName.text = defaultAddress.name
             self.lbReceverMobile.text = defaultAddress.phone;
@@ -160,8 +160,8 @@ class T05PayVC: RootVC,WebRequestDelegate {
                 
                 var images: [UIImage] = [UIImage]()
                 for imageUrl in self.item.images {
-                    var url: NSURL = NSURL(string: imageUrl)!
-                    var image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                    let url: NSURL = NSURL(string: imageUrl)!
+                    let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
                     images.append(image)
                 }
                 dispatch_async(dispatch_get_main_queue(), {

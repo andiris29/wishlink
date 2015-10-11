@@ -202,9 +202,9 @@ class U02TradeCell: UICollectionViewCell {
             self.sellerRoundImageView.hidden = true
         }
         else {
-            self.buyerTopView.backgroundColor = RGB(253, 234, 237)
+            self.buyerTopView.backgroundColor = RGB(253, g: 234, b: 237)
             self.buyerRoundImageView.hidden = false
-            self.sellerTopView.backgroundColor = RGB(253, 234, 237)
+            self.sellerTopView.backgroundColor = RGB(253, g: 234, b: 237)
             self.sellerRoundImageView.hidden = false
         }
     }

@@ -54,7 +54,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -85,7 +85,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     }
     
     //MARK: UIImagePickerController delegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         if self.uploadImageType == .Portrait {
@@ -109,7 +109,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     // MARK: - response event
     
     @IBAction func btnAction(sender: UIButton) {
-        var tag = sender.tag ;
+        let tag = sender.tag ;
         switch tag {
         case 100:
             // 上传头像
@@ -121,20 +121,20 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             self.imgHeadChange()
         case 102:
             // 地址管理
-            var vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+            let vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
             
             self.navigationController?.pushViewController(vc, animated: true);
         case 103:
-            println("常见问题")
+            print("常见问题")
         case 104:
             // 退出登录
             self.logout();
         default:
-            println("1111")
+            print("1111")
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -158,10 +158,10 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         switch self.uploadImageType {
         case .Portrait:
             urlString = urlString + "user/updatePortrait"
-            imageData = UIImageJPEGRepresentation(self.headImageView.image!, 1.0)
+            imageData = UIImageJPEGRepresentation(self.headImageView.image!, 1.0)!
         case .Background:
             urlString = urlString + "user/updateBackground"
-            imageData = UIImageJPEGRepresentation(self.bgImageView.image!, 1.0)
+            imageData = UIImageJPEGRepresentation(self.bgImageView.image!, 1.0)!
         default:
             return
         }
@@ -170,36 +170,41 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     //MARK:弹出图片上传选择框
     func imgHeadChange()
     {
-        var alertController = UIAlertController(title: "上传图片", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        var cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler:  {
-            (action: UIAlertAction!) -> Void in
-            
-        })
-        var deleteAction = UIAlertAction(title: "拍照上传", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction!) -> Void in
-            
-            var imagePicker = UIImagePickerController()
-            if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
-            {
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: "上传图片", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    
+            let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler:  {
+                (action: UIAlertAction) -> Void in
+                
+            })
+            let deleteAction = UIAlertAction(title: "拍照上传", style: UIAlertActionStyle.Default, handler: {
+                (action: UIAlertAction) -> Void in
+                
+                let imagePicker = UIImagePickerController()
+                if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+                {
+                    imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                    imagePicker.delegate = self;
+                    self.presentViewController(imagePicker, animated: true, completion: nil);
+                }
+            })
+            let archiveAction = UIAlertAction(title: "从相册中选择", style: UIAlertActionStyle.Default, handler: {
+                (action: UIAlertAction) -> Void in
+                
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 imagePicker.delegate = self;
                 self.presentViewController(imagePicker, animated: true, completion: nil);
-            }
-        })
-        var archiveAction = UIAlertAction(title: "从相册中选择", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction!) -> Void in
+                
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            alertController.addAction(archiveAction)
             
-            var imagePicker = UIImagePickerController()
-            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            imagePicker.delegate = self;
-            self.presentViewController(imagePicker, animated: true, completion: nil);
-            
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(deleteAction)
-        alertController.addAction(archiveAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
         
     }
     

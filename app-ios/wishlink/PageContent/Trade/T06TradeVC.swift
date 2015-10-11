@@ -37,7 +37,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        var last: Int = itemContents.count - 1
+        let last: Int = itemContents.count - 1
         
         switch indexPath.row {
         case 0:
@@ -62,11 +62,11 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
-        var last: Int = itemContents.count - 1
+        let last: Int = itemContents.count - 1
         
         switch indexPath.row {
         case 0:
-           var  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
+           let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
    
            tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
            tCell.delegate = self
@@ -74,7 +74,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
            
            cell = tCell;
         case last:
-           var  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
+           let  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
            fcell.btnGrabOrder.addTarget(self, action: "btnGrabOrderAction:", forControlEvents: UIControlEvents.TouchUpInside)
            fcell.delegate = self
            cell = fcell;
@@ -89,13 +89,13 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func btnFollowAction(sernder:UIButton) {
         
-        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+        let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
     func btnGrabOrderAction(sernder:UIButton) {
         
-        var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+        let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
@@ -118,7 +118,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         
         self.navigationController?.popToRootViewControllerAnimated(true);
         if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-            var tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
             tababarController.selectedIndex = 3;
         }
     }
@@ -127,7 +127,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
-        print(response)
+        print(response, terminator: "")
         
         if(tag == 60) {
         } else if(tag == 61) {

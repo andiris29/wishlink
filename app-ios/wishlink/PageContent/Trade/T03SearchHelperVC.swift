@@ -44,7 +44,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     func httpRequest() {
         
         self.httpObj.mydelegate = self;
-        var parameter = ["req.pageNo":1, "req.pageSize":10]
+        let parameter = ["req.pageNo":1, "req.pageSize":10]
         
         for var index = 0; index < marks.count; index++ {
             
@@ -72,9 +72,9 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         
         if kind == UICollectionElementKindSectionHeader {
         
-            reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellHeaderIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
+            reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellHeaderIdentifier, forIndexPath: indexPath) 
             
-            var label: UILabel = reusableView.viewWithTag(100) as! UILabel
+            let label: UILabel = reusableView.viewWithTag(100) as! UILabel
             label.text = titles[indexPath.section] as? String
         }
         return reusableView
@@ -88,7 +88,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         var num: Int = 0
-        var key: String = marks[section] as! String
+        let key: String = marks[section] as! String
         if self.goods[key] == nil { num = 0 } else { num = self.goods[key]!.count }
         
         return num
@@ -96,12 +96,12 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell: SearchCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! SearchCollectionViewCell
+        let cell: SearchCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! SearchCollectionViewCell
         cell.delegate = self
         
-        var key: String = marks[indexPath.section] as! String
+        let key: String = marks[indexPath.section] as! String
         if self.goods[key] != nil {
-            var array: NSArray = self.goods[key] as! NSArray
+            let array: NSArray = self.goods[key] as! NSArray
             cell.initData(array[indexPath.row] as! TrendModel, indexPath: indexPath)
         }
         
@@ -112,8 +112,8 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     
     @IBAction func searchButtonAction(sender: AnyObject) {
         
-        var vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
-        vc.keyword = self.searchTextField.text
+        let vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
+        vc.keyword = self.searchTextField.text!
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
@@ -121,8 +121,8 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         
         
         
-        var vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
-        vc.keyword = self.searchTextField.text
+        let vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
+        vc.keyword = self.searchTextField.text!
         self.navigationController?.pushViewController(vc, animated: true);
         
         
@@ -156,15 +156,15 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
        
         if (dataArray != nil && dataArray.count > 0) {
             
-            var temp: NSMutableArray = NSMutableArray();
+            let temp: NSMutableArray = NSMutableArray();
             
             for itemObj in dataArray {
                 
-                var itemdic = itemObj as! NSDictionary;
-                var item =  TrendModel(dict: itemdic);
+                let itemdic = itemObj as! NSDictionary;
+                let item =  TrendModel(dict: itemdic);
                 temp.addObject(item);
             }
-            var key: String = marks[tag - HttpTag] as! String
+            let key: String = marks[tag - HttpTag] as! String
             self.goods[key] = temp
             
             self.collectionView.reloadData()

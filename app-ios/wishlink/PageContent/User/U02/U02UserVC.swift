@@ -111,7 +111,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
     }
     
     @IBAction func settingBtnAction(sender: AnyObject) {
-        var vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
+        let vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
         self.navigationController!.pushViewController(vc, animated: true)
     }
     

@@ -39,12 +39,12 @@ class U02LogisticsTipView: UIView {
         super.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height))
         self.prepareUI()
     }
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     func show() {
-        var window = UIApplication.sharedApplication().keyWindow
+        let window = UIApplication.sharedApplication().keyWindow
         window!.addSubview(self)
     }
     
@@ -80,13 +80,13 @@ class U02LogisticsTipView: UIView {
         self.orderNumberLabel.text = self.orderNumber
         tipView.addSubview(self.orderNumberLabel)
         
-        var confirmBtn = UIButton.buttonWithType(.Custom) as! UIButton
+        var confirmBtn = UIButton(type: .Custom)
         var btnHeight = CGFloat(35)
         var btnY = tipViewHeight - btnHeight
         var btnWidth = tipViewWidth
         var btnX = 0
         confirmBtn.frame = CGRectMake(0, btnY, btnWidth, btnHeight)
-        confirmBtn.setTitleColor(RGB(123, 2, 90), forState: .Normal)
+        confirmBtn.setTitleColor(RGB(123, g: 2, b: 90), forState: .Normal)
         confirmBtn.setTitle("确定", forState: .Normal)
         confirmBtn.addTarget(self, action: "confirmBtnAction:", forControlEvents: .TouchUpInside)
         tipView.addSubview(confirmBtn)

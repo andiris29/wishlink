@@ -19,7 +19,7 @@ extension UITabBarItem {
             
         ]
         tabBarItem.setTitleTextAttributes(selectedDic, forState: .Selected)
-        tabBarItem.setTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -3))
+//        tabBarItem.setTitlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
         return tabBarItem;
     }
 }

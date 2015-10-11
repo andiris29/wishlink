@@ -52,11 +52,11 @@ extension String{
     }
     //长度
     var length: Int {
-        return count(self)
+        return self.characters.count
     }
     //统计长度(别名)
     func size()->Int{
-        return count(self)
+        return self.characters.count
     }
 }
 

@@ -45,8 +45,8 @@ class UIHelper {
     将图片转换成64位编码
     */
      func imageToBase64(image:UIImage )->String {
-        var imageData:NSData = UIImageJPEGRepresentation(image, 1)
-        return imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
+        var imageData:NSData = UIImageJPEGRepresentation(image, 1)!
+        return imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
     }
     func GetAppDelegate()->AppDelegate
     {
@@ -59,8 +59,8 @@ class UIHelper {
      func getCachedFilePath(relative:String)->String!
     {
         var strResult = "";
-        var paths:NSArray=NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
-        var root:String = paths.count>0 ? paths.objectAtIndex(0) as! String:"undefined";
+        let paths:NSArray=NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
+        let root:String = paths.count>0 ? paths.objectAtIndex(0) as! String:"undefined";
         strResult = root + "/" + relative
         return strResult
         
@@ -71,7 +71,7 @@ class UIHelper {
      func getBundledImage(name:String)->UIImage
     {
         
-        var strResure =  NSBundle.mainBundle().pathForResource(name, ofType: nil)
+        let strResure =  NSBundle.mainBundle().pathForResource(name, ofType: nil)
         return UIImage(contentsOfFile:strResure!)!
         //    return [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:nil]];
     }
@@ -91,7 +91,7 @@ class UIHelper {
         
         if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone)
         {
-            var maxLenght = max(ScreenWidth,ScreenHeight)
+            let maxLenght = max(ScreenWidth,ScreenHeight)
             if(maxLenght == 568.0)
             {
                 result = DeviceEnum.iPnone5;
@@ -112,7 +112,7 @@ class UIHelper {
     //等比缩放高度:以6尺寸为基本尺寸
     func resizeHeight(orginHeightInIphone6:CGFloat)->CGFloat
     {
-        var deviceType = GetDeviceModel()
+        let deviceType = GetDeviceModel()
         var height = orginHeightInIphone6
         if(deviceType == DeviceEnum.iPnone5)
         {
@@ -126,7 +126,7 @@ class UIHelper {
         {
             height = height/self.Iphone6Height * self.Iphone4SHeight;
         }
-        var newHeigt:Int = Int(height)
+        let newHeigt:Int = Int(height)
         return CGFloat(newHeigt);
     }
     
@@ -160,7 +160,7 @@ class UIHelper {
         
         let filePath:String =   docs[0].stringByAppendingString(imgName)//docs[0].stringByAppendingPathComponent(imgName);
         
-        print("save editImg to path:" + filePath);
+        print("save editImg to path:" + filePath, terminator: "");
                 var result:Bool = UIImagePNGRepresentation(img)!.writeToFile(filePath, atomically: true);
     }
     
@@ -172,7 +172,7 @@ class UIHelper {
     func compressionImageToDate(img:UIImage)->NSData
     {
         var imageData:NSData = UIImageJPEGRepresentation(img, 1)!
-        print(imageData.length);
+        print(imageData.length, terminator: "");
         var rate:CGFloat = 1
         while( imageData.length > 40 * 1000)
         {

@@ -59,7 +59,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - delegate
@@ -71,7 +71,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         if tag == 10 {
             UserModel.shared.userDic = response["user"] as! [String: AnyObject]
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                var alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
+                let alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
                 alertView.show()
                 self.navigationController!.popViewControllerAnimated(true)
             })
@@ -110,7 +110,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         self.saveAddress()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -121,18 +121,18 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         var dic: [String: AnyObject]
         if self.operationType == .Add {
             dic = [
-                "name": self.nameTextField.text,
-                "phone": self.phoneTextField.text,
-                "province": self.provinceTextField.text,
-                "address": self.addressTextField.text]
+                "name": self.nameTextField.text!,
+                "phone": self.phoneTextField.text!,
+                "province": self.provinceTextField.text!,
+                "address": self.addressTextField.text!]
         }
         else {
             dic = [
                 "uuid": "",
-                "name": self.nameTextField.text,
-                "phone": self.phoneTextField.text,
-                "province": self.provinceTextField.text,
-                "address": self.addressTextField.text,
+                "name": self.nameTextField.text!,
+                "phone": self.phoneTextField.text!,
+                "province": self.provinceTextField.text!,
+                "address": self.addressTextField.text!,
                 "isDefault": NSNumber(bool: false)]
         }
         
@@ -147,13 +147,13 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
     
     func validateContent() -> Bool {
         var msg = ""
-        if self.nameTextField.text.length == 0 {
+        if self.nameTextField.text!.length == 0 {
             msg = "姓名不能为空"
-        } else if self.phoneTextField.text.length == 0 {
+        } else if self.phoneTextField.text!.length == 0 {
             msg = "电话不能为空"
-        } else if self.provinceTextField.text.length == 0 {
+        } else if self.provinceTextField.text!.length == 0 {
             msg = "地区不能为空"
-        }else if self.addressTextField.text.length == 0{
+        }else if self.addressTextField.text!.length == 0{
             msg = "地址不能为空"
         }else {
             
@@ -189,7 +189,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
 
         }
         self.loadComNaviLeftBtn()
-        var rightBtn = UIButton.buttonWithType(.Custom) as! UIButton
+        let rightBtn = UIButton(type: .Custom)
         rightBtn.frame = CGRectMake(0, 0, 60, 44)
         rightBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
         rightBtn.setTitle("保存", forState: .Normal)

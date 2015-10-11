@@ -115,9 +115,9 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     @IBAction func searchTexfieldValueChange(sender: UITextField) {
         
         
-        if (sender.text == nil || sender.text.length <= 0) {return}
+        if (sender.text == nil || sender.text!.length <= 0) {return}
         
-        var para = ["keyword":sender.text.trim()]
+        var para = ["keyword":sender.text!.trim()]
         var apiName = "suggestion/any"
         if(self.searchType == .country)
         {
@@ -142,7 +142,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         
         if(self.myDelegate != nil)
         {
-            self.myDelegate!.GetSelectValue(textField.text);
+            self.myDelegate!.GetSelectValue(textField.text!);
              self.dismissViewControllerAnimated(true, completion: nil);
         }
         
@@ -173,7 +173,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             if (dic.objectForKey("suggestions") != nil)
             {
                 var resultArr = dic.objectForKey("suggestions") as! NSArray;
-                if(self.searchTexfield.text.trim().length > 0  && resultArr.count > 0)
+                if(self.searchTexfield.text!.trim().length > 0  && resultArr.count > 0)
                 {
                     
                     var dataArray: NSMutableArray = NSMutableArray()
