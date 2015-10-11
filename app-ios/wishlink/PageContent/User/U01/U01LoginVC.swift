@@ -82,7 +82,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         if APService.registrationID() != nil {
             registrationId = APService.registrationID()
         }
-        var parametersDic = [
+        let parametersDic = [
             "access_token" : self.wbToekn,
             "uid" : self.wbUserID,
             "registrationId" : registrationId]

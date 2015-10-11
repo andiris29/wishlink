@@ -13,7 +13,11 @@
 
 import UIKit
 
-class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource,U02TradeCellDelegate {
+enum SellerTradeFilterStatus: Int {
+    case All = 0, InTrade, CanceledTade, Delivered, Finished, Complainting
+}
+
+class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource,U02TradeCellDelegate, WebRequestDelegate {
 
 
     
@@ -33,9 +37,11 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     @IBOutlet weak var finishedBtn: U02FilterButton!
     @IBOutlet weak var complaintingBtn: U02FilterButton!
     
-    
+    var currentStatus: SellerTradeFilterStatus = .All
+    var currentTradeIndex: Int = -1
+    var tradeArray: [TradeModel] = []
+    var afterFilterTradeArray: [TradeModel] = []
     var seletedConditionBtn: UIButton!
-    
     var coverTabBarView: UIView!
     
     let tradeCellIde = "U02TradeCell"
@@ -45,6 +51,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.httpObj.mydelegate = self
         self.prepareUI()
         // Do any additional setup after loading the view.
     }
@@ -96,29 +103,36 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return self.afterFilterTradeArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        
+
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(tradeCellIde, forIndexPath: indexPath) as! U02TradeCell
         cell.delegate = self
         cell.cellType = .Seller
         cell.indexPath = indexPath
+        if indexPath.row < self.afterFilterTradeArray.count {
+            let trade = self.afterFilterTradeArray[indexPath.row]
+            cell.trade = trade
+        }
+        
+
         return cell
         
     }
     
     func tradeCell(cell: U02TradeCell, clickType: TradeCellButtonClickType) {
-        var msg = ""
         switch clickType {
         case .EditItemInfo:
             let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             vc.hidesBottomBarWhenPushed = true
             self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .Revoke:
-            print("撤单")
-            msg = "撤单"
+            self.currentTradeIndex = cell.indexPath.row
+            self.cancelTrade()
         case .CheckComplain:
             print("查看投诉")
             let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
@@ -140,10 +154,34 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         default:
             print("error")
         }
-        if msg.length > 0 {
-            let alertView = UIAlertView(title: "提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
-            alertView.show()
+    }
+    
+    
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        if tag == 10 {
+            let tradeArray = response["trades"] as! NSArray
+            if tradeArray.count == 0 {
+                return
+            }
+            for tradeDic in tradeArray {
+                let trade = TradeModel(dict: tradeDic as! NSDictionary)
+                self.tradeArray.append(trade)
+            }
+            self.afterFilterTradeArray = self.tradeArray
+            self.collectionView.reloadData()
+        }else if tag == 20 {
+            if let tradeDic = response["trade"] as? NSDictionary {
+                let trade = TradeModel(dict: tradeDic)
+                self.afterFilterTradeArray.removeAtIndex(self.currentTradeIndex)
+                self.afterFilterTradeArray.insert(trade, atIndex: self.currentTradeIndex)
+                self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
+            }
         }
+    }
+    
+    func requestDataFailed(error: String) {
+        
     }
     
     // MARK: - response event
@@ -161,12 +199,67 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             self.seletedConditionBtn = btn
             self.seletedConditionBtn.selected = true
         }
+        self.filterSellerTradeWithStatus(SellerTradeFilterStatus(rawValue: btn.tag - 100)!)
         self.filterBtnAction(self.finishedBtn)
 
     }
     
     // MARK: - private method
 
+    func getSellerTrade() {
+        self.httpObj.httpGetApi("tradeFeeding/asSeller", parameters: nil, tag: 10)
+    }
+    
+    // 根据状态筛选卖家订单
+    func filterSellerTradeWithStatus(status: SellerTradeFilterStatus) {
+        self.afterFilterTradeArray.removeAll(keepCapacity: false)
+        switch status {
+        case .All:
+            self.afterFilterTradeArray = self.tradeArray
+        case .InTrade:
+            for trade in self.tradeArray {
+                if trade.status == 3 {
+                    self.afterFilterTradeArray.append(trade)
+                }
+            }
+        case .CanceledTade:
+            for trade in self.tradeArray {
+                if trade.status == 7 {
+                    self.afterFilterTradeArray.append(trade)
+                }
+            }
+        case .Delivered:
+            for trade in self.tradeArray {
+                if trade.status == 4 {
+                    self.afterFilterTradeArray.append(trade)
+                }
+            }
+        case .Finished:
+            for trade in self.tradeArray {
+                if trade.status == 5 || trade.status == 6 || trade.status == 11 {
+                    self.afterFilterTradeArray.append(trade)
+                }
+            }
+        case .Complainting:
+            for trade in self.tradeArray {
+                if trade.status == 10 {
+                    self.afterFilterTradeArray.append(trade)
+                }
+            }
+        default:
+            break
+        }
+        self.collectionView.reloadData()
+    }
+    
+    func cancelTrade() {
+        let trade = self.afterFilterTradeArray[self.currentTradeIndex]
+        let dic = [
+            "_id": trade._id
+        ]
+        self.httpObj.httpPostApi("trade/cancel", parameters: dic, tag: 20)
+    }
+    
     func isCoverTabBar(isCover: Bool) {
         self.coverTabBarView.hidden = !isCover
     }

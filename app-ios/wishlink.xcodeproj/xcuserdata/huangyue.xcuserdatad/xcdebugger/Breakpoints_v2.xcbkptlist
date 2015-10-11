@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wishlink/PageContent/User/U02/U02RecommendVC.swift"
-            timestampString = "463136324.313812"
+            filePath = "wishlink/PageContent/User/U03/U03AddressManagerVC.swift"
+            timestampString = "465747184.122249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "collectionView(_:cellForItemAtIndexPath:)"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "setDefaultReceiver(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wishlink/PageContent/User/U03/U03AddressManagerVC.swift"
-            timestampString = "465747184.122249"
+            filePath = "wishlink/PageContent/User/U02/U02SellerTradeVC.swift"
+            timestampString = "466265589.437829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "setDefaultReceiver(_:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "requestDataFailed(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wishlink/PageContent/User/U02/U02SellerTradeVC.swift"
+            timestampString = "466265644.599174"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "requestDataComplete(_:tag:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

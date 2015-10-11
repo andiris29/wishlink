@@ -27,11 +27,7 @@ class U02TradeCell: UICollectionViewCell {
 
     let kCornerRadius: CGFloat = 5
     let kBorderWidth: CGFloat = 0.5
-    var indexPath: NSIndexPath! {
-        didSet {
-            self.adjustUI()
-        }
-    }
+    var indexPath: NSIndexPath!
     var cellType: TradeCellType! {
         didSet {
             if cellType == .Buyer {
@@ -42,6 +38,12 @@ class U02TradeCell: UICollectionViewCell {
                 self.buyerTopView.hidden = true
                 self.sellerTopView.hidden = false
             }
+        }
+    }
+    
+    var trade: TradeModel! {
+        didSet {
+            self.adjustUI()
         }
     }
     
@@ -122,75 +124,133 @@ class U02TradeCell: UICollectionViewCell {
     }
     
     func adjustBuyerTopView() {
-        let row = self.indexPath.row % 5
+        
         self.hideAllBtns()
-        if row == 0 {
-            // 已接单
-            self.buyerStatusLabel.text = "已接单"
-            self.isRead(false)
-            self.buyerRevokeBtn.hidden = false
-            self.btnComplain.hidden = false
-        }else if row == 1 {
-            // 已发货
-            self.buyerStatusLabel.text = "已发货"
-            self.isRead(false)
-            self.buyerCheckLogisticsBtn.hidden = false
-            self.buyerConfirmBtn.hidden = false
-            self.btnComplain.hidden = false
-        }else if row == 2 {
-            // 未接单
-            self.buyerStatusLabel.text = "未接单"
-            self.buyerRevokeBtn.hidden = false
-            self.isRead(true)
-            
-        }else if row == 3 {
-            // 投诉处理中
-            self.buyerStatusLabel.text = "投诉处理中"
-            self.buyerCheckComplaintBtn.hidden = false
-            self.isRead(true)
-            
-        }else {
-            // 已完成
-            self.buyerStatusLabel.text = "已完成"
-            self.btnComplain.hidden = false
-            self.isRead(true)
+        self.isRead(true)
+        self.btnComplain.hidden = false
+        switch trade.status {
+        case 1:
+            if trade.statusOrder == .b0 {
+                self.buyerStatusLabel.text = "未接单"
+                self.buyerRevokeBtn.hidden = false
+                self.btnComplain.hidden = true
+
+            }
+        case 2:
+            if trade.statusOrder == .b0 {
+                self.buyerStatusLabel.text = "未接单"
+                self.buyerRevokeBtn.hidden = false
+                self.btnComplain.hidden = true
+            }
+        case 3:
+            if trade.statusOrder == .c0 {
+                self.buyerStatusLabel.text = "已被接单"
+                self.buyerRevokeBtn.hidden = false
+            }
+        case 4:
+            if trade.statusOrder == .c0 {
+                self.buyerStatusLabel.text = "已发货"
+                self.buyerCheckLogisticsBtn.hidden = false
+                self.buyerConfirmBtn.hidden = false
+            }
+        case 5:
+            if trade.statusOrder == .d0 {
+                self.buyerStatusLabel.text = "已完成"
+                self.btnComplain.hidden = true
+            }
+        case 6:
+            if trade.statusOrder == .d0 {
+                self.buyerStatusLabel.text = "已完成"
+                self.btnComplain.hidden = true
+
+            }
+        case 7:
+            if trade.statusOrder == .c0 {
+                self.buyerStatusLabel.text = "请求撤单中"
+                
+            }
+        case 8:
+            if trade.statusOrder == .d0 {
+                self.buyerStatusLabel.text = "已撤单"
+                self.btnComplain.hidden = true
+            }
+        case 9:
+            if trade.statusOrder == .d0 {
+                self.buyerStatusLabel.text = "自动撤单"
+                self.btnComplain.hidden = true
+
+            }
+        case 10:
+            if trade.statusOrder == .d0 {
+                self.buyerStatusLabel.text = "投诉处理中"
+                self.buyerCheckComplaintBtn.hidden = false
+                self.btnComplain.hidden = true
+                
+            }
+        case 11:
+            if trade.statusOrder == .d0 {
+                self.buyerStatusLabel.text = "已完成"
+                self.buyerCheckComplaintBtn.hidden = false
+                self.btnComplain.hidden = true
+                
+            }
+        case 12:
+            if trade.statusOrder == .b0 {
+                self.buyerStatusLabel.text = "未接单"
+                self.buyerRevokeBtn.hidden = false
+                
+            }
+        default:
+            break
         }
+        
     }
-    
+
     func adjustSellerTopView() {
-        let row = self.indexPath.row % 5
         self.hideAllBtns()
-        if row == 0 {
-            // 已接单
-            self.sellerStatusLabel.text = "已抢单"
-            self.isRead(false)
-            self.sellerRevokeBtn.hidden = false
-            self.sellerSendOutBtn.hidden = false
-            self.btnComplain.hidden = false
-        }else if row == 1 {
-            // 已发货
-            self.sellerStatusLabel.text = "买家要求退单"
-            self.isRead(false)
-            self.sellerRevokeBtn.hidden = false
-            self.btnComplain.hidden = false
-        }else if row == 2 {
-            // 未接单
-            self.sellerStatusLabel.text = "已发货"
-            self.sellerEditItemInfoBtn.hidden = false
-            self.isRead(true)
-            
-        }else if row == 3 {
-            // 投诉处理中
-            self.sellerStatusLabel.text = "投诉处理中"
-            self.sellerCheckComplaintBtn.hidden = false
-            self.isRead(true)
-            
-        }else {
-            // 已完成
-            self.sellerStatusLabel.text = "已完成"
-            self.btnComplain.hidden = false
-            self.isRead(true)
+        self.isRead(true)
+        switch trade.status {
+        case 3:
+            if trade.statusOrder == .c0 {
+                self.sellerStatusLabel.text = "已抢单"
+                self.sellerSendOutBtn.hidden = false
+                self.sellerRevokeBtn.hidden = false
+                self.btnComplain.hidden = false
+            }
+        case 4:
+            if trade.statusOrder == .c0 {
+                self.sellerStatusLabel.text = "已发货"
+                self.sellerEditItemInfoBtn.hidden = false
+                self.btnComplain.hidden = false
+            }
+        case 5:
+            if trade.statusOrder == .d0 {
+                self.sellerStatusLabel.text = "已完成"
+            }
+        case 6:
+            if trade.statusOrder == .d0 {
+                self.sellerStatusLabel.text = "已完成"
+            }
+        case 7:
+            if trade.statusOrder == .c0 {
+                self.sellerStatusLabel.text = "买家要求撤单"
+                self.sellerRevokeBtn.hidden = false
+                self.btnComplain.hidden = false
+            }
+        case 10:
+            if trade.statusOrder == .d0 {
+                self.sellerStatusLabel.text = "投诉处理中"
+                self.sellerCheckComplaintBtn.hidden = false
+            }
+        case 11:
+            if trade.statusOrder == .d0 {
+                self.sellerStatusLabel.text = "已完成"
+                self.sellerCheckComplaintBtn.hidden = false
+            }
+        default:
+            break
         }
+        
     }
     
     
