@@ -99,10 +99,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     
     @IBAction func btnAction(sender: UIButton) {
     
-        var tag = sender.tag;
+        let tag = sender.tag;
         if(tag==11)//确认发布
         {
-            var errmsg = ""// checkInput();
+            let errmsg =  checkInput();
             if(errmsg != "")
             {
                 UIHEPLER.alertErrMsg(errmsg);
@@ -110,23 +110,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             else
             {
                 
-//                
-//                var para:[String:String] = ["name":txtName.text.trim(),
-//                    "brand":txtCategory.text.trim(),
-//                    "country":txtBuyArea.text.trim(),
-//                    "price":txtPrice.text.trim(),
-//                    "spec":txtSize.text.trim(),
-//                    "comment":txtRemark.text.trim()
-////                    "file_a":(self.imagrArr.count>0?self.imagrArr[0]:"")
-//                ]
-                
-  
-                
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
-            
-              var apiurl = SERVICE_ROOT_PATH + "item/create"
-                
-       
+                self.view.userInteractionEnabled = false;
+                let apiurl = SERVICE_ROOT_PATH + "item/create"
                    upload(
                         .POST,
                         apiurl,
@@ -196,28 +182,29 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                 
                             case .Success(let _upload, _, _ ):
                                 
-                                 _upload.responseJSON { response in
+                                 _upload.responseJSON { _response in
                                     
-                                
-//                                _upload.responseJSON {
-//                                    request, response, JSON, error in
+                                    let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
+                                 
+
                                     
-//                                    if(error == nil)
-//                                    {
-                                        NSLog("Success:")
+                                    switch resultObj.result {
                                         
-                                        var itemdic = response as! NSDictionary;
-                                        var itemData =  itemdic.objectForKey("data") as! NSDictionary
+                                    case .Success(let json):
+                                        
+                                        print("Validation Successful")
+                                        print(json);
+                                        let itemData =  json.objectForKey("data") as! NSDictionary
                                         if(itemData.objectForKey("item") != nil)
                                         {
-                                            var itemObj =  itemData.objectForKey("item") as! NSDictionary
-                                            var item = ItemModel(dict: itemObj);
+                                            let itemObj =  itemData.objectForKey("item") as! NSDictionary
+                                            let item = ItemModel(dict: itemObj);
                                             self.item = item;
                                             print(item, terminator: "");
                                             if(item._id.length>0)
                                             {
                                                 
-                                                var para  = ["itemRef":item._id,
+                                                let para  = ["itemRef":item._id,
                                                     "quantity":self.txtCount.text!.trim()];
                                                 self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
                                             }
@@ -225,25 +212,23 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                         else
                                         {
                                             
-                                            
                                             SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                            self.view.userInteractionEnabled = true;
                                             NSLog("Fail:")
                                             
                                         }
-
-//                                    }
-//                                    else
-//                                    {
-//                                        
-//                                        
-//                                        SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
-//                                        NSLog("Fail:")
-//                                        
-//                                    }
-//                                    print(JSON)
-                                    
+                                    case .Failure(let error):
+                                        
+                                        SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                        self.view.userInteractionEnabled = true;
+                                        NSLog("Fail:")
+                                        print(error)
+                                    }
                                 }
                             case .Failure(let encodingError):
+                                
+                                SVProgressHUD.showErrorWithStatusWithBlack("编码数据失败！");
+                                 self.view.userInteractionEnabled = true;
                                 print("Failure")
                                 print(encodingError)
                             }
@@ -293,6 +278,11 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         if(count.length == 0)
         {
             return "数量不能为空"
+        }
+        if(self.imagrArr.count == 0)
+        {
+            
+            return "请上传图片"
         }
         return result;
         
