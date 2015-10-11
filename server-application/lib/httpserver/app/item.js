@@ -122,7 +122,7 @@ item.approve = {
                 return function(internalCallback) {
                     TradeService.statusTo(req.currentUserId, trade, TradeService.Status.UN_ORDER_RECEIVE.code, 'item/approve', function(error, trade) {
                         internalCallback(error);
-                        NotificationService.notify(_ids, NotificationService.notifyItemApproved.command, NotificationService.notifyItemApproved.message, {
+                        NotificationService.notify([trade.ownerRef], NotificationService.notifyItemApproved.command, NotificationService.notifyItemApproved.message, {
                             _id : trade._id
                         }, null);
                     });
@@ -178,7 +178,7 @@ item.disapprove = {
                 return function(internalCallback) {
                     TradeService.statusTo(req.currentUserId, trade, TradeService.Status.ITEM_REVIEW_REJECTED.code, 'item/disapprove', function(error, trade) {
                         internalCallback(error);
-                        NotificationService.notify(_ids, NotificationService.notifyItemDisapproved.command, NotificationService.notifyItemDisapproved.message, {
+                        NotificationService.notify([trade.ownerRef], NotificationService.notifyItemDisapproved.command, NotificationService.notifyItemDisapproved.message, {
                             _id : trade._id
                         }, null);
                     });
