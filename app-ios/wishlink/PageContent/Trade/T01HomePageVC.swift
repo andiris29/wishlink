@@ -66,8 +66,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
             var colorArray = [RGBA(234, g: 234, b: 234, a: 1.0), RGBA(254, g: 216, b: 222, a: 1.0),RGBA(229, g: 204, b: 222, a: 1.0)]
   
-            var window = UIApplication.sharedApplication().keyWindow
-            var windowWidth = ScreenWidth
+//            _ = UIApplication.sharedApplication().keyWindow
+            let windowWidth = ScreenWidth
             var isfirstTime = false;
             if( self.sphereView == nil)
             {
@@ -83,12 +83,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 btView.removeFromSuperview()
             }
             
-            var views: NSMutableArray = NSMutableArray()
+            let views: NSMutableArray = NSMutableArray()
             
             for var index = 0; index < self.dataArr.count; index++ {
                 
-                var count: Int = Int(arc4random() % UInt32(colorArray.count))
-                var button: UIButton = UIButton(frame: CGRectMake(0, 0, 90, 90))
+                let count: Int = Int(arc4random() % UInt32(colorArray.count))
+                let button: UIButton = UIButton(frame: CGRectMake(0, 0, 90, 90))
                 button.layer.masksToBounds = true;
                 button.layer.cornerRadius = button.frame.size.width / 2.0;
                 button.setTitle("\(self.dataArr[index])", forState: UIControlState.Normal)

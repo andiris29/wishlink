@@ -78,7 +78,7 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     {
         if(!UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
         {
-            UIAlertView(title: "", message: "设备不支持拍照功能!", delegate: nil, cancelButtonTitle: "确定")
+            UIAlertView(title: "", message: "设备不支持拍照功能!", delegate: nil, cancelButtonTitle: "确定").show();
             print("设备不支持拍照功能!", terminator: "");
 //            SVProgressHUD.showErrorWithStatusWithBlack("设备不支持拍照功能!")
             return;

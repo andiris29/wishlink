@@ -64,7 +64,7 @@ class T03Cell: UITableViewCell {
         
         var index = 0;
         let martop:CGFloat = 10;
-        for item in dataArr
+        for _ in dataArr
         {
             let rectX = (imgWidth+spance)*CGFloat(index);
             let btnRect = CGRectMake(rectX,  martop, imgWidth, imgWidth)

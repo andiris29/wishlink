@@ -127,50 +127,50 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "comment")
                             if(self.imagrArr.count>0)
                             {
-                                var imgName = "item_a.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_a.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>1)
                             {
                                 
-                                var imgName = "item_b.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_b.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>2)
                             {
-                                var imgName = "item_c.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_c.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>3)
                             {
-                                var imgName = "item_d.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_d.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
@@ -246,35 +246,35 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     
       func checkInput()->String{
         
-        var result = "";
+        let result = "";
         
-        var category = txtCategory.text!.trim();
+        let category = txtCategory.text!.trim();
         if(category.length == 0)
         {
             return "品牌不能为空"
         }
-        var name = txtName.text!.trim();
+        let name = txtName.text!.trim();
         if(name.length == 0)
         {
             return "品名不能为空"
         }
-        var country = txtBuyArea.text!.trim();
+        let country = txtBuyArea.text!.trim();
         if(country.length == 0)
         {
             return "购买地不能为空"
         }
-        var price = txtPrice.text!.trim();
+        let price = txtPrice.text!.trim();
         if(price.length == 0)
         {
             return "出价不能为空"
         }
-        var spec = txtSize.text!.trim();
+        let spec = txtSize.text!.trim();
         if(spec.length == 0)
         {
             return "规格不能为空"
         }
         
-        var count = txtCount.text!.trim();
+        let count = txtCount.text!.trim();
         if(count.length == 0)
         {
             return "数量不能为空"

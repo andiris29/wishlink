@@ -45,7 +45,7 @@ class UIHelper {
     将图片转换成64位编码
     */
      func imageToBase64(image:UIImage )->String {
-        var imageData:NSData = UIImageJPEGRepresentation(image, 1)!
+        let imageData:NSData = UIImageJPEGRepresentation(image, 1)!
         return imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
     }
     func GetAppDelegate()->AppDelegate
@@ -161,7 +161,8 @@ class UIHelper {
         let filePath:String =   docs[0].stringByAppendingString(imgName)//docs[0].stringByAppendingPathComponent(imgName);
         
         print("save editImg to path:" + filePath, terminator: "");
-                var result:Bool = UIImagePNGRepresentation(img)!.writeToFile(filePath, atomically: true);
+                let result:Bool = UIImagePNGRepresentation(img)!.writeToFile(filePath, atomically: true);
+        print(result)
     }
     
     func alertErrMsg(strMsg:String)

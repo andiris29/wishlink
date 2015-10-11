@@ -47,7 +47,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         
         //request
         self.httpObj.mydelegate = self;
-        var apiName = "user/get?registrationId=" + APPCONFIG.Uid;
+//        _ = "user/get?registrationId=" + APPCONFIG.Uid;
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 71)
     }
@@ -64,7 +64,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     
     @IBAction func btnAction(sender: UIButton) {
         
-        var btnTag = sender.tag;
+        let btnTag = sender.tag;
         if(btnTag == 10)//返回
         {
             self.navigationController?.popViewControllerAnimated(true);

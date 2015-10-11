@@ -161,7 +161,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         if msg.length == 0 {
             return true
         }else {
-            var alertView = UIAlertView(title: "温馨提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
+            let alertView = UIAlertView(title: "温馨提示", message: msg, delegate: nil, cancelButtonTitle: "确定")
             alertView.show()
             return false
         }

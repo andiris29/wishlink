@@ -11,7 +11,7 @@ import UIKit
 extension UITabBarItem {
     
     class func tabBarItem(title: String, image: UIImage, selectedImage:UIImage) -> UITabBarItem{
-        var tabBarItem = UITabBarItem(title: title, image: image.imageWithRenderingMode(.AlwaysOriginal), selectedImage: selectedImage.imageWithRenderingMode(.AlwaysOriginal))
+        let tabBarItem = UITabBarItem(title: title, image: image.imageWithRenderingMode(.AlwaysOriginal), selectedImage: selectedImage.imageWithRenderingMode(.AlwaysOriginal))
         NSFontAttributeName
         let selectedDic = [
             NSFontAttributeName : UIHEPLER.getCustomFont(true, fontSsize: 12),

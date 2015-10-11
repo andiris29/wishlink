@@ -117,7 +117,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         
         if (sender.text == nil || sender.text!.length <= 0) {return}
         
-        var para = ["keyword":sender.text!.trim()]
+        let para = ["keyword":sender.text!.trim()]
         var apiName = "suggestion/any"
         if(self.searchType == .country)
         {
@@ -157,7 +157,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             UserModel.shared.userDic = response["user"] as! [String: AnyObject]
             if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
             {
-                var dataArray: NSMutableArray = NSMutableArray()
+                let dataArray: NSMutableArray = NSMutableArray()
                 for item in UserModel.shared.searchHistory
                 {
                     dataArray.addObject(item.keyword);
@@ -172,11 +172,11 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             let dic = response as! NSDictionary;
             if (dic.objectForKey("suggestions") != nil)
             {
-                var resultArr = dic.objectForKey("suggestions") as! NSArray;
+                let resultArr = dic.objectForKey("suggestions") as! NSArray;
                 if(self.searchTexfield.text!.trim().length > 0  && resultArr.count > 0)
                 {
                     
-                    var dataArray: NSMutableArray = NSMutableArray()
+                    let dataArray: NSMutableArray = NSMutableArray()
                     for item in resultArr
                     {
                         dataArray.addObject(item as! String)
