@@ -1,20 +1,22 @@
-// third party library
+// Third party library
 var mongoose = require('mongoose');
 var async = require('async');
 var path = require('path');
 var _ = require('underscore');
 
-// helper
+// Helper
 var ServerError = require('../server-error');
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var RelationshipHelper = require('../helper/RelationshipHelper');
 
+// Model
 var Items = require('../../model/items');
 var Trades = require('../../model/trades');
 var RUserFavoriteItem = require('../../model/rUserFavoriteItem');
 
-//Services
+// Services
+var NotificationService = require('../service/NotificationService');
 var SearchBuildService = require('../service/search/SearchBuildService');
 var TradeService = require('../service/TradeService');
 
@@ -110,16 +112,20 @@ item.approve = {
             });
         }, function(item, callback) {
             Trades.find({
-                itemRef: item._id
+                itemRef: item._id,
+                status: TradeService.Status.PAID.code
             }).exec(function(error, trades) {
                 callback(error, item, trades);
             });
         }, function(item, trades, callback) {
             var tasks = _.map(trades, function(trade) {
                 return function(internalCallback) {
-                    TradeService.statusTo(req.currentUserId, trade,
-                            TradeService.UN_ORDER_RECEIVE.code,
-                            '', internalCallback);
+                    TradeService.statusTo(req.currentUserId, trade, TradeService.Status.UN_ORDER_RECEIVE.code, '', function(error, trade) {
+                        internalCallback(error);
+                        NotificationService.notify(_ids, NotificationService.notifyItemApproved.command, NotificationService.notifyItemApproved.message, {
+                            _id : trade._id
+                        }, null);
+                    });
                 };
             });
 
@@ -162,16 +168,20 @@ item.disapprove = {
             });
         }, function(item, callback) {
             Trades.find({
-                itemRef: item._id
+                itemRef: item._id,
+                status: TradeService.Status.PAID.code
             }).exec(function(error, trades) {
                 callback(error, item, trades);
             });
         }, function(item, trades, callback) {
             var tasks = _.map(trades, function(trade) {
                 return function(internalCallback) {
-                    TradeService.statusTo(req.currentUserId, trade,
-                            TradeService.ITEM_REVIEW_REJECTED.code,
-                            '', internalCallback);
+                    TradeService.statusTo(req.currentUserId, trade, TradeService.Status.ITEM_REVIEW_REJECTED.code, '', function(error, trade) {
+                        internalCallback(error);
+                        NotificationService.notify(_ids, NotificationService.notifyItemDisapproved.command, NotificationService.notifyItemDisapproved.message, {
+                            _id : trade._id
+                        }, null);
+                    });
                 };
             });
 
