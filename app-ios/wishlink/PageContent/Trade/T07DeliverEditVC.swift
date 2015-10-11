@@ -45,9 +45,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         self.scanTextField.text = ""
         self.companyTextField.text = ""
         
-        //request
         self.httpObj.mydelegate = self;
-//        _ = "user/get?registrationId=" + APPCONFIG.Uid;
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 71)
     }

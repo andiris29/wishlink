@@ -43,20 +43,14 @@ class WebRequestHelper:NSObject {
                     
                     if(apiName == "user/login")
                     {
-                        let headerArr = Response?.allHeaderFields as? NSDictionary;
-                        var cookieString = headerArr!.valueForKey("Set-Cookie")
+                        var cookieString = Response?.allHeaderFields["Set-Cookie"]
                         if(cookieString != nil)
                         {
                             var tempArr = (cookieString as! NSString).componentsSeparatedByString(";")
                             cookieString =  tempArr[0];
-                            
-//                            tempArr = (cookieString as! NSString).componentsSeparatedByString("=")
-//                            if(tempArr.count>1)
-//                            {
-//                                cookieString =  tempArr[1];
-                                APPCONFIG.cookieStr = cookieString as! String
-                                print(cookieString);
-//                            }
+
+                            APPCONFIG.cookieStr = cookieString as! String
+                            print(cookieString);
                         }
                     }
                     
@@ -66,51 +60,15 @@ class WebRequestHelper:NSObject {
                     print(error)
                 }
         }
-
-//        
-//        request(.POST, URLString: apiurl, parameters: parameters, encoding: .JSON, headers: self.headers).responseJSON() {
-//            (_, _, data, error) in
-//            
-//            
-//            if(error == nil)
-//            {
-//                NSLog("respone:%@",data!.description)
-//                self.handleHttpResponse(data!, tag: tag)
-//            }
-//            else
-//            {
-//                self.mydelegate?.requestDataFailed("网络不给力哦");
-//            }
-//            
-//        }
-//        .response({
-//        (_, _, data, error) in
-//
-//           var result = NSString(data: data!, encoding:NSUTF8StringEncoding);
-//            NSLog("respone:%@",result as! String)
-////            if(error == nil)
-////            {
-////                NSLog("respone:%@",data!.description)
-////                self.handleHttpResponse(data!, tag: tag)
-////            }
-////            else
-////            {
-////                self.mydelegate?.requestDataFailed("网络不给力哦");
-////            }
-//
-//        })
     }
     
     func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
         
         let apiurl = SERVICE_ROOT_PATH + apiName
         NSLog("request url: %@", apiurl)
-        let _request = request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
-//        var result = _request.request?.HTTPShouldHandleCookies
-        _request.request?.URLRequest.setValue(APPCONFIG.cookieStr, forHTTPHeaderField: "Cookie");
-//        request(.GET, apiurl, parameters: nil, encoding: .URL, headers: self.headers)
-            
-            _request.responseJSON{ _, respore, result in
+        
+            request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
+                .responseJSON{ _, respore, result in
                 switch result {
                 case .Success:
                     self.handleHttpResponse(result.value!, tag: tag)
@@ -119,21 +77,6 @@ class WebRequestHelper:NSObject {
                     print(error)
                 }
         }
-        
-//        request(.GET, URLString: apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
-//            .responseJSON() {
-//            (_, _, data, error) in
-//            
-//            if(error == nil)
-//            {
-//                self.handleHttpResponse(data!, tag: tag)
-//            }
-//            else
-//            {
-//                self.mydelegate?.requestDataFailed("网络不给力哦");
-//            }
-//            
-//        }
     }
     
     /*
@@ -220,11 +163,7 @@ class WebRequestHelper:NSObject {
                             return;
                         }
                         
-                    }
-                    //                    let _encoding = ParameterEncoding.URL
-                    
-                    
-                    
+                    }                    
                     request(.GET, url).response(){
                         
                         (_, _, data, error) in

@@ -109,7 +109,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
             else
             {
-                
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
                 self.view.userInteractionEnabled = false;
                 let apiurl = SERVICE_ROOT_PATH + "item/create"
@@ -128,9 +127,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             if(self.imagrArr.count>0)
                             {
                                 let imgName = "item_a.jpg"
-                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
-                                
-                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[0]);
                                 
                                 let imgStream  = NSInputStream(data: imageData);
                                 let len =   UInt64(imageData.length)
@@ -141,9 +138,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             {
                                 
                                 let imgName = "item_b.jpg"
-                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
-                                
-                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[1]);
                                 
                                 let imgStream  = NSInputStream(data: imageData);
                                 let len =   UInt64(imageData.length)
@@ -153,9 +148,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             if(self.imagrArr.count>2)
                             {
                                 let imgName = "item_c.jpg"
-                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
-                                
-                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[2]);
                                 
                                 let imgStream  = NSInputStream(data: imageData);
                                 let len =   UInt64(imageData.length)
@@ -165,9 +158,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             if(self.imagrArr.count>3)
                             {
                                 let imgName = "item_d.jpg"
-                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
-                                
-                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[3]);
                                 
                                 let imgStream  = NSInputStream(data: imageData);
                                 let len =   UInt64(imageData.length)
@@ -185,11 +176,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                  _upload.responseJSON { _response in
                                     
                                     let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
-                                 
-
+                                    
                                     
                                     switch resultObj.result {
-                                        
                                     case .Success(let json):
                                         
                                         print("Validation Successful")
@@ -326,25 +315,19 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
             if(self.imagrArr.count>0 && icount == 0)
             {
-                
-                
-                UIHEPLER.saveImageToLocal(self.imagrArr[0], strName: "item_a.jpg")
                 self.iv0.image = self.imagrArr[0];
             }
             
             if(self.imagrArr.count>1 && icount == 1)
             {
-                UIHEPLER.saveImageToLocal(self.imagrArr[1], strName: "item_b.jpg")
                 self.iv1.image = self.imagrArr[1];
             }
             if(self.imagrArr.count>2 && icount == 2)
             {
-                UIHEPLER.saveImageToLocal(self.imagrArr[2], strName: "item_c.jpg")
                 self.iv2.image = self.imagrArr[2];
             }
             if(self.imagrArr.count>3 && icount == 3)
             {
-                UIHEPLER.saveImageToLocal(self.imagrArr[3], strName: "item_d.jpg")
                 self.iv3.image = self.imagrArr[3];
             }
             

@@ -24,7 +24,6 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
         
         self.loadComNaviLeftBtn();
-//        self.navigationController?.navigationBarHidden = false;
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTime, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTime)
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTextLeft, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTextLeft)
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTextRight, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTextRight)

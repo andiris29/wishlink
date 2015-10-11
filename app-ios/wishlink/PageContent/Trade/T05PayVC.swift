@@ -73,7 +73,6 @@ class T05PayVC: RootVC,WebRequestDelegate {
         self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
         
         self.httpObj.mydelegate = self;
-//        _ = "user/get?registrationId=" + APPCONFIG.Uid;
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 10)
     }

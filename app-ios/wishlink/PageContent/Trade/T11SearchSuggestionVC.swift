@@ -30,7 +30,6 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     var searchType:SearchModel = .any
     var searchContext:String = ""
     
-//    var itemData: NSMutableArray = ["sk II", "sk II神仙水", "sk II光彩粉饼", "斯凯奇运动女鞋", "sikaqi慢跑鞋"]
     var itemContents: NSArray = NSArray()
     
     override func viewDidLoad() {

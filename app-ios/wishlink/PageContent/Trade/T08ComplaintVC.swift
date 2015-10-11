@@ -54,7 +54,6 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         else if(tag == 10)
         {
             self.navigationController?.popViewControllerAnimated(true);
-//            self.dismissViewControllerAnimated(true, completion: nil);
         }
         else if(tag == 11)
         {

@@ -66,7 +66,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
             var colorArray = [RGBA(234, g: 234, b: 234, a: 1.0), RGBA(254, g: 216, b: 222, a: 1.0),RGBA(229, g: 204, b: 222, a: 1.0)]
   
-//            _ = UIApplication.sharedApplication().keyWindow
             let windowWidth = ScreenWidth
             var isfirstTime = false;
             if( self.sphereView == nil)
@@ -102,7 +101,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 views.addObject(button)
             }
          
-//            sphereView.setItems(views as [AnyObject])
             if(isfirstTime)
             {
                 
@@ -129,8 +127,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.navigationController?.pushViewController(vc, animated: true);
         self.removeTimer();
         
-        
-//        self.dismissViewControllerAnimated(true, completion: nil);
         print("buttonAction:\(sender.tag)")
     }
     
