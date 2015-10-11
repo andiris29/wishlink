@@ -37,7 +37,7 @@ NotificationService.notifyItemApproved = {
 };
 
 NotificationService.notifyItemDisapproved = {
-    command: 'trade/itemApproved',
+    command: 'trade/itemDisapproved',
     message: '你发布的心愿还需要完善，现在就去吧'
 };
 NotificationService.notifyAssigned = {
