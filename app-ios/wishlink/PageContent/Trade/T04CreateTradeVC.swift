@@ -80,7 +80,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
   
         
         
-        var titleView = UIView(frame: CGRectMake(0, 0, 50, 40))
+        let titleView = UIView(frame: CGRectMake(0, 0, 50, 40))
         titleView.addSubview(titleLabel);
         titleView.addSubview(txtRemark);
         self.navigationItem.titleView = titleView;
@@ -92,17 +92,17 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     func csActionSheet() {
         
-        var titles: Array<String> = ["取消", "从手机相册中选择", "拍照"]
+        let titles: Array<String> = ["取消", "从手机相册中选择", "拍照"]
         actionSheet = CSActionSheet.sharedInstance
         actionSheet.bindWithData(titles, delegate: self)
     }
     
     @IBAction func btnAction(sender: UIButton) {
     
-        var tag = sender.tag;
+        let tag = sender.tag;
         if(tag==11)//确认发布
         {
-            var errmsg =  checkInput();
+            let errmsg =  checkInput();
             if(errmsg != "")
             {
                 UIHEPLER.alertErrMsg(errmsg);
@@ -110,81 +110,67 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             else
             {
                 
-//                
-//                var para:[String:String] = ["name":txtName.text.trim(),
-//                    "brand":txtCategory.text.trim(),
-//                    "country":txtBuyArea.text.trim(),
-//                    "price":txtPrice.text.trim(),
-//                    "spec":txtSize.text.trim(),
-//                    "comment":txtRemark.text.trim()
-////                    "file_a":(self.imagrArr.count>0?self.imagrArr[0]:"")
-//                ]
-                
-  
-                
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
-            
-              var apiurl = SERVICE_ROOT_PATH + "item/create"
-                
-                
+                self.view.userInteractionEnabled = false;
+                let apiurl = SERVICE_ROOT_PATH + "item/create"
                    upload(
                         .POST,
-                        URLString: apiurl,
+                        apiurl,
                         multipartFormData: {
                             multipartFormData in
                             
-                            multipartFormData.appendBodyPart(data: self.txtName.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "name")
-                            multipartFormData.appendBodyPart(data: self.txtCategory.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "brand")
-                            multipartFormData.appendBodyPart(data: self.txtBuyArea.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
-                            multipartFormData.appendBodyPart(data: self.txtPrice.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
-                            multipartFormData.appendBodyPart(data: self.txtSize.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
+                            multipartFormData.appendBodyPart(data: self.txtName.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "name")
+                            multipartFormData.appendBodyPart(data: self.txtCategory.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "brand")
+                            multipartFormData.appendBodyPart(data: self.txtBuyArea.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
+                            multipartFormData.appendBodyPart(data: self.txtPrice.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
+                            multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                             multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "comment")
                             if(self.imagrArr.count>0)
                             {
-                                var imgName = "item_a.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_a.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>1)
                             {
                                 
-                                var imgName = "item_b.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_b.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>2)
                             {
-                                var imgName = "item_c.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_c.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
                             if(self.imagrArr.count>3)
                             {
-                                var imgName = "item_d.jpg"
-                                var imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
+                                let imgName = "item_d.jpg"
+                                let imgInfo = UIHEPLER.readImageFromLocalByName(imgName);
                                 
-                                var imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
+                                let imageData = UIHEPLER.compressionImageToDate(imgInfo.img);
                                 
-                                var imgStream  = NSInputStream(data: imageData);
-                                var len =   UInt64(imageData.length)
+                                let imgStream  = NSInputStream(data: imageData);
+                                let len =   UInt64(imageData.length)
                                 
                                 multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                             }
@@ -196,53 +182,55 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                 
                             case .Success(let _upload, _, _ ):
                                 
-                                _upload.responseJSON {
-                                    request, response, JSON, error in
+                                 _upload.responseJSON { _response in
                                     
-                                    if(error == nil)
-                                    {
-                                        NSLog("Success:")
+                                    let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
+                                 
+
+                                    
+                                    switch resultObj.result {
                                         
-                                        var itemdic = JSON as! NSDictionary;
-                                        var itemData =  itemdic.objectForKey("data") as! NSDictionary
+                                    case .Success(let json):
+                                        
+                                        print("Validation Successful")
+                                        print(json);
+                                        let itemData =  json.objectForKey("data") as! NSDictionary
                                         if(itemData.objectForKey("item") != nil)
                                         {
-                                            var itemObj =  itemData.objectForKey("item") as! NSDictionary
-                                            var item = ItemModel(dict: itemObj);
+                                            let itemObj =  itemData.objectForKey("item") as! NSDictionary
+                                            let item = ItemModel(dict: itemObj);
                                             self.item = item;
-                                            print(item);
+                                            print(item, terminator: "");
                                             if(item._id.length>0)
                                             {
                                                 
-                                                var para  = ["itemRef":item._id,
-                                                    "quantity":self.txtCount.text.trim()];
+                                                let para  = ["itemRef":item._id,
+                                                    "quantity":self.txtCount.text!.trim()];
                                                 self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
                                             }
                                         }
                                         else
                                         {
                                             
-                                            
                                             SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                            self.view.userInteractionEnabled = true;
                                             NSLog("Fail:")
                                             
                                         }
-
-                                    }
-                                    else
-                                    {
-                                        
+                                    case .Failure(let error):
                                         
                                         SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                        self.view.userInteractionEnabled = true;
                                         NSLog("Fail:")
-                                        
+                                        print(error)
                                     }
-                                    println(JSON)
-                                    
                                 }
                             case .Failure(let encodingError):
-                                println("Failure")
-                                println(encodingError)
+                                
+                                SVProgressHUD.showErrorWithStatusWithBlack("编码数据失败！");
+                                 self.view.userInteractionEnabled = true;
+                                print("Failure")
+                                print(encodingError)
                             }
                         }
                 )
@@ -258,43 +246,43 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     
       func checkInput()->String{
         
-        var result = "";
+        let result = "";
         
-        var category = txtCategory.text.trim();
+        let category = txtCategory.text!.trim();
         if(category.length == 0)
         {
             return "品牌不能为空"
         }
-        var name = txtName.text.trim();
+        let name = txtName.text!.trim();
         if(name.length == 0)
         {
             return "品名不能为空"
         }
-        var country = txtBuyArea.text.trim();
+        let country = txtBuyArea.text!.trim();
         if(country.length == 0)
         {
             return "购买地不能为空"
         }
-        var price = txtPrice.text.trim();
+        let price = txtPrice.text!.trim();
         if(price.length == 0)
         {
             return "出价不能为空"
         }
-        var spec = txtSize.text.trim();
+        let spec = txtSize.text!.trim();
         if(spec.length == 0)
         {
             return "规格不能为空"
         }
         
-        var count = txtCount.text.trim();
+        let count = txtCount.text!.trim();
         if(count.length == 0)
         {
             return "数量不能为空"
         }
         if(self.imagrArr.count == 0)
         {
-            return "请至少上传一张图片"
             
+            return "请上传图片"
         }
         return result;
         
@@ -305,13 +293,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         if index == 1001 {
             
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             imagePicker.delegate = self;
             self.presentViewController(imagePicker, animated: true, completion: nil);
         } else if index == 1002 {
             
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
                 imagePicker.delegate = self;
@@ -321,9 +309,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     }
     
     //MARK: UIImagePickerController delegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        var icount = self.imagrArr.count;
+        let icount = self.imagrArr.count;
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         picker.dismissViewControllerAnimated(true, completion: {
@@ -406,7 +394,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         else
         {
             self.lastSelectTextFiledTag = textField.tag;
-            var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+            let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
             vc.myDelegate = self;
             if(textField.tag == 1)
             {
@@ -443,11 +431,11 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         {
             
             SVProgressHUD.dismiss();
-            var dic = response as! NSDictionary;
-            var tradeDic = dic.objectForKey("trade") as!  NSDictionary;
-            var tradeItem = TradeModel(dict: tradeDic);
+            let dic = response as! NSDictionary;
+            let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
+            let tradeItem = TradeModel(dict: tradeDic);
             
-            var vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
             vc.item = self.item;
             vc.trade = tradeItem;
             self.navigationController?.pushViewController(vc, animated: true);

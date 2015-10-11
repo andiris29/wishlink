@@ -40,7 +40,7 @@ class CSDorpListView: UIWindow {
         return Static.instance!
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
     }
@@ -56,7 +56,7 @@ class CSDorpListView: UIWindow {
         
         self.hidden = true
         self.frame = KeyWindow.bounds
-        self.backgroundColor = RGBCA(0, 0.3)
+        self.backgroundColor = RGBCA(0, a: 0.3)
         self.windowLevel = UIWindowLevelStatusBar
         
         baseView = UIView()
@@ -67,7 +67,7 @@ class CSDorpListView: UIWindow {
         
         titleView      = UIView()
         titleView.backgroundColor = UIColor.clearColor()
-        titleView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        titleView.translatesAutoresizingMaskIntoConstraints = false
         baseView.addSubview(titleView)
         
 //        dorpButton     = UIButton()
@@ -85,7 +85,7 @@ class CSDorpListView: UIWindow {
         
         containerView  = UIView()
         containerView.backgroundColor = UIColor.clearColor()
-        containerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         
         scrollerView   = UIScrollView()
         scrollerView.bounces = true
@@ -93,7 +93,7 @@ class CSDorpListView: UIWindow {
         scrollerView.backgroundColor = UIColor.clearColor()
         scrollerView.showsVerticalScrollIndicator = false
         scrollerView.showsHorizontalScrollIndicator = false
-        scrollerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        scrollerView.translatesAutoresizingMaskIntoConstraints = false
         scrollerView.addSubview(containerView)
         baseView.addSubview(scrollerView)
     }
@@ -138,9 +138,9 @@ class CSDorpListView: UIWindow {
         for var index = 0; index < self.titles.count; index++ {
         
             let key: String = "button\(index)"
-            var button: UIButton = UIButton()
+            let button: UIButton = UIButton()
             button.backgroundColor = UIColor.clearColor()
-            button.setTranslatesAutoresizingMaskIntoConstraints(false)
+            button.translatesAutoresizingMaskIntoConstraints = false
             button.titleLabel?.font = UIFont(name: "FZLanTingHeiS-EL-GB", size: 15)
             button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
             button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
@@ -202,7 +202,7 @@ class CSDorpListView: UIWindow {
     
     //MARK: - override
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.hidden = true
         self.removeFromSuperview()

@@ -34,19 +34,19 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     
     //MARK: - override
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         contexTextView.resignFirstResponder()
     }
-    
+    var selectImgTag = 0;
     @IBAction func btnAction(sender: AnyObject) {
-        
-        currentButton = sender as! UIButton
-        var tag = (sender as! UIButton).tag
-        
-        if(tag >= 1 && tag <= 5) {
+        selectImgTag = 0;
+        let tag = (sender as! UIButton).tag
+        if(tag >= 1 && tag <= 5)
+        {
+            selectImgTag = tag
             
-            var actionSheet: UIActionSheet = UIActionSheet(title: "上传照片", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
+            let actionSheet: UIActionSheet = UIActionSheet(title: "上传照片", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(self.view)
 
 
@@ -68,19 +68,19 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
 
         } else if(tag == 30) {
             
-            var strUrl:NSURL = NSURL(string: "telprompt://18601746164")!
+            let strUrl:NSURL = NSURL(string: "telprompt://18601746164")!
             UIApplication.sharedApplication().openURL(strUrl);
 
             
         } else if(tag == 31) {
-            var vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle());
+            let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle());
             self.navigationController?.pushViewController(vc, animated: true);
         }
     }
     //MARK:ActionSheetDelegate
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
             imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
@@ -89,7 +89,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             })]
             
         }else if buttonIndex == 2 {
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
@@ -103,7 +103,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     }
 
     //MARK: UIImagePickerController delegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         picker.dismissViewControllerAnimated(true, completion: {

@@ -31,7 +31,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         
         self.httpObj.mydelegate = self;
         
-        var titles: NSArray = ["韵达快递","顺风快递","天天快递"]
+        let titles: NSArray = ["韵达快递","顺风快递","天天快递"]
         dorpListView = CSDorpListView.sharedInstance
         dorpListView.bindWithList(titles, delegate: self)
     }
@@ -47,14 +47,14 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         
         //request
         self.httpObj.mydelegate = self;
-        var apiName = "user/get?registrationId=" + APPCONFIG.Uid;
+//        _ = "user/get?registrationId=" + APPCONFIG.Uid;
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 71)
     }
     
     //MARK: - override
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         scanTextField.resignFirstResponder()
         companyTextField.resignFirstResponder()
@@ -64,7 +64,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     
     @IBAction func btnAction(sender: UIButton) {
         
-        var btnTag = sender.tag;
+        let btnTag = sender.tag;
         if(btnTag == 10)//返回
         {
             self.navigationController?.popViewControllerAnimated(true);
@@ -72,7 +72,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         }
         else if(btnTag == 11)//提交
         {
-            self.httpObj.httpPostApi("trade/deliver", parameters: ["company": companyTextField.text, "trackingId": scanTextField.text], tag: 70)
+            self.httpObj.httpPostApi("trade/deliver", parameters: ["company": companyTextField.text!, "trackingId": scanTextField.text!], tag: 70)
         }
     }
     
@@ -87,12 +87,12 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         
         
         
-        var btnTag = sender.tag;
+        let btnTag = sender.tag;
         if(btnTag == 20) {//company
             dorpListView.show(companyTextField)
         } else if (btnTag == 21) {//scan
             
-            var vc = ScanVC(nibName: "ScanVC", bundle: NSBundle.mainBundle())
+            let vc = ScanVC(nibName: "ScanVC", bundle: NSBundle.mainBundle())
             
             vc.myDelegate = self;
             self.navigationController?.pushViewController(vc, animated: true)
@@ -116,7 +116,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
-        print(response)
+        print(response, terminator: "")
         
         if(tag == 70) {
             self.navigationController?.popViewControllerAnimated(true);
@@ -132,7 +132,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
             
             if(result.count>0) {
                 
-                var defaultAddress = result[0] as ReceiverModel
+                let defaultAddress = result[0] as ReceiverModel
                 
                 self.phoneLabel.text = defaultAddress.phone
                 self.personLabel.text = defaultAddress.name;

@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         }
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return WXApi.handleOpenURL(url, delegate: self) || WeiboSDK.handleOpenURL(url, delegate: self)
     }
     
@@ -87,13 +87,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     
     func prepareJPush(launchOptions: [NSObject: AnyObject]?) {
         
-        if IOS_VERSION >= 8 {
+//        if IOS_VERSION >= 8 {
             //categories
-            APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
-        }else {
-            //categories nil
-            APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
-        }
+            if #available(iOS 8.0, *) {
+                APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
+            } else {
+                 if #available(iOS 8.0, *) {
+                     APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
+                 } else {
+                     // Fallback on earlier versions
+                 }
+                // Fallback on earlier versions
+            }
+//        }else {
+//            //categories nil
+//            APService.registerForRemoteNotificationTypes(UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue, categories:nil)
+//        }
         APService.setupWithOption(launchOptions)
         
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, WebRequestDelegate {
 
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -17,14 +17,15 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     var clearView: UIView!
     var clearBtn: UIButton!
     let itemCellIde = "U02ItemCell"
-    var cellCount: Int = 7
     weak var userVC: U02UserVC!
-    var dataArray: NSMutableArray = NSMutableArray(array: ["1", "2", "3", "4", "5", "6"])
+    var dataArray: [ItemModel] = []
     // MARK: - life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.httpObj.mydelegate = self
         self.prepareCollectionView()
+        self.getRecommendation()
         // Do any additional setup after loading the view.
     }
 
@@ -37,7 +38,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,8 +47,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     // MARK: - delegate
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
-        var height: CGFloat = 250.0
+        let width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
+        let height: CGFloat = 250.0
         return CGSize(width: width, height: height)
     }
     
@@ -57,15 +58,16 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.indexPath = indexPath;
         cell.closure = {
+            [unowned self]
             (type: ItemCellButtonClickType, selectedIndexPath: NSIndexPath) in
             if type == ItemCellButtonClickType.Favorite {
-                
+                self.favoriteItem(selectedIndexPath.row)
             }
             else {
-                self.dataArray.removeObjectAtIndex(selectedIndexPath.row)
+                self.dataArray.removeAtIndex(selectedIndexPath.row)
                 self.collectionView.reloadData()
             }
         };
@@ -86,12 +88,23 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         }
     }
     
+    func requestDataFailed(error: String) {
+        print(error)
+    }
+    
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        if tag == 10 {
+            // recommdation
+            print(response)
+        }
+    }
+    
     // MARK: - response event
     func clearBtnAction(sender: AnyObject) {
         var inset = self.collectionView.contentInset
         inset.top = 0
         self.collectionView.contentInset = inset
-        self.dataArray.removeAllObjects()
+        self.dataArray.removeAll()
         self.collectionView.reloadData()
         
         UIView.animateWithDuration(Double(0.5), animations: { () -> Void in
@@ -102,15 +115,27 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     // MARK: - prive method
+    
+    func getRecommendation() {
+        self.httpObj.httpGetApi("itemFeeding/recommendation", tag: 10)
+    }
+    
+    
+    func favoriteItem(itemIndex: Int) {
+        let item = self.dataArray[itemIndex]
+        print(item)
+    }
+
+    
     func prepareCollectionView() {
         self.clearView = UIView(frame: CGRectMake(0, -40, UIScreen.mainScreen().bounds.size.width, 40))
         self.clearView.userInteractionEnabled = true
         self.collectionView.addSubview(self.clearView)
-        var clearBtnW = CGRectGetWidth(self.clearView.frame) * 0.6
-        var clearBtnH = CGFloat(30)
-        var clearBtnX = (CGRectGetWidth(self.clearView.frame) - clearBtnW) * 0.5
-        var clearBtnY = (CGRectGetHeight(self.clearView.frame) - clearBtnH) * 0.5
-        self.clearBtn = UIButton.buttonWithType(.Custom) as! UIButton
+        let clearBtnW = CGRectGetWidth(self.clearView.frame) * 0.6
+        let clearBtnH = CGFloat(30)
+        let clearBtnX = (CGRectGetWidth(self.clearView.frame) - clearBtnW) * 0.5
+        let clearBtnY = (CGRectGetHeight(self.clearView.frame) - clearBtnH) * 0.5
+        self.clearBtn = UIButton(type: .Custom)
         self.clearBtn.frame = CGRectMake(clearBtnX, clearBtnY, clearBtnW, clearBtnH)
         self.clearBtn.setTitle("清空推荐", forState: .Normal)
         self.clearBtn.setBackgroundImage(UIImage(named: "u02-clearcollection"), forState: .Normal)

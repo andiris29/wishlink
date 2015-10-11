@@ -48,6 +48,11 @@ class U02ItemCell: UICollectionViewCell {
         }
     }
     
+    var item: ItemModel! {
+        didSet {
+            self.filldataForUI()
+        }
+    }
     var delegate: U02ItemCellDelegate?
     
     override func awakeFromNib() {
@@ -57,7 +62,7 @@ class U02ItemCell: UICollectionViewCell {
         self.layer.borderWidth = 1
     }
     @IBAction func favoriteBtnAction(sender: AnyObject) {
-        var btn = sender as! UIButton
+        let btn = sender as! UIButton
         btn.selected = !btn.selected
         if let c = self.closure {
             c(ItemCellButtonClickType.Favorite, self.indexPath)
@@ -72,6 +77,11 @@ class U02ItemCell: UICollectionViewCell {
         }
     }
     
+    func filldataForUI() {
+        self.lbCountry.text = item.country;
+        self.lbPrice.text = "￥" + item.price.format(".2");
+        self.lbIntro.text = item.name + " " + item.spec;
+    }
     
     //从热门列表中加载的时候调用此方法
     func loadFromhotVC(item:ItemModel)

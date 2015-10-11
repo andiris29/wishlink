@@ -19,7 +19,7 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
     
    var delegate:       CSImageRollViewDelegate?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
         
@@ -45,16 +45,16 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
         self.addSubview(scrollerView)
         self.addSubview(pageControl)
         
-        pageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
-        scrollerView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        containerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        scrollerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func initWithImages(images: [UIImage]?) {
         
         self.images = images
     
-        var scrollerViews = Dictionary<NSObject, AnyObject>()
+        var scrollerViews = Dictionary<String, AnyObject>()
         scrollerViews["pageControl"] = pageControl
         scrollerViews["scrollerView"] = scrollerView
         scrollerViews["containerView"] = containerView
@@ -72,10 +72,10 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
         for var tag = 0; tag < self.images.count; tag++ {
             
             let key: String = "imageView\(tag)"
-            var image: UIImage = self.images[tag] as! UIImage
-            var imageView: UIImageView = UIImageView(image: image)
+            let image: UIImage = self.images[tag] as! UIImage
+            let imageView: UIImageView = UIImageView(image: image)
             
-            imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.backgroundColor = UIColor.clearColor()
             imageView.userInteractionEnabled = true
@@ -83,7 +83,7 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
             imageView.tag = ImageTag + tag
             containerView.addSubview(imageView)
             
-            var imageViewTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("tapGestureRecognizerForImageView:"))
+            let imageViewTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("tapGestureRecognizerForImageView:"))
             imageView.addGestureRecognizer(imageViewTapGesture)
             
             
@@ -135,7 +135,7 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
     
     func pageControlValueChangeAction(sender: UIPageControl!) {
         
-        var pointX: CGFloat = CGFloat(sender.currentPage) * scrollerView.frame.size.width
+        let pointX: CGFloat = CGFloat(sender.currentPage) * scrollerView.frame.size.width
         self.scrollerView.setContentOffset(CGPoint(x: pointX, y: 0), animated: true)
     }
     
@@ -148,7 +148,7 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
 
-        var pageCurrent: Int = Int(scrollView.contentOffset.x / scrollView.frame.size.width + 0.5)
+        let pageCurrent: Int = Int(scrollView.contentOffset.x / scrollView.frame.size.width + 0.5)
         self.pageControl.currentPage = pageCurrent
     }
 }
@@ -167,9 +167,9 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
 
 extension UIView {
     
-    func addConstraintsVisualFormat(format: String, views: [NSObject : AnyObject]) {
+    func addConstraintsVisualFormat(format: String, views: [String : AnyObject]) {
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.allZeros, metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: nil, views: views))
     }
     
     // view1 是view2 的多少倍

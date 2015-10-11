@@ -21,10 +21,11 @@ class U02UserVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var contryLabel: UILabel!
-    
+    @IBOutlet weak var bgImageView: UIImageView!
+
     
     var selectedBtn: UIButton!
-    
+    var userModel: UserModel = UserModel.shared
     var buyerTradeVC: U02BuyerTradeVC!
     var sellerTradeVC: U02SellerTradeVC!
     var recommendVC: U02RecommendVC!
@@ -47,6 +48,19 @@ class U02UserVC: RootVC, WebRequestDelegate {
 //        self.navigationController?.navigationBar.frame = CGRectMake(0, -100.0, ScreenWidth, 44)
         self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight)
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if userModel.isLogin == false {
+            struct once {
+                static var predicate:dispatch_once_t = 0
+            }
+            dispatch_once(&once.predicate, { () -> Void in
+                let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+                self.presentViewController(vc, animated: true, completion: nil)
+            })
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,6 +96,8 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.selectedBtn.selected = true;
         self.buyerTradeVC.resetConditionView()
         self.view.bringSubviewToFront(self.sellerTradeVC.view)
+        self.sellerTradeVC.getSellerTrade()
+
     }
     
     @IBAction func buyerBtnAction(sender: AnyObject) {
@@ -90,6 +106,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.selectedBtn.selected = true;
         self.sellerTradeVC.resetConditionView()
         self.view.bringSubviewToFront(self.buyerTradeVC.view)
+        self.buyerTradeVC.getBuyerTrade()
     }
     
     @IBAction func recommendBtnAction(sender: AnyObject) {
@@ -108,10 +125,11 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.sellerTradeVC.resetConditionView()
         self.buyerTradeVC.resetConditionView()
         self.view.bringSubviewToFront(self.favoriteVC.view)
+        self.favoriteVC.getFavoriteList()
     }
     
     @IBAction func settingBtnAction(sender: AnyObject) {
-        var vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
+        let vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
@@ -128,10 +146,11 @@ class U02UserVC: RootVC, WebRequestDelegate {
     
     // 根据用户数据填充界面
     func fillDataForUI() {
-        if UserModel.shared.isLogin == true {
+        if userModel.isLogin == true {
             self.nicknameLabel.text = UserModel.shared.nickname;
             
-            self.httpObj.renderImageView(self.headImageView, url: UserModel.shared.portrait, defaultName: "")
+            self.httpObj.renderImageView(self.headImageView, url: userModel.portrait, defaultName: "")
+            self.httpObj.renderImageView(self.bgImageView, url: userModel.backgroud, defaultName: "")
             self.contryLabel.text = "上海杨浦区国和路555弄"
         }
     }

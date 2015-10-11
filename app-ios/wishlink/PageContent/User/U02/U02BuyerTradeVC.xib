@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U02BuyerTradeVC" customModule="wishlink" customModuleProvider="target">
@@ -31,6 +32,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXB-ha-kZR">
                             <rect key="frame" x="215" y="0.0" width="80" height="35"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="Fe1-f5-h5u"/>
                                 <constraint firstAttribute="height" constant="35" id="QfJ-Pp-gxe"/>
@@ -50,6 +52,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" secondItem="UXB-ha-kZR" secondAttribute="height" id="23o-0g-6pd"/>
@@ -60,6 +63,7 @@
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3ZX-SY-QGx">
                     <rect key="frame" x="0.0" y="35" width="320" height="533"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EI0-GK-DQf">
                         <size key="itemSize" width="50" height="50"/>
@@ -74,6 +78,7 @@
                 </collectionView>
                 <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Cy-yC-JXv" userLabel="coverView">
                     <rect key="frame" x="0.0" y="35" width="320" height="533"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLK-mH-4nj" userLabel="conditionView">
@@ -81,6 +86,7 @@
                     <subviews>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7y-rU-Pdh">
                             <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="761-7r-eOB"/>
                             </constraints>
@@ -98,6 +104,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="soM-KJ-7yD">
                             <rect key="frame" x="5" y="39" width="90" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="T62-LF-8Kh"/>
@@ -105,6 +112,7 @@
                         </imageView>
                         <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZZ-rE-lto" customClass="U02FilterButton" customModule="wishlink" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="40" width="100" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="未接单">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -119,6 +127,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PnM-cj-lys">
                             <rect key="frame" x="5" y="79" width="90" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="AGw-g3-dOn"/>
@@ -126,6 +135,7 @@
                         </imageView>
                         <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMQ-Rl-61x" customClass="U02FilterButton" customModule="wishlink" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="80" width="100" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="已接单">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,6 +150,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fTK-5m-Ovn">
                             <rect key="frame" x="5" y="119" width="90" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="4LJ-if-TCg"/>
@@ -147,6 +158,7 @@
                         </imageView>
                         <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXm-2F-KEY" customClass="U02FilterButton" customModule="wishlink" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="120" width="100" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="已撤单">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,6 +173,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-4b-sit">
                             <rect key="frame" x="5" y="160" width="90" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="kf5-0w-Nvt"/>
@@ -168,6 +181,7 @@
                         </imageView>
                         <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q20-Jp-Joh" customClass="U02FilterButton" customModule="wishlink" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="160" width="100" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="已发货">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,6 +196,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tsh-ks-ACM">
                             <rect key="frame" x="5" y="199" width="90" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="5dx-1S-8CE"/>
@@ -189,6 +204,7 @@
                         </imageView>
                         <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yqs-GU-aEi" customClass="U02FilterButton" customModule="wishlink" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="200" width="100" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="已完成">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,6 +219,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fE4-ef-uEt">
                             <rect key="frame" x="5" y="239" width="90" height="1"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="2ck-R0-C9T"/>
@@ -210,6 +227,7 @@
                         </imageView>
                         <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeP-1U-FBk" customClass="U02FilterButton" customModule="wishlink" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="240" width="100" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="投诉中">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -223,6 +241,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="JaO-4b-sit" firstAttribute="top" secondItem="NXm-2F-KEY" secondAttribute="bottom" id="1IL-34-aRX"/>
@@ -283,6 +302,7 @@
                     </variation>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="icH-pt-9Ha" secondAttribute="trailing" id="20G-OQ-TvL"/>

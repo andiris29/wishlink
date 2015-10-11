@@ -31,8 +31,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false;
         
-        var para:[String : AnyObject] = ["req.pageNo":1,
-            "req.pageSize":10,
+        let para:[String : AnyObject] = ["pageNo":1,
+            "pageSize":10,
         "keyword":self.keyword]
         self.maskView.hidden = false;
         self.lbTipMessage.text = "正在搜索中..."
@@ -52,8 +52,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     //MARK: collectionView Delegete
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
-        var height: CGFloat = 250.0
+        let width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
+        let height: CGFloat = 250.0
         
         return CGSize(width: width, height: height)
     }
@@ -70,15 +70,15 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.delegate = self
-        var item = self.dataArr[indexPath.row] as! ItemModel
+        let item = self.dataArr[indexPath.row] as! ItemModel
         cell.loadFromhotVC(item);
         return cell as UICollectionViewCell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        var vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+        let vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
         vc.product = self.dataArr[indexPath.row] as! ItemModel
         self.navigationController?.pushViewController(vc, animated: true);
     }
@@ -123,14 +123,14 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         {
             if(response as! NSDictionary).objectForKey("items") != nil{
             
-                var itemArr = (response as! NSDictionary).objectForKey("items") as! NSArray;
+                let itemArr = (response as! NSDictionary).objectForKey("items") as! NSArray;
                 if(itemArr.count>0)
                 {
                     
                     self.maskView.hidden = true;
                     for itemObj in itemArr
                     {
-                        var item = ItemModel(dict: itemObj as! NSDictionary);
+                        let item = ItemModel(dict: itemObj as! NSDictionary);
                         if(item._id != "")
                         {
                             self.dataArr.append(item);

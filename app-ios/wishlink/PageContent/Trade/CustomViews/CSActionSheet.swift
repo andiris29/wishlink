@@ -25,7 +25,7 @@ class CSActionSheet : UIWindow {
         return Static.instance
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -46,14 +46,14 @@ class CSActionSheet : UIWindow {
             
         self.frame = KeyWindow.bounds
         self.windowLevel = UIWindowLevelStatusBar
-        self.backgroundColor = RGBCA(0, 0.3)
+        self.backgroundColor = RGBCA(0, a: 0.3)
         
         viewConstraints = Dictionary<String, NSObject>()
         
         backguandImageView = UIImageView()
         backguandImageView.backgroundColor = RGBC(229.0)
         backguandImageView.userInteractionEnabled = true
-        backguandImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        backguandImageView.translatesAutoresizingMaskIntoConstraints = false
         viewConstraints["backguandImageView"] = backguandImageView
         self.addSubview(backguandImageView)
         
@@ -64,7 +64,7 @@ class CSActionSheet : UIWindow {
             
             var button: UIButton = UIButton()
             button.backgroundColor = UIColor.whiteColor()
-            button.setTranslatesAutoresizingMaskIntoConstraints(false)
+            button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle(titles[index] as? String, forState: UIControlState.Normal)
             button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
             button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
@@ -103,7 +103,7 @@ class CSActionSheet : UIWindow {
 
     //MARK: - touches
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         show(false)
     }

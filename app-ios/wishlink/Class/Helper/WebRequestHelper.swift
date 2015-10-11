@@ -22,7 +22,8 @@ class WebRequestHelper:NSObject {
     var mydelegate:WebRequestDelegate?
     
     let headers = [
-        "Content-Type": "application/json;charset=utf-8"
+        "Content-Type": "application/json;charset=utf-8",
+        "Cookie": APPCONFIG.cookieStr
     ];
     
     /*
@@ -30,28 +31,47 @@ class WebRequestHelper:NSObject {
     */
     func httpPostApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
         
-        var apiurl = SERVICE_ROOT_PATH + apiName
+        let apiurl = SERVICE_ROOT_PATH + apiName
         NSLog(" request(POST) url: %@", apiurl)
-        request(.POST, apiurl, parameters: parameters, encoding: .JSON, headers: self.headers).responseJSON() {
-            (_, _, data, error) in
-            
-            
-            if(error == nil)
-            {
-                NSLog("respone:%@",data!.description)
-                self.handleHttpResponse(data!, tag: tag)
-            }
-            else
-            {
-                self.mydelegate?.requestDataFailed("网络不给力哦");
-            }
-            
+        
+        request(.POST, apiurl, parameters: parameters, encoding: .JSON, headers: self.headers)
+            .responseJSON{ request, Response, result in
+                debugPrint(result)
+                
+                switch result {
+                case .Success:
+                    
+                    if(apiName == "user/login")
+                    {
+                        let headerArr = Response?.allHeaderFields as? NSDictionary;
+                        var cookieString = headerArr!.valueForKey("Set-Cookie")
+                        if(cookieString != nil)
+                        {
+                            var tempArr = (cookieString as! NSString).componentsSeparatedByString(";")
+                            cookieString =  tempArr[0];
+                            
+//                            tempArr = (cookieString as! NSString).componentsSeparatedByString("=")
+//                            if(tempArr.count>1)
+//                            {
+//                                cookieString =  tempArr[1];
+                                APPCONFIG.cookieStr = cookieString as! String
+                                print(cookieString);
+//                            }
+                        }
+                    }
+                    
+                    self.handleHttpResponse(result.value!, tag: tag)
+                case .Failure(_, let error):
+                    self.mydelegate?.requestDataFailed("网络不给力哦");
+                    print(error)
+                }
         }
-        .response({
-        (_, _, data, error) in
 
-           var result = NSString(data: data!, encoding:NSUTF8StringEncoding);
-            NSLog("respone:%@",result as! String)
+//        
+//        request(.POST, URLString: apiurl, parameters: parameters, encoding: .JSON, headers: self.headers).responseJSON() {
+//            (_, _, data, error) in
+//            
+//            
 //            if(error == nil)
 //            {
 //                NSLog("respone:%@",data!.description)
@@ -61,29 +81,59 @@ class WebRequestHelper:NSObject {
 //            {
 //                self.mydelegate?.requestDataFailed("网络不给力哦");
 //            }
-
-        })
+//            
+//        }
+//        .response({
+//        (_, _, data, error) in
+//
+//           var result = NSString(data: data!, encoding:NSUTF8StringEncoding);
+//            NSLog("respone:%@",result as! String)
+////            if(error == nil)
+////            {
+////                NSLog("respone:%@",data!.description)
+////                self.handleHttpResponse(data!, tag: tag)
+////            }
+////            else
+////            {
+////                self.mydelegate?.requestDataFailed("网络不给力哦");
+////            }
+//
+//        })
     }
     
     func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
         
-        var apiurl = SERVICE_ROOT_PATH + apiName
+        let apiurl = SERVICE_ROOT_PATH + apiName
         NSLog("request url: %@", apiurl)
-        
-        request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
-            .responseJSON() {
-            (_, _, data, error) in
+        let _request = request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
+//        var result = _request.request?.HTTPShouldHandleCookies
+        _request.request?.URLRequest.setValue(APPCONFIG.cookieStr, forHTTPHeaderField: "Cookie");
+//        request(.GET, apiurl, parameters: nil, encoding: .URL, headers: self.headers)
             
-            if(error == nil)
-            {
-                self.handleHttpResponse(data!, tag: tag)
-            }
-            else
-            {
-                self.mydelegate?.requestDataFailed("网络不给力哦");
-            }
-            
+            _request.responseJSON{ _, respore, result in
+                switch result {
+                case .Success:
+                    self.handleHttpResponse(result.value!, tag: tag)
+                case .Failure(_, let error):
+                    self.mydelegate?.requestDataFailed("网络不给力哦");
+                    print(error)
+                }
         }
+        
+//        request(.GET, URLString: apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
+//            .responseJSON() {
+//            (_, _, data, error) in
+//            
+//            if(error == nil)
+//            {
+//                self.handleHttpResponse(data!, tag: tag)
+//            }
+//            else
+//            {
+//                self.mydelegate?.requestDataFailed("网络不给力哦");
+//            }
+//            
+//        }
     }
     
     /*
@@ -103,15 +153,15 @@ class WebRequestHelper:NSObject {
         {
             //解析metadata
             var errorMsg = "返回数据无效";
-            var metaDic = dataDir.objectForKey("metadata")  as! NSDictionary
+            let metaDic = dataDir.objectForKey("metadata")  as! NSDictionary
             if(metaDic.count>0)
             {
 //                var errCode = metaDic.objectForKey("error");
-                var errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
+                let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
                 if(errDic.count>0)
                 {
-                    var errCode =  errDic.objectForKey("errorCode") as! Int;
-                    var errDesc =  errDic.objectForKey("description") as! String;
+                    let errCode =  errDic.objectForKey("errorCode") as! Int;
+                    let errDesc =  errDic.objectForKey("description") as! String;
                     errorMsg = "ErrorCode:\(errCode) \(errDesc)";
                     
                     
@@ -121,6 +171,7 @@ class WebRequestHelper:NSObject {
             self.mydelegate?.requestDataFailed(errorMsg)
         }
     }
+    
     
     /*
     下载网络图片并加载ImageView中，
@@ -132,43 +183,76 @@ class WebRequestHelper:NSObject {
     defaultName：如果下载失败，则所加载的默认图片名称
     
     */
-    func renderImageView(iv:UIImageView,url:String,defaultName:String) {
-        var  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-        //判断文件路径是否存在，不存在则创建
-        var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
-        
-        var fm:NSFileManager = NSFileManager.defaultManager();
-        if(!fm.fileExistsAtPath(imagepath))
+    func renderImageView(iv:UIImageView,url:String,defaultName:String)
+    {
+        if(url != "" && url.trim().length>0)
         {
-            fm.createDirectoryAtPath(imagepath, withIntermediateDirectories: true, attributes: nil, error: nil)
-        }
-        //检测本读是否有该图片缓存
-        imagepath = imagepath+"/"+encodeName
-        var image = UIImage(contentsOfFile: imagepath);
-        if (image != nil) {
-            iv.image = image;
-            return;
-        }
-        
-        request(.GET, url, parameters: nil, encoding: .URL, headers: self.headers).responseJSON() {
-            (_, _, data, error) in
-            
-            if(error == nil)
-            {
-                var image = UIImage(data: data as! NSData)
-                NSLog("Write to file:%@", imagepath);
-                //显示图片
-                if (image != nil) {
-                    iv.image = image;
-                } else {
-                    iv.image = UIHEPLER.getBundledImage(defaultName)
-                }
-            }
-            else
-            {
-                iv.image = UIImage(named: defaultName) //UIHelper.getBundledImage(defaultName)
-                NSLog("Download image failed: %@", error!.description);
-            }
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                
+                autoreleasepool({ () -> () in
+                    
+                    
+                    let  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
+                    //判断文件路径是否存在，不存在则创建
+                    var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
+                    
+                    let fm:NSFileManager = NSFileManager.defaultManager();
+                    if(!fm.fileExistsAtPath(imagepath))
+                    {
+                        do {
+                            try fm.createDirectoryAtPath(imagepath, withIntermediateDirectories: true, attributes: nil)
+                        } catch _ {
+                        }
+                    }
+                    //检测本读是否有该图片缓存
+                    
+                    imagepath = imagepath+"/"+encodeName
+                    
+                    if(fm.fileExistsAtPath(imagepath))
+                    {
+                        
+                        let imageData:NSData = NSData(contentsOfFile: imagepath)!
+                        let image = UIImage(data: imageData);
+                        if (image != nil) {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                iv.image = image;
+                            })
+                            return;
+                        }
+                        
+                    }
+                    //                    let _encoding = ParameterEncoding.URL
+                    
+                    
+                    
+                    request(.GET, url).response(){
+                        
+                        (_, _, data, error) in
+                        
+                        if(error == nil)
+                        {
+                            let image = UIImage(data: data! as NSData)
+                            NSLog("Write to file:%@", imagepath);
+                            data!.writeToFile(imagepath, atomically: true);
+                            //显示图片
+                            if (image != nil) {
+                                iv.image = image;
+                            } else {
+                                iv.image = UIHEPLER.getBundledImage(defaultName)
+                            }
+                            
+                        }
+                        else
+                        {
+                            iv.image = UIImage(named: defaultName)
+                            print(error)
+                        }
+                        
+                        
+                    }
+                    
+                })
+            })
         }
     }
 }

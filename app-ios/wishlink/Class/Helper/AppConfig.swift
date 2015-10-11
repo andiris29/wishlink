@@ -36,9 +36,9 @@ let KeyWindow = APPLICATION.keyWindow!
 
 
 func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a) }
-func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return RGBA(r, g, b, 1.0) }
-func RGBCA(c:CGFloat, a:CGFloat) -> UIColor { return RGBA(c, c, c, a)}
-func RGBC(c:CGFloat) -> UIColor { return RGBA(c, c, c, 1.0)}
+func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return RGBA(r, g: g, b: b, a: 1.0) }
+func RGBCA(c:CGFloat, a:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: a)}
+func RGBC(c:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: 1.0)}
 
 let UIHEPLER = UIHelper();
 let APPCONFIG =  AppConfig.sharedAppConfig;
@@ -58,6 +58,7 @@ class AppConfig: NSObject
     
     var AccessToken:String!;
     var Uid = "";
+    var cookieStr:String = "";
     var CurrentLoginName:String = ""
     
     var profileDetailDictionary:NSDictionary!;
@@ -84,7 +85,7 @@ class AppConfig: NSObject
     }
     func load()
     {
-        var ud = NSUserDefaults.standardUserDefaults()
+        let ud = NSUserDefaults.standardUserDefaults()
         if(ud.objectForKey("Configuration_Token") != nil)
         {
             self.AccessToken = ud.objectForKey("Configuration_Token") as! String;
@@ -112,7 +113,7 @@ class AppConfig: NSObject
     }
     func save()->Bool
     {
-        var ud = NSUserDefaults.standardUserDefaults()
+        let ud = NSUserDefaults.standardUserDefaults()
         if(!self.AccessToken.isNullOrEmpty())
         {
             ud.setObject(self.AccessToken, forKey: "Configuration_Token")
@@ -156,7 +157,7 @@ class AppConfig: NSObject
     
     func getAuthorizationString()->String
     {
-        var strFullToken = String(format: "iPhone<>%@<>%f<>%f<>%d",AppConfig.sharedAppConfig.AccessToken,AppConfig.sharedAppConfig.Latitude,AppConfig.sharedAppConfig.Longitude,AppConfig.sharedAppConfig.languageVer.rawValue)
+        let strFullToken = String(format: "iPhone<>%@<>%f<>%f<>%d",AppConfig.sharedAppConfig.AccessToken,AppConfig.sharedAppConfig.Latitude,AppConfig.sharedAppConfig.Longitude,AppConfig.sharedAppConfig.languageVer.rawValue)
         return strFullToken
     }
     

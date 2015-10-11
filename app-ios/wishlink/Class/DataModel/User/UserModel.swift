@@ -62,14 +62,14 @@ class UserModel: BaseModel {
             if receivers.count > 0 {
                 self.receiversArray = []
                 for receiverDic in receivers {
-                    var receiverModel = ReceiverModel(dic: receiverDic as! NSDictionary)
+                    let receiverModel = ReceiverModel(dic: receiverDic as! NSDictionary)
                     self.receiversArray.append(receiverModel)
                 }
             }
         }
         
         var unreadDic = self.userDic["unread"] as! [String: AnyObject]
-        var itemRecommendationRefs = unreadDic["itemRecommendationRefs"] as! [ItemModel]
+        let itemRecommendationRefs = unreadDic["itemRecommendationRefs"] as! [ItemModel]
         if itemRecommendationRefs.count != 0 {
             for item in itemRecommendationRefs {
                 
@@ -82,7 +82,7 @@ class UserModel: BaseModel {
                 if itemArr.count > 0 {
                     self.searchHistory = []
                     for itemDic in itemArr {
-                        var item = keywordModel(dict: itemDic as! NSDictionary)
+                        let item = keywordModel(dict: itemDic as! NSDictionary)
                         self.searchHistory.append(item)
                     }
                 }
@@ -90,7 +90,7 @@ class UserModel: BaseModel {
         }
         
         // TODO
-        var tradeRefs = unreadDic["tradeRefs"] as! [AnyObject]
+        let tradeRefs = unreadDic["tradeRefs"] as! [AnyObject]
         if tradeRefs.count != 0 {
             for trande in tradeRefs {
                 

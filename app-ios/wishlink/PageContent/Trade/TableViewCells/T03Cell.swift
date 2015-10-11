@@ -42,40 +42,40 @@ class T03Cell: UITableViewCell {
     
     func btnAction(sender:UIButton)
     {
-        var tag = sender.tag;
+        let tag = sender.tag;
         self.myDelegate?.btnAction(tag, rowIndex: self.rowIndex);
     }
     func lodaData(rowindex:Int,selectindex:Int)
     {
         self.rowIndex = rowindex;
         self.selectIndex = selectindex;
-        var imgWidth = ScreenWidth / 6;
-        var spance = (ScreenWidth - 5 * imgWidth)/6
+        let imgWidth = ScreenWidth / 6;
+        let spance = (ScreenWidth - 5 * imgWidth)/6
         
         if(self.sv.subviews.count>0)
         {
             for v in self.sv.subviews
             {
-                var vi = v as! UIView;
+                let vi = v ;
                 vi.removeFromSuperview()
                 
             }
         }
         
         var index = 0;
-        var martop:CGFloat = 10;
-        for item in dataArr
+        let martop:CGFloat = 10;
+        for _ in dataArr
         {
-            var rectX = (imgWidth+spance)*CGFloat(index);
-            var btnRect = CGRectMake(rectX,  martop, imgWidth, imgWidth)
-            var imgName_u = self.dataArr[index]
-            var imgView = UIImageView(frame: btnRect)
+            let rectX = (imgWidth+spance)*CGFloat(index);
+            let btnRect = CGRectMake(rectX,  martop, imgWidth, imgWidth)
+            let imgName_u = self.dataArr[index]
+            let imgView = UIImageView(frame: btnRect)
             
-            var btn = UIButton(frame: btnRect);
+            let btn = UIButton(frame: btnRect);
             btn.addTarget(self, action: "btnAction:", forControlEvents: UIControlEvents.TouchUpInside);
             btn.tag = index;
-            var lRect = CGRectMake(rectX, imgWidth+10+martop, imgWidth, imgWidth/2)
-            var lbName = UILabel(frame: lRect)
+            let lRect = CGRectMake(rectX, imgWidth+10+martop, imgWidth, imgWidth/2)
+            let lbName = UILabel(frame: lRect)
             lbName.text = self.dataArr_Name[index];
             lbName.textAlignment = NSTextAlignment.Center;
             
@@ -101,7 +101,7 @@ class T03Cell: UITableViewCell {
              self.sv.addSubview(imgView);
             self.sv.addSubview(btn);
             self.sv.addSubview(lbName);
-            var sizeWidth = (imgWidth+spance)*CGFloat(dataArr.count)+spance
+            let sizeWidth = (imgWidth+spance)*CGFloat(dataArr.count)+spance
             self.sv.contentSize = CGSizeMake(sizeWidth,imgWidth*1.5+10);
             index++;
         }

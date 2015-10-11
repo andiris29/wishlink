@@ -29,7 +29,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         super.viewDidLoad()
         if(isNeedShowLoin)
         {
-            var vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
             self.presentViewController(vc, animated: true, completion: nil)
         }
         
@@ -46,7 +46,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
         
-        self.startTimer();
+        //self.startTimer();
     }
     
     func getKeyWordData()
@@ -64,10 +64,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         if(self.dataArr.count>0)
         {
         
-            var colorArray = [RGBA(234, 234, 234, 1.0), RGBA(254, 216, 222, 1.0),RGBA(229, 204, 222, 1.0)]
+            var colorArray = [RGBA(234, g: 234, b: 234, a: 1.0), RGBA(254, g: 216, b: 222, a: 1.0),RGBA(229, g: 204, b: 222, a: 1.0)]
   
-            var window = UIApplication.sharedApplication().keyWindow
-            var windowWidth = ScreenWidth
+//            _ = UIApplication.sharedApplication().keyWindow
+            let windowWidth = ScreenWidth
             var isfirstTime = false;
             if( self.sphereView == nil)
             {
@@ -83,16 +83,16 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 btView.removeFromSuperview()
             }
             
-            var views: NSMutableArray = NSMutableArray()
+            let views: NSMutableArray = NSMutableArray()
             
             for var index = 0; index < self.dataArr.count; index++ {
                 
-                var count: Int = Int(arc4random() % UInt32(colorArray.count))
-                var button: UIButton = UIButton(frame: CGRectMake(0, 0, 90, 90))
+                let count: Int = Int(arc4random() % UInt32(colorArray.count))
+                let button: UIButton = UIButton(frame: CGRectMake(0, 0, 90, 90))
                 button.layer.masksToBounds = true;
                 button.layer.cornerRadius = button.frame.size.width / 2.0;
                 button.setTitle("\(self.dataArr[index])", forState: UIControlState.Normal)
-                button.setTitleColor(RGB(124, 0, 90), forState: UIControlState.Normal)
+                button.setTitleColor(RGB(124, g: 0, b: 90), forState: UIControlState.Normal)
                 button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
                 button.titleLabel?.font = UIFont(name: "FZLanTingHeiS-EL-GB", size: 13)
                 button.backgroundColor = colorArray[count]
@@ -124,14 +124,14 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func buttonAction(sender: UIButton) {
     
-        var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         vc.keyword = sender.titleLabel!.text!
         self.navigationController?.pushViewController(vc, animated: true);
         self.removeTimer();
         
         
 //        self.dismissViewControllerAnimated(true, completion: nil);
-        println("buttonAction:\(sender.tag)")
+        print("buttonAction:\(sender.tag)")
     }
     
     // MARK: - Navigation
@@ -150,7 +150,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        var vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+        let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
         vc.myDelegate = self;
         vc.searchType = .any
         self.presentViewController(vc, animated: true, completion: nil);
@@ -162,7 +162,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     {
         self.searchTextField.text = inputValue;
         
-        var vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         vc.keyword = inputValue;
         self.navigationController?.pushViewController(vc, animated: true);
     }
@@ -172,7 +172,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         if(tag == 10)
         {
-            var trendsArr = (response as! NSDictionary).objectForKey("trends") as! NSArray
+            let trendsArr = (response as! NSDictionary).objectForKey("trends") as! NSArray
             if(trendsArr.count>0)
             {
                 if(self.dataArr.count>0)
@@ -182,7 +182,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 self.dataArr = [];
                 for itemObj in trendsArr
                 {
-                    var item = TrendModel(dict: (itemObj as! NSDictionary));
+                    let item = TrendModel(dict: (itemObj as! NSDictionary));
                     if(item.name != nil && item.name != "")
                     {
                         self.dataArr.append(item.name);
@@ -193,8 +193,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         }
         else  if(tag == 11)
         {
-            var numTrades = (response as! NSDictionary).objectForKey("numTrades") as! Int
-            var numCompleteTrades = (response as! NSDictionary).objectForKey("numCompleteTrades") as! Int
+            let numTrades = (response as! NSDictionary).objectForKey("numTrades") as! Int
+            let numCompleteTrades = (response as! NSDictionary).objectForKey("numCompleteTrades") as! Int
             self.lbAllCount.text = String(numTrades);
             self.lbComplateCount.text = String(numCompleteTrades);
         }

@@ -25,7 +25,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         
         self.httpObj.mydelegate = self;
         self.txtSearch.delegate = self;
-        var para = ["req.pageNo":1,
+        let para = ["req.pageNo":1,
         "req.pageSize":10]
 //        para = nil
         self.httpObj.httpGetApi("trend/country", parameters: para, tag: 10);
@@ -62,7 +62,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:T03Cell =  tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T03Cell
+        let cell:T03Cell =  tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T03Cell
        
         if(indexPath.row == 0)
         {
@@ -118,7 +118,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        let hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         hotVC.isNeedShowNavi = true;
         self.navigationController?.pushViewController(hotVC, animated: true);
         
@@ -132,7 +132,7 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
         {
             if let trendDic = response as? NSDictionary
             {
-                var trendArr:NSArray! = trendDic.objectForKey("trends") as! NSArray
+                let trendArr:NSArray! = trendDic.objectForKey("trends") as! NSArray
                 if(trendArr != nil && trendArr.count>0)
                 {
                     if(self.dataArr.count>0)
@@ -142,8 +142,8 @@ class T03SearchVC: RootVC,UITableViewDelegate,UITableViewDataSource,UITextFieldD
                     
                     for itemObj in trendArr
                     {
-                        var itemdic = itemObj as! NSDictionary;
-                        var item =  TrendModel(dict: itemdic);
+                        let itemdic = itemObj as! NSDictionary;
+                        let item =  TrendModel(dict: itemdic);
                         self.dataArr.append(item);
                     }
                     self.myTableView.reloadData();

@@ -40,26 +40,26 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         //var hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         
         
-        var hotVC =  T01HomePageVC(nibName: "T01HomePageVC", bundle: NSBundle.mainBundle())
+        let hotVC =  T01HomePageVC(nibName: "T01HomePageVC", bundle: NSBundle.mainBundle())
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
         
-        var hotNav =  NavigationPageVC(rootViewController: hotVC)
+        let hotNav =  NavigationPageVC(rootViewController: hotVC)
         
-        var releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
+        let releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
         releaseVC.tabBarItem.title = "发布"
         releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
-        var createNav =  NavigationPageVC(rootViewController: releaseVC)
+        let createNav =  NavigationPageVC(rootViewController: releaseVC)
         
         
-        var searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
+        let searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
         searchVC.tabBarItem.title = "搜索"
         searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "search_unselect")!, selectedImage: UIImage(named: "search_select")!);
-        var searchNav =  NavigationPageVC(rootViewController: searchVC)
+        let searchNav =  NavigationPageVC(rootViewController: searchVC)
 
 
-        var mineVC = U02UserVC(nibName: "U02UserVC", bundle: NSBundle.mainBundle())
+        let mineVC = U02UserVC(nibName: "U02UserVC", bundle: NSBundle.mainBundle())
         mineVC.tabBarItem = UITabBarItem.tabBarItem("我的", image: UIImage(named: "me")!, selectedImage: UIImage(named: "me-p")!)
-        var mineNav = NavigationPageVC(rootViewController: mineVC)
+        let mineNav = NavigationPageVC(rootViewController: mineVC)
         
         self.addChildViewController(hotNav)
         self.addChildViewController(createNav)
@@ -69,7 +69,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
     }
     
-    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
       
             self.selectedViewController!.navigationController?.popToRootViewControllerAnimated(true);
     }

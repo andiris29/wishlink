@@ -33,7 +33,7 @@ class DefaultCell: UITableViewCell {
         // Configure the view for the selected state
     }
     override func  drawRect(rect: CGRect) {
-        var context:CGContextRef = UIGraphicsGetCurrentContext();
+        var context:CGContextRef = UIGraphicsGetCurrentContext()!;
         
 //        if(isShowBottonLine)
 //        {
