@@ -102,7 +102,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         var tag = sender.tag;
         if(tag==11)//确认发布
         {
-            var errmsg = ""// checkInput();
+            var errmsg =  checkInput();
             if(errmsg != "")
             {
                 UIHEPLER.alertErrMsg(errmsg);
@@ -290,6 +290,11 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         if(count.length == 0)
         {
             return "数量不能为空"
+        }
+        if(self.imagrArr.count == 0)
+        {
+            return "请至少上传一张图片"
+            
         }
         return result;
         
