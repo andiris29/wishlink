@@ -15,14 +15,15 @@ class UserModel: BaseModel {
             self.fillData()
         }
     }
+    var _id: String = ""
     var isLogin: Bool = false
-    var userId: String = ""
     var nickname: String = ""
     var password: String = ""
     var update: String = ""
     var create: String = ""
     var portrait: String = ""
-    var backgroud: String = ""
+    var background: String = ""
+    var countryRef: String = ""
     var itemRecommendationRefs: NSMutableArray!
     var tradeRefs: NSMutableArray!
     var receiversArray: [ReceiverModel]!
@@ -47,12 +48,13 @@ class UserModel: BaseModel {
             return  
         }
         self.isLogin = true
-        self.userId = getStringValue("_id", dic: self.userDic)
+        self._id = getStringValue("_id", dic: self.userDic)
         self.nickname = getStringValue("nickname", dic: self.userDic)
         self.update = getStringValue("update", dic: self.userDic)
         self.create = getStringValue("create", dic: self.userDic)
         self.portrait = getStringValue("portrait", dic: self.userDic)
-
+        self.background = getStringValue("background", dic: self.userDic)
+        self.countryRef = getStringValue("countryRef", dic: self.userDic)
         if let alipay = self.userDic["alipay"] as? NSDictionary {
             self.alipayId = alipay["id"] as! String
         }

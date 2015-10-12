@@ -21,11 +21,13 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     var uploadImageRequest: Request!
     var uploadImageType: SettingVCUploadImageType = .None
     var isUploadHeadImage: Bool!
+    var userModel = UserModel.shared
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.httpObj.mydelegate = self
+        self.fillDataForUI()
         // Do any additional setup after loading the view.
     }
     
@@ -66,21 +68,36 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     // MARK: - delegate
     
     func requestDataFailed(error: String) {
-        SVProgressHUD.dismiss()
-        UIHelper().alertErrMsg(error)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+            UIHelper().alertErrMsg(error)
+        })
     }
     
     func requestDataComplete(response: AnyObject, tag: Int) {
-        if tag == 10 {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
+        })
+        if tag == 10 {
+            // 注销
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
+        }else if tag == 20 {
+            // update user
+            if let userDic = response["user"] as? NSDictionary {
+                self.userModel.userDic = userDic as! [String : AnyObject]
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    SVProgressHUD.showSuccessWithStatusWithBlack("个人信息修改成功")
+                    self.fillDataForUI()
+                })
+            }
         }
     }
     
     // MARK: -- UITextField delegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.updateUser()
         return true
     }
     
@@ -90,11 +107,12 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         if self.uploadImageType == .Portrait {
             self.headImageView.image = gotImage
+            self.updatePortrait()
         }
         else if self.uploadImageType == .Background{
             self.bgImageView.image = gotImage
+            self.updateBackground()
         }
-        self.uploadImage()
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
             
@@ -140,6 +158,111 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     
     // MARK: - prive method
     
+    func validateNickname() -> Bool{
+        if self.nicknameTextField.text != nil {
+            if self.nicknameTextField.text == self.userModel.nickname {
+                return false
+            }
+            
+            // TODO 验证nickname合法性
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    func updateUser() {
+        if self.validateNickname() == false {
+            return
+        }
+        let dic = [
+            "nickname": self.nicknameTextField.text!,
+            "alipay.id": "test@gmail.com"
+        ]
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.httpObj.httpPostApi("user/update", parameters: dic, tag: 20)
+    }
+    
+    // MARK:
+    func updatePortrait() {
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.view.userInteractionEnabled = false
+        let apiurl = SERVICE_ROOT_PATH + "user/updatePortrait"
+        upload(.POST, apiurl, headers: nil, multipartFormData: {
+            (multipartFormData) -> Void in
+            let imageName = "portrait"
+            let imageData = UIHEPLER.compressionImageToDate(self.headImageView.image!)
+            let imageStream = NSInputStream(data: imageData)
+            let len = UInt64(imageData.length)
+            multipartFormData.appendBodyPart(stream:imageStream, length:len, name: imageName, fileName: imageName, mimeType: "image/jpeg")
+            
+            }) {
+                encodingResult in
+                switch encodingResult {
+                case .Success(let _upload, _, _ ):
+                    _upload.responseJSON(completionHandler: { (requst, response, result) -> Void in
+                        switch result {
+                        case .Success(let json):
+                            if let dic = json["data"] as? NSDictionary {
+                                self.userModel.userDic = dic["user"] as! [String : AnyObject]
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    SVProgressHUD.showSuccessWithStatusWithBlack("头像上传成功")
+                                    self.fillDataForUI()
+                                })
+                            }
+                        case .Failure(let error):
+                            SVProgressHUD.showErrorWithStatusWithBlack("头像上传失败")
+                            print(error)
+                        }
+                        
+                    })
+                case .Failure(let encodingError):
+                    SVProgressHUD.showErrorWithStatusWithBlack("头像上传失败")
+                    print(encodingError)
+                }
+        }
+    }
+    
+    func updateBackground() {
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.view.userInteractionEnabled = false
+        let apiurl = SERVICE_ROOT_PATH + "user/updateBackground"
+        upload(.POST, apiurl, headers: nil, multipartFormData: {
+            (multipartFormData) -> Void in
+            let imageName = "background"
+            let imageData = UIHEPLER.compressionImageToDate(self.bgImageView.image!)
+            let imageStream = NSInputStream(data: imageData)
+            let len = UInt64(imageData.length)
+            multipartFormData.appendBodyPart(stream:imageStream, length:len, name: imageName, fileName: imageName, mimeType: "image/jpeg")
+            
+            }) {
+                encodingResult in
+                switch encodingResult {
+                case .Success(let _upload, _, _ ):
+                    _upload.responseJSON(completionHandler: { (requst, response, result) -> Void in
+                        switch result {
+                        case .Success(let json):
+                            if let dic = json["data"] as? NSDictionary {
+                                self.userModel.userDic = dic["user"] as! [String : AnyObject]
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    SVProgressHUD.showSuccessWithStatusWithBlack("背景图片上传成功")
+                                    self.fillDataForUI()
+                                })
+                            }
+                        case .Failure(let error):
+                            SVProgressHUD.showErrorWithStatusWithBlack("背景图片上传失败")
+                            print(error)
+                        }
+                        
+                    })
+                case .Failure(let encodingError):
+                    SVProgressHUD.showErrorWithStatusWithBlack("背景图片上传失败")
+                    print(encodingError)
+                }
+        }
+    }
+    
     func logout() {
         SVProgressHUD.showInfoWithStatus("请稍等...")
         if let registrationId = APService.registrationID() {
@@ -148,22 +271,6 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
-        }
-    }
-    
-    // MARK: 上传图片
-    func uploadImage () {
-        var urlString = "http://121.41.162.102:80/services/"
-        var imageData: NSData
-        switch self.uploadImageType {
-        case .Portrait:
-            urlString = urlString + "user/updatePortrait"
-            imageData = UIImageJPEGRepresentation(self.headImageView.image!, 1.0)!
-        case .Background:
-            urlString = urlString + "user/updateBackground"
-            imageData = UIImageJPEGRepresentation(self.bgImageView.image!, 1.0)!
-        default:
-            return
         }
     }
     
@@ -208,6 +315,12 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         
     }
     
+    func fillDataForUI() {
+        self.nicknameTextField.text = self.userModel.nickname
+        self.httpObj.renderImageView(self.headImageView, url: self.userModel.portrait, defaultName: "")
+        self.httpObj.renderImageView(self.bgImageView, url: self.userModel.background, defaultName: "")
+    }
+    
     // MARK: - setter and getter
     
     
@@ -223,3 +336,10 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     */
 
 }
+
+
+
+
+
+
+

@@ -37,7 +37,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.prepareSubVC()
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
-        self.fillDataForUI()
+        
         self.getUser()
         self.navigationController!.navigationBar.hidden = false
     }
@@ -47,7 +47,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.navigationController!.navigationBar.hidden = true;
 //        self.navigationController?.navigationBar.frame = CGRectMake(0, -100.0, ScreenWidth, 44)
         self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight)
-        
+        self.fillDataForUI()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -150,7 +150,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
             self.nicknameLabel.text = UserModel.shared.nickname;
             
             self.httpObj.renderImageView(self.headImageView, url: userModel.portrait, defaultName: "")
-            self.httpObj.renderImageView(self.bgImageView, url: userModel.backgroud, defaultName: "")
+            self.httpObj.renderImageView(self.bgImageView, url: userModel.background, defaultName: "")
             self.contryLabel.text = "上海杨浦区国和路555弄"
         }
     }

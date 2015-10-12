@@ -40,7 +40,6 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     var currentStatus: SellerTradeFilterStatus = .All
     var currentTradeIndex: Int = -1
     var tradeArray: [TradeModel] = []
-    var afterFilterTradeArray: [TradeModel] = []
     var seletedConditionBtn: UIButton!
     var coverTabBarView: UIView!
     
@@ -103,7 +102,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.afterFilterTradeArray.count
+        return self.tradeArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -114,8 +113,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         cell.delegate = self
         cell.cellType = .Seller
         cell.indexPath = indexPath
-        if indexPath.row < self.afterFilterTradeArray.count {
-            let trade = self.afterFilterTradeArray[indexPath.row]
+        if indexPath.row < self.tradeArray.count {
+            let trade = self.tradeArray[indexPath.row]
             cell.trade = trade
         }
         
@@ -168,20 +167,25 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
                 let trade = TradeModel(dict: tradeDic as! NSDictionary)
                 self.tradeArray.append(trade)
             }
-            self.afterFilterTradeArray = self.tradeArray
-            self.collectionView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.collectionView.reloadData()
+            })
         }else if tag == 20 {
             if let tradeDic = response["trade"] as? NSDictionary {
                 let trade = TradeModel(dict: tradeDic)
-                self.afterFilterTradeArray.removeAtIndex(self.currentTradeIndex)
-                self.afterFilterTradeArray.insert(trade, atIndex: self.currentTradeIndex)
-                self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
+                self.tradeArray.removeAtIndex(self.currentTradeIndex)
+                self.tradeArray.insert(trade, atIndex: self.currentTradeIndex)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
+                })
             }
         }
     }
     
     func requestDataFailed(error: String) {
-        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.collectionView.reloadData()
+        })
     }
     
     // MARK: - response event
@@ -207,53 +211,51 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     // MARK: - private method
 
     func getSellerTrade() {
+        self.tradeArray.removeAll()
         self.httpObj.httpGetApi("tradeFeeding/asSeller", parameters: nil, tag: 10)
     }
     
     // 根据状态筛选卖家订单
     func filterSellerTradeWithStatus(status: SellerTradeFilterStatus) {
-        self.afterFilterTradeArray.removeAll(keepCapacity: false)
+        self.tradeArray.removeAll()
+        var dic: [String: AnyObject]
         switch status {
         case .All:
-            self.afterFilterTradeArray = self.tradeArray
+            dic = [
+                "statuses": []
+            ]
         case .InTrade:
-            for trade in self.tradeArray {
-                if trade.status == 3 {
-                    self.afterFilterTradeArray.append(trade)
-                }
-            }
+            dic = [
+                "statuses": [3]
+            ]
         case .CanceledTade:
-            for trade in self.tradeArray {
-                if trade.status == 7 {
-                    self.afterFilterTradeArray.append(trade)
-                }
-            }
+            dic = [
+                "statuses": [7]
+            ]
         case .Delivered:
-            for trade in self.tradeArray {
-                if trade.status == 4 {
-                    self.afterFilterTradeArray.append(trade)
-                }
-            }
+            dic = [
+                "statuses": [4]
+            ]
+
         case .Finished:
-            for trade in self.tradeArray {
-                if trade.status == 5 || trade.status == 6 || trade.status == 11 {
-                    self.afterFilterTradeArray.append(trade)
-                }
-            }
+            dic = [
+                "statuses": [5, 6, 11]
+            ]
+
         case .Complainting:
-            for trade in self.tradeArray {
-                if trade.status == 10 {
-                    self.afterFilterTradeArray.append(trade)
-                }
-            }
+            dic = [
+                "statuses": [10]
+            ]
+
         default:
             break
         }
-        self.collectionView.reloadData()
+        self.httpObj.httpGetApi("tradeFeeding/asSeller", parameters: dic, tag: 10)
+
     }
     
     func cancelTrade() {
-        let trade = self.afterFilterTradeArray[self.currentTradeIndex]
+        let trade = self.tradeArray[self.currentTradeIndex]
         let dic = [
             "_id": trade._id
         ]
