@@ -45,10 +45,10 @@ geo.trace = {
                 }
             }).sort({
                 create: -1
-            }).limit(1).exec(function(error, countries) {
+            }).limit(1).exec(function(error, traces) {
                 if (error) {
                     callback(error);
-                } else if (countries.length === 0) {
+                } else if (traces.length === 0) {
                     GeoService.reverseGeocoding(req.body.location, function(error, country) {
                         if (error) {
                             callback(error);

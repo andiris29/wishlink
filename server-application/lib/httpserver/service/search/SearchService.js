@@ -7,7 +7,6 @@ var Users = require('../../../model/users');
 var SegmentService = require('../SegmentService');
 
 var SearchService = {};
-//TODO
 /**
  * [cache]
  *
@@ -30,7 +29,8 @@ SearchService.search = function(keyword, pageNo, pageSize, callback) {
             SegmentService.segment(keyword, callback);
         }, function (segs, callback) {
             var searchKeyword = segs.join(' ');
-            MongoHelper.queryPaging(Items.find({
+
+            var querier = Items.find({
                     $text: {
                         $search: searchKeyword
                     }
@@ -38,7 +38,10 @@ SearchService.search = function(keyword, pageNo, pageSize, callback) {
                     score: { $meta: "textScore"
                     }
                 }
-            ).sort({ score: { $meta: "textScore" } } ), pageNo, pageSize, callback);
+            ).sort({ score: { $meta: "textScore" } } );
+
+            //var querier = Items.textSearch(searchKeyword);
+            MongoHelper.queryPaging(querier, pageNo, pageSize, callback);
         }
     ], callback);
 };
