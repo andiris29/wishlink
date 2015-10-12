@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7654247D1B8B5861001C607C /* U03AddAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654247B1B8B5861001C607C /* U03AddAddressVC.swift */; };
 		7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7654247C1B8B5861001C607C /* U03AddAddressVC.xib */; };
 		765424811B8B5A56001C607C /* U03AddressManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654247F1B8B5A56001C607C /* U03AddressManagerVC.swift */; };
 		765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765424801B8B5A56001C607C /* U03AddressManagerVC.xib */; };
@@ -15,6 +14,8 @@
 		765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765424841B8B5A9E001C607C /* U03AddressCell.xib */; };
 		7661BD5F1BB983D700E01DBC /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661BD5E1BB983D700E01DBC /* libPushSDK-1.8.5.a */; };
 		7661BD611BB98F9000E01DBC /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7661BD601BB98F9000E01DBC /* PushConfig.plist */; };
+		76758B711BCB87730087BB58 /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 76758B701BCB87730087BB58 /* area.json */; settings = {ASSET_TAGS = (); }; };
+		76758B731BCB91F50087BB58 /* U03AddAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76758B721BCB91F50087BB58 /* U03AddAddressVC.swift */; settings = {ASSET_TAGS = (); }; };
 		7684F3BF1B8DFA4D00B7D7DC /* U02FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684F3B91B8DFA4D00B7D7DC /* U02FilterButton.swift */; };
 		7684F3C01B8DFA4D00B7D7DC /* U02ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684F3BA1B8DFA4D00B7D7DC /* U02ItemCell.swift */; };
 		7684F3C11B8DFA4D00B7D7DC /* U02ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7684F3BB1B8DFA4D00B7D7DC /* U02ItemCell.xib */; };
@@ -160,7 +161,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7654247B1B8B5861001C607C /* U03AddAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddAddressVC.swift; sourceTree = "<group>"; };
 		7654247C1B8B5861001C607C /* U03AddAddressVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddAddressVC.xib; sourceTree = "<group>"; };
 		7654247F1B8B5A56001C607C /* U03AddressManagerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddressManagerVC.swift; sourceTree = "<group>"; };
 		765424801B8B5A56001C607C /* U03AddressManagerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U03AddressManagerVC.xib; sourceTree = "<group>"; };
@@ -169,6 +169,8 @@
 		7661BD5D1BB983D700E01DBC /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		7661BD5E1BB983D700E01DBC /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
 		7661BD601BB98F9000E01DBC /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		76758B701BCB87730087BB58 /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
+		76758B721BCB91F50087BB58 /* U03AddAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U03AddAddressVC.swift; sourceTree = "<group>"; };
 		7684F3B91B8DFA4D00B7D7DC /* U02FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02FilterButton.swift; sourceTree = "<group>"; };
 		7684F3BA1B8DFA4D00B7D7DC /* U02ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02ItemCell.swift; sourceTree = "<group>"; };
 		7684F3BB1B8DFA4D00B7D7DC /* U02ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02ItemCell.xib; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 		A1043DF71B7F787A007A237C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				76758B701BCB87730087BB58 /* area.json */,
 				A1043DF81B7F787A007A237C /* Info.plist */,
 				7661BD601BB98F9000E01DBC /* PushConfig.plist */,
 			);
@@ -651,7 +654,7 @@
 			children = (
 				A132BB9C1B863342004EAB47 /* U03SettingVC.swift */,
 				A132BB9D1B863342004EAB47 /* U03SettingVC.xib */,
-				7654247B1B8B5861001C607C /* U03AddAddressVC.swift */,
+				76758B721BCB91F50087BB58 /* U03AddAddressVC.swift */,
 				7654247C1B8B5861001C607C /* U03AddAddressVC.xib */,
 				7654247F1B8B5A56001C607C /* U03AddressManagerVC.swift */,
 				765424801B8B5A56001C607C /* U03AddressManagerVC.xib */,
@@ -924,6 +927,7 @@
 				D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */,
 				A1C36CB21B87A50100EFCB57 /* SearchCollectionViewCell.xib in Resources */,
 				A132BBA71B863342004EAB47 /* U03SettingVC.xib in Resources */,
+				76758B711BCB87730087BB58 /* area.json in Resources */,
 				D25A35321B80821A000CCD7C /* T06TradeVC.xib in Resources */,
 				D20B90841B8C8D470017F89C /* T08ComplaintVC.xib in Resources */,
 				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
@@ -983,7 +987,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */,
-				7654247D1B8B5861001C607C /* U03AddAddressVC.swift in Sources */,
 				A1C36CA81B87A4E300EFCB57 /* T03SearchHelperVC.swift in Sources */,
 				A1C8EA671BCA05DA00ED9910 /* ServerTrustPolicy.swift in Sources */,
 				D276A98F1BA6E69D005CC047 /* T01HomePageVC.swift in Sources */,
@@ -1041,6 +1044,7 @@
 				A1FD283B1B878DF4006535E0 /* T03SearchVC.swift in Sources */,
 				A1C8EA681BCA05DA00ED9910 /* Stream.swift in Sources */,
 				7684F3BF1B8DFA4D00B7D7DC /* U02FilterButton.swift in Sources */,
+				76758B731BCB91F50087BB58 /* U03AddAddressVC.swift in Sources */,
 				A1C8EA621BCA05DA00ED9910 /* MultipartFormData.swift in Sources */,
 				765424811B8B5A56001C607C /* U03AddressManagerVC.swift in Sources */,
 				D24485C81B8DE88300CD97D5 /* T09ComplaintStatusVC.swift in Sources */,

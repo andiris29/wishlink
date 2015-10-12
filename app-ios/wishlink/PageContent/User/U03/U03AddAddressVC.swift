@@ -12,15 +12,17 @@ enum AddAddressVCOperationType {
     case Add, Edit
 }
 
-class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
+class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var phoneTextField: UITextField!
     
-    @IBOutlet weak var provinceTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
 
     @IBOutlet weak var addressTextField: UITextField!
+    
+    @IBOutlet weak var locationPickView: UIPickerView!
     
     var saveBtn: UIButton!
     
@@ -35,11 +37,19 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
     
     var callBackClosure: ((AddAddressVCOperationType, ReceiverModel) -> Void)?
     
+    var provinceDic: NSDictionary!
+    var cityDic: NSDictionary!
+    var districtDic: NSDictionary!
+    var provinceCodeArray: [String] = []
+    var cityArray: [[String]] = []
+    var districArray: [[String]] = []
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self
         self.prepareNav()
+        self.prepareData()
         // Do any additional setup after loading the view.
         
         
@@ -91,8 +101,10 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
             self.phoneTextField.becomeFirstResponder()
         }else if textField == self.phoneTextField {
 //            self.provinceTextField.becomeFirstResponder()
-
-        }else if textField == self.provinceTextField {
+            self.view.endEditing(true)
+            self.locationPickView.hidden = false
+            self.locationTextField.text = self.locationString()
+        }else if textField == self.locationTextField {
             self.addressTextField.becomeFirstResponder()
 
         }
@@ -100,6 +112,69 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
             self.saveBtnAction(self.saveBtn)
         }
         return true
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            let provinceCode = self.provinceCodeArray[row]
+            self.bindCity(provinceCode)
+            self.locationPickView.reloadComponent(1)
+            self.locationPickView.selectRow(0, inComponent: 1, animated: false)
+        }else if component == 1 {
+            self.bindDistrict(row)
+            self.locationPickView.reloadComponent(2)
+            self.locationPickView.selectRow(0, inComponent: 2, animated: false)
+        }else if component == 2 {
+            
+        }else {
+            
+        }
+        self.locationTextField.text = self.locationString()
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return self.provinceCodeArray.count
+        }else if component == 1 {
+            return self.cityArray.count
+        }else if component == 2 {
+            return self.districArray.count
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        var label: UILabel;
+        if let tempLabel = view as? UILabel {
+            label = tempLabel
+        }else {
+            
+            label = UILabel(frame: CGRectMake(0, 0, 0, 0))
+            label.textColor = UIColor.blackColor()
+            label.textAlignment = .Center
+            label.adjustsFontSizeToFitWidth = true
+        }
+        var string = ""
+        if component == 0 {
+            string = self.provinceDic[self.provinceCodeArray[row]] as! String
+        }else if component == 1 {
+            let tempCityArray = self.cityArray[row]
+            string = tempCityArray[0]
+        }else if component == 2 {
+            let tempDistrictArray = self.districArray[row]
+            string = tempDistrictArray[0]
+        }
+        else {
+            string = ""
+        }
+        label.text = string
+        return label
     }
     
     // MARK: - response event
@@ -110,8 +185,16 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
         self.saveAddress()
     }
     
+    @IBAction func locationBtnAction(sender: AnyObject) {
+        self.view.endEditing(true)
+        self.locationPickView.hidden = false
+        self.locationTextField.text = self.locationString()
+    }
+    
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
+        self.locationPickView.hidden = true
     }
     
     // MARK: - prive method
@@ -123,7 +206,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
             dic = [
                 "name": self.nameTextField.text!,
                 "phone": self.phoneTextField.text!,
-                "province": self.provinceTextField.text!,
+                "province": self.locationTextField.text!,
                 "address": self.addressTextField.text!]
         }
         else {
@@ -131,7 +214,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
                 "uuid": "",
                 "name": self.nameTextField.text!,
                 "phone": self.phoneTextField.text!,
-                "province": self.provinceTextField.text!,
+                "province": self.locationTextField.text!,
                 "address": self.addressTextField.text!,
                 "isDefault": NSNumber(bool: false)]
         }
@@ -145,13 +228,36 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
 //        self.receiver.address = self.addressTextField.text
     }
     
+    func bindCity(key: String) {
+        self.cityArray = self.cityDic[key] as! [[String]]
+    }
+    
+    func bindDistrict(row: Int) {
+        let tempCity = self.cityArray[row]
+        let key =  tempCity[1]
+        self.districArray = self.districtDic[key] as! [[String]]
+    }
+    
+    func locationString() -> String {
+        var string = ""
+        let provinceRow = self.locationPickView.selectedRowInComponent(0)
+        string += self.provinceDic[self.provinceCodeArray[provinceRow]] as! String + " "
+        
+        let cityRow = self.locationPickView.selectedRowInComponent(1)
+        string += self.cityArray[cityRow][0] + " "
+        
+        let districtRow = self.locationPickView.selectedRowInComponent(2)
+        string += self.districArray[districtRow][0]
+        return string
+    }
+    
     func validateContent() -> Bool {
         var msg = ""
         if self.nameTextField.text!.length == 0 {
             msg = "姓名不能为空"
         } else if self.phoneTextField.text!.length == 0 {
             msg = "电话不能为空"
-        } else if self.provinceTextField.text!.length == 0 {
+        } else if self.locationTextField.text!.length == 0 {
             msg = "地区不能为空"
         }else if self.addressTextField.text!.length == 0{
             msg = "地址不能为空"
@@ -170,14 +276,27 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate {
     func fillDataForUI() {
         self.nameTextField.text = self.receiver.name
         self.phoneTextField.text = self.receiver.phone
-        self.provinceTextField.text = self.receiver.province
+        self.locationTextField.text = self.receiver.province
         self.addressTextField.text = self.receiver.address
-        
-        // TODO test inputting
-        self.nameTextField.text = "黄悦"
-        self.provinceTextField.text = "上海"
-        self.phoneTextField.text = "18815287600"
-        self.addressTextField.text = "杨浦"
+    }
+    
+    func prepareData() {
+        let fileName = NSBundle.mainBundle().pathForResource("area.json", ofType: nil)
+        let data = NSData(contentsOfFile: fileName!)
+        do {
+            let dic = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
+            self.provinceDic = dic["area0"] as! NSDictionary
+            self.cityDic = dic["area1"] as! NSDictionary
+            self.districtDic = dic["area2"] as! NSDictionary
+            self.provinceCodeArray = (self.provinceDic.allKeys as! [String]).sort(<)
+            
+            let provinceCode = self.provinceCodeArray[0]
+            self.bindCity(provinceCode)
+            self.bindDistrict(0)
+            
+        }catch _ {
+            print("error")
+        }
     }
     
     func prepareNav() {

@@ -79,8 +79,6 @@ class U03AddressCell: UITableViewCell {
         self.selectBtn.selected = self.defaultReceiver
         self.editBtn.selected = self.selectBtn.selected
         self.deleteBtn.selected = self.selectBtn.selected
-        self.editBtn.userInteractionEnabled = self.selectBtn.selected
-        self.deleteBtn.userInteractionEnabled = self.selectBtn.selected
     }
     
     func fillDataForUI() {

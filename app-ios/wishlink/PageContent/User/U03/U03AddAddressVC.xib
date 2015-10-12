@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U03AddAddressVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="addressTextField" destination="L6W-Nb-Ke6" id="acO-Co-TmS"/>
+                <outlet property="locationPickView" destination="QDQ-09-IHS" id="3ff-Gj-AQt"/>
+                <outlet property="locationTextField" destination="VfS-EF-bXl" id="nf2-oj-C20"/>
                 <outlet property="nameTextField" destination="iAf-G1-c4B" id="8S0-B1-wrU"/>
                 <outlet property="phoneTextField" destination="nTD-T7-wCA" id="PIU-QE-uhQ"/>
-                <outlet property="provinceTextField" destination="VfS-EF-bXl" id="Eny-aF-ObJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -129,6 +130,9 @@
                             <state key="normal" image="u02-next">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="locationBtnAction:" destination="-1" eventType="touchUpInside" id="PSS-lR-yBV"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
@@ -198,6 +202,17 @@
                         </mask>
                     </variation>
                 </view>
+                <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDQ-09-IHS">
+                    <rect key="frame" x="0.0" y="384" width="600" height="216"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="216" id="2un-Jh-dx2"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="L2A-Sn-ZlD"/>
+                        <outlet property="delegate" destination="-1" id="3aN-xZ-SWE"/>
+                    </connections>
+                </pickerView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -207,12 +222,15 @@
                 <constraint firstItem="NCg-an-biP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="A0y-dx-qB6"/>
                 <constraint firstAttribute="trailing" secondItem="XEp-LF-gXb" secondAttribute="trailing" id="BcF-OL-pNL"/>
                 <constraint firstItem="NCg-an-biP" firstAttribute="top" secondItem="XEp-LF-gXb" secondAttribute="bottom" id="I9P-yT-gAH"/>
+                <constraint firstAttribute="bottom" secondItem="QDQ-09-IHS" secondAttribute="bottom" id="Xkn-vT-W0R"/>
                 <constraint firstItem="5py-VW-02v" firstAttribute="top" secondItem="NCg-an-biP" secondAttribute="bottom" id="bHk-mV-UFa"/>
                 <constraint firstAttribute="trailing" secondItem="ERF-E8-M53" secondAttribute="trailing" id="hO3-V0-Unw"/>
                 <constraint firstItem="ERF-E8-M53" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nJs-zu-Z0S"/>
                 <constraint firstAttribute="trailing" secondItem="5py-VW-02v" secondAttribute="trailing" id="qUH-mG-9wk"/>
                 <constraint firstItem="XEp-LF-gXb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="siB-lr-BSp"/>
+                <constraint firstAttribute="trailing" secondItem="QDQ-09-IHS" secondAttribute="trailing" id="wHz-cm-nJ0"/>
                 <constraint firstItem="ERF-E8-M53" firstAttribute="top" secondItem="5py-VW-02v" secondAttribute="bottom" id="yBM-nM-Ld2"/>
+                <constraint firstItem="QDQ-09-IHS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ykt-Hj-Y4Y"/>
                 <constraint firstItem="5py-VW-02v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zQy-MV-O0O"/>
             </constraints>
         </view>

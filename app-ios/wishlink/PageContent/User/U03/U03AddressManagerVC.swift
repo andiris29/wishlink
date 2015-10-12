@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 U03AddressCellDelegate, WebRequestDelegate{
 
@@ -89,6 +90,7 @@ U03AddressCellDelegate, WebRequestDelegate{
             let vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
             vc.operationType = .Edit
             vc.receiver = self.addressArray[indexPath.row]
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController!.pushViewController(vc, animated: true)
         }
         else if tag == 1{
@@ -118,18 +120,22 @@ U03AddressCellDelegate, WebRequestDelegate{
             SVProgressHUD.dismiss()
         })
         if tag == 10 {
+            // 删除收货地址
             if let userDic = response["user"] as? [String: AnyObject] {
                 UserModel.shared.userDic = userDic
                 self.addressArray = UserModel.shared.receiversArray
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    UIHelper().alertErrMsg("删除成功")
                     self.tableView.reloadData()
                 })
             }
         }else if tag == 20 {
+            // 设置默认地址
             if let userDic = response["user"] as? [String: AnyObject] {
                 UserModel.shared.userDic = userDic
                 self.addressArray = UserModel.shared.receiversArray
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    UIHelper().alertErrMsg("默认地址设置成功")
                     self.tableView.reloadData()
                 })
             }
@@ -151,6 +157,7 @@ U03AddressCellDelegate, WebRequestDelegate{
             self.addressArray.append(receiver)
             self.tableView.reloadData()
         }
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
@@ -170,7 +177,7 @@ U03AddressCellDelegate, WebRequestDelegate{
         let dic = [
             "uuid": uuid
         ]
-        SVProgressHUD.showInfoWithStatus("请稍等...")
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
         self.httpObj.httpPostApi("user/removeReceiver", parameters: dic, tag: 10)
     }
     
