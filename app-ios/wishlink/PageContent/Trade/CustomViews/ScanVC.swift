@@ -20,7 +20,7 @@ protocol scanDelegate
 class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     
     @IBOutlet weak var scan_input: UIImageView!
-    @IBOutlet weak var imageVIew_Mask: UIImageView!
+//    @IBOutlet weak var imageVIew_Mask: UIImageView!
     var device:AVCaptureDevice!;
     var input:AVCaptureDeviceInput!;
     var session:AVCaptureSession!;
@@ -31,12 +31,11 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     var notiKey = "kScanPhoto";
     
     var myDelegate:scanDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.hidden = true;
-        self.setupCamera();
         
-        // Do any additional setup after loading the view.
+        self.setupCamera();
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,32 +44,39 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     }
     
     @IBAction func btnActionTapped(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
     @IBAction func btnBackAction(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
-        self.navigationController?.navigationBar.hidden = true;
         
+        self.navigationController?.navigationBar.hidden = true
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
     }
     
-    func clearScanArea()
-    {
-        UIGraphicsBeginImageContext(self.view.frame.size);
-        self.imageVIew_Mask.image?.drawInRect(self.view.bounds)
+    override func viewWillDisappear(animated: Bool) {
         
-        CGContextClearRect (UIGraphicsGetCurrentContext(), CGRectMake(self.scan_input.frame.origin.x, self.scan_input.frame.origin.y, self.scan_input.frame.width, self.scan_input.frame.height));
-        self.imageVIew_Mask.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        self.navigationController?.navigationBar.hidden = true
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
     }
+    
+//    func clearScanArea()
+//    {
+//        UIGraphicsBeginImageContext(self.view.frame.size);
+//        self.imageVIew_Mask.image?.drawInRect(self.view.bounds)
+//        
+//        CGContextClearRect (UIGraphicsGetCurrentContext(), CGRectMake(self.scan_input.frame.origin.x, self.scan_input.frame.origin.y, self.scan_input.frame.width, self.scan_input.frame.height));
+//        self.imageVIew_Mask.image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//    }
     override func  viewDidAppear(animated: Bool) {
         
-        self.clearScanArea();
+//        self.clearScanArea();
     }
     
     
