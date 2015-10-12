@@ -70,7 +70,7 @@ geo.trace = {
                         });
                     });
                 } else {
-                    GeoService.differentCountries(traces[0].location, traces[0].countryRef, req.body.location2, function(error, country) {
+                    GeoService.differentCountries(traces[0].location, traces[0].countryRef, req.body.location, function(error, country) {
                         if (error) {
                             callback(error);
                         } else if (country) {
