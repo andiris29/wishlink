@@ -421,6 +421,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
             vc.item = self.item;
             vc.trade = tradeItem;
+            vc.isNewOrder = true;
             self.navigationController?.pushViewController(vc, animated: true);
             
         }

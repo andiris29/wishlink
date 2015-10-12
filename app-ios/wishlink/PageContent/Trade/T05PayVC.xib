@@ -38,7 +38,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T05PayVC" customModule="wishlink" customModuleProvider="target">
             <connections>
+                <outlet property="decreaseButton" destination="T6U-Vr-LEO" id="mdx-Q6-wEu"/>
                 <outlet property="imageRollView" destination="6gO-Lg-bZN" id="rqB-d4-U39"/>
+                <outlet property="increaseButton" destination="7Bo-Rw-ptW" id="hqS-ph-6Cy"/>
                 <outlet property="lbCountry" destination="nf9-03-aS6" id="cUg-Tj-ilP"/>
                 <outlet property="lbName" destination="YKd-MU-6ew" id="BPg-FD-0Eh"/>
                 <outlet property="lbPrice" destination="0Ud-cr-IPg" id="bFn-2F-2aX"/>
@@ -723,7 +725,7 @@
         <image name="T05hhh" width="27" height="25"/>
         <image name="T05iii" width="54" height="37"/>
         <image name="T05jjj" width="113" height="35"/>
-        <image name="T05kkk" width="10" height="15"/>
+        <image name="T05kkk" width="10" height="9"/>
         <image name="c1_0011" width="1" height="1"/>
     </resources>
 </document>

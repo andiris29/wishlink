@@ -17,11 +17,14 @@ class T05PayVC: RootVC,WebRequestDelegate {
     let declineButtonTag: Int = 2000
     
     var goodsNumbers: Int = 0
+    var isNewOrder: Bool = true
 
     var item:ItemModel!
     var trade:TradeModel!
 //    var defaultAddress:ReceiverModel!
     
+    @IBOutlet weak var increaseButton: UIButton!
+    @IBOutlet weak var decreaseButton: UIButton!
     
     @IBOutlet weak var lbReceverName: UILabel!
     @IBOutlet weak var lbReceverMobile: UILabel!
@@ -78,9 +81,14 @@ class T05PayVC: RootVC,WebRequestDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        
         self.navigationController?.navigationBarHidden = false;
+        
+        self.increaseButton.enabled = !self.isNewOrder
+        self.decreaseButton.enabled = !self.isNewOrder
+        
         self.loadComNaviLeftBtn()
-        self.loadComNavTitle("发布新订单")
+        self.loadComNavTitle(self.isNewOrder ? "发布" : "我要跟单")
     }
     
     @IBAction func selectedButtonPay(sender: UIButton) {
@@ -126,8 +134,10 @@ class T05PayVC: RootVC,WebRequestDelegate {
             goodsNumbers++
             
         } else if sender.tag == declineButtonTag {
-            goodsNumbers > 0 ? goodsNumbers-- : goodsNumbers
+            goodsNumbers > 1 ? goodsNumbers-- : goodsNumbers
         }
+        self.decreaseButton.enabled = goodsNumbers > 1
+        
         numbersTextField.text = "\(goodsNumbers)"
         let totalfree = (self.item.price * Float(goodsNumbers)).format(".2")
         self.lbTotalFree.text =  "¥\(totalfree)";

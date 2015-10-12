@@ -90,6 +90,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func btnFollowAction(sernder:UIButton) {
         
         let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+        vc.isNewOrder = false
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
