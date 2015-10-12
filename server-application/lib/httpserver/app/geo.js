@@ -44,11 +44,16 @@ geo.trace = {
                     '$exists': true
                 }
             }).sort({
+                create: -1
             }).limit(1).exec(function(error, countries) {
                 if (error) {
                     callback(error);
                 } else if (countries.length === 0) {
-                    GeoTraces.reverseGeocoding(req.body.location, function(error, country) {
+                    GeoService.reverseGeocoding(req.body.location, function(error, country) {
+                        if (error) {
+                            callback(error);
+                            return;
+                        }
                         var trace = new GeoTraces({
                             device: req.body.device,
                             location: req.body.location,
@@ -90,7 +95,7 @@ geo.trace = {
                 }
             });
         }, function(trace, callback) {
-            User.findOne({
+            Users.findOne({
                 _id: req.currentUserId
             }, function(error, user) {
                 if (error) {
@@ -119,7 +124,7 @@ geo.trace = {
                 } else if (!country) {
                     callback(null, trace);
                 } else {
-                    if (country.iso3166 === 'CHN') {
+                    if (country.iso3166 !== 'CHN') {
                         RecommendationService.recommendItemsInForeignCountry(req.currentUserId, function(error) {
                             var notifyType = NotificationService.notifyGotoForeignCountry;
                             NotificationService.notify([req.currentUserId], notifyType.command, notifyType.message, {}, null);
