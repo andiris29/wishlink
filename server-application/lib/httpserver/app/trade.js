@@ -1,20 +1,21 @@
-// third party library
+// Third party library
 var async = require('async');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 
-// model
+// Model
 var Trades = require('../../model/trades');
 var Items = require('../../model/items');
 var Users = require('../../model/users');
 
-// helper
+// Helper
 var ServerError = require('../server-error');
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var RelationshipHelper = require('../helper/RelationshipHelper');
 
 // Service
+var NotificationService = require('../service/NotificationService');
 var TradeService = require('../service/TradeService');
 
 var trade = module.exports;
@@ -253,6 +254,21 @@ trade.payCallback = {
                     callback(ServerError.ERR_UNKOWN);
                 } else {
                     callback(null, trade);
+                    if (newStatus === TradeService.Status.PAID.code) {
+                        return;
+                    }
+
+                    var command, message;
+                    if (newStatus === TradeService.Status.UN_ORDER_RECEIVE.code) {
+                        command = NotificationService.notifyItemApproved.command;
+                        message = NotificationService.notifyItemApproved.message;
+                    } else {
+                        command = NotificationService.notifyItemDisapproved.command;
+                        message = NotificationService.notifyItemDisapproved.message;
+                    }
+                    NotificationService.notify([trade.onwerRef], command, message, {
+                        _id: trade._id
+                    }, null);
                 }
             });
         }, function(trade, callback) {
@@ -343,13 +359,27 @@ trade.cancel = {
                 }
             });
         }, function(trade, callback) {
+            var command, message;
             var newStatus = TradeService.Status.CANCELED.code;
+            var command = NotificationService.notifyUnassigned.command;
+            var message = NotificationService.notifyUnassigned.message;
             if (trade.assigneeRef !== null) {
                 newStatus = TradeService.Status.REQUEST_CANCEL.code;
+                command = NotificationService.notifyUnassigned2.command;
+                message = NotificationService.notifyUnassigned2.message;
             }
 
             TradeService.statusTo(req.currentUserId, trade, newStatus, 'trade/cancel', function(error, trade) {
                 callback(error, trade);
+                NotificationService.notify([trade.onwerRef], command, message, {
+                    _id: trade._id
+                }, null);
+
+                if (trade.assigneeRef !== null) {
+                    NotificationService.notify([trade.assigneeRef], NotificationService.notifyRequestCancel2.commnad, NotificationService.notifyRequestCancel2.message, {
+                        _id: trade._id
+                    }, null);
+                }
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
@@ -384,6 +414,11 @@ trade.assignToMe = {
             TradeService.statusTo(req.currentUserId, trade, TradeService.Status.ORDER_RECEIVED.code, 'trade/assignToMe', function(error, trade) {
                 callback(error, trade);
             });
+        }, function(trade, callback) {
+            callback(null, trade);
+            NotificationService.notify([trade.ownerRef], NotificationService.notifyAssigned.command, NotificationService.notifyAssigned.message, {
+                _id: trade._id
+            }, null);
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
                 trade: trade
@@ -403,7 +438,8 @@ trade.unassign = {
         async.waterfall([function(callback) {
             // find trade
             Trades.findOne({
-                _id: RequestHelper.parseId(req.body._id)
+                _id: RequestHelper.parseId(req.body._id),
+                assigneeRef: req.currentUserId
             }, function(error, trade) {
                 if (error) {
                     callback(error);
@@ -425,6 +461,9 @@ trade.unassign = {
             trade.assigneeRef = null;
             TradeService.statusTo(req.currentUserId, trade, newStatus, 'trade/unassign', function(error, trade) {
                 callback(error, trade);
+                NotificationService.notify([req.currentUserId], NotificationService.notifyRequestCancel.command, NotificationService.notifyRequestCancel.message, {
+                    _id: trade._id
+                }, null);
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
@@ -466,6 +505,9 @@ trade.deliver = {
 
             TradeService.statusTo(req.currentUserId, trade, TradeService.Status.DELIVERED.code, 'trade/deliver', function(error, trade) {
                 callback(error, trade);
+                NotificationService.notify([trade.ownerRef], NotificationService.notifyDelivered.command, NotificationService.notifyDelivered.message, {
+                    _id: trade._id
+                }, null);
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
@@ -552,6 +594,9 @@ trade.complaint = {
                 });
                 TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINING.code, 'trade/complaint', function(error, trade) {
                     callback(error, trade);
+                    NotificationService.notify([trade.ownerRef], NotificationService.notifyComplaint.command, NotificationService.notifyComplaint.message, {
+                        _id: trade._id
+                    }, null);
                 });
             });
         }], function(error, trade) {
@@ -594,6 +639,9 @@ trade.resolveComplaint = {
 
             TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINED.code, 'trade/resolveComplaint', function(error, trade) {
                 callback(error, trade);
+                NotificationService.notify([trade.ownerRef], NotificationService.notifyComplaintResolved.command, NotificationService.notifyComplaintResolved.message, {
+                    _id: trade._id
+                }, null);
             });
         }], function(error, trade) {
             ResponseHelper.response(res, error, {
