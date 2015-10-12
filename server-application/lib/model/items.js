@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var textSearch = require('mongoose-text-search');
+
 var Schema = mongoose.Schema;
 
 require('./countries');
@@ -51,14 +53,25 @@ var entitySchema = Schema({
     }
 });
 
+entitySchema.plugin(textSearch);
+
 entitySchema.index(
     {
         nameWords: "text",
         countryWords: "text",
         brandWords: "text",
         categoryWords : "text"
+    } , {
+        name : 'text_search_index',
+        weights: {
+            nameWords : 1,
+            countryWords : 1,
+            brandWords: 1,
+            categoryWords: 1
+        }
     }
 );
+
 /*
 db.getCollection('items').createIndex(
     {
