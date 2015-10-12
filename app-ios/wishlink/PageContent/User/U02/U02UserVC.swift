@@ -57,7 +57,8 @@ class U02UserVC: RootVC, WebRequestDelegate {
                 static var predicate:dispatch_once_t = 0
             }
             dispatch_once(&once.predicate, { () -> Void in
-                let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+                let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
+//                vc.hideSkipBtn = true
                 self.presentViewController(vc, animated: true, completion: nil)
             })
         }

@@ -13,9 +13,13 @@ let WXLoginSuccessNotification: String = "WXLoginSuccess"
 
 class U01LoginVC: RootVC,WebRequestDelegate {
     
+    
+    @IBOutlet weak var skipBtn: UIButton!
+    
     var wxCode: String!
     var wbToekn: String!
     var wbUserID: String!
+    var hideSkipBtn: Bool = false
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,10 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.skipBtn.hidden = self.hideSkipBtn
+    }
 
     
     override func didReceiveMemoryWarning() {
@@ -47,7 +55,11 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     // MARK: - response event
     
     @IBAction func weiXinLoginAction(sender: AnyObject) {
-
+        
+        if WXApi.isWXAppInstalled() == false {
+            UIHEPLER.alertErrMsg("未安装微信")
+            return
+        }
         let req = SendAuthReq()
         req.scope = "snsapi_userinfo,snsapi_base"
         req.state = "wishlink"
@@ -86,7 +98,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             "access_token" : self.wbToekn,
             "uid" : self.wbUserID,
             "registrationId" : registrationId]
-        self.httpObj.httpPostApi("", parameters: parametersDic, tag: 10)
+        self.httpObj.httpPostApi("user/loginViaWeibo", parameters: parametersDic, tag: 10)
     }
     
     func wxLogin() {

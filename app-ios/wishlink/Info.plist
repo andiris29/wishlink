@@ -49,7 +49,66 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <!-- 集成新浪微博对应的HTTP白名单-->
+            <key>sina.cn</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <key>sina.com.cn</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <key>weibo.cn</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <key>weibo.com</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <!-- 新浪微博-->
+            <!-- 集成微信、QQ、Qzone、腾讯微博授权对应的HTTP白名单-->
+            <key>qq.com</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <!-- 腾讯授权-->
+        </dict>
 	</dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <!-- 微信 URL Scheme 白名单-->
+        <string>wechat</string>
+        <string>weixin</string>
+        
+        <!-- 新浪微博 URL Scheme 白名单-->
+        <string>sinaweibohd</string>
+        <string>sinaweibo</string>
+        <string>sinaweibosso</string>
+        <string>weibosdk</string>
+        <string>weibosdk2.5</string>
+    </array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FZLanTingHeiS-EL-GB.ttf</string>

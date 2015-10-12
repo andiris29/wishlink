@@ -220,7 +220,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPicker
         }
         
         
-        SVProgressHUD.showSuccessWithStatusWithBlack("请稍等...")
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
         self.httpObj.httpPostApi("user/saveReceiver", parameters: dic, tag: 10)
 //        self.receiver.name = self.nameTextField.text
 //        self.receiver.phone = self.phoneTextField.text
