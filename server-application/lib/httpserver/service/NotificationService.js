@@ -179,8 +179,8 @@ NotificationService.notify = function(_ids, command, message, extras, callback) 
                 });
         }
     }], function(error) {
-        if (callbck) {
-            callbck(error);
+        if (callback) {
+            callback(error);
         }
     });
 };
