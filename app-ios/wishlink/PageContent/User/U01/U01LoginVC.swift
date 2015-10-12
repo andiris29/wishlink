@@ -86,7 +86,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             "access_token" : self.wbToekn,
             "uid" : self.wbUserID,
             "registrationId" : registrationId]
-        self.httpObj.httpPostApi("", parameters: nil, tag: 10)
+        self.httpObj.httpPostApi("", parameters: parametersDic, tag: 10)
     }
     
     func wxLogin() {
@@ -107,7 +107,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         UserModel.shared.userDic = data["user"] as! [String: AnyObject]
         
         //存储用户ID
-        APPCONFIG.Uid = UserModel.shared.userId;
+        APPCONFIG.Uid = UserModel.shared._id;
         print(data)
     }
     
