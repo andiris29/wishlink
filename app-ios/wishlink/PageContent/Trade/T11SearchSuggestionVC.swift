@@ -72,7 +72,6 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         return itemContents.count
     }
 
-
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T11SearchSuggestionCell
@@ -89,6 +88,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 //        // Return NO if you do not want the item to be re-orderable.
 //        return true
 //    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        self.searchTexfield.text = itemContents[indexPath.row] as? String
         
@@ -110,6 +110,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         self.navigationController?.popViewControllerAnimated(true);
         self.dismissViewControllerAnimated(true, completion: nil);
     }
+    
     var lastKeyWord = "";
     @IBAction func searchTexfieldValueChange(sender: UITextField) {
         
@@ -131,8 +132,6 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             apiName = "suggestion/name"
         }
         self.httpObj.httpGetApi(apiName, parameters: para, tag: 10);
-        
-      
     }
     
     //MARK: UITextFiledDelegate
@@ -147,6 +146,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         
         return false;
     }
+    
     //MAEK: webrequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         SVProgressHUD.dismiss();
@@ -157,8 +157,10 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
             {
                 let dataArray: NSMutableArray = NSMutableArray()
-                for item in UserModel.shared.searchHistory
-                {
+                dataArray.addObject("历史搜索")
+                
+                for item in UserModel.shared.searchHistory {
+                    
                     dataArray.addObject(item.keyword);
                 }
                 
@@ -176,8 +178,10 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
                 {
                     
                     let dataArray: NSMutableArray = NSMutableArray()
-                    for item in resultArr
-                    {
+                    dataArray.addObject("历史搜索")
+                    
+                    for item in resultArr {
+                        
                         dataArray.addObject(item as! String)
                     }
                     
