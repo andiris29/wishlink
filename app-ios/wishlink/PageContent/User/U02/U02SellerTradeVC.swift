@@ -129,27 +129,29 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             vc.hidesBottomBarWhenPushed = true
             self.userVC.navigationController!.pushViewController(vc, animated: true)
+            
         case .Revoke:
             self.currentTradeIndex = cell.indexPath.row
             self.cancelTrade()
+            
         case .CheckComplain:
-            print("查看投诉")
             let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
-        case .SendOut:
-            print("发货")
-            let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             
+        case .SendOut:
+            let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             vc.hidesBottomBarWhenPushed = true
             self.userVC.navigationController!.pushViewController(vc, animated: true)
-        case .Chat:
             
+        case .Chat:
             self.userVC.navigationController?.navigationBarHidden = false;
             let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true)
+            
         case .Complain:
             let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
             self.userVC.navigationController!.pushViewController(vc, animated: true);
+            
         default:
             print("error")
         }
@@ -158,6 +160,9 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     
     func requestDataComplete(response: AnyObject, tag: Int) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.view.userInteractionEnabled = true
+        })
         if tag == 10 {
             let tradeArray = response["trades"] as! NSArray
             if tradeArray.count == 0 {
@@ -184,6 +189,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func requestDataFailed(error: String) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.view.userInteractionEnabled = true
             self.collectionView.reloadData()
         })
     }
@@ -203,7 +209,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             self.seletedConditionBtn = btn
             self.seletedConditionBtn.selected = true
         }
-        self.filterSellerTradeWithStatus(SellerTradeFilterStatus(rawValue: btn.tag - 100)!)
+        self.currentStatus = SellerTradeFilterStatus(rawValue: btn.tag - 100)!
+        self.filterSellerTrade()
         self.filterBtnAction(self.finishedBtn)
 
     }
@@ -211,15 +218,14 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     // MARK: - private method
 
     func getSellerTrade() {
-        self.tradeArray.removeAll()
-        self.httpObj.httpGetApi("tradeFeeding/asSeller", parameters: nil, tag: 10)
+        self.filterSellerTrade()
     }
     
     // 根据状态筛选卖家订单
-    func filterSellerTradeWithStatus(status: SellerTradeFilterStatus) {
+    func filterSellerTrade() {
         self.tradeArray.removeAll()
         var dic: [String: AnyObject]
-        switch status {
+        switch self.currentStatus {
         case .All:
             dic = [
                 "statuses": []
@@ -255,6 +261,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func cancelTrade() {
+        self.view.userInteractionEnabled = false
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
         let trade = self.tradeArray[self.currentTradeIndex]
         let dic = [
             "_id": trade._id
