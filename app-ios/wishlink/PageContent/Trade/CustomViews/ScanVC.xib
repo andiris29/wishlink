@@ -80,7 +80,7 @@
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将条码/二维码放入框内，即可自动扫描" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UO-6a-WvF">
-                    <rect key="frame" x="8" y="407" width="304" height="17.5"/>
+                    <rect key="frame" x="8" y="407" width="304" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17.5" id="VmY-LB-TSb"/>
                     </constraints>
