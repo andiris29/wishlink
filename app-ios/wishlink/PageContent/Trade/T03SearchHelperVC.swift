@@ -172,10 +172,18 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     }
     
     //MARK: - SearchCollectionViewCellDelegate 
-    
+    var selectCell:SearchCollectionViewCell!
     func searchCollectionViewCell(cell: SearchCollectionViewCell, title: NSString, buttonIndex: Int) {
         
+        if(self.selectCell != nil)
+        {
+            self.selectCell.setCellSelectStatus(false);
+        }
+        
+        self.selectCell = cell
+        self.selectCell.setCellSelectStatus(true);
         self.searchTextField.text = title as String
+        
     }
     
     // MARK: - Navigation
