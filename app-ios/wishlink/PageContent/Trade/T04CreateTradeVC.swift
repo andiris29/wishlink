@@ -97,6 +97,125 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         actionSheet.bindWithData(titles, delegate: self)
     }
     
+    func submit()
+    {
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        self.view.userInteractionEnabled = false;
+        let apiurl = SERVICE_ROOT_PATH + "item/create"
+        upload(
+            .POST,
+            apiurl,
+            multipartFormData: {
+                multipartFormData in
+                
+                multipartFormData.appendBodyPart(data: self.txtName.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "name")
+                multipartFormData.appendBodyPart(data: self.txtCategory.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "brand")
+                multipartFormData.appendBodyPart(data: self.txtBuyArea.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
+                multipartFormData.appendBodyPart(data: self.txtPrice.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
+                multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
+                multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
+                if(self.imagrArr.count>0)
+                {
+                    let imgName = "item_a.jpg"
+                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[0]);
+                    
+                    let imgStream  = NSInputStream(data: imageData);
+                    let len =   UInt64(imageData.length)
+                    
+                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                }
+                if(self.imagrArr.count>1)
+                {
+                    
+                    let imgName = "item_b.jpg"
+                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[1]);
+                    
+                    let imgStream  = NSInputStream(data: imageData);
+                    let len =   UInt64(imageData.length)
+                    
+                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                }
+                if(self.imagrArr.count>2)
+                {
+                    let imgName = "item_c.jpg"
+                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[2]);
+                    
+                    let imgStream  = NSInputStream(data: imageData);
+                    let len =   UInt64(imageData.length)
+                    
+                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                }
+                if(self.imagrArr.count>3)
+                {
+                    let imgName = "item_d.jpg"
+                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[3]);
+                    
+                    let imgStream  = NSInputStream(data: imageData);
+                    let len =   UInt64(imageData.length)
+                    
+                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                }
+                
+            },
+            encodingCompletion: {
+                encodingResult in
+                switch encodingResult {
+                    
+                case .Success(let _upload, _, _ ):
+                    
+                    _upload.responseJSON { _response in
+                        
+                        let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
+                        
+                        
+                        switch resultObj.result {
+                        case .Success(let json):
+                            
+                            print("Validation Successful")
+                            print(json);
+                            let itemData =  json.objectForKey("data") as! NSDictionary
+                            if(itemData.objectForKey("item") != nil)
+                            {
+                                let itemObj =  itemData.objectForKey("item") as! NSDictionary
+                                let item = ItemModel(dict: itemObj);
+                                self.item = item;
+                                print(item, terminator: "");
+                                if(item._id.length>0)
+                                {
+                                    
+                                    let para  = ["itemRef":item._id,
+                                        "quantity":self.txtCount.text!.trim()];
+                                    self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
+                                }
+                            }
+                            else
+                            {
+                                
+                                SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                self.view.userInteractionEnabled = true;
+                                NSLog("Fail:")
+                                
+                            }
+                        case .Failure(let error):
+                            
+                            SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                            self.view.userInteractionEnabled = true;
+                            NSLog("Fail:")
+                            print(error)
+                        }
+                    }
+                case .Failure(let encodingError):
+                    
+                    SVProgressHUD.showErrorWithStatusWithBlack("编码数据失败！");
+                    self.view.userInteractionEnabled = true;
+                    print("Failure")
+                    print(encodingError)
+                }
+            }
+        )
+
+    }
+    
     @IBAction func btnAction(sender: UIButton) {
     
         let tag = sender.tag;
@@ -109,121 +228,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
             else
             {
-                SVProgressHUD.showWithStatusWithBlack("请稍后...")
-                self.view.userInteractionEnabled = false;
-                let apiurl = SERVICE_ROOT_PATH + "item/create"
-                   upload(
-                        .POST,
-                        apiurl,
-                        multipartFormData: {
-                            multipartFormData in
-                            
-                            multipartFormData.appendBodyPart(data: self.txtName.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "name")
-                            multipartFormData.appendBodyPart(data: self.txtCategory.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "brand")
-                            multipartFormData.appendBodyPart(data: self.txtBuyArea.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
-                            multipartFormData.appendBodyPart(data: self.txtPrice.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
-                            multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
-                            multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
-                            if(self.imagrArr.count>0)
-                            {
-                                let imgName = "item_a.jpg"
-                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[0]);
-                                
-                                let imgStream  = NSInputStream(data: imageData);
-                                let len =   UInt64(imageData.length)
-                                
-                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                            }
-                            if(self.imagrArr.count>1)
-                            {
-                                
-                                let imgName = "item_b.jpg"
-                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[1]);
-                                
-                                let imgStream  = NSInputStream(data: imageData);
-                                let len =   UInt64(imageData.length)
-                                
-                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                            }
-                            if(self.imagrArr.count>2)
-                            {
-                                let imgName = "item_c.jpg"
-                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[2]);
-                                
-                                let imgStream  = NSInputStream(data: imageData);
-                                let len =   UInt64(imageData.length)
-                                
-                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                            }
-                            if(self.imagrArr.count>3)
-                            {
-                                let imgName = "item_d.jpg"
-                                let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[3]);
-                                
-                                let imgStream  = NSInputStream(data: imageData);
-                                let len =   UInt64(imageData.length)
-                                
-                                multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                            }
-                            
-                        },
-                        encodingCompletion: {
-                            encodingResult in
-                            switch encodingResult {
-                                
-                            case .Success(let _upload, _, _ ):
-                                
-                                 _upload.responseJSON { _response in
-                                    
-                                    let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
-                                    
-                                    
-                                    switch resultObj.result {
-                                    case .Success(let json):
-                                        
-                                        print("Validation Successful")
-                                        print(json);
-                                        let itemData =  json.objectForKey("data") as! NSDictionary
-                                        if(itemData.objectForKey("item") != nil)
-                                        {
-                                            let itemObj =  itemData.objectForKey("item") as! NSDictionary
-                                            let item = ItemModel(dict: itemObj);
-                                            self.item = item;
-                                            print(item, terminator: "");
-                                            if(item._id.length>0)
-                                            {
-                                                
-                                                let para  = ["itemRef":item._id,
-                                                    "quantity":self.txtCount.text!.trim()];
-                                                self.httpObj.httpPostApi("trade/create", parameters: para, tag: 12);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            
-                                            SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
-                                            self.view.userInteractionEnabled = true;
-                                            NSLog("Fail:")
-                                            
-                                        }
-                                    case .Failure(let error):
-                                        
-                                        SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
-                                        self.view.userInteractionEnabled = true;
-                                        NSLog("Fail:")
-                                        print(error)
-                                    }
-                                }
-                            case .Failure(let encodingError):
-                                
-                                SVProgressHUD.showErrorWithStatusWithBlack("编码数据失败！");
-                                 self.view.userInteractionEnabled = true;
-                                print("Failure")
-                                print(encodingError)
-                            }
-                        }
-                )
-                
+                if(UserModel.shared.isLogin)
+                {
+                    self.submit()
+                }
+                else
+                {
+                    UIHEPLER.showLoginPage(self);
+                }
             }
         }
         else

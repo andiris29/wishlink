@@ -78,6 +78,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
         let vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
         vc.product = self.dataArr[indexPath.row] as! ItemModel
         self.navigationController?.pushViewController(vc, animated: true);

@@ -29,8 +29,9 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         super.viewDidLoad()
         if(isNeedShowLoin)
         {
-            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-            self.presentViewController(vc, animated: true, completion: nil)
+            UIHEPLER.showLoginPage(self);
+//            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+//            self.presentViewController(vc, animated: true, completion: nil)
         }
         
         self.searchTextField.delegate = self;

@@ -68,14 +68,14 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         case 0:
            let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
    
-           tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
+//           tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
            tCell.delegate = self
            tCell.initData(product)
            
            cell = tCell;
         case last:
            let  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
-           fcell.btnGrabOrder.addTarget(self, action: "btnGrabOrderAction:", forControlEvents: UIControlEvents.TouchUpInside)
+//           fcell.btnGrabOrder.addTarget(self, action: "btnGrabOrderAction:", forControlEvents: UIControlEvents.TouchUpInside)
            fcell.delegate = self
            cell = fcell;
         default:
@@ -89,15 +89,29 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func btnFollowAction(sernder:UIButton) {
         
-        let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
-        vc.isNewOrder = false
-        self.navigationController?.pushViewController(vc, animated: true);
+        if(UserModel.shared.isLogin)
+        {
+            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
+            vc.isNewOrder = false
+            self.navigationController?.pushViewController(vc, animated: true);
+        }
+        else
+        {
+            UIHEPLER.showLoginPage(self);
+        }
     }
     
     func btnGrabOrderAction(sernder:UIButton) {
         
-        let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
-        self.navigationController?.pushViewController(vc, animated: true);
+        if(UserModel.shared.isLogin)
+        {
+            SVProgressHUD.showWithStatusWithBlack("请稍后...")
+            self.httpObj.httpPostApi("trade/assignToMe", tag: 61)
+        }
+        else
+        {
+            UIHEPLER.showLoginPage(self);
+        }
     }
     
     //MARK: - T06CellHeaderDelegate
@@ -106,9 +120,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     }
     
-    func orderButtonAction(sender: UIButton) {
-
-    }
+   
 
     //MARK: - T06CellFooterDelegate
     
@@ -117,11 +129,13 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpPostApi("trade/assignToMe", tag: 61)
         
-        self.navigationController?.popToRootViewControllerAnimated(true);
-        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-            tababarController.selectedIndex = 3;
-        }
+        
+        
+//        self.navigationController?.popToRootViewControllerAnimated(true);
+//        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+//            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+//            tababarController.selectedIndex = 3;
+//        }
     }
     
     //MARK: - Request delegate
@@ -134,6 +148,13 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         } else if(tag == 61) {
             
             SVProgressHUD.dismiss();
+            
+            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            vc.item = self.product;
+            vc.isNewOrder = false;
+            self.navigationController?.pushViewController(vc, animated: true);
+
+            
             //todo:
         }
     }

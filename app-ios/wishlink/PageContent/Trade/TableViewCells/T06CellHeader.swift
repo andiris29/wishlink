@@ -11,7 +11,7 @@ import UIKit
 protocol T06CellHeaderDelegate: NSObjectProtocol {
 
     func dorpListButtonAction(sender: UIButton)
-    func orderButtonAction(sender: UIButton)
+    func btnFollowAction(sender: UIButton)
 }
 
 class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
@@ -83,8 +83,8 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
     
     //MARK: - Action
     
-    @IBAction func orderButtonAction(sender: UIButton) {
-        delegate?.orderButtonAction(sender)
+    @IBAction func btnFollowAction(sender: UIButton) {
+        delegate?.btnFollowAction(sender)
     }
     
     @IBAction func dorpListButtonAction(sender: UIButton) {

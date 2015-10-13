@@ -10,7 +10,7 @@ import UIKit
 
 protocol T06CellFooterDelegate: NSObjectProtocol {
 
-  func grabOrderButtonAction(sender: UIButton)
+  func btnGrabOrderAction(sender: UIButton)
 }
 
 class T06CellFooter: UITableViewCell {
@@ -31,7 +31,7 @@ class T06CellFooter: UITableViewCell {
     }
     
     @IBAction func grabOrderButtonAction(sender: UIButton) {
-        delegate!.grabOrderButtonAction(sender)
+        delegate!.btnGrabOrderAction(sender)
     }
     
 }

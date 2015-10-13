@@ -147,41 +147,54 @@ class T05PayVC: RootVC,WebRequestDelegate {
     
     //WebRequesrDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        SVProgressHUD.dismiss();
-        print(response, terminator: "");
-        UserModel.shared.userDic = response["user"] as! [String: AnyObject]
         
-        
-        let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
-            return (itemObj as ReceiverModel).isDefault == true;
-        }
-        self.lbReceverName.text = "";
-        self.lbReceverMobile.text = "";
-        self.lbRecevierAddress.text = "";
-        if(result.count>0)
+        if(tag == 10)
         {
-            let defaultAddress = result[0] as ReceiverModel
+            SVProgressHUD.dismiss();
+            print(response, terminator: "");
+            if(response["user"] != nil)
+            {
+                UserModel.shared.userDic = response["user"] as! [String: AnyObject]
             
-            self.lbReceverName.text = defaultAddress.name
-            self.lbReceverMobile.text = defaultAddress.phone;
-            self.lbRecevierAddress.text = defaultAddress.address;
+            }
             
-            if (item == nil ||  item.images == nil) {return}
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                
-                var images: [UIImage] = [UIImage]()
-                for imageUrl in self.item.images {
-                    let url: NSURL = NSURL(string: imageUrl)!
-                    let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
-                    images.append(image)
+            if( UserModel.shared.isLogin)
+            {
+                let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+                    return (itemObj as ReceiverModel).isDefault == true;
                 }
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.initImageRollView(images)
-                })
-            })
+                self.lbReceverName.text = "";
+                self.lbReceverMobile.text = "";
+                self.lbRecevierAddress.text = "";
+                if(result.count>0)
+                {
+                    let defaultAddress = result[0] as ReceiverModel
+                    
+                    self.lbReceverName.text = defaultAddress.name
+                    self.lbReceverMobile.text = defaultAddress.phone;
+                    self.lbRecevierAddress.text = defaultAddress.address;
+                    
+                    if (item == nil ||  item.images == nil) {return}
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                        
+                        var images: [UIImage] = [UIImage]()
+                        for imageUrl in self.item.images {
+                            let url: NSURL = NSURL(string: imageUrl)!
+                            let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                            images.append(image)
+                        }
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.initImageRollView(images)
+                        })
+                    })
 
-        }
+                }
+            }
+            else
+            {
+            }
         
+        }
     }
     
     func requestDataFailed(error: String) {

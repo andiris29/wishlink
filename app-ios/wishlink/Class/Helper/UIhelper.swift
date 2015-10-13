@@ -187,4 +187,10 @@ class UIHelper {
    
         return imageData;
     }
+    func showLoginPage(target:UIViewController)
+    {
+        let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+        target.presentViewController(vc, animated: true, completion: nil)
+        
+    }
 }

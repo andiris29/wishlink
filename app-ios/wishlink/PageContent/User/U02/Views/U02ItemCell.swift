@@ -34,7 +34,7 @@ class U02ItemCell: UICollectionViewCell {
     
     @IBOutlet weak var btnDelete: UIButton!
     var indexPath: NSIndexPath!
-    
+ 
     var closure: ((ItemCellButtonClickType, NSIndexPath) -> ())?
     
     var cellType: ItemCellType = .Recommand {
@@ -84,12 +84,9 @@ class U02ItemCell: UICollectionViewCell {
     }
     
     //从热门列表中加载的时候调用此方法
-    func loadFromhotVC(item:ItemModel)
+    func loadFromhotVC(_item:ItemModel)
     {
-        self.lbCountry.text = item.country;
-        self.lbPrice.text = "￥" + item.price.format(".2");
-//        self.lbCount = 
-        self.lbIntro.text = item.name + " " + item.spec;
+        self.item = _item
         self.btnDelete.hidden = true;
         
     }
