@@ -70,9 +70,9 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     
     @IBAction func weiBoLoginAction(sender: AnyObject) {
-        self.httpObj.httpPostApi("user/login", parameters: ["nickname": "testtest", "password": "testtest"], tag: 10)
-        
-        return
+//        self.httpObj.httpPostApi("user/login", parameters: ["nickname": "testtest", "password": "testtest"], tag: 10)
+//        
+//        return
         let request = WBAuthorizeRequest()
         request.scope = "all"
         request.redirectURI = AppConfig.wbRedirectURI
@@ -98,6 +98,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             "access_token" : self.wbToekn,
             "uid" : self.wbUserID,
             "registrationId" : registrationId]
+        print(parametersDic)
         self.httpObj.httpPostApi("user/loginViaWeibo", parameters: parametersDic, tag: 10)
     }
     
@@ -127,11 +128,17 @@ class U01LoginVC: RootVC,WebRequestDelegate {
 
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        if tag == 10 {
-            self.parseUserData(response)
-        }else if tag == 20 {
-            self.parseUserData(response)
+
+        let cookieJar = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in cookieJar.cookies! {
+            if cookie.value.length != 0 {
+                APPCONFIG.cookieStr = cookie.value
+            }
         }
+        print(APPCONFIG.cookieStr)
+        self.parseUserData(response)
+
+        
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss();
             self.dismissViewControllerAnimated(true, completion: nil);
