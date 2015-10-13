@@ -166,7 +166,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
             self.lbReceverMobile.text = defaultAddress.phone;
             self.lbRecevierAddress.text = defaultAddress.address;
             
-            if (item.images == nil) {return}
+            if (item == nil ||  item.images == nil) {return}
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
                 var images: [UIImage] = [UIImage]()
