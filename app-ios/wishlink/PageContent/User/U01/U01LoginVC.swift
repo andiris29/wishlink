@@ -90,7 +90,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     func wbLogin() {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        var registrationId = "1234"
+        var registrationId = ""
         if APService.registrationID() != nil {
             registrationId = APService.registrationID()
         }
@@ -104,7 +104,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     func wxLogin() {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        var registrationId = "1234"
+        var registrationId = ""
         if APService.registrationID().length != 0 {
             registrationId = APService.registrationID()
         }

@@ -40,20 +40,6 @@ class WebRequestHelper:NSObject {
                 
                 switch result {
                 case .Success:
-                    
-                    if(apiName == "user/login")
-                    {
-                        var cookieString = Response?.allHeaderFields["Set-Cookie"]
-                        if(cookieString != nil)
-                        {
-                            var tempArr = (cookieString as! NSString).componentsSeparatedByString(";")
-                            cookieString =  tempArr[0];
-
-                            APPCONFIG.cookieStr = cookieString as! String
-                            print(cookieString);
-                        }
-                    }
-                    
                     self.handleHttpResponse(result.value!, tag: tag)
                 case .Failure(_, let error):
                     self.mydelegate?.requestDataFailed("网络不给力哦");
@@ -106,12 +92,12 @@ class WebRequestHelper:NSObject {
                     let errCode =  errDic.objectForKey("errorCode") as! Int;
                     let errDesc =  errDic.objectForKey("description") as! String;
                     errorMsg = "ErrorCode:\(errCode) \(errDesc)";
-                    
-                    
                 }
+                self.mydelegate?.requestDataFailed(errorMsg)
+            }else {
+                self.mydelegate?.requestDataComplete(dataDir, tag: tag)
             }
             
-            self.mydelegate?.requestDataFailed(errorMsg)
         }
     }
     

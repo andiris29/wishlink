@@ -82,6 +82,9 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             // 注销
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.navigationController!.popViewControllerAnimated(true)
+            })
         }else if tag == 20 {
             // update user
             if let userDic = response["user"] as? NSDictionary {
