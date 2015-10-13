@@ -69,7 +69,6 @@
 		A140B0101B94B45500531546 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140B00E1B94B45500531546 /* DefaultCell.swift */; };
 		A140B0111B94B45500531546 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A140B00F1B94B45500531546 /* DefaultCell.xib */; };
 		A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89281B806DC400BC66DE /* SwiftyJSON.swift */; };
-		A16C61B31BCD7085002DAA24 /* AlipayOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C61B21BCD7085002DAA24 /* AlipayOrder.swift */; settings = {ASSET_TAGS = (); }; };
 		A16C61C61BCD7114002DAA24 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C61B61BCD7114002DAA24 /* base64.m */; settings = {ASSET_TAGS = (); }; };
 		A16C61C71BCD7114002DAA24 /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C61B91BCD7114002DAA24 /* DataSigner.m */; settings = {ASSET_TAGS = (); }; };
 		A16C61C81BCD7114002DAA24 /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C61BB1BCD7114002DAA24 /* DataVerifier.m */; settings = {ASSET_TAGS = (); }; };
@@ -80,6 +79,7 @@
 		A16C61CD1BCD7114002DAA24 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C61C51BCD7114002DAA24 /* RSADataVerifier.m */; settings = {ASSET_TAGS = (); }; };
 		A16C62201BCD73A2002DAA24 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C621E1BCD73A2002DAA24 /* libcrypto.a */; settings = {ASSET_TAGS = (); }; };
 		A16C62211BCD73A2002DAA24 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C621F1BCD73A2002DAA24 /* libssl.a */; settings = {ASSET_TAGS = (); }; };
+		A16C62241BCD8268002DAA24 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C62231BCD8268002DAA24 /* Order.m */; settings = {ASSET_TAGS = (); }; };
 		A18A06741BAF1504005ADFFA /* ScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A06721BAF1504005ADFFA /* ScanVC.swift */; };
 		A18A06751BAF1504005ADFFA /* ScanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A18A06731BAF1504005ADFFA /* ScanVC.xib */; };
 		A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD11BB0637200A09A0D /* SVIndefiniteAnimatedView.m */; };
@@ -257,7 +257,6 @@
 		A140B00E1B94B45500531546 /* DefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultCell.swift; path = cell/DefaultCell.swift; sourceTree = "<group>"; };
 		A140B00F1B94B45500531546 /* DefaultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultCell.xib; path = cell/DefaultCell.xib; sourceTree = "<group>"; };
 		A15D89281B806DC400BC66DE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		A16C61B21BCD7085002DAA24 /* AlipayOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlipayOrder.swift; sourceTree = "<group>"; };
 		A16C61B51BCD7114002DAA24 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		A16C61B61BCD7114002DAA24 /* base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = base64.m; sourceTree = "<group>"; };
 		A16C61B71BCD7114002DAA24 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -352,6 +351,8 @@
 		A16C62191BCD7158002DAA24 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		A16C621E1BCD73A2002DAA24 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		A16C621F1BCD73A2002DAA24 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		A16C62221BCD8268002DAA24 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		A16C62231BCD8268002DAA24 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		A18A06721BAF1504005ADFFA /* ScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanVC.swift; sourceTree = "<group>"; };
 		A18A06731BAF1504005ADFFA /* ScanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanVC.xib; sourceTree = "<group>"; };
 		A18A0DD01BB0637200A09A0D /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
@@ -942,7 +943,6 @@
 				A1F0E2851BA31E83005379CD /* TrendModel.swift */,
 				A1F7C1411BB1A6090045C125 /* ItemModel.swift */,
 				A13474FA1BC55DF0002CD7CB /* TradeModel.swift */,
-				A16C61B21BCD7085002DAA24 /* AlipayOrder.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -1048,6 +1048,8 @@
 		D2EFB15A1BCCE9C400C50315 /* AliSDK */ = {
 			isa = PBXGroup;
 			children = (
+				A16C62221BCD8268002DAA24 /* Order.h */,
+				A16C62231BCD8268002DAA24 /* Order.m */,
 				A16C621E1BCD73A2002DAA24 /* libcrypto.a */,
 				A16C621F1BCD73A2002DAA24 /* libssl.a */,
 				A16C61CE1BCD7158002DAA24 /* openssl */,
@@ -1282,7 +1284,7 @@
 				A16C61C61BCD7114002DAA24 /* base64.m in Sources */,
 				76CD0E851B89649000B04453 /* U02BuyerTradeVC.swift in Sources */,
 				7684F3C31B8DFA4D00B7D7DC /* U02TradeCell.swift in Sources */,
-				A16C61B31BCD7085002DAA24 /* AlipayOrder.swift in Sources */,
+				A16C62241BCD8268002DAA24 /* Order.m in Sources */,
 				A140B0101B94B45500531546 /* DefaultCell.swift in Sources */,
 				76CD0E8D1B89655B00B04453 /* U02RecommendVC.swift in Sources */,
 				D24604C81BAAE22B00D7CE44 /* CSDorpListView.swift in Sources */,
@@ -1438,7 +1440,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c337a98a-0787-4473-9ffe-3628da0f1f45";
+				PROVISIONING_PROFILE = "79ffc1c3-5ca4-4d44-90e8-cecf4ac23d0f";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
@@ -1473,7 +1475,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c337a98a-0787-4473-9ffe-3628da0f1f45";
+				PROVISIONING_PROFILE = "79ffc1c3-5ca4-4d44-90e8-cecf4ac23d0f";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};

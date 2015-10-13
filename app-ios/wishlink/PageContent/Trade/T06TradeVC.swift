@@ -89,16 +89,16 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func btnFollowAction(sernder:UIButton) {
         
-        if(UserModel.shared.isLogin)
-        {
+//        if(UserModel.shared.isLogin)
+//        {
             let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
             vc.isNewOrder = false
             self.navigationController?.pushViewController(vc, animated: true);
-        }
-        else
-        {
-            UIHEPLER.showLoginPage(self);
-        }
+//        }
+//        else
+//        {
+//            UIHEPLER.showLoginPage(self);
+//        }
     }
     
     func btnGrabOrderAction(sernder:UIButton) {

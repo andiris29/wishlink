@@ -55,6 +55,9 @@ class AppConfig: NSObject
     static var  wbAppSecret:String = "36bdb49defb6765bce3b831c7e18fa86"
     static var  wbRedirectURI:String = "https://api.weibo.com/oauth2/default.html"
     
+    var alipay_partner = "2088021598577909"
+    var alipay_seller = "ledsed@qq.com"
+    var alipay_privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMwf59KHQGYH9aL1ViXhc28IfJ4ddbMiRwmcYnu3ZW6Vyu75EuJ66k+LCpjmVogQRGso5VdYV9HCvXIWmDXvMrvvaKmRSdm5jxkGiY9Y8RBYJYTpalti4beKmf2swcngxYqimxMdDaJ43IU4Vm4KwG7uIAOiP1W6PvWK994J85ULAgMBAAECgYBa1E+phHmJbT1GN/kPfhSJcbNSADXhcf0+L5I7Ds5ZuNnGIJrgoGUm4+3hP419mg93x4jVpv/c3NTDsX4lcbyWzF9hc0R7B9K5pdDJdS9quTwB9fuCnvh+AC5BWp0RAnrS4z74Va/qX61ZR8HljNLw4NsiFOdn6wEBo7qMMN9iwQJBAOo3gfwgDytkps+jSA+FH3+jJZAb6/IOhARl03/4LW8GWaSFReqJAzBk1fBLncgQxSyELR0PMQKua/NzuHP+prECQQDfG+39XX6Hy3MI7mVuvYeIVk+rouEwXPaYX4RtqEYDxUoLvu7HPfRQz0BGl5wlC6W4Tapho7JvL6baY7g1zN57AkB5z0yG95VsF/i5XE4J5E4xb4QFor/fL7VxJBQPJd9bMo5EhhuKkp9Z99dcFbeFaVNih4t+5XuzzUrPXou7p+DBAkAfo8hWXAHrpBCGPbiowbwMu6DEyG6C+0wFQ9Z17p0vP7VGgSc/niudoiaNXEbKgiJYRrtY6WwOlIVnBylCh/EtAkEApvb2fEks0lxOEbX9ZPPjM0sZtRrt+vyD/EqMvWOUCOjNyTG3RuSPJEOElspIhAeB2tgpKIN73z9aW9bmHJDCjQ=="    
     
     var AccessToken:String!;
     var Uid = "";
