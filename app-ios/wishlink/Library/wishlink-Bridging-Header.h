@@ -15,3 +15,4 @@
 #import "ZYQSphereView.h"
 #include "SVProgressHUD.h"
 #import "APService.h"
+#import <AlipaySDK/AlipaySDK.h>

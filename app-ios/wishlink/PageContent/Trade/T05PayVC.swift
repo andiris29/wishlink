@@ -187,4 +187,12 @@ class T05PayVC: RootVC,WebRequestDelegate {
         SVProgressHUD.showErrorWithStatusWithBlack("获取用户地址失败！");
     }
 
+    //MARK: - Unit
+    
+    func alipaySetting() {
+        
+        AlipaySDK.defaultService().payOrder("", fromScheme: "") { (_: [NSObject : AnyObject]!) -> Void in
+            
+        }
+    }
 }

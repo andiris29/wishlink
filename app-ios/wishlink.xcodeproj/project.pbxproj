@@ -148,6 +148,8 @@
 		D2E6BE931B96D62F0050C177 /* T11SearchSuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6BE911B96D62F0050C177 /* T11SearchSuggestionCell.swift */; };
 		D2E6BE941B96D62F0050C177 /* T11SearchSuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */; };
 		D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6BE961B96E70A0050C177 /* CSImageRollView.swift */; };
+		D2EFB15D1BCCE9C400C50315 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2EFB15B1BCCE9C400C50315 /* AlipaySDK.bundle */; settings = {ASSET_TAGS = (); }; };
+		D2EFB15E1BCCE9C400C50315 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFB15C1BCCE9C400C50315 /* AlipaySDK.framework */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +339,8 @@
 		D2E6BE911B96D62F0050C177 /* T11SearchSuggestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T11SearchSuggestionCell.swift; sourceTree = "<group>"; };
 		D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T11SearchSuggestionCell.xib; sourceTree = "<group>"; };
 		D2E6BE961B96E70A0050C177 /* CSImageRollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSImageRollView.swift; sourceTree = "<group>"; };
+		D2EFB15B1BCCE9C400C50315 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		D2EFB15C1BCCE9C400C50315 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +365,7 @@
 				7695653F1BA08A4900A6AD10 /* libWeChatSDK.a in Frameworks */,
 				7661BD5F1BB983D700E01DBC /* libPushSDK-1.8.5.a in Frameworks */,
 				769565391BA0891E00A6AD10 /* libWeiboSDK.a in Frameworks */,
+				D2EFB15E1BCCE9C400C50315 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +513,7 @@
 		A1043E1A1B7F7902007A237C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D2EFB15A1BCCE9C400C50315 /* AliSDK */,
 				7661BD5C1BB983D700E01DBC /* JPush-1.8-3.5 */,
 				A18A0DCF1BB0637200A09A0D /* SVProgressHUD */,
 				D276A99D1BA6F795005CC047 /* SphereView */,
@@ -836,6 +842,15 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		D2EFB15A1BCCE9C400C50315 /* AliSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D2EFB15B1BCCE9C400C50315 /* AlipaySDK.bundle */,
+				D2EFB15C1BCCE9C400C50315 /* AlipaySDK.framework */,
+			);
+			path = AliSDK;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -953,6 +968,7 @@
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
+				D2EFB15D1BCCE9C400C50315 /* AlipaySDK.bundle in Resources */,
 				D2E6BE881B96D36D0050C177 /* T11SearchSuggestionVC.xib in Resources */,
 				D24485D11B8E028B00CD97D5 /* T09CellTextLeft.xib in Resources */,
 				D2E327A71B8399E80063CC95 /* T04CreateTradeVC.xib in Resources */,
@@ -1186,7 +1202,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/AliSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1218,7 +1234,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/AliSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
