@@ -58,7 +58,14 @@ class AppConfig: NSObject
     
     var AccessToken:String!;
     var Uid = "";
-    var cookieStr:String = "";
+    var cookieStr:String = "" {
+        didSet {
+            if cookieStr.length != 0 {
+                AccessToken = cookieStr
+                save()
+            }
+        }
+    }
     var CurrentLoginName:String = ""
     
     var profileDetailDictionary:NSDictionary!;
@@ -102,6 +109,14 @@ class AppConfig: NSObject
         {
             self.Uid = "";
         }
+        
+        // add by yeo 2015.10.13 23:22
+        if ud.objectForKey("Configuration_Cookie") != nil {
+            self.cookieStr = ud.objectForKey("Configuration_Cookie") as! String
+        }else {
+            self.cookieStr = ""
+        }
+        
         if(ud.objectForKey("Configuration_CurrentLoginName") != nil)
         {
             self.CurrentLoginName = ud.objectForKey("Configuration_CurrentLoginName") as! String;
@@ -130,6 +145,13 @@ class AppConfig: NSObject
             ud.removeObjectForKey("Configuration_CurrentUID")
         }
         
+        // add by yeo 2015.10.13 23:19
+        if self.cookieStr != "" {
+            ud.setObject(self.cookieStr, forKey: "Configuration_Cookie")
+        }else {
+            ud.removeObjectForKey("Configuration_Cookie")
+        }
+        
         if(!self.CurrentLoginName.isNullOrEmpty())
         {
             ud.setObject(self.CurrentLoginName, forKey: "Configuration_CurrentLoginName")
@@ -150,6 +172,7 @@ class AppConfig: NSObject
     {
         self.AccessToken = "";
         self.Uid  = "";
+        self.cookieStr = ""
         self.save();
         
         NSNotificationCenter.defaultCenter().postNotificationName("user-login-logout", object: nil, userInfo: nil)
