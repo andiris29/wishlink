@@ -86,9 +86,7 @@ tradeFeeding.byItem = {
             var criteria = {
                 itemRef : RequestHelper.parseId(param._id),
             };
-            MongoHelper.queryPaging(Trades.find(criteria), param.pageNo, param.pageSize, function(error, trade) {
-                callback(error, trade);
-            });
+            MongoHelper.queryPaging(Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 

@@ -12,21 +12,33 @@ var MongoHelper = module.exports;
  * @param {Object} callback function(err, models)
  */
 MongoHelper.queryPaging = function(query, pageNo, pageSize, callback) {
-    async.waterfall([
-        function(cb) {
-            // Query
-            query.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
-                if (err) {
-                    cb(ServerError.fromDescription(err));
-                } else if (!models || !models.length) {
+    async.waterfall([function(cb) {
+        // Query
+        query.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
+            if (err) {
+                cb(ServerError.fromDescription(err));
+            } else if (!models || !models.length) {
+                cb(ServerError.PAGING_NOT_EXIST);
+            } else {
+                cb(err, models);
+            }
+        });
+    }, function(models, cb) {
+        // Count
+        query.count(function(err, count) {
+            if (err) {
+                cb(errors.genUnkownError(err));
+            } else {
+                if ((pageNo - 1) * pageSize >= count) {
                     cb(ServerError.PAGING_NOT_EXIST);
                 } else {
-                    cb(err, models);
+                    cb(null, models, count);
                 }
-            });
-        }], function(error, models) {
-            callback(error, models);
+            }
         });
+    }], function(error, models, numTotals) {
+        callback(error, models, numTotals);
+    });
 };
 
 MongoHelper.aggregatePaging =  function(aggregate, pageNo, pageSize, callback) {

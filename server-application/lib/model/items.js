@@ -8,6 +8,7 @@ require('./brands');
 require('./categories');
 
 var entitySchema = Schema({
+    __context: Object,
     status: Number,
     images: [String],
     name: String,
