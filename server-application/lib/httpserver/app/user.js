@@ -275,7 +275,8 @@ user.loginViaWeibo = {
         var param = req.body;
         var token = param.access_token;
         var uid = param.uid;
-        if (!toke || !uid || !registrationId) {
+        var registrationId = param.registrationId;
+        if (!token || !uid || !registrationId) {
             ResponseHelper.response(res, ServerError.ERR_UNKOWN);
             return;
         }
@@ -320,7 +321,7 @@ user.loginViaWeibo = {
                         return;
                     }
 
-                    var newPath = path.jon(portraitUploadInfo.ftpPath, baseName);
+                    var newPath = path.join(portraitUploadInfo.ftpPath, baseName);
                     user.avatar_large = portraitUploadInfo.exposeToUrl + '/' +
                         path.relative(portraitUploadInfo.ftpPath, newPath);
 
