@@ -72,8 +72,10 @@ class T05PayVC: RootVC,WebRequestDelegate {
             self.numbersTextField.text = String(self.trade.quantity)
             goodsNumbers = self.trade.quantity
         }
-        
-        self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
+        if(self.item != nil)
+        {
+            self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
+        }
         
         self.httpObj.mydelegate = self;
         SVProgressHUD.showWithStatusWithBlack("请稍后...")

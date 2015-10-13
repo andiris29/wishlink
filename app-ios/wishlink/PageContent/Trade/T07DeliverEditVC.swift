@@ -31,7 +31,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         
         self.httpObj.mydelegate = self;
         
-        let titles: NSArray = ["韵达快递","顺风快递","天天快递"]
+        let titles: NSArray = ["韵达快递","顺风快递","天天快递","圆通快递","中通快递","百世汇通","全峰快递","德邦物流","宅急送","速尔","EMS"]
         dorpListView = CSDorpListView.sharedInstance
         dorpListView.bindWithList(titles, delegate: self)
     }
