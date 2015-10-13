@@ -9,10 +9,12 @@
 
 //#include "JSONKit.h"
 //#include "AFNetworking.h"
-#include "GTMBase64.h"
+
+//#include "GTMBase64.h"
 #import "WeiboSDK.h"
 #import "WXApi.h"
 #import "ZYQSphereView.h"
 #include "SVProgressHUD.h"
 #import "APService.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "RSADataSigner.h"
