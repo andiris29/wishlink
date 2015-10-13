@@ -82,6 +82,9 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             // 注销
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.navigationController!.popViewControllerAnimated(true)
+            })
         }else if tag == 20 {
             // update user
             if let userDic = response["user"] as? NSDictionary {
@@ -264,13 +267,14 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     }
     
     func logout() {
-        SVProgressHUD.showInfoWithStatus("请稍等...")
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
         if let registrationId = APService.registrationID() {
             self.httpObj.httpPostApi("user/logout", parameters: ["registrationId": registrationId], tag: 10)
         }else {
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
+            self.navigationController!.popViewControllerAnimated(true)
         }
     }
     

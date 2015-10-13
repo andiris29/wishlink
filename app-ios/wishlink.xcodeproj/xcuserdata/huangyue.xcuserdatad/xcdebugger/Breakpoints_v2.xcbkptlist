@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wishlink/PageContent/User/U03/U03SettingVC.swift"
-            timestampString = "466357215.377672"
+            timestampString = "466443035.528036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "updatePortrait()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,61 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wishlink/PageContent/User/U03/U03SettingVC.swift"
-            timestampString = "466441412.0147"
+            timestampString = "466442927.057098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "requestDataComplete(_:tag:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wishlink/PageContent/User/U03/U03SettingVC.swift"
-            timestampString = "466441421.934829"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "requestDataFailed(_:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "wishlink.U03SettingVC.requestDataFailed (wishlink.U03SettingVC)(Swift.String) -&gt; ()"
-                  moduleName = "wishlink"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/huangyue/Desktop/Joke/%E7%A7%81%E6%B4%BB/wishlink/wishlink-iOS/app-ios/wishlink/PageContent/User/U03/U03SettingVC.swift"
-                  timestampString = "466441421.944971"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "wishlink.U03SettingVC.(requestDataFailed (wishlink.U03SettingVC) -&gt; (Swift.String) -&gt; ()).(closure #1)"
-                  moduleName = "wishlink"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/huangyue/Desktop/Joke/%E7%A7%81%E6%B4%BB/wishlink/wishlink-iOS/app-ios/wishlink/PageContent/User/U03/U03SettingVC.swift"
-                  timestampString = "466441421.945174"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

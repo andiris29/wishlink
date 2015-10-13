@@ -37,7 +37,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.prepareSubVC()
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
-        
+        self.httpObj.mydelegate = self
         self.getUser()
         self.navigationController!.navigationBar.hidden = false
     }
@@ -52,7 +52,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if userModel.isLogin == false {
+        if APPCONFIG.isUserLogin() == false {
             struct once {
                 static var predicate:dispatch_once_t = 0
             }
@@ -82,7 +82,14 @@ class U02UserVC: RootVC, WebRequestDelegate {
     
     // MARK: - delegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        
+        if tag == 10 {
+            if let userDic = response["user"] as? [String: AnyObject] {
+                self.userModel.userDic = userDic
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.fillDataForUI()
+                })
+            }
+        }
     }
     
     func requestDataFailed(error: String) {
@@ -137,8 +144,16 @@ class U02UserVC: RootVC, WebRequestDelegate {
     // MARK: - prive method
     
     func getUser() {
-//        var parameters = ["nickname": "Yeo", ""]
-//        self.httpObj.httpGetApi("user/update", parameters: <#[String : AnyObject]?#>, tag: <#Int#>)
+        if self.userModel._id.length != 0 {
+            return
+        }
+        var registrationId = ""
+        if APService.registrationID().length != 0 {
+            registrationId = APService.registrationID()
+        }
+        let parametersDic = [
+            "registrationId" : registrationId]
+        self.httpObj.httpGetApi("user/get", parameters: parametersDic, tag: 10)
     }
     
     func prepareData() {

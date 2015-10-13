@@ -27,7 +27,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     var isNeedShowLoin = true;
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(isNeedShowLoin)
+        if APPCONFIG.isUserLogin() == false
         {
             UIHEPLER.showLoginPage(self);
 //            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);

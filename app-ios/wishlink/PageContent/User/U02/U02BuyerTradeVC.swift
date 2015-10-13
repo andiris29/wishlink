@@ -201,22 +201,22 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             self.seletedConditionBtn = btn
             self.seletedConditionBtn.selected = true
         }
-        self.filterBuyerTradeWithStatus(BuyerTradeFilterStatus(rawValue: btn.tag - 100)!)
+        self.currentStatus = BuyerTradeFilterStatus(rawValue: btn.tag - 100)!
+        self.filterBuyerTrade()
         self.filterBtnAction(self.finishedBtn)
     }
 
     // MARK: - private method
     
     func getBuyerTrade() {
-        self.tradeArray.removeAll()
-        self.httpObj.httpGetApi("tradeFeeding/asBuyer", parameters: nil, tag: 10)
+        self.filterBuyerTrade()
     }
     
     // 根据状态筛选卖家订单
-    func filterBuyerTradeWithStatus(status: BuyerTradeFilterStatus) {
+    func filterBuyerTrade() {
         self.tradeArray.removeAll()
         var dic: [String: AnyObject]
-        switch status {
+        switch self.currentStatus {
         case .All:
             dic = [
                 "statuses": []
