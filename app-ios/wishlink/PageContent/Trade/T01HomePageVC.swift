@@ -175,6 +175,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 if(self.dataArr.count>0)
                 {
                     self.dataArr.removeAll(keepCapacity: false);
+                    
                 }
                 self.dataArr = [];
                 for itemObj in trendsArr

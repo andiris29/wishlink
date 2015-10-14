@@ -101,6 +101,10 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         print(parametersDic)
         self.httpObj.httpPostApi("user/loginViaWeibo", parameters: parametersDic, tag: 10)
     }
+    @IBAction func testLoginAction(sender: AnyObject) {
+        
+        self.httpObj.httpPostApi("user/login", parameters: ["nickname": "testtest", "password": "testtest"], tag: 10)
+    }
     
     func wxLogin() {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")

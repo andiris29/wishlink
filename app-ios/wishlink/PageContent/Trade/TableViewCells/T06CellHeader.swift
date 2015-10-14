@@ -63,8 +63,8 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
         self.productPriceLabel.text  = "\(item.price)"
 //        self.productTotalLabel.text  = item.countryRef
 //        self.productNumberLabel.text  = item.country
-//        self.productFormatLabel.text  = item.create
-        self.productMessageLabel.text  = item.spec
+        self.productFormatLabel.text  = item.spec
+        self.productMessageLabel.text  = item.notes
         
         if (item.images == nil) {return}
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {

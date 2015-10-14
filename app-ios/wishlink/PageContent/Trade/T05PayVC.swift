@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum PayModel{
+    case Weixin
+    case Alipay
+}
+
+
 class T05PayVC: RootVC,WebRequestDelegate {
     
     let selectedButtonWXTag: Int = 1000
@@ -18,7 +24,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
     
     var goodsNumbers: Int = 0
     var isNewOrder: Bool = true
-
+    var currPayModel:PayModel = .Alipay
     var item:ItemModel!
     var trade:TradeModel!
 //    var defaultAddress:ReceiverModel!
@@ -65,21 +71,53 @@ class T05PayVC: RootVC,WebRequestDelegate {
             self.lbCountry.text = self.item.country;
             self.lbSpec.text = self.item.spec;
             self.lbPrice.text = self.item.price.format(".2");
-            
+            if(goodsNumbers>0)
+            {
+                self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
+            }
+            else
+            {
+                 self.lbTotalFree.text = "¥" + self.item.price.format(".2");
+            }
         }
         if(self.trade != nil && self.trade._id != "")
         {
             self.numbersTextField.text = String(self.trade.quantity)
             goodsNumbers = self.trade.quantity
         }
-        if(self.item != nil)
-        {
-            self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
-        }
         
-        self.httpObj.mydelegate = self;
-        SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 10)
+         self.decreaseButton.enabled = goodsNumbers > 1
+        self.lbReceverName.text = "";
+        self.lbReceverMobile.text = "";
+        self.lbRecevierAddress.text = "";
+        if( UserModel.shared.isLogin && UserModel.shared.receiversArray != nil && UserModel.shared.receiversArray.count>0)
+        {
+            let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+                return (itemObj as ReceiverModel).isDefault == true;
+            }
+            if(result.count>0)
+            {
+                let defaultAddress = result[0] as ReceiverModel
+                
+                self.lbReceverName.text = defaultAddress.name
+                self.lbReceverMobile.text = defaultAddress.phone;
+                self.lbRecevierAddress.text = defaultAddress.address;
+                
+                if (item == nil ||  item.images == nil) {return}
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    
+                    var images: [UIImage] = [UIImage]()
+                    for imageUrl in self.item.images {
+                        let url: NSURL = NSURL(string: imageUrl)!
+                        let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                        images.append(image)
+                    }
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.initImageRollView(images)
+                    })
+                })
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -96,11 +134,12 @@ class T05PayVC: RootVC,WebRequestDelegate {
     @IBAction func selectedButtonPay(sender: UIButton) {
         
         sender.selected = !sender.selected
-        
         if sender.tag == selectedButtonWXTag {
             
+            self.currPayModel = .Weixin
         } else if sender.tag == selectedButtonZFBTag {
             
+            self.currPayModel = .Alipay
         }
     }
     @IBAction func btnPayTapped(sender: UIButton) {
@@ -110,76 +149,17 @@ class T05PayVC: RootVC,WebRequestDelegate {
         if(tag == 11)//跳转到个人中心
         {
             
-            let order = Order()
-            order.partner = APPCONFIG.alipay_partner;
-            order.seller = APPCONFIG.alipay_seller;
-            order.tradeNO = "CSDFKHYMRG0MKFMSF"; //订单ID（由商家自行制定）
-            order.productName = "奶粉"; //商品标题
-            order.productDescription = "我是测试数据"; //商品描述
-            order.amount = "0.2" //商品价格
-            order.notifyURL =  "http://www.xxx.com"; //回调URL
-            
-            order.service = "mobile.securitypay.pay";
-            order.paymentType = "1";
-            order.inputCharset = "utf-8";
-            order.itBPay = "30m";
-            order.showUrl = "m.alipay.com";
-            
-            //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-            let appScheme = "alisdkdemo";
-            let orderSpec = order.description
-            //将商品信息拼接成字符串
-            NSLog("orderSpec = %@",orderSpec);
-            
-            
-            
-            let signer = CreateRSADataSigner(APPCONFIG.alipay_privateKey)
-            
-            let signedString = signer.signString(orderSpec)
-            
-            let orderString = "\(order.description)&sign=\"\(signedString)\"&sign_type=\"RSA\""
-            
-         
-            
-            NSLog("orderString = %@",orderString);
-            AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
-                
-                NSLog(" alipay reslut = \(resultDic)")
-          
-            })
-            
-        
-            
-//            //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-//            id<DataSigner> signer = CreateRSADataSigner(privateKey);
-//            NSString *signedString = [signer signString:orderSpec];
-//            
-//            //将签名成功字符串格式化为订单字符串,请严格按照该格式
-//            NSString *orderString = nil;
-//            if (signedString != nil) {
-//                orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
-//                orderSpec, signedString, @"RSA"];
-//                
-//                [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-//                NSLog(@"reslut = %@",resultDic);
-//                }];
-//                
-//                [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//            }
-
-            
-            self.navigationController?.popToRootViewControllerAnimated(true);
-           
-            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
-                if(vc != nil)
-                {
-                    vc.sellerBtnAction(vc.sellerBtn);
-                }
-                
-                tababarController.selectedIndex = 3;
+            var para = ["_id":self.trade._id,
+                "pay.alipay":"{ pay : {alipay :{}}"];
+            if(self.currPayModel == .Weixin)
+            {
+                para = ["_id":self.trade._id,
+                    "pay.weixin":"{ pay : {weixin :{}}"]
             }
+           SVProgressHUD.showWithStatusWithBlack("请稍等...")
+            self.httpObj.httpPostApi("trade/prepay", parameters: para, tag: 88)
+       
+            
 
         }
         else
@@ -210,64 +190,54 @@ class T05PayVC: RootVC,WebRequestDelegate {
         if(tag == 10)
         {
             SVProgressHUD.dismiss();
-            print(response, terminator: "");
-//            if(response["user"] != nil)
-//            {
-//                UserModel.shared.userDic = response["user"] as! [String: AnyObject]
-//            
-//            }
+        }
+        else if(tag == 88)//发送prepay后服务端返回的结果
+        {
+            let order = AlipayOrder()
+            order.partner = APPCONFIG.alipay_partner;
+            order.seller = APPCONFIG.alipay_seller;
+            order.tradeNO = self.trade._id
+            order.productName = self.item.name
+            order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
+            order.amount = "0.01"// (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
+            order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
             
-            if( UserModel.shared.isLogin && UserModel.shared.receiversArray != nil && UserModel.shared.receiversArray.count>0)
-            {
-                let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
-                    return (itemObj as ReceiverModel).isDefault == true;
-                }
-                self.lbReceverName.text = "";
-                self.lbReceverMobile.text = "";
-                self.lbRecevierAddress.text = "";
-                if(result.count>0)
-                {
-                    let defaultAddress = result[0] as ReceiverModel
-                    
-                    self.lbReceverName.text = defaultAddress.name
-                    self.lbReceverMobile.text = defaultAddress.phone;
-                    self.lbRecevierAddress.text = defaultAddress.address;
-                    
-                    if (item == nil ||  item.images == nil) {return}
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                        
-                        var images: [UIImage] = [UIImage]()
-                        for imageUrl in self.item.images {
-                            let url: NSURL = NSURL(string: imageUrl)!
-                            let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
-                            images.append(image)
-                        }
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.initImageRollView(images)
-                        })
-                    })
-
-                }
-            }
-            else
-            {
+            order.service = "mobile.securitypay.pay";
+            order.paymentType = "1";
+            order.inputCharset = "utf-8";
+            order.itBPay = "30m";
+            order.showUrl = "m.alipay.com";
+            
+            
+            //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+            let appScheme = "alisdkdemo";
+            let orderSpec = order.description
+            //将商品信息拼接成字符串
+            NSLog("orderSpec = %@",orderSpec);
+            let signer = CreateRSADataSigner(APPCONFIG.alipay_privateKey)
+            let signedString = signer.signString(orderSpec)
+            let orderString = "\(order.description)&sign=\"\(signedString)\"&sign_type=\"RSA\""
+            
+            NSLog("orderString = %@",orderString);
+            AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
                 
-            }
-        
+                NSLog(" alipay reslut = \(resultDic)")
+                self.httpObj.httpPostApi("trade/postpay", parameters: ["_id":self.trade._id], tag: 99);
+            })
+
+            
+        }
+        else if(tag == 99)//交易回调请求（Postpay成后后返回的请求）
+        {
+            
+            
         }
     }
     
     func requestDataFailed(error: String) {
         
-        SVProgressHUD.showErrorWithStatusWithBlack("获取用户地址失败！");
+        SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 
-    //MARK: - Unit
-    
-    func alipaySetting() {
-        
-        AlipaySDK.defaultService().payOrder("", fromScheme: "") { (_: [NSObject : AnyObject]!) -> Void in
-            
-        }
-    }
+ 
 }
