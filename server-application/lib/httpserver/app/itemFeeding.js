@@ -45,7 +45,7 @@ itemFeeding.recommendation = {
                 items: models
             };
         }, {
-            afterQuery: function (param, currentPageModels, numTotal, callback) {
+            afterQuery: function(param, currentPageModels, numTotal, callback) {
                 async.series([function(cb) {
                     ContextHelper.appendItemContext(req.currentUserId, currentPageModels, callback);
                 }], callback);
@@ -72,14 +72,14 @@ itemFeeding.favorite = {
                 models.forEach(function(relationship) {
                     items.push(relationship.targetRef);
                 });
-                cb(null, items, count); 
+                cb(null, items, count);
             }], callback);
-        }, function (models) {
+        }, function(models) {
             return {
                 items: models
             };
         }, {
-            afterQuery: function (param, currentPageModels, numTotal, callback) {
+            afterQuery: function(param, currentPageModels, numTotal, callback) {
                 async.series([function(cb) {
                     ContextHelper.appendItemContext(req.currentUserId, currentPageModels, callback);
                 }], callback);
