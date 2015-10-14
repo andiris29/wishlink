@@ -19,13 +19,13 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     let itemCellIde = "U02ItemCell"
     weak var userVC: U02UserVC!
     var dataArray: [ItemModel] = []
+    var currentItemIndex: Int = -1
     // MARK: - life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self
         self.prepareCollectionView()
-        self.getRecommendation()
         // Do any additional setup after loading the view.
     }
 
@@ -64,13 +64,17 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
             [unowned self]
             (type: ItemCellButtonClickType, selectedIndexPath: NSIndexPath) in
             if type == ItemCellButtonClickType.Favorite {
-                self.favoriteItem(selectedIndexPath.row)
+                self.currentItemIndex = selectedIndexPath.row
+                self.favoriteItem()
             }
             else {
                 self.dataArray.removeAtIndex(selectedIndexPath.row)
                 self.collectionView.reloadData()
             }
         };
+        if indexPath.row < self.dataArray.count {
+            cell.item = self.dataArray[indexPath.row]
+        }
         return cell
     }
     
@@ -89,13 +93,52 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func requestDataFailed(error: String) {
-        print(error)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+            self.view.userInteractionEnabled = true
+            self.collectionView.reloadData()
+        })
     }
     
     func requestDataComplete(response: AnyObject, tag: Int) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
+            self.view.userInteractionEnabled = true
+        })
         if tag == 10 {
             // recommdation
-            print(response)
+            if let itemArray = response["items"] as? [[String: AnyObject]] {
+                for itemDic in itemArray {
+                    let item = ItemModel(dict: itemDic)
+                    self.dataArray.append(item)
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.collectionView.reloadData()
+            })
+        }else if tag == 20 {
+            // 取消收藏
+            if let itemDic = response["item"] as? [String: AnyObject] {
+                let item = ItemModel(dict: itemDic)
+                item.isFavorite = false
+                self.dataArray.removeAtIndex(self.currentItemIndex)
+                self.dataArray.insert(item, atIndex: self.currentItemIndex)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    SVProgressHUD.showSuccessWithStatusWithBlack("取消收藏成功")
+                    self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentItemIndex, inSection: 0)])
+                })
+            }
+        }else if tag == 30 {
+            if let itemDic = response["item"] as? [String: AnyObject] {
+                let item = ItemModel(dict: itemDic)
+                item.isFavorite = true
+                self.dataArray.removeAtIndex(self.currentItemIndex)
+                self.dataArray.insert(item, atIndex: self.currentItemIndex)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    SVProgressHUD.showSuccessWithStatusWithBlack("收藏成功")
+                    self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentItemIndex, inSection: 0)])
+                })
+            }
         }
     }
     
@@ -117,15 +160,34 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     // MARK: - prive method
     
     func getRecommendation() {
+        self.dataArray.removeAll()
         self.httpObj.httpGetApi("itemFeeding/recommendation", tag: 10)
     }
     
     
-    func favoriteItem(itemIndex: Int) {
-        let item = self.dataArray[itemIndex]
-        print(item)
+    func favoriteItem() {
+        let item = self.dataArray[self.currentItemIndex]
+        let dic = [
+            "_id": item._id
+        ]
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.view.userInteractionEnabled = false
+        if item.isFavorite == true {
+            // 取消收藏
+            self.httpObj.httpPostApi("item/unfavorite", parameters: dic, tag: 20)
+
+        }
+        else {
+            // 收藏
+            self.httpObj.httpPostApi("item/favorite", parameters: dic, tag: 30)
+
+        }
+        
     }
 
+    func unfavoriteItem(itemIndex: Int) {
+        
+    }
     
     func prepareCollectionView() {
         self.clearView = UIView(frame: CGRectMake(0, -40, UIScreen.mainScreen().bounds.size.width, 40))

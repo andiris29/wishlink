@@ -1440,7 +1440,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79ffc1c3-5ca4-4d44-90e8-cecf4ac23d0f";
+				PROVISIONING_PROFILE = "c337a98a-0787-4473-9ffe-3628da0f1f45";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
@@ -1475,7 +1475,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "79ffc1c3-5ca4-4d44-90e8-cecf4ac23d0f";
+				PROVISIONING_PROFILE = "c337a98a-0787-4473-9ffe-3628da0f1f45";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};

@@ -161,7 +161,7 @@
                                     <constraint firstAttribute="height" constant="25" id="Djy-Ox-8aV"/>
                                     <constraint firstAttribute="width" constant="70" id="RJo-Ax-vng"/>
                                 </constraints>
-                                <state key="normal" title="我要撤单">
+                                <state key="normal" title="取消抢单">
                                     <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

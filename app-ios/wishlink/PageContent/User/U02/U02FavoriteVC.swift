@@ -113,8 +113,11 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
             // unfavorite
             
             // 成功
-            self.dataArray.removeAtIndex(self.currentIndex)
-            self.collectionView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                SVProgressHUD.showSuccessWithStatusWithBlack("取消收藏成功")
+                self.dataArray.removeAtIndex(self.currentIndex)
+                self.collectionView.reloadData()
+            })
         }else {
             
         }
@@ -135,13 +138,13 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     // MARK: - prive method
     
     func getFavoriteList() {
+        self.dataArray.removeAll()
         self.httpObj.httpGetApi("itemFeeding/favorite", tag: 10)
     }
     
     func unFavorite(itemIndex: Int) {
         self.currentIndex = itemIndex
         let item = self.dataArray[itemIndex]
-        // TODO 确定标志位执行删除操作
         let dic = [
             "_id": item._id
         ]

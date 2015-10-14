@@ -63,7 +63,7 @@ class U02ItemCell: UICollectionViewCell {
     }
     @IBAction func favoriteBtnAction(sender: AnyObject) {
         let btn = sender as! UIButton
-        btn.selected = !btn.selected
+//        btn.selected = !btn.selected
         if let c = self.closure {
             c(ItemCellButtonClickType.Favorite, self.indexPath)
 //            c(self.indexPath, ItemCellType.Favorite)
@@ -81,6 +81,7 @@ class U02ItemCell: UICollectionViewCell {
         self.lbCountry.text = item.country;
         self.lbPrice.text = "￥" + item.price.format(".2");
         self.lbIntro.text = item.name + " " + item.spec;
+        self.favoriteBtn.selected = self.item.isFavorite
     }
     
     //从热门列表中加载的时候调用此方法
