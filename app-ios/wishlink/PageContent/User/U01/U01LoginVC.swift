@@ -10,6 +10,7 @@ import UIKit
 
 let WBLoginSuccessNotification: String = "WBLoginSuccess"
 let WXLoginSuccessNotification: String = "WXLoginSuccess"
+let LoginSuccessNotification: String = "LoginSuccess"
 
 class U01LoginVC: RootVC,WebRequestDelegate {
     
@@ -27,14 +28,21 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         self.httpObj.mydelegate = self
         NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
             let temp = noti.object as! WBAuthorizeResponse
-            self.wbToekn = temp.accessToken
-            self.wbUserID = temp.userID
-            self.wbLogin()
+            if temp.statusCode == .Success {
+                self.wbToekn = temp.accessToken
+                self.wbUserID = temp.userID
+                self.wbLogin()
+            }
+ 
         }
         NSNotificationCenter.defaultCenter().addObserverForName(WXLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
             let temp = noti.object as! SendAuthResp
-            self.wxCode = temp.code
-            self.wxLogin()
+            print("\(temp.errCode)")
+            if temp.errCode != -2 {
+                self.wxCode = temp.code
+                self.wxLogin()
+            }
+         
         }
         // Do any additional setup after loading the view.
     }
@@ -82,7 +90,6 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     @IBAction func skipAction(sender: AnyObject) {
         print("跳过")
-        APPCONFIG.AccessToken = "temp_token";
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     
@@ -141,9 +148,10 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         }
         print(APPCONFIG.cookieStr)
         self.parseUserData(response)
-
+        
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            NSNotificationCenter.defaultCenter().postNotificationName(LoginSuccessNotification, object: nil)
             SVProgressHUD.dismiss();
             self.dismissViewControllerAnimated(true, completion: nil);
         })

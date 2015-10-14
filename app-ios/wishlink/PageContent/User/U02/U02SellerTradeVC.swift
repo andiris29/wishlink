@@ -161,10 +161,12 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
             self.view.userInteractionEnabled = true
         })
         if tag == 10 {
             let tradeArray = response["trades"] as! NSArray
+            print(tradeArray)
             if tradeArray.count == 0 {
                 return
             }
@@ -189,6 +191,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func requestDataFailed(error: String) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SVProgressHUD.dismiss()
             self.view.userInteractionEnabled = true
             self.collectionView.reloadData()
         })

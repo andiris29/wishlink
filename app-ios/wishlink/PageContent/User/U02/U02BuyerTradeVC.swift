@@ -153,6 +153,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     func requestDataComplete(response: AnyObject, tag: Int) {
         if tag == 10 {
             let tradeArray = response["trades"] as! NSArray
+            print(tradeArray)
             if tradeArray.count == 0 {
                 return
             }

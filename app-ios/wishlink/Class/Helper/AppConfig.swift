@@ -67,10 +67,8 @@ class AppConfig: NSObject
     var Uid = "";
     var cookieStr:String = "" {
         didSet {
-            if cookieStr.length != 0 {
-                AccessToken = cookieStr
-                save()
-            }
+            AccessToken = cookieStr
+            save()
         }
     }
     var CurrentLoginName:String = ""
