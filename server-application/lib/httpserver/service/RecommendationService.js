@@ -31,7 +31,7 @@ var RecommendationService = module.exports;
  * @param {string} err
  */
 RecommendationService.recommendItems = function(_id, callback) {
-    SearchTrendService.queryItems(0, 10, function(error, trends) {
+    SearchTrendService.queryItems(1, 10, function(error, trends) {
         if (error) {
             callback(error);
             return;
@@ -85,7 +85,7 @@ RecommendationService.recommendItemsInForeignCountry = function(_id, callback) {
             }
         });
     }, function(country, cb) {
-        SearchService.search(country.name, 0, 10, function(error, items) {
+        SearchService.search(country.name, 1, 10, function(error, items) {
             if (error) {
                 cb(error);
                 return;
