@@ -9,6 +9,7 @@ var request = require('request');
 
 // Model
 var Users = require('../../model/users');
+var rUserRecommendedItems = require('../../model/rUserRecommendedItem');
 
 // Service
 var NotificationService = require('../service/NotificationService');
@@ -654,6 +655,109 @@ user.login = {
                 delete req.session.loginDate;
                 ResponseHelper.response(res, ServerError.ERR_INCORRECT_ID_OR_PASSWORD);
             }
+        });
+    }
+};
+
+/**
+ * 移除搜索历史
+ *
+ * @method post
+ * @return {db.user} res.data.user
+ */
+user.clearSearchHistory = {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        async.waterfall([function(callback) {
+            Users.findOne({
+                _id: req.currentUserId
+            }, (error, user) => {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            user.searchHistory.entry = [];
+            user.save(function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_UNKOWN);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user: user
+            });
+        });
+    }
+};
+
+/**
+ * 删除推荐商品
+ *
+ * @method post
+ * @param {db.item._id} req._id
+ * @return {db.user} res.data.user
+ */
+user.removeRecommendedItem = {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        async.waterfall([function(callback) {
+            rUserRecommendedItems.remove({
+                initiatorRef: req.currentUserId,
+                targetRef: RequestHelper.parseId(req.body._id)
+            }, error => {
+                callback(error);
+            });
+        }, function(callback) {
+            Users.findOne({
+                _id: req.currentUserId
+            }, function(error, user) {
+                callback(error, user);
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user: user
+            });
+        });
+    }
+};
+
+/**
+ * 删除所有推荐商品
+ *
+ * @method post
+ * @return {db.user} res.data.user
+ */
+user.removeAllRecommendedItems = {
+    method: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        async.waterfall([function(callback) {
+            rUserRecommendedItems.remove({
+                initiatorRef: req.currentUserId
+            }, error => {
+                callback(error);
+            });
+        }, function(callback) {
+            Users.findOne({
+                _id: req.currentUserId
+            }, function(error, user) {
+                callback(error, user);
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user: user
+            });
         });
     }
 };
