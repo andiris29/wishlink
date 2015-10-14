@@ -45,7 +45,7 @@ public class AlipayNotify {
     	String responseTxt = "true";
 		if(params.get("notify_id") != null) {
 			String notify_id = params.get("notify_id");
-			log.debug("verify notify_id");
+			log.debug("verify notify_id=" + notify_id);
 			responseTxt = verifyResponse(notify_id);
 		}
 	    String sign = "";

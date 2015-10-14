@@ -64,6 +64,7 @@ public class AlipayPaymentController {
         
         log.debug("verify request source is alipay!");
         if (!AlipayNotify.verify(params)) {
+            log.error("verify request source failure");
             log.info("<========================== alipay/callback end");
             return FAIL;
         }
