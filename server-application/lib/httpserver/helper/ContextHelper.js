@@ -36,12 +36,13 @@ ContextHelper.appendItemContext = function(currentUserId, items, callback) {
         });
     };
 
-    async.parallel([favoritedByCurrentUser, numTrades], err => {
+    async.parallel([favoritedByCurrentUser, numTrades], function (err) {
         callback(null, items);
     });
 };
 
 var _prepare = function(models) {
+    models = models || [];
     return models.filter(function(model) {
         return model;
     }).map(function(model) {
@@ -67,7 +68,7 @@ var _rInitiator = function(RModel, initiatorRef, models, contextField, callback)
             }
         };
     });
-    async.parallel(tasks, error => {
+    async.parallel(tasks, function (error) {
         callback(null, models);
     });
 };

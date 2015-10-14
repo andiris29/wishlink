@@ -22,6 +22,7 @@ var SearchService = {};
  * @callback search~callback
  * @param {string} err
  * @param {db.item[]} items
+ * @param {int} count
  */
 SearchService.search = function(keyword, pageNo, pageSize, callback) {
     async.waterfall([

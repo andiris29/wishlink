@@ -103,7 +103,7 @@ itemFeeding.search = {
             });
         }, function(callback) {
             SearchService.search(keyword, pageNo, pageSize, callback);
-        }, function(callback) {
+        }, function(items, count, callback) {
             ContextHelper.appendItemContext(req.currentUserId, items, callback);
         }], function(err, items) {
             ResponseHelper.response(res, err, {

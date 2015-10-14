@@ -672,7 +672,7 @@ user.clearSearchHistory = {
         async.waterfall([function(callback) {
             Users.findOne({
                 _id: req.currentUserId
-            }, (error, user) => {
+            }, function (error, user) {
                 if (error) {
                     callback(error);
                 } else if (!user) {
@@ -715,7 +715,7 @@ user.removeRecommendedItem = {
             rUserRecommendedItems.remove({
                 initiatorRef: req.currentUserId,
                 targetRef: RequestHelper.parseId(req.body._id)
-            }, error => {
+            }, function (error) {
                 callback(error);
             });
         }, function(callback) {
@@ -745,7 +745,7 @@ user.removeAllRecommendedItems = {
         async.waterfall([function(callback) {
             rUserRecommendedItems.remove({
                 initiatorRef: req.currentUserId
-            }, error => {
+            },function (error) {
                 callback(error);
             });
         }, function(callback) {
