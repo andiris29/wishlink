@@ -326,7 +326,7 @@ trade.postpay = {
                 }
             });
         }, function(trade, callback) {
-            if (trade.pay.weixin.prepayid !== null && trade.pay.weixin.prepayid.length > 0) {
+            if (trade.pay.weixin.prepayid != null && trade.pay.weixin.prepayid.length > 0) {
                 PaymentService.syncStatus(trade, function(error, trade) {
                     callback(error, trade);
                 });
