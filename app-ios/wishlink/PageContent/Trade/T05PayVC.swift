@@ -148,19 +148,27 @@ class T05PayVC: RootVC,WebRequestDelegate {
         let tag = sender.tag;
         if(tag == 11)//跳转到个人中心
         {
+      
+
             
             var para = ["_id":self.trade._id,
-                "pay.alipay":"{ pay : {alipay :{}}"];
+                "pay": [
+                    "alipay":NSDictionary()
+                ]];
+            
+                
+              
             if(self.currPayModel == .Weixin)
             {
                 para = ["_id":self.trade._id,
-                    "pay.weixin":"{ pay : {weixin :{}}"]
-            }
-           SVProgressHUD.showWithStatusWithBlack("请稍等...")
-            self.httpObj.httpPostApi("trade/prepay", parameters: para, tag: 88)
-       
-            
+                    "pay": [
+                        "weixin":NSDictionary()
+                    ]];
+                
 
+            }
+            SVProgressHUD.showWithStatusWithBlack("请稍等...")
+            self.httpObj.httpPostApi("trade/prepay", parameters: para as! [String : AnyObject], tag: 88)
         }
         else
         {
@@ -193,6 +201,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
         }
         else if(tag == 88)//发送prepay后服务端返回的结果
         {
+            
             let order = AlipayOrder()
             order.partner = APPCONFIG.alipay_partner;
             order.seller = APPCONFIG.alipay_seller;
