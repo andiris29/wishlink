@@ -27,17 +27,16 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
 
         followArr = [];
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
-        self.httpObj.httpPostApi("tradeFeeding/byItem", parameters: ["_id":self.product._id], tag: 10);
-        
-        
+        let param = ["item.id" : self.product._id]
+        self.httpObj.httpGetApi("tradeFeeding/byItem", parameters: param, tag: 60)
         
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierHeader, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
-
         self.httpObj.mydelegate = self;
         self.navigationController?.navigationBarHidden = false;
+        
         self.loadComNaviLeftBtn()
         self.loadComNavTitle("订单详情")
     }
@@ -97,6 +96,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         default:
             cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
             
+            
         }
         
         return cell
@@ -154,7 +154,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         print(response, terminator: "")
-        if(tag == 10)
+        if(tag == 60)
         {
             let tradesObj = response as? NSArray
             if(tradesObj != nil && tradesObj?.count>0)
@@ -165,14 +165,11 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
                 }
                 for  itemObj in tradesObj!
                 {
-                    var tradeItem = TradeModel(dict: itemObj as! NSDictionary);
+                    let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
                     self.followArr.append(tradeItem);
                     self.tradeTableView.reloadData();
                 }
             }
-        }
-        else if(tag == 60) {
-            
         } else if(tag == 61) {
             
             SVProgressHUD.dismiss();
@@ -184,6 +181,8 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
 
             
             //todo:
+        } else if(tag == 62) {
+            
         }
     }
     
