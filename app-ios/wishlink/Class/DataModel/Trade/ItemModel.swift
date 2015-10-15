@@ -18,9 +18,10 @@ class ItemModel: BaseModel {
     var country:String!
     var spec:String!
     var price:Float!
-    
+    var notes:String!
     var create:String!
     var images:[String]!
+    var isFavorite: Bool = false
     
     init(dict:NSDictionary) {
         super.init()
@@ -37,7 +38,11 @@ class ItemModel: BaseModel {
         self.country =  self.getStringValue("country", dic: dict);
         self.spec =  self.getStringValue("spec", dic: dict);
         self.create =  self.getStringValue("create", dic: dict);
+        self.notes =  self.getStringValue("notes", dic: dict);
         self.price =  self.getFloatValue("price", dic: dict);
+        if let tempDic = dict["__context"] as? NSDictionary {
+            self.isFavorite = self.getBoolValue("favoritedByCurrentUser", dic: tempDic)
+        }
         if(dict.objectForKey("images") != nil)
         {
             if let imgArr = dict.objectForKey("images") as? NSArray

@@ -124,6 +124,12 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         {
             if(response as! NSDictionary).objectForKey("items") != nil{
             
+                if( self.dataArr != nil &&  self.dataArr.count>0)
+                {
+                    self.dataArr.removeAll(keepCapacity: false);
+                }
+                self.dataArr = [];
+                
                 let itemArr = (response as! NSDictionary).objectForKey("items") as! NSArray;
                 if(itemArr.count>0)
                 {

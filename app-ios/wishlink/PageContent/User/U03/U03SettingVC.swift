@@ -12,6 +12,8 @@ enum SettingVCUploadImageType {
     case None, Portrait, Background
 }
 
+let LogoutNotification: String = "LogoutNotification"
+
 class U03SettingVC: RootVC, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     
@@ -77,12 +79,14 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     func requestDataComplete(response: AnyObject, tag: Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
+            
         })
         if tag == 10 {
             // 注销
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
                 self.navigationController!.popViewControllerAnimated(true)
             })
         }else if tag == 20 {
@@ -274,6 +278,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             UserModel.shared.isLogin = false
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
+            NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
             self.navigationController!.popViewControllerAnimated(true)
         }
     }

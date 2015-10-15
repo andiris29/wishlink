@@ -30,6 +30,11 @@ class U02UserVC: RootVC, WebRequestDelegate {
     var sellerTradeVC: U02SellerTradeVC!
     var recommendVC: U02RecommendVC!
     var favoriteVC: U02FavoriteVC!
+    lazy var loginVC: U01LoginVC = {
+        let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
+        vc.hideSkipBtn = true
+        return vc
+    }()
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +44,12 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.sellerBtnAction(self.sellerBtn)
         self.httpObj.mydelegate = self
         self.getUser()
+        NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
+            self.loginVC.view.removeFromSuperview()
+        }
+        NSNotificationCenter.defaultCenter().addObserverForName(LogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
+            self.view.addSubview(self.loginVC.view)
+        }
         self.navigationController!.navigationBar.hidden = false
     }
 
@@ -53,14 +64,9 @@ class U02UserVC: RootVC, WebRequestDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if APPCONFIG.isUserLogin() == false {
-            struct once {
-                static var predicate:dispatch_once_t = 0
-            }
-            dispatch_once(&once.predicate, { () -> Void in
-                let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
-//                vc.hideSkipBtn = true
-                self.presentViewController(vc, animated: true, completion: nil)
-            })
+            self.view.addSubview(self.loginVC.view)
+        }else {
+            self.loginVC.view.removeFromSuperview()
         }
     }
     
@@ -124,6 +130,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.sellerTradeVC.resetConditionView()
         self.buyerTradeVC.resetConditionView()
         self.view.bringSubviewToFront(self.recommendVC.view)
+        self.recommendVC.getRecommendation()
     }
     
     @IBAction func collectionBtnAction(sender: AnyObject) {

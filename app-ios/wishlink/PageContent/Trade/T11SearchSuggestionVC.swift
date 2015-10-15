@@ -37,7 +37,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         
         self.httpObj.mydelegate = self;
    
-        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+//        SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 0)
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
@@ -152,20 +152,24 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         SVProgressHUD.dismiss();
         if( tag == 0)
         {
-            
-            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
-            if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
+            let respDic  = response as! NSDictionary;
+            if(respDic.objectForKey("user") != nil)
             {
-                let dataArray: NSMutableArray = NSMutableArray()
-                dataArray.addObject("历史搜索")
-                
-                for item in UserModel.shared.searchHistory {
+            
+                UserModel.shared.userDic = respDic["user"] as! [String: AnyObject]
+                if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
+                {
+                    let dataArray: NSMutableArray = NSMutableArray()
+                    dataArray.addObject("历史搜索")
                     
-                    dataArray.addObject(item.keyword);
+                    for item in UserModel.shared.searchHistory {
+                   
+                        dataArray.addObject(item.keyword);
+                    }
+                    
+                    itemContents = dataArray
+                    self.searchTableView.reloadData()
                 }
-                
-                itemContents = dataArray
-                self.searchTableView.reloadData()
             }
         }
         else if(tag  == 10)
@@ -197,7 +201,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             
         }
     }
-    func requestDataFailed(error: String) {
+    func requestDataFailed(n: String) {
         
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -65,6 +65,13 @@
                         <action selector="weiBoLoginAction:" destination="-1" eventType="touchUpInside" id="TVz-RP-9ne"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyy-pE-Nts">
+                    <rect key="frame" x="164" y="475" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="testLoginAction:" destination="-1" eventType="touchUpInside" id="Spw-IQ-2aR"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -73,6 +80,7 @@
                 <constraint firstItem="IvB-nj-5A2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BbQ-KK-B7g"/>
                 <constraint firstAttribute="trailing" secondItem="02x-8d-Pby" secondAttribute="trailing" id="EGJ-jL-FeC"/>
                 <constraint firstItem="02x-8d-Pby" firstAttribute="top" secondItem="6q7-WB-P53" secondAttribute="bottom" constant="170" id="FeF-21-jVh"/>
+                <constraint firstItem="Vyy-pE-Nts" firstAttribute="top" secondItem="xzS-U2-3Ii" secondAttribute="bottom" constant="38" id="JAj-u1-3AD"/>
                 <constraint firstAttribute="bottom" secondItem="IvB-nj-5A2" secondAttribute="bottom" id="NTE-4t-Hg1"/>
                 <constraint firstItem="IvB-nj-5A2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="R3c-7d-c1S"/>
                 <constraint firstAttribute="centerX" secondItem="mYF-d1-EpW" secondAttribute="centerX" id="RZf-p2-nmQ"/>
@@ -84,6 +92,7 @@
                 <constraint firstAttribute="centerX" secondItem="1se-59-LEa" secondAttribute="centerX" id="b98-Yk-2IA"/>
                 <constraint firstItem="1se-59-LEa" firstAttribute="top" secondItem="02x-8d-Pby" secondAttribute="bottom" constant="-20" id="j14-tg-4e5"/>
                 <constraint firstItem="02x-8d-Pby" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jsf-rp-ob9"/>
+                <constraint firstItem="Vyy-pE-Nts" firstAttribute="centerX" secondItem="1se-59-LEa" secondAttribute="centerX" id="pZ6-bu-pKS"/>
                 <constraint firstAttribute="trailing" secondItem="IvB-nj-5A2" secondAttribute="trailing" id="uc6-5M-naY"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

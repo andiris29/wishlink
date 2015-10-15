@@ -19,4 +19,4 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "DataSigner.h"
 #import "RSADataSigner.h"
-#import "Order.h"
+#import "AlipayOrder.h"

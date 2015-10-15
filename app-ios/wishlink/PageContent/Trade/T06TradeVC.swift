@@ -93,6 +93,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
 //        {
             let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
             vc.isNewOrder = false
+            vc.item = product;
             self.navigationController?.pushViewController(vc, animated: true);
 //        }
 //        else

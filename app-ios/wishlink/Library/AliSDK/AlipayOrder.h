@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Order : NSObject
+@interface AlipayOrder : NSObject
 
 @property(nonatomic, copy) NSString * partner;
 @property(nonatomic, copy) NSString * seller;

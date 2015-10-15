@@ -139,8 +139,13 @@ public enum ParameterEncoding {
             do {
                 let options = NSJSONWritingOptions()
                 let data = try NSJSONSerialization.dataWithJSONObject(parameters, options: options)
+                
+                let datastring: String = NSString(data:data, encoding:NSUTF8StringEncoding) as! String
+                print(datastring);
 
                 mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                
+                
                 mutableURLRequest.HTTPBody = data
             } catch {
                 encodingError = error as NSError
