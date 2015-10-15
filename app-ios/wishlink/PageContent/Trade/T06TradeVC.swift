@@ -27,14 +27,12 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
 
         followArr = [];
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
-        let param = ["item.id" : self.product._id]
-        self.httpObj.httpGetApi("tradeFeeding/byItem", parameters: param, tag: 60)
-        
+     
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierHeader, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
-        self.httpObj.mydelegate = self;
+        self.httpObj.httpGetApi("tradeFeeding/byItem?item._id="+self.product._id, parameters: nil, tag: 60)
         self.navigationController?.navigationBarHidden = false;
         
         self.loadComNaviLeftBtn()

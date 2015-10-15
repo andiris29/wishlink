@@ -87,7 +87,6 @@
 		A13474FB1BC55DF0002CD7CB /* TradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13474FA1BC55DF0002CD7CB /* TradeModel.swift */; };
 		A140B0101B94B45500531546 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140B00E1B94B45500531546 /* DefaultCell.swift */; };
 		A140B0111B94B45500531546 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A140B00F1B94B45500531546 /* DefaultCell.xib */; };
-		A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D89281B806DC400BC66DE /* SwiftyJSON.swift */; };
 		A18A06741BAF1504005ADFFA /* ScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A06721BAF1504005ADFFA /* ScanVC.swift */; };
 		A18A06751BAF1504005ADFFA /* ScanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A18A06731BAF1504005ADFFA /* ScanVC.xib */; };
 		A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD11BB0637200A09A0D /* SVIndefiniteAnimatedView.m */; };
@@ -292,7 +291,6 @@
 		A13474FA1BC55DF0002CD7CB /* TradeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeModel.swift; sourceTree = "<group>"; };
 		A140B00E1B94B45500531546 /* DefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultCell.swift; path = cell/DefaultCell.swift; sourceTree = "<group>"; };
 		A140B00F1B94B45500531546 /* DefaultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultCell.xib; path = cell/DefaultCell.xib; sourceTree = "<group>"; };
-		A15D89281B806DC400BC66DE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A18A06721BAF1504005ADFFA /* ScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanVC.swift; sourceTree = "<group>"; };
 		A18A06731BAF1504005ADFFA /* ScanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanVC.xib; sourceTree = "<group>"; };
 		A18A0DD01BB0637200A09A0D /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
@@ -699,7 +697,6 @@
 				A18A0DCF1BB0637200A09A0D /* SVProgressHUD */,
 				D276A99D1BA6F795005CC047 /* SphereView */,
 				A1043E7A1B7F85F3007A237C /* wishlink-Bridging-Header.h */,
-				A15D89271B806DC400BC66DE /* SwiftyJSON */,
 				A15D89291B806DC400BC66DE /* Alamofire */,
 				A1043E5E1B7F80E4007A237C /* GTMBase64 */,
 				7695652C1BA0891E00A6AD10 /* libWeiboSDK */,
@@ -858,14 +855,6 @@
 				A140B00F1B94B45500531546 /* DefaultCell.xib */,
 			);
 			name = cell;
-			sourceTree = "<group>";
-		};
-		A15D89271B806DC400BC66DE /* SwiftyJSON */ = {
-			isa = PBXGroup;
-			children = (
-				A15D89281B806DC400BC66DE /* SwiftyJSON.swift */,
-			);
-			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
 		A15D89291B806DC400BC66DE /* Alamofire */ = {
@@ -1300,7 +1289,6 @@
 				D276A98F1BA6E69D005CC047 /* T01HomePageVC.swift in Sources */,
 				A1F0E2861BA31E83005379CD /* TrendModel.swift in Sources */,
 				A1C8EA691BCA05DA00ED9910 /* Upload.swift in Sources */,
-				A15D892A1B806DC400BC66DE /* SwiftyJSON.swift in Sources */,
 				A1C8EA661BCA05DA00ED9910 /* Result.swift in Sources */,
 				D276A9A71BA6F795005CC047 /* PFGoldenSectionSpiral.m in Sources */,
 				D20B90831B8C8D470017F89C /* T08ComplaintVC.swift in Sources */,
