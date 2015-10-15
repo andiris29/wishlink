@@ -114,7 +114,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         if (cell.favoriteBtn.selected) {
             urlSub = "item/unfavorite"
         }
-        let para = ["keyword" : cell.item._id]
+        let para = ["item._id" : cell.item._id]
         self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
         self.currentItemCell = cell
     }

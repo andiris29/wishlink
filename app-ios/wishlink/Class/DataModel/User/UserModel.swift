@@ -29,7 +29,7 @@ class UserModel: BaseModel {
     var receiversArray: [ReceiverModel]!
     var searchHistory: [keywordModel]!
     var alipayId: String = ""
-    
+    var rcToken: String = ""
     class var shared: UserModel {
         dispatch_once(&Inner.token) {
             Inner.instance = UserModel()
@@ -58,7 +58,9 @@ class UserModel: BaseModel {
         if let alipay = self.userDic["alipay"] as? NSDictionary {
             self.alipayId = alipay["id"] as! String
         }
-
+        if let rongcloud = self.userDic["rongcloud"] as? NSDictionary {
+            self.rcToken = rongcloud["token"] as! String
+        }
         
         if let receivers = self.userDic["receivers"] as? NSArray {
             if receivers.count > 0 {
