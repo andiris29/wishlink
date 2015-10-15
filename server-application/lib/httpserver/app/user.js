@@ -6,6 +6,7 @@ var fs = require('fs');
 var uuid = require('node-uuid');
 var path = require('path');
 var request = require('request');
+var rongcloudSDK = require('rongcloud-sdk');
 
 // Model
 var Users = require('../../model/users');
@@ -66,6 +67,10 @@ var _upload = function(req, res, config, keyword, resizeOptions) {
                 ResponseHelper.response(res, error, {
                     user: user
                 });
+                if (keyword === 'portrait') {
+                    rongcloudSDK.init(global.config.api.rongcloud.appkey, global.config.api.rongcloud.appsecret);
+                    rongcloudSDK.user.refresh(user._id.toString(), user.nickname, user.portrait, null);
+                }
             });
         });
     });
@@ -144,6 +149,7 @@ user.loginViaWeixin = {
         var appId = config.social.network.sdk.wechat.appid;
         var secret = config.social.network.sdk.wechat.secret;
 
+        var isNewUser = false;
         async.waterfall([function(callback) {
             var tokenUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' +
                 appId + '&secret=' + secret + '&code=' + code + '&grant_type=authorization_code';
@@ -215,6 +221,7 @@ user.loginViaWeixin = {
                     return;
                 }
 
+                isNewUser = true;
                 var newUser = new Users({
                     nickname: user.nickname,
                     portrait: user.headimgurl,
@@ -255,6 +262,19 @@ user.loginViaWeixin = {
             ResponseHelper.response(res, error, {
                 user: user
             });
+            // exists user do not get rongcloud's token
+            if (!isNewUser) {
+                return;
+            }
+            rongcloudSDK.init(global.config.api.rongcloud.appkey, global.config.api.rongcloud.appsecret);
+            rongcloudSDK.user.getToken(user._id.toString(), user.nickname, user.portrait, function(error, result) {
+                var data = JSON.parse(result);
+                if (data.code !== 200) {
+                    return;
+                }
+                user.rongcloud.token = date.token;
+                user.save();
+            });
         });
     }
 };
@@ -282,6 +302,7 @@ user.loginViaWeibo = {
             return;
         }
 
+        var isNewUser = false;
         async.waterfall([function(callback) {
             // request webio api for get weibo user's information
             var url = 'https://api.weibo.com/2/users/show.json?access_token=' + token + '&uid=' + uid;
@@ -342,6 +363,7 @@ user.loginViaWeibo = {
                     return;
                 }
 
+                isNewUser = true;
                 // when not exist , add a new user
                 var newUser = new Users({
                     nickname: user.screen_name,
@@ -382,6 +404,19 @@ user.loginViaWeibo = {
         }], function(error, user) {
             ResponseHelper.response(res, error, {
                 user: user
+            });
+            // exists user do not get rongcloud's token
+            if (!isNewUser) {
+                return;
+            }
+            rongcloudSDK.init(global.config.api.rongcloud.appkey, global.config.api.rongcloud.appsecret);
+            rongcloudSDK.user.getToken(user._id.toString(), user.nickname, user.portrait, function(error, result) {
+                var data = JSON.parse(result);
+                if (data.code !== 200) {
+                    return;
+                }
+                user.rongcloud.token = date.token;
+                user.save();
             });
         });
     }
@@ -455,6 +490,8 @@ user.update = {
             ResponseHelper.response(res, error, {
                 user: user
             });
+            rongcloudSDK.init(global.config.api.rongcloud.appkey, global.config.api.rongcloud.appsecret);
+            rongcloudSDK.user.refresh(user._id.toString(), user.nickname, user.portrait, null);
         });
     }
 };
