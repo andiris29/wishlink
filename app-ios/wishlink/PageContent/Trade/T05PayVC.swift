@@ -47,7 +47,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.httpObj.mydelegate = self;
         self.loadData();
     }
     
@@ -201,6 +201,8 @@ class T05PayVC: RootVC,WebRequestDelegate {
         }
         else if(tag == 88)//发送prepay后服务端返回的结果
         {
+            SVProgressHUD.dismiss();
+            
             
             let order = AlipayOrder()
             order.partner = APPCONFIG.alipay_partner;
@@ -231,6 +233,8 @@ class T05PayVC: RootVC,WebRequestDelegate {
             AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
                 
                 NSLog(" alipay reslut = \(resultDic)")
+                
+                SVProgressHUD.showWithStatusWithBlack("请稍等...")
                 self.httpObj.httpPostApi("trade/postpay", parameters: ["_id":self.trade._id], tag: 99);
             })
 
@@ -239,7 +243,19 @@ class T05PayVC: RootVC,WebRequestDelegate {
         else if(tag == 99)//交易回调请求（Postpay成后后返回的请求）
         {
             
+            SVProgressHUD.dismiss();
+            self.navigationController?.popToRootViewControllerAnimated(true);
             
+            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+                let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
+                if(vc != nil)
+                {
+                    vc.sellerBtnAction(vc.sellerBtn);
+                }
+                
+                tababarController.selectedIndex = 3;
+
         }
     }
     

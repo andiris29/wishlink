@@ -1,4 +1,4 @@
-//
+asd//
 //  WebRequestHelper.swift
 //  landi-app
 //
@@ -19,7 +19,7 @@ let SERVICE_ROOT_PATH = "http://121.41.162.102/services/"
 
 class WebRequestHelper:NSObject {
     
-    var mydelegate:WebRequestDelegate?
+    weak var mydelegate:WebRequestDelegate?
     
     let headers = [
         "Content-Type": "application/json;charset=utf-8",
