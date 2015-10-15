@@ -133,6 +133,9 @@ trade.prepay = {
                 }
             });
         }, function(trade, callback) {
+            // clear pay's info
+            trade.pay.alipay = {};
+            trade.pay.weixin = {};
             if (req.body.pay || req.body.pay.weixin) {
                 PaymentService.getPrepayId(trade, RequestHelper.getIp(req), function(error, trade) {
                     if (error) {
