@@ -31,7 +31,7 @@ SearchSuggestionService.queryAny = function(keyword, pageNo, pageSize, callback)
     async.waterfall([
         function (callback) {
             _queryWordEntities(keyword, null, pageNo, pageSize, callback);
-        }, function (wordEntities, callback) {
+        }, function (wordEntities, count, callback) {
             var tasks = [];
             wordEntities.forEach(function (wordEntity, index) {
                 var task = function (callback) {
@@ -124,7 +124,7 @@ var _queryWords = function (keyword, type, pageNo, pageSize, callback) {
     async.waterfall([
         function (callback) {
             _queryWordEntities(keyword, type, pageNo, pageSize, callback);
-        }, function (wordEntities, callback) {
+        }, function (wordEntities, count, callback) {
             var words = wordEntities.map(function (i) {
                 return i.word;
             }).filter(function (n) {
