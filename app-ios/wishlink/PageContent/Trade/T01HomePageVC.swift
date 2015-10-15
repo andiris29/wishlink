@@ -8,7 +8,9 @@
 
 import UIKit
 
-class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebRequestDelegate {
+class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebRequestDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    let cellIdentifierSearch = "T11SearchSuggestionCell"
     
     @IBOutlet weak var searchBgImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -18,13 +20,16 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     @IBOutlet weak var allWishLabel: UILabel!
     @IBOutlet weak var finishWishLabel: UILabel!
+    @IBOutlet weak var searchTableView: UITableView!
     
     @IBOutlet weak var lbAllCount: UILabel!
-    
     @IBOutlet weak var lbComplateCount: UILabel!
+    
     var lastDataArr:[AnyObject]! = []
     var sphereView: ZYQSphereView!
     var isNeedShowLoin = true;
+    var itemContents: NSArray = NSArray()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if APPCONFIG.isUserLogin() == false
@@ -33,6 +38,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
 //            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
 //            self.presentViewController(vc, animated: true, completion: nil)
         }
+        
+        self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         
         self.searchTextField.delegate = self;
         self.httpObj.mydelegate = self;
@@ -119,6 +126,33 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
 
     }
     
+    // MARK: - Table view data source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return itemContents.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T11SearchSuggestionCell
+        cell.labelName.text = itemContents[indexPath.row] as? String
+        cell.selected = false;
+        cell.selectionStyle = UITableViewCellSelectionStyle.Default
+        return cell
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.searchTextField.text = itemContents[indexPath.row] as? String
+        
+    }
+    
     //MARK: - 标签点击操作
     
     func buttonAction(sender: UIButton) {
@@ -139,7 +173,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         // Pass the selected object to the new view controller.
     }
     
-    //MARK:UItextFiledDelegate
+    // MARK: - UItextFiledDelegate
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         self.searchTextField.resignFirstResponder();
@@ -147,11 +182,30 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
-        vc.myDelegate = self;
-        vc.searchType = .any
-        self.presentViewController(vc, animated: true, completion: nil);
-        return false;
+        
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 12)
+        
+//        let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+//        vc.myDelegate = self;
+//        vc.searchType = .any
+//        self.presentViewController(vc, animated: true, completion: nil);
+        return true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    
+        let para = ["keyword" : textField.text!.trim()]
+        self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
+        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        
+        self.searchTableView.hidden = true
+        
+        return true
     }
 
     //MARK: 手动输入的搜索结果
@@ -195,7 +249,54 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             let numCompleteTrades = (response as! NSDictionary).objectForKey("numCompleteTrades") as! Int
             self.lbAllCount.text = String(numTrades);
             self.lbComplateCount.text = String(numCompleteTrades);
+            
+        } else if( tag == 12)
+        {
+//            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+//            if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
+//            {
+//                let dataArray: NSMutableArray = NSMutableArray()
+//                dataArray.addObject("历史搜索")
+//                
+//                for item in UserModel.shared.searchHistory {
+//                    
+//                    dataArray.addObject(item.keyword);
+//                }
+//                
+//                itemContents = dataArray
+//                self.searchTableView.reloadData()
+//            }
+//            self.searchTableView.hidden = false
         }
+        else if(tag  == 13)
+        {
+            let dic = response as! NSDictionary;
+            if (dic.objectForKey("suggestions") != nil)
+            {
+                let resultArr = dic.objectForKey("suggestions") as! NSArray;
+                if(self.searchTextField.text!.trim().length > 0  && resultArr.count > 0)
+                {
+                    
+                    let dataArray: NSMutableArray = NSMutableArray()
+                    dataArray.addObject("历史搜索")
+                    
+                    for item in resultArr {
+                        
+                        dataArray.addObject(item as! String)
+                    }
+                    
+                    itemContents = dataArray
+                    self.searchTableView.reloadData()
+                }
+            }
+            else
+            {
+                itemContents = [];
+                self.searchTableView.reloadData()
+            }
+            self.searchTableView.hidden = false
+        }
+
     }
     
     func requestDataFailed(error: String) {
