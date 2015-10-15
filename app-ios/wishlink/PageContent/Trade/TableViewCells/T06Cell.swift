@@ -12,6 +12,8 @@ class T06Cell: UITableViewCell {
 
     @IBOutlet weak var selectedButton: UIButton!
     
+    @IBOutlet weak var lbCount: UILabel!
+    @IBOutlet weak var lbCountry: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,6 +28,10 @@ class T06Cell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    func loaddata(trade:TradeModel)
+    {
+        self.lbCount.text = String(trade.quantity)
     }
     
 }

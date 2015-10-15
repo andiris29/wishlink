@@ -17,13 +17,20 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tradeTableView: UITableView!
     
-    var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
     
     var product: ItemModel!
+    var followArr:[TradeModel]! = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.httpObj.mydelegate = self;
 
+        followArr = [];
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.httpObj.httpPostApi("tradeFeeding/byItem", parameters: ["_id":self.product._id], tag: 10);
+        
+        
+        
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierHeader, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
@@ -37,15 +44,23 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        let last: Int = itemContents.count - 1
-        
-        switch indexPath.row {
-        case 0:
-            return 568
-        case last:
-            return 65
-        default :
-            return 90
+        if(followArr.count>0)
+        {
+            let last: Int = followArr.count - 1
+            
+            switch indexPath.row {
+            case 0:
+                return 568
+            case last:
+                return 65
+            default :
+                return 90
+            }
+        }
+        else
+        {
+            
+            return 568+20+65;
         }
     }
     
@@ -56,13 +71,14 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return itemContents.count
+        return followArr.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
-        let last: Int = itemContents.count - 1
+        let last: Int = followArr.count - 1
+        
         
         switch indexPath.row {
         case 0:
@@ -80,6 +96,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
            cell = fcell;
         default:
             cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
+            
         }
         
         return cell
@@ -89,17 +106,17 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func btnFollowAction(sernder:UIButton) {
         
-//        if(UserModel.shared.isLogin)
-//        {
+        if(UserModel.shared.isLogin)
+        {
             let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
             vc.isNewOrder = false
             vc.item = product;
             self.navigationController?.pushViewController(vc, animated: true);
-//        }
-//        else
-//        {
-//            UIHEPLER.showLoginPage(self);
-//        }
+        }
+        else
+        {
+            UIHEPLER.showLoginPage(self);
+        }
     }
     
     func btnGrabOrderAction(sernder:UIButton) {
@@ -129,14 +146,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpPostApi("trade/assignToMe", tag: 61)
-        
-        
-        
-//        self.navigationController?.popToRootViewControllerAnimated(true);
-//        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-//            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-//            tababarController.selectedIndex = 3;
-//        }
+
     }
     
     //MARK: - Request delegate
@@ -144,8 +154,25 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         print(response, terminator: "")
-        
-        if(tag == 60) {
+        if(tag == 10)
+        {
+            let tradesObj = response as? NSArray
+            if(tradesObj != nil && tradesObj?.count>0)
+            {
+                if(followArr != nil && followArr.count>0)
+                {
+                    self.followArr.removeAll();
+                }
+                for  itemObj in tradesObj!
+                {
+                    var tradeItem = TradeModel(dict: itemObj as! NSDictionary);
+                    self.followArr.append(tradeItem);
+                    self.tradeTableView.reloadData();
+                }
+            }
+        }
+        else if(tag == 60) {
+            
         } else if(tag == 61) {
             
             SVProgressHUD.dismiss();
@@ -164,4 +191,5 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         
         SVProgressHUD.showErrorWithStatusWithBlack("获取用户信息失败！");
     }
+    
 }
