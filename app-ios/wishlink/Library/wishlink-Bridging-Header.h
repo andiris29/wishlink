@@ -20,3 +20,5 @@
 #import "DataSigner.h"
 #import "RSADataSigner.h"
 #import "AlipayOrder.h"
+#import <RongIMLib/RongIMLib.h>
+#import <RongIMKit/RongIMKit.h>
