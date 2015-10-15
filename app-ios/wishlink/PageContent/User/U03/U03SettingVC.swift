@@ -124,7 +124,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             () -> Void in
             
             //            UIHelper.saveEditImageToLocal(gotImage, strName: "UserHead.jpg")
-            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
+//            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
         })
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

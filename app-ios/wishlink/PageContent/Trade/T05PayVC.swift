@@ -168,7 +168,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
 
             }
             SVProgressHUD.showWithStatusWithBlack("请稍等...")
-            self.httpObj.httpPostApi("trade/prepay", parameters: para as! [String : AnyObject], tag: 88)
+            self.httpObj.httpPostApi("trade/prepay", parameters: para as? [String : AnyObject], tag: 88)
         }
         else
         {

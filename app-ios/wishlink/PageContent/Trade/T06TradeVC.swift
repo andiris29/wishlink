@@ -165,7 +165,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
                 }
                 for  itemObj in tradesObj!
                 {
-                    var tradeItem = TradeModel(dict: itemObj as! NSDictionary);
+                    let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
                     self.followArr.append(tradeItem);
                     self.tradeTableView.reloadData();
                 }
