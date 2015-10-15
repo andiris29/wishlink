@@ -76,7 +76,7 @@ public class AlipayPaymentController {
         log.debug("alipay RefundStatus=" + StringUtils.trimToNull(entity.getRefund_status()));
         log.debug("qingshow-appserver-callback-url:" + appServerCallbackUrl);
         RestTemplate restClient = new RestTemplate();
-        
+        params.put("_id", params.get("out_trade_no"));
         // ////////////////////////////////////////////////////////////////////////////////////////
         // 请在这里加上商户的业务逻辑程序代码
         // ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——

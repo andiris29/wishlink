@@ -145,7 +145,7 @@ public class WeChatPaymentController {
   
         // tell app-server this is wechat's callback
         params.put("type", "wechat");
-        
+        params.put("_id", reqBean.getOut_trade_no());
         RestTemplate restClient = new RestTemplate();
         ResponseJsonEntity appRes = restClient.postForObject(appServerCallbackUrl, params, ResponseJsonEntity.class);
         Gson gson = new Gson();
