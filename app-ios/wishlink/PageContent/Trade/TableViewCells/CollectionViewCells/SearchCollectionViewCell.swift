@@ -41,15 +41,18 @@ class SearchCollectionViewCell: UICollectionViewCell {
             {
                 self.nameLabel.textColor = UIHEPLER.mainColor;
                 self.iconButton.setImage(UIImage(named: "T03eee1"), forState: UIControlState.Normal);
+                self.iconButton.setBackgroundImage(UIImage(named: "T03aaa"), forState: UIControlState.Normal)
             }
             else
             {
                 
                 self.nameLabel.textColor =  UIColor.lightGrayColor();
                 self.iconButton.setImage(UIImage(named: "T03eee0"), forState: UIControlState.Normal);
+                self.iconButton.setBackgroundImage(UIImage(named: "T03bbb"), forState: UIControlState.Normal)
             }
         }
     }
+  
     //MARK: - Action
     
     @IBAction func buttonAction(sender: UIButton) {
