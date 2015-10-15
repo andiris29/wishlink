@@ -255,6 +255,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
                 }
                 
                 tababarController.selectedIndex = 3;
+            }
 
         }
     }
