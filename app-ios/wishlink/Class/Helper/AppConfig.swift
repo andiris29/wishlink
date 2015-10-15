@@ -54,6 +54,7 @@ class AppConfig: NSObject
     static var  wbAppKey:String = "3764189536"
     static var  wbAppSecret:String = "36bdb49defb6765bce3b831c7e18fa86"
     static var  wbRedirectURI:String = "https://api.weibo.com/oauth2/default.html"
+    static var  rcAppKey: String = "pvxdm17jxrm5r"      // 融云AppKey
     
     var alipay_callback_url="http://121.41.162.102/wishlink-payment/alipay/callback";
     var alipay_partner = "2088021598577909"

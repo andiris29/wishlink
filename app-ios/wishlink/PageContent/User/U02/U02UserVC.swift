@@ -45,6 +45,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.httpObj.mydelegate = self
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
+            self.fillDataForUI()
             self.loginVC.view.removeFromSuperview()
         }
         NSNotificationCenter.defaultCenter().addObserverForName(LogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
@@ -63,7 +64,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if APPCONFIG.isUserLogin() == false {
+        if self.userModel.isLogin == false {
             self.view.addSubview(self.loginVC.view)
         }else {
             self.loginVC.view.removeFromSuperview()
@@ -170,7 +171,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
     // 根据用户数据填充界面
     func fillDataForUI() {
         if userModel.isLogin == true {
-            self.nicknameLabel.text = UserModel.shared.nickname;
+            self.nicknameLabel.text = self.userModel.nickname;
             
             self.httpObj.renderImageView(self.headImageView, url: userModel.portrait, defaultName: "")
             self.httpObj.renderImageView(self.bgImageView, url: userModel.background, defaultName: "")
