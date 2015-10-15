@@ -29,7 +29,6 @@ class U02ItemCell: UICollectionViewCell {
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var lbCount: UILabel!
     
-    
     @IBOutlet weak var favoriteBtn: UIButton!
     
     @IBOutlet weak var btnDelete: UIButton!
@@ -62,7 +61,7 @@ class U02ItemCell: UICollectionViewCell {
         self.layer.borderWidth = 1
     }
     @IBAction func favoriteBtnAction(sender: AnyObject) {
-        let btn = sender as! UIButton
+//        let btn = sender as! UIButton
 //        btn.selected = !btn.selected
         if let c = self.closure {
             c(ItemCellButtonClickType.Favorite, self.indexPath)
@@ -81,6 +80,7 @@ class U02ItemCell: UICollectionViewCell {
         self.lbCountry.text = item.country;
         self.lbPrice.text = "￥" + item.price.format(".2");
         self.lbIntro.text = item.name + " " + item.spec;
+        self.lbCount.text = "\(item.trades)件"
         self.favoriteBtn.selected = self.item.isFavorite
     }
     
