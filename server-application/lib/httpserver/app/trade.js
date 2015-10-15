@@ -17,6 +17,7 @@ var RelationshipHelper = require('../helper/RelationshipHelper');
 // Service
 var NotificationService = require('../service/NotificationService');
 var TradeService = require('../service/TradeService');
+var PaymentService = require('../service/PaymentService');
 
 var trade = module.exports;
 
@@ -136,7 +137,7 @@ trade.prepay = {
             // clear pay's info
             trade.pay.alipay = {};
             trade.pay.weixin = {};
-            if (req.body.pay || req.body.pay.weixin) {
+            if (req.body.pay && req.body.pay.weixin) {
                 PaymentService.getPrepayId(trade, RequestHelper.getIp(req), function(error, trade) {
                     if (error) {
                         callback(error);
