@@ -19,6 +19,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     var keyword = "奶粉";
     var isNeedShowNavi = false;
     
+    var currentItemCell: U02ItemCell = U02ItemCell()
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.maskView.hidden = false;
         self.lbTipMessage.text = "正在搜索中..."
         
-        self.httpObj.httpGetApi("search/search", parameters: para , tag: 10);
+        self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
     }
     override func viewDidAppear(animated: Bool) {
@@ -112,7 +114,9 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         if (cell.favoriteBtn.selected) {
             urlSub = "item/unfavorite"
         }
-        self.httpObj.httpPostApi(urlSub , tag: 21);
+        let para = ["keyword" : cell.item._id]
+        self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
+        self.currentItemCell = cell
     }
     
     //MARK:WebRequestDelegate
@@ -160,6 +164,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
             
         } else if (tag == 21) {
         
+            self.currentItemCell.favoriteBtn.selected = !self.currentItemCell.favoriteBtn.selected
         }
     }
     

@@ -20,6 +20,7 @@ class ItemModel: BaseModel {
     var price:Float!
     var notes:String!
     var create:String!
+    var trades:Int!
     var images:[String]!
     var isFavorite: Bool = false
     
@@ -41,6 +42,8 @@ class ItemModel: BaseModel {
         self.notes =  self.getStringValue("notes", dic: dict);
         self.price =  self.getFloatValue("price", dic: dict);
         if let tempDic = dict["__context"] as? NSDictionary {
+            
+            self.trades = self.getIntValue("numTrades", dic: tempDic)
             self.isFavorite = self.getBoolValue("favoritedByCurrentUser", dic: tempDic)
         }
         if(dict.objectForKey("images") != nil)
