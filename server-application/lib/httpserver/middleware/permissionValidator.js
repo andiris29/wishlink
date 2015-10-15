@@ -48,8 +48,7 @@ var _builtInValidators = {
             callback(null);
         } else {
             // TODO now nologin
-            //callback(ServerError.ERR_NOT_LOGGED_IN);
-            callback(null);
+            callback(ServerError.ERR_NOT_LOGGED_IN);
         }
     },
     'validateAdmin' : function(req, res, callback) {
