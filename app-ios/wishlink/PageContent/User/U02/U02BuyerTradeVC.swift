@@ -125,9 +125,18 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             self.currentTradeIndex = cell.indexPath.row
             self.cancelTrade()
         case .CheckComplain:
-            
-            let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.pushViewController(vc, animated: true)
+            if let dic = cell.trade.owner!["rongcloud"] as? NSDictionary {
+                let targetId = dic["token"] as! String
+                let vc = T09SimpleComplaintStatusVC()
+                vc.targetId = targetId
+                vc.conversationType = .ConversationType_PRIVATE
+                vc.title = "投诉处理"
+                vc.hidesBottomBarWhenPushed = true
+                self.userVC.navigationController!.navigationBar.hidden = false;
+                self.userVC.navigationController!.pushViewController(vc, animated: true)
+            }
+//            let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+//            self.userVC.navigationController!.pushViewController(vc, animated: true)
         case .CheckLogistics:
             //TODO 物流信息
             let tipView = U02LogisticsTipView(name: "物流公司：韵达快递", orderNumber: "物流单号：18815287600")
@@ -143,18 +152,9 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
                 self.userVC.navigationController!.pushViewController(vc, animated: true)
             }
         case .Complain:
-            if let dic = cell.trade.owner!["rongcloud"] as? NSDictionary {
-                let targetId = dic["token"] as! String
-                let vc = T08SimpleComplaintVC()
-                vc.targetId = targetId
-                vc.conversationType = .ConversationType_PRIVATE
-                vc.title = "投诉处理"
-                vc.hidesBottomBarWhenPushed = true
-                self.userVC.navigationController!.navigationBar.hidden = false;
-                self.userVC.navigationController!.pushViewController(vc, animated: true)
-            }
-//            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
-//            self.userVC.navigationController!.pushViewController(vc, animated: true);
+            
+            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+            self.userVC.navigationController!.pushViewController(vc, animated: true);
         default:
             print("error")
         }

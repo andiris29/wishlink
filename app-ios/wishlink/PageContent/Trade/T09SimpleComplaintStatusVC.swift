@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T08SimpleComplaintVC: RCConversationViewController {
+class T09SimpleComplaintStatusVC: RCConversationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
