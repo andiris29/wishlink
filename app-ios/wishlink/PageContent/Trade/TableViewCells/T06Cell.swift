@@ -65,13 +65,12 @@ class T06Cell: UITableViewCell {
         self.lbTotalFree.text = totalPrice.format(".2")
         if(self.trade != nil)
         {
-            let dic:NSDictionary! = self.trade.ownerRef
-            if(dic != nil && dic.count>0)
+            if(self.trade.owner != nil && self.trade.owner!.count>0)
             {
                 self.lbUserName.text = ""
                 self.iv_userImg.image = nil;
-                let name:String! = dic.objectForKey("nickname") as? String
-                let imgUrl:String! = dic.objectForKey("portrait") as? String
+                let name:String! = self.trade.owner!.objectForKey("nickname") as? String
+                let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
                 if(name != nil)
                 {
                     self.lbUserName.text = name;

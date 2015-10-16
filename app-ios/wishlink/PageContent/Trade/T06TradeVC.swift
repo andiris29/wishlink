@@ -235,7 +235,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func requestDataFailed(error: String) {
         
-        SVProgressHUD.showErrorWithStatusWithBlack("获取用户信息失败！");
+        SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
     
 }
