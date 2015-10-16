@@ -150,12 +150,11 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
             if(self.selectArr.count>0)
             {
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
-                var tradeidArr:[String]! = [];
+                
                 for tradeItem in self.selectArr
                 {
-                    tradeidArr.append(tradeItem._id);
+                    self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeItem._id], tag: 61)
                 }
-                self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeidArr], tag: 61)
             }
             else
             {
@@ -212,10 +211,18 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
             }
         } else if(tag == 61) {
             
-            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            vc.item = self.item;
-            vc.isNewOrder = false;
-            self.navigationController?.pushViewController(vc, animated: true);
+            
+            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+                let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
+                if(vc != nil)
+                {
+                    vc.sellerBtnAction(vc.sellerBtn);
+                }
+                
+                tababarController.selectedIndex = 3;
+            }
+            
             //todo:
         } else if(tag == 62) {//跟单成功转向支付页面
             
