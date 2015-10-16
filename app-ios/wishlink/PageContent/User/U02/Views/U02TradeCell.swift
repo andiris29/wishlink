@@ -69,6 +69,17 @@ class U02TradeCell: UICollectionViewCell {
     @IBOutlet weak var sellerCheckComplaintBtn: UIButton!
     @IBOutlet weak var sellerSendOutBtn: UIButton!
     
+    @IBOutlet weak var itemNameLabel: UILabel!
+    
+    @IBOutlet weak var itemCountryLabel: UILabel!
+    
+    @IBOutlet weak var itemPriceLabel: UILabel!
+    
+    @IBOutlet weak var itemCountLabel: UILabel!
+    
+    @IBOutlet weak var itemTotalPrice: UILabel!
+    
+    @IBOutlet weak var ownerNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -120,7 +131,15 @@ class U02TradeCell: UICollectionViewCell {
         } else {
             self.adjustSellerTopView()
         }
-        
+        self.itemNameLabel.text = "品名：" + self.trade.item.name
+        self.itemCountryLabel.text = "购买地：" + self.trade.item.country
+        self.itemPriceLabel.text = "出价：￥" + "\(self.trade.item.price)"
+        self.itemCountryLabel.text = "数量：" + "\(self.trade.quantity)"
+        let totalPrice: Float = Float(self.trade.quantity) * self.trade.item.price
+        self.itemTotalPrice.text = "合计：" + "\(totalPrice)"
+        if self.trade.owner != nil {
+            self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
+        }
     }
     
     func adjustBuyerTopView() {
