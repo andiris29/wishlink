@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc protocol T06CellDelegate
+{
+    //选中项发生更改的时候
+    func selectItemChange(trade:TradeModel,isSelected:Bool);
+}
+
 class T06Cell: UITableViewCell {
 
     @IBOutlet weak var selectedButton: UIButton!
@@ -18,6 +24,8 @@ class T06Cell: UITableViewCell {
     @IBOutlet weak var lbUserImage: UIImageView!
     @IBOutlet weak var lbUserName: UILabel!
     @IBOutlet weak var lbTotalFree: UILabel!
+    
+    var myDelegate:T06CellDelegate!
     var trade:TradeModel!
     var item:ItemModel!
     override func awakeFromNib() {
@@ -28,6 +36,11 @@ class T06Cell: UITableViewCell {
     @IBAction func selectedButtonAction(sender: UIButton) {
         
         sender.selected = !sender.selected
+        
+        if(self.myDelegate != nil)
+        {
+            self.myDelegate!.selectItemChange(self.trade, isSelected: sender.selected);
+        }
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

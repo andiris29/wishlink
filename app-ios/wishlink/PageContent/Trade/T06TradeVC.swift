@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHeaderDelegate, T06CellFooterDelegate, WebRequestDelegate {
+class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHeaderDelegate, T06CellFooterDelegate,T06CellDelegate, WebRequestDelegate {
 
     let cellIdentifier = "T06Cell"
     let cellIdentifierHeader = "T06CellHeader"
@@ -19,7 +19,10 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     
     var item: ItemModel!
+    //跟单列表
     var followArr:[TradeModel]! = []
+    //选中的抢单列表
+    var selectArr:[TradeModel]! = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,13 +94,37 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         default:
             let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
             tCell.loadData(followArr[indexPath.row - 1],item:self.item);
+            tCell.myDelegate = self;
             cell = tCell;
             
         }
         
         return cell
     }
-    
+     func selectItemChange(selectTrade:TradeModel,isSelected:Bool)
+     {
+        if(isSelected)//insert
+        {
+            self.selectArr.append(selectTrade);
+        }
+        else//remove
+        {
+            if(self.selectArr.count>0)
+            {
+                var index = 0;
+               for tradeObj in self.selectArr
+               {
+                    if(tradeObj._id == selectTrade._id)
+                    {
+                        break;
+                    }
+                    index+=1;
+                }
+                self.selectArr.removeAtIndex(index);
+            }
+            
+        }
+    }
     //MARK: - Action
     //跟单
     func btnFollowAction(sernder:UIButton) {
@@ -120,8 +147,21 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         
         if(UserModel.shared.isLogin)
         {
-            SVProgressHUD.showWithStatusWithBlack("请稍后...")
-            self.httpObj.httpPostApi("trade/assignToMe", tag: 61)
+            if(self.selectArr.count>0)
+            {
+                SVProgressHUD.showWithStatusWithBlack("请稍后...")
+                var tradeidArr:[String]! = nil;
+                for tradeItem in self.selectArr
+                {
+                    tradeidArr.append(tradeItem._id);
+                }
+                self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeidArr], tag: 61)
+            }
+            else
+            {
+                UIHEPLER.alertErrMsg("请先选择");
+            }
+          
         }
         else
         {
