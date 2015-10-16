@@ -36,25 +36,12 @@ tradeFeeding.asSeller = {
                     '$in' : RequestHelper.parseInts(param.statuses)
                 };
             }
-            MongoHelper.queryPaging(Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
             };
         }, {
-            afterQuery: function(param, currentPageModels, numTotal, callback) {
-                async.series([function(cb) {
-                    Trades.populate(currentPageModels, {
-                        path: 'itemRef',
-                        model: 'items'
-                    }, cb);
-                }, function(cb) {
-                    Trades.populate(currentPageModels, {
-                        path: 'ownerRef',
-                        model: 'users'
-                    }, cb);
-                }], callback);
-            }
         });
     }
 };
@@ -77,25 +64,12 @@ tradeFeeding.asBuyer = {
                     '$in' : RequestHelper.parseInts(param.statuses)
                 };
             }
-            MongoHelper.queryPaging(Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
             };
         }, {
-            afterQuery: function(param, currentPageModels, numTotal, callback) {
-                async.series([function(cb) {
-                    Trades.populate(currentPageModels, {
-                        path: 'itemRef',
-                        model: 'items'
-                    }, cb);
-                }, function(cb) {
-                    Trades.populate(currentPageModels, {
-                        path: 'ownerRef',
-                        model: 'users'
-                    }, cb);
-                }], callback);
-            }
         });
     }
 };
@@ -113,25 +87,12 @@ tradeFeeding.byItem = {
             var criteria = {
                 itemRef : RequestHelper.parseId(param._id),
             };
-            MongoHelper.queryPaging(Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
             };
         }, {
-            afterQuery: function(param, currentPageModels, numTotal, callback) {
-                async.series([function(cb) {
-                    Trades.populate(currentPageModels, {
-                        path: 'itemRef',
-                        model: 'items'
-                    }, cb);
-                }, function(cb) {
-                    Trades.populate(currentPageModels, {
-                        path: 'ownerRef',
-                        model: 'users'
-                    }, cb);
-                }], callback);
-            }
         });
     }
 };
