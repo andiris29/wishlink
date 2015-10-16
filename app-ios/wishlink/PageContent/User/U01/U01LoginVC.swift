@@ -26,6 +26,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         super.viewDidLoad()
 
         self.httpObj.mydelegate = self
+        
         NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
             let temp = noti.object as! WBAuthorizeResponse
             if temp.statusCode == .Success {
@@ -126,7 +127,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     }
     
     func parseUserData(data: AnyObject!) {
-        NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
+//        NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
         SVProgressHUD.dismiss();
         UserModel.shared.userDic = data["user"] as! [String: AnyObject]
         

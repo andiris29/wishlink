@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserModel: BaseModel {
+class UserModel: BaseModel, RCIMUserInfoDataSource {
     
     var userDic: [String : AnyObject]! {
         didSet {
@@ -29,7 +29,14 @@ class UserModel: BaseModel {
     var receiversArray: [ReceiverModel]!
     var searchHistory: [keywordModel]!
     var alipayId: String = ""
-    var rcToken: String = ""
+    var rcToken: String = "" {
+        didSet {
+            if rcToken != oldValue {
+//                self.loginRongCloud()
+            }
+        }
+    }
+    
     class var shared: UserModel {
         dispatch_once(&Inner.token) {
             Inner.instance = UserModel()
@@ -41,7 +48,13 @@ class UserModel: BaseModel {
         static var token: dispatch_once_t = 0
     }
     
-    
+    func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
+        let user = RCUserInfo()
+        user.userId = self._id
+        user.portraitUri = self.portrait
+        user.name = self.nickname
+        return completion(user)
+    }
     
     func fillData() {
         if self.userDic.count == 0 {
@@ -102,6 +115,27 @@ class UserModel: BaseModel {
         }
         
     }
+    
+    func logout() {
+        self.isLogin = false
+        if self.rcToken.length != 0 {
+            RCIM.sharedRCIM().logout()
+        }
+    }
+    
+    func loginRongCloud() {
+        if self.rcToken.length == 0 {
+            return
+        }
+        RCIM.sharedRCIM().connectWithToken(self.rcToken, success: { (userId) -> Void in
+            RCIM.sharedRCIM().userInfoDataSource = self
+            }, error: { (errorCode) -> Void in
+                print(errorCode)
+            }) { () -> Void in
+                print("token 无效 ，请确保生成token 使用的appkey 和初始化时的appkey 一致")
+        }
+    }
+    
 }
 
 

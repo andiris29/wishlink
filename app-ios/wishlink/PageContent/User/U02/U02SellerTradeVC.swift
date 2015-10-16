@@ -260,7 +260,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             break
         }
         self.httpObj.httpGetApi("tradeFeeding/asSeller", parameters: dic, tag: 10)
-
+        
+        // TODO test
     }
     
     func cancelTrade() {

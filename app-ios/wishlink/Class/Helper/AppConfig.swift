@@ -119,6 +119,7 @@ class AppConfig: NSObject
         // add by yeo 2015.10.13 23:22
         if ud.objectForKey("Configuration_Cookie") != nil {
             self.cookieStr = ud.objectForKey("Configuration_Cookie") as! String
+            UserModel.shared.isLogin = true
         }else {
             self.cookieStr = ""
         }

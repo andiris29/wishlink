@@ -42,7 +42,6 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.prepareSubVC()
         self.selectedBtn = self.sellerBtn
         self.sellerBtnAction(self.sellerBtn)
-        self.httpObj.mydelegate = self
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
             self.fillDataForUI()
