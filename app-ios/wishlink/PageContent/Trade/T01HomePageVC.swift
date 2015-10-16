@@ -32,7 +32,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if APPCONFIG.isUserLogin() == false
+        if UserModel.shared.isLogin == false
         {
             UIHEPLER.showLoginPage(self);
 //            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);

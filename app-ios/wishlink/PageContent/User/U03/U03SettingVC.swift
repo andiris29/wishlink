@@ -83,7 +83,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         })
         if tag == 10 {
             // 注销
-            UserModel.shared.isLogin = false
+            UserModel.shared.logout()
             AppConfig().userLogout()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
@@ -275,7 +275,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         if let registrationId = APService.registrationID() {
             self.httpObj.httpPostApi("user/logout", parameters: ["registrationId": registrationId], tag: 10)
         }else {
-            UserModel.shared.isLogin = false
+            UserModel.shared.logout()
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
             NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
