@@ -5,7 +5,7 @@ var ServerError = function(errorCode, description, err) {
     Error.call(this, 'server error');
     this.errorCode = errorCode;
     this.description = description || _codeToString(errorCode);
-    if (errorCode === ServerError.ServerError) {
+    if (errorCode === ServerError.ERR_UNKOWN) {
         err = err || new Error();
         this.stack = err.stack;
         winston.error(new Date().toString() + '- ServerError: ' + this.errorCode);

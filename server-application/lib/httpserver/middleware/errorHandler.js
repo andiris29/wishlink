@@ -1,11 +1,10 @@
-//var ResponseHelper = require('../helpers/ResponseHelper');
+var ResponseHelper = require('../helper/ResponseHelper');
 
 function error_handler(err, req, res, next) {
     if (!err) {
         return next();
     } else {
-        //TODO
-//        ResponseHelper.response(res, err);
+        ResponseHelper.response(res, err);
     }
 }
 
