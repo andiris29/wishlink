@@ -41,6 +41,7 @@
 		76CD0E921B89657200B04453 /* U02FavoriteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CD0E901B89657200B04453 /* U02FavoriteVC.xib */; };
 		76DC3B7A1BA85997005DFA23 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC3B791BA85997005DFA23 /* UserModel.swift */; };
 		76DC96661B8993E100270969 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC96651B8993E100270969 /* UIView.swift */; };
+		76E905001BD15DF100A95A99 /* T10SimpleMessagingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E904FF1BD15DF100A95A99 /* T10SimpleMessagingVC.swift */; settings = {ASSET_TAGS = (); }; };
 		76ED21E71BCFF7EB005C2D80 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76ED21E61BCFF7EB005C2D80 /* AssetsLibrary.framework */; };
 		76ED21E91BCFF7FD005C2D80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76ED21E81BCFF7FD005C2D80 /* AudioToolbox.framework */; };
 		76ED21EB1BCFF80A005C2D80 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76ED21EA1BCFF80A005C2D80 /* AVFoundation.framework */; };
@@ -243,6 +244,7 @@
 		76CD0E901B89657200B04453 /* U02FavoriteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02FavoriteVC.xib; sourceTree = "<group>"; };
 		76DC3B791BA85997005DFA23 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		76DC96651B8993E100270969 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		76E904FF1BD15DF100A95A99 /* T10SimpleMessagingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T10SimpleMessagingVC.swift; sourceTree = "<group>"; };
 		76ED21E61BCFF7EB005C2D80 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		76ED21E81BCFF7FD005C2D80 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		76ED21EA1BCFF80A005C2D80 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1029,6 +1031,7 @@
 				D24485C71B8DE88300CD97D5 /* T09ComplaintStatusVC.xib */,
 				D24485D61B8E10B500CD97D5 /* T10MessagingVC.swift */,
 				D24485D71B8E10B500CD97D5 /* T10MessagingVC.xib */,
+				76E904FF1BD15DF100A95A99 /* T10SimpleMessagingVC.swift */,
 				D2E6BE851B96D36D0050C177 /* T11SearchSuggestionVC.swift */,
 				D2E6BE861B96D36D0050C177 /* T11SearchSuggestionVC.xib */,
 			);
@@ -1310,6 +1313,7 @@
 				A132BBA61B863342004EAB47 /* U03SettingVC.swift in Sources */,
 				D2744B321B84B9CE00746229 /* T06CellHeader.swift in Sources */,
 				D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */,
+				76E905001BD15DF100A95A99 /* T10SimpleMessagingVC.swift in Sources */,
 				76CD0E911B89657200B04453 /* U02FavoriteVC.swift in Sources */,
 				76DC96661B8993E100270969 /* UIView.swift in Sources */,
 				A1F3D3541BCEB4340007B7CE /* base64.m in Sources */,

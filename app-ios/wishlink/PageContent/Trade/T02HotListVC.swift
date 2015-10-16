@@ -29,6 +29,12 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.httpObj.mydelegate = self;
     }
 
+    deinit{
+        
+        NSLog("T02HotListVC -->deinit")
+        self.collectionView = nil;
+        self.dataArr = nil;
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false;

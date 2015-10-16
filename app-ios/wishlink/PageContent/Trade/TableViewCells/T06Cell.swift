@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc protocol T06CellDelegate
+{
+    //选中项发生更改的时候
+    func selectItemChange(trade:TradeModel,isSelected:Bool);
+}
+
 class T06Cell: UITableViewCell {
 
     @IBOutlet weak var selectedButton: UIButton!
@@ -15,9 +21,11 @@ class T06Cell: UITableViewCell {
     @IBOutlet weak var lbCount: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
     
-    @IBOutlet weak var lbUserImage: UIImageView!
+    @IBOutlet weak var iv_userImg: UIImageView!
     @IBOutlet weak var lbUserName: UILabel!
     @IBOutlet weak var lbTotalFree: UILabel!
+    
+    var myDelegate:T06CellDelegate!
     var trade:TradeModel!
     var item:ItemModel!
     override func awakeFromNib() {
@@ -28,6 +36,11 @@ class T06Cell: UITableViewCell {
     @IBAction func selectedButtonAction(sender: UIButton) {
         
         sender.selected = !sender.selected
+        
+        if(self.myDelegate != nil)
+        {
+            self.myDelegate!.selectItemChange(self.trade, isSelected: sender.selected);
+        }
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -50,6 +63,26 @@ class T06Cell: UITableViewCell {
             totalPrice = item.price * Float(trade.quantity)
         }
         self.lbTotalFree.text = totalPrice.format(".2")
+        if(self.trade != nil)
+        {
+            if(self.trade.owner != nil && self.trade.owner!.count>0)
+            {
+                self.lbUserName.text = ""
+                self.iv_userImg.image = nil;
+                let name:String! = self.trade.owner!.objectForKey("nickname") as? String
+                let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
+                if(name != nil)
+                {
+                    self.lbUserName.text = name;
+                }
+                if(imgUrl != nil && imgUrl.trim().length>1)
+                {
+                    WebRequestHelper().renderImageView(self.iv_userImg, url: imgUrl, defaultName: "T03aaa")
+                    UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIHEPLER.mainColor, borderWidth: 1);
+                    
+                }
+            }
+        }
 
         
     }
