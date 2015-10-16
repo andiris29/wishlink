@@ -64,6 +64,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if self.userModel.isLogin == false {
+            self.loginVC.hideSkipBtn = true
             self.view.addSubview(self.loginVC.view)
         }else {
             self.loginVC.view.removeFromSuperview()

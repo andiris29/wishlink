@@ -150,7 +150,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
             if(self.selectArr.count>0)
             {
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")
-                var tradeidArr:[String]! = nil;
+                var tradeidArr:[String]! = [];
                 for tradeItem in self.selectArr
                 {
                     tradeidArr.append(tradeItem._id);

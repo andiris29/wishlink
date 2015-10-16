@@ -16,7 +16,9 @@ class TradeModel: BaseModel {
     
     var status:Int!
     var itemRef:String!
-    var ownerRef:String!
+    var item: ItemModel!
+//    var ownerRef:String!
+    var ownerRef:NSDictionary!
     var create:String!
     var update:String!
     var statusOrder: TradeStatusOrder = .a0
@@ -35,8 +37,13 @@ class TradeModel: BaseModel {
         
         self.statusOrder =   self.statusOrderFromString(self.getStringValue("statusOrder", dic: dict))
         self.status =  self.getIntValue("status", dic: dict);
-        self.itemRef =  self.getStringValue("itemRef", dic: dict);
-        self.ownerRef =  self.getStringValue("ownerRef", dic: dict);
+//        self.itemRef =  self.getStringValue("itemRef", dic: dict);
+        self.item = ItemModel(dict: dict["itemRef"] as! NSDictionary)
+        if( dict["ownerRef"] != nil)
+        {
+            self.ownerRef = dict["ownerRef"] as! NSDictionary
+        }
+//        self.ownerRef =  self.getStringValue("ownerRef", dic: dict);
         self.create =  self.getStringValue("create", dic: dict);
         self.update =  self.getStringValue("update", dic: dict);
         self.quantity =  self.getIntValue("quantity", dic: dict);

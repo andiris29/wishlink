@@ -32,7 +32,7 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
     var rcToken: String = "" {
         didSet {
             if rcToken != oldValue {
-//                self.loginRongCloud()
+                self.loginRongCloud()
             }
         }
     }
@@ -46,6 +46,12 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
     struct Inner {
         static var instance: UserModel?
         static var token: dispatch_once_t = 0
+    }
+    
+    override init()
+    {
+        super.init();
+        self.prepareData()
     }
     
     func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
@@ -113,7 +119,13 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
                 
             }
         }
-        
+        self.save()
+    }
+    
+    func save() {
+        let ud = NSUserDefaults.standardUserDefaults()
+        ud.setObject("true", forKey: "isLogin")
+        ud.synchronize()
     }
     
     func logout() {
@@ -133,6 +145,16 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
                 print(errorCode)
             }) { () -> Void in
                 print("token 无效 ，请确保生成token 使用的appkey 和初始化时的appkey 一致")
+        }
+    }
+    
+    func prepareData() {
+        let ud = NSUserDefaults.standardUserDefaults()
+        if ud.objectForKey("isLogin") != nil {
+            self.isLogin = true
+        }else
+        {
+            self.isLogin = false
         }
     }
     

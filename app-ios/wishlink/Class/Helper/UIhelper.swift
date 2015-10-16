@@ -75,7 +75,7 @@ class UIHelper {
         return UIImage(contentsOfFile:strResure!)!
         //    return [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:nil]];
     }
-    //给btn假圆角
+    //给btn加圆角
     func buildButtonFilletStyleWithRadius(btn:UIButton,borderColor:UIColor,titleColor:UIColor,radius:CGFloat)
     {
         btn.layer.cornerRadius = radius;
@@ -84,6 +84,14 @@ class UIHelper {
         btn.layer.borderColor = borderColor.CGColor;
         btn.setTitleColor(titleColor, forState: UIControlState.Normal)
         
+    }
+    //给Image加圆角
+    func buildImageViewWithRadius(image:UIImageView,borderColor:UIColor,borderWidth:Int)
+    {
+        image.layer.cornerRadius = image.frame.width/2;
+        image.layer.masksToBounds=true
+        image.layer.borderWidth = CGFloat(borderWidth);
+        image.layer.borderColor = mainColor.CGColor;
     }
     func GetDeviceModel()->DeviceEnum
     {

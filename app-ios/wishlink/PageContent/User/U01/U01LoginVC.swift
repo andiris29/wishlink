@@ -20,7 +20,13 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     var wxCode: String!
     var wbToekn: String!
     var wbUserID: String!
-    var hideSkipBtn: Bool = false
+    var hideSkipBtn: Bool = false {
+        didSet {
+            if self.skipBtn != nil {
+                self.skipBtn.hidden = self.hideSkipBtn
+            }
+        }
+    }
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +56,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.skipBtn.hidden = self.hideSkipBtn
+        
     }
 
     
@@ -141,13 +147,6 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
 
-        let cookieJar = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        for cookie in cookieJar.cookies! {
-            if cookie.value.length != 0 {
-                APPCONFIG.cookieStr = cookie.value
-            }
-        }
-        print(APPCONFIG.cookieStr)
         self.parseUserData(response)
         
         

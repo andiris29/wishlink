@@ -21,7 +21,7 @@ class T06Cell: UITableViewCell {
     @IBOutlet weak var lbCount: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
     
-    @IBOutlet weak var lbUserImage: UIImageView!
+    @IBOutlet weak var iv_userImg: UIImageView!
     @IBOutlet weak var lbUserName: UILabel!
     @IBOutlet weak var lbTotalFree: UILabel!
     
@@ -63,6 +63,27 @@ class T06Cell: UITableViewCell {
             totalPrice = item.price * Float(trade.quantity)
         }
         self.lbTotalFree.text = totalPrice.format(".2")
+        if(self.trade != nil)
+        {
+            let dic:NSDictionary! = self.trade.ownerRef
+            if(dic != nil && dic.count>0)
+            {
+                self.lbUserName.text = ""
+                self.iv_userImg.image = nil;
+                let name:String! = dic.objectForKey("nickname") as? String
+                let imgUrl:String! = dic.objectForKey("portrait") as? String
+                if(name != nil)
+                {
+                    self.lbUserName.text = name;
+                }
+                if(imgUrl != nil && imgUrl.trim().length>1)
+                {
+                    WebRequestHelper().renderImageView(self.iv_userImg, url: imgUrl, defaultName: "T03aaa")
+                    UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIHEPLER.mainColor, borderWidth: 1);
+                    
+                }
+            }
+        }
 
         
     }
