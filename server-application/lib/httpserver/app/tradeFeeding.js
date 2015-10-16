@@ -1,14 +1,15 @@
-// third party library
+// Third party library
 var async = require('async');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 
-// model
+// Model
 var Trades = require('../../model/trades');
+var Items = require('../../model/items');
+var Users = require('../../model/users');
 
-// helper
+// Helper
 var ServerError = require('../server-error');
-
 var RequestHelper = require('../helper/RequestHelper');
 var ResponseHelper = require('../helper/ResponseHelper');
 var RelationshipHelper = require('../helper/RelationshipHelper');
@@ -41,6 +42,19 @@ tradeFeeding.asSeller = {
                 'trades' : trades 
             };
         }, {
+            afterQuery: function(param, currentPageModels, numTotal, callback) {
+                async.series([function(cb) {
+                    Trades.populate(currentPageModels, {
+                        path: 'itemRef',
+                        model: 'items'
+                    }, cb);
+                }, function(cb) {
+                    Trades.populate(currentPageModels, {
+                        path: 'ownerRef',
+                        model: 'users'
+                    }, cb);
+                }], callback);
+            }
         });
     }
 };
@@ -69,6 +83,19 @@ tradeFeeding.asBuyer = {
                 'trades' : trades 
             };
         }, {
+            afterQuery: function(param, currentPageModels, numTotal, callback) {
+                async.series([function(cb) {
+                    Trades.populate(currentPageModels, {
+                        path: 'itemRef',
+                        model: 'items'
+                    }, cb);
+                }, function(cb) {
+                    Trades.populate(currentPageModels, {
+                        path: 'ownerRef',
+                        model: 'users'
+                    }, cb);
+                }], callback);
+            }
         });
     }
 };
@@ -92,6 +119,19 @@ tradeFeeding.byItem = {
                 'trades' : trades 
             };
         }, {
+            afterQuery: function(param, currentPageModels, numTotal, callback) {
+                async.series([function(cb) {
+                    Trades.populate(currentPageModels, {
+                        path: 'itemRef',
+                        model: 'items'
+                    }, cb);
+                }, function(cb) {
+                    Trades.populate(currentPageModels, {
+                        path: 'ownerRef',
+                        model: 'users'
+                    }, cb);
+                }], callback);
+            }
         });
     }
 };
