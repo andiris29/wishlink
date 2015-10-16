@@ -157,8 +157,18 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
 //            let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             
         case .Complain:
-            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.pushViewController(vc, animated: true);
+            if let dic = cell.trade.owner!["rongcloud"] as? NSDictionary {
+                let targetId = dic["token"] as! String
+                let vc = T08SimpleComplaintVC()
+                vc.targetId = targetId
+                vc.conversationType = .ConversationType_PRIVATE
+                vc.title = "投诉处理"
+                vc.hidesBottomBarWhenPushed = true
+                self.userVC.navigationController!.navigationBar.hidden = false;
+                self.userVC.navigationController!.pushViewController(vc, animated: true)
+            }
+//            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+//            self.userVC.navigationController!.pushViewController(vc, animated: true);
             
         default:
             print("error")
