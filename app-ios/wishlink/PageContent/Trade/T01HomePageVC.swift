@@ -134,6 +134,13 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
 
     }
     
+    // MARK: - Touched
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.searchTableView.hidden = true
+    }
+    
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -157,8 +164,13 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.searchTextField.text = itemContents[indexPath.row] as? String
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        if indexPath.row == 0 { return }
+        
+        self.searchTableView.hidden = true
+        self.searchTextField.text = itemContents[indexPath.row] as? String
     }
     
     //MARK: - 标签点击操作

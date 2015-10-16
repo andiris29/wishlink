@@ -38,7 +38,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         self.httpObj.mydelegate = self;
    
 //        SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 0)
+        self.httpObj.httpGetApi("user/get", parameters: ["req.registrationId":APPCONFIG.Uid], tag: 110)
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         self.searchTexfield.delegate = self;
@@ -78,6 +78,11 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         cell.labelName.text = itemContents[indexPath.row] as? String
         cell.selected = false;
         cell.selectionStyle = UITableViewCellSelectionStyle.Default
+        
+        let isLast: Bool = indexPath.row == itemContents.count - 1
+        cell.labelName.textAlignment = isLast ? NSTextAlignment.Center :NSTextAlignment.Left
+        cell.lineImageView.hidden = isLast
+        
         return cell
         
     }
@@ -90,7 +95,16 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       self.searchTexfield.text = itemContents[indexPath.row] as? String
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if indexPath.row == 0 { return }
+        if indexPath.row == itemContents.count - 1 {
+            
+            self.httpObj.httpPostApi("user/clearSearchHistory", parameters: ["req.registrationId":APPCONFIG.Uid], tag: 112)
+        } else {
+            self.searchTexfield.text = itemContents[indexPath.row] as? String
+        }
         
     }
 
@@ -131,7 +145,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         {
             apiName = "suggestion/name"
         }
-        self.httpObj.httpGetApi(apiName, parameters: para, tag: 10);
+        self.httpObj.httpGetApi(apiName, parameters: para, tag: 111);
     }
     
     //MARK: UITextFiledDelegate
@@ -150,7 +164,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     //MAEK: webrequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         SVProgressHUD.dismiss();
-        if( tag == 0)
+        if( tag == 110)
         {
             let respDic  = response as! NSDictionary;
             if(respDic.objectForKey("user") != nil)
@@ -166,13 +180,13 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
                    
                         dataArray.addObject(item.keyword);
                     }
-                    
+                    dataArray.addObject("清空历史搜索")
                     itemContents = dataArray
                     self.searchTableView.reloadData()
                 }
             }
         }
-        else if(tag  == 10)
+        else if(tag  == 111)
         {
             let dic = response as! NSDictionary;
             if (dic.objectForKey("suggestions") != nil)
@@ -188,7 +202,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
                         
                         dataArray.addObject(item as! String)
                     }
-                    
+                    dataArray.addObject("清空历史搜索")
                     itemContents = dataArray
                     self.searchTableView.reloadData()
                 }
@@ -199,9 +213,14 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
                 self.searchTableView.reloadData()
             }
             
+        } else if (tag == 112) {
+        
+            itemContents = [];
+            self.searchTableView.reloadData()
         }
     }
-    func requestDataFailed(n: String) {
+    func requestDataFailed(error: String) {
         
+        print("T11RequestDataFailed: \(error)")
     }
 }
