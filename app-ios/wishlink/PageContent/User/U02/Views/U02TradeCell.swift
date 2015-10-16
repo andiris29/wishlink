@@ -128,6 +128,7 @@ class U02TradeCell: UICollectionViewCell {
     func adjustUI() {
         if self.cellType == .Buyer {
             self.adjustBuyerTopView()
+            
         } else {
             self.adjustSellerTopView()
         }
@@ -143,7 +144,9 @@ class U02TradeCell: UICollectionViewCell {
     }
     
     func adjustBuyerTopView() {
-        
+        self.btnChat.setImage(UIImage(named: "u02-contactsell"), forState: .Normal)
+        self.btnChat.setImage(UIImage(named: "u02-contactsell-new"), forState: .Selected)
+
         self.hideAllBtns()
         self.isRead(true)
         self.btnComplain.hidden = false
@@ -226,6 +229,8 @@ class U02TradeCell: UICollectionViewCell {
     }
 
     func adjustSellerTopView() {
+        self.btnChat.setImage(UIImage(named: "u02-contactbuy"), forState: .Normal)
+        self.btnChat.setImage(UIImage(named: "u02-contactbuy-new"), forState: .Selected)
         self.hideAllBtns()
         self.isRead(true)
         switch trade.status {

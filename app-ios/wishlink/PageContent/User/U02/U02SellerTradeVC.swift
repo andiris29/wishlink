@@ -144,9 +144,17 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             self.userVC.navigationController!.pushViewController(vc, animated: true)
             
         case .Chat:
-            self.userVC.navigationController?.navigationBarHidden = false;
-            let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.pushViewController(vc, animated: true)
+//            self.goto
+            if let dic = cell.trade.owner!["rongcloud"] as? NSDictionary {
+                let targetId = dic["token"] as! String
+                let vc = T10SimpleMessagingVC()
+                vc.targetId = targetId
+                vc.conversationType = .ConversationType_PRIVATE
+                vc.hidesBottomBarWhenPushed = true
+                self.userVC.navigationController!.navigationBar.hidden = false;
+                self.userVC.navigationController!.pushViewController(vc, animated: true)
+            }
+//            let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
             
         case .Complain:
             let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
@@ -179,9 +187,10 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             })
         }else if tag == 20 {
             if let tradeDic = response["trade"] as? NSDictionary {
-                let trade = TradeModel(dict: tradeDic)
-                self.tradeArray.removeAtIndex(self.currentTradeIndex)
-                self.tradeArray.insert(trade, atIndex: self.currentTradeIndex)
+                let tempTrade = TradeModel(dict: tradeDic)
+                let trade = self.tradeArray[self.currentTradeIndex]
+                trade.status = tempTrade.status
+                trade.statusOrder = tempTrade.statusOrder
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
                 })

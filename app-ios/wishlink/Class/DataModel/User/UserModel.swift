@@ -129,6 +129,9 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
     }
     
     func logout() {
+        let ud = NSUserDefaults.standardUserDefaults()
+        ud.removeObjectForKey("isLogin")
+        ud.synchronize()
         self.isLogin = false
         if self.rcToken.length != 0 {
             RCIM.sharedRCIM().logout()

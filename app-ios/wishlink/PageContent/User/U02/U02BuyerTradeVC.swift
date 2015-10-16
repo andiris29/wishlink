@@ -167,9 +167,10 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         }else if tag == 20 {
             // 撤单
             if let tradeDic = response["trade"] as? NSDictionary {
-                let trade = TradeModel(dict: tradeDic)
-                self.tradeArray.removeAtIndex(self.currentTradeIndex)
-                self.tradeArray.insert(trade, atIndex: self.currentTradeIndex)
+                let tempTrade = TradeModel(dict: tradeDic)
+                let trade = self.tradeArray[self.currentTradeIndex]
+                trade.status = tempTrade.status
+                trade.statusOrder = tempTrade.statusOrder
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
                 })
@@ -177,9 +178,10 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         }else if tag == 30{
             // 确认收货
             if let tradeDic = response["trade"] as? NSDictionary {
-                let trade = TradeModel(dict: tradeDic)
-                self.tradeArray.removeAtIndex(self.currentTradeIndex)
-                self.tradeArray.insert(trade, atIndex: self.currentTradeIndex)
+                let tempTrade = TradeModel(dict: tradeDic)
+                let trade = self.tradeArray[self.currentTradeIndex]
+                trade.status = tempTrade.status
+                trade.statusOrder = tempTrade.statusOrder
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
                 })

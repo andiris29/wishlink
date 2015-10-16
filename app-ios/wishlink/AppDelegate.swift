@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(AppConfig.wbAppKey)
         WXApi.registerApp(AppConfig.wxAppKey, withDescription: "wishlink")
-//        RCIM.sharedRCIM().initWithAppKey(AppConfig.rcAppKey);
+        RCIM.sharedRCIM().initWithAppKey(AppConfig.rcAppKey);
 
         return true
     }
