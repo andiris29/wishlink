@@ -157,14 +157,21 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func buttonAction(sender: UIButton) {
     
-        let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        vc.keyword = sender.titleLabel!.text!
-        self.navigationController?.pushViewController(vc, animated: true);
-        self.removeTimer();
+        
+        self.gotoNextPage(sender.titleLabel!.text!);
         
         print("buttonAction:\(sender.tag)")
     }
-    
+    func gotoNextPage(strKeyWord:String)
+    {
+        let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        vc.keyword = strKeyWord;
+        self.navigationController?.pushViewController(vc, animated: true);
+        self.removeTimer();
+        
+        
+    }
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -204,7 +211,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
         self.searchTableView.hidden = true
-        
+        self.gotoNextPage(textField.text!);
         return true
     }
 

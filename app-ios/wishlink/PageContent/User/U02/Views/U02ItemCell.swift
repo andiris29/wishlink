@@ -33,6 +33,8 @@ class U02ItemCell: UICollectionViewCell {
     
     @IBOutlet weak var btnDelete: UIButton!
     var indexPath: NSIndexPath!
+    
+        @IBOutlet weak var imageRollView: CSImageRollView!
  
     var closure: ((ItemCellButtonClickType, NSIndexPath) -> ())?
     
@@ -80,8 +82,29 @@ class U02ItemCell: UICollectionViewCell {
         self.lbCountry.text = item.country;
         self.lbPrice.text = "￥" + item.price.format(".2");
         self.lbIntro.text = item.name + " " + item.spec;
-        self.lbCount.text = "\(item.trades)件"
+        self.lbCount.text = "\(item.numTrades)件"
         self.favoriteBtn.selected = self.item.isFavorite
+        
+        
+        if (item == nil ||  item.images == nil) {return}
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            
+            var images: [UIImage] = [UIImage]()
+            for imageUrl in self.item.images {
+                let url: NSURL = NSURL(string: imageUrl)!
+                let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                images.append(image)
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                self.initImageRollView(images)
+            })
+        })
+    }
+    func initImageRollView(images:[UIImage]) {
+        
+        imageRollView.initWithImages(images)
+        imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
+        imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
     }
     
     //从热门列表中加载的时候调用此方法
@@ -89,6 +112,8 @@ class U02ItemCell: UICollectionViewCell {
     {
         self.item = _item
         self.btnDelete.hidden = true;
+        
+        
         
     }
     

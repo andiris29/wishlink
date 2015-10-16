@@ -386,6 +386,7 @@
                 <outlet property="btnDorp" destination="BP1-Ce-vBz" id="0OH-Ve-VL1"/>
                 <outlet property="btnFlow" destination="Rd0-Ng-yZU" id="edw-Bm-eKL"/>
                 <outlet property="imageRollView" destination="GRC-FX-ebG" id="LSl-uY-aAy"/>
+                <outlet property="lbTotalCount" destination="n5W-Ey-1k5" id="Cob-JW-Bh9"/>
                 <outlet property="productFormatLabel" destination="rue-KT-FF1" id="37P-dJ-Yvu"/>
                 <outlet property="productMessageLabel" destination="Fmw-po-SQm" id="ZYJ-Yz-4J1"/>
                 <outlet property="productNameLabel" destination="xRC-aO-aVL" id="vzs-Aq-GDY"/>
@@ -394,6 +395,7 @@
                 <outlet property="productTotalLabel" destination="wBa-ji-xRa" id="9Ba-M4-hve"/>
                 <outlet property="titleLabel" destination="hOt-2Q-eBW" id="zuc-J1-A2k"/>
             </connections>
+            <point key="canvasLocation" x="-9" y="197"/>
         </tableViewCell>
     </objects>
     <resources>

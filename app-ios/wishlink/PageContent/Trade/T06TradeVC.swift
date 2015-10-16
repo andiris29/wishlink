@@ -18,7 +18,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     @IBOutlet var tradeTableView: UITableView!
     
     
-    var product: ItemModel!
+    var item: ItemModel!
     var followArr:[TradeModel]! = []
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierHeader, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
-        self.httpObj.httpGetApi("tradeFeeding/byItem?item._id="+self.product._id, parameters: nil, tag: 60)
+        self.httpObj.httpGetApi("tradeFeeding/byItem?item._id="+self.item._id, parameters: nil, tag: 60)
         self.navigationController?.navigationBarHidden = false;
         
         self.loadComNaviLeftBtn()
@@ -80,20 +80,18 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         switch indexPath.row {
         case 0:
            let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
-   
-//           tCell.btnFlow.addTarget(self, action: "btnFollowAction:", forControlEvents: UIControlEvents.TouchUpInside)
            tCell.delegate = self
-           tCell.initData(product)
+           tCell.initData(item)
            
            cell = tCell;
         case last:
            let  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
-//           fcell.btnGrabOrder.addTarget(self, action: "btnGrabOrderAction:", forControlEvents: UIControlEvents.TouchUpInside)
            fcell.delegate = self
            cell = fcell;
         default:
-            cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
-            
+            let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
+            tCell.loadData(followArr[indexPath.row - 1],item:self.item);
+            cell = tCell;
             
         }
         
@@ -101,15 +99,15 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     }
     
     //MARK: - Action
-    
+    //跟单
     func btnFollowAction(sernder:UIButton) {
         
         if(UserModel.shared.isLogin)
         {
-            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle())
-            vc.isNewOrder = false
-            vc.item = product;
-            self.navigationController?.pushViewController(vc, animated: true);
+            SVProgressHUD.showWithStatusWithBlack("请稍后...")
+            let para  = ["itemRef":item._id,
+                "quantity":"1"];
+            self.httpObj.httpPostApi("trade/create", parameters: para, tag: 62);
         }
         else
         {
@@ -117,6 +115,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         }
     }
     
+    //抢单
     func btnGrabOrderAction(sernder:UIButton) {
         
         if(UserModel.shared.isLogin)
@@ -151,11 +150,14 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
+        SVProgressHUD.dismiss();
         print(response, terminator: "")
         if(tag == 60)
         {
-            let tradesObj = response as? NSArray
-            if(tradesObj != nil && tradesObj?.count>0)
+            
+            let tradesObj:NSArray! = (response as? NSDictionary)?.objectForKey("trades") as? NSArray
+        
+            if(tradesObj != nil && tradesObj!.count>0)
             {
                 if(followArr != nil && followArr.count>0)
                 {
@@ -165,21 +167,28 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
                 {
                     let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
                     self.followArr.append(tradeItem);
-                    self.tradeTableView.reloadData();
                 }
+                self.tradeTableView.reloadData();
             }
         } else if(tag == 61) {
             
-            SVProgressHUD.dismiss();
-            
             let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            vc.item = self.product;
+            vc.item = self.item;
             vc.isNewOrder = false;
             self.navigationController?.pushViewController(vc, animated: true);
-
-            
             //todo:
-        } else if(tag == 62) {
+        } else if(tag == 62) {//跟单成功转向支付页面
+            
+            
+            let dic = response as! NSDictionary;
+            let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
+            let tradeItem = TradeModel(dict: tradeDic);
+            
+            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            vc.item = self.item;
+            vc.trade = tradeItem;
+            vc.isNewOrder = false;
+            self.navigationController?.pushViewController(vc, animated: true);
             
         }
     }

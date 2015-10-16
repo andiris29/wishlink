@@ -16,6 +16,7 @@ protocol T06CellHeaderDelegate: NSObjectProtocol {
 
 class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
 
+    @IBOutlet weak var lbTotalCount: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
@@ -31,6 +32,7 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
     var dorpListView: CSDorpListView!
     
     var delegate: T06CellHeaderDelegate?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,11 +63,16 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
         self.titleLabel.text  = item.brand
         self.productNameLabel.text  = "品名：" + item.name
         self.productPriceLabel.text  = "\(item.price)"
-//        self.productTotalLabel.text  = item.countryRef
-//        self.productNumberLabel.text  = item.country
+        var totalPrice:Float = item.price
+        if(item.numTrades != nil && item.numTrades>0)
+        {
+            totalPrice = item.price * Float(item.numTrades)
+        }
+        self.productTotalLabel.text = totalPrice.format(".2")
+        self.productNumberLabel.text  = "\(item.numTrades)件"
         self.productFormatLabel.text  = item.spec
         self.productMessageLabel.text  = item.notes
-        
+        self.lbTotalCount.text = "\(item.numTrades)件"
         if (item.images == nil) {return}
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
