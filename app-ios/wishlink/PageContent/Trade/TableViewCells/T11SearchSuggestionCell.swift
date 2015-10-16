@@ -11,6 +11,7 @@ import UIKit
 class T11SearchSuggestionCell: UITableViewCell {
 
     @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var lineImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
