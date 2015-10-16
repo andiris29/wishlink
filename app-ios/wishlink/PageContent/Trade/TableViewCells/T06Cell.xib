@@ -125,6 +125,9 @@
             <connections>
                 <outlet property="lbCount" destination="4qP-oc-21l" id="obU-WD-8X9"/>
                 <outlet property="lbCountry" destination="LFs-XX-jZP" id="BIE-pG-elJ"/>
+                <outlet property="lbTotalFree" destination="NkM-iX-DM0" id="3Rx-rz-nev"/>
+                <outlet property="lbUserImage" destination="hkY-Fp-Xdr" id="A5E-XG-Sdg"/>
+                <outlet property="lbUserName" destination="F1F-SY-ngx" id="WGw-HA-7vT"/>
                 <outlet property="selectedButton" destination="G0F-LY-7Y4" id="1ph-lf-G51"/>
             </connections>
         </tableViewCell>

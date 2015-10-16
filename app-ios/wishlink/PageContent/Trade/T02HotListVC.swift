@@ -82,7 +82,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         let vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
-        vc.product = self.dataArr[indexPath.row] as! ItemModel
+        vc.item = self.dataArr[indexPath.row] as! ItemModel
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
@@ -101,7 +101,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         }
         
         self.loadComNaviLeftBtn()
-        self.loadComNavTitle("热门")
+        self.loadComNavTitle(self.keyword)
         
 
     }
@@ -159,7 +159,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
             {
                 
                 self.maskView.hidden = false;
-                self.lbTipMessage.text = "没有搜索数据"
+                self.lbTipMessage.text = "没有搜索到数据"
             }
             
         } else if (tag == 21) {
@@ -169,7 +169,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func requestDataFailed(error: String) {
-        SVProgressHUD.showErrorWithStatusWithBlack("获取数据出错");
+        SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 
     
