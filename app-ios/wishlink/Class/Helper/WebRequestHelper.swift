@@ -23,7 +23,7 @@ class WebRequestHelper:NSObject {
     
     let headers = [
         "Content-Type": "application/json;charset=utf-8",
-        "Cookie": APPCONFIG.cookieStr
+//        "Cookie": APPCONFIG.cookieStr
     ];
     
     /*
