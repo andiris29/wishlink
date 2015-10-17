@@ -8,23 +8,29 @@
 
 import UIKit
 
-class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
     @IBOutlet weak var maskView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lbTipMessage: UILabel!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    
     let itemCellIde = "U02ItemCell"
     
     var keyword = "奶粉";
     var isNeedShowNavi = false;
     
     var currentItemCell: U02ItemCell = U02ItemCell()
+    var searchTextField: UITextField!
+    var topView = UIImageView()
     
     // MARK: - life cycle
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         self.preparePage()
+        self.initTopView()
 
         self.httpObj.mydelegate = self;
     }
@@ -35,9 +41,11 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.collectionView = nil;
         self.dataArr = nil;
     }
+    
     override func viewWillAppear(animated: Bool) {
+        
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = false;
+        self.navigationController?.navigationBarHidden = true;
         
         let para:[String : AnyObject] = ["pageNo":1,
             "pageSize":10,
@@ -48,16 +56,51 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
     }
-    override func viewDidAppear(animated: Bool) {
+    
+    override func viewDidDisappear(animated: Bool) {
         
         self.navigationController?.navigationBarHidden = false;
     }
-
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func initTopView() {
+    
+        self.collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(44, 0, 0, 0)
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        topView.backgroundColor = RGB(247, g: 247, b: 247)
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.frame = CGRectMake(0, 0, ScreenWidth, 44)
+        topView.userInteractionEnabled = true
+        self.collectionView.addSubview(topView)
+        
+        let backButton = UIButton(type: UIButtonType.Custom)
+        backButton.frame = CGRectMake(5, 0, 44, 44)
+        backButton.backgroundColor = UIColor.clearColor()
+        backButton.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
+        backButton.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Selected)
+        backButton.addTarget(self, action: Selector("backButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        topView.addSubview(backButton)
+        
+        self.searchTextField = UITextField()
+        self.searchTextField.frame = CGRectMake(50, 7, ScreenWidth - 60 - 10, 30)
+        self.searchTextField.backgroundColor = RGB(228, g: 228, b: 228)
+        self.searchTextField.font = UIHEPLER.mainChineseFont15
+        self.searchTextField.layer.masksToBounds = true
+        self.searchTextField.layer.cornerRadius = 5
+        self.searchTextField.placeholder = "请输入搜索内容"
+        self.searchTextField.delegate = self
+        self.searchTextField.leftViewMode = UITextFieldViewMode.Always
+        self.searchTextField.leftView = UIView(frame: CGRectMake(0, 0, 7, 30))
+        topView.addSubview(self.searchTextField)
     }
+
+    // MARK: - Touch
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.searchTextField.resignFirstResponder()
+    }
+    
     //MARK: collectionView Delegete
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
@@ -95,9 +138,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     // MARK: - prive method
     func preparePage() {
-        
-        
-        
+
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 7.5, right: 10)
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
         self.collectionView.scrollEnabled = true;
@@ -110,6 +151,43 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.loadComNavTitle(self.keyword)
         
 
+    }
+    
+    // MARK: - Action 
+    
+    func backButtonAction(button: UIButton){
+        
+        self.navigationController?.popViewControllerAnimated(true);
+    }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        let para:[String : AnyObject] = ["pageNo":1,
+            "pageSize":10,
+            "keyword":self.keyword]
+        self.maskView.hidden = false;
+        self.lbTipMessage.text = "正在搜索中..."
+        
+        self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        
+        return true
+    }
+    
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+
+        if scrollView.contentOffset.y < 22.0 {
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+        if (scrollView.contentOffset.y >= 22.0) && (scrollView.contentOffset.y <= 44.0) {
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: 44.0), animated: true)
+        }
     }
 
     //MARK: - U02ItemCellDelegate 
@@ -160,6 +238,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
                 {
                     self.dataArr = [];
                 }
+                self.searchTextField.becomeFirstResponder()
             }
             else
             {

@@ -19,6 +19,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     @IBOutlet weak var btnImage1: UIButton!
     
     var currentButton: UIButton!
+    var images = Dictionary<String, UIImage>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,12 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     }
     var selectImgTag = 0;
     @IBAction func btnAction(sender: AnyObject) {
+        
         selectImgTag = 0;
+        currentButton = sender as! UIButton
+        
         let tag = (sender as! UIButton).tag
+        
         if(tag >= 1 && tag <= 5)
         {
             selectImgTag = tag
@@ -57,7 +62,8 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         }
         else if(tag == 11)
         {
-            self.httpObj.httpPostApi("trade/complaint", parameters: ["problem": contexTextView.text], tag: 80)
+//            self.httpObj.httpPostApi("trade/complaint", parameters: ["problem": contexTextView.text], tag: 80)
+            submit()
         }
         else if(tag == 22)
         {
@@ -76,6 +82,82 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             self.navigationController?.pushViewController(vc, animated: true);
         }
     }
+    
+    func submit()
+    {
+        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        self.view.userInteractionEnabled = false;
+        let apiurl = SERVICE_ROOT_PATH + "trade/complaint"
+        upload(
+            .POST,
+            apiurl,
+            multipartFormData: {
+                multipartFormData in
+                
+                multipartFormData.appendBodyPart(data: self.contexTextView.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "problem")
+ 
+                for var index = self.btnImage1.tag; index <= self.btnImage5.tag; index++ {
+                    
+                    let image = self.images["T08Complaint_\(index)"]
+                    if (image != nil) {
+                        let imgName = "T08Complaint_\(index).jpg"
+                        let imageData = UIHEPLER.compressionImageToDate(image!);
+                        
+                        let imgStream  = NSInputStream(data: imageData);
+                        let len =   UInt64(imageData.length)
+                        
+                        multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    }
+                }
+            
+            },
+            encodingCompletion: {
+                encodingResult in
+                switch encodingResult {
+                    
+                case .Success(let _upload, _, _ ):
+                    
+                    _upload.responseJSON { _response in
+                        
+                        let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
+
+                        switch resultObj.result {
+                        case .Success(let json):
+                            
+                            SVProgressHUD.dismiss();
+                            self.navigationController?.popViewControllerAnimated(true);
+                            self.dismissViewControllerAnimated(true, completion: nil);
+                            
+                            print("complaint Successful")
+                            print(json);
+                            let itemData =  json.objectForKey("data") as! NSDictionary
+                            if(itemData.objectForKey("trade") != nil) {
+
+                            } else {
+                                
+                                SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                self.view.userInteractionEnabled = true;
+                                NSLog("Fail:")
+                            }
+                        case .Failure(let error):
+                            
+                            SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                            self.view.userInteractionEnabled = true;
+                            print("Fail:\(error)")
+                        }
+                    }
+                case .Failure(let encodingError):
+                    
+                    SVProgressHUD.showErrorWithStatusWithBlack("编码数据失败！");
+                    self.view.userInteractionEnabled = true;
+                    print("Failure")
+                    print(encodingError)
+                }
+            }
+        )
+        
+    }
+    
     //MARK:ActionSheetDelegate
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
@@ -108,7 +190,8 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
     
-            self.currentButton.setBackgroundImage(gotImage, forState: UIControlState.Normal);
+            self.images["T08Complaint_\(self.currentButton.tag)"] = gotImage
+            self.currentButton.setImage(gotImage, forState: UIControlState.Normal);
             UIHEPLER.saveImageToLocal(gotImage, strName: "T08Complaint_\(self.currentButton.tag).jpg")
         })
     }
@@ -120,13 +203,15 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
-        if(tag == 80) {
-            self.navigationController?.popViewControllerAnimated(true);
-            //             self.dismissViewControllerAnimated(true, completion: nil);
-        }
+        SVProgressHUD.dismiss();
+//        if(tag == 80) {
+//            self.navigationController?.popViewControllerAnimated(true);
+//            //             self.dismissViewControllerAnimated(true, completion: nil);
+//        }
     }
     
     func requestDataFailed(error: String) {
         
+        SVProgressHUD.dismiss();
     }
 }
