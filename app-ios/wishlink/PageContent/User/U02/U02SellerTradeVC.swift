@@ -61,7 +61,6 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.inTradeBtn.hideRedRound = false
         self.conditionView.layer.shadowOffset = CGSizeMake(5, 5)
         self.conditionView.layer.shadowColor = UIColor.blackColor().CGColor
         self.conditionView.layer.shadowOpacity = 0.7
@@ -150,8 +149,9 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             
         case .SendOut:
             let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
-            vc.hidesBottomBarWhenPushed = true
-            self.userVC.navigationController!.pushViewController(vc, animated: true)
+//            vc.hidesBottomBarWhenPushed = true
+            self.userVC.presentViewController(vc, animated: true, completion: nil)
+//            self.userVC.navigationController!.pushViewController(vc, animated: true)
             
         case .Chat:
 //            self.goto
@@ -184,6 +184,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             self.view.userInteractionEnabled = true
         })
         if tag == 10 {
+            // tradeList
             let tradeArray = response["trades"] as! NSArray
             print(tradeArray)
             if tradeArray.count == 0 {
@@ -197,12 +198,14 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
                 self.collectionView.reloadData()
             })
         }else if tag == 20 {
+            // 取消抢单
             if let tradeDic = response["trade"] as? NSDictionary {
                 let tempTrade = TradeModel(dict: tradeDic)
                 let trade = self.tradeArray[self.currentTradeIndex]
                 trade.status = tempTrade.status
                 trade.statusOrder = tempTrade.statusOrder
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    SVProgressHUD.showSuccessWithStatusWithBlack("取消抢单成功")
                     self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentTradeIndex, inSection: 0)])
                 })
             }
@@ -236,6 +239,12 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         self.filterSellerTrade()
         self.filterBtnAction(self.finishedBtn)
 
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.conditionView.hidden = true
+        self.coverView.hidden = true
+        self.isCoverTabBar(!self.conditionView.hidden)
     }
     
     // MARK: - private method

@@ -310,7 +310,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPicker
         self.loadComNaviLeftBtn()
         let rightBtn = UIButton(type: .Custom)
         rightBtn.frame = CGRectMake(0, 0, 60, 44)
-        rightBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
+        rightBtn.setTitleColor(RGB(248, g: 74, b: 102), forState: .Normal)
         rightBtn.setTitle("保存", forState: .Normal)
         rightBtn.titleLabel!.font = UIFont.systemFontOfSize(13)
         rightBtn.contentHorizontalAlignment = .Right
