@@ -139,6 +139,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.searchTableView.hidden = true
+        self.searchTextField.resignFirstResponder()
     }
     
     // MARK: - Table view data source
@@ -170,6 +171,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         if indexPath.row == 0 { return }
         
         self.searchTableView.hidden = true
+        self.searchTextField.resignFirstResponder()
         self.searchTextField.text = itemContents[indexPath.row] as? String
     }
     
@@ -182,6 +184,17 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         print("buttonAction:\(sender.tag)")
     }
+    
+    @IBAction func searchButtonAction(sender: UIButton) {
+        
+        self.gotoNextPage(self.searchTextField.text!);
+    }
+    
+    @IBAction func textFieldEndAndExit(sender: UITextField) {
+        
+//        self.gotoNextPage(sender.text!);
+    }
+    
     func gotoNextPage(strKeyWord:String)
     {
         let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
@@ -205,59 +218,31 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         self.searchTextField.resignFirstResponder();
-        
-        if(textField.text?.trim().length>=1)
-        {
-            self.gotoNextPage(textField.text!);
-        }
-        else
-        {
-            
-            itemContents = [];
-            self.searchTableView.reloadData()
-        }
         return true;
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        //SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        NSLog("textFieldShouldBeginEditing ")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 12)
         
+
         return true
     }
-    @IBAction func searchTexfieldValueChange(sender: AnyObject) {
-          if (sender.text == nil || sender.text!.length <= 0) {return}
-        
-                NSLog("searchTexfieldValueChange")
-                let para = ["keyword" : searchTextField.text!.trim()]
-                self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
-    }
+    
 
-//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-//    
-//        
-//        NSLog("shouldChangeCharactersInRange %@ ,%@",string,textField.text!.trim())
-//
-//        let para = ["keyword" : textField.text!.trim()]
-//        self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
-//        
-//        return true
-//    }
-//    func textFieldDidEndEditing(textField: UITextField) {
-//        
-//        NSLog("textFieldDidEndEditing")
-//    }
-//    
+    @IBAction func searchTexfieldValueChange(sender: AnyObject) {
+        
+        if (sender.text == nil || sender.text!.length <= 0) {return}
+        
+        let para = ["keyword" : sender.text!]
+        self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
+        
+    }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
-        
-        NSLog("textFieldShouldEndEditing ")
-
         self.searchTableView.hidden = true
-    
+        
         return true
     }
 
@@ -324,12 +309,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         else if(tag  == 13)
         {
             let dic = response as! NSDictionary;
-            
             if (dic.objectForKey("suggestions") != nil)
             {
-                let resultArr = dic.objectForKey("suggestions") as! NSArray;
                 
                 itemContents = [];
+                let resultArr = dic.objectForKey("suggestions") as! NSArray;
                 if(self.searchTextField.text!.trim().length > 0  && resultArr.count > 0)
                 {
                     
@@ -337,10 +321,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                     dataArray.addObject("历史搜索")
                     
                     for item in resultArr {
-                        
                         dataArray.addObject(item as! String)
                     }
-                    
                     itemContents = dataArray
                 }
                 self.searchTableView.reloadData()

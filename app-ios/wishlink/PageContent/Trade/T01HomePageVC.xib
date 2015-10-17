@@ -73,7 +73,7 @@
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             <connections>
-                                <action selector="searchTexfieldValueChange:" destination="-1" eventType="editingChanged" id="rH6-cR-7RT"/>
+                                <action selector="searchTexfieldValueChange:" destination="-1" eventType="editingChanged" id="XEC-Hw-RDg"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8U-B1-CdR">
@@ -86,6 +86,9 @@
                             <state key="normal" image="t01bbb">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="searchButtonAction:" destination="-1" eventType="touchUpInside" id="Wrf-g2-3R0"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
