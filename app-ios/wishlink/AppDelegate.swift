@@ -28,46 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
 //        var vc = HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
         self.httpObj.mydelegate = self;
         //通知授权
-        if #available(iOS 8.0, *) {
-            if UIApplication.sharedApplication().currentUserNotificationSettings()!.types == UIUserNotificationType.None
-            {
-                let action1:UIMutableUserNotificationAction = UIMutableUserNotificationAction()
-                
-                action1.activationMode = UIUserNotificationActivationMode.Background;
-                action1.title = "取消"
-                action1.identifier = NotificationActionOneIdent
-                action1.destructive = false;
-                action1.authenticationRequired = false;
-                
-                let action2:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
-                action2.activationMode = UIUserNotificationActivationMode.Background;
-                action2.title = "回复"
-                action2.identifier = NotificationActionTwoIdent
-                action2.destructive = false;
-                action2.authenticationRequired = false;
-                
-                
-                let actionCategory = UIMutableUserNotificationCategory();
-                actionCategory.identifier = NotificationCategoryIdent;
-                actionCategory.setActions([action1,action2], forContext: UIUserNotificationActionContext.Default);
-                
-                let categories = NSSet(object: actionCategory);
-                
-                
-                let types: UIUserNotificationType  = [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert];
-                let  settings = UIUserNotificationSettings(forTypes: types, categories: categories as? Set<UIUserNotificationCategory>);
-                
-                UIApplication.sharedApplication().registerForRemoteNotifications();
-                UIApplication.sharedApplication().registerUserNotificationSettings(settings);
-              
-            }
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-        
-        self._registerSignificantChange();
+        //通知授权
 
         
         self.window!.rootViewController = TabBarVC();
@@ -77,6 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         WeiboSDK.registerApp(AppConfig.wbAppKey)
         WXApi.registerApp(AppConfig.wxAppKey, withDescription: "wishlink")
         RCIM.sharedRCIM().initWithAppKey(AppConfig.rcAppKey);
+        
+        
+        if #available(iOS 8.0, *) {
+            if UIApplication.sharedApplication().currentUserNotificationSettings()!.types == UIUserNotificationType.None
+            {
+                UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge], categories: nil));
+                UIApplication.sharedApplication().registerForRemoteNotifications();
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        
+        self._registerSignificantChange();
 
         return true
     }
@@ -162,27 +138,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     
     
     
-    //MARk:接受本地通知处理:
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        
-        let alertView = UIAlertView(title: " 系统本地通知 " , message: notification.alertBody , delegate: nil , cancelButtonTitle: " 返回 " )
-        
-        alertView.show ()
-        
-    }
-    
-    // 注册本地通知
-    func locaNotifcationSchedule(chedulDate chedulDate: NSDate ,alertBody: String ,content: NSDictionary ) {
-        
-        let localNotif = UILocalNotification ()
-        localNotif.fireDate = chedulDate
-        localNotif.timeZone = NSTimeZone . defaultTimeZone ()
-        localNotif.soundName = UILocalNotificationDefaultSoundName;
-        localNotif.alertBody = alertBody;
-        localNotif.userInfo  = content as [NSObject : AnyObject];
-        UIApplication.sharedApplication ().scheduleLocalNotification(localNotif)
-        
-    }
+//    //MARk:接受本地通知处理:
+//    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+//        
+//        let alertView = UIAlertView(title: " 系统本地通知 " , message: notification.alertBody , delegate: nil , cancelButtonTitle: " 返回 " )
+//        
+//        alertView.show ()
+//        
+//    }
+//    
+//    // 注册本地通知
+//    func locaNotifcationSchedule(chedulDate chedulDate: NSDate ,alertBody: String ,content: NSDictionary ) {
+//        
+//        let localNotif = UILocalNotification ()
+//        localNotif.fireDate = chedulDate
+//        localNotif.timeZone = NSTimeZone . defaultTimeZone ()
+//        localNotif.soundName = UILocalNotificationDefaultSoundName;
+//        localNotif.alertBody = alertBody;
+//        localNotif.userInfo  = content as [NSObject : AnyObject];
+//        UIApplication.sharedApplication ().scheduleLocalNotification(localNotif)
+//        
+//    }
     
     //启动位置改变通知服务
     func _registerSignificantChange() {
@@ -217,26 +193,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         NSLog(error.description)
     }
     
+    
+    var lastLocation:CLLocation!
     func _notify(location:CLLocation) {
         var strlocation = "latitude:" + String(location.coordinate.latitude.description)
         strlocation += " longitude:" + String(location.coordinate.longitude.description)
-        NSLog("Location change",location)
+        NSLog("Location change:%@",location)
         
         
+        lastLocation = location;
+        self.performSelector(Selector("postLocation"), withObject: nil, afterDelay: 1)
         
-        
-        let para = ["device":UIDevice.currentDevice().identifierForVendor!.description,
-            "location.lat":location.coordinate.latitude.description,
-            "location.lng":location.coordinate.longitude.description
+//        //发送本地通知
+//        let contentDic = [ "KEY" : "VALUE" ]
+//        let tipDate:NSDate = NSDate();
+//        self.locaNotifcationSchedule (chedulDate: tipDate , alertBody: "didUpdateLocations - " + strlocation, content: contentDic)
+    }
+    
+    func postLocation()
+    {
+        let para = ["device":UIDevice.currentDevice().identifierForVendor!.UUIDString as String,
+            "location.lat":lastLocation.coordinate.latitude,
+            "location.lng":lastLocation.coordinate.longitude
         ];
+        
+        self.httpObj.httpPostApi("geo/trace", parameters: para as! [String : AnyObject], tag: 0);
 
-        self.httpObj.httpGetApi("geo/trace", parameters: para, tag: 0);
         
-        
-        let contentDic = [ "KEY" : "VALUE" ]
-        let tipDate:NSDate = NSDate();
-        
-        self.locaNotifcationSchedule (chedulDate: tipDate , alertBody: "didUpdateLocations - " + strlocation, content: contentDic)
     }
     func requestDataComplete(response: AnyObject, tag: Int) {
         
