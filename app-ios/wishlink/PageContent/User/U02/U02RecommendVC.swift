@@ -68,8 +68,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
                 self.favoriteItem()
             }
             else {
-                self.dataArray.removeAtIndex(selectedIndexPath.row)
-                self.collectionView.reloadData()
+                self.currentItemIndex = selectedIndexPath.row
+                self.removeRecommendationItem()
             }
         };
         if indexPath.row < self.dataArray.count {
@@ -139,22 +139,34 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
                     self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: self.currentItemIndex, inSection: 0)])
                 })
             }
+        }else if tag == 40 {
+            self.dataArray.removeAtIndex(self.currentItemIndex)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                SVProgressHUD.showSuccessWithStatusWithBlack("删除成功!")
+                self.collectionView.reloadData()
+            })
+        }else if tag == 50 {
+            self.dataArray.removeAll()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                SVProgressHUD.showSuccessWithStatusWithBlack("删除成功!")
+                var inset = self.collectionView.contentInset
+                inset.top = 0
+                self.collectionView.contentInset = inset
+                
+                UIView.animateWithDuration(Double(0.5), animations: { () -> Void in
+                    self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
+                    }) { (xxx: Bool) -> Void in
+                        self.collectionView.reloadData()
+                }
+                self.collectionView.reloadData()
+            })
         }
     }
     
     // MARK: - response event
     func clearBtnAction(sender: AnyObject) {
-        var inset = self.collectionView.contentInset
-        inset.top = 0
-        self.collectionView.contentInset = inset
-        self.dataArray.removeAll()
-        self.collectionView.reloadData()
+        self.removeAllRecommendationItems()
         
-        UIView.animateWithDuration(Double(0.5), animations: { () -> Void in
-            self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
-            }) { (xxx: Bool) -> Void in
-                self.collectionView.reloadData()
-        }
     }
     
     // MARK: - prive method
@@ -164,6 +176,21 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         self.httpObj.httpGetApi("itemFeeding/recommendation", tag: 10)
     }
     
+    func removeRecommendationItem() {
+        self.view.userInteractionEnabled = false
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        let item = self.dataArray[self.currentItemIndex]
+        let dic = [
+            "_id": item._id
+        ]
+        self.httpObj.httpPostApi("user/removeRecommendedItem", parameters: dic, tag: 40)
+    }
+    
+    func removeAllRecommendationItems() {
+        self.view.userInteractionEnabled = false
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.httpObj.httpPostApi("user/removeAllRecommendedItems", parameters: nil, tag: 50)
+    }
     
     func favoriteItem() {
         let item = self.dataArray[self.currentItemIndex]

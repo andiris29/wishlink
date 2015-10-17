@@ -32,27 +32,12 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         super.viewDidLoad()
 
         self.httpObj.mydelegate = self
+        self.registerNotification()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
-            let temp = noti.object as! WBAuthorizeResponse
-            if temp.statusCode == .Success {
-                self.wbToekn = temp.accessToken
-                self.wbUserID = temp.userID
-                self.wbLogin()
-            }
- 
-        }
-        NSNotificationCenter.defaultCenter().addObserverForName(WXLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
-            let temp = noti.object as! SendAuthResp
-            print("\(temp.errCode)")
-            if temp.errCode != -2 {
-                self.wxCode = temp.code
-                self.wxLogin()
-            }
-         
-        }
         // Do any additional setup after loading the view.
     }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -132,8 +117,30 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         self.httpObj.httpPostApi("user/loginViaWeixin", parameters: parametersDic, tag: 20)
     }
     
+    func registerNotification() {
+        NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
+            let temp = noti.object as! WBAuthorizeResponse
+            if temp.statusCode == .Success {
+                self.wbToekn = temp.accessToken
+                self.wbUserID = temp.userID
+                self.wbLogin()
+            }
+            
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(WXLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
+            let temp = noti.object as! SendAuthResp
+            print("\(temp.errCode)")
+            if temp.errCode != -2 {
+                self.wxCode = temp.code
+                self.wxLogin()
+            }
+            
+        }
+    }
+    
     func parseUserData(data: AnyObject!) {
-//        NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
+        NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
         SVProgressHUD.dismiss();
         UserModel.shared.userDic = data["user"] as! [String: AnyObject]
         
