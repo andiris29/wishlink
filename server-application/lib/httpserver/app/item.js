@@ -203,6 +203,10 @@ item.favorite = {
     method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
+        if (req.body._id == null || req.body._id.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
         var initiatorRef = req.currentUserId;
         var targetRef = RequestHelper.parseId(req.body._id);
         async.waterfall([function(callback) {
@@ -236,6 +240,10 @@ item.unfavorite = {
     method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
+        if (req.body._id == null || req.body._id.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
         var initiatorRef = req.currentUserId;
         var targetRef = RequestHelper.parseId(req.body._id);
         async.waterfall([function(callback) {
