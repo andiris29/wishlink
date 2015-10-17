@@ -45,7 +45,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true;
+        self.navigationController?.navigationBarHidden = false;
         
         let para:[String : AnyObject] = ["pageNo":1,
             "pageSize":10,
@@ -65,24 +65,22 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     func initTopView() {
     
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(44, 0, 0, 0)
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         topView.backgroundColor = RGB(247, g: 247, b: 247)
-        topView.translatesAutoresizingMaskIntoConstraints = false
         topView.frame = CGRectMake(0, 0, ScreenWidth, 44)
         topView.userInteractionEnabled = true
         self.collectionView.addSubview(topView)
         
-        let backButton = UIButton(type: UIButtonType.Custom)
-        backButton.frame = CGRectMake(5, 0, 44, 44)
-        backButton.backgroundColor = UIColor.clearColor()
-        backButton.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
-        backButton.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Selected)
-        backButton.addTarget(self, action: Selector("backButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-        topView.addSubview(backButton)
+//        let backButton = UIButton(type: UIButtonType.Custom)
+//        backButton.frame = CGRectMake(5, 0, 44, 44)
+//        backButton.backgroundColor = UIColor.clearColor()
+//        backButton.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
+//        backButton.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Selected)
+//        backButton.addTarget(self, action: Selector("backButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+//        topView.addSubview(backButton)
         
         self.searchTextField = UITextField()
-        self.searchTextField.frame = CGRectMake(50, 7, ScreenWidth - 60 - 10, 30)
+        self.searchTextField.frame = CGRectMake(10, 7, ScreenWidth - 20, 30)
         self.searchTextField.backgroundColor = RGB(228, g: 228, b: 228)
         self.searchTextField.font = UIHEPLER.mainChineseFont15
         self.searchTextField.layer.masksToBounds = true
@@ -178,15 +176,25 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     // MARK: - UIScrollViewDelegate
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+                
+        if (scrollView.contentOffset.y < 0) {
+        
+            var topViewRect = self.topView.frame
+            topViewRect.origin.y = scrollView.contentOffset.y
+            self.topView.frame = topViewRect
+        }
+    }
+    
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 
-        if scrollView.contentOffset.y < 22.0 {
+        if scrollView.contentOffset.y < 10.0 {
             
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         }
-        if (scrollView.contentOffset.y >= 22.0) && (scrollView.contentOffset.y <= 44.0) {
+        if (scrollView.contentOffset.y >= 10.0) && (scrollView.contentOffset.y <= 44.0) {
             
-            scrollView.setContentOffset(CGPoint(x: 0, y: 44.0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: 38.0), animated: true)
         }
     }
 

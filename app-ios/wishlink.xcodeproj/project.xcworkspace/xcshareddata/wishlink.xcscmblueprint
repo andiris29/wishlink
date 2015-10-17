@@ -1,35 +1,47 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7D6421B",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++92C7DBE",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++8B3D672" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++560C08D" : {
 
     },
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++0A6F5AE" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AB0ABFA" : {
 
     },
-    "7f69d04d-286e-3648-968a-806926e1464b++2450+++C91DF3C" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AEAF22C" : {
 
     },
-    "7f69d04d-286e-3648-968a-806926e1464b++2450+++F7DCE84" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++E8FFB98" : {
+
+    },
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++2093B1C" : {
+
+    },
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++6D62D2E" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++8B3D672" : 0,
-    "7f69d04d-286e-3648-968a-806926e1464b++2450+++F7DCE84" : 0,
-    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++B1C34E7" : 0,
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++0A6F5AE" : 0,
-    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7D6421B" : 0,
-    "7f69d04d-286e-3648-968a-806926e1464b++2450+++C91DF3C" : 0
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++6D62D2E" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++E8FFB98" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AEAF22C" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++560C08D" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++92C7DBE" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7CFE0E8" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++395C6F7" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AB0ABFA" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++2093B1C" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "58398B6B-92FB-499B-82C8-A842276A1E6C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++8B3D672" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
-    "7f69d04d-286e-3648-968a-806926e1464b++2450+++F7DCE84" : "com.wishlink.kelp\/app-ios\/wishlink\/Library\/GTMBase64\/",
-    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++B1C34E7" : "wishlink-iOS\/",
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++0A6F5AE" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
-    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7D6421B" : "com.wishlink.kelp\/",
-    "7f69d04d-286e-3648-968a-806926e1464b++2450+++C91DF3C" : "com.wishlink.kelp\/app-ios\/wishlink\/Library\/SVProgressHUD\/SVProgressHUD.bundle\/"
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++6D62D2E" : "wishlink\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++E8FFB98" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AEAF22C" : "wishlink\/app-ios\/wishlink\/Library\/GTMBase64\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++560C08D" : "com.wishlink.kelp\/app-ios\/wishlink\/Library\/SVProgressHUD\/SVProgressHUD.bundle\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++92C7DBE" : "wishlink\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7CFE0E8" : "wishlink-iOS\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++395C6F7" : "com.wishlink.kelp\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AB0ABFA" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++2093B1C" : "com.wishlink.kelp\/app-ios\/wishlink\/Library\/GTMBase64\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "wishlink",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -38,32 +50,47 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++0A6F5AE"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++6D62D2E"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++8B3D672"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++AB0ABFA"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++2450+++C91DF3C"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++AEAF22C"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++2450+++F7DCE84"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++E8FFB98"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++2450+++2093B1C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++2450+++560C08D"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7D6421B"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++395C6F7"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++B1C34E7"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++7CFE0E8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++92C7DBE"
     }
   ]
 }

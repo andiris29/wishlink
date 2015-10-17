@@ -59,10 +59,10 @@ class CSActionSheet : UIWindow {
         
         for var index = 0; index < titles.count; index++ {
         
-            var space: Int = index == 1 ? 5 : 1
+            let space: Int = index == 1 ? 5 : 1
             let key: String = "button\(index)"
             
-            var button: UIButton = UIButton()
+            let button: UIButton = UIButton()
             button.backgroundColor = UIColor.whiteColor()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle(titles[index] as? String, forState: UIControlState.Normal)
