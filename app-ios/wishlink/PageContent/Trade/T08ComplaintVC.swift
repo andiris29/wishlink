@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
 
     @IBOutlet weak var contexTextView: UITextView!
     
@@ -17,13 +17,16 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     @IBOutlet weak var btnImage3: UIButton!
     @IBOutlet weak var btnImage2: UIButton!
     @IBOutlet weak var btnImage1: UIButton!
+    @IBOutlet weak var lbCount: UILabel!
     
+    var tradeid:String!
     var currentButton: UIButton!
     var images = Dictionary<String, UIImage>()
+    var defaultMsg:String = "在此描述您遇到的具体问题，将有客服人员更快的处理您的申请"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.contexTextView.delegate = self;
         self.httpObj.mydelegate = self;
     }
     
@@ -93,7 +96,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             apiurl,
             multipartFormData: {
                 multipartFormData in
-                
+                 multipartFormData.appendBodyPart(data: self.tradeid.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "_id")
                 multipartFormData.appendBodyPart(data: self.contexTextView.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "problem")
  
                 for var index = self.btnImage1.tag; index <= self.btnImage5.tag; index++ {
@@ -197,6 +200,57 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    var currMsgLength = 0;
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        return CalculationLenght();
+        
+    }
+    //textViewDelegate
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        
+        
+        if(textView.text == self.defaultMsg)
+        {
+            textView.text = "";
+            
+            self.lbCount.text = "0/500";
+        }
+        else
+        {
+            CalculationLenght();
+        }
+        return true;
+        
+    }
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        if(textView.text!.trim().length<1)
+        {
+            textView.text = self.defaultMsg;
+            self.lbCount.text = "\(self.defaultMsg.length)/500";
+        }
+        else
+        {
+            CalculationLenght();
+        }
+        return true;
+    }
+    
+    func CalculationLenght()->Bool
+    {
+        var resut = true;
+        currMsgLength = self.contexTextView.text.trim().length
+        if(currMsgLength>=500)
+        {
+            self.lbCount.text = "500/500";
+            resut = false;
+        }
+        else
+        {
+            self.lbCount.text = "\(currMsgLength)/500";
+        }
+        return resut;
     }
 
     //MARK: - Request delegate

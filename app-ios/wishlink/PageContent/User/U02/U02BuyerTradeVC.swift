@@ -151,9 +151,11 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
                 self.userVC.navigationController!.pushViewController(vc, animated: true)
             }
         case .Complain:
+         
+                let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
+                vc.tradeid = cell.trade._id;
+                self.userVC.navigationController!.pushViewController(vc, animated: true);
             
-            let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
-            self.userVC.navigationController!.pushViewController(vc, animated: true);
         default:
             print("error")
         }
