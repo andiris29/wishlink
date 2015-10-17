@@ -10,10 +10,10 @@ import UIKit
 import MapKit;
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate,CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDelegate,CLLocationManagerDelegate,WebRequestDelegate {
 
     var window: UIWindow?
-    
+    var httpObj = WebRequestHelper();
     var locationManager:CLLocationManager! = nil;
     var backgroundUpdateTask:UIBackgroundTaskIdentifier!;
     
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //        var vc = HomeVC(nibName: "HomeVC", bundle: NSBundle.mainBundle())
-
+        self.httpObj.mydelegate = self;
         //通知授权
         if #available(iOS 8.0, *) {
             if UIApplication.sharedApplication().currentUserNotificationSettings()!.types == UIUserNotificationType.None
@@ -217,15 +217,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         NSLog(error.description)
     }
     
-    
     func _notify(location:CLLocation) {
         var strlocation = "latitude:" + String(location.coordinate.latitude.description)
         strlocation += " longitude:" + String(location.coordinate.longitude.description)
+        NSLog("Location change",location)
+        
+        
+        
+        
+        let para = ["device":UIDevice.currentDevice().identifierForVendor!.description,
+            "location.lat":location.coordinate.latitude.description,
+            "location.lng":location.coordinate.longitude.description
+        ];
+
+        self.httpObj.httpGetApi("geo/trace", parameters: para, tag: 0);
+        
         
         let contentDic = [ "KEY" : "VALUE" ]
         let tipDate:NSDate = NSDate();
         
         self.locaNotifcationSchedule (chedulDate: tipDate , alertBody: "didUpdateLocations - " + strlocation, content: contentDic)
+    }
+    func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        
+        NSLog("post geo/trace Success!")
+        
+    }
+    func requestDataFailed(error: String) {
+        NSLog("post geo/trace fail:%@",error)
+
     }
 
 }

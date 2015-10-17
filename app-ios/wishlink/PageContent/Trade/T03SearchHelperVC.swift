@@ -191,6 +191,11 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         self.selectCell.setCellSelectStatus(true);
         self.searchTextField.text = title as String
         
+        //转到T02页面
+        
+        let vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
+        vc.keyword =  title as String
+        self.navigationController?.pushViewController(vc, animated: true);
     }
     
     // MARK: - Navigation
