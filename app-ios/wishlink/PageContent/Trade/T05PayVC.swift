@@ -221,7 +221,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
             
             
             //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-            let appScheme = "alisdkdemo";
+            let appScheme = "alipay";
             let orderSpec = order.description
             //将商品信息拼接成字符串
             NSLog("orderSpec = %@",orderSpec);
@@ -233,7 +233,6 @@ class T05PayVC: RootVC,WebRequestDelegate {
             AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
                 
                 NSLog(" alipay reslut = \(resultDic)")
-                
                 SVProgressHUD.showWithStatusWithBlack("请稍等...")
                 self.httpObj.httpPostApi("trade/postpay", parameters: ["_id":self.trade._id], tag: 99);
             })

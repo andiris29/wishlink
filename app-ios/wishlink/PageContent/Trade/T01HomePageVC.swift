@@ -205,33 +205,59 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         self.searchTextField.resignFirstResponder();
+        
+        if(textField.text?.trim().length>=1)
+        {
+            self.gotoNextPage(textField.text!);
+        }
+        else
+        {
+            
+            itemContents = [];
+            self.searchTableView.reloadData()
+        }
         return true;
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        //SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        NSLog("textFieldShouldBeginEditing ")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 12)
         
-//        let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
-//        vc.myDelegate = self;
-//        vc.searchType = .any
-//        self.presentViewController(vc, animated: true, completion: nil);
         return true
     }
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-    
-        let para = ["keyword" : textField.text!.trim()]
-        self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
+    @IBAction func searchTexfieldValueChange(sender: AnyObject) {
+          if (sender.text == nil || sender.text!.length <= 0) {return}
         
-        return true
+                NSLog("searchTexfieldValueChange")
+                let para = ["keyword" : searchTextField.text!.trim()]
+                self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
     }
+
+//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+//    
+//        
+//        NSLog("shouldChangeCharactersInRange %@ ,%@",string,textField.text!.trim())
+//
+//        let para = ["keyword" : textField.text!.trim()]
+//        self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
+//        
+//        return true
+//    }
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        
+//        NSLog("textFieldDidEndEditing")
+//    }
+//    
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
+        
+        NSLog("textFieldShouldEndEditing ")
+
         self.searchTableView.hidden = true
-        self.gotoNextPage(textField.text!);
+    
         return true
     }
 
@@ -298,9 +324,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         else if(tag  == 13)
         {
             let dic = response as! NSDictionary;
+            
             if (dic.objectForKey("suggestions") != nil)
             {
                 let resultArr = dic.objectForKey("suggestions") as! NSArray;
+                
+                itemContents = [];
                 if(self.searchTextField.text!.trim().length > 0  && resultArr.count > 0)
                 {
                     
@@ -313,8 +342,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                     }
                     
                     itemContents = dataArray
-                    self.searchTableView.reloadData()
                 }
+                self.searchTableView.reloadData()
             }
             else
             {
