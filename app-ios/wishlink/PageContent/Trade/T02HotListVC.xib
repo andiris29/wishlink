@@ -24,9 +24,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gwO-00-V21">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gwO-00-V21">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N3B-u1-kbI">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -42,7 +42,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无索索结果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-0A-DWc">
-                            <rect key="frame" x="130" y="50" width="90" height="18"/>
+                            <rect key="frame" x="130" y="50" width="90" height="17.5"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                             <color key="textColor" red="0.48627450980392156" green="0.0" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -55,9 +55,9 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="gwO-00-V21" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1XW-ar-vcG"/>
+                <constraint firstItem="gwO-00-V21" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="1XW-ar-vcG"/>
                 <constraint firstItem="XT0-Na-bTx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ExX-Eq-z5K"/>
                 <constraint firstAttribute="trailing" secondItem="gwO-00-V21" secondAttribute="trailing" id="FDQ-f3-Dxt"/>
                 <constraint firstAttribute="bottom" secondItem="XT0-Na-bTx" secondAttribute="bottom" id="Ykw-3m-XJn"/>
