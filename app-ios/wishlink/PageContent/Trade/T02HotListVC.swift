@@ -160,7 +160,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     // MARK: - UITextFieldDelegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         let para:[String : AnyObject] = ["pageNo":1,
             "pageSize":10,
@@ -246,7 +246,6 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
                 {
                     self.dataArr = [];
                 }
-                self.searchTextField.becomeFirstResponder()
             }
             else
             {
