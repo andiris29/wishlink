@@ -65,8 +65,13 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         let btnTag = sender.tag;
         if(btnTag == 10)//返回
         {
-            self.navigationController?.popViewControllerAnimated(true);
-//            self.dismissViewControllerAnimated(true, completion: nil);
+            if self.navigationController == nil {
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }else {
+                
+                self.navigationController?.popViewControllerAnimated(true);
+            }
         }
         else if(btnTag == 11)//提交
         {

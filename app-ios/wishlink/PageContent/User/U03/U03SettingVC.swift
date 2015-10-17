@@ -79,7 +79,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     func requestDataComplete(response: AnyObject, tag: Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
-            
+            self.view.userInteractionEnabled = true
         })
         if tag == 10 {
             // 注销
@@ -215,6 +215,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                                 self.userModel.userDic = dic["user"] as! [String : AnyObject]
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     SVProgressHUD.showSuccessWithStatusWithBlack("头像上传成功")
+                                    self.view.userInteractionEnabled = true
                                     self.fillDataForUI()
                                 })
                             }
@@ -254,6 +255,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                                 self.userModel.userDic = dic["user"] as! [String : AnyObject]
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     SVProgressHUD.showSuccessWithStatusWithBlack("背景图片上传成功")
+                                    self.view.userInteractionEnabled = true
                                     self.fillDataForUI()
                                 })
                             }

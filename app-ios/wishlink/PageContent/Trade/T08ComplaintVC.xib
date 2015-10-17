@@ -25,6 +25,7 @@
                 <outlet property="btnImage4" destination="wj3-Ef-uD4" id="yBr-W8-oIq"/>
                 <outlet property="btnImage5" destination="VCw-bQ-Pd6" id="rBr-PU-hZf"/>
                 <outlet property="contexTextView" destination="tnw-df-bGW" id="5oX-eI-k85"/>
+                <outlet property="lbCount" destination="ZAz-uX-pUr" id="1W4-YL-M12"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -72,7 +72,6 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.unTradeBtn.hideRedRound = false
         self.conditionView.layer.shadowOffset = CGSizeMake(5, 5)
         self.conditionView.layer.shadowColor = UIColor.blackColor().CGColor
         self.conditionView.layer.shadowOpacity = 0.7
@@ -228,6 +227,12 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         self.filterBtnAction(self.finishedBtn)
     }
 
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.conditionView.hidden = true
+        self.coverView.hidden = true
+        self.isCoverTabBar(!self.conditionView.hidden)
+    }
+    
     // MARK: - private method
     
     func getBuyerTrade() {
