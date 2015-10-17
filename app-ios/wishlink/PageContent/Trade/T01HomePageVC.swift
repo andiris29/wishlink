@@ -139,6 +139,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.searchTableView.hidden = true
+        self.searchTextField.resignFirstResponder()
     }
     
     // MARK: - Table view data source
@@ -170,6 +171,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         if indexPath.row == 0 { return }
         
         self.searchTableView.hidden = true
+        self.searchTextField.resignFirstResponder()
         self.searchTextField.text = itemContents[indexPath.row] as? String
     }
     
@@ -182,6 +184,17 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         print("buttonAction:\(sender.tag)")
     }
+    
+    @IBAction func searchButtonAction(sender: UIButton) {
+        
+        self.gotoNextPage(self.searchTextField.text!);
+    }
+    
+    @IBAction func textFieldEndAndExit(sender: UITextField) {
+        
+//        self.gotoNextPage(sender.text!);
+    }
+    
     func gotoNextPage(strKeyWord:String)
     {
         let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
@@ -231,7 +244,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
         self.searchTableView.hidden = true
-        self.gotoNextPage(textField.text!);
+        
         return true
     }
 

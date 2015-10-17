@@ -125,15 +125,24 @@ class T05PayVC: RootVC,WebRequestDelegate {
         self.navigationController?.navigationBarHidden = false;
         
         self.increaseButton.enabled = !self.isNewOrder
-        self.decreaseButton.enabled = !self.isNewOrder
+        
+        if self.isNewOrder {
+            
+            self.decreaseButton.enabled = false
+        } else {
+            
+            self.decreaseButton.enabled = goodsNumbers > 1
+        }
         
         self.loadComNaviLeftBtn()
         self.loadComNavTitle(self.isNewOrder ? "发布" : "我要跟单")
     }
     
+    var currentButton: UIButton = UIButton()
     @IBAction func selectedButtonPay(sender: UIButton) {
         
         sender.selected = !sender.selected
+        
         if sender.tag == selectedButtonWXTag {
             
             self.currPayModel = .Weixin
@@ -141,9 +150,19 @@ class T05PayVC: RootVC,WebRequestDelegate {
             
             self.currPayModel = .Alipay
         }
+        // single select
+        if currentButton != sender { currentButton.selected = false }
+        currentButton = sender
     }
     @IBAction func btnPayTapped(sender: UIButton) {
         
+        if !(currentButton.tag == selectedButtonWXTag || currentButton.tag == selectedButtonZFBTag) {
+            
+            let alertView = UIAlertView(title: "提示" , message: "请选择一种支付方式" , delegate: nil , cancelButtonTitle: " 完成 " )
+            
+            alertView.show ()
+            return
+        }
         
         let tag = sender.tag;
         if(tag == 11)//跳转到个人中心

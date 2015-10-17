@@ -81,7 +81,7 @@
                         <constraint firstItem="6bM-GU-RKf" firstAttribute="leading" secondItem="zbp-yk-vgN" secondAttribute="leading" constant="10" id="ttu-mS-HTN"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="p3X-iC-3Lq">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="p3X-iC-3Lq">
                     <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1ac-SV-jGI">
