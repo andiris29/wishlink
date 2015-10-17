@@ -108,6 +108,13 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         return cell
     }
     
+    // MARK: - Touched
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.searchTextField.resignFirstResponder()
+    }
+    
     //MARK: - Action
     
     @IBAction func searchButtonAction(sender: AnyObject) {
