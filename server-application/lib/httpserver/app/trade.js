@@ -2,6 +2,7 @@
 var async = require('async');
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var path = require('path');
 
 // Model
 var Trades = require('../../model/trades');
