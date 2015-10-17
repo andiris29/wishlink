@@ -223,22 +223,20 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 12)
         
-//        let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
-//        vc.myDelegate = self;
-//        vc.searchType = .any
-//        self.presentViewController(vc, animated: true, completion: nil);
+
         return true
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-    
-        let para = ["keyword" : textField.text!.trim()]
+
+    @IBAction func searchTexfieldValueChange(sender: AnyObject) {
+        
+        if (sender.text == nil || sender.text!.length <= 0) {return}
+        
+        let para = ["keyword" : sender.text!]
         self.httpObj.httpGetApi("suggestion/any", parameters: para, tag: 13)
         
-        return true
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
@@ -313,6 +311,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             let dic = response as! NSDictionary;
             if (dic.objectForKey("suggestions") != nil)
             {
+                
+                itemContents = [];
                 let resultArr = dic.objectForKey("suggestions") as! NSArray;
                 if(self.searchTextField.text!.trim().length > 0  && resultArr.count > 0)
                 {
@@ -321,13 +321,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                     dataArray.addObject("历史搜索")
                     
                     for item in resultArr {
-                        
                         dataArray.addObject(item as! String)
                     }
-                    
                     itemContents = dataArray
-                    self.searchTableView.reloadData()
                 }
+                self.searchTableView.reloadData()
             }
             else
             {

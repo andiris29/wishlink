@@ -73,7 +73,7 @@
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             <connections>
-                                <action selector="textFieldEndAndExit:" destination="-1" eventType="editingDidEnd" id="Mlt-q1-1Uf"/>
+                                <action selector="searchTexfieldValueChange:" destination="-1" eventType="editingChanged" id="XEC-Hw-RDg"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8U-B1-CdR">
