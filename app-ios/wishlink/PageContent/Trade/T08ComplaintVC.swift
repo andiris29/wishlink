@@ -18,6 +18,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     @IBOutlet weak var btnImage2: UIButton!
     @IBOutlet weak var btnImage1: UIButton!
     
+    var tradeid:String!
     var currentButton: UIButton!
     var images = Dictionary<String, UIImage>()
     
@@ -93,7 +94,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             apiurl,
             multipartFormData: {
                 multipartFormData in
-                
+                 multipartFormData.appendBodyPart(data: self.tradeid.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "_id")
                 multipartFormData.appendBodyPart(data: self.contexTextView.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "problem")
  
                 for var index = self.btnImage1.tag; index <= self.btnImage5.tag; index++ {

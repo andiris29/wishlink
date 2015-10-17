@@ -384,6 +384,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         if(textField.tag>3 || textField.tag == 0)
         {
+            
+            self.sv.contentOffset.y = self.sv.contentOffset.y + 200
             return true;
         }
         else
@@ -407,6 +409,11 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             return false;
         }
     }
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {//结束编辑
+        
+        self.sv.contentOffset.y = self.sv.contentOffset.y - 200
+        return true
+    }
 
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n")
@@ -418,6 +425,17 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
         
         return true;
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        
+        self.sv.contentOffset.y = self.sv.contentOffset.y + 250
+        return true
+    }
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        
+        self.sv.contentOffset.y = self.sv.contentOffset.y - 250
+        return true
     }
 
     //MAEK: WebrequestDelegate
