@@ -50,6 +50,14 @@ class T05PayVC: RootVC,WebRequestDelegate {
         self.httpObj.mydelegate = self;
         self.loadData();
     }
+    deinit
+    {
+        NSLog("T05PayVC --> deinit");
+        self.imageRollView.removeFromSuperview();
+        self.imageRollView = nil;
+        self.item = nil;
+        self.trade = nil;
+    }
     
     func initImageRollView(images:[UIImage]) {
         

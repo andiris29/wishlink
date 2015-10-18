@@ -15,7 +15,27 @@ class RootVC: UIViewController {
     var httpObj:WebRequestHelper!
     var dataArr:[AnyObject]! = []
 
-    
+    deinit
+    {
+        NSLog("RootVC ->deinit")
+        if( self.httpObj != nil)
+        {
+            self.httpObj = nil;
+        }
+        
+        if( self.dataArr != nil)
+        {
+            self.dataArr = nil;
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        NSLog("didReceiveMemoryWarning-->RootVC")
+        super.didReceiveMemoryWarning();
+        if(self.view.window  == nil)
+        {
+            self.view = nil;
+        }
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -45,10 +65,7 @@ class RootVC: UIViewController {
     }
  
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+ 
     
     //MARK: reDesign Navigation
     func loadComNavTitle(strTitle:String)

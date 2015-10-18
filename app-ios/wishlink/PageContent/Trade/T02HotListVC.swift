@@ -24,6 +24,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     var searchTextField: UITextField!
     var topView = UIImageView()
     
+    var t06VC:T06TradeVC!
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         
@@ -39,12 +41,29 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         
         NSLog("T02HotListVC -->deinit")
         self.collectionView = nil;
-        self.dataArr = nil;
+        if(self.dataArr != nil && self.dataArr.count>0)
+        {
+            self.dataArr.removeAll();
+            self.dataArr = nil;
+        }
+    
+        if(self.t06VC != nil)
+        {
+            self.t06VC = nil;
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
+        
+        if(self.t06VC != nil)
+        {
+            self.t06VC.view.removeFromSuperview();
+            self.t06VC.view = nil;
+            self.t06VC = nil;
+        }
+        
         self.navigationController?.navigationBarHidden = false;
         
         let para:[String : AnyObject] = ["pageNo":1,
@@ -70,14 +89,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         topView.frame = CGRectMake(0, 0, ScreenWidth, 44)
         topView.userInteractionEnabled = true
         self.collectionView.addSubview(topView)
-        
-//        let backButton = UIButton(type: UIButtonType.Custom)
-//        backButton.frame = CGRectMake(5, 0, 44, 44)
-//        backButton.backgroundColor = UIColor.clearColor()
-//        backButton.setImage(UIImage(named: "u02-back"), forState: UIControlState.Normal)
-//        backButton.setImage(UIImage(named: "u02-back-w"), forState: UIControlState.Selected)
-//        backButton.addTarget(self, action: Selector("backButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-//        topView.addSubview(backButton)
+
         
         self.searchTextField = UITextField()
         self.searchTextField.frame = CGRectMake(10, 7, ScreenWidth - 20, 30)
@@ -128,9 +140,12 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let vc = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
-        vc.item = self.dataArr[indexPath.row] as! ItemModel
-        self.navigationController?.pushViewController(vc, animated: true);
+        if(self.t06VC == nil)
+        {
+            self.t06VC = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+        }
+        self.t06VC.item = self.dataArr[indexPath.row] as! ItemModel
+        self.navigationController?.pushViewController(self.t06VC, animated: true);
     }
     
     

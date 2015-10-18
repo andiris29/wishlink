@@ -25,14 +25,28 @@ class T06Cell: UITableViewCell {
     @IBOutlet weak var lbUserName: UILabel!
     @IBOutlet weak var lbTotalFree: UILabel!
     
-    var myDelegate:T06CellDelegate!
+    weak var myDelegate:T06CellDelegate!
     var trade:TradeModel!
     var item:ItemModel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    deinit{
+        
+        NSLog("T06Cell -->deinit")
+        self.myDelegate = nil;
+        if(self.trade != nil )
+        {
+            self.trade = nil;
+        }
+        if(self.item != nil )
+        {
+            self.item = nil;
+        }
+        
+    }
     @IBAction func selectedButtonAction(sender: UIButton) {
         
         sender.selected = !sender.selected
@@ -86,10 +100,6 @@ class T06Cell: UITableViewCell {
 
         
     }
-    deinit
-    {
-        trade = nil;
-        item = nil;
-    }
+
     
 }

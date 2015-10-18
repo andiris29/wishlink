@@ -1,23 +1,30 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++BC732C9",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3F9A6EF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++B0EC933" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++7CFE0F4" : {
 
     },
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++DA423AE" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++D75F557" : {
+
+    },
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AE146EF" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++DA423AE" : 0,
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++B0EC933" : 0,
-    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++BC732C9" : 0
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++7CFE0F4" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++D75F557" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++DA8B284" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AE146EF" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3F9A6EF" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "58398B6B-92FB-499B-82C8-A842276A1E6C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++DA423AE" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
-    "7f69d04d-286e-3648-968a-806926e1464b++1783+++B0EC933" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
-    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++BC732C9" : "wishlink-iOS\/"
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++7CFE0F4" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++D75F557" : "com.wishlink.kelp\/app-ios\/wishlink\/Library\/GTMBase64\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++DA8B284" : "wishlink-iOS\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++AE146EF" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3F9A6EF" : "com.wishlink.kelp\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "wishlink",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -26,17 +33,27 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++B0EC933"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++7CFE0F4"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++DA423AE"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++AE146EF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++2450+++D75F557"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++BC732C9"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3F9A6EF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++DA8B284"
     }
   ]
 }

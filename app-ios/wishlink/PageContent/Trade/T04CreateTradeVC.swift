@@ -28,13 +28,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var constraint_topViewHieght: NSLayoutConstraint!
     //通用View高度约束
     @IBOutlet weak var constraint_viewHeight: NSLayoutConstraint!
-
     var actionSheet: CSActionSheet!
-    
     var item:ItemModel!
-    
-    //上传的图像列表
-    var imagrArr:[UIImage] = [];
+    var t05VC:T05PayVC!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -57,6 +53,12 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     
     override func viewWillAppear(animated: Bool) {
+        
+        if(self.t05VC != nil)
+        {
+            self.t05VC.view.removeFromSuperview();
+            self.t05VC = nil;
+        }
         
         self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(60.0);
         self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(75);
@@ -114,41 +116,42 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 multipartFormData.appendBodyPart(data: self.txtPrice.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
                 multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                 multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
-                if(self.imagrArr.count>0)
+//                if(self.imagrArr.count>0)
+                if(self.pickImageCount>0)
                 {
                     let imgName = "item_a.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[0]);
+                    let imageData = UIHEPLER.compressionImageToDate(self.iv0.image!);
                     
                     let imgStream  = NSInputStream(data: imageData);
                     let len =   UInt64(imageData.length)
                     
                     multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                 }
-                if(self.imagrArr.count>1)
+                if(self.pickImageCount>1)
                 {
                     
                     let imgName = "item_b.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[1]);
+                    let imageData = UIHEPLER.compressionImageToDate(self.iv1.image!);
                     
                     let imgStream  = NSInputStream(data: imageData);
                     let len =   UInt64(imageData.length)
                     
                     multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                 }
-                if(self.imagrArr.count>2)
+                if(self.pickImageCount>2)
                 {
                     let imgName = "item_c.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[2]);
+                    let imageData = UIHEPLER.compressionImageToDate(self.iv2.image!);
                     
                     let imgStream  = NSInputStream(data: imageData);
                     let len =   UInt64(imageData.length)
                     
                     multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                 }
-                if(self.imagrArr.count>3)
+                if(self.pickImageCount>3)
                 {
                     let imgName = "item_d.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.imagrArr[3]);
+                    let imageData = UIHEPLER.compressionImageToDate(self.iv3.image!);
                     
                     let imgStream  = NSInputStream(data: imageData);
                     let len =   UInt64(imageData.length)
@@ -280,9 +283,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         {
             return "数量不能为空"
         }
-        if(self.imagrArr.count == 0)
+        if(self.pickImageCount == 0)
         {
-            
             return "请上传图片"
         }
         return result;
@@ -308,39 +310,39 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
         }
     }
+    var pickImageCount = 0;
     
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let icount = self.imagrArr.count;
+//        let icount = self.imagrArr.count;
         let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
         
-            if(self.imagrArr.count<4)
+            if(self.pickImageCount<4)
             {
-                
-                self.imagrArr.append(gotImage);
-                
+                self.pickImageCount+=1;
+            }
+          
+            
+            if(self.pickImageCount == 1)
+            {
+                self.iv0.image = gotImage;
             }
             
-            if(self.imagrArr.count>0 && icount == 0)
+            if(self.pickImageCount == 2)
             {
-                self.iv0.image = self.imagrArr[0];
+                self.iv1.image = gotImage;
             }
-            
-            if(self.imagrArr.count>1 && icount == 1)
+            if(self.pickImageCount == 3)
             {
-                self.iv1.image = self.imagrArr[1];
+                self.iv2.image = gotImage;
             }
-            if(self.imagrArr.count>2 && icount == 2)
+            if(self.pickImageCount == 4)
             {
-                self.iv2.image = self.imagrArr[2];
-            }
-            if(self.imagrArr.count>3 && icount == 3)
-            {
-                self.iv3.image = self.imagrArr[3];
+                self.iv3.image = gotImage;
             }
             
 //            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
@@ -437,31 +439,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.sv.contentOffset.y = self.sv.contentOffset.y - 250
         return true
     }
-
-    //MAEK: WebrequestDelegate
-    func requestDataComplete(response: AnyObject, tag: Int) {
-     if(tag == 12)//trade创建成功,准备页面跳转
-        {
-            
-            SVProgressHUD.dismiss();
-            let dic = response as! NSDictionary;
-            let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
-            let tradeItem = TradeModel(dict: tradeDic);
-            
-            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            vc.item = self.item;
-            vc.trade = tradeItem;
-            vc.isNewOrder = true;
-            self.navigationController?.pushViewController(vc, animated: true);
-            
-        }
-    }
-    func requestDataFailed(error: String) {
-        
-        SVProgressHUD.dismiss();
-        UIHEPLER.alertErrMsg(error);
-        
-    }
+    
     
     //T11SelectSuggestionDelegate
     func GetSelectValue(inputValue: String) {
@@ -480,5 +458,48 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         self.lastSelectTextFiledTag = -1;
     }
+    func clearInput()
+    {
+        self.txtCategory.text = "";
+        self.txtName.text = "";
+        self.txtPrice.text = "";
+        self.txtRemark.text = "";
+        self.txtCount.text = "";
+        self.txtSize.text = "";
+        self.txtBuyArea.text = "";
+        self.iv0.image = nil;
+        self.iv1.image = nil;
+        self.iv2.image = nil;
+        self.iv3.image = nil;
+    }
+
+    //MARK: WebrequestDelegate
+    func requestDataComplete(response: AnyObject, tag: Int) {
+     if(tag == 12)//trade创建成功,准备页面跳转
+        {
+            self.clearInput();
+            SVProgressHUD.dismiss();
+            let dic = response as! NSDictionary;
+            let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
+            let tradeItem = TradeModel(dict: tradeDic);
+            
+            if(self.t05VC == nil)
+            {
+                self.t05VC = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            }
+            self.t05VC.item = self.item;
+            self.t05VC.trade = tradeItem;
+            self.t05VC.isNewOrder = true;
+            self.navigationController?.pushViewController(self.t05VC, animated: true);
+            
+        }
+    }
+    func requestDataFailed(error: String) {
+        
+        SVProgressHUD.dismiss();
+        UIHEPLER.alertErrMsg(error);
+        
+    }
+
     
 }

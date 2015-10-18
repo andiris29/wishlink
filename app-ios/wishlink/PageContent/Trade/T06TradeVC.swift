@@ -42,6 +42,34 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         self.loadComNavTitle("订单详情")
     }
     
+    deinit{
+        
+        NSLog("T06TradeVC -->deinit")
+        self.item = nil;
+        self.tradeTableView = nil;
+        
+        if(self.dataArr != nil && self.dataArr.count>0)
+        {
+            self.dataArr.removeAll();
+            self.dataArr = nil;
+        }
+        if(self.followArr != nil && self.followArr.count>0)
+        {
+            self.followArr.removeAll();
+            self.followArr = nil;
+        }
+        if(self.selectArr != nil && self.selectArr.count>0)
+        {
+            self.selectArr.removeAll();
+            self.selectArr = nil;
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.tradeTableView.layoutIfNeeded();
+        self.view.layoutIfNeeded();
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if(followArr.count>0)
@@ -190,7 +218,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         SVProgressHUD.dismiss();
-        print(response, terminator: "")
+//        print(response, terminator: "")
         if(tag == 60)
         {
             

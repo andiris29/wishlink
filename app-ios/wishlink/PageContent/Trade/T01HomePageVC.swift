@@ -36,8 +36,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         if UserModel.shared.isLogin == false
         {
             UIHEPLER.showLoginPage(self);
-//            let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-//            self.presentViewController(vc, animated: true, completion: nil)
         }
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
@@ -54,9 +52,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         if(self.t02VC != nil)
         {
-            
-            self.view.removeFromSuperview()
-            self.view = nil;
+            self.t02VC.view.removeFromSuperview()
+            self.t02VC.view = nil;
             self.t02VC = nil;
         }
         super.viewWillAppear(animated);
@@ -197,9 +194,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func gotoNextPage(strKeyWord:String)
     {
-        let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        vc.keyword = strKeyWord;
-        self.navigationController?.pushViewController(vc, animated: true);
+        if(self.t02VC == nil)
+        {
+            self.t02VC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        }
+        self.t02VC.keyword = strKeyWord;
+        self.navigationController?.pushViewController(self.t02VC, animated: true);
         self.removeTimer();
         
         
