@@ -25,6 +25,8 @@ var SearchService = {};
  * @param {int} count
  */
 SearchService.search = function(keyword, pageNo, pageSize, callback) {
+    pageNo = pageNo || 1;
+    pageSize = pageSize || 10;
     async.waterfall([
         function (callback) {
             SegmentService.segment(keyword, callback);
