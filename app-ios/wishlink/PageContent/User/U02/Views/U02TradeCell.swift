@@ -80,6 +80,10 @@ class U02TradeCell: UICollectionViewCell {
     @IBOutlet weak var itemTotalPrice: UILabel!
     
     @IBOutlet weak var ownerNameLabel: UILabel!
+    
+    @IBOutlet weak var itemImageView: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -140,6 +144,9 @@ class U02TradeCell: UICollectionViewCell {
         self.itemTotalPrice.text = "合计：" + "\(totalPrice)"
         if self.trade.owner != nil {
             self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
+        }
+        if self.trade.item.images != nil && self.trade.item.images.count != 0 {
+            WebRequestHelper().renderImageView(self.itemImageView, url: self.trade.item.images[0], defaultName: "")
         }
     }
     

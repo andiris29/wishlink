@@ -187,11 +187,11 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         if tag == 10 {
             // tradeList
             let tradeArray = response["trades"] as! NSArray
-            print(tradeArray)
             if tradeArray.count == 0 {
                 return
             }
             for tradeDic in tradeArray {
+                print(tradeDic)
                 let trade = TradeModel(dict: tradeDic as! NSDictionary)
                 self.tradeArray.append(trade)
             }
