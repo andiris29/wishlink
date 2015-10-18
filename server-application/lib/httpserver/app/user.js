@@ -14,6 +14,7 @@ var rUserRecommendedItems = require('../../model/rUserRecommendedItem');
 
 // Service
 var NotificationService = require('../service/NotificationService');
+var RecommendationService = require('../service/RecommendationService');
 
 // Helper
 var RequestHelper = require('../helper/RequestHelper');
@@ -253,6 +254,14 @@ user.loginViaWeixin = {
                 });
             });
         }, function(user, callback) {
+            if (isNewUser) {
+                RecommendationService.recommendItems(user._id, function(error) {
+                    callback(error, user);
+                });
+            } else {
+                callback(null, user);
+            }
+        }, function(user, callback) {
             req.session.userId = user._id;
             req.session.loginDate = new Date();
             NotificationService.bind(param.registrationId, user._id, function(error) {
@@ -393,6 +402,14 @@ user.loginViaWeibo = {
                     }
                 });
             });
+        }, function(user, callback) {
+            if (isNewUser) {
+                RecommendationService.recommendItems(user._id, function(error) {
+                    callback(error, user);
+                });
+            } else {
+                callback(null, user);
+            }
         }, function(user, callback) {
             // add user to session
             req.session.userId = user._id;
