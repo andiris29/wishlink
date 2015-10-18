@@ -42,9 +42,17 @@ SearchService.search = function(keyword, pageNo, pageSize, callback) {
                     }
                 }
             ).sort({ score: { $meta: "textScore" } } );
+            var countQuerier = Items.find({
+                    $text: {
+                        $search: searchKeyword
+                    }
+                }, {
+                    score: { $meta: "textScore"
+                    }
+                }
+            );
 
-            //var querier = Items.textSearch(searchKeyword);
-            MongoHelper.queryPaging(querier, pageNo, pageSize, callback);
+            MongoHelper.queryPaging(querier, countQuerier, pageNo, pageSize, callback);
         }
     ], callback);
 };

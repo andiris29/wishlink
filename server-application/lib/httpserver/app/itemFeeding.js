@@ -32,7 +32,7 @@ itemFeeding.recommendation = {
                 var criteria = {
                     initiatorRef: req.currentUserId
                 };
-                MongoHelper.queryPaging(rUserRecommendedItems.find(criteria).populate('targetRef').sort({create: -1}), param.pageNo, param.pageSize, cb);
+                MongoHelper.queryPaging(rUserRecommendedItems.find(criteria).populate('targetRef').sort({create: -1}), rUserRecommendedItems.find(criteria), param.pageNo, param.pageSize, cb);
             }, function(models, count, cb) {
                 var items = [];
                 models.forEach(function(relations) {
@@ -66,7 +66,7 @@ itemFeeding.favorite = {
                 var criteria = {
                     initiatorRef: req.currentUserId
                 };
-                MongoHelper.queryPaging(rUserFavoriteItems.find(criteria).populate('targetRef'), param.pageNo, param.pageSize, cb);
+                MongoHelper.queryPaging(rUserFavoriteItems.find(criteria).populate('targetRef'), rUserFavoriteItems.find(criteria), param.pageNo, param.pageSize, cb);
             }, function(models, count, cb) {
                 var items = [];
                 models.forEach(function(relationship) {
@@ -101,13 +101,19 @@ itemFeeding.search = {
                 //ignore error of save history
                 callback();
             });
-        }, function(callback) {
-            SearchService.search(keyword, pageNo, pageSize, callback);
-        }, function(items, count, callback) {
-            ContextHelper.appendItemContext(req.currentUserId, items, callback);
-        }], function(err, items) {
-            ResponseHelper.response(res, err, {
-                items: items
+        }], function(err) {
+            ServiceHelper.queryPaging(req, res, function(param, callback) {
+                SearchService.search(keyword, pageNo, pageSize, callback);
+            }, function(models) {
+                return {
+                    items: models
+                };
+            }, {
+                afterQuery: function(param, currentPageModels, numTotal, callback) {
+                    async.series([function(cb) {
+                        ContextHelper.appendItemContext(req.currentUserId, currentPageModels, cb);
+                    }], callback);
+                }
             });
         });
     }

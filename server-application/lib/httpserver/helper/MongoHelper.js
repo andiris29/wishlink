@@ -11,7 +11,7 @@ var MongoHelper = module.exports;
  * @param {Object} pageSize
  * @param {Object} callback function(err, models)
  */
-MongoHelper.queryPaging = function(query, pageNo, pageSize, callback) {
+MongoHelper.queryPaging = function(query, countQuery, pageNo, pageSize, callback) {
     async.waterfall([function(cb) {
         // Query
         query.skip((pageNo - 1) * pageSize).limit(pageSize).exec(function(err, models) {
@@ -25,7 +25,7 @@ MongoHelper.queryPaging = function(query, pageNo, pageSize, callback) {
         });
     }, function(models, cb) {
         // Count
-        query.count(function(err, count) {
+        countQuery.count(function(err, count) {
             if (err) {
                 cb(ServerError.genUnkownError(err));
             } else {

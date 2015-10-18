@@ -73,9 +73,12 @@ SearchSuggestionService.queryName = function(keyword, pageNo, pageSize, callback
         function (k, callback) {
             var query = items.find({
                 name : _generatePrefixRegex(k)
+            }), countQuery = items.find({
+                name : _generatePrefixRegex(k)
             });
-            MongoHelper.queryPaging(query, pageNo, pageSize, callback);
-        }, function (items, callback) {
+
+            MongoHelper.queryPaging(query, countQuery, pageNo, pageSize, callback);
+        }, function (items, count, callback) {
             var itemsNames = items.map(function (i) {
                 return i.name;
             }).filter(function (n) {
@@ -148,7 +151,8 @@ var _queryWordEntities = function (keyword, type, pageNo, pageSize, callback) {
                 c.type = type;
             }
             var query = words.find(c);
-            MongoHelper.queryPaging(query, pageNo, pageSize, callback);
+            var countQuery = words.find(c);
+            MongoHelper.queryPaging(query, countQuery, pageNo, pageSize, callback);
         }
     ], callback);
 };
