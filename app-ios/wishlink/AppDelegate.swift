@@ -213,8 +213,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     func postLocation()
     {
         let para = ["device":UIDevice.currentDevice().identifierForVendor!.UUIDString as String,
-            "location.lat":lastLocation.coordinate.latitude,
-            "location.lng":lastLocation.coordinate.longitude
+            "location":[
+                "lat":lastLocation.coordinate.latitude,
+                "lng":lastLocation.coordinate.longitude]
         ];
         
         self.httpObj.httpPostApi("geo/trace", parameters: para as! [String : AnyObject], tag: 0);
