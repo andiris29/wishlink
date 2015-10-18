@@ -57,6 +57,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         if(self.t05VC != nil)
         {
             self.t05VC.view.removeFromSuperview();
+            self.t05VC.view  = nil;
             self.t05VC = nil;
         }
         
@@ -222,7 +223,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBAction func btnAction(sender: UIButton) {
     
         let tag = sender.tag;
-        if(tag==11)//确认发布
+        if(tag==11)
         {
             let errmsg =  checkInput();
             if(errmsg != "")

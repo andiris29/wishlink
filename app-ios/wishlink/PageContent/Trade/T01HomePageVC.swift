@@ -48,20 +48,25 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         getKeyWordData();
         getReportDate();
     }
+    
     override func viewWillAppear(animated: Bool) {
-        
         if(self.t02VC != nil)
         {
             self.t02VC.view.removeFromSuperview()
             self.t02VC.view = nil;
             self.t02VC = nil;
         }
+
         super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
         
         //self.startTimer();
     }
-    
+ 
+    override func viewDidAppear(animated: Bool) {
+        
+        self.navigationController?.navigationBarHidden = true
+    }
     func getKeyWordData()
     {
         self.httpObj.httpGetApi("trend/keywords", parameters: nil, tag: 10)

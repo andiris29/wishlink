@@ -18,6 +18,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     @IBOutlet var tradeTableView: UITableView!
     
     
+    var t05VC:T05PayVC!
     var item: ItemModel!
     //跟单列表
     var followArr:[TradeModel]! = []
@@ -62,6 +63,15 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         {
             self.selectArr.removeAll();
             self.selectArr = nil;
+        }
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        if(self.t05VC != nil)
+        {
+            self.t05VC.view.removeFromSuperview();
+            self.t05VC.view = nil;
+            self.t05VC = nil;
         }
     }
     
@@ -251,19 +261,20 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
                 tababarController.selectedIndex = 3;
             }
             
-            //todo:
-        } else if(tag == 62) {//跟单成功转向支付页面
             
+        } else if(tag == 62) {//跟单成功转向支付页面
             
             let dic = response as! NSDictionary;
             let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
             let tradeItem = TradeModel(dict: tradeDic);
-            
-            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            vc.item = self.item;
-            vc.trade = tradeItem;
-            vc.isNewOrder = false;
-            self.navigationController?.pushViewController(vc, animated: true);
+            if( self.t05VC == nil)
+            {
+                self.t05VC = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            }
+            self.t05VC.item = self.item;
+            self.t05VC.trade = tradeItem;
+            self.t05VC.isNewOrder = false;
+            self.navigationController?.pushViewController(self.t05VC, animated: true);
             
         }
     }
