@@ -66,6 +66,7 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
         if self.userDic.count == 0 {
             return  
         }
+        print(self.userDic)
         self.isLogin = true
         self._id = getStringValue("_id", dic: self.userDic)
         self.nickname = getStringValue("nickname", dic: self.userDic)

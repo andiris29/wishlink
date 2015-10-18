@@ -112,12 +112,14 @@ U03AddressCellDelegate, WebRequestDelegate{
     func requestDataFailed(error: String) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
+            self.view.userInteractionEnabled = true
         })
     }
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
+            self.view.userInteractionEnabled = true
         })
         if tag == 10 {
             // 删除收货地址
@@ -125,7 +127,7 @@ U03AddressCellDelegate, WebRequestDelegate{
                 UserModel.shared.userDic = userDic
                 self.addressArray = UserModel.shared.receiversArray
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    UIHelper().alertErrMsg("删除成功")
+                    SVProgressHUD.showSuccessWithStatusWithBlack("删除成功")
                     self.tableView.reloadData()
                 })
             }
@@ -135,7 +137,6 @@ U03AddressCellDelegate, WebRequestDelegate{
                 UserModel.shared.userDic = userDic
                 self.addressArray = UserModel.shared.receiversArray
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    UIHelper().alertErrMsg("默认地址设置成功")
                     self.tableView.reloadData()
                 })
             }
@@ -164,13 +165,14 @@ U03AddressCellDelegate, WebRequestDelegate{
     // MARK: - prive method
     
     func setDefaultReceiver(receiver: ReceiverModel) {
-        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.view.userInteractionEnabled = false
         receiver.isDefault = true
         let dic = receiver.keyValuesWithType(.Update)
         self.httpObj.httpPostApi("user/saveReceiver", parameters: dic, tag: 20)
     }
     
     func removeReceiver(uuid: String) {
+        self.view.userInteractionEnabled = false
         if uuid.length == 0 {
             return
         }

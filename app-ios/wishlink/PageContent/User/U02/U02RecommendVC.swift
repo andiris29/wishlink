@@ -13,6 +13,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    var refreshControl: UIRefreshControl!
     
     var clearView: UIView!
     var clearBtn: UIButton!
@@ -20,12 +21,14 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     weak var userVC: U02UserVC!
     var dataArray: [ItemModel] = []
     var currentItemIndex: Int = -1
+    var pageNo: Int = 1
+    var pageSize: Int = 10
     // MARK: - life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self
-        self.prepareCollectionView()
+        self.prepareUI()
         // Do any additional setup after loading the view.
     }
 
@@ -169,11 +172,20 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         
     }
     
+    func refreshRecommendation() {
+        self.pageNo = 1
+        
+    }
+    
     // MARK: - prive method
     
     func getRecommendation() {
         self.dataArray.removeAll()
-        self.httpObj.httpGetApi("itemFeeding/recommendation", tag: 10)
+        let dic = [
+            "pageNo": self.pageNo,
+            "pageSize": self.pageSize
+        ]
+        self.httpObj.httpGetApi("itemFeeding/recommendation", parameters: dic, tag: 10)
     }
     
     func removeRecommendationItem() {
@@ -214,6 +226,16 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func unfavoriteItem(itemIndex: Int) {
         
+    }
+    
+    func prepareUI() {
+        self.prepareCollectionView()
+        self.prepareRefreshControl()
+    }
+    
+    func prepareRefreshControl() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refreshRecommendation", forControlEvents: .ValueChanged)
     }
     
     func prepareCollectionView() {
