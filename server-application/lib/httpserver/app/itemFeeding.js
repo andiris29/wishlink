@@ -93,9 +93,6 @@ itemFeeding.search = {
     func: function(req, res) {
         var param = req.queryString;
         var keyword = param.keyword;
-        var pageNo = param.pageNo;
-        var pageSize = param.pageSize;
-
         async.waterfall([function (callback) {
             SearchService.saveHistory(keyword, req.currentUserId, function (err) {
                 //ignore error of save history
@@ -103,6 +100,8 @@ itemFeeding.search = {
             });
         }], function(err) {
             ServiceHelper.queryPaging(req, res, function(param, callback) {
+                var pageNo = param.pageNo;
+                var pageSize = param.pageSize;
                 SearchService.search(keyword, pageNo, pageSize, callback);
             }, function(models) {
                 return {
