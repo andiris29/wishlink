@@ -14,6 +14,9 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         super.viewDidLoad()
         self.tabBar.backgroundColor = UIColor.whiteColor()
         self.addAllChildControllers()
+        
+
+
         // Do any additional setup after loading the view.
     }
 
@@ -71,6 +74,14 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
     
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
       
-            self.selectedViewController!.navigationController?.popToRootViewControllerAnimated(true);
+        let navigationController = self.selectedViewController as! UINavigationController
+//        let viewController = (navigationController.viewControllers)[0]
+        
+      
+        
+//        if  viewController.isKindOfClass(T03SearchHelperVC) {
+        
+            navigationController.popToRootViewControllerAnimated(false)
+//        }
     }
 }

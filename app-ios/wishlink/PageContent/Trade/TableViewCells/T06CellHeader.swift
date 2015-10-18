@@ -24,6 +24,7 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
     @IBOutlet weak var productNumberLabel: UILabel!
     @IBOutlet weak var productFormatLabel: UILabel!
     @IBOutlet weak var productMessageLabel: UILabel!
+    @IBOutlet weak var iv_notes: UIImageView!
     
     @IBOutlet weak var btnDorp: UIButton!
     @IBOutlet weak var btnFlow: UIButton!
@@ -31,8 +32,8 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
     
     var dorpListView: CSDorpListView!
     
-    var delegate: T06CellHeaderDelegate?
-    
+    weak var delegate: T06CellHeaderDelegate?
+    var item: ItemModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,6 +51,30 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
         self.productFormatLabel.text  = ""
         self.productMessageLabel.text  = ""
     }
+    deinit{
+        
+        NSLog("T06CellHeader -->deinit")
+        if( self.imageRollView != nil)
+        {
+            self.imageRollView.removeFromSuperview();
+            self.imageRollView = nil;
+        }
+        if( self.dorpListView != nil)
+        {
+//            CSDorpListView.sharedInstance.removeFromSuperview();
+            self.dorpListView.removeFromSuperview();
+            self.dorpListView = nil;
+        }
+        if(self.delegate != nil )
+        {
+            self.delegate = nil;
+        }
+        if(self.item != nil )
+        {
+            self.item = nil;
+        }
+        
+    }
     
     func initImageRollView(images:[UIImage]) {
 
@@ -59,7 +84,7 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
     }
     
     func initData(item: ItemModel) {
-    
+        self.item = item;
         self.titleLabel.text  = item.brand
         self.productNameLabel.text  = "品名：" + item.name
         self.productPriceLabel.text  = "\(item.price)"
@@ -72,6 +97,16 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
         self.productNumberLabel.text  = "\(item.numTrades)件"
         self.productFormatLabel.text  = item.spec
         self.productMessageLabel.text  = item.notes
+        if(self.productMessageLabel.text?.trim().length>0)
+        {
+            self.iv_notes.hidden = false;
+        }
+        else
+        {
+            self.iv_notes.hidden = true;
+            
+        }
+        
         self.lbTotalCount.text = "\(item.numTrades)件"
         if (item.images == nil) {return}
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {

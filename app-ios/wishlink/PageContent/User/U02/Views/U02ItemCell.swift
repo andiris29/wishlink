@@ -12,13 +12,12 @@ enum ItemCellType {
     case Recommand, Favorite
 }
 
-enum ItemCellButtonClickType {
+ enum ItemCellButtonClickType {
     case Favorite, Delete
 }
 
-
 protocol U02ItemCellDelegate: NSObjectProtocol {
-    func itemCell(cell: U02ItemCell, clickType: ItemCellButtonClickType)
+    func itemCell(cell: U02ItemCell,  clickType: ItemCellButtonClickType)
 }
 
 class U02ItemCell: UICollectionViewCell {
@@ -31,10 +30,10 @@ class U02ItemCell: UICollectionViewCell {
     
     @IBOutlet weak var favoriteBtn: UIButton!
     
+    @IBOutlet weak var iv_Item: UIImageView!
     @IBOutlet weak var btnDelete: UIButton!
     var indexPath: NSIndexPath!
     
-        @IBOutlet weak var imageRollView: CSImageRollView!
  
     var closure: ((ItemCellButtonClickType, NSIndexPath) -> ())?
     
@@ -54,7 +53,7 @@ class U02ItemCell: UICollectionViewCell {
             self.filldataForUI()
         }
     }
-    var delegate: U02ItemCellDelegate?
+    weak var delegate: U02ItemCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,6 +61,17 @@ class U02ItemCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.layer.borderWidth = 1
     }
+    deinit{
+        
+        NSLog("U02ItemCell -->deinit")
+        self.delegate = nil;
+        if(self.item != nil)
+        {
+            self.item = nil;
+        }
+    }
+    
+    
     @IBAction func favoriteBtnAction(sender: AnyObject) {
 //        let btn = sender as! UIButton
 //        btn.selected = !btn.selected
@@ -86,26 +96,32 @@ class U02ItemCell: UICollectionViewCell {
         self.favoriteBtn.selected = self.item.isFavorite
         
         
-        if (item == nil ||  item.images == nil) {return}
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            
-            var images: [UIImage] = [UIImage]()
-            for imageUrl in self.item.images {
-                let url: NSURL = NSURL(string: imageUrl)!
-                let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
-                images.append(image)
-            }
-            dispatch_async(dispatch_get_main_queue(), {
-                self.initImageRollView(images)
-            })
-        })
-    }
-    func initImageRollView(images:[UIImage]) {
+        if (item == nil ||  item.images == nil) {
+            self.iv_Item.image = nil;
+            return
+        }
         
-        imageRollView.initWithImages(images)
-        imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
-        imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
+        WebRequestHelper().renderImageView(self.iv_Item, url: item.images[0], defaultName: "")
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//            
+//            var images: [UIImage] = [UIImage]()
+//            for imageUrl in self.item.images {
+//                let url: NSURL = NSURL(string: imageUrl)!
+//                let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+//                images.append(image)
+//            }
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.initImageRollView(images)
+//            })
+//        })
     }
+//    func initImageRollView(images:[UIImage]) {
+//        
+//        imageRollView.initWithImages(images)
+//        imageRollView.setcurrentPageIndicatorTintColor(UIColor.grayColor())
+//        imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
+//    }
     
     //从热门列表中加载的时候调用此方法
     func loadFromhotVC(_item:ItemModel)

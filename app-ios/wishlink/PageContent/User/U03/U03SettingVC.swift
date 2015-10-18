@@ -154,6 +154,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         case 104:
             // 退出登录
             self.logout();
+        
         default:
             print("1111")
         }
@@ -281,7 +282,14 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
             NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
-            self.navigationController!.popViewControllerAnimated(true)
+//            self.navigationController!.popViewControllerAnimated(true)
+            
+            //跳转到Tab 第一个选项卡，并popup登录页面  －－update by andy.chen 2015-10-18
+            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+            
+            tababarController.selectedIndex = 0;
+            UIHEPLER.showLoginPage(self);
+            
         }
     }
     

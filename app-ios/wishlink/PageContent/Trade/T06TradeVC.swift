@@ -18,6 +18,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     @IBOutlet var tradeTableView: UITableView!
     
     
+    var t05VC:T05PayVC!
     var item: ItemModel!
     //跟单列表
     var followArr:[TradeModel]! = []
@@ -40,6 +41,43 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         
         self.loadComNaviLeftBtn()
         self.loadComNavTitle("订单详情")
+    }
+    
+    deinit{
+        
+        NSLog("T06TradeVC -->deinit")
+        self.item = nil;
+        self.tradeTableView = nil;
+        
+        if(self.dataArr != nil && self.dataArr.count>0)
+        {
+            self.dataArr.removeAll();
+            self.dataArr = nil;
+        }
+        if(self.followArr != nil && self.followArr.count>0)
+        {
+            self.followArr.removeAll();
+            self.followArr = nil;
+        }
+        if(self.selectArr != nil && self.selectArr.count>0)
+        {
+            self.selectArr.removeAll();
+            self.selectArr = nil;
+        }
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        if(self.t05VC != nil)
+        {
+            self.t05VC.view.removeFromSuperview();
+            self.t05VC.view = nil;
+            self.t05VC = nil;
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.tradeTableView.layoutIfNeeded();
+        self.view.layoutIfNeeded();
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -190,7 +228,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         SVProgressHUD.dismiss();
-        print(response, terminator: "")
+//        print(response, terminator: "")
         if(tag == 60)
         {
             
@@ -223,19 +261,20 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
                 tababarController.selectedIndex = 3;
             }
             
-            //todo:
-        } else if(tag == 62) {//跟单成功转向支付页面
             
+        } else if(tag == 62) {//跟单成功转向支付页面
             
             let dic = response as! NSDictionary;
             let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
             let tradeItem = TradeModel(dict: tradeDic);
-            
-            let vc = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            vc.item = self.item;
-            vc.trade = tradeItem;
-            vc.isNewOrder = false;
-            self.navigationController?.pushViewController(vc, animated: true);
+            if( self.t05VC == nil)
+            {
+                self.t05VC = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            }
+            self.t05VC.item = self.item;
+            self.t05VC.trade = tradeItem;
+            self.t05VC.isNewOrder = false;
+            self.navigationController?.pushViewController(self.t05VC, animated: true);
             
         }
     }
