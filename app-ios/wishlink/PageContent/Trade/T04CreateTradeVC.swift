@@ -251,7 +251,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
       func checkInput()->String{
         
         let result = "";
-        
+        self.dismissKeyboard();
         let category = txtCategory.text!.trim();
         if(category.length == 0)
         {
