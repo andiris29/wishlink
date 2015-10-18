@@ -113,6 +113,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
         tababarController.selectedIndex = 0;
         var vc = UIHEPLER.GetAppDelegate().window?.rootViewController
+        vc?.navigationController?.popToRootViewControllerAnimated(false)
         UIHEPLER.showLoginPage(vc!);
     }
     
