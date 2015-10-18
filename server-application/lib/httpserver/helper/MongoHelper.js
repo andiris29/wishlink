@@ -27,7 +27,7 @@ MongoHelper.queryPaging = function(query, countQuery, pageNo, pageSize, callback
         // Count
         countQuery.count(function(err, count) {
             if (err) {
-                cb(ServerError.genUnkownError(err));
+                cb(ServerError.fromDescription(err));
             } else {
                 if ((pageNo - 1) * pageSize >= count) {
                     cb(ServerError.PAGING_NOT_EXIST);

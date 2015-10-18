@@ -571,46 +571,46 @@ trade.complaint = {
     method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
-        async.waterfall([function(callback) {
-            Trades.findOne({
-                _id: RequestHelper.parseId(req.body._id)
-            }, function(error, trade) {
-                if (error) {
-                    callback(error);
-                } else if (!trade) {
-                    callback(ServerError.ERR_TRADE_NOT_EXIST);
-                } else {
-                    callback(null, trade);
-                }
-            });
-        }, function(trade, callback) {
-            trade.complaints = trade.complaints || [];
-            RequestHelper.parseFiles(req, global.config.uploads.trade.complaint.ftpPath, null, function(error, fields, files) {
-                if (error) {
-                    callback(error);
-                    return;
-                }
+        RequestHelper.parseFiles(req, global.config.uploads.trade.complaint.ftpPath, null, function(error, fields, files) {
+            if (error) {
+                ResponseHelper.response(res, error);
+                return;
+            }
 
+            async.waterfall([function(callback) {
+                Trades.findOne({
+                    _id: RequestHelper.parseId(fields._id)
+                }, function(error, trade) {
+                    if (error) {
+                        callback(error);
+                    } else if (!trade) {
+                        callback(ServerError.ERR_TRADE_NOT_EXIST);
+                    } else {
+                        callback(null, trade);
+                    }
+                });
+            }, function(trade, callback) {
+                trade.complaints = trade.complaints || [];
                 var complaint = {
                     problem: fields.problem,
                     images: [],
                     resolution: {}
                 };
-
                 files.forEach(function(file) {
                     var imagePath = global.config.uploads.trade.complaint.exposeToUrl + '/' + path.relative(global.config.uploads.trade.complaint.ftpPath, file.path);
                     complaint.images.push(imagePath);
                 });
+                trade.complaints.push(complaint);
                 TradeService.statusTo(req.currentUserId, trade, TradeService.Status.COMPLAINING.code, 'trade/complaint', function(error, trade) {
                     callback(error, trade);
                     NotificationService.notify([trade.ownerRef], NotificationService.notifyComplaint.command, NotificationService.notifyComplaint.message, {
                         _id: trade._id
                     }, null);
                 });
-            });
-        }], function(error, trade) {
-            ResponseHelper.response(res, error, {
-                trade: trade
+            }], function(error, trade) {
+                ResponseHelper.response(res, error, {
+                    trade: trade
+                });
             });
         });
     }
