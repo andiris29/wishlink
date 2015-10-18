@@ -36,7 +36,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierHeader, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierHeader)
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifierFooter, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierFooter)
         
-        self.httpObj.httpGetApi("tradeFeeding/byItem?item._id="+self.item._id, parameters: nil, tag: 60)
+        self.httpObj.httpGetApi("tradeFeeding/byItem?_id="+self.item._id, parameters: nil, tag: 60)
         self.navigationController?.navigationBarHidden = false;
         
         self.loadComNaviLeftBtn()
@@ -233,7 +233,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         {
             
             let tradesObj:NSArray! = (response as? NSDictionary)?.objectForKey("trades") as? NSArray
-        
+            print(tradesObj);
             if(tradesObj != nil && tradesObj!.count>0)
             {
                 if(followArr != nil && followArr.count>0)
