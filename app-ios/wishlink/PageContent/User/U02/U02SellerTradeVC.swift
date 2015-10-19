@@ -301,7 +301,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         let dic = [
             "_id": trade._id
         ]
-        self.httpObj.httpPostApi("trade/cancel", parameters: dic, tag: 20)
+        self.httpObj.httpPostApi("trade/unassign", parameters: dic, tag: 20)
     }
     
     func isCoverTabBar(isCover: Bool) {

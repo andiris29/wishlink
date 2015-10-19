@@ -8,7 +8,7 @@
 
 import UIKit
 
-class U02UserVC: RootVC, WebRequestDelegate {
+class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var sellerBtn: UIButton!
     
@@ -22,6 +22,7 @@ class U02UserVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var contryLabel: UILabel!
     @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     
     var selectedBtn: UIButton!
@@ -39,9 +40,8 @@ class U02UserVC: RootVC, WebRequestDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareData()
-        self.prepareSubVC()
-        self.selectedBtn = self.sellerBtn
-        self.sellerBtnAction(self.sellerBtn)
+        self.prepareUI()
+
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
             self.fillDataForUI()
@@ -73,12 +73,8 @@ class U02UserVC: RootVC, WebRequestDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.buyerTradeVC.view.frame = self.subVCView.frame
-        self.sellerTradeVC.view.frame = self.subVCView.frame
-        self.recommendVC.view.frame = self.subVCView.frame
-        self.favoriteVC.view.frame = self.subVCView.frame
-        self.headImageView.layer.cornerRadius = self.headImageView.w * 0.5
-        self.headImageView.layer.masksToBounds = true
+        self.adjustUI()
+
     }
 
     
@@ -110,9 +106,11 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
         self.buyerTradeVC.resetConditionView()
-        self.view.bringSubviewToFront(self.sellerTradeVC.view)
-        self.sellerTradeVC.getSellerTrade()
-
+//        self.view.bringSubviewToFront(self.sellerTradeVC.view)
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        dispatch_after(1, dispatch_get_main_queue()) { () -> Void in
+            self.sellerTradeVC.getSellerTrade()
+        }
     }
     
     @IBAction func buyerBtnAction(sender: AnyObject) {
@@ -120,7 +118,8 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
         self.sellerTradeVC.resetConditionView()
-        self.view.bringSubviewToFront(self.buyerTradeVC.view)
+//        self.view.bringSubviewToFront(self.buyerTradeVC.view)
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
         self.buyerTradeVC.getBuyerTrade()
     }
     
@@ -130,7 +129,9 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.selectedBtn.selected = true;
         self.sellerTradeVC.resetConditionView()
         self.buyerTradeVC.resetConditionView()
-        self.view.bringSubviewToFront(self.recommendVC.view)
+//        self.view.bringSubviewToFront(self.recommendVC.view)
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 2, y: 0), animated: true)
+
         self.recommendVC.getRecommendation()
     }
     
@@ -140,7 +141,9 @@ class U02UserVC: RootVC, WebRequestDelegate {
         self.selectedBtn.selected = true;
         self.sellerTradeVC.resetConditionView()
         self.buyerTradeVC.resetConditionView()
-        self.view.bringSubviewToFront(self.favoriteVC.view)
+//        self.view.bringSubviewToFront(self.favoriteVC.view)
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 3, y: 0), animated: true)
+
         self.favoriteVC.getFavoriteList()
     }
     
@@ -179,24 +182,61 @@ class U02UserVC: RootVC, WebRequestDelegate {
         }
     }
     
+    func adjustUI() {
+        self.buyerTradeVC.view.frame = self.subVCView.frame
+        self.sellerTradeVC.view.frame = self.subVCView.frame
+        self.recommendVC.view.frame = self.subVCView.frame
+        self.favoriteVC.view.frame = self.subVCView.frame
+        self.headImageView.layer.cornerRadius = self.headImageView.w * 0.5
+        self.headImageView.layer.masksToBounds = true
+        
+        var center = CGPoint(x: CGRectGetWidth(self.scrollView.frame) * 0.5, y: CGRectGetHeight(self.scrollView.frame) * 0.5)
+        self.sellerTradeVC.view.center = center
+        
+        center.x += ScreenWidth
+        self.buyerTradeVC.view.center = center
+        
+        center.x += ScreenWidth
+        self.recommendVC.view.center = center
+        
+        center.x += ScreenWidth
+        self.favoriteVC.view.center = center
+
+        self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 4, height: 0)
+    }
+    
     func prepareSubVC() {
+        
         self.buyerTradeVC = U02BuyerTradeVC(nibName: "U02BuyerTradeVC", bundle: NSBundle.mainBundle())
         self.buyerTradeVC.userVC = self
-        self.view.addSubview(self.buyerTradeVC.view)
+        self.buyerTradeVC.view.frame = self.scrollView.bounds
+        self.scrollView.addSubview(self.buyerTradeVC.view)
+//        self.view.addSubview(self.buyerTradeVC.view)
         
         self.sellerTradeVC = U02SellerTradeVC(nibName: "U02SellerTradeVC", bundle: NSBundle.mainBundle())
         self.sellerTradeVC.userVC = self
-        self.view.addSubview(self.sellerTradeVC.view)
+        self.scrollView.addSubview(self.sellerTradeVC.view)
+//        self.view.addSubview(self.sellerTradeVC.view)
         
+
         self.recommendVC = U02RecommendVC(nibName: "U02RecommendVC", bundle: NSBundle.mainBundle())
         self.recommendVC.userVC = self
-        self.view.addSubview(self.recommendVC.view)
+        self.scrollView.addSubview(self.recommendVC.view)
+//        self.view.addSubview(self.recommendVC.view)
         
         self.favoriteVC = U02FavoriteVC(nibName: "U02FavoriteVC", bundle: NSBundle.mainBundle())
         self.favoriteVC.userVC = self
-        self.view.addSubview(self.favoriteVC.view)
-        
+        self.scrollView.addSubview(self.favoriteVC.view)
+//        self.view.addSubview(self.favoriteVC.view)
+        self.adjustUI()
     }
+    
+    func prepareUI() {
+        self.prepareSubVC()
+        self.selectedBtn = self.sellerBtn
+        self.sellerBtnAction(self.sellerBtn)
+    }
+    
     // MARK: - setter and getter
 
 }

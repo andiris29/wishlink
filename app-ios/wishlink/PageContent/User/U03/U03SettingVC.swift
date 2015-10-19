@@ -170,7 +170,9 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         case 104:
             // 退出登录
             self.logout();
-        
+        case 105:
+            let numString = "telprompt://021-64269893"
+            APPLICATION.openURL(NSURL(string: numString)!)
         default:
             print("1111")
         }

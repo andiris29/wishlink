@@ -1484,8 +1484,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Lingshi Cultural Media Co., Ltd (589V53Y9R7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Lingshi Cultural Media Co., Ltd (589V53Y9R7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/wishlink/Library/AliSDK",
@@ -1513,7 +1513,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee3a30a9-6f53-4b32-9927-2662d9581172";
+				PROVISIONING_PROFILE = "79ffc1c3-5ca4-4d44-90e8-cecf4ac23d0f";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
@@ -1524,8 +1524,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Lingshi Cultural Media Co., Ltd (589V53Y9R7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Lingshi Cultural Media Co., Ltd (589V53Y9R7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/wishlink/Library/AliSDK",
@@ -1553,7 +1553,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee3a30a9-6f53-4b32-9927-2662d9581172";
+				PROVISIONING_PROFILE = "79ffc1c3-5ca4-4d44-90e8-cecf4ac23d0f";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
