@@ -13,7 +13,7 @@ enum SearchModel {
 }
 
 
-protocol T11SearchSuggestionDelegate
+@objc protocol T11SearchSuggestionDelegate
 {
     func GetSelectValue(inputValue:String)
 }
@@ -26,7 +26,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var searchTexfield: UITextField!
     @IBOutlet weak var cannelButton: UIButton!
     @IBOutlet weak var searchView: UIView!
-    var myDelegate:T11SearchSuggestionDelegate!;
+    weak var myDelegate:T11SearchSuggestionDelegate!;
     var searchType:SearchModel = .any
     var searchContext:String = ""
     

@@ -27,7 +27,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
     var currPayModel:PayModel = .Alipay
     var item:ItemModel!
     var trade:TradeModel!
-//    var defaultAddress:ReceiverModel!
+    var u03VC:U03AddressManagerVC!
     
     @IBOutlet weak var increaseButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
@@ -49,6 +49,14 @@ class T05PayVC: RootVC,WebRequestDelegate {
         super.viewDidLoad()
         self.httpObj.mydelegate = self;
         self.loadData();
+    }
+    deinit
+    {
+        NSLog("T05PayVC --> deinit");
+        self.imageRollView.removeFromSuperview();
+        self.imageRollView = nil;
+        self.item = nil;
+        self.trade = nil;
     }
     
     func initImageRollView(images:[UIImage]) {
@@ -122,6 +130,33 @@ class T05PayVC: RootVC,WebRequestDelegate {
     
     override func viewWillAppear(animated: Bool) {
         
+        
+        if(self.u03VC != nil)
+        {
+            if(self.u03VC.selectedReciver != nil)//更换支付地址
+            {
+                
+                self.lbReceverName.text = self.u03VC.selectedReciver.name
+                self.lbReceverMobile.text = self.u03VC.selectedReciver.phone;
+                self.lbRecevierAddress.text = self.u03VC.selectedReciver.address;
+                
+                let para = ["_id":self.trade._id,
+                    "receiver":[
+                        "name":self.u03VC.selectedReciver.name,
+                        "phone":self.u03VC.selectedReciver.phone,
+                        "province":self.u03VC.selectedReciver.province,
+                        "address":self.u03VC.selectedReciver.address
+                    ]
+                ]
+                
+                //TODU:更换支付地址
+                self.httpObj.httpPostApi("trade/updateReceiver", parameters: para as! [String : AnyObject], tag: 51)
+            }
+            self.u03VC.view.removeFromSuperview();
+            self.u03VC.view  = nil;
+            self.u03VC = nil;
+        }
+        
         self.navigationController?.navigationBarHidden = false;
         
         self.increaseButton.enabled = !self.isNewOrder
@@ -156,43 +191,38 @@ class T05PayVC: RootVC,WebRequestDelegate {
     }
     @IBAction func btnPayTapped(sender: UIButton) {
         
-        if !(currentButton.tag == selectedButtonWXTag || currentButton.tag == selectedButtonZFBTag) {
-            
-            let alertView = UIAlertView(title: "提示" , message: "请选择一种支付方式" , delegate: nil , cancelButtonTitle: " 完成 " )
-            
-            alertView.show ()
-            return
-        }
+      
         
         let tag = sender.tag;
-        if(tag == 11)//跳转到个人中心
+        if(tag == 11)//确认支付
         {
-      
-
-            
+            if !(currentButton.tag == selectedButtonWXTag || currentButton.tag == selectedButtonZFBTag) {
+                
+                UIAlertView(title: "提示" , message: "请选择一种支付方式" , delegate: nil , cancelButtonTitle: " 完成 " ).show()
+                return
+            }
             var para = ["_id":self.trade._id,
                 "pay": [
                     "alipay":NSDictionary()
                 ]];
-            
-                
-              
             if(self.currPayModel == .Weixin)
             {
                 para = ["_id":self.trade._id,
                     "pay": [
                         "weixin":NSDictionary()
                     ]];
-                
-
             }
             SVProgressHUD.showWithStatusWithBlack("请稍等...")
             self.httpObj.httpPostApi("trade/prepay", parameters: para as? [String : AnyObject], tag: 88)
         }
         else
         {
-            let vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
-            self.navigationController?.pushViewController(vc, animated: true);
+            if(self.u03VC == nil)
+            {
+                self.u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+            }
+            self.navigationController?.pushViewController(self.u03VC, animated: true);
+            
         }
     }
     
@@ -217,6 +247,12 @@ class T05PayVC: RootVC,WebRequestDelegate {
         if(tag == 10)
         {
             SVProgressHUD.dismiss();
+        }
+            
+        else if(tag == 51)//发送prepay后服务端返回的结果
+        {
+            SVProgressHUD.dismiss();
+            
         }
         else if(tag == 88)//发送prepay后服务端返回的结果
         {

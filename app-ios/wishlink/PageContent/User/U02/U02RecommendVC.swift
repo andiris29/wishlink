@@ -32,6 +32,10 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,8 +95,15 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
                     self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
                     //                    scrollView.setContentOffset(CGPointMake(0, -50), animated: false)
                 })
+            }else if scrollView.contentOffset.y - scrollView.contentSize.height > 10{
+//                self.loadMoreRecommendation()
+                
+                print("11111111")
             }
         }
+        
+        print("y: \(scrollView.contentOffset.y) \n height:\(scrollView.contentSize.height)")
+        
     }
     
     func requestDataFailed(error: String) {
@@ -168,19 +179,33 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     
     // MARK: - response event
     func clearBtnAction(sender: AnyObject) {
+        if self.dataArray.count == 0 {
+            return
+        }
         self.removeAllRecommendationItems()
         
     }
     
-    func refreshRecommendation() {
-        self.pageNo = 1
-        
-    }
+//    func refreshRecommendation() {
+//        self.refreshControl.beginRefreshing()
+//        self.pageNo = 1
+//        self.getRecommendation()
+//    }
     
     // MARK: - prive method
     
     func getRecommendation() {
         self.dataArray.removeAll()
+        self.pageNo = 1
+        let dic = [
+            "pageNo": self.pageNo,
+            "pageSize": self.pageSize
+        ]
+        self.httpObj.httpGetApi("itemFeeding/recommendation", parameters: dic, tag: 10)
+    }
+    
+    func loadMoreRecommendation() {
+        self.pageNo++
         let dic = [
             "pageNo": self.pageNo,
             "pageSize": self.pageSize
@@ -230,7 +255,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func prepareUI() {
         self.prepareCollectionView()
-        self.prepareRefreshControl()
+//        self.prepareRefreshControl()
     }
     
     func prepareRefreshControl() {

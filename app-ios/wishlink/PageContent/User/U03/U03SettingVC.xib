@@ -301,7 +301,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZH-4X-TZg">
+                <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZH-4X-TZg">
                     <rect key="frame" x="10" y="342" width="130" height="23"/>
                     <animations/>
                     <constraints>
@@ -314,6 +314,9 @@
                         <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="XhK-ZP-g5R"/>
+                    </connections>
                 </button>
                 <button opaque="NO" alpha="0.69999999999999996" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9X1-Uv-Bnw">
                     <rect key="frame" x="15" y="398" width="290" height="35"/>

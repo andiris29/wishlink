@@ -82,13 +82,18 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             self.view.userInteractionEnabled = true
         })
         if tag == 10 {
+            
+            
+            
             // 注销
             UserModel.shared.logout()
             AppConfig().userLogout()
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
-                self.navigationController!.popViewControllerAnimated(true)
-            })
+            
+      
+            self.logOutAction();
+
+            
+            
         }else if tag == 20 {
             // update user
             if let userDic = response["user"] as? NSDictionary {
@@ -99,6 +104,17 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                 })
             }
         }
+    }
+    
+    
+    //跳转到Tab 第一个选项卡，并popup登录页面  －－update by andy.chen 2015-10-18
+    func logOutAction()
+    {
+        let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+        tababarController.selectedIndex = 0;
+        var vc = UIHEPLER.GetAppDelegate().window?.rootViewController
+        vc?.navigationController?.popToRootViewControllerAnimated(false)
+        UIHEPLER.showLoginPage(vc!);
     }
     
     // MARK: -- UITextField delegate
@@ -154,6 +170,9 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         case 104:
             // 退出登录
             self.logout();
+        case 105:
+            let numString = "telprompt://021-64269893"
+            APPLICATION.openURL(NSURL(string: numString)!)
         default:
             print("1111")
         }
@@ -281,7 +300,11 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
             NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
-            self.navigationController!.popViewControllerAnimated(true)
+            
+            self.logOutAction();
+            
+
+            
         }
     }
     

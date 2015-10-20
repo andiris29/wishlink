@@ -17,13 +17,25 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
    private var images: NSArray!
    private let ImageTag = 1000
     
-   var delegate:       CSImageRollViewDelegate?
+   weak var delegate:       CSImageRollViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
         
         initViews()
+    }
+    
+    deinit{
+        
+        NSLog("CSImageRollView -->deinit")
+      
+        
+        self.delegate = nil
+        self.containerView = nil;
+        self.scrollerView = nil;
+        self.pageControl = nil;
+        self.images = nil;
     }
     
     func initViews() {

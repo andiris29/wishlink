@@ -476,6 +476,7 @@
                 <outlet property="buyerTopView" destination="cpm-BQ-uID" id="wJ9-d2-rkD"/>
                 <outlet property="itemCountLabel" destination="92N-bH-4gz" id="t8y-iJ-RnV"/>
                 <outlet property="itemCountryLabel" destination="yVE-5B-aYH" id="qzD-4h-8OF"/>
+                <outlet property="itemImageView" destination="GXY-0y-Jss" id="gR2-xj-5ZL"/>
                 <outlet property="itemNameLabel" destination="Tvt-zd-YFj" id="uyX-FH-AlV"/>
                 <outlet property="itemPriceLabel" destination="xrT-6D-Jmq" id="Saa-wF-60f"/>
                 <outlet property="itemTotalPrice" destination="abe-yP-vpC" id="zQI-kI-mQJ"/>

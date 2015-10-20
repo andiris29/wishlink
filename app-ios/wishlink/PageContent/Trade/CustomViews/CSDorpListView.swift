@@ -25,7 +25,20 @@ class CSDorpListView: UIWindow {
     private let buttonTag = 10000
     
     var delegate: CSDorpListViewDelegate?
-    
+    deinit{
+        
+        NSLog("CSImageRollView -->deinit")
+        
+        
+        self.delegate = nil
+        self.baseView = nil;
+        self.viewConstraints = nil;
+        self.titles = nil;
+        self.scrollerView = nil;
+        self.containerView = nil;
+        self.titleView = nil;
+        self.scrollerView = nil;
+    }
     
     class var sharedInstance : CSDorpListView {
         

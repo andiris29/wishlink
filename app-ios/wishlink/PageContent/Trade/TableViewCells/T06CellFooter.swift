@@ -17,11 +17,16 @@ class T06CellFooter: UITableViewCell {
 
     @IBOutlet weak var btnGrabOrder: UIButton!
     
-    var delegate: T06CellFooterDelegate?
+    weak var delegate: T06CellFooterDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    deinit{
+        
+        NSLog("T06CellFooter -->deinit")
+        self.delegate = nil;
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
