@@ -150,7 +150,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
                 ]
                 
                 //TODU:更换支付地址
-                self.httpObj.httpPostApi("trade/updateReceiver", parameters: para as! [String : AnyObject], tag: 51)
+                self.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
             }
             self.u03VC.view.removeFromSuperview();
             self.u03VC.view  = nil;
@@ -258,40 +258,79 @@ class T05PayVC: RootVC,WebRequestDelegate {
         {
             SVProgressHUD.dismiss();
             
-            
-            let order = AlipayOrder()
-            order.partner = APPCONFIG.alipay_partner;
-            order.seller = APPCONFIG.alipay_seller;
-            order.tradeNO = self.trade._id
-            order.productName = self.item.name
-            order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
-            order.amount = "0.01"// (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
-            order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
-            
-            order.service = "mobile.securitypay.pay";
-            order.paymentType = "1";
-            order.inputCharset = "utf-8";
-            order.itBPay = "30m";
-            order.showUrl = "m.alipay.com";
-            
-            
-            //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-            let appScheme = "alipay";
-            let orderSpec = order.description
-            //将商品信息拼接成字符串
-            NSLog("orderSpec = %@",orderSpec);
-            let signer = CreateRSADataSigner(APPCONFIG.alipay_privateKey)
-            let signedString = signer.signString(orderSpec)
-            let orderString = "\(order.description)&sign=\"\(signedString)\"&sign_type=\"RSA\""
-            
-            NSLog("orderString = %@",orderString);
-            AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
+            if (self.currPayModel == .Alipay) {
                 
-                NSLog(" alipay reslut = \(resultDic)")
-                SVProgressHUD.showWithStatusWithBlack("请稍等...")
-                self.httpObj.httpPostApi("trade/postpay", parameters: ["_id":self.trade._id], tag: 99);
-            })
-
+                let order = AlipayOrder()
+                order.partner = APPCONFIG.alipay_partner;
+                order.seller = APPCONFIG.alipay_seller;
+                order.tradeNO = self.trade._id
+                order.productName = self.item.name
+                order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
+                order.amount = "0.01"// (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
+                order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
+                
+                order.service = "mobile.securitypay.pay";
+                order.paymentType = "1";
+                order.inputCharset = "utf-8";
+                order.itBPay = "30m";
+                order.showUrl = "m.alipay.com";
+                
+                
+                //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+                let appScheme = "alipay";
+                let orderSpec = order.description
+                //将商品信息拼接成字符串
+                NSLog("orderSpec = %@",orderSpec);
+                let signer = CreateRSADataSigner(APPCONFIG.alipay_privateKey)
+                let signedString = signer.signString(orderSpec)
+                let orderString = "\(order.description)&sign=\"\(signedString)\"&sign_type=\"RSA\""
+                
+                NSLog("orderString = %@",orderString);
+                AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
+                    
+                    NSLog(" alipay reslut = \(resultDic)")
+                    SVProgressHUD.showWithStatusWithBlack("请稍等...")
+                    self.httpObj.httpPostApi("trade/postpay", parameters: ["_id":self.trade._id], tag: 99);
+                })
+            } else if (self.currPayModel == .Weixin) {
+                
+                //{{{
+                //本实例只是演示签名过程， 请将该过程在商户服务器上实现
+                
+                //创建支付签名对象
+                let req: payRequsestHandler = payRequsestHandler()
+                //初始化支付签名对象
+                req.initWith(APP_ID, mch_id: MCH_ID)
+                //设置密钥
+                req.setKey(PARTNER_ID)
+                
+                //}}}
+                
+                //获取到实际调起微信支付的参数后，在app端调起支付
+                let dict = req.sendPay_demo()
+                
+                if (dict == nil) {
+                    //错误提示
+                    let debug: NSString = req.getDebugifo()
+                    
+                    NSLog("debug:%@\n\n",debug);
+                }else{
+                    NSLog("debug:%@\n\n",req.getDebugifo());
+                    //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
+                    
+                    //调起微信支付
+                    let req                 = PayReq()
+                    req.openID              = dict["appid"]?.stringValue;
+                    req.partnerId           = dict["partnerid"]?.stringValue;
+                    req.prepayId            = dict["prepayid"]?.stringValue;
+                    req.nonceStr            = dict["noncestr"]?.stringValue;
+                    req.timeStamp           = UInt32((dict["timestamp"]?.intValue)!);
+                    req.package             = dict["package"]?.stringValue;
+                    req.sign                = dict["sign"]?.stringValue;
+                    
+                    WXApi.sendReq(req)
+                }
+            }
             
         }
         else if(tag == 99)//交易回调请求（Postpay成后后返回的请求）

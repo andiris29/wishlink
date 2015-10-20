@@ -22,3 +22,4 @@
 #import "AlipayOrder.h"
 #import <RongIMLib/RongIMLib.h>
 #import <RongIMKit/RongIMKit.h>
+#import "payRequsestHandler.h"
