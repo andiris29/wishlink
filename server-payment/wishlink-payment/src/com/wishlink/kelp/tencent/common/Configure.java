@@ -59,7 +59,7 @@ public class Configure {
     //8）统一下单API
     public static String PREPAY_API = "https://api.mch.weixin.qq.com/pay/unifiedorder";
     
-    public static String HttpsRequestClassName = "com.focosee.qingshow.tencent.common.HttpsRequest";
+    public static String HttpsRequestClassName = "com.wishlink.kelp.tencent.common.HttpsRequest";
     
     public static boolean isUseThreadToDoReport() {
         return useThreadToDoReport;
