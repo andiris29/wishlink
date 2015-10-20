@@ -316,7 +316,6 @@ class T05PayVC: RootVC,WebRequestDelegate {
                     NSLog("debug:%@\n\n",debug);
                 }else{
                     NSLog("debug:%@\n\n",req.getDebugifo());
-                    //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
                     
                     //调起微信支付
                     let req                 = PayReq()
