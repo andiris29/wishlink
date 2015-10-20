@@ -37,7 +37,7 @@ PaymentService.getPrepayId = function(trade, ip, callback) {
     }, function(item, cb) {
         var orderName = item.name;
         var totalFee = Math.max(0.01, trade.quantity * item.price).toFixed(2);
-        var url = 'http://localhost:8080/wishilink-payment/wechat/prepay?id=' + trade._id.toString() + '&totalFee=' + totalFee + '&orderName=' + encodeURIComponent(orderName) + '&clientIp=' + ip;
+        var url = 'http://localhost:8080/wishlink-payment/wechat/prepay?id=' + trade._id.toString() + '&totalFee=' + totalFee + '&orderName=' + encodeURIComponent(orderName) + '&clientIp=' + ip;
         winston.info(new Date(), 'call weixin prepay url=' + url);
         request.get(url, function(error, response, body) {
             var jsonObject = JSON.parse(body);
