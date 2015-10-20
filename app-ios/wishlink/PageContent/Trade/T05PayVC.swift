@@ -307,7 +307,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
                 //}}}
                 
                 //获取到实际调起微信支付的参数后，在app端调起支付
-                let dict = req.sendPay_demo()
+                let dict = req.sendPayOrderName(self.item.name, orderPrice: "1", nonceString: self.item._id, orderNo: self.item._id)
                 
                 if (dict == nil) {
                     //错误提示
@@ -319,16 +319,17 @@ class T05PayVC: RootVC,WebRequestDelegate {
                     
                     //调起微信支付
                     let req                 = PayReq()
-                    req.openID              = dict["appid"]?.stringValue;
-                    req.partnerId           = dict["partnerid"]?.stringValue;
-                    req.prepayId            = dict["prepayid"]?.stringValue;
-                    req.nonceStr            = dict["noncestr"]?.stringValue;
+                    req.openID              = dict["appid"] as? String;
+                    req.partnerId           = dict["partnerid"] as? String;
+                    req.prepayId            = dict["prepayid"] as? String;
+                    req.nonceStr            = dict["noncestr"] as? String;
                     req.timeStamp           = UInt32((dict["timestamp"]?.intValue)!);
-                    req.package             = dict["package"]?.stringValue;
-                    req.sign                = dict["sign"]?.stringValue;
+                    req.package             = dict["package"] as? String;
+                    req.sign                = dict["sign"] as? String;
                     
                     WXApi.sendReq(req)
                 }
+                
             }
             
         }
