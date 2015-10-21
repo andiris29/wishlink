@@ -74,7 +74,7 @@ public class AlipayPaymentController {
         
         log.debug("alipay TradeStatus=" + entity.getTrade_status());
         log.debug("alipay RefundStatus=" + StringUtils.trimToNull(entity.getRefund_status()));
-        log.debug("qingshow-appserver-callback-url:" + appServerCallbackUrl);
+        log.debug("appserver-callback-url:" + appServerCallbackUrl);
         RestTemplate restClient = new RestTemplate();
         params.put("_id", params.get("out_trade_no"));
         // ////////////////////////////////////////////////////////////////////////////////////////
