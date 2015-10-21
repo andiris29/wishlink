@@ -60,7 +60,7 @@ PaymentService.getPrepayId = function(trade, ip, callback) {
  */
 PaymentService.syncStatus = function(trade, callback) {
     // pay with wechat
-    var url = 'http://localhost:8080/wishlink-payment/wechat/queryOrder?id=' + trade._id.toString;
+    var url = 'http://localhost:8080/wishlink-payment/wechat/queryOrder?id=' + trade._id.toString();
     winston.info(new Date(), ' call wechat/queryOrder url=', url);
     request.get(url, function(error, response, body) {
         var jsonObject = JSON.parse(body);
