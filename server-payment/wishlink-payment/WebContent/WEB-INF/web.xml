@@ -21,7 +21,6 @@
             <param-value>UTF-8</param-value>
         </init-param>
         <init-param>
-            <!-- 强制进行转码 -->
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
         </init-param>
