@@ -169,6 +169,8 @@
 		D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A61BA6F795005CC047 /* ZYQSphereView.m */; };
 		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
 		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
+		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D2ABA11C1BD922A100CFA42E /* T01SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
 		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
 		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };
@@ -474,6 +476,8 @@
 		D276A9A61BA6F795005CC047 /* ZYQSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQSphereView.m; sourceTree = "<group>"; };
 		D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZLanTingHeiS-EL-GB.ttf"; sourceTree = "<group>"; };
 		D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaInserat-Roman-SemiBold.ttf"; sourceTree = "<group>"; };
+		D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T01SearchCell.swift; sourceTree = "<group>"; };
+		D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T01SearchCell.xib; sourceTree = "<group>"; };
 		D2DE57711B84D049000DD691 /* T05PayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T05PayVC.swift; sourceTree = "<group>"; };
 		D2DE57721B84D049000DD691 /* T05PayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T05PayVC.xib; sourceTree = "<group>"; };
 		D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T04CreateTradeVC.swift; sourceTree = "<group>"; };
@@ -1082,6 +1086,8 @@
 				D24485D31B8E02A200CD97D5 /* T09CellTextRight.xib */,
 				D2E6BE911B96D62F0050C177 /* T11SearchSuggestionCell.swift */,
 				D2E6BE921B96D62F0050C177 /* T11SearchSuggestionCell.xib */,
+				D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */,
+				D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1254,6 +1260,7 @@
 				7684F3C11B8DFA4D00B7D7DC /* U02ItemCell.xib in Resources */,
 				A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */,
 				D24485C91B8DE88300CD97D5 /* T09ComplaintStatusVC.xib in Resources */,
+				D2ABA11C1BD922A100CFA42E /* T01SearchCell.xib in Resources */,
 				76CD0E921B89657200B04453 /* U02FavoriteVC.xib in Resources */,
 				76CD0E861B89649000B04453 /* U02BuyerTradeVC.xib in Resources */,
 				7695653A1BA0891E00A6AD10 /* WeiboSDK.bundle in Resources */,
@@ -1376,6 +1383,7 @@
 				A132BBAA1B863448004EAB47 /* T02HotListVC.swift in Sources */,
 				769565581BA0910800A6AD10 /* LoginHelper.mm in Sources */,
 				76CD0E851B89649000B04453 /* U02BuyerTradeVC.swift in Sources */,
+				D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */,
 				7684F3C31B8DFA4D00B7D7DC /* U02TradeCell.swift in Sources */,
 				A140B0101B94B45500531546 /* DefaultCell.swift in Sources */,
 				76CD0E8D1B89655B00B04453 /* U02RecommendVC.swift in Sources */,
