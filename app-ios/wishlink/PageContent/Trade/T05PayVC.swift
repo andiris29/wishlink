@@ -14,7 +14,7 @@ enum PayModel{
 }
 
 
-class T05PayVC: RootVC,WebRequestDelegate {
+class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     
     let selectedButtonWXTag: Int = 1000
     let selectedButtonZFBTag: Int = 1001
@@ -45,10 +45,31 @@ class T05PayVC: RootVC,WebRequestDelegate {
     @IBOutlet weak var lbTotalFree: UILabel!
     @IBOutlet weak var imageRollView: CSImageRollView!
     
+    private var new_trade_id:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self;
         self.loadData();
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("receiveWeXinPayResultNotification:"), name: APPCONFIG.NotificationActionPayResult, object: nil)
+        
+    }
+    func receiveWeXinPayResultNotification(obj:NSNotification)
+    {
+        var result = obj.object as! PayResp
+        if(result.errCode == 0)
+        {
+            
+            SVProgressHUD.showWithStatusWithBlack("请稍等...")
+            self.httpObj.httpPostApi("trade/postpay", parameters: ["_id":self.new_trade_id], tag: 99);
+        }
+        else if(result.errCode  == -1)//错误
+        {
+            
+        }
+        else if(result.errCode  == -2)//用户取消
+        {
+        }
     }
     deinit
     {
@@ -260,13 +281,25 @@ class T05PayVC: RootVC,WebRequestDelegate {
             
             if (self.currPayModel == .Alipay) {
                 
-                let order = AlipayOrder()
+                
+                var _tradeDic:NSDictionary! = response as? NSDictionary
+                var _trade:TradeModel!
+                var _prepayid:String!;
+                if(_tradeDic != nil && _tradeDic.objectForKey("trade") != nil)
+                {
+                    var tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
+                    _trade = TradeModel(dict: tradeDic)
+
+                }
+                new_trade_id = _trade._id;
+                
+                let order = Order()
                 order.partner = APPCONFIG.alipay_partner;
                 order.seller = APPCONFIG.alipay_seller;
-                order.tradeNO = self.trade._id
+                order.tradeNO = new_trade_id
                 order.productName = self.item.name
                 order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
-                order.amount = "0.01"// (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
+                order.amount = "0.02"// (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
                 order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
                 
                 order.service = "mobile.securitypay.pay";
@@ -277,7 +310,7 @@ class T05PayVC: RootVC,WebRequestDelegate {
                 
                 
                 //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-                let appScheme = "alipay";
+                let appScheme = "alisdkdemo";
                 let orderSpec = order.description
                 //将商品信息拼接成字符串
                 NSLog("orderSpec = %@",orderSpec);
@@ -295,73 +328,87 @@ class T05PayVC: RootVC,WebRequestDelegate {
             } else if (self.currPayModel == .Weixin) {
                 
                 
+                
                 var _tradeDic:NSDictionary! = response as? NSDictionary
                 var _trade:TradeModel!
-                var _prepayid = "";
+                var _prepayid:String!;
                 if(_tradeDic != nil && _tradeDic.objectForKey("trade") != nil)
                 {
-                    
-                    
-                    
                     ////-------------------方式一 begin-------------------／
-                    var tradeDic = _tradeDic.objectForKey("trade") as! NSDictionary
+                    var tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
                     _trade = TradeModel(dict: tradeDic)
                     var payDic:NSDictionary! = tradeDic.objectForKey("pay")  as! NSDictionary
                     if(payDic != nil && payDic.objectForKey("weixin") != nil)
                     {
-                      var   prepayDic  = payDic.objectForKey("weixin") as! NSDictionary
-                        _prepayid = prepayDic.objectForKey("prepayid") as! String
+                        var   prepayDic:NSDictionary!  = payDic.objectForKey("weixin") as! NSDictionary
+                        _prepayid = prepayDic.objectForKey("prepayid") as? String
+                        prepayDic = nil;
                     }
+                    if(_prepayid == nil || _prepayid == "" ||  _prepayid.length<1)
+                    {
+                        UIHEPLER.alertErrMsg("微信预支付出现问题，无法获取预支付标识，请联系客服");
+                    }
+                    else
+                    {
+                        new_trade_id = _trade._id
+                        let request = PayReq()
+                        request.partnerId = MCH_ID;
+                        request.prepayId = _prepayid
+                        
+                        request.package = "Sign=WXPay";
+                        request.nonceStr = String(random())
+                        request.timeStamp =  UInt32(NSDate().timeIntervalSince1970)
+                        var strPara:NSString!  = NSString(format: "appid=%@&noncestr=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u&key=%@",APP_ID, request.nonceStr, request.partnerId, request.prepayId, request.timeStamp, PARTNER_ID);
+                        
+                        strPara.UTF8String
+                        var md5sign:String! =  WXUtil.md5(strPara as String).uppercaseString;
+                        request.sign = md5sign;
+                
+                        WXApi.sendReq(request)
+                        ////-------------------方式一 End-------------------／
+                        
+    ////-------------------方式二 begin-------------------／
+    //                //创建支付签名对象
+    //                let req: payRequsestHandler = payRequsestHandler()
+    //                //初始化支付签名对象
+    //                req.initWith(APP_ID, mch_id: MCH_ID)
+    //                //设置密钥
+    //                req.setKey(PARTNER_ID)
+    //                //获取到实际调起微信支付的参数后，在app端调起支付
+    //                 let dict = req.sendPayOrderName(self.item.name, orderPrice: "1", nonceString: _trade._id, orderNo: _trade._id, prePayid: _prepayid)
+    //                if (dict == nil) {
+    //                    //错误提示
+    //                    let debug: NSString = req.getDebugifo()
+    //                    NSLog("debug:%@\n\n",debug);
+    //                }else{
+    //                      NSLog("dict:%@\n\n",dict);
+    //                    NSLog("debug:%@\n\n",req.getDebugifo());
+    ////                    调起微信支付
+    //                    let req                 = PayReq()
+    //                    req.openID              = dict["appid"] as? String;
+    //                    req.partnerId           = dict["partnerid"] as? String;
+    //                    req.prepayId            = dict["prepayid"] as? String;
+    //                    req.nonceStr            = dict["noncestr"] as? String;
+    //                    req.timeStamp           = UInt32((dict["timestamp"]?.intValue)!);
+    //                    req.package             = dict["package"] as? String;
+    //                    req.sign                = dict["sign"] as? String;
+    //                    
+    //                    WXApi.sendReq(req)
+    //                }
+    //                    //-------------------方式二 End-------------------／
+                        
+                        strPara = nil;
+                        md5sign = nil;
+                        
+                    }
+                    tradeDic = nil;
+                    _tradeDic = nil;
+                    payDic = nil;
                     
-                    let request = PayReq()
-                    request.partnerId = MCH_ID;
-                    request.prepayId = _prepayid
-                    
-                    request.package = "Sign=WXPay";
-                    request.nonceStr = String(random())
-                    request.timeStamp =  UInt32(NSDate().timeIntervalSince1970)
-                    var strPara  = NSString(format: "appid=%@&noncestr=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u&key=%@",APP_ID, request.nonceStr, request.partnerId, request.prepayId, request.timeStamp, PARTNER_ID);
-                    
-                    strPara.UTF8String
-                    var md5sign =  WXUtil.md5(strPara as String).uppercaseString;
-                    request.sign = md5sign;
-                    WXApi.sendReq(request)
-                    ////-------------------方式二 begin-------------------／
-                    
-////-------------------方式二 begin-------------------／
-//                
-//                //创建支付签名对象
-//                let req: payRequsestHandler = payRequsestHandler()
-//                //初始化支付签名对象
-//                req.initWith(APP_ID, mch_id: MCH_ID)
-//                //设置密钥
-//                req.setKey(PARTNER_ID)
-//
-//                //获取到实际调起微信支付的参数后，在app端调起支付
-//                 let dict = req.sendPayOrderName(self.item.name, orderPrice: "1", nonceString: _trade._id, orderNo: _trade._id, prePayid: _prepayid)
-//                if (dict == nil) {
-//                    //错误提示
-//                    let debug: NSString = req.getDebugifo()
-//                    
-//                    NSLog("debug:%@\n\n",debug);
-//                }else{
-//                      NSLog("dict:%@\n\n",dict);
-//                    
-//                    NSLog("debug:%@\n\n",req.getDebugifo());
-//                
-////                    调起微信支付
-//                    let req                 = PayReq()
-//                    req.openID              = dict["appid"] as? String;
-//                    req.partnerId           = dict["partnerid"] as? String;
-//                    req.prepayId            = dict["prepayid"] as? String;
-//                    req.nonceStr            = dict["noncestr"] as? String;
-//                    req.timeStamp           = UInt32((dict["timestamp"]?.intValue)!);
-//                    req.package             = dict["package"] as? String;
-//                    req.sign                = dict["sign"] as? String;
-//                    
-//                    WXApi.sendReq(req)
-//                }
-//                    //-------------------方式二 End-------------------／
+                }
+                else
+                {
+                    UIHEPLER.alertErrMsg("微信预支付出现问题，请联系客服");
                 }
                 
             }
@@ -369,6 +416,16 @@ class T05PayVC: RootVC,WebRequestDelegate {
         }
         else if(tag == 99)//交易回调请求（Postpay成后后返回的请求）
         {
+            var trade_Dic:NSDictionary! = response as? NSDictionary
+         
+            print(trade_Dic)
+            if(trade_Dic != nil && trade_Dic.objectForKey("trade") != nil)
+            {
+         
+                var tradeDic:NSDictionary! = trade_Dic.objectForKey("trade") as! NSDictionary
+                var   _trade_result = TradeModel(dict: tradeDic)
+              
+            }
             
             SVProgressHUD.dismiss();
             self.navigationController?.popToRootViewControllerAnimated(true);
@@ -392,5 +449,12 @@ class T05PayVC: RootVC,WebRequestDelegate {
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 
+    //MARK:WXApiDelegate
+    func onResp(resp: BaseResp!) {
+        NSLog("onResp")
+    }
+    func onReq(req: BaseReq!) {
+        NSLog("onReq")
+    }
  
 }

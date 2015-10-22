@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     var locationManager:CLLocationManager! = nil;
     var backgroundUpdateTask:UIBackgroundTaskIdentifier!;
     
-    let NotificationCategoryIdent  = "ACTIONABLE";
-    let NotificationActionOneIdent = "ACTION_ONE";
-    let NotificationActionTwoIdent = "ACTION_TWO";
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -74,13 +71,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     }
     
     func onResp(resp: BaseResp!) {
+        
+        print(resp);
         if resp is SendAuthResp {
             NSNotificationCenter.defaultCenter().postNotificationName(WXLoginSuccessNotification, object: resp)
 
         }
+     
+        if( resp.isKindOfClass(PayResp))
+        {
+                
+            let  payResult = resp as! PayResp
+           if(payResult.errCode == 0)
+           {
+                NSLog("支付成功");
+           }
+           else if(payResult.errCode == -1)
+           {
+                NSLog("错误")
+           }
+           else if(payResult.errCode == -2)
+           {
+                NSLog("用户取消")
+            }
+            //支付结果的通知
+            NSNotificationCenter.defaultCenter().postNotificationName(APPCONFIG.NotificationActionPayResult, object: payResult)
+            
+        }
+
+        
+        
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+//            NSLog(@"result = %@",resultDic);
+//            }];
+//        
+        AlipaySDK.defaultService().processOrderWithPaymentResult(url, standbyCallback: { (resultDic) -> Void in
+            
+            NSLog(" alipay reslut = \(resultDic)")
+        })
+        
         return WXApi.handleOpenURL(url, delegate: self) || WeiboSDK.handleOpenURL(url, delegate: self)
     }
     
@@ -232,6 +266,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         NSLog("post geo/trace fail:%@",error)
 
     }
+    
+    
+//    - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//    {
+//    return  [WXApi handleOpenURL:url delegate:self];
+//    }
+//    
+//    - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//    {
+//    return  [WXApi handleOpenURL:url delegate:self];
+//    }
+//    
+
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        return WXApi.handleOpenURL(url, delegate: self);
+    }
+
 
 }
 
