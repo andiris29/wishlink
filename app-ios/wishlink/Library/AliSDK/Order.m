@@ -6,9 +6,9 @@
 //
 //
 
-#import "AlipayOrder.h"
+#import "Order.h"
 
-@implementation AlipayOrder
+@implementation Order
 
 - (NSString *)description {
 	NSMutableString * discription = [NSMutableString string];

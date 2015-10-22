@@ -47,12 +47,14 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>alipay</string>
+				<string>alisdkdemo</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>4</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
@@ -63,7 +65,6 @@
 		<string>weibosdk</string>
 		<string>weibosdk2.5</string>
 		<string>alipay</string>
-		<string>alipayauth</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

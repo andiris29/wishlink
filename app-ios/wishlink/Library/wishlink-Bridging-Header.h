@@ -19,7 +19,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "DataSigner.h"
 #import "RSADataSigner.h"
-#import "AlipayOrder.h"
+#import "Order.h"
 #import <RongIMLib/RongIMLib.h>
 #import <RongIMKit/RongIMKit.h>
 #import "payRequsestHandler.h"

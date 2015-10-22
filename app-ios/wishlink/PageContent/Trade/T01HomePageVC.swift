@@ -10,7 +10,7 @@ import UIKit
 
 class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebRequestDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    let cellIdentifierSearch = "T11SearchSuggestionCell"
+    let cellIdentifierSearch = "T01SearchCell"
     
     @IBOutlet weak var searchBgImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -47,6 +47,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.lbAllCount.text = "0"
         getKeyWordData();
         getReportDate();
+        
+        self.searchBgImageView.layer.borderWidth = 1.0
+        self.searchBgImageView.layer.borderColor = RGBC(67).CGColor
+        self.searchBgImageView.layer.masksToBounds = true
+        self.searchBgImageView.layer.cornerRadius = self.searchBgImageView.frame.size.height / 2.0
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -158,10 +163,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T11SearchSuggestionCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T01SearchCell
         cell.labelName.text = itemContents[indexPath.row] as? String
         cell.selected = false;
         cell.selectionStyle = UITableViewCellSelectionStyle.Default
+        cell.cellDataFrom("", lastCell: itemContents.count == indexPath.row + 1)
+        
         return cell
         
     }
