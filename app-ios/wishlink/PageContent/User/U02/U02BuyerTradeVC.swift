@@ -12,7 +12,7 @@ enum BuyerTradeFilterStatus: Int {
     case All = 0, UnTrade, InTrade, CanceledTade, Delivered, Finished, Complainting
 }
 
-class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, U02TradeCellDelegate, WebRequestDelegate {
+class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, U02TradeCellDelegate, WebRequestDelegate, UIAlertViewDelegate {
     
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -122,7 +122,14 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             self.receiptTrade()
         case .Revoke:
             self.currentTradeIndex = cell.indexPath.row
-            self.cancelTrade()
+			let alert = UIAlertView()
+			alert.title = "温馨提示"
+			alert.message = "买家临时变卦，请帮助买家取消此订单，谢谢！"
+			alert.addButtonWithTitle("确定取消订单")
+			alert.delegate = self
+			alert.show()
+
+//            self.cancelTrade()
         case .CheckComplain:
             if let dic = cell.trade.owner!["rongcloud"] as? NSDictionary {
                 let targetId = dic["token"] as! String
@@ -206,7 +213,13 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
             }
         }
     }
-    
+	
+	func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+		if buttonIndex == 0 {
+			self.cancelTrade()
+		}
+	}
+	
     // MARK: - response event
     
     @IBAction func filterBtnAction(sender: AnyObject) {
