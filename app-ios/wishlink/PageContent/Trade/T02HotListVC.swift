@@ -83,7 +83,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func initTopView() {
     
-        self.collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(44, 0, 0, 0)
+        self.collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(44, 10, 10, 10)
         
         topView.backgroundColor = RGB(247, g: 247, b: 247)
         topView.frame = CGRectMake(0, 0, ScreenWidth, 44)

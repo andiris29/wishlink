@@ -32,6 +32,8 @@ class U02ItemCell: UICollectionViewCell {
     
     @IBOutlet weak var iv_Item: UIImageView!
     @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var iconContryView: UIView!
+    
     var indexPath: NSIndexPath!
     
  
@@ -41,9 +43,11 @@ class U02ItemCell: UICollectionViewCell {
         didSet {
             if cellType == .Recommand {
                 favoriteBtn.hidden = false
+                iconContryView.backgroundColor = UIColor.whiteColor()
             }
             else {
                 favoriteBtn.hidden = true
+                iconContryView.backgroundColor = UIColor.clearColor()
             }
         }
     }
@@ -60,6 +64,9 @@ class U02ItemCell: UICollectionViewCell {
         // Initialization code
         self.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.layer.borderWidth = 1
+        
+        self.iconContryView.layer.masksToBounds = true
+        self.iconContryView.layer.cornerRadius = self.iconContryView.frame.size.height / 2.0
     }
     deinit{
         
