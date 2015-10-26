@@ -435,7 +435,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
                 if(vc != nil)
                 {
-                    vc.sellerBtnAction(vc.sellerBtn);
+                    vc.orderBtnAction(vc.orderBtn);
                 }
                 
                 tababarController.selectedIndex = 3;

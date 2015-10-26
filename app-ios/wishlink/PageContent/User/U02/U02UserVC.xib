@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -19,14 +19,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="U02UserVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="bgImageView" destination="XLr-nl-H7G" id="Byd-Yo-jeq"/>
-                <outlet property="buyerBtn" destination="GWW-Fn-qUR" id="hn1-Sg-bOM"/>
-                <outlet property="collectionBtn" destination="16n-Ja-XGU" id="6VH-2Q-saM"/>
+                <outlet property="collectionBtn" destination="OZE-0A-WLl" id="y0j-VD-t5U"/>
                 <outlet property="contryLabel" destination="JON-ID-wW5" id="R3I-Lw-HO5"/>
                 <outlet property="headImageView" destination="37a-kk-TnA" id="wBK-PO-e4O"/>
                 <outlet property="nicknameLabel" destination="xts-Fw-eK5" id="CAY-Eq-lhr"/>
-                <outlet property="recommendBtn" destination="OZE-0A-WLl" id="cxh-2b-ofM"/>
+                <outlet property="orderBtn" destination="HVM-vc-SWe" id="3DC-k9-fR3"/>
+                <outlet property="recommendBtn" destination="GWW-Fn-qUR" id="kU7-uu-or9"/>
                 <outlet property="scrollView" destination="url-5o-K8E" id="8aS-8D-Kpe"/>
-                <outlet property="sellerBtn" destination="HVM-vc-SWe" id="ArB-ci-rNU"/>
+                <outlet property="settingBtn" destination="16n-Ja-XGU" id="80K-Co-bJs"/>
                 <outlet property="subVCView" destination="HKj-l9-Sb5" id="fzO-41-twC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -72,7 +72,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gW-Ny-x2c">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gW-Ny-x2c">
                             <rect key="frame" x="274" y="12" width="86" height="26"/>
                             <animations/>
                             <constraints>
@@ -94,15 +94,15 @@
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="-48" maxY="0.0"/>
-                            <state key="normal" title="买家订单" image="u02-buy">
+                            <state key="normal" title="推荐" image="u02commend0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="u02-buy-p">
+                            <state key="selected" title="推荐" image="u02commend1">
                                 <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="buyerBtnAction:" destination="-1" eventType="touchUpInside" id="uEy-8b-TZO"/>
+                                <action selector="recommendBtnAction:" destination="-1" eventType="touchUpInside" id="Nna-Pc-M65"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZE-0A-WLl">
@@ -111,15 +111,15 @@
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="-26" maxY="0.0"/>
-                            <state key="normal" title="推荐" image="u02-recommend">
+                            <state key="normal" title="收藏" image="u02collecticon0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="u02-recommend-p">
+                            <state key="selected" title="收藏" image="u02collecticon1">
                                 <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="recommendBtnAction:" destination="-1" eventType="touchUpInside" id="XXd-rF-1rQ"/>
+                                <action selector="collectionBtnAction:" destination="-1" eventType="touchUpInside" id="Jx6-VC-amz"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16n-Ja-XGU">
@@ -128,15 +128,15 @@
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="-26" maxY="0.0"/>
-                            <state key="normal" title="收藏" image="u02-collection">
+                            <state key="normal" title="设置" image="u02setting0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="u02-collection-p">
+                            <state key="selected" title="设置" image="u02setting1">
                                 <color key="titleColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="collectionBtnAction:" destination="-1" eventType="touchUpInside" id="ID5-G2-AsN"/>
+                                <action selector="settingBtnAction:" destination="-1" eventType="touchUpInside" id="Ey8-6j-Pow"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-vc-SWe">
@@ -148,15 +148,15 @@
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="-48" maxY="0.0"/>
-                            <state key="normal" title="卖家订单" image="u02-sell">
+                            <state key="normal" title="订单" image="u02order0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="u02-sell-p">
+                            <state key="selected" title="订单" image="u02order1">
                                 <color key="titleColor" red="0.4823529411764706" green="0.011764705882352941" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="sellerBtnAction:" destination="-1" eventType="touchUpInside" id="bFz-Rn-jI5"/>
+                                <action selector="orderBtnAction:" destination="-1" eventType="touchUpInside" id="MNc-7Q-BXo"/>
                             </connections>
                         </button>
                     </subviews>
@@ -249,16 +249,16 @@
     </objects>
     <resources>
         <image name="u02-back-w" width="29" height="29"/>
-        <image name="u02-buy" width="30" height="30"/>
-        <image name="u02-buy-p" width="30" height="30"/>
-        <image name="u02-collection" width="30" height="30"/>
-        <image name="u02-collection-p" width="30" height="30"/>
         <image name="u02-headimage" width="73" height="73"/>
-        <image name="u02-recommend" width="30" height="30"/>
-        <image name="u02-recommend-p" width="30" height="30"/>
-        <image name="u02-sell" width="30" height="30"/>
-        <image name="u02-sell-p" width="30" height="30"/>
         <image name="u02-setup" width="86" height="26"/>
         <image name="u02-topbg" width="512" height="233"/>
+        <image name="u02collecticon0" width="25" height="21"/>
+        <image name="u02collecticon1" width="25" height="21"/>
+        <image name="u02commend0" width="25" height="25"/>
+        <image name="u02commend1" width="25" height="25"/>
+        <image name="u02order0" width="25" height="25"/>
+        <image name="u02order1" width="20" height="25"/>
+        <image name="u02setting0" width="25" height="25"/>
+        <image name="u02setting1" width="25" height="25"/>
     </resources>
 </document>

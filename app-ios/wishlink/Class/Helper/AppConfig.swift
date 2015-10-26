@@ -39,6 +39,7 @@ func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)->UIColor { return UIColor(
 func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return RGBA(r, g: g, b: b, a: 1.0) }
 func RGBCA(c:CGFloat, a:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: a)}
 func RGBC(c:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: 1.0)}
+func MainColor() -> UIColor { return RGB(124, g: 0, b: 90)}
 
 let UIHEPLER = UIHelper();
 let APPCONFIG =  AppConfig.sharedAppConfig;

@@ -252,10 +252,10 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
             
             if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
                 let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
+                let vc: U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
                 if(vc != nil)
                 {
-                    vc.sellerBtnAction(vc.sellerBtn);
+                    vc.orderBtnAction(vc.orderBtn);
                 }
                 
                 tababarController.selectedIndex = 3;

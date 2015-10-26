@@ -10,13 +10,11 @@ import UIKit
 
 class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
 
-    @IBOutlet weak var sellerBtn: UIButton!
+    @IBOutlet weak var orderBtn:        UIButton!
+    @IBOutlet weak var recommendBtn:    UIButton!
+    @IBOutlet weak var collectionBtn:   UIButton!
+    @IBOutlet weak var settingBtn:      UIButton!
     
-    @IBOutlet weak var buyerBtn: UIButton!
-    
-    @IBOutlet weak var recommendBtn: UIButton!
-    
-    @IBOutlet weak var collectionBtn: UIButton!
     @IBOutlet weak var subVCView: UIView!
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -27,10 +25,12 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     
     var selectedBtn: UIButton!
     var userModel: UserModel = UserModel.shared
-    var buyerTradeVC: U02BuyerTradeVC!
-    var sellerTradeVC: U02SellerTradeVC!
+    
+    var orderTradeVC: U02OrderTradeVC!
     var recommendVC: U02RecommendVC!
     var favoriteVC: U02FavoriteVC!
+    var settingVC: U03SettingVC!
+    
     lazy var loginVC: U01LoginVC = {
         let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
         vc.hideSkipBtn = true
@@ -101,36 +101,21 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     
     // MARK: - response event
     
-    @IBAction func sellerBtnAction(sender: AnyObject) {
+    @IBAction func orderBtnAction(sender: AnyObject) {
+        
         self.selectedBtn.selected = false
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
-        self.buyerTradeVC.resetConditionView()
-//        self.view.bringSubviewToFront(self.sellerTradeVC.view)
+        self.orderTradeVC.resetConditionView()
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        dispatch_after(1, dispatch_get_main_queue()) { () -> Void in
-            self.sellerTradeVC.getSellerTrade()
-        }
-    }
-    
-    @IBAction func buyerBtnAction(sender: AnyObject) {
-        self.selectedBtn.selected = false;
-        self.selectedBtn = sender as! UIButton
-        self.selectedBtn.selected = true;
-        self.sellerTradeVC.resetConditionView()
-//        self.view.bringSubviewToFront(self.buyerTradeVC.view)
-        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
-        self.buyerTradeVC.getBuyerTrade()
     }
     
     @IBAction func recommendBtnAction(sender: AnyObject) {
         self.selectedBtn.selected = false;
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
-        self.sellerTradeVC.resetConditionView()
-        self.buyerTradeVC.resetConditionView()
-//        self.view.bringSubviewToFront(self.recommendVC.view)
-        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 2, y: 0), animated: true)
+        self.orderTradeVC.resetConditionView()
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 1, y: 0), animated: true)
 
         self.recommendVC.getRecommendation()
     }
@@ -139,18 +124,24 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.selectedBtn.selected = false;
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
-        self.sellerTradeVC.resetConditionView()
-        self.buyerTradeVC.resetConditionView()
-//        self.view.bringSubviewToFront(self.favoriteVC.view)
-        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 3, y: 0), animated: true)
+        self.orderTradeVC.resetConditionView()
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 2, y: 0), animated: true)
 
         self.favoriteVC.getFavoriteList()
     }
     
     @IBAction func settingBtnAction(sender: AnyObject) {
-        let vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
-        self.navigationController!.pushViewController(vc, animated: true)
+        self.selectedBtn.selected = false;
+        self.selectedBtn = sender as! UIButton
+        self.selectedBtn.selected = true;
+        self.orderTradeVC.resetConditionView()
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 3, y: 0), animated: true)
     }
+    
+//    @IBAction func settingBtnAction(sender: AnyObject) {
+//        let vc = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
+//        self.navigationController!.pushViewController(vc, animated: true)
+//    }
     
     // MARK: - prive method
     
@@ -183,58 +174,55 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     }
     
     func adjustUI() {
-        self.buyerTradeVC.view.frame = self.subVCView.frame
-        self.sellerTradeVC.view.frame = self.subVCView.frame
+        self.orderTradeVC.view.frame = self.subVCView.frame
         self.recommendVC.view.frame = self.subVCView.frame
         self.favoriteVC.view.frame = self.subVCView.frame
+        self.settingVC.view.frame = self.subVCView.frame
         self.headImageView.layer.cornerRadius = self.headImageView.w * 0.5
         self.headImageView.layer.masksToBounds = true
         
         var center = CGPoint(x: CGRectGetWidth(self.scrollView.frame) * 0.5, y: CGRectGetHeight(self.scrollView.frame) * 0.5)
-        self.sellerTradeVC.view.center = center
-        
-        center.x += ScreenWidth
-        self.buyerTradeVC.view.center = center
+        self.orderTradeVC.view.center = center
         
         center.x += ScreenWidth
         self.recommendVC.view.center = center
         
         center.x += ScreenWidth
         self.favoriteVC.view.center = center
+        
+        center.x += ScreenWidth
+        self.settingVC.view.center = center
 
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 4, height: 0)
     }
     
     func prepareSubVC() {
         
-        self.buyerTradeVC = U02BuyerTradeVC(nibName: "U02BuyerTradeVC", bundle: NSBundle.mainBundle())
-        self.buyerTradeVC.userVC = self
-        self.buyerTradeVC.view.frame = self.scrollView.bounds
-        self.scrollView.addSubview(self.buyerTradeVC.view)
-//        self.view.addSubview(self.buyerTradeVC.view)
-        
-        self.sellerTradeVC = U02SellerTradeVC(nibName: "U02SellerTradeVC", bundle: NSBundle.mainBundle())
-        self.sellerTradeVC.userVC = self
-        self.scrollView.addSubview(self.sellerTradeVC.view)
-//        self.view.addSubview(self.sellerTradeVC.view)
-        
+        self.orderTradeVC = U02OrderTradeVC(nibName: "U02OrderTradeVC", bundle: NSBundle.mainBundle())
+        self.orderTradeVC.userVC = self
+        self.orderTradeVC.view.frame = self.scrollView.bounds
+        self.scrollView.addSubview(self.orderTradeVC.view)
 
         self.recommendVC = U02RecommendVC(nibName: "U02RecommendVC", bundle: NSBundle.mainBundle())
         self.recommendVC.userVC = self
         self.scrollView.addSubview(self.recommendVC.view)
-//        self.view.addSubview(self.recommendVC.view)
         
         self.favoriteVC = U02FavoriteVC(nibName: "U02FavoriteVC", bundle: NSBundle.mainBundle())
         self.favoriteVC.userVC = self
         self.scrollView.addSubview(self.favoriteVC.view)
-//        self.view.addSubview(self.favoriteVC.view)
+
+        self.settingVC = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
+        self.settingVC.userVC = self
+        self.scrollView.addSubview(self.settingVC.view)
+        
         self.adjustUI()
     }
     
     func prepareUI() {
+        
         self.prepareSubVC()
-        self.selectedBtn = self.sellerBtn
-        self.sellerBtnAction(self.sellerBtn)
+        self.selectedBtn = self.orderBtn
+        self.orderBtnAction(self.orderBtn)
     }
     
     // MARK: - setter and getter
