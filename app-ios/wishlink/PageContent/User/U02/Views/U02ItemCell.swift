@@ -9,7 +9,7 @@
 import UIKit
 
 enum ItemCellType {
-    case Recommand, Favorite
+    case Recommand, Favorite, Hot
 }
 
  enum ItemCellButtonClickType {
@@ -42,12 +42,21 @@ class U02ItemCell: UICollectionViewCell {
     var cellType: ItemCellType = .Recommand {
         didSet {
             if cellType == .Recommand {
-                favoriteBtn.hidden = false
-                iconContryView.backgroundColor = UIColor.whiteColor()
+                
+                btnDelete.hidden = false
+            } else {
+                
+                btnDelete.hidden = true
             }
-            else {
-                favoriteBtn.hidden = true
+            
+            if cellType == .Hot {
+                
+                favoriteBtn.hidden = false
                 iconContryView.backgroundColor = UIColor.clearColor()
+            } else {
+                
+                favoriteBtn.hidden = true
+                iconContryView.backgroundColor = UIColor.whiteColor()
             }
         }
     }
@@ -134,7 +143,7 @@ class U02ItemCell: UICollectionViewCell {
     func loadFromhotVC(_item:ItemModel)
     {
         self.item = _item
-        self.btnDelete.hidden = true;
+//        self.btnDelete.hidden = true;
         
         
         

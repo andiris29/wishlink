@@ -67,6 +67,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.indexPath = indexPath;
+        cell.cellType = .Recommand
         cell.closure = {
             [unowned self]
             (type: ItemCellButtonClickType, selectedIndexPath: NSIndexPath) in

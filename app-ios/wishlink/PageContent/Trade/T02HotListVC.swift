@@ -134,7 +134,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(itemCellIde, forIndexPath: indexPath) as! U02ItemCell
         cell.delegate = self
         let item = self.dataArr[indexPath.row] as! ItemModel
-        cell.loadFromhotVC(item);
+        cell.loadFromhotVC(item)
+        cell.cellType = .Hot
         return cell as UICollectionViewCell
     }
     
