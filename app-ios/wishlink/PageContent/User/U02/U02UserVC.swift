@@ -111,6 +111,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     }
     
     @IBAction func recommendBtnAction(sender: AnyObject) {
+        
         self.selectedBtn.selected = false;
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
@@ -121,20 +122,22 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     }
     
     @IBAction func collectionBtnAction(sender: AnyObject) {
+        
         self.selectedBtn.selected = false;
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
         self.orderTradeVC.resetConditionView()
         self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 2, y: 0), animated: true)
-
         self.favoriteVC.getFavoriteList()
     }
     
     @IBAction func settingBtnAction(sender: AnyObject) {
+        
         self.selectedBtn.selected = false;
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
         self.orderTradeVC.resetConditionView()
+        self.settingVC.fillDataForUI()
         self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 3, y: 0), animated: true)
     }
     

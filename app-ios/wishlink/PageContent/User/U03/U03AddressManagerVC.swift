@@ -36,6 +36,9 @@ U03AddressCellDelegate, WebRequestDelegate{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController!.navigationBar.hidden = false
+        
         if let array = UserModel.shared.receiversArray {
             self.addressArray = array
         }
