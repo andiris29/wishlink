@@ -141,6 +141,8 @@
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
 		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
 		D21E9BA81BAC76D400C55C84 /* CSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21E9BA71BAC76D400C55C84 /* CSActionSheet.swift */; };
+		D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */; settings = {ASSET_TAGS = (); }; };
+		D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */; settings = {ASSET_TAGS = (); }; };
 		D24485C81B8DE88300CD97D5 /* T09ComplaintStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24485C61B8DE88300CD97D5 /* T09ComplaintStatusVC.swift */; };
 		D24485C91B8DE88300CD97D5 /* T09ComplaintStatusVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24485C71B8DE88300CD97D5 /* T09ComplaintStatusVC.xib */; };
 		D24485CC1B8E027000CD97D5 /* T09CellTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24485CA1B8E027000CD97D5 /* T09CellTime.swift */; };
@@ -440,6 +442,8 @@
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
 		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
 		D21E9BA71BAC76D400C55C84 /* CSActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSActionSheet.swift; sourceTree = "<group>"; };
+		D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U07OrderTradeDetailVC.swift; sourceTree = "<group>"; };
+		D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U07OrderTradeDetailVC.xib; sourceTree = "<group>"; };
 		D24485C61B8DE88300CD97D5 /* T09ComplaintStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T09ComplaintStatusVC.swift; sourceTree = "<group>"; };
 		D24485C71B8DE88300CD97D5 /* T09ComplaintStatusVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T09ComplaintStatusVC.xib; sourceTree = "<group>"; };
 		D24485CA1B8E027000CD97D5 /* T09CellTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T09CellTime.swift; sourceTree = "<group>"; };
@@ -837,6 +841,8 @@
 				76CD0E881B8964B000B04453 /* U02SellerTradeVC.xib */,
 				D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */,
 				D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */,
+				D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */,
+				D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */,
 				76CD0E8B1B89655B00B04453 /* U02RecommendVC.swift */,
 				76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */,
 				76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */,
@@ -1280,6 +1286,7 @@
 				765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */,
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
+				D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */,
 				D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
 				D2E6BE881B96D36D0050C177 /* T11SearchSuggestionVC.xib in Resources */,
@@ -1367,6 +1374,7 @@
 				A132BB8D1B863310004EAB47 /* TabBarVC.swift in Sources */,
 				D2E6BE931B96D62F0050C177 /* T11SearchSuggestionCell.swift in Sources */,
 				D24485D01B8E028B00CD97D5 /* T09CellTextLeft.swift in Sources */,
+				D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */,
 				A1F3D35B1BCEB4340007B7CE /* RSADataVerifier.m in Sources */,
 				D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */,
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,

@@ -115,6 +115,13 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let vc = U07OrderTradeDetailVC(nibName: "U07OrderTradeDetailVC", bundle: NSBundle.mainBundle())
+//        vc.hidesBottomBarWhenPushed = true
+        self.userVC.navigationController!.pushViewController(vc, animated: true)
+    }
+    
     func tradeCell(cell: U02TradeCell, clickType: TradeCellButtonClickType) {
         switch clickType {
         case .Confirm:
