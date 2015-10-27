@@ -61,32 +61,35 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             self.t05VC = nil;
         }
         
-        self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(60.0);
-        self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(75);
+        self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(50.0);
+        self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(120);
        
         self.navigationController?.navigationBarHidden = false;
         
          self.item = nil;
         
-        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
-        titleLabel.text = "发布新订单"
-        titleLabel.textColor = UIHEPLER.mainColor;
-        titleLabel.font =  UIHEPLER.mainChineseFont15
-        titleLabel.textAlignment = NSTextAlignment.Center
         
+        self.loadComNavTitle("发布新订单")
         
-        let txtRemark: UILabel = UILabel(frame: CGRectMake(0, 20, 80, 20))
-        txtRemark.text = "(*为必填项)"
-        txtRemark.textColor = UIColor.redColor();
-        txtRemark.font = UIHEPLER.getCustomFont(true, fontSsize: 11);
-        txtRemark.textAlignment = NSTextAlignment.Center
-  
-        
-        
-        let titleView = UIView(frame: CGRectMake(0, 0, 50, 40))
-        titleView.addSubview(titleLabel);
-        titleView.addSubview(txtRemark);
-        self.navigationItem.titleView = titleView;
+//        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
+//        titleLabel.text = "发布新订单"
+//        titleLabel.textColor = UIHEPLER.mainColor;
+//        titleLabel.font =  UIHEPLER.mainChineseFont15
+//        titleLabel.textAlignment = NSTextAlignment.Center
+//        
+//        
+////        let txtRemark: UILabel = UILabel(frame: CGRectMake(0, 20, 80, 20))
+////        txtRemark.text = "(*为必填项)"
+////        txtRemark.textColor = UIColor.redColor();
+////        txtRemark.font = UIHEPLER.getCustomFont(true, fontSsize: 11);
+////        txtRemark.textAlignment = NSTextAlignment.Center
+////  
+//        
+//        
+//        let titleView = UIView(frame: CGRectMake(0, 0, 50, 40))
+//        titleView.addSubview(titleLabel);
+//        titleView.addSubview(txtRemark);
+//        self.navigationItem.titleView = titleView;
         
         self.navigationController?.navigationBarHidden = false;
         

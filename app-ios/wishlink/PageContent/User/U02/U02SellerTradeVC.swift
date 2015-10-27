@@ -134,7 +134,10 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         case .EditItemInfo:
             let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
             vc.hidesBottomBarWhenPushed = true
-            self.userVC.navigationController!.pushViewController(vc, animated: true)
+            
+            
+            self.userVC.presentViewController(vc, animated: true, completion: nil);
+//            self.userVC.navigationController!.pushViewController(vc, animated: true)
             
         case .Revoke:
             self.currentTradeIndex = cell.indexPath.row
@@ -184,7 +187,9 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
             
             let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
             vc.tradeid = cell.trade._id;
-            self.userVC.navigationController!.pushViewController(vc, animated: true);
+            
+            self.userVC.presentViewController(vc, animated: true, completion: nil);
+//            self.userVC.navigationController!.pushViewController(vc, animated: true);
             
         default:
             print("error")

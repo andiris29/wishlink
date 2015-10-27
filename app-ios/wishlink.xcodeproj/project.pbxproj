@@ -171,10 +171,10 @@
 		D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A61BA6F795005CC047 /* ZYQSphereView.m */; };
 		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
 		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
-		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D2ABA11C1BD922A100CFA42E /* T01SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */; settings = {ASSET_TAGS = (); }; };
-		D2C3D6E21BDE643F000EE182 /* U02OrderTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */; settings = {ASSET_TAGS = (); }; };
-		D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */; settings = {ASSET_TAGS = (); }; };
+		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; };
+		D2ABA11C1BD922A100CFA42E /* T01SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */; };
+		D2C3D6E21BDE643F000EE182 /* U02OrderTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */; };
+		D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */; };
 		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
 		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
 		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };

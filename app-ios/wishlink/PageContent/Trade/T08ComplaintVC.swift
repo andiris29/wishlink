@@ -61,7 +61,15 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         }
         else if(tag == 10)
         {
-            self.navigationController?.popViewControllerAnimated(true);
+            if(self.navigationController != nil)
+            {
+                self.navigationController?.popViewControllerAnimated(true);
+            }
+            else
+            {
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
         else if(tag == 11)
         {
@@ -82,7 +90,17 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             
         } else if(tag == 31) {
             let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle());
-            self.navigationController?.pushViewController(vc, animated: true);
+           
+            
+            if(self.navigationController != nil)
+            {
+                 self.navigationController?.pushViewController(vc, animated: true);
+            }
+            else
+            {
+                
+                self.presentViewController(vc, animated: true, completion: nil);
+            }
         }
     }
     
@@ -128,8 +146,15 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
                         case .Success(let json):
                             
                             SVProgressHUD.dismiss();
-                            self.navigationController?.popViewControllerAnimated(true);
-                            self.dismissViewControllerAnimated(true, completion: nil);
+                            if(self.navigationController != nil)
+                            {
+                                self.navigationController?.popViewControllerAnimated(true);
+                            }
+                            else
+                            {
+                                
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                            }
                             
                             print("complaint Successful")
                             print(json);
