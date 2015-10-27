@@ -169,8 +169,10 @@
 		D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A61BA6F795005CC047 /* ZYQSphereView.m */; };
 		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
 		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
-		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D2ABA11C1BD922A100CFA42E /* T01SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; };
+		D2ABA11C1BD922A100CFA42E /* T01SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */; };
+		D2C3D6E21BDE643F000EE182 /* U02OrderTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */; };
+		D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */; };
 		D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DE57711B84D049000DD691 /* T05PayVC.swift */; };
 		D2DE57741B84D049000DD691 /* T05PayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE57721B84D049000DD691 /* T05PayVC.xib */; };
 		D2E327A61B8399E80063CC95 /* T04CreateTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */; };
@@ -246,7 +248,7 @@
 		76CD0E881B8964B000B04453 /* U02SellerTradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02SellerTradeVC.xib; sourceTree = "<group>"; };
 		76CD0E8B1B89655B00B04453 /* U02RecommendVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02RecommendVC.swift; sourceTree = "<group>"; };
 		76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02RecommendVC.xib; sourceTree = "<group>"; };
-		76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = U02FavoriteVC.swift; path = ../User/U02/U02FavoriteVC.swift; sourceTree = "<group>"; };
+		76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02FavoriteVC.swift; sourceTree = "<group>"; };
 		76CD0E901B89657200B04453 /* U02FavoriteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02FavoriteVC.xib; sourceTree = "<group>"; };
 		76DC3B791BA85997005DFA23 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		76DC96651B8993E100270969 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -478,6 +480,8 @@
 		D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaInserat-Roman-SemiBold.ttf"; sourceTree = "<group>"; };
 		D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T01SearchCell.swift; sourceTree = "<group>"; };
 		D2ABA11A1BD922A100CFA42E /* T01SearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T01SearchCell.xib; sourceTree = "<group>"; };
+		D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U02OrderTradeVC.swift; sourceTree = "<group>"; };
+		D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U02OrderTradeVC.xib; sourceTree = "<group>"; };
 		D2DE57711B84D049000DD691 /* T05PayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T05PayVC.swift; sourceTree = "<group>"; };
 		D2DE57721B84D049000DD691 /* T05PayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T05PayVC.xib; sourceTree = "<group>"; };
 		D2E327A41B8399E80063CC95 /* T04CreateTradeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T04CreateTradeVC.swift; sourceTree = "<group>"; };
@@ -831,8 +835,11 @@
 				76CD0E841B89649000B04453 /* U02BuyerTradeVC.xib */,
 				76CD0E871B8964B000B04453 /* U02SellerTradeVC.swift */,
 				76CD0E881B8964B000B04453 /* U02SellerTradeVC.xib */,
+				D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */,
+				D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */,
 				76CD0E8B1B89655B00B04453 /* U02RecommendVC.swift */,
 				76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */,
+				76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */,
 				76CD0E901B89657200B04453 /* U02FavoriteVC.xib */,
 			);
 			path = U02;
@@ -1024,7 +1031,6 @@
 		D25A352E1B8081DF000CCD7C /* Trade */ = {
 			isa = PBXGroup;
 			children = (
-				76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */,
 				D2744B251B849AE200746229 /* TableViewCells */,
 				D2E6BE951B96E6BA0050C177 /* CustomViews */,
 				D276A98D1BA6E69D005CC047 /* T01HomePageVC.swift */,
@@ -1274,6 +1280,7 @@
 				765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */,
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
+				D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
 				D2E6BE881B96D36D0050C177 /* T11SearchSuggestionVC.xib in Resources */,
 				D24485D11B8E028B00CD97D5 /* T09CellTextLeft.xib in Resources */,
@@ -1335,6 +1342,7 @@
 				A1F3D35A1BCEB4340007B7CE /* RSADataSigner.m in Sources */,
 				A132BB8F1B863328004EAB47 /* TabBarItem.swift in Sources */,
 				D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */,
+				D2C3D6E21BDE643F000EE182 /* U02OrderTradeVC.swift in Sources */,
 				76DC3B7A1BA85997005DFA23 /* UserModel.swift in Sources */,
 				A1C36CB11B87A50100EFCB57 /* SearchCollectionViewCell.swift in Sources */,
 				A1C8EA601BCA05DA00ED9910 /* Error.swift in Sources */,

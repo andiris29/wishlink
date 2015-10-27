@@ -9,7 +9,7 @@
 import UIKit
 
 enum ItemCellType {
-    case Recommand, Favorite
+    case Recommand, Favorite, Hot
 }
 
  enum ItemCellButtonClickType {
@@ -32,6 +32,8 @@ class U02ItemCell: UICollectionViewCell {
     
     @IBOutlet weak var iv_Item: UIImageView!
     @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var iconContryView: UIView!
+    
     var indexPath: NSIndexPath!
     
  
@@ -40,10 +42,21 @@ class U02ItemCell: UICollectionViewCell {
     var cellType: ItemCellType = .Recommand {
         didSet {
             if cellType == .Recommand {
-                favoriteBtn.hidden = false
+                
+                btnDelete.hidden = false
+            } else {
+                
+                btnDelete.hidden = true
             }
-            else {
+            
+            if cellType == .Hot {
+                
+                favoriteBtn.hidden = false
+                iconContryView.backgroundColor = UIColor.clearColor()
+            } else {
+                
                 favoriteBtn.hidden = true
+                iconContryView.backgroundColor = UIColor.whiteColor()
             }
         }
     }
@@ -60,6 +73,9 @@ class U02ItemCell: UICollectionViewCell {
         // Initialization code
         self.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.layer.borderWidth = 1
+        
+        self.iconContryView.layer.masksToBounds = true
+        self.iconContryView.layer.cornerRadius = self.iconContryView.frame.size.height / 2.0
     }
     deinit{
         
@@ -127,7 +143,7 @@ class U02ItemCell: UICollectionViewCell {
     func loadFromhotVC(_item:ItemModel)
     {
         self.item = _item
-        self.btnDelete.hidden = true;
+//        self.btnDelete.hidden = true;
         
         
         

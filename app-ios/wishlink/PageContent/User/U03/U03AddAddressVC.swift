@@ -57,6 +57,8 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPicker
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController!.navigationBar.hidden = false
         self.fillDataForUI()
     }
     

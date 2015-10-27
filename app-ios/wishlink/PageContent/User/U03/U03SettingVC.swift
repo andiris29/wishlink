@@ -25,6 +25,8 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     var isUploadHeadImage: Bool!
     var userModel = UserModel.shared
     
+    weak var userVC: U02UserVC!
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.hidden = false
+//        self.navigationController!.navigationBar.hidden = false
         
         self.loadComNaviLeftBtn()
         self.loadComNavTitle("个人设置")
@@ -112,7 +114,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     {
         let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
         tababarController.selectedIndex = 0;
-        var vc = UIHEPLER.GetAppDelegate().window?.rootViewController
+        let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
         vc?.navigationController?.popToRootViewControllerAnimated(false)
         UIHEPLER.showLoginPage(vc!);
     }
@@ -164,7 +166,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             // 地址管理
             let vc = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
             
-            self.navigationController?.pushViewController(vc, animated: true);
+            userVC.navigationController?.pushViewController(vc, animated: true);
         case 103:
             print("常见问题")
         case 104:
@@ -326,7 +328,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                 {
                     imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
                     imagePicker.delegate = self;
-                    self.presentViewController(imagePicker, animated: true, completion: nil);
+                    self.userVC.presentViewController(imagePicker, animated: true, completion: nil);
                 }
             })
             let archiveAction = UIAlertAction(title: "从相册中选择", style: UIAlertActionStyle.Default, handler: {
@@ -335,14 +337,14 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                 let imagePicker = UIImagePickerController()
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 imagePicker.delegate = self;
-                self.presentViewController(imagePicker, animated: true, completion: nil);
+                self.userVC.presentViewController(imagePicker, animated: true, completion: nil);
                 
             })
             alertController.addAction(cancelAction)
             alertController.addAction(deleteAction)
             alertController.addAction(archiveAction)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.userVC.presentViewController(alertController, animated: true, completion: nil)
         } else {
             // Fallback on earlier versions
         }
