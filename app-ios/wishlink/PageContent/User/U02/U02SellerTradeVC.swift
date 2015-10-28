@@ -96,7 +96,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
-        let height: CGFloat = 223
+        let height: CGFloat = 146 // 223
         return CGSize(width: width, height: height)
     }
     
