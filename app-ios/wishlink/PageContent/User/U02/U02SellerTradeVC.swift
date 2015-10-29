@@ -96,7 +96,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;
-        let height: CGFloat = 223
+        let height: CGFloat = 146 // 223
         return CGSize(width: width, height: height)
     }
     
@@ -120,6 +120,13 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
 
         return cell
         
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let vc = U07OrderTradeDetailVC(nibName: "U07OrderTradeDetailVC", bundle: NSBundle.mainBundle())
+//        vc.hidesBottomBarWhenPushed = true
+        self.userVC.navigationController!.pushViewController(vc, animated: true)
     }
     
     func tradeCell(cell: U02TradeCell, clickType: TradeCellButtonClickType) {

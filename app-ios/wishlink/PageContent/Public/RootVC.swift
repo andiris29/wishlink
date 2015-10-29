@@ -91,8 +91,17 @@ class RootVC: UIViewController {
         self.navigationItem.leftBarButtonItem = leftItem;
     }
     
-
-    
+    func loadSpecNaviRightTextBtn(text: String, _selecotr: Selector)
+    {
+        let rightBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
+        rightBtn.backgroundColor = UIColor.clearColor();
+        rightBtn.setTitle(text, forState: UIControlState.Normal)
+        rightBtn.setTitleColor(MainColor(), forState: UIControlState.Normal)
+        rightBtn.addTarget(self, action: _selecotr, forControlEvents: UIControlEvents.TouchUpInside)
+        let rightItem : UIBarButtonItem = UIBarButtonItem(customView: rightBtn)
+        
+        self.navigationItem.rightBarButtonItem = rightItem
+    }
     
     
     func loadComNaviLeftBtn()

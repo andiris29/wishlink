@@ -52,35 +52,30 @@ class U02TradeCell: UICollectionViewCell {
     @IBOutlet weak var buyerTopView: UIView!
     @IBOutlet weak var buyerRoundImageView: UIImageView!
     @IBOutlet weak var buyerStatusLabel: UILabel!
-    @IBOutlet weak var buyerRevokeBtn: UIButton!
-    @IBOutlet weak var buyerConfirmBtn: UIButton!
-    @IBOutlet weak var buyerCheckComplaintBtn: UIButton!
-    @IBOutlet weak var buyerCheckLogisticsBtn: UIButton!
+    @IBOutlet weak var buyerRevokeBtn: UIButton!//
+    @IBOutlet weak var buyerConfirmBtn: UIButton!//
+    @IBOutlet weak var buyerCheckComplaintBtn: UIButton!//
+    @IBOutlet weak var buyerCheckLogisticsBtn: UIButton!//
+    @IBOutlet weak var buyerTradeIdLabel: UILabel!
     
     @IBOutlet weak var btnComplain: UIButton!
     @IBOutlet weak var btnChat: UIButton!
     
-    
     @IBOutlet weak var sellerTopView: UIView!
     @IBOutlet weak var sellerRoundImageView: UIImageView!
     @IBOutlet weak var sellerStatusLabel: UILabel!
-    @IBOutlet weak var sellerRevokeBtn: UIButton!
-    @IBOutlet weak var sellerEditItemInfoBtn: UIButton!
-    @IBOutlet weak var sellerCheckComplaintBtn: UIButton!
-    @IBOutlet weak var sellerSendOutBtn: UIButton!
+    @IBOutlet weak var sellerRevokeBtn: UIButton!//
+    @IBOutlet weak var sellerEditItemInfoBtn: UIButton!//
+    @IBOutlet weak var sellerCheckComplaintBtn: UIButton!//
+    @IBOutlet weak var sellerSendOutBtn: UIButton!//
+    @IBOutlet weak var sellerTradeIdLabel: UILabel!
     
     @IBOutlet weak var itemNameLabel: UILabel!
-    
     @IBOutlet weak var itemCountryLabel: UILabel!
-    
     @IBOutlet weak var itemPriceLabel: UILabel!
-    
     @IBOutlet weak var itemCountLabel: UILabel!
-    
     @IBOutlet weak var itemTotalPrice: UILabel!
-    
     @IBOutlet weak var ownerNameLabel: UILabel!
-    
     @IBOutlet weak var itemImageView: UIImageView!
     
     
@@ -89,8 +84,8 @@ class U02TradeCell: UICollectionViewCell {
         // Initialization code
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.redColor().CGColor
-        self.prepareBuyerTopView()
-        self.prepareSellerTopView()
+//        self.prepareBuyerTopView()
+//        self.prepareSellerTopView()
     }
     
     @IBAction func revokeBtnAction(sender: AnyObject) {
@@ -136,6 +131,10 @@ class U02TradeCell: UICollectionViewCell {
         } else {
             self.adjustSellerTopView()
         }
+        
+        self.buyerTradeIdLabel.text = "订单号：\(self.trade._id)"
+        self.sellerTradeIdLabel.text = "订单号：\(self.trade._id)"
+        
         self.itemNameLabel.text = "品名：" + self.trade.item.name
         self.itemCountryLabel.text = "购买地：" + self.trade.item.country
         self.itemPriceLabel.text = "出价：￥" + "\(self.trade.item.price)"
@@ -154,33 +153,33 @@ class U02TradeCell: UICollectionViewCell {
         self.btnChat.setImage(UIImage(named: "u02-contactsell"), forState: .Normal)
         self.btnChat.setImage(UIImage(named: "u02-contactsell-new"), forState: .Selected)
 
-        self.hideAllBtns()
+//        self.hideAllBtns()
         self.isRead(true)
         self.btnComplain.hidden = false
         switch trade.status {
         case 1:
             if trade.statusOrder == .b0 {
                 self.buyerStatusLabel.text = "未接单"
-                self.buyerRevokeBtn.hidden = false
+//                self.buyerRevokeBtn.hidden = false
                 self.btnComplain.hidden = true
 
             }
         case 2:
             if trade.statusOrder == .b0 {
                 self.buyerStatusLabel.text = "未接单"
-                self.buyerRevokeBtn.hidden = false
+//                self.buyerRevokeBtn.hidden = false
                 self.btnComplain.hidden = true
             }
         case 3:
             if trade.statusOrder == .c0 {
                 self.buyerStatusLabel.text = "已被接单"
-                self.buyerRevokeBtn.hidden = false
+//                self.buyerRevokeBtn.hidden = false
             }
         case 4:
             if trade.statusOrder == .c0 {
                 self.buyerStatusLabel.text = "已发货"
-                self.buyerCheckLogisticsBtn.hidden = false
-                self.buyerConfirmBtn.hidden = false
+//                self.buyerCheckLogisticsBtn.hidden = false
+//                self.buyerConfirmBtn.hidden = false
             }
         case 5:
             if trade.statusOrder == .d0 {
@@ -212,21 +211,21 @@ class U02TradeCell: UICollectionViewCell {
         case 10:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "投诉处理中"
-                self.buyerCheckComplaintBtn.hidden = false
+//                self.buyerCheckComplaintBtn.hidden = false
                 self.btnComplain.hidden = true
                 
             }
         case 11:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "已完成"
-                self.buyerCheckComplaintBtn.hidden = false
+//                self.buyerCheckComplaintBtn.hidden = false
                 self.btnComplain.hidden = true
                 
             }
         case 12:
             if trade.statusOrder == .b0 {
                 self.buyerStatusLabel.text = "未接单"
-                self.buyerRevokeBtn.hidden = false
+//                self.buyerRevokeBtn.hidden = false
                 
             }
         default:
@@ -238,20 +237,20 @@ class U02TradeCell: UICollectionViewCell {
     func adjustSellerTopView() {
         self.btnChat.setImage(UIImage(named: "u02-contactbuy"), forState: .Normal)
         self.btnChat.setImage(UIImage(named: "u02-contactbuy-new"), forState: .Selected)
-        self.hideAllBtns()
+//        self.hideAllBtns()
         self.isRead(true)
         switch trade.status {
         case 3:
             if trade.statusOrder == .c0 {
                 self.sellerStatusLabel.text = "已抢单"
-                self.sellerSendOutBtn.hidden = false
-                self.sellerRevokeBtn.hidden = false
+//                self.sellerSendOutBtn.hidden = false
+//                self.sellerRevokeBtn.hidden = false
                 self.btnComplain.hidden = false
             }
         case 4:
             if trade.statusOrder == .c0 {
                 self.sellerStatusLabel.text = "已发货"
-                self.sellerEditItemInfoBtn.hidden = false
+//                self.sellerEditItemInfoBtn.hidden = false
                 self.btnComplain.hidden = false
             }
         case 5:
@@ -265,18 +264,18 @@ class U02TradeCell: UICollectionViewCell {
         case 7:
             if trade.statusOrder == .c0 {
                 self.sellerStatusLabel.text = "买家要求撤单"
-                self.sellerRevokeBtn.hidden = false
+//                self.sellerRevokeBtn.hidden = false
                 self.btnComplain.hidden = false
             }
         case 10:
             if trade.statusOrder == .d0 {
                 self.sellerStatusLabel.text = "投诉处理中"
-                self.sellerCheckComplaintBtn.hidden = false
+//                self.sellerCheckComplaintBtn.hidden = false
             }
         case 11:
             if trade.statusOrder == .d0 {
                 self.sellerStatusLabel.text = "已完成"
-                self.sellerCheckComplaintBtn.hidden = false
+//                self.sellerCheckComplaintBtn.hidden = false
             }
         default:
             break
@@ -300,73 +299,73 @@ class U02TradeCell: UICollectionViewCell {
         }
     }
     
-    func hideAllBtns() {
-        self.buyerRevokeBtn.hidden = true
-        self.buyerConfirmBtn.hidden = true
-        self.buyerCheckComplaintBtn.hidden = true
-        self.buyerCheckLogisticsBtn.hidden = true
-        self.sellerRevokeBtn.hidden = true
-        self.sellerSendOutBtn.hidden = true
-        self.sellerCheckComplaintBtn.hidden = true
-        self.sellerEditItemInfoBtn.hidden = true
-        self.btnComplain.hidden = true
-    }
-    
-    func prepareBuyerTopView() {
-        self.buyerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.buyerRoundImageView.frame) * 0.5
-        self.buyerRoundImageView.layer.masksToBounds = true
-        
-        self.buyerRevokeBtn.layer.cornerRadius = kCornerRadius
-        self.buyerRevokeBtn.layer.masksToBounds = true
-        self.buyerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.buyerRevokeBtn.layer.borderWidth = kBorderWidth;
-        
-        self.buyerConfirmBtn.layer.cornerRadius = kCornerRadius
-        self.buyerConfirmBtn.layer.masksToBounds = true
-        self.buyerConfirmBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.buyerConfirmBtn.layer.borderWidth = kBorderWidth;
-        
-        self.buyerCheckComplaintBtn.layer.cornerRadius = kCornerRadius
-        self.buyerCheckComplaintBtn.layer.masksToBounds = true
-        self.buyerCheckComplaintBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.buyerCheckComplaintBtn.layer.borderWidth = kBorderWidth;
-        
-        self.buyerCheckLogisticsBtn.layer.cornerRadius = kCornerRadius
-        self.buyerCheckLogisticsBtn.layer.masksToBounds = true
-        self.buyerCheckLogisticsBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.buyerCheckLogisticsBtn.layer.borderWidth = kBorderWidth;
-        
-        self.buyerRevokeBtn.layer.cornerRadius = kCornerRadius
-        self.buyerRevokeBtn.layer.masksToBounds = true
-        self.buyerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.buyerRevokeBtn.layer.borderWidth = kBorderWidth;
-    }
-    
-    func prepareSellerTopView() {
-        
-        self.sellerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.sellerRoundImageView.frame) * 0.5
-        self.sellerRoundImageView.layer.masksToBounds = true
-        
-        self.sellerRevokeBtn.layer.cornerRadius = kCornerRadius
-        self.sellerRevokeBtn.layer.masksToBounds = true
-        self.sellerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.sellerRevokeBtn.layer.borderWidth = kBorderWidth;
-        
-        self.sellerEditItemInfoBtn.layer.cornerRadius = kCornerRadius
-        self.sellerEditItemInfoBtn.layer.masksToBounds = true
-        self.sellerEditItemInfoBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.sellerEditItemInfoBtn.layer.borderWidth = kBorderWidth;
-        
-        self.sellerCheckComplaintBtn.layer.cornerRadius = kCornerRadius
-        self.sellerCheckComplaintBtn.layer.masksToBounds = true
-        self.sellerCheckComplaintBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.sellerCheckComplaintBtn.layer.borderWidth = kBorderWidth;
-        
-        self.sellerSendOutBtn.layer.cornerRadius = kCornerRadius
-        self.sellerSendOutBtn.layer.masksToBounds = true
-        self.sellerSendOutBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
-        self.sellerSendOutBtn.layer.borderWidth = kBorderWidth;
-    }
+//    func hideAllBtns() {
+//        self.buyerRevokeBtn.hidden = true
+//        self.buyerConfirmBtn.hidden = true
+//        self.buyerCheckComplaintBtn.hidden = true
+//        self.buyerCheckLogisticsBtn.hidden = true
+//        self.sellerRevokeBtn.hidden = true
+//        self.sellerSendOutBtn.hidden = true
+//        self.sellerCheckComplaintBtn.hidden = true
+//        self.sellerEditItemInfoBtn.hidden = true
+//        self.btnComplain.hidden = true
+//    }
+//    
+//    func prepareBuyerTopView() {
+//        self.buyerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.buyerRoundImageView.frame) * 0.5
+//        self.buyerRoundImageView.layer.masksToBounds = true
+//        
+//        self.buyerRevokeBtn.layer.cornerRadius = kCornerRadius
+//        self.buyerRevokeBtn.layer.masksToBounds = true
+//        self.buyerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.buyerRevokeBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.buyerConfirmBtn.layer.cornerRadius = kCornerRadius
+//        self.buyerConfirmBtn.layer.masksToBounds = true
+//        self.buyerConfirmBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.buyerConfirmBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.buyerCheckComplaintBtn.layer.cornerRadius = kCornerRadius
+//        self.buyerCheckComplaintBtn.layer.masksToBounds = true
+//        self.buyerCheckComplaintBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.buyerCheckComplaintBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.buyerCheckLogisticsBtn.layer.cornerRadius = kCornerRadius
+//        self.buyerCheckLogisticsBtn.layer.masksToBounds = true
+//        self.buyerCheckLogisticsBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.buyerCheckLogisticsBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.buyerRevokeBtn.layer.cornerRadius = kCornerRadius
+//        self.buyerRevokeBtn.layer.masksToBounds = true
+//        self.buyerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.buyerRevokeBtn.layer.borderWidth = kBorderWidth;
+//    }
+//    
+//    func prepareSellerTopView() {
+//        
+//        self.sellerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.sellerRoundImageView.frame) * 0.5
+//        self.sellerRoundImageView.layer.masksToBounds = true
+//        
+//        self.sellerRevokeBtn.layer.cornerRadius = kCornerRadius
+//        self.sellerRevokeBtn.layer.masksToBounds = true
+//        self.sellerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.sellerRevokeBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.sellerEditItemInfoBtn.layer.cornerRadius = kCornerRadius
+//        self.sellerEditItemInfoBtn.layer.masksToBounds = true
+//        self.sellerEditItemInfoBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.sellerEditItemInfoBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.sellerCheckComplaintBtn.layer.cornerRadius = kCornerRadius
+//        self.sellerCheckComplaintBtn.layer.masksToBounds = true
+//        self.sellerCheckComplaintBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.sellerCheckComplaintBtn.layer.borderWidth = kBorderWidth;
+//        
+//        self.sellerSendOutBtn.layer.cornerRadius = kCornerRadius
+//        self.sellerSendOutBtn.layer.masksToBounds = true
+//        self.sellerSendOutBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
+//        self.sellerSendOutBtn.layer.borderWidth = kBorderWidth;
+//    }
 }
 
 
