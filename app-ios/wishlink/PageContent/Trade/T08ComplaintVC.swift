@@ -227,12 +227,26 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     var currMsgLength = 0;
+    
+    //textViewDelegate
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         return CalculationLenght();
         
     }
-    //textViewDelegate
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+        textView.text = "";
+        textView.textColor = UIColor.blackColor();
+    }
+    func textViewDidEndEditing(textView: UITextView) {
+        if(textView.text == "")
+        {
+            textView.text = " 填写其他补充信息！";
+            textView.textColor = UIColor.lightGrayColor();
+        }
+    }
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         
         

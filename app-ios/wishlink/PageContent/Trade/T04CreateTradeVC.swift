@@ -19,11 +19,31 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var txtSize: UITextField!
     @IBOutlet weak var txtBuyArea: UITextField!
     
-    @IBOutlet weak var iv0: UIImageView!
+    @IBOutlet weak var iv1_bg: UIImageView!
+    @IBOutlet weak var iv2_bg: UIImageView!
+    @IBOutlet weak var iv3_bg: UIImageView!
+    @IBOutlet weak var iv4_bg: UIImageView!
+    @IBOutlet weak var iv5_bg: UIImageView!
+    
     @IBOutlet weak var iv1: UIImageView!
     @IBOutlet weak var iv2: UIImageView!
     @IBOutlet weak var iv3: UIImageView!
-
+    @IBOutlet weak var iv4: UIImageView!
+    @IBOutlet weak var iv5: UIImageView!
+    
+    @IBOutlet weak var btn1: UIButton!
+    @IBOutlet weak var btn2: UIButton!
+    @IBOutlet weak var btn3: UIButton!
+    @IBOutlet weak var btn4: UIButton!
+    @IBOutlet weak var btn5: UIButton!
+    
+    @IBOutlet weak var btn1_del: UIButton!
+    @IBOutlet weak var btn2_del: UIButton!
+    @IBOutlet weak var btn3_del: UIButton!
+    @IBOutlet weak var btn4_del: UIButton!
+    @IBOutlet weak var btn5_del: UIButton!
+    //5张上传图片的宽度
+    @IBOutlet weak var constrain_ImgBtn_Width: NSLayoutConstraint!
     //顶部标题View的高度约束
     @IBOutlet weak var constraint_topViewHieght: NSLayoutConstraint!
     //通用View高度约束
@@ -31,6 +51,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     var actionSheet: CSActionSheet!
     var item:ItemModel!
     var t05VC:T05PayVC!
+    var imgArr:[UIImage]!
+    
+    var imgEmpty:UIImage! = UIImage(named: "T08bbb");
+    var imgSelect:UIImage! = UIImage(named: "T04_Img_Select");
+    
+  
+    //MARK:System func
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -46,13 +73,18 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.httpObj.mydelegate = self;
         
   
+        self.constrain_ImgBtn_Width.constant = (ScreenWidth - (7*8))/5
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
-        
+        self.loadImagesData();
         csActionSheet()
+        
+        
     }
 
-    
     override func viewWillAppear(animated: Bool) {
+        
+     
+        
         
         if(self.t05VC != nil)
         {
@@ -63,38 +95,73 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(50.0);
         self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(120);
-       
+        
         self.navigationController?.navigationBarHidden = false;
         
-         self.item = nil;
-        
+        self.item = nil;
         
         self.loadComNavTitle("发布新订单")
         
-//        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 80, 20))
-//        titleLabel.text = "发布新订单"
-//        titleLabel.textColor = UIHEPLER.mainColor;
-//        titleLabel.font =  UIHEPLER.mainChineseFont15
-//        titleLabel.textAlignment = NSTextAlignment.Center
-//        
-//        
-////        let txtRemark: UILabel = UILabel(frame: CGRectMake(0, 20, 80, 20))
-////        txtRemark.text = "(*为必填项)"
-////        txtRemark.textColor = UIColor.redColor();
-////        txtRemark.font = UIHEPLER.getCustomFont(true, fontSsize: 11);
-////        txtRemark.textAlignment = NSTextAlignment.Center
-////  
-//        
-//        
-//        let titleView = UIView(frame: CGRectMake(0, 0, 50, 40))
-//        titleView.addSubview(titleLabel);
-//        titleView.addSubview(txtRemark);
-//        self.navigationItem.titleView = titleView;
-        
         self.navigationController?.navigationBarHidden = false;
         
-        
     }
+    
+    //MARK:Customer func
+    func loadImagesData()
+    {
+        self.btn1_del.hidden = true;
+        self.btn2_del.hidden = true;
+        self.btn3_del.hidden = true;
+        self.btn4_del.hidden = true;
+        self.btn5_del.hidden = true;
+        self.iv1.image = nil
+        self.iv2.image = nil
+        self.iv3.image = nil
+        self.iv4.image = nil
+        self.iv5.image = nil
+        
+        self.iv1_bg.image = imgEmpty
+        self.iv2_bg.image = imgEmpty
+        self.iv3_bg.image = imgEmpty
+        self.iv4_bg.image = imgEmpty
+        self.iv5_bg.image = imgEmpty
+        
+    
+        if(self.imgArr != nil && self.imgArr.count>0)
+        {
+            
+            if(self.imgArr.count>=1)
+            {
+                self.iv1.image = self.imgArr[0]
+                self.iv1_bg.image = imgSelect
+            }
+            if(self.imgArr.count>=2)
+            {
+                self.iv2.image = self.imgArr[1]
+                self.iv2_bg.image = imgSelect
+            }
+            if(self.imgArr.count>=3)
+            {
+                self.iv3.image = self.imgArr[2]
+                self.iv3_bg.image = imgSelect
+            }
+            if(self.imgArr.count>=4)
+            {
+                self.iv4.image = self.imgArr[3]
+                self.iv4_bg.image = imgSelect
+            }
+            if(self.imgArr.count>=5)
+            {
+                self.iv5.image = self.imgArr[4]
+                self.iv5_bg.image = imgSelect
+                
+            }
+            
+        }
+    }
+
+    
+
 
     func csActionSheet() {
         
@@ -121,47 +188,61 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                 multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
 //                if(self.imagrArr.count>0)
-                if(self.pickImageCount>0)
+                if(self.imgArr != nil && self.imgArr.count>0)
                 {
-                    let imgName = "item_a.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.iv0.image!);
-                    
-                    let imgStream  = NSInputStream(data: imageData);
-                    let len =   UInt64(imageData.length)
-                    
-                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    if(self.imgArr.count == 1)
+                    {
+                        let imgName = "item_a.jpg"
+                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[0]);
+                        
+                        let imgStream  = NSInputStream(data: imageData);
+                        let len =   UInt64(imageData.length)
+                        
+                        multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    }
+                    if(self.imgArr.count>1)
+                    {
+                        
+                        let imgName = "item_b.jpg"
+                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[1]);
+                        
+                        let imgStream  = NSInputStream(data: imageData);
+                        let len =   UInt64(imageData.length)
+                        
+                        multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    }
+                    if(self.imgArr.count>2)
+                    {
+                        let imgName = "item_c.jpg"
+                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[2]);
+                        
+                        let imgStream  = NSInputStream(data: imageData);
+                        let len =   UInt64(imageData.length)
+                        
+                        multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    }
+                    if(self.imgArr.count>3)
+                    {
+                        let imgName = "item_d.jpg"
+                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[3]);
+                        
+                        let imgStream  = NSInputStream(data: imageData);
+                        let len =   UInt64(imageData.length)
+                        
+                        multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    }
+                    if(self.imgArr.count>4)
+                    {
+                        let imgName = "item_e.jpg"
+                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[4]);
+                        
+                        let imgStream  = NSInputStream(data: imageData);
+                        let len =   UInt64(imageData.length)
+                        
+                        multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
+                    }
                 }
-                if(self.pickImageCount>1)
-                {
-                    
-                    let imgName = "item_b.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.iv1.image!);
-                    
-                    let imgStream  = NSInputStream(data: imageData);
-                    let len =   UInt64(imageData.length)
-                    
-                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                }
-                if(self.pickImageCount>2)
-                {
-                    let imgName = "item_c.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.iv2.image!);
-                    
-                    let imgStream  = NSInputStream(data: imageData);
-                    let len =   UInt64(imageData.length)
-                    
-                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                }
-                if(self.pickImageCount>3)
-                {
-                    let imgName = "item_d.jpg"
-                    let imageData = UIHEPLER.compressionImageToDate(self.iv3.image!);
-                    
-                    let imgStream  = NSInputStream(data: imageData);
-                    let len =   UInt64(imageData.length)
-                    
-                    multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
-                }
+                
                 
             },
             encodingCompletion: {
@@ -222,11 +303,28 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         )
 
     }
+
     
+    var selectTag:Int!
+    var startTime:Double = 0;
+    @IBAction func touchDownAction(sender: AnyObject) {
+        self.selectTag = (sender as! UIButton).tag;
+   
+        
+        let timeNow:NSTimeInterval = NSDate().timeIntervalSince1970;
+        self.startTime = timeNow;
+        
+        print("touchDownAction")
+        //开启定时器
+    }
     @IBAction func btnAction(sender: UIButton) {
-    
+        //关闭定时器
+        print("btnAction")
+        
+        
+        
         let tag = sender.tag;
-        if(tag==11)
+        if(tag==11)//确定发布   
         {
             let errmsg =  checkInput();
             if(errmsg != "")
@@ -247,9 +345,82 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
         else
         {
-            actionSheet.show(true)
+            self.selectTag = tag;
+            if(tag >= 41 && tag <= 45)//上传图片
+            {
+                if(self.startTime > 0.01 )
+                {
+                    
+                    let timeNow:NSTimeInterval = NSDate().timeIntervalSince1970;
+                    let durration =  timeNow - self.startTime
+                    print(durration)
+                    var isShowDel = false;
+                    if(durration>1)
+                    {
+                        if(self.iv1.image != nil)
+                        {
+                            self.btn1_del.hidden = false;
+                            isShowDel = true
+                        }
+                        if(self.iv2.image != nil)
+                        {
+                            self.btn2_del.hidden = false;
+                            isShowDel = true
+                        }
+                        if(self.iv3.image != nil)
+                        {
+                            self.btn3_del.hidden = false;
+                            isShowDel = true
+                        }
+                        if(self.iv4.image != nil)
+                        {
+                            self.btn4_del.hidden = false;
+                            isShowDel = true
+                        }
+                        if(self.iv5.image != nil)
+                        {
+                            self.btn5_del.hidden = false;
+                            isShowDel = true
+                        }
+                        if(!isShowDel)
+                        {
+                            actionSheet.show(true)
+                        }
+                    }
+                    else
+                    {
+                        self.loadImagesData();
+                        actionSheet.show(true)
+                    }
+                }
+                else
+                {
+                    self.loadImagesData();
+                    actionSheet.show(true)
+                }
+                self.startTime = 0.0;
+            }
+            else if(tag>=401 && tag <= 405)//删除图片
+            {
+                self.selectTag = tag;
+                let index = tag - 401;
+                
+                self.imgArr.removeAtIndex(index);
+                self.loadImagesData();
+            }
         }
-
+    }
+    func longPressAction(gestureRecognizer:UILongPressGestureRecognizer)
+    {
+        NSLog("longPressAction");
+        if gestureRecognizer.state == .Ended {
+            // Do your stuff here
+            
+            UIHEPLER.alertErrMsg("ADSD");
+            self.btn1_del.hidden = false;
+        }
+        
+        
     }
     
       func checkInput()->String{
@@ -287,7 +458,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         {
             return "数量不能为空"
         }
-        if(self.pickImageCount == 0)
+        
+        if(self.imgArr == nil || self.imgArr.count == 0)
         {
             return "请上传图片"
         }
@@ -314,7 +486,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
         }
     }
-    var pickImageCount = 0;
+//    var pickImageCount = 0;
     
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -324,29 +496,38 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
-        
-            if(self.pickImageCount<4)
-            {
-                self.pickImageCount+=1;
-            }
-          
+
             
-            if(self.pickImageCount == 1)
+            if(self.imgArr == nil || self.imgArr == [] || self.imgArr.count == 0)
             {
-                self.iv0.image = gotImage;
-            }
-            
-            if(self.pickImageCount == 2)
-            {
+                self.imgArr = [];
+                self.imgArr.append(gotImage);
                 self.iv1.image = gotImage;
+                self.iv1_bg.image = self.imgSelect
             }
-            if(self.pickImageCount == 3)
+            else if(self.imgArr.count == 1)
             {
+                self.imgArr.append(gotImage);
                 self.iv2.image = gotImage;
+                self.iv2_bg.image = self.imgSelect
             }
-            if(self.pickImageCount == 4)
+            else if(self.imgArr.count == 2)
             {
+                self.imgArr.append(gotImage);
                 self.iv3.image = gotImage;
+                self.iv3_bg.image = self.imgSelect
+            }
+            else if(self.imgArr.count == 3)
+            {
+                self.imgArr.append(gotImage);
+                self.iv4.image = gotImage;
+                self.iv4_bg.image = self.imgSelect
+            }
+            else if(self.imgArr.count == 4)
+            {
+                self.imgArr.append(gotImage);
+                self.iv5.image = gotImage;
+                self.iv5_bg.image = self.imgSelect
             }
             
 //            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
@@ -355,7 +536,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+    //MARK: hidden keyboard
     func dismissKeyboard()
     {
         self.txtCategory.resignFirstResponder();
@@ -367,6 +548,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.txtBuyArea.resignFirstResponder();
         
     }
+    //MARK: scrollViewDelegate: hidden keyboard
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         
         self.dismissKeyboard();
@@ -416,11 +598,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
     }
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {//结束编辑
-        
-        self.sv.contentOffset.y = self.sv.contentOffset.y - 200
+        if(textField.tag>3 || textField.tag == 0)
+        {
+            self.sv.contentOffset.y = self.sv.contentOffset.y - 200
+        }
         return true
     }
-
+    
+    //MARK:UItextViewDelegate
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n")
         {
@@ -435,12 +620,12 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         
-        self.sv.contentOffset.y = self.sv.contentOffset.y + 250
+        self.sv.contentOffset.y = self.sv.contentOffset.y + 200
         return true
     }
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
         
-        self.sv.contentOffset.y = self.sv.contentOffset.y - 250
+        self.sv.contentOffset.y = self.sv.contentOffset.y - 200
         return true
     }
     
@@ -471,10 +656,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.txtCount.text = "";
         self.txtSize.text = "";
         self.txtBuyArea.text = "";
-        self.iv0.image = nil;
-        self.iv1.image = nil;
-        self.iv2.image = nil;
-        self.iv3.image = nil;
+//        self.iv0.image = nil;
+//        self.iv1.image = nil;
+//        self.iv2.image = nil;
+//        self.iv3.image = nil;
+        self.dataArr = nil;
+        self.imgArr = nil;
+        loadImagesData();
     }
 
     //MARK: WebrequestDelegate

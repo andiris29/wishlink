@@ -310,7 +310,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 
                 
                 //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-                let appScheme = "alisdkdemo";
+                let appScheme = "alisdk";
                 let orderSpec = order.description
                 //将商品信息拼接成字符串
                 NSLog("orderSpec = %@",orderSpec);

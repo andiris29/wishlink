@@ -47,7 +47,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>alisdkdemo</string>
+				<string>alisdk</string>
 			</array>
 		</dict>
 	</array>
