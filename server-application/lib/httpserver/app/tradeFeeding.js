@@ -36,7 +36,7 @@ tradeFeeding.asSeller = {
                     '$in' : RequestHelper.parseInts(param.statuses)
                 };
             }
-            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
@@ -64,7 +64,7 @@ tradeFeeding.asBuyer = {
                     '$in' : RequestHelper.parseInts(param.statuses)
                 };
             }
-            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
@@ -87,7 +87,7 @@ tradeFeeding.byItem = {
             var criteria = {
                 itemRef : RequestHelper.parseId(param._id),
             };
-            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
                 'trades' : trades 
