@@ -423,6 +423,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
     }
     
+    @IBAction func buttonLongPressAction(sender: AnyObject) {
+        print("==>>:\(sender)")
+    }
+    
       func checkInput()->String{
         
         let result = "";
