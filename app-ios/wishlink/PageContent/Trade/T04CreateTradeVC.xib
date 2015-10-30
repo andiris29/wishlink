@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
@@ -868,26 +868,31 @@
                                         </view>
                                         <button opaque="NO" tag="41" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDZ-FW-Fea" userLabel="btn1">
                                             <rect key="frame" x="8" y="37" width="60" height="60"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="JDZ-FW-Fea" secondAttribute="height" multiplier="1:1" id="TdQ-62-QxO"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="7Et-gF-vKN"/>
                                                 <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="p6R-4o-71k"/>
+                                                <outletCollection property="gestureRecognizers" destination="fKM-Jg-UWz" appends="YES" id="wVM-1z-GsA"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="42" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ql-9f-jx1" userLabel="btn2">
                                             <rect key="frame" x="76" y="37" width="60" height="60"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="1Ql-9f-jx1" secondAttribute="height" multiplier="1:1" id="Rzj-7L-Pg5"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="18x-3K-j3t"/>
                                                 <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="rqw-Yw-iWt"/>
+                                                <outletCollection property="gestureRecognizers" destination="ywL-qj-7pb" appends="YES" id="wSA-t6-SMR"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="43" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g32-LK-Wcq" userLabel="btn3">
                                             <rect key="frame" x="144" y="37" width="60" height="60"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="g32-LK-Wcq" secondAttribute="height" multiplier="1:1" id="3dS-5x-Zyc"/>
                                                 <constraint firstAttribute="width" secondItem="g32-LK-Wcq" secondAttribute="height" multiplier="1:1" id="het-Cb-a1r"/>
@@ -900,26 +905,31 @@
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="t0X-Ha-AQY"/>
                                                 <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="g0R-85-W6B"/>
+                                                <outletCollection property="gestureRecognizers" destination="1pz-zR-dSr" appends="YES" id="wbt-Ip-4zl"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="44" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wt4-s5-HW3" userLabel="btn4">
                                             <rect key="frame" x="212" y="37" width="60" height="60"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Wt4-s5-HW3" secondAttribute="height" multiplier="1:1" id="DFY-Wd-g6O"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="49G-Wn-BXR"/>
                                                 <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="Zze-nh-FQg"/>
+                                                <outletCollection property="gestureRecognizers" destination="JAz-tA-sfl" appends="YES" id="ioo-8q-r0o"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="45" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5N-or-OKX" userLabel="btn5">
                                             <rect key="frame" x="280" y="37" width="60" height="60"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="r5N-or-OKX" secondAttribute="height" multiplier="1:1" id="dad-KU-haO"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="yJS-fy-s9z"/>
                                                 <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="UUi-Dh-Rhx"/>
+                                                <outletCollection property="gestureRecognizers" destination="kOD-f5-ANk" appends="YES" id="sB9-N3-82w"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="401" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibq-x2-Ydd" userLabel="btn1_del">
@@ -1183,6 +1193,31 @@
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="fKM-Jg-UWz">
+            <connections>
+                <action selector="buttonLongPressAction:" destination="-1" id="ERx-T9-EjN"/>
+            </connections>
+        </pongPressGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ywL-qj-7pb">
+            <connections>
+                <action selector="buttonLongPressAction:" destination="-1" id="D5q-hG-XUU"/>
+            </connections>
+        </pongPressGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="1pz-zR-dSr">
+            <connections>
+                <action selector="buttonLongPressAction:" destination="-1" id="d7s-yd-6K6"/>
+            </connections>
+        </pongPressGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="JAz-tA-sfl">
+            <connections>
+                <action selector="buttonLongPressAction:" destination="-1" id="N3k-fw-WS0"/>
+            </connections>
+        </pongPressGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="kOD-f5-ANk">
+            <connections>
+                <action selector="buttonLongPressAction:" destination="-1" id="znR-dH-EaC"/>
+            </connections>
+        </pongPressGestureRecognizer>
     </objects>
     <resources>
         <image name="T04_del" width="18" height="18"/>
