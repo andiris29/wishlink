@@ -93,7 +93,7 @@ class RootVC: UIViewController {
     
     func loadSpecNaviRightTextBtn(text: String, _selecotr: Selector)
     {
-        let rightBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 32, 32));
+        let rightBtn : UIButton = UIButton(frame: CGRectMake(0, 0, 44, 44));
         rightBtn.backgroundColor = UIColor.clearColor();
         rightBtn.setTitle(text, forState: UIControlState.Normal)
         rightBtn.setTitleColor(MainColor(), forState: UIControlState.Normal)

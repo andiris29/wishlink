@@ -125,6 +125,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         let vc = U07OrderTradeDetailVC(nibName: "U07OrderTradeDetailVC", bundle: NSBundle.mainBundle())
+        vc.role = .seller
+        vc.trade = self.tradeArray[indexPath.row]
 //        vc.hidesBottomBarWhenPushed = true
         self.userVC.navigationController!.pushViewController(vc, animated: true)
     }

@@ -38,6 +38,7 @@
                 <outlet property="reveicerName" destination="goe-3F-0ku" id="KFd-hl-x9m"/>
                 <outlet property="reveicerPhone" destination="KvE-Af-4xR" id="788-ge-UJh"/>
                 <outlet property="revokeButton" destination="UdG-Lh-Jv9" id="dFn-FL-w6j"/>
+                <outlet property="tradeIdLabel" destination="u0o-6A-x6m" id="gYa-B6-XLO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -175,8 +176,8 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="Z1L-iP-k9N"/>
                                             <exclude reference="3YZ-Cc-QlM"/>
+                                            <exclude reference="Z1L-iP-k9N"/>
                                             <exclude reference="aBJ-YP-CrX"/>
                                         </mask>
                                     </variation>
