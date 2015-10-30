@@ -1,5 +1,5 @@
 //
-//  T06-TradeVC.swift
+//  T13AssignToMeVC.swift
 //  wishlink
 //
 //  Created by whj on 15/8/16.
@@ -8,18 +8,20 @@
 
 import UIKit
 
-class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHeaderDelegate, T06CellFooterDelegate,T06CellDelegate, WebRequestDelegate {
+class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06CellFooterDelegate,T06CellDelegate, WebRequestDelegate {
 
     let cellIdentifier = "T06Cell"
-    let cellIdentifierHeader = "T06CellHeader"
+    let cellIdentifierHeader = "T13CellHeader"
     let cellIdentifierFooter = "T06CellFooter"
 
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tradeTableView: UITableView!
     
+    var T14VC:T14AssignToMeConfirm!
     
     var t05VC:T05PayVC!
     var item: ItemModel!
+    var trade:TradeModel!
     //跟单列表
     var followArr:[TradeModel]! = []
     //选中的抢单列表
@@ -40,7 +42,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         self.navigationController?.navigationBarHidden = false;
         
         self.loadComNaviLeftBtn()
-        self.loadComNavTitle("订单详情")
+        self.loadComNavTitle("抢单列表")
     }
     
     deinit{
@@ -69,9 +71,11 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         super.viewWillAppear(animated);
         if(self.t05VC != nil)
         {
-            self.t05VC.view.removeFromSuperview();
-            self.t05VC.view = nil;
             self.t05VC = nil;
+        }
+        if(self.T14VC != nil)
+        {
+            self.T14VC = nil;
         }
     }
     
@@ -88,7 +92,7 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
             
             switch indexPath.row {
             case 0:
-                return 568
+                return 276
             case last:
                 return 65
             default :
@@ -120,9 +124,9 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
         
         switch indexPath.row {
         case 0:
-           let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T06CellHeader
-           tCell.delegate = self
-           tCell.initData(item)
+           let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T13CellHeader
+//           tCell.delegate = self
+           tCell.loadData(self.item,_trade: self.trade);
            
            cell = tCell;
         case last:
@@ -165,45 +169,55 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
     }
     //MARK: - Action
     //跟单
-    func btnFollowAction(sernder:UIButton) {
-        
-        if(UserModel.shared.isLogin)
-        {
-            SVProgressHUD.showWithStatusWithBlack("请稍后...")
-            let para  = ["itemRef":item._id,
-                "quantity":"1"];
-            self.httpObj.httpPostApi("trade/create", parameters: para, tag: 62);
-        }
-        else
-        {
-            UIHEPLER.showLoginPage(self);
-        }
-    }
+//    func btnFollowAction(sernder:UIButton) {
+//        
+//        if(UserModel.shared.isLogin)
+//        {
+//            SVProgressHUD.showWithStatusWithBlack("请稍后...")
+//            let para  = ["itemRef":item._id,
+//                "quantity":"1"];
+//            self.httpObj.httpPostApi("trade/create", parameters: para, tag: 62);
+//        }
+//        else
+//        {
+//            UIHEPLER.showLoginPage(self);
+//        }
+//    }
     
     //抢单
     func btnGrabOrderAction(sernder:UIButton) {
         
-        if(UserModel.shared.isLogin)
-        {
-            if(self.selectArr.count>0)
-            {
-                SVProgressHUD.showWithStatusWithBlack("请稍后...")
-                
-                for tradeItem in self.selectArr
-                {
-                    self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeItem._id], tag: 61)
-                }
-            }
-            else
-            {
-                UIHEPLER.alertErrMsg("请先选择");
-            }
-          
-        }
-        else
-        {
-            UIHEPLER.showLoginPage(self);
-        }
+        
+        
+         self.T14VC = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
+        
+//        vc.item = self.item;
+        self.presentViewController(self.T14VC, animated: true, completion: nil);
+   
+        
+        
+        
+//        if(UserModel.shared.isLogin)
+//        {
+//            if(self.selectArr.count>0)
+//            {
+//                SVProgressHUD.showWithStatusWithBlack("请稍后...")
+//                
+//                for tradeItem in self.selectArr
+//                {
+//                    self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeItem._id], tag: 61)
+//                }
+//            }
+//            else
+//            {
+//                UIHEPLER.alertErrMsg("请先选择");
+//            }
+//          
+//        }
+//        else
+//        {
+//            UIHEPLER.showLoginPage(self);
+//        }
     }
     
     //MARK: - T06CellHeaderDelegate
@@ -243,10 +257,20 @@ class T06TradeVC: RootVC, UITableViewDelegate,UITableViewDataSource, T06CellHead
                 for  itemObj in tradesObj!
                 {
                     let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
+                    if(tradeItem.item != nil && tradeItem.item._id == self.item._id)
+                    {
+                        self.trade = tradeItem
+                    }
                     self.followArr.append(tradeItem);
                 }
+                
+                
+                
                 self.tradeTableView.reloadData();
             }
+            
+            
+            
         } else if(tag == 61) {
             
             

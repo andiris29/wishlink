@@ -1,5 +1,5 @@
 //
-//  T06TradeListVC.swift
+//  T14AssignToMeConfirm.swift
 //  wishlink
 //
 //  Created by whj on 15/10/29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T06TradeListVC: RootVC, UITableViewDataSource, UITableViewDelegate, WebRequestDelegate, T06CellDelegate {
+class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, WebRequestDelegate, T06CellDelegate {
     
     let cellIdentifier = "T06Cell"
     
@@ -62,14 +62,15 @@ class T06TradeListVC: RootVC, UITableViewDataSource, UITableViewDelegate, WebReq
     // MARK: - Action
     
     @IBAction func closeButtonAction(sender: UIButton) {
-    
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     @IBAction func tradeButtonAction(sender: UIButton) {
         
-        if sender.tag == 500 { //确认跟单
-        
-        } else if sender.tag == 501 { //继续抢单
+        if sender.tag == 500 { //继续抢单
+            self.dismissViewControllerAnimated(true, completion: nil);
+        } else if sender.tag == 501 { //确定抢单
+            //调用抢单接口
         
         }
     }

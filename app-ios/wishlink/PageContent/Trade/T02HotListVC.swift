@@ -24,7 +24,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     var searchTextField: UITextField!
     var topView = UIImageView()
     
-    var t06VC:T06TradeVC!
+    var t06VC:T06ItemVC!
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -59,8 +59,6 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         
         if(self.t06VC != nil)
         {
-            self.t06VC.view.removeFromSuperview();
-            self.t06VC.view = nil;
             self.t06VC = nil;
         }
         
@@ -143,7 +141,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         
         if(self.t06VC == nil)
         {
-            self.t06VC = T06TradeVC(nibName: "T06TradeVC", bundle: NSBundle.mainBundle());
+            self.t06VC = T06ItemVC(nibName: "T06ItemVC", bundle: NSBundle.mainBundle());
         }
         self.t06VC.item = self.dataArr[indexPath.row] as! ItemModel
         self.navigationController?.pushViewController(self.t06VC, animated: true);

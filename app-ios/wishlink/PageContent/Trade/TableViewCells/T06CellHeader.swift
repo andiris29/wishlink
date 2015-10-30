@@ -104,7 +104,6 @@ class T06CellHeader: UITableViewCell, CSDorpListViewDelegate {
         else
         {
             self.iv_notes.hidden = true;
-            
         }
         
         self.lbTotalCount.text = "\(item.numTrades)件"
