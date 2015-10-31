@@ -432,15 +432,16 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             
             if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
                 let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc:U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
+                let vc:U02UserVC! = tababarController.childViewControllers[4] as? U02UserVC
                 if(vc != nil)
                 {
                     vc.orderBtnAction(vc.orderBtn);
                 }
                 
-                tababarController.selectedIndex = 3;
+                tababarController.selectedIndex = 4;
             }
 
+            trade_Dic = nil;
         }
     }
     

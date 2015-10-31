@@ -29,6 +29,7 @@
                 <outlet property="imageRollView" destination="NWI-5U-pEV" id="1gv-k6-uQm"/>
                 <outlet property="img_tips" destination="AqF-So-Uxh" id="lYy-MO-606"/>
                 <outlet property="lbRemark" destination="i58-ym-plr" id="hD2-vw-g01"/>
+                <outlet property="sv" destination="WTo-m3-Ch7" id="Z0l-VU-TEa"/>
                 <outlet property="tradeNameLabel" destination="8XE-Rj-boz" id="fvh-B5-DfU"/>
                 <outlet property="tradeTimeLabel" destination="mOL-Ac-0Gc" id="Cxp-CJ-6xC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -47,20 +48,6 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWI-5U-pEV" customClass="CSImageRollView" customModule="wishlink" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1m-S0-KpK">
-                                            <rect key="frame" x="8" y="8" width="45" height="45"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="HVw-u0-usV"/>
-                                                <constraint firstAttribute="width" constant="45" id="P82-Mn-KXs"/>
-                                            </constraints>
-                                            <state key="normal" image="u02-back"/>
-                                            <connections>
-                                                <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="e6c-dO-MrQ"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="320" id="7KE-E4-tnd"/>
@@ -373,6 +360,18 @@
                                         <constraint firstAttribute="trailing" secondItem="zZp-6a-tWr" secondAttribute="trailing" id="xdH-AQ-6Sx"/>
                                     </constraints>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1m-S0-KpK" userLabel="btnBack">
+                                    <rect key="frame" x="8" y="8" width="45" height="45"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="HVw-u0-usV"/>
+                                        <constraint firstAttribute="width" constant="45" id="P82-Mn-KXs"/>
+                                    </constraints>
+                                    <state key="normal" image="u02-back"/>
+                                    <connections>
+                                        <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="e6c-dO-MrQ"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -385,10 +384,18 @@
                                 <constraint firstItem="NWI-5U-pEV" firstAttribute="top" secondItem="MYW-K1-uN1" secondAttribute="top" id="Svy-nP-t1o"/>
                                 <constraint firstAttribute="trailing" secondItem="2Kw-T8-Nqa" secondAttribute="trailing" id="Vf5-nf-afn"/>
                                 <constraint firstItem="pxN-HX-X5l" firstAttribute="leading" secondItem="WMC-IA-Xae" secondAttribute="trailing" constant="8" id="Vfh-sy-bQJ"/>
+                                <constraint firstItem="U1m-S0-KpK" firstAttribute="top" secondItem="MYW-K1-uN1" secondAttribute="top" constant="8" id="Y3m-lz-V11"/>
+                                <constraint firstItem="U1m-S0-KpK" firstAttribute="leading" secondItem="MYW-K1-uN1" secondAttribute="leading" constant="8" id="ZYt-3b-nN5"/>
                                 <constraint firstAttribute="trailing" secondItem="NWI-5U-pEV" secondAttribute="trailing" id="aOC-fp-Hsr"/>
                                 <constraint firstAttribute="bottom" secondItem="2Kw-T8-Nqa" secondAttribute="bottom" id="bhv-VI-pV8"/>
                                 <constraint firstItem="NWI-5U-pEV" firstAttribute="trailing" secondItem="pxN-HX-X5l" secondAttribute="trailing" constant="8" id="luJ-bC-FWT"/>
+                                <constraint firstAttribute="trailing" secondItem="U1m-S0-KpK" secondAttribute="trailing" constant="165" id="zt1-Ct-r93"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="zt1-Ct-r93"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -22,6 +22,8 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var nextVC:UIViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,14 +32,18 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         initWithView()
         httpRequest()
     }
+    override func viewWillAppear(animated: Bool) {
+        if(self.nextVC != nil)
+        {
+            self.nextVC = nil;
+        }
+    }
     
     func collectionCellRegisterNib() {
     
         self.collectionView.registerNib(UINib(nibName: "SearchCollectionViewCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: cellIdentifier)
         self.collectionView.registerNib(UINib(nibName: "SearchCollectionReusableViewHeader", bundle: NSBundle.mainBundle()), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: cellHeaderIdentifier)
         
-//        self.collectionView!.registerClass(SearchCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-//        self.collectionView!.registerClass(SearchCollectionReusableViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: cellHeaderIdentifier)
 
     }
     
@@ -119,26 +125,23 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     
     @IBAction func searchButtonAction(sender: AnyObject) {
         
-        let vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
-        vc.keyword = self.searchTextField.text!
-        self.navigationController?.pushViewController(vc, animated: true);
+        self.gotoSearchResultPage(self.searchTextField.text!);
     }
     
     @IBAction func searchTextFiledEndExit(sender: AnyObject) {
         
+        self.gotoSearchResultPage(self.searchTextField.text!);
         
+    }
+    func gotoSearchResultPage(keyWord:String)
+    {
+        var vc:T02HotListVC! = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
+        vc.keyword = keyWord
+        vc.isNeedShowNavi = true;
+        self.nextVC = vc
         
-        let vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
-        vc.keyword = self.searchTextField.text!
-        self.navigationController?.pushViewController(vc, animated: true);
-        
-        
-//        var vc = T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle());
-//        vc.searchContext = self.searchTextField.text
-//        vc.searchType = .any
-//        self.navigationController?.pushViewController(vc, animated: true);
-        
-        
+        self.navigationController?.pushViewController( self.nextVC, animated: true);
+        vc = nil;
     }
     
     //MARK: - WebRequestDelegate 
@@ -191,11 +194,9 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         self.selectCell.setCellSelectStatus(true);
         self.searchTextField.text = title as String
         
-        //转到T02页面
-        
-        let vc = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
-        vc.keyword =  title as String
-        self.navigationController?.pushViewController(vc, animated: true);
+    
+        self.gotoSearchResultPage(title as String)
+    
     }
     
     // MARK: - Navigation
