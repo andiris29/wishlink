@@ -19,6 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T06ItemVC" customModule="wishlink" customModuleProvider="target">
             <connections>
+                <outlet property="btnFav" destination="WMC-IA-Xae" id="aso-fl-qWv"/>
                 <outlet property="goodAddressLabel" destination="uOQ-Ep-l76" id="jAJ-C9-fak"/>
                 <outlet property="goodAllTradeLabel" destination="b7s-F6-NC7" id="nbU-sC-uaL"/>
                 <outlet property="goodFormatLabel" destination="aji-lY-Z1I" id="Nd2-zX-wFn"/>
@@ -65,14 +66,14 @@
                                         <action selector="hotButtonAction:" destination="-1" eventType="touchUpInside" id="zcQ-lg-i6k"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="62" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMC-IA-Xae" userLabel="btnFav">
+                                <button opaque="NO" tag="62" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMC-IA-Xae" userLabel="btnFav">
                                     <rect key="frame" x="269" y="267" width="45" height="45"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="45" id="X5g-zh-xWf"/>
                                         <constraint firstAttribute="height" constant="45" id="sHa-eC-0uQ"/>
                                     </constraints>
-                                    <state key="normal" image="T06heart1" backgroundImage="T06btnbg01"/>
+                                    <state key="normal" image="T06heart0" backgroundImage="T06btnbg01"/>
                                     <connections>
                                         <action selector="hotButtonAction:" destination="-1" eventType="touchUpInside" id="toF-iw-fsu"/>
                                     </connections>
@@ -131,7 +132,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZp-6a-tWr">
-                                            <rect key="frame" x="0.0" y="62" width="375" height="165"/>
+                                            <rect key="frame" x="0.0" y="62" width="375" height="150"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTz-kX-Wqo">
                                                     <rect key="frame" x="10" y="10" width="355" height="18"/>
@@ -236,7 +237,7 @@
                                                 <constraint firstItem="txI-nB-Zft" firstAttribute="leading" secondItem="sr4-Gz-EcB" secondAttribute="trailing" constant="20" id="BSh-Rq-sRD"/>
                                                 <constraint firstItem="Tzq-wE-i5I" firstAttribute="top" secondItem="txI-nB-Zft" secondAttribute="bottom" constant="5" id="EX0-X4-yya"/>
                                                 <constraint firstItem="b7s-F6-NC7" firstAttribute="top" secondItem="txI-nB-Zft" secondAttribute="bottom" constant="2" id="Fjv-Hv-f0r"/>
-                                                <constraint firstAttribute="height" constant="165" id="HiR-lw-sQ5"/>
+                                                <constraint firstAttribute="height" constant="150" id="HiR-lw-sQ5"/>
                                                 <constraint firstAttribute="trailing" secondItem="b7s-F6-NC7" secondAttribute="trailing" constant="10" id="HoG-qg-3xr"/>
                                                 <constraint firstAttribute="trailing" secondItem="eTz-kX-Wqo" secondAttribute="trailing" constant="10" id="Ivq-EF-8dN"/>
                                                 <constraint firstItem="uOQ-Ep-l76" firstAttribute="top" secondItem="eTz-kX-Wqo" secondAttribute="bottom" constant="3.5" id="JN8-fM-YP1"/>
@@ -265,14 +266,14 @@
                                             </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="c1_0011" translatesAutoresizingMaskIntoConstraints="NO" id="3Wg-gs-qEh" userLabel="ImageLine2">
-                                            <rect key="frame" x="0.0" y="227" width="375" height="1"/>
+                                            <rect key="frame" x="0.0" y="212" width="375" height="1"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-AT-LqQ">
-                                            <rect key="frame" x="0.0" y="228" width="375" height="72"/>
+                                            <rect key="frame" x="0.0" y="213" width="375" height="87"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3Z-wk-Y6g">
-                                                    <rect key="frame" x="0.0" y="0.0" width="188" height="72"/>
+                                                    <rect key="frame" x="0.0" y="8" width="188" height="72"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="60" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sRA-ZQ-998">
                                                             <rect key="frame" x="24" y="11" width="140" height="50"/>
@@ -297,7 +298,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecd-Mh-Fbc">
-                                                    <rect key="frame" x="188" y="0.0" width="187" height="72"/>
+                                                    <rect key="frame" x="188" y="8" width="187" height="72"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="61" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIt-QE-Wn4">
                                                             <rect key="frame" x="23" y="11" width="140" height="50"/>
@@ -422,7 +423,7 @@
     <resources>
         <image name="T06btnbg00" width="139" height="48"/>
         <image name="T06btnbg01" width="34" height="34"/>
-        <image name="T06heart1" width="21" height="18"/>
+        <image name="T06heart0" width="21" height="18"/>
         <image name="T06share" width="20" height="20"/>
         <image name="c1_0009" width="141" height="38"/>
         <image name="c1_0011" width="1" height="1"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class T06ItemVC: RootVC, WebRequestDelegate {
 
+    @IBOutlet weak var btnFav: UIButton!
     @IBOutlet weak var tradeNameLabel   : UILabel!
     @IBOutlet weak var tradeTimeLabel   : UILabel!
     @IBOutlet weak var goodNameLabel    : UILabel!
@@ -52,6 +53,23 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         self.navigationController?.navigationBarHidden = true;
     }
+    var isFav = false;
+    func changeBtnFav(_isFav:Bool)
+    {
+        self.isFav = _isFav
+        if(!isFav)
+        {
+            self.btnFav.setImage(UIImage(named: "T06heart0"), forState: UIControlState.Normal)
+            self.btnFav.setImage(UIImage(named: "T06heart0"), forState: UIControlState.Highlighted)
+        }
+        else
+        {
+            self.btnFav.setImage(UIImage(named: "T06heart1"), forState: UIControlState.Normal)
+            self.btnFav.setImage(UIImage(named: "T06heart1"), forState: UIControlState.Highlighted)
+            
+        }
+        
+    }
 
     func initData() {
         
@@ -64,6 +82,10 @@ class T06ItemVC: RootVC, WebRequestDelegate {
 
         //绑定数据
         self.goodPriceLabel.text = "出价：\(self.item.price)";
+        
+      
+        self.changeBtnFav(self.item.isFavorite);
+//         self.btnFav.selected = self.item.isFavorite
      
 
         self.goodNameLabel.text = "品名：\(self.item.name)";
@@ -132,12 +154,13 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 UIHEPLER.showLoginPage(self);
             }
             
-        } else if sender.tag == 61 { //继续抢单
+        } else if sender.tag == 61 { //抢单
             
             
             var vc:T13AssignToMeVC!  = T13AssignToMeVC(nibName: "T13AssignToMeVC", bundle: NSBundle.mainBundle());
             
             vc.item = self.item;
+            vc.trade = self.trade;
             self.nextVC = vc;
             self.navigationController?.pushViewController(self.nextVC, animated: true);
             vc = nil;
@@ -146,7 +169,16 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     
     @IBAction func hotButtonAction(sender: UIButton) {
         
-        if sender.tag == 62 { //hot
+        if sender.tag == 62 { //fav
+            
+            var urlSub: String = "item/favorite"
+            if (self.isFav) {
+                urlSub = "item/unfavorite"
+            }
+            let para = ["_id" : self.item._id]
+            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 63);
+     
+
             
         } else if sender.tag == 63 { //share
             
@@ -249,6 +281,10 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             self.navigationController?.pushViewController(self.nextVC, animated: true);
             vc = nil;
             
+            
+        } else if(tag == 63) {//收藏 or 取消收藏
+        
+            self.changeBtnFav(!self.isFav);
         }
 
         
