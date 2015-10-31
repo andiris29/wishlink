@@ -7,6 +7,7 @@ var _ = require('underscore');
 var Items = require('../../model/items');
 var rUserFavoriteItems = require('../../model/rUserFavoriteItem');
 var rUserRecommendedItems = require('../../model/rUserRecommendedItem');
+var countries = require('../../model/countries');
 
 // Helper
 var RequestHelper = require('../helper/RequestHelper');
@@ -47,6 +48,11 @@ itemFeeding.recommendation = {
         }, {
             afterQuery: function(param, currentPageModels, numTotal, callback) {
                 async.series([function(cb) {
+                    Items.populate(currentPageModels, {
+                        'path': 'countryRef',
+                        'model': 'countries'
+                    }, cb);
+                }, function(cb) {
                     ContextHelper.appendItemContext(req.currentUserId, currentPageModels, callback);
                 }], callback);
             }
@@ -81,6 +87,11 @@ itemFeeding.favorite = {
         }, {
             afterQuery: function(param, currentPageModels, numTotal, callback) {
                 async.series([function(cb) {
+                    Items.populate(currentPageModels, {
+                        path: 'countryRef',
+                        model: 'countries'
+                    }, cb);
+                }, function(cb) {
                     ContextHelper.appendItemContext(req.currentUserId, currentPageModels, callback);
                 }], callback);
             }
@@ -93,8 +104,8 @@ itemFeeding.search = {
     func: function(req, res) {
         var param = req.queryString;
         var keyword = param.keyword;
-        async.waterfall([function (callback) {
-            SearchService.saveHistory(keyword, req.currentUserId, function (err) {
+        async.waterfall([function(callback) {
+            SearchService.saveHistory(keyword, req.currentUserId, function(err) {
                 //ignore error of save history
                 callback();
             });
@@ -110,6 +121,11 @@ itemFeeding.search = {
             }, {
                 afterQuery: function(param, currentPageModels, numTotal, callback) {
                     async.series([function(cb) {
+                        Items.populate({
+                            path: 'countryRef',
+                            model: 'countries'
+                        }, cb);
+                    }, function(cb) {
                         ContextHelper.appendItemContext(req.currentUserId, currentPageModels, cb);
                     }], callback);
                 }

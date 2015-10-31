@@ -13,7 +13,7 @@ var entitySchema = Schema({
     images: [String],
     name: String,
     nameWords: {
-        type : [String]//,
+        type: [String]//,
         //index : 'text'
     },
     approved: Boolean,
@@ -23,7 +23,7 @@ var entitySchema = Schema({
         ref: 'countries'
     },
     countryWords: {
-        type : [String]//,
+        type: [String]//,
         //index : 'text'
     },
     brand: String,
@@ -32,7 +32,7 @@ var entitySchema = Schema({
         ref: 'brands'
     },
     brandWords: {
-        type : [String]//,
+        type: [String]//,
         //index : 'text'
     },
     category: String,
@@ -41,7 +41,7 @@ var entitySchema = Schema({
         ref: 'categories'
     },
     categoryWords: {
-        type : [String]//,
+        type: [String]//,
         //index : 'text'
     },
     weight: Number,
@@ -58,15 +58,15 @@ entitySchema.plugin(textSearch);
 
 entitySchema.index(
     {
-        nameWords: "text",
-        countryWords: "text",
-        brandWords: "text",
-        categoryWords : "text"
+        nameWords: 'text',
+        countryWords: 'text',
+        brandWords: 'text',
+        categoryWords: 'text'
     } , {
-        name : 'text_search_index',
+        name: 'text_search_index',
         weights: {
-            nameWords : 1,
-            countryWords : 1,
+            nameWords: 1,
+            countryWords: 1,
             brandWords: 1,
             categoryWords: 1
         }
