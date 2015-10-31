@@ -14,7 +14,12 @@ let LoginSuccessNotification: String = "LoginSuccess"
 
 class U01LoginVC: RootVC,WebRequestDelegate {
     
-    
+    @IBOutlet weak var inputFillView: UIView!
+    @IBOutlet weak var scrollerView: UIScrollView!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var passWordTextField: UITextField!
+    @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
     
     var wxCode: String!
@@ -30,13 +35,12 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.httpObj.mydelegate = self
         self.registerNotification()
         
-        // Do any additional setup after loading the view.
+        self.initView()
     }
-    
     
     
     override func viewWillAppear(animated: Bool) {
@@ -50,9 +54,43 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func initView() {
+    
+        self.inputFillView.layer.borderColor = RGBC(125).CGColor
+        self.inputFillView.layer.borderWidth = 1.0
+        self.inputFillView.layer.masksToBounds = true
+        self.inputFillView.layer.cornerRadius = 5.0
+        
+        self.registerBtn.layer.masksToBounds = true
+        self.registerBtn.layer.cornerRadius = 5.0
+        
+        self.loginBtn.layer.masksToBounds = true
+        self.loginBtn.layer.cornerRadius = 5.0
+    }
     
     // MARK: - delegate
     // MARK: - response event
+    
+    @IBAction func textFieldBegin(sender: UITextField) {
+        
+        let viewframe: CGRect = sender.convertRect(view.frame, toView: self.scrollerView)
+        let spaceY = ScreenHeight - viewframe.origin.y
+        
+        if spaceY < 300 {
+            self.scrollerView.setContentOffset(CGPoint(x: 0, y: 345 - spaceY), animated: true)
+        }
+    }
+    
+    @IBAction func textFieldEnd(sender: UITextField) {
+        
+        self.scrollerView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
+    @IBAction func tapScollerViewAction(sender: AnyObject) {
+        
+        self.userNameTextField.resignFirstResponder()
+        self.passWordTextField.resignFirstResponder()
+    }
     
     @IBAction func weiXinLoginAction(sender: AnyObject) {
         
@@ -83,6 +121,19 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     @IBAction func skipAction(sender: AnyObject) {
         print("跳过")
         self.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    @IBAction func forgotPasswordButtonAction(sender: AnyObject) {
+    }
+    
+    @IBAction func registerButtonAction(sender: AnyObject) {
+        
+        let regsiterVC = U01RegsiterVC(nibName: "U01RegsiterVC", bundle: NSBundle.mainBundle())
+        self.presentViewController(regsiterVC, animated: true) { () -> Void in
+        }
+    }
+    
+    @IBAction func loginButtonAction(sender: AnyObject) {
     }
     
     // MARK: - prive method
