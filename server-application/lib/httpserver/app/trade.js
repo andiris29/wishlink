@@ -732,3 +732,35 @@ trade.read = {
     }
 };
 
+/**
+ * @method get
+ * @return {db.trade} res.data.trade, populate itemRef, ownerRef, assigneeRef
+ */
+trade.query = {
+    method: 'get',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        if (req.queryString._id == null || req.queryString._id.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+        async.waterfall([function(callback) {
+            Trades.findOne({
+                _id: RequestHelper.parseId(req.queryString._id)
+            }).populate('itemRef').populate('ownerRef').populate('assigneeRef').exec(function(error, trade) {
+                if (error) {
+                    callback(error);
+                } else if (!trade) {
+                    callback(ServerError.ERR_TRADE_NOT_EXIST);
+                } else {
+                    callback(null, trade);
+                }
+            });
+        }], function(error, trade) {
+            ResponseHelper.response(res, error, {
+                trade: trade
+            });
+        });
+    }
+};
+
