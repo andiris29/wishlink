@@ -422,25 +422,15 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             if(trade_Dic != nil && trade_Dic.objectForKey("trade") != nil)
             {
          
-                var tradeDic:NSDictionary! = trade_Dic.objectForKey("trade") as! NSDictionary
-                var   _trade_result = TradeModel(dict: tradeDic)
+//                let tradeDic:NSDictionary! = trade_Dic.objectForKey("trade") as! NSDictionary
+//                var   _trade_result = TradeModel(dict: tradeDic)
               
             }
             
             SVProgressHUD.dismiss();
             self.navigationController?.popToRootViewControllerAnimated(true);
             
-            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc:U02UserVC! = tababarController.childViewControllers[4] as? U02UserVC
-                if(vc != nil)
-                {
-                    vc.orderBtnAction(vc.orderBtn);
-                }
-                
-                tababarController.selectedIndex = 4;
-            }
-
+            UIHEPLER.gotoU02Page();
             trade_Dic = nil;
         }
     }

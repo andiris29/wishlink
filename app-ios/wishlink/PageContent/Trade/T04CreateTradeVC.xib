@@ -874,7 +874,6 @@
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="7Et-gF-vKN"/>
-                                                <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="p6R-4o-71k"/>
                                                 <outletCollection property="gestureRecognizers" destination="fKM-Jg-UWz" appends="YES" id="wVM-1z-GsA"/>
                                             </connections>
                                         </button>
@@ -886,7 +885,6 @@
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="18x-3K-j3t"/>
-                                                <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="rqw-Yw-iWt"/>
                                                 <outletCollection property="gestureRecognizers" destination="ywL-qj-7pb" appends="YES" id="wSA-t6-SMR"/>
                                             </connections>
                                         </button>
@@ -904,7 +902,6 @@
                                             </variation>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="t0X-Ha-AQY"/>
-                                                <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="g0R-85-W6B"/>
                                                 <outletCollection property="gestureRecognizers" destination="1pz-zR-dSr" appends="YES" id="wbt-Ip-4zl"/>
                                             </connections>
                                         </button>
@@ -916,7 +913,6 @@
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="49G-Wn-BXR"/>
-                                                <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="Zze-nh-FQg"/>
                                                 <outletCollection property="gestureRecognizers" destination="JAz-tA-sfl" appends="YES" id="ioo-8q-r0o"/>
                                             </connections>
                                         </button>
@@ -928,7 +924,6 @@
                                             </constraints>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="yJS-fy-s9z"/>
-                                                <action selector="touchDownAction:" destination="-1" eventType="touchDown" id="UUi-Dh-Rhx"/>
                                                 <outletCollection property="gestureRecognizers" destination="kOD-f5-ANk" appends="YES" id="sB9-N3-82w"/>
                                             </connections>
                                         </button>

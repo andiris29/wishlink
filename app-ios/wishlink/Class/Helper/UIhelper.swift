@@ -201,4 +201,19 @@ class UIHelper {
         target.presentViewController(vc, animated: true, completion: nil)
         
     }
+    //跳转到U02选项卡
+    func gotoU02Page()
+    {
+        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
+            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+            let vc: U02UserVC! = tababarController.childViewControllers[4] as? U02UserVC
+            if(vc != nil)
+            {
+                vc.orderBtnAction(vc.orderBtn);
+            }
+            
+            tababarController.selectedIndex = 4;
+          
+        }
+    }
 }

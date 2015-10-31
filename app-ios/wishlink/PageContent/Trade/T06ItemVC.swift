@@ -253,16 +253,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         } else if(tag == 61) {//跟单
             
             
-            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc: U02UserVC! = tababarController.childViewControllers[4] as? U02UserVC
-                if(vc != nil)
-                {
-                    vc.orderBtnAction(vc.orderBtn);
-                }
-                
-                tababarController.selectedIndex = 4;
-            }
+            
+            UIHEPLER.gotoU02Page();
             
             
         } else if(tag == 62) {//跟单成功转向支付页面

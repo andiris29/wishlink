@@ -67,7 +67,8 @@ class T06Cell: UITableViewCell {
     {
         self.trade = trade;
         self.item = item;
-        self.lbCount.text = item.price.format(".2") + " * " + String(trade.quantity)
+        let count = trade.quantity > 0 ? trade.quantity : 1
+        self.lbCount.text = item.price.format(".2") + " * " + String(count)
         self.lbCountry.text = item.country;
         
         

@@ -187,13 +187,21 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     //抢单
     func btnGrabOrderAction(sernder:UIButton) {
         
+        if(self.selectArr != nil && self.selectArr.count>0)
+        {
         
-        
-         self.T14VC = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
-        
-//        vc.item = self.item;
-        self.presentViewController(self.T14VC, animated: true, completion: nil);
-   
+             self.T14VC = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
+            
+            self.T14VC.item = self.item;
+            self.T14VC.followArr = self.selectArr;
+            self.T14VC.selectArr = self.selectArr;
+            self.presentViewController(self.T14VC, animated: true, completion: nil);
+       
+        }
+        else
+        {
+            UIHEPLER.alertErrMsg("请至少选择一个订单");
+        }
         
         
         
@@ -257,10 +265,11 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                 for  itemObj in tradesObj!
                 {
                     let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
-                    if(tradeItem.item != nil && tradeItem.item._id == self.item._id)
-                    {
-                        self.trade = tradeItem
-                    }
+//                    if(tradeItem.item != nil && tradeItem.item._id == self.item._id)
+//                    {
+//                        self.trade = tradeItem
+//                    }
+
                     self.followArr.append(tradeItem);
                 }
                 
@@ -273,18 +282,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             
         } else if(tag == 61) {
             
-            
-            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc: U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
-                if(vc != nil)
-                {
-                    vc.orderBtnAction(vc.orderBtn);
-                }
-                
-                tababarController.selectedIndex = 3;
-            }
-            
+            UIHEPLER.gotoU02Page();
             
         } else if(tag == 62) {//跟单成功转向支付页面
             

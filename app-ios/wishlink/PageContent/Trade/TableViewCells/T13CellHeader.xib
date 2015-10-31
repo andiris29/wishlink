@@ -254,10 +254,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="d3V-rG-Mtd"/>
                                 <exclude reference="6eV-Ab-SSh"/>
                                 <exclude reference="Lqe-0h-LNd"/>
                                 <exclude reference="P1E-Pi-CSL"/>
+                                <exclude reference="d3V-rG-Mtd"/>
                             </mask>
                         </variation>
                     </view>

@@ -47,6 +47,7 @@ class T13CellHeader: UITableViewCell {
         self.lbName.text = self.item.name
         self.lbSpec.text = self.item.spec
         self.lbCountry.text = self.item.country
+        self.lb_trde_country.text = self.item.country
         self.lbPrice.text = self.item.price.format(".0");
         if(self.item.images != nil && self.item.images.count>0)
         {
@@ -72,12 +73,15 @@ class T13CellHeader: UITableViewCell {
                     UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
                     
                 }
-                self.lbTitle.text = self.item.price.format(".0") + " * " + String(self.trade.quantity)
-                var totalFree = self.item.price * Float(self.trade.quantity)
-                self.lb_trade_totalFree.text = totalFree.format(".0");
-//                self.lb_trde_country.text = self.trade.
                 
             }
+            
+            let count = trade.quantity > 0 ? trade.quantity : 1
+            self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+            
+            let totalFree = self.item.price * Float(self.trade.quantity)
+            self.lb_trade_totalFree.text = totalFree.format(".0");
+            
         }
 
     }

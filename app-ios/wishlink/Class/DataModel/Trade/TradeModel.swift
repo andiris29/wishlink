@@ -46,6 +46,10 @@ class TradeModel: BaseModel {
         if let ownerDic = dict["ownerRef"] as? NSDictionary {
             self.owner = ownerDic
         }
+        
+        if let ownerID = dict["ownerRef"] as? String {
+            self.ownerRef = ownerID
+        }
 //        self.ownerRef =  self.getStringValue("ownerRef", dic: dict);
         self.create =  self.getStringValue("create", dic: dict);
         self.update =  self.getStringValue("update", dic: dict);

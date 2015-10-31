@@ -11,9 +11,11 @@ import UIKit
 class TabBarVC: UITabBarController,UITabBarControllerDelegate {
 
     var whiteImage:UIImage! = UIImage(named: "tabbar_bg");
+    var isFirstTime = false;
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.backgroundImage = self.whiteImage;
+        isFirstTime = true;
         self.addAllChildControllers()
         // Do any additional setup after loading the view.
     }
@@ -78,20 +80,27 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
     var centerBtn_HightLight:UIImage! = UIImage(named: "tabbar_red_bg");
     override func viewWillAppear(animated: Bool) {
         
-        //中上部自定义BUtton
-        let btnWidth:CGFloat = self.tabBar.frame.height-5;
-        centerButton = UIButton(type: UIButtonType.Custom);
-        centerButton.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin,UIViewAutoresizing.FlexibleBottomMargin,
-            UIViewAutoresizing.FlexibleTopMargin,UIViewAutoresizing.FlexibleRightMargin]
-        centerButton.frame = CGRectMake(0, 0, btnWidth, btnWidth);
-        centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
-        centerButton.addTarget(self, action: Selector("centerBtnAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-        var center = self.tabBar.center;
-        center.y = center.y - 15;
-        centerButton.center = center;
-        self.view.addSubview(centerButton);
+        if(self.centerButton == nil)
+        {
+            //中上部自定义BUtton
+            let btnWidth:CGFloat = self.tabBar.frame.height-5;
+            centerButton = UIButton(type: UIButtonType.Custom);
+            centerButton.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin,UIViewAutoresizing.FlexibleBottomMargin,
+                UIViewAutoresizing.FlexibleTopMargin,UIViewAutoresizing.FlexibleRightMargin]
+            centerButton.frame = CGRectMake(0, 0, btnWidth, btnWidth);
+            centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
+            centerButton.addTarget(self, action: Selector("centerBtnAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+            var center = self.tabBar.center;
+            center.y = center.y - 15;
+            centerButton.center = center;
+            self.view.addSubview(centerButton);
+        }
         
-        self.selectedIndex = 0;
+        if(isFirstTime)
+        {
+            isFirstTime = false;
+            self.selectedIndex = 0;
+        }
     }
     func centerBtnAction(sender:UIButton)
     {
