@@ -175,6 +175,8 @@
 		D29662311BE11FE100BDEDB9 /* T06ItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296622F1BE11FE100BDEDB9 /* T06ItemVC.xib */; };
 		D29662341BE130C000BDEDB9 /* T14AssignToMeConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29662321BE130C000BDEDB9 /* T14AssignToMeConfirm.swift */; };
 		D29662351BE130C000BDEDB9 /* T14AssignToMeConfirm.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29662331BE130C000BDEDB9 /* T14AssignToMeConfirm.xib */; };
+		D2A08B7C1BE518BD00605ACA /* U01RegsiterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A08B7A1BE518BD00605ACA /* U01RegsiterVC.swift */; settings = {ASSET_TAGS = (); }; };
+		D2A08B7D1BE518BD00605ACA /* U01RegsiterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A08B7B1BE518BD00605ACA /* U01RegsiterVC.xib */; settings = {ASSET_TAGS = (); }; };
 		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
 		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
 		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; };
@@ -492,6 +494,8 @@
 		D296622F1BE11FE100BDEDB9 /* T06ItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06ItemVC.xib; sourceTree = "<group>"; };
 		D29662321BE130C000BDEDB9 /* T14AssignToMeConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T14AssignToMeConfirm.swift; sourceTree = "<group>"; };
 		D29662331BE130C000BDEDB9 /* T14AssignToMeConfirm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T14AssignToMeConfirm.xib; sourceTree = "<group>"; };
+		D2A08B7A1BE518BD00605ACA /* U01RegsiterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U01RegsiterVC.swift; sourceTree = "<group>"; };
+		D2A08B7B1BE518BD00605ACA /* U01RegsiterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U01RegsiterVC.xib; sourceTree = "<group>"; };
 		D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZLanTingHeiS-EL-GB.ttf"; sourceTree = "<group>"; };
 		D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaInserat-Roman-SemiBold.ttf"; sourceTree = "<group>"; };
 		D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T01SearchCell.swift; sourceTree = "<group>"; };
@@ -837,6 +841,8 @@
 			children = (
 				A132BB921B863342004EAB47 /* U01LoginVC.swift */,
 				A132BB931B863342004EAB47 /* U01LoginVC.xib */,
+				D2A08B7A1BE518BD00605ACA /* U01RegsiterVC.swift */,
+				D2A08B7B1BE518BD00605ACA /* U01RegsiterVC.xib */,
 			);
 			path = U01;
 			sourceTree = "<group>";
@@ -1319,6 +1325,7 @@
 				A18A06751BAF1504005ADFFA /* ScanVC.xib in Resources */,
 				A132BBAB1B863448004EAB47 /* T02HotListVC.xib in Resources */,
 				D24485D91B8E10B500CD97D5 /* T10MessagingVC.xib in Resources */,
+				D2A08B7D1BE518BD00605ACA /* U01RegsiterVC.xib in Resources */,
 				A1C36CA91B87A4E300EFCB57 /* T03SearchHelperVC.xib in Resources */,
 				7684F3C41B8DFA4D00B7D7DC /* U02TradeCell.xib in Resources */,
 				D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */,
@@ -1355,6 +1362,7 @@
 				A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */,
 				A1F3D3571BCEB4340007B7CE /* MD5DataSigner.m in Sources */,
 				A18A06741BAF1504005ADFFA /* ScanVC.swift in Sources */,
+				D2A08B7C1BE518BD00605ACA /* U01RegsiterVC.swift in Sources */,
 				D24485D81B8E10B500CD97D5 /* T10MessagingVC.swift in Sources */,
 				A132BB9E1B863342004EAB47 /* U01LoginVC.swift in Sources */,
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
