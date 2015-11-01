@@ -24,22 +24,22 @@ var tradeFeeding = module.exports;
  * @param {int[]} req.statuses
  */
 tradeFeeding.asSeller = {
-    method : 'get',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'get',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         ServiceHelper.queryPaging(req, res, function(param, callback) {
             var criteria = {
-                assigneeRef : req.currentUserId,
+                assigneeRef: req.currentUserId,
             };
             if (param.statuses) {
                 criteria.status = {
-                    '$in' : RequestHelper.parseInts(param.statuses)
+                    '$in': RequestHelper.parseInts(param.statuses)
                 };
             }
-            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
-                'trades' : trades 
+                'trades': trades
             };
         }, {
         });
@@ -52,22 +52,22 @@ tradeFeeding.asSeller = {
  * @param {int[]} req.statuses
  */
 tradeFeeding.asBuyer = {
-    method : 'get',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'get',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         ServiceHelper.queryPaging(req, res, function(param, callback) {
             var criteria = {
-                ownerRef : req.currentUserId,
+                ownerRef: req.currentUserId,
             };
             if (param.statuses) {
                 criteria.status = {
-                    '$in' : RequestHelper.parseInts(param.statuses)
+                    '$in': RequestHelper.parseInts(param.statuses)
                 };
             }
-            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
-                'trades' : trades 
+                'trades': trades
             };
         }, {
         });
@@ -80,17 +80,17 @@ tradeFeeding.asBuyer = {
  * @param {db.item._id} req._id
  */
 tradeFeeding.byItem = {
-    method : 'get',
-    permissionValidators : ['validateLogin'],
-    func : function(req, res) {
+    method: 'get',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
         ServiceHelper.queryPaging(req, res, function(param, callback) {
             var criteria = {
-                itemRef : RequestHelper.parseId(param._id),
+                itemRef: RequestHelper.parseId(param._id),
             };
-            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Trades.find(criteria).populate('itemRef').populate('ownerRef'), Trades.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(trades) {
             return {
-                'trades' : trades 
+                'trades': trades
             };
         }, {
         });
