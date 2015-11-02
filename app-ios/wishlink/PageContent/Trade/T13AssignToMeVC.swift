@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06CellFooterDelegate,T06CellDelegate, WebRequestDelegate {
+class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06CellFooterDelegate,T06CellDelegate,T13CellHeaderDelegate, WebRequestDelegate {
 
     let cellIdentifier = "T06Cell"
     let cellIdentifierHeader = "T13CellHeader"
@@ -125,23 +125,61 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         switch indexPath.row {
         case 0:
            let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierHeader, forIndexPath: indexPath) as! T13CellHeader
-//           tCell.delegate = self
+           tCell.awakeFromNib();
+           tCell.myDelegate = self
            tCell.loadData(self.item,_trade: self.trade);
            
            cell = tCell;
         case last:
            let  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
            fcell.delegate = self
+         
+
+
            cell = fcell;
         default:
             let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
-            tCell.loadData(followArr[indexPath.row - 1],item:self.item);
+            tCell.awakeFromNib()
+            let tdata = followArr[indexPath.row - 1]
+            if(tCell.trade != nil)
+            {
+                if(tCell.trade._id != tdata._id)
+                {
+                    tCell.removeData();
+                }
+            }
+            tCell.loadData(tdata,item:self.item);
             tCell.myDelegate = self;
             cell = tCell;
             
         }
         
         return cell
+    }
+    func t13CellHeaderSelectItemChange(selectTrade:TradeModel,isSelected:Bool)
+    {
+        if(isSelected)//insert
+        {
+            self.selectArr.append(selectTrade);
+        }
+        else//remove
+        {
+            if(self.selectArr.count>0)
+            {
+                var index = 0;
+                for tradeObj in self.selectArr
+                {
+                    if(tradeObj._id == selectTrade._id)
+                    {
+                        break;
+                    }
+                    index+=1;
+                }
+                self.selectArr.removeAtIndex(index);
+            }
+            
+        }
+
     }
      func selectItemChange(selectTrade:TradeModel,isSelected:Bool)
      {
@@ -187,13 +225,21 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     //抢单
     func btnGrabOrderAction(sernder:UIButton) {
         
+        if(self.selectArr != nil && self.selectArr.count>0)
+        {
         
-        
-         self.T14VC = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
-        
-//        vc.item = self.item;
-        self.presentViewController(self.T14VC, animated: true, completion: nil);
-   
+             self.T14VC = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
+            
+            self.T14VC.item = self.item;
+            self.T14VC.followArr = self.selectArr;
+            self.T14VC.selectArr = self.selectArr;
+            self.presentViewController(self.T14VC, animated: true, completion: nil);
+       
+        }
+        else
+        {
+            UIHEPLER.alertErrMsg("请至少选择一个订单");
+        }
         
         
         
@@ -257,10 +303,11 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                 for  itemObj in tradesObj!
                 {
                     let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
-                    if(tradeItem.item != nil && tradeItem.item._id == self.item._id)
-                    {
-                        self.trade = tradeItem
-                    }
+//                    if(tradeItem.item != nil && tradeItem.item._id == self.item._id)
+//                    {
+//                        self.trade = tradeItem
+//                    }
+
                     self.followArr.append(tradeItem);
                 }
                 
@@ -273,18 +320,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             
         } else if(tag == 61) {
             
-            
-            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc: U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
-                if(vc != nil)
-                {
-                    vc.orderBtnAction(vc.orderBtn);
-                }
-                
-                tababarController.selectedIndex = 3;
-            }
-            
+            UIHEPLER.gotoU02Page();
             
         } else if(tag == 62) {//跟单成功转向支付页面
             

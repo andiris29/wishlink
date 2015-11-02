@@ -16,7 +16,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
     let itemCellIde = "U02ItemCell"
-    
+   
     var keyword = "奶粉";
     var isNeedShowNavi = false;
     
@@ -157,12 +157,12 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         if(isNeedShowNavi)
         {
             self.loadComNaviLeftBtn()
+            self.loadComNavTitle(self.keyword)
         }
-        
-        self.loadComNaviLeftBtn()
-        self.loadComNavTitle(self.keyword)
-        
-
+        else
+        {
+            self.loadComNavTitle("最热")
+        }
     }
     
     // MARK: - Action 
@@ -275,6 +275,9 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func requestDataFailed(error: String) {
+        
+        self.maskView.hidden = false;
+        self.lbTipMessage.text = "暂无数据"
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 

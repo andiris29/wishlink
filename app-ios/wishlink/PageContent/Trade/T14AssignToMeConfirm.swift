@@ -33,6 +33,21 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     
         self.httpObj.mydelegate = self
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+        
+        
+        
+        self.totalLabel.text = "订单总金额："
+        if(self.followArr != nil && self.followArr.count>0)
+        {
+            var totalFree:Float = 0;
+            for _trade in self.followArr
+            {
+                totalFree += (Float(_trade.quantity) * self.item.price)
+            }
+            
+            self.totalLabel.text = "订单总金额：\(totalFree)";
+        }
+
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -53,7 +68,9 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
-        cell.loadData(followArr[indexPath.row - 1],item:self.item);
+
+        cell.loadData(self.followArr[indexPath.row],item:self.item);
+        cell.selectedButton.selected = true;
         cell.myDelegate = self;
         
         return cell
@@ -71,7 +88,28 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
             self.dismissViewControllerAnimated(true, completion: nil);
         } else if sender.tag == 501 { //确定抢单
             //调用抢单接口
-        
+            if(UserModel.shared.isLogin)
+            {
+                if(self.selectArr.count>0)
+                {
+                    SVProgressHUD.showWithStatusWithBlack("请稍后...")
+    
+                    for tradeItem in self.selectArr
+                    {
+                        self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeItem._id], tag: 141)
+                    }
+                }
+                else
+                {
+                    UIHEPLER.alertErrMsg("请先选择");
+                }
+              
+            }
+            else
+            {
+                UIHEPLER.showLoginPage(self);
+            }
+
         }
     }
     
@@ -80,15 +118,44 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     
     func selectItemChange(trade: TradeModel, isSelected: Bool) {
         
+        if(isSelected)//insert
+        {
+            self.selectArr.append(trade);
+        }
+        else//remove
+        {
+            if(self.selectArr.count>0)
+            {
+                var index = 0;
+                for tradeObj in self.selectArr
+                {
+                    if(tradeObj._id == trade._id)
+                    {
+                        break;
+                    }
+                    index+=1;
+                }
+                self.selectArr.removeAtIndex(index);
+            }
+            
+        }
+
     }
     
     // MARK: - WebRequestDelegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
+        SVProgressHUD.dismiss();
+        if(tag == 141)
+        {
+            self.dismissViewControllerAnimated(true, completion: nil);
+            UIHEPLER.gotoU02Page();
+        }
     }
     
     func requestDataFailed(error: String) {
         
+        SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 
 }

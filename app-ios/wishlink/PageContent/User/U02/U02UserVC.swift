@@ -63,9 +63,17 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if self.userModel.isLogin == false {
-            self.loginVC.hideSkipBtn = true
-            self.view.addSubview(self.loginVC.view)
+        if self.userModel.isLogin == false {//弹出登陆窗体
+
+            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
+            tababarController.selectedIndex = 0;
+            let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
+            vc?.navigationController?.popToRootViewControllerAnimated(false)
+            UIHEPLER.showLoginPage(vc!);
+            
+            
+//            self.loginVC.hideSkipBtn = true
+//            self.view.addSubview(self.loginVC.view)
         }else {
             self.loginVC.view.removeFromSuperview()
         }

@@ -31,6 +31,18 @@ class T06Cell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIHEPLER.mainColor, borderWidth: 1);
+        
+    }
+    func removeData()
+    {
+        self.item = nil;
+        self.trade = nil;
+        self.myDelegate = nil;
+        self.iv_userImg.image = nil;
+        
+        
     }
     
     deinit{
@@ -65,9 +77,11 @@ class T06Cell: UITableViewCell {
     //TODO:缺少用户信息绑定
     func loadData(trade:TradeModel! , item:ItemModel)
     {
+        
         self.trade = trade;
         self.item = item;
-        self.lbCount.text = item.price.format(".2") + " * " + String(trade.quantity)
+        let count = trade.quantity > 0 ? trade.quantity : 1
+        self.lbCount.text = item.price.format(".2") + " * " + String(count)
         self.lbCountry.text = item.country;
         
         
@@ -92,7 +106,6 @@ class T06Cell: UITableViewCell {
                 if(imgUrl != nil && imgUrl.trim().length>1)
                 {
                     WebRequestHelper().renderImageView(self.iv_userImg, url: imgUrl, defaultName: "T03aaa")
-                    UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIHEPLER.mainColor, borderWidth: 1);
                     
                 }
             }

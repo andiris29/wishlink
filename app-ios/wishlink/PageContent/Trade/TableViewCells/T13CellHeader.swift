@@ -7,11 +7,17 @@
 //
 
 import UIKit
+@objc protocol T13CellHeaderDelegate
+{
+    //选中项发生更改的时候
+    func t13CellHeaderSelectItemChange(trade:TradeModel,isSelected:Bool);
+}
 
 class T13CellHeader: UITableViewCell {
     
     
 
+    @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbSpec: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
@@ -28,17 +34,31 @@ class T13CellHeader: UITableViewCell {
     @IBOutlet weak var lb_trade_totalFree: UILabel!
     var item:ItemModel!
     var trade:TradeModel!
+    weak var myDelegate:T13CellHeaderDelegate!
     
     @IBOutlet weak var iv: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func btnSelectAction(sender: UIButton) {
+        
+        
+        sender.selected = !sender.selected
+        
+        if(self.myDelegate != nil)
+        {
+            self.myDelegate!.t13CellHeaderSelectItemChange(self.trade, isSelected: sender.selected);
+        }
+
     }
     func loadData(_item:ItemModel,_trade:TradeModel!)
     {
@@ -47,6 +67,7 @@ class T13CellHeader: UITableViewCell {
         self.lbName.text = self.item.name
         self.lbSpec.text = self.item.spec
         self.lbCountry.text = self.item.country
+        self.lb_trde_country.text = self.item.country
         self.lbPrice.text = self.item.price.format(".0");
         if(self.item.images != nil && self.item.images.count>0)
         {
@@ -69,15 +90,17 @@ class T13CellHeader: UITableViewCell {
                 if(imgUrl != nil && imgUrl.trim().length>1)
                 {
                     WebRequestHelper().renderImageView(self.iv_trade, url: imgUrl, defaultName: "T03aaa")
-                    UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
                     
                 }
-                self.lbTitle.text = self.item.price.format(".0") + " * " + String(self.trade.quantity)
-                var totalFree = self.item.price * Float(self.trade.quantity)
-                self.lb_trade_totalFree.text = totalFree.format(".0");
-//                self.lb_trde_country.text = self.trade.
                 
             }
+            
+            let count = trade.quantity > 0 ? trade.quantity : 1
+            self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+            
+            let totalFree = self.item.price * Float(self.trade.quantity)
+            self.lb_trade_totalFree.text = totalFree.format(".0");
+            
         }
 
     }

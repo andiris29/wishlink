@@ -85,14 +85,22 @@ class WebRequestHelper:NSObject {
             let metaDic = dataDir.objectForKey("metadata")  as! NSDictionary
             if(metaDic.count>0)
             {
+                var errCode  = 0;
+                var errDesc = "";
 //                var errCode = metaDic.objectForKey("error");
                 let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
                 if(errDic.count>0)
                 {
-                    let errCode =  errDic.objectForKey("errorCode") as! Int;
-                    let errDesc =  errDic.objectForKey("description") as! String;
+                    errCode =  errDic.objectForKey("errorCode") as! Int;
+                    errDesc =  errDic.objectForKey("description") as! String;
                     errorMsg = "ErrorCode:\(errCode) \(errDesc)";
                 }
+                
+                if(errCode == 1001 || errDesc == "ERR_NOT_LOGGED_IN")
+                {
+                    UserModel.shared.logout()
+                }
+                
                 self.mydelegate?.requestDataFailed(errorMsg)
             }else {
                 self.mydelegate?.requestDataComplete(dataDir, tag: tag)

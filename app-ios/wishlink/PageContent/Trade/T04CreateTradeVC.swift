@@ -306,17 +306,17 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     
     var selectTag:Int!
-    var startTime:Double = 0;
-    @IBAction func touchDownAction(sender: AnyObject) {
-        self.selectTag = (sender as! UIButton).tag;
-   
-        
-        let timeNow:NSTimeInterval = NSDate().timeIntervalSince1970;
-        self.startTime = timeNow;
-        
-        print("touchDownAction")
-        //开启定时器
-    }
+//    var startTime:Double = 0;
+//    @IBAction func touchDownAction(sender: AnyObject) {
+//        self.selectTag = (sender as! UIButton).tag;
+//   
+//        
+//        let timeNow:NSTimeInterval = NSDate().timeIntervalSince1970;
+//        self.startTime = timeNow;
+//        
+//        print("touchDownAction")
+//        //开启定时器
+//    }
     @IBAction func btnAction(sender: UIButton) {
         //关闭定时器
         print("btnAction")
@@ -348,57 +348,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             self.selectTag = tag;
             if(tag >= 41 && tag <= 45)//上传图片
             {
-                if(self.startTime > 0.01 )
-                {
-                    
-                    let timeNow:NSTimeInterval = NSDate().timeIntervalSince1970;
-                    let durration =  timeNow - self.startTime
-                    print(durration)
-                    var isShowDel = false;
-                    if(durration>1)
-                    {
-                        if(self.iv1.image != nil)
-                        {
-                            self.btn1_del.hidden = false;
-                            isShowDel = true
-                        }
-                        if(self.iv2.image != nil)
-                        {
-                            self.btn2_del.hidden = false;
-                            isShowDel = true
-                        }
-                        if(self.iv3.image != nil)
-                        {
-                            self.btn3_del.hidden = false;
-                            isShowDel = true
-                        }
-                        if(self.iv4.image != nil)
-                        {
-                            self.btn4_del.hidden = false;
-                            isShowDel = true
-                        }
-                        if(self.iv5.image != nil)
-                        {
-                            self.btn5_del.hidden = false;
-                            isShowDel = true
-                        }
-                        if(!isShowDel)
-                        {
-                            actionSheet.show(true)
-                        }
-                    }
-                    else
-                    {
-                        self.loadImagesData();
-                        actionSheet.show(true)
-                    }
-                }
-                else
-                {
-                    self.loadImagesData();
-                    actionSheet.show(true)
-                }
-                self.startTime = 0.0;
+                actionSheet.show(true)
+                
             }
             else if(tag>=401 && tag <= 405)//删除图片
             {
@@ -410,21 +361,45 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
         }
     }
-    func longPressAction(gestureRecognizer:UILongPressGestureRecognizer)
-    {
-        NSLog("longPressAction");
-        if gestureRecognizer.state == .Ended {
-            // Do your stuff here
-            
-            UIHEPLER.alertErrMsg("ADSD");
-            self.btn1_del.hidden = false;
-        }
-        
-        
-    }
+ 
     
     @IBAction func buttonLongPressAction(sender: AnyObject) {
         print("==>>:\(sender)")
+        
+      
+        var isShowDel = false;
+            if(self.iv1.image != nil)
+            {
+                self.btn1_del.hidden = false;
+                isShowDel = true
+            }
+            if(self.iv2.image != nil)
+            {
+                self.btn2_del.hidden = false;
+                isShowDel = true
+            }
+            if(self.iv3.image != nil)
+            {
+                self.btn3_del.hidden = false;
+                isShowDel = true
+            }
+            if(self.iv4.image != nil)
+            {
+                self.btn4_del.hidden = false;
+                isShowDel = true
+            }
+            if(self.iv5.image != nil)
+            {
+                self.btn5_del.hidden = false;
+                isShowDel = true
+            }
+            if(!isShowDel)
+            {
+                actionSheet.show(true)
+            }
+       
+        
+        
     }
     
       func checkInput()->String{

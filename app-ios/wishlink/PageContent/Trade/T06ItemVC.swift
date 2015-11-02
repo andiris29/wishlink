@@ -10,6 +10,7 @@ import UIKit
 
 class T06ItemVC: RootVC, WebRequestDelegate {
 
+    @IBOutlet weak var btnFav: UIButton!
     @IBOutlet weak var tradeNameLabel   : UILabel!
     @IBOutlet weak var tradeTimeLabel   : UILabel!
     @IBOutlet weak var goodNameLabel    : UILabel!
@@ -20,6 +21,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var goodAllTradeLabel: UILabel!
     @IBOutlet weak var goodTotalLabel   : UILabel!
     
+    @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var lbRemark: UILabel!
     var nextVC:UIViewController!
     
@@ -51,18 +53,39 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         self.navigationController?.navigationBarHidden = true;
     }
+    var isFav = false;
+    func changeBtnFav(_isFav:Bool)
+    {
+        self.isFav = _isFav
+        if(!isFav)
+        {
+            self.btnFav.setImage(UIImage(named: "T06heart0"), forState: UIControlState.Normal)
+            self.btnFav.setImage(UIImage(named: "T06heart0"), forState: UIControlState.Highlighted)
+        }
+        else
+        {
+            self.btnFav.setImage(UIImage(named: "T06heart1"), forState: UIControlState.Normal)
+            self.btnFav.setImage(UIImage(named: "T06heart1"), forState: UIControlState.Highlighted)
+            
+        }
+        
+    }
 
     func initData() {
         
         self.httpObj.mydelegate = self
-        
+    
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
-        
+        self.sv.hidden = true;
         self.httpObj.httpGetApi("tradeFeeding/byItem?_id="+self.item._id, parameters: nil, tag: 60)
      
 
         //绑定数据
         self.goodPriceLabel.text = "出价：\(self.item.price)";
+        
+      
+        self.changeBtnFav(self.item.isFavorite);
+//         self.btnFav.selected = self.item.isFavorite
      
 
         self.goodNameLabel.text = "品名：\(self.item.name)";
@@ -95,42 +118,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         })
 
     
-//        self.titleLabel.text  = item.brand
-//        self.productNameLabel.text  = "品名：" + item.name
-//        self.productPriceLabel.text  = "\(item.price)"
-//        var totalPrice:Float = item.price
-//        if(item.numTrades != nil && item.numTrades>0)
-//        {
-//            totalPrice = item.price * Float(item.numTrades)
-//        }
-//        self.productTotalLabel.text = totalPrice.format(".2")
-//        self.productNumberLabel.text  = "\(item.numTrades)件"
-//        self.productFormatLabel.text  = item.spec
-//        self.productMessageLabel.text  = item.notes
-//        if(self.productMessageLabel.text?.trim().length>0)
-//        {
-//            self.iv_notes.hidden = false;
-//        }
-//        else
-//        {
-//            self.iv_notes.hidden = true;
-//            
-//        }
-//        
-//        self.lbTotalCount.text = "\(item.numTrades)件"
-//        if (item.images == nil) {return}
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-//            
-//            var images: [UIImage] = [UIImage]()
-//            for imageUrl in item.images {
-//                let url: NSURL = NSURL(string: imageUrl)!
-//                let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
-//                images.append(image)
-//            }
-//            dispatch_async(dispatch_get_main_queue(), {
-//                self.initImageRollView(images)
-//            })
-//        })
 
         
 
@@ -167,12 +154,13 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 UIHEPLER.showLoginPage(self);
             }
             
-        } else if sender.tag == 61 { //继续抢单
+        } else if sender.tag == 61 { //抢单
             
             
             var vc:T13AssignToMeVC!  = T13AssignToMeVC(nibName: "T13AssignToMeVC", bundle: NSBundle.mainBundle());
             
             vc.item = self.item;
+            vc.trade = self.trade;
             self.nextVC = vc;
             self.navigationController?.pushViewController(self.nextVC, animated: true);
             vc = nil;
@@ -181,7 +169,16 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     
     @IBAction func hotButtonAction(sender: UIButton) {
         
-        if sender.tag == 62 { //hot
+        if sender.tag == 62 { //fav
+            
+            var urlSub: String = "item/favorite"
+            if (self.isFav) {
+                urlSub = "item/unfavorite"
+            }
+            let para = ["_id" : self.item._id]
+            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 63);
+     
+
             
         } else if sender.tag == 63 { //share
             
@@ -211,22 +208,11 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
-        
         SVProgressHUD.dismiss();
-        
         
         if(tag == 60)//加载跟单列表
         {
-//            var _tradeDic:NSDictionary! = response as? NSDictionary
-//            var _trade:TradeModel!
-//            var _prepayid:String!;
-//            if(_tradeDic != nil && _tradeDic.objectForKey("trade") != nil)
-//            {
-//                var tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
-//                _trade = TradeModel(dict: tradeDic)
-//                
-//            }
-
+            var isHaveData = false;
             
             let tradesObj:NSArray! = (response as? NSDictionary)?.objectForKey("trades") as? NSArray
             print(tradesObj);
@@ -249,23 +235,26 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 }
                 if(self.trade != nil)
                 {
-                    self.bindData();
+                    isHaveData = true;
                 }
             }
-            
-        } else if(tag == 61) {
-            
-            
-            if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
-                let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-                let vc: U02UserVC! = tababarController.childViewControllers[3] as? U02UserVC
-                if(vc != nil)
-                {
-                    vc.orderBtnAction(vc.orderBtn);
-                }
-                
-                tababarController.selectedIndex = 3;
+            if(isHaveData)
+            {
+                self.sv.hidden = false;
+                self.bindData();
             }
+            else
+            {
+             
+                UIHEPLER.alertErrMsg("获取数据失败")
+                self.navigationController?.popViewControllerAnimated(true);
+            }
+            
+        } else if(tag == 61) {//跟单
+            
+            
+            
+            UIHEPLER.gotoU02Page();
             
             
         } else if(tag == 62) {//跟单成功转向支付页面
@@ -284,6 +273,10 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             self.navigationController?.pushViewController(self.nextVC, animated: true);
             vc = nil;
             
+            
+        } else if(tag == 63) {//收藏 or 取消收藏
+        
+            self.changeBtnFav(!self.isFav);
         }
 
         
@@ -291,5 +284,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     
     func requestDataFailed(error: String) {
         
+        SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 }

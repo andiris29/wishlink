@@ -137,7 +137,7 @@ class U02TradeCell: UICollectionViewCell {
         
         self.itemNameLabel.text = "品名：" + self.trade.item.name
         self.itemCountryLabel.text = "购买地：" + self.trade.item.country
-        self.itemPriceLabel.text = "出价：￥" + "\(self.trade.item.price)"
+        self.itemPriceLabel.text = "出价：￥\(self.trade.item.price)"
         self.itemCountryLabel.text = "数量：" + "\(self.trade.quantity)"
         let totalPrice: Float = Float(self.trade.quantity) * self.trade.item.price
         self.itemTotalPrice.text = "合计：" + "\(totalPrice)"
@@ -145,7 +145,7 @@ class U02TradeCell: UICollectionViewCell {
             self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
         }
         if self.trade.item.images != nil && self.trade.item.images.count != 0 {
-            WebRequestHelper().renderImageView(self.itemImageView, url: self.trade.item.images[0], defaultName: "")
+            WebRequestHelper().renderImageView(self.itemImageView, url: self.trade.item.images[0], defaultName: "T07-bgimg")
         }
     }
     

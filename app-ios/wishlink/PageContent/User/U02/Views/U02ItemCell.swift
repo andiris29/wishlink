@@ -22,6 +22,7 @@ protocol U02ItemCellDelegate: NSObjectProtocol {
 
 class U02ItemCell: UICollectionViewCell {
 
+    @IBOutlet weak var iv_country: UIImageView!
     
     @IBOutlet weak var lbCountry: UILabel!
     @IBOutlet weak var lbIntro: UILabel!
@@ -106,10 +107,26 @@ class U02ItemCell: UICollectionViewCell {
     
     func filldataForUI() {
         self.lbCountry.text = item.country;
-        self.lbPrice.text = "￥" + item.price.format(".2");
+        if(self.item.price != nil)
+        {
+            self.lbPrice.text = "￥" + item.price.format(".2");
+        }
         self.lbIntro.text = item.name + " " + item.spec;
         self.lbCount.text = "\(item.numTrades)件"
         self.favoriteBtn.selected = self.item.isFavorite
+        
+        self.iv_country.image = nil;
+        if(self.item._countryRef != nil)
+        {
+            if(self.item._countryRef.icon != nil && self.item._countryRef.icon.length>1)
+            {
+                if(self.item._countryRef.icon.containsString("http"))
+                {
+                    WebRequestHelper().renderImageView(self.iv_country, url: self.item._countryRef.icon, defaultName: "")
+                }
+            }
+            
+        }
         
         
         if (item == nil ||  item.images == nil) {

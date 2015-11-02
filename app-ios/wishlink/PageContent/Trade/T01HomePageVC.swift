@@ -33,10 +33,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserModel.shared.isLogin == false
-        {
-            UIHEPLER.showLoginPage(self);
-        }
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         
@@ -52,24 +48,27 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.searchBgImageView.layer.borderColor = RGBC(67).CGColor
         self.searchBgImageView.layer.masksToBounds = true
         self.searchBgImageView.layer.cornerRadius = self.searchBgImageView.frame.size.height / 2.0
+        
+        if UserModel.shared.isLogin == false
+        {
+            UIHEPLER.showLoginPage(self);
+        }
+
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated);
         if(self.t02VC != nil)
         {
-            self.t02VC.view.removeFromSuperview()
-            self.t02VC.view = nil;
             self.t02VC = nil;
         }
 
-        super.viewWillAppear(animated);
         self.navigationController?.navigationBarHidden = true
-        
-        //self.startTimer();
     }
  
     override func viewDidAppear(animated: Bool) {
-        
+         super.viewDidAppear(animated);
         self.navigationController?.navigationBarHidden = true
     }
     func getKeyWordData()
@@ -211,10 +210,9 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             self.t02VC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         }
         self.t02VC.keyword = strKeyWord;
+        self.t02VC.isNeedShowNavi = true;
         self.navigationController?.pushViewController(self.t02VC, animated: true);
         self.removeTimer();
-        
-        
     }
 
     // MARK: - Navigation
@@ -263,9 +261,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     {
         self.searchTextField.text = inputValue;
         
-        let vc =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        vc.keyword = inputValue;
-        self.navigationController?.pushViewController(vc, animated: true);
+        self.gotoNextPage(inputValue);
     }
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
