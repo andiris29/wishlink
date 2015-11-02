@@ -157,10 +157,12 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         if(isNeedShowNavi)
         {
             self.loadComNaviLeftBtn()
+            self.loadComNavTitle(self.keyword)
         }
-        self.loadComNavTitle(self.keyword)
-        
-
+        else
+        {
+            self.loadComNavTitle("最热")
+        }
     }
     
     // MARK: - Action 

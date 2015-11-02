@@ -228,6 +228,7 @@
                 <outlet property="favoriteBtn" destination="m0L-E6-rID" id="hR3-69-uVN"/>
                 <outlet property="iconContryView" destination="td4-7t-Fgx" id="sbJ-0u-tWd"/>
                 <outlet property="iv_Item" destination="vX3-G3-fVc" id="PWa-06-rrQ"/>
+                <outlet property="iv_country" destination="HYi-LH-MhZ" id="aBj-Ft-G9Y"/>
                 <outlet property="lbCount" destination="bkA-hn-qzO" id="mgz-2f-h3Q"/>
                 <outlet property="lbCountry" destination="wfE-vE-uMR" id="fFp-pc-Oce"/>
                 <outlet property="lbIntro" destination="aca-aA-ov1" id="7Sb-mx-ZWy"/>
