@@ -6,6 +6,8 @@ require('./items');
 
 var entitySchema = Schema({
     __context: Object,
+    role: Number,
+    mobile: String,
     nickname: String,
     portrait: String,
     background: String,
