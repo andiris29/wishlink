@@ -59,7 +59,7 @@ class ItemModel: BaseModel {
         self.spec =  self.getStringValue("spec", dic: dict);
         self.create =  self.getStringValue("create", dic: dict);
         self.notes =  self.getStringValue("notes", dic: dict);
-        self.price =  self.getFloatValue("price", dic: dict);
+//        self.price =  self.getFloatValue("price", dic: dict);
         
         if let priceStr = dict.objectForKey("price") as? String
         {
