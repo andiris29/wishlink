@@ -5,7 +5,7 @@ var ServerError = function(errorCode, description, err) {
     Error.call(this, 'server error');
     this.errorCode = errorCode;
     this.description = description || _codeToString(errorCode);
-    if (errorCode === ServerError.ERR_UNKOWN) {
+    if (errorCode === ServerError.ERR_UNKNOWN) {
         err = err || new Error();
         this.stack = err.stack;
         winston.error(new Date().toString() + '- ServerError: ' + this.errorCode);
@@ -26,7 +26,7 @@ ServerError.fromError = function(err) {
 util.inherits(ServerError, Error);
 
 //ErrorCode
-ServerError.ERR_UNKOWN = 1000;
+ServerError.ERR_UNKNOWN = 1000;
 ServerError.ERR_NOT_LOGGED_IN = 1001;
 ServerError.ERR_PERMISSION_DENIED = 1002;
 ServerError.ERR_NOT_ENOUGH_PARAM = 1003;
@@ -42,11 +42,12 @@ ServerError.ERR_INVALID_COUNTRY = 1012;
 ServerError.ERR_INVALID_MOBILE = 1013;
 ServerError.ERR_FREQUENT_REQUEST = 1014;
 ServerError.ERR_MOBILE_ALREADY_EXIST = 1015;
+ServerError.ERR_DUPLICATE_REGISTER = 1016;
 
 var _codeToString = function(code) {
     switch (code) {
         case 1000 :
-            return 'ERR_UNKOWN';
+            return 'ERR_UNKNOWN';
         case 1001 :
             return 'ERR_NOT_LOGGED_IN';
         case 1002 :
@@ -77,6 +78,8 @@ var _codeToString = function(code) {
             return 'ERR_FREQUENT_REQUEST';
         case 1015:
             return 'ERR_MOBILE_ALREADY_EXIST';
+        case 1016:
+            return 'ERR_DUPLICATE_REGISTER';
     }
 };
 

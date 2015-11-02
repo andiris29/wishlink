@@ -224,6 +224,7 @@ user.loginViaWeixin = {
 
                 isNewUser = true;
                 var newUser = new Users({
+                    role: 0,
                     nickname: user.nickname,
                     portrait: user.headimgurl,
                     weixin: {
@@ -247,7 +248,7 @@ user.loginViaWeixin = {
                     if (error) {
                         callback(error);
                     } else if (!target) {
-                        callback(ServerError.ERR_UNKOWN);
+                        callback(ServerError.ERR_UNKNOWN);
                     } else {
                         callback(null, target);
                     }
@@ -305,7 +306,7 @@ user.loginViaWeibo = {
         var uid = param.uid;
         var registrationId = param.registrationId;
         if (!token || !uid || !registrationId) {
-            ResponseHelper.response(res, ServerError.ERR_UNKOWN);
+            ResponseHelper.response(res, ServerError.ERR_UNKNOWN);
             return;
         }
 
@@ -373,6 +374,7 @@ user.loginViaWeibo = {
                 isNewUser = true;
                 // when not exist , add a new user
                 var newUser = new Users({
+                    role: 0,
                     nickname: user.screen_name,
                     portrait: user.avatar_large,
                     weibo: {
@@ -394,7 +396,7 @@ user.loginViaWeibo = {
                     if (error) {
                         callback(error);
                     } else if (!target) {
-                        callback(ServerError.ERR_UNKOWN);
+                        callback(ServerError.ERR_UNKNOWN);
                     } else {
                         callback(null, target);
                     }
@@ -449,6 +451,7 @@ user.logout = {
         delete req.session.userId;
         delete req.session.loginDate;
         delete req.currentUserId;
+        delete req.session.mobileVerification;
         ResponseHelper.response(res, null, null);
     }
 };
@@ -491,7 +494,7 @@ user.update = {
                 if (error) {
                     callback(error);
                 } else if (!user) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, user);
                 }
@@ -674,11 +677,11 @@ user.login = {
     method: 'post',
     func: function(req, res) {
         var param = req.body;
-        var nickname = param.nickname || '';
+        var mobile = param.mobile || '';
         var password = param.password || '';
         Users.findOne({
             '$and': [{
-                nickname: nickname
+                mobile: mobile
             }, {
                 '$or': [{
                     password: password
@@ -734,7 +737,7 @@ user.clearSearchHistory = {
                 if (error) {
                     callback(error);
                 } else if (!user) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, user);
                 }
@@ -762,7 +765,7 @@ user.removeRecommendedItem = {
             rUserRecommendedItems.remove({
                 initiatorRef: req.currentUserId,
                 targetRef: RequestHelper.parseId(req.body._id)
-            }, function (error) {
+            }, function(error) {
                 callback(error);
             });
         }, function(callback) {
@@ -953,6 +956,100 @@ user.loginAsGuest = {
     methdo: 'get',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
+        var user = new Users({
+            role: 0
+        });
+
+        user.save(function(error, target) {
+            if (error) {
+                ResponseHelper.response(res, error);
+            } else if (!target) {
+                ResponseHelper.response(res, ServerError.ERR_UNKNOWN);
+            } else {
+                ResponseHelper.response(res, null, {
+                    user: target
+                });
+            }
+        });
+    }
+};
+
+/**
+ * 验证当前 session 中的用户的 role 是否为 Guest
+ *      ERR_DUPLICATE_REGISTER
+ * 验证 req.mobile 是否已经和 db 中的一致
+ *      ERR_INVALID_MOBILE
+ * 调用 RecommendationService 向用户推荐商品
+ *
+ * @method post
+ * @param {string} req.nickname
+ * @param {string} req.password
+ * @param {string} req.mobile
+ * @return {db.user} res.data.user
+ *
+ */
+user.register = {
+    methdo: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        var param = req.body;
+        if (param.nickname == null || param.nickname.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+        if (param.password == null || param.password.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+        if (param.mobile == null || param.mobile.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+
+        async.waterfall([function(calllback) {
+            Users.findOne({
+                _id: req.currentUserId
+            }, function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_UNKNOWN);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            // 验证当前 session 中的用户的 role 是否为 Guest
+            if (user.role != 0) {
+                callback(ServerError.ERR_DUPLICATE_REGISTER);
+                return;
+            }
+
+            // 验证 req.mobile 是否已经和 db 中的一致
+            if (param.mobile != user.mobile) {
+                callback(ServerError.ERR_INVALID_MOBILE);
+                return;
+            }
+
+            user.role = 1;
+            user.nickname = param.nickname;
+            user.encryptedPassword = _encrypt(param.password);
+            user.password = null;
+
+            user.save(function(error, target) {
+                if (error) {
+                    callback(error);
+                } else if (!target) {
+                    callback(ServerError.ERR_UNKNOWN);
+                } else {
+                    callback(null, target);
+                }
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user: user
+            });
+        });
     }
 };
 

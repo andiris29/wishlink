@@ -76,7 +76,7 @@ item.create = {
                                 if (error) {
                                     callback(error);
                                 } else if (!newItem) {
-                                    callback(ServerError.ERR_UNKOWN);
+                                    callback(ServerError.ERR_UNKNOWN);
                                 } else {
                                     callback(null, newItem);
                                 }

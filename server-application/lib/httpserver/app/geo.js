@@ -63,7 +63,7 @@ geo.trace = {
                             if (error) {
                                 callback(error);
                             } else if (!trace) {
-                                callback(ServerError.ERR_UNKOWN);
+                                callback(ServerError.ERR_UNKNOWN);
                             } else {
                                 callback(null, trace);
                             }
@@ -83,7 +83,7 @@ geo.trace = {
                                 if (error) {
                                     callback(error);
                                 } else if (!trace) {
-                                    callback(ServerError.ERR_UNKOWN);
+                                    callback(ServerError.ERR_UNKNOWN);
                                 } else {
                                     callback(null, trace);
                                 }
@@ -101,14 +101,14 @@ geo.trace = {
                 if (error) {
                     callback(error);
                 } else if (!user) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     user.countryRef = trace.countryRef;
                     user.save(function(error, user) {
                         if (error) {
                             callback(error);
                         } else if (!user) {
-                            callback(ServerError.ERR_UNKOWN);
+                            callback(ServerError.ERR_UNKNOWN);
                         } else {
                             callback(null, trace);
                         }

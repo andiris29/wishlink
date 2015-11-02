@@ -43,7 +43,7 @@ trade.create = {
                 if (error) {
                     callback(error);
                 } else if (!trade) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, trade);
                 }
@@ -53,7 +53,7 @@ trade.create = {
                 if (error) {
                     callback(error);
                 } else if (!trade) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, trade);
                 }
@@ -102,7 +102,7 @@ trade.updateReceiver = {
                 if (error) {
                     callback(error);
                 } else if (!trade) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, trade);
                 }
@@ -143,7 +143,7 @@ trade.prepay = {
                     if (error) {
                         callback(error);
                     } else if (!trade) {
-                        callback(ServerError.ERR_UNKOWN);
+                        callback(ServerError.ERR_UNKNOWN);
                     } else {
                         callback(null, trade);
                     }
@@ -219,7 +219,7 @@ trade.payCallback = {
                     //'date': Date.now
                 });
             } else {
-                callback(ServerError.ERR_UNKOWN);
+                callback(ServerError.ERR_UNKNOWN);
                 return;
             }
 
@@ -256,7 +256,7 @@ trade.payCallback = {
                 if (error) {
                     callback(error);
                 } else if (!trade) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, trade);
                     if (newStatus === TradeService.Status.PAID.code) {
@@ -719,7 +719,7 @@ trade.read = {
                 if (error) {
                     callback(error);
                 } else if (!user) {
-                    callback(ServerError.ERR_UNKOWN);
+                    callback(ServerError.ERR_UNKNOWN);
                 } else {
                     callback(null, trade);
                 }
