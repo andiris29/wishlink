@@ -12,6 +12,7 @@ class ItemModel: BaseModel {
     
     var _id:String = "";
     var countryRef:String!
+    var _countryRef:CountryModel!
     var brandRef:String!
     var name:String!
     var brand:String!
@@ -33,7 +34,25 @@ class ItemModel: BaseModel {
     {
         self.name =  self.getStringValue("name", dic: dict);
         self._id =  self.getStringValue("_id", dic: dict);
-        self.countryRef =  self.getStringValue("countryRef", dic: dict);
+        
+        
+     
+
+        
+        if let countryDic = dict.objectForKey("countryRef") as? NSDictionary
+        {
+            self._countryRef = CountryModel(dict: countryDic);
+            self.countryRef = self._countryRef.name;
+        }
+        
+        
+        if let countryStr = dict.objectForKey("countryRef") as? String
+        {
+             self.countryRef = countryStr
+        }
+        
+        
+//        self.countryRef =  self.getStringValue("countryRef", dic: dict);
         self.brandRef =  self.getStringValue("brandRef", dic: dict);
         self.brand =  self.getStringValue("brand", dic: dict);
         self.country =  self.getStringValue("country", dic: dict);
@@ -41,6 +60,19 @@ class ItemModel: BaseModel {
         self.create =  self.getStringValue("create", dic: dict);
         self.notes =  self.getStringValue("notes", dic: dict);
         self.price =  self.getFloatValue("price", dic: dict);
+        
+        if let priceStr = dict.objectForKey("price") as? String
+        {
+            if let pricePic = priceStr as? Float
+            {   
+                self.price = pricePic
+            }
+        }
+        if let priceFloat = dict.objectForKey("price") as? Float
+        {
+            self.price = priceFloat
+        }
+        
         if let tempDic = dict["__context"] as? NSDictionary {
             
             self.numTrades = self.getIntValue("numTrades", dic: tempDic)
