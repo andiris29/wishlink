@@ -121,7 +121,7 @@ itemFeeding.search = {
             }, {
                 afterQuery: function(param, currentPageModels, numTotal, callback) {
                     async.series([function(cb) {
-                        Items.populate({
+                        Items.populate(currentPageModels, {
                             path: 'countryRef',
                             model: 'countries'
                         }, cb);
