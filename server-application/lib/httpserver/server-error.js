@@ -39,6 +39,9 @@ ServerError.ERR_INCORRECT_ID_OR_PASSWORD = 1009;
 ServerError.ERR_TRADE_NOT_EXIST = 1010;
 ServerError.ERR_TRADE_STATUS = 1011;
 ServerError.ERR_INVALID_COUNTRY = 1012;
+ServerError.ERR_INVALID_MOBILE = 1013;
+ServerError.ERR_FREQUENT_REQUEST = 1014;
+ServerError.ERR_MOBILE_ALREADY_EXIST = 1015;
 
 var _codeToString = function(code) {
     switch (code) {
@@ -68,6 +71,12 @@ var _codeToString = function(code) {
             return 'ERR_TRADE_STATUS';
         case 1012:
             return 'ERR_INVALID_COUNTRY';
+        case 1013:
+            return 'ERR_INVALID_MOBILE';
+        case 1014:
+            return 'ERR_FREQUENT_REQUEST';
+        case 1015:
+            return 'ERR_MOBILE_ALREADY_EXIST';
     }
 };
 

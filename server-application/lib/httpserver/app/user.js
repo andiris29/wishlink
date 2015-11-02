@@ -264,9 +264,7 @@ user.loginViaWeixin = {
         }, function(user, callback) {
             req.session.userId = user._id;
             req.session.loginDate = new Date();
-            NotificationService.bind(param.registrationId, user._id, function(error) {
-                callback(error, user);
-            });
+            callback(null, user);
         }], function(error, user) {
             ResponseHelper.response(res, error, {
                 user: user
@@ -414,10 +412,7 @@ user.loginViaWeibo = {
             // add user to session
             req.session.userId = user._id;
             req.session.loginDate = new Date();
-            // add registrationId to jPushAudiences
-            NotificationService.bind(param.registrationId, user._id, function(error) {
-                callback(error, user);
-            });
+            callback(null, user);
         }], function(error, user) {
             ResponseHelper.response(res, error, {
                 user: user
@@ -454,9 +449,7 @@ user.logout = {
         delete req.session.userId;
         delete req.session.loginDate;
         delete req.currentUserId;
-        NotificationService.unbind(req.body.registrationId, _id, function(error) {
-            ResponseHelper.response(res, error);
-        });
+        ResponseHelper.response(res, null, null);
     }
 };
 
@@ -726,7 +719,7 @@ user.clearSearchHistory = {
         async.waterfall([function(callback) {
             Users.findOne({
                 _id: req.currentUserId
-            }, function (error, user) {
+            }, function(error, user) {
                 if (error) {
                     callback(error);
                 } else if (!user) {
@@ -799,7 +792,7 @@ user.removeAllRecommendedItems = {
         async.waterfall([function(callback) {
             rUserRecommendedItems.remove({
                 initiatorRef: req.currentUserId
-            },function (error) {
+            },function(error) {
                 callback(error);
             });
         }, function(callback) {
@@ -813,6 +806,153 @@ user.removeAllRecommendedItems = {
                 user: user
             });
         });
+    }
+};
+
+/**
+ * 验证 mobileVerification 是否已经存在，并且 create 在 1分钟以内
+ * 随机生成一个 100000 - 999999 的数字，并调用 SmsService.send 发送给用户
+ * 将手机号以 mobileVerification.mobile 为关键字存入 session
+ * 将生成的验证码以 mobileVerification.code 为关键字存入 session
+ * 将生成的时间以 mobileVerification.create 为关键字存入 session
+ *
+ * @method post
+ * @param {string} req.mobile
+ *
+ * @return {string} res.metadata.err.code
+ *      ERR_INVALID_MOBILE
+ *      ERR_FREQUENT_REQUEST
+ */
+user.requestBindMobile = {
+    methdo: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+    }
+};
+
+/**
+ * 验证 req.code 是否和 session 中的一致
+ * 如果一致，将 req.mobile 存入 db
+ *
+ * @method post
+ * @param {string} req.code
+ * @return
+ *      ERR_INVALID_CODE
+ *      ERR_MOBILE_ALREADY_EXIST
+ */
+user.bindMobile = {
+    methdo: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+    }
+};
+
+/**
+ * 调用 NotificationService.bind 绑定该 registrationId 与当前用户
+ *
+ * @method post
+ * @param {string} req.registrationId
+ * @return {db.user} res.data.user
+ */
+user.bindRegistrationId = {
+    methdo: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        if (req.body.registrationId == null || req.body.registrationId.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+
+        var userId = req.currentUserId;
+        async.waterfall([function(callback) {
+            User.findOne({
+                _id: userId
+            }, function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            NotificationService.bind(req.body.registrationId, userId, function(error) {
+                callback(error, user);
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user: user
+            });
+        });
+    }
+};
+
+/**
+ * 调用 NotificationService.unbind 解除该 registrationId 与当前用户的绑定
+ *
+ * @method post
+ * @param {string} req.registrationId
+ * @return {db.user} res.data.user
+ */
+user.unbindRegistrationId = {
+    methdo: 'post',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+        if (req.body.registrationId == null || req.body.registrationId.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+
+        var userId = req.currentUserId;
+        async.waterfall([function(callback) {
+            User.findOne({
+                _id: userId
+            }, function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            NotificationService.unbind(req.body.registrationId, userId, function(error) {
+                callback(error, user);
+            });
+        }], function(error, user) {
+            ResponseHelper.response(res, error, {
+                user: user
+            });
+        });
+    }
+};
+
+/**
+ * 批量查询用户信息
+ *
+ * @method get
+ * @param {string[]} req._ids
+ * @return {db.user[]} res.data.user
+ */
+user.fetch = {
+    methdo: 'get',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
+    }
+};
+
+/**
+ * 创建一个 User，role 为 Guest
+ *
+ * @method post
+ * @return {db.user} res.data.user
+ */
+user.loginAsGuest = {
+    methdo: 'get',
+    permissionValidators: ['validateLogin'],
+    func: function(req, res) {
     }
 };
 
