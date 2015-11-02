@@ -30,13 +30,14 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         collectionCellRegisterNib()
         initWithData()
         initWithView()
-        httpRequest()
+
     }
     override func viewWillAppear(animated: Bool) {
         if(self.nextVC != nil)
         {
             self.nextVC = nil;
         }
+        httpRequest()
     }
     
     func collectionCellRegisterNib() {

@@ -115,13 +115,16 @@ class U02ItemCell: UICollectionViewCell {
         self.lbCount.text = "\(item.numTrades)件"
         self.favoriteBtn.selected = self.item.isFavorite
         
+        self.iv_country.image = nil;
         if(self.item._countryRef != nil)
         {
-            WebRequestHelper().renderImageView(self.iv_country, url: self.item._countryRef.icon, defaultName: "")
-        }
-        else
-        {
-            self.iv_country.image = nil;
+            if(self.item._countryRef.icon != nil && self.item._countryRef.icon.length>1)
+            {
+                if(self.item._countryRef.icon.containsString("http"))
+                {
+                    WebRequestHelper().renderImageView(self.iv_country, url: self.item._countryRef.icon, defaultName: "")
+                }
+            }
             
         }
         

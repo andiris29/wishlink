@@ -175,6 +175,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="c1_0002"/>
+                                <connections>
+                                    <action selector="btnSelectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eGd-7c-MEc"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXf-G7-bGh">
                                 <rect key="frame" x="238" y="102" width="75" height="21"/>
@@ -300,6 +303,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="btnSelect" destination="nWp-m1-J7a" id="3Lo-Vi-NzG"/>
                 <outlet property="iv" destination="kus-FU-PKD" id="08q-a8-H94"/>
                 <outlet property="iv_trade" destination="lFO-zq-3Lo" id="v7J-Uu-8cg"/>
                 <outlet property="lbCountry" destination="7cC-Q5-a5m" id="ZHU-Y1-gWy"/>
