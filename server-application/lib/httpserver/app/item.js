@@ -14,6 +14,7 @@ var RelationshipHelper = require('../helper/RelationshipHelper');
 var Items = require('../../model/items');
 var Trades = require('../../model/trades');
 var RUserFavoriteItem = require('../../model/rUserFavoriteItem');
+var Countries = require('../../model/countries');
 
 // Services
 var NotificationService = require('../service/NotificationService');
@@ -49,27 +50,37 @@ item.create = {
                     callback(error);
                 } else {
                     var param = fields;
-                    var newItem = new Items({
-                        name: param.name,
-                        brand: param.brand,
-                        country: param.country,
-                        spec: param.spec,
-                        price: RequestHelper.parseNumber(param.price),
-                        notes: param.notes,
-                        images: []
-                    });
-                    files.forEach(function(file) {
-                        var imagePath = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
-                        newItem.images.push(imagePath);
-                    });
-
-                    newItem.save(function(error, newItem) {
+                    Countris.findOne({
+                        name: param.name
+                    }, function(error, country) {
                         if (error) {
                             callback(error);
-                        } else if (!newItem) {
-                            callback(ServerError.ERR_UNKOWN);
+                        } else if (!country) {
+                            callback(ServerError.ERR_INVALID_COUNTRY);
                         } else {
-                            callback(null, newItem);
+                            var newItem = new Items({
+                                name: param.name,
+                                brand: param.brand,
+                                country: param.country,
+                                spec: param.spec,
+                                price: RequestHelper.parseNumber(param.price),
+                                notes: param.notes,
+                                images: []
+                            });
+                            files.forEach(function(file) {
+                                var imagePath = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
+                                newItem.images.push(imagePath);
+                            });
+
+                            newItem.save(function(error, newItem) {
+                                if (error) {
+                                    callback(error);
+                                } else if (!newItem) {
+                                    callback(ServerError.ERR_UNKOWN);
+                                } else {
+                                    callback(null, newItem);
+                                }
+                            });
                         }
                     });
                 }
@@ -123,7 +134,7 @@ item.approve = {
                     TradeService.statusTo(req.currentUserId, trade, TradeService.Status.UN_ORDER_RECEIVE.code, 'item/approve', function(error, trade) {
                         internalCallback(error);
                         NotificationService.notify([trade.ownerRef], NotificationService.notifyItemApproved.command, NotificationService.notifyItemApproved.message, {
-                            _id : trade._id
+                            _id: trade._id
                         }, null);
                     });
                 };
@@ -179,7 +190,7 @@ item.disapprove = {
                     TradeService.statusTo(req.currentUserId, trade, TradeService.Status.ITEM_REVIEW_REJECTED.code, 'item/disapprove', function(error, trade) {
                         internalCallback(error);
                         NotificationService.notify([trade.ownerRef], NotificationService.notifyItemDisapproved.command, NotificationService.notifyItemDisapproved.message, {
-                            _id : trade._id
+                            _id: trade._id
                         }, null);
                     });
                 };

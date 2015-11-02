@@ -38,33 +38,36 @@ ServerError.PAGING_NOT_EXIST = 1008;
 ServerError.ERR_INCORRECT_ID_OR_PASSWORD = 1009;
 ServerError.ERR_TRADE_NOT_EXIST = 1010;
 ServerError.ERR_TRADE_STATUS = 1011;
+ServerError.ERR_INVALID_COUNTRY = 1012;
 
 var _codeToString = function(code) {
     switch (code) {
         case 1000 :
-            return "ERR_UNKOWN";
+            return 'ERR_UNKOWN';
         case 1001 :
-            return "ERR_NOT_LOGGED_IN";
+            return 'ERR_NOT_LOGGED_IN';
         case 1002 :
-            return "ERR_PERMISSION_DENIED";
+            return 'ERR_PERMISSION_DENIED';
         case 1003 :
-            return "ERR_NOT_ENOUGH_PARAM";
+            return 'ERR_NOT_ENOUGH_PARAM';
         case 1004 :
-            return "ERR_USER_NOT_EXIST";
+            return 'ERR_USER_NOT_EXIST';
         case 1005:
-            return "ERR_ITEM_NOT_EXIST";
+            return 'ERR_ITEM_NOT_EXIST';
         case 1006:
-            return "ALREADY_RELATED";
+            return 'ALREADY_RELATED';
         case 1007:
-            return "ALREADY_UNRELATED";
+            return 'ALREADY_UNRELATED';
         case 1008:
-            return "PAGING_NOT_EXIST";
+            return 'PAGING_NOT_EXIST';
         case 1009:
-            return "ERR_INCORRECT_ID_OR_PASSWORD";
+            return 'ERR_INCORRECT_ID_OR_PASSWORD';
         case 1010:
-            return "ERR_TRADE_NOT_EXIST";
+            return 'ERR_TRADE_NOT_EXIST';
         case 1011:
-            return "ERR_TRADE_STATUS";
+            return 'ERR_TRADE_STATUS';
+        case 1012:
+            return 'ERR_INVALID_COUNTRY';
     }
 };
 
