@@ -106,7 +106,10 @@ class U02ItemCell: UICollectionViewCell {
     
     func filldataForUI() {
         self.lbCountry.text = item.country;
-        self.lbPrice.text = "￥" + item.price.format(".2");
+        if(self.item.price != nil)
+        {
+            self.lbPrice.text = "￥" + item.price.format(".2");
+        }
         self.lbIntro.text = item.name + " " + item.spec;
         self.lbCount.text = "\(item.numTrades)件"
         self.favoriteBtn.selected = self.item.isFavorite
