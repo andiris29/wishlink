@@ -81,16 +81,57 @@ class U01RegsiterVC: RootVC, WebRequestDelegate {
     }
     
     @IBAction func registerButtonAction(sender: UIButton) {
-    
+        
+        guard let username = self.usernameTextField.text else {
+            SVProgressHUD.showWithStatusWithBlack("用户昵称不能为空。")
+            return
+        }
+        
+        guard let password = self.passwordTextField.text else {
+            SVProgressHUD.showWithStatusWithBlack("密码不能为空。")
+            return
+        }
+        
+        guard let phone = self.phonecheckTextField.text else {
+            SVProgressHUD.showWithStatusWithBlack("手机号不能为空。")
+            return
+        }
+        
+        let para = ["nickname": username, "password": password, "mobile": phone]
+        self.httpObj.httpPostApi("user/register", parameters: para, tag: 100)
+        
+        
+        guard let verifition = self.phonecheckTextField.text else {
+            SVProgressHUD.showWithStatusWithBlack("验证码不能为空。")
+            return
+        }
+
+        let parameters = ["code": verifition]
+        self.httpObj.httpPostApi("user/bindMobile", parameters: parameters, tag: 101)
     }
     
     @IBAction func sendVerificationCodeButtonAction(sender: UIButton) {
         
+        guard let phone = self.phonecheckTextField.text else {
+            SVProgressHUD.showWithStatusWithBlack("手机号不能为空。")
+            return
+        }
+        
+        let para = ["mobile": phone]
+        self.httpObj.httpPostApi("user/requestBindMobile", parameters: para, tag: 102)
     }
     
     // MARK: - WebRequestDelegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
+        
+        if tag == 100 {
+        
+        } else if tag == 101 {
+        
+        } else if tag == 102 {
+            
+        }
         
     }
     
