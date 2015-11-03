@@ -15,6 +15,7 @@ var Items = require('../../model/items');
 var Trades = require('../../model/trades');
 var RUserFavoriteItem = require('../../model/rUserFavoriteItem');
 var Countries = require('../../model/countries');
+var Brands = require('../../model/brands');
 
 // Services
 var NotificationService = require('../service/NotificationService');
@@ -50,38 +51,71 @@ item.create = {
                     callback(error);
                 } else {
                     var param = fields;
-                    Countris.findOne({
-                        name: param.name
-                    }, function(error, country) {
-                        if (error) {
-                            callback(error);
-                        } else if (!country) {
-                            callback(ServerError.ERR_INVALID_COUNTRY);
-                        } else {
-                            var newItem = new Items({
-                                name: param.name,
-                                brand: param.brand,
-                                country: param.country,
-                                spec: param.spec,
-                                price: RequestHelper.parseNumber(param.price),
-                                notes: param.notes,
-                                images: []
-                            });
-                            files.forEach(function(file) {
-                                var imagePath = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
-                                newItem.images.push(imagePath);
-                            });
 
-                            newItem.save(function(error, newItem) {
-                                if (error) {
-                                    callback(error);
-                                } else if (!newItem) {
-                                    callback(ServerError.ERR_UNKNOWN);
-                                } else {
-                                    callback(null, newItem);
-                                }
-                            });
-                        }
+                    async.waterfall([function(cb) {
+                        Countris.findOne({
+                            name: param.country
+                        }, function(error, country) {
+                            if (error) {
+                                cb(error);
+                            } else if (!country) {
+                                cb(ServerError.ERR_INVALID_COUNTRY);
+                            } else {
+                                cb(null, country);
+                            }
+                        });
+                    }, function(countryRef, cb) {
+                        Brands.findOne({
+                            name: param.brand
+                        }, function(error, brand) {
+                            if (error) {
+                                cb(error);
+                            } else if (!brand) {
+                                var newBrand = new Brands({
+                                    name: param.brand
+                                });
+
+                                newBrand.save(function(error, newBrand) {
+                                    if (error) {
+                                        cb(error);
+                                    } else if (!newBrand) {
+                                        cb(ServerError.ERR_UNKNOWN);
+                                    } else {
+                                        cb(null, country, newBrand);
+                                    }
+                                });
+                            } else {
+                                cb(null, country, brand);
+                            }
+                        });
+                    }, function(countryRef, brandRef, cb) {
+                        var newItem = new Items({
+                            name: param.name,
+                            brand: param.brand,
+                            country: param.country,
+                            spec: param.spec,
+                            price: RequestHelper.parseNumber(param.price),
+                            notes: param.notes,
+                            brandRef: brandRef._id,
+                            countryRef: countryRef._id
+                            images: []
+                        });
+                        files.forEach(function(file) {
+                            var imagePath = global.config.uploads.item.image.exposeToUrl + '/' + path.relative(global.config.uploads.item.image.ftpPath, file.path);
+                            newItem.images.push(imagePath);
+                        });
+
+                        newItem.save(function(error, newItem) {
+                            if (error) {
+                                cb(error);
+                            } else if (!newItem) {
+                                cb(ServerError.ERR_UNKNOWN);
+                            } else {
+                                cb(null, newItem);
+                            }
+                        });
+                    }], function(error, item) {
+                        callback(error, item);
                     });
                 }
             });
