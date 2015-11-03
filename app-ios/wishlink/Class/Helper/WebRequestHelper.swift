@@ -129,6 +129,9 @@ class WebRequestHelper:NSObject {
                 autoreleasepool({ () -> () in
                     
                     
+                    print("------------")
+                    print(NSDate())
+                    
                     let  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
                     //判断文件路径是否存在，不存在则创建
                     var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
@@ -147,15 +150,50 @@ class WebRequestHelper:NSObject {
                     
                     if(fm.fileExistsAtPath(imagepath))
                     {
+                     
+                         let imageData:NSData!
                         
-                        let imageData:NSData = NSData(contentsOfFile: imagepath)!
-                        let image = UIImage(data: imageData);
-                        if (image != nil) {
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                iv.image = image;
-                            })
-                            return;
+                        
+                        
+                        
+                        do {
+                            try imageData = NSData(contentsOfURL: NSURL(fileURLWithPath: imagepath), options: NSDataReadingOptions.DataReadingUncached)
+
+//                            imageData =   fm.contentsAtPath(imagepath)
+                            
+                          let  image = UIImage(data: imageData!);
+                            if (image != nil) {
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    
+                                    
+                                    print("***********")
+                                    print(NSDate())
+                                    iv.image = image;
+                                })
+                                return;
+                            }
+
+                           
+                            
+                        } catch {
+                            // deal with error
                         }
+                        
+                        
+                        
+                        
+//                        let imageData:NSData = NSData(contentsOfFile: imagepath)!
+//                        let image = UIImage(data: imageData);
+//                        if (image != nil) {
+//                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                                
+//                                
+//                                print("***********")
+//                                print(NSDate())
+//                                iv.image = image;
+//                            })
+//                            return;
+//                        }
                         
                     }                    
                     request(.GET, url).response(){
