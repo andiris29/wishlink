@@ -146,6 +146,8 @@
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
 		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
 		D21E9BA81BAC76D400C55C84 /* CSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21E9BA71BAC76D400C55C84 /* CSActionSheet.swift */; };
+		D23B5DCD1BE90B4A00DB4377 /* AssigneeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */; settings = {ASSET_TAGS = (); }; };
+		D23B5DCF1BE90B7E00DB4377 /* OrderStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */; settings = {ASSET_TAGS = (); }; };
 		D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */; };
 		D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */; };
 		D24485C81B8DE88300CD97D5 /* T09ComplaintStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24485C61B8DE88300CD97D5 /* T09ComplaintStatusVC.swift */; };
@@ -456,6 +458,8 @@
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
 		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
 		D21E9BA71BAC76D400C55C84 /* CSActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSActionSheet.swift; sourceTree = "<group>"; };
+		D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssigneeModel.swift; sourceTree = "<group>"; };
+		D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusModel.swift; sourceTree = "<group>"; };
 		D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U07OrderTradeDetailVC.swift; sourceTree = "<group>"; };
 		D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U07OrderTradeDetailVC.xib; sourceTree = "<group>"; };
 		D24485C61B8DE88300CD97D5 /* T09ComplaintStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T09ComplaintStatusVC.swift; sourceTree = "<group>"; };
@@ -595,6 +599,8 @@
 			children = (
 				769564D31BA02ACE00A6AD10 /* ReceiverModel.swift */,
 				76DC3B791BA85997005DFA23 /* UserModel.swift */,
+				D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */,
+				D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1373,6 +1379,7 @@
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1F7C1421BB1A6090045C125 /* ItemModel.swift in Sources */,
+				D23B5DCD1BE90B4A00DB4377 /* AssigneeModel.swift in Sources */,
 				A1C8EA641BCA05DA00ED9910 /* Request.swift in Sources */,
 				A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */,
 				A1C8EA651BCA05DA00ED9910 /* ResponseSerialization.swift in Sources */,
@@ -1414,6 +1421,7 @@
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
 				A1E08D3E1BC81D2C00F22A42 /* keywordModel.swift in Sources */,
+				D23B5DCF1BE90B7E00DB4377 /* OrderStatusModel.swift in Sources */,
 				769564D41BA02ACE00A6AD10 /* ReceiverModel.swift in Sources */,
 				A1F3D3591BCEB4340007B7CE /* openssl_wrapper.m in Sources */,
 				A107EE951BD9305A00617A14 /* Order.m in Sources */,

@@ -39,6 +39,10 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     var role: U07Role!
     var trade: TradeModel!
     var receiver: ReceiverModel!
+    var assigneeModel: AssigneeModel!
+    var orderStatus: [OrderStatusModel]! = []
+    
+    var orderStatusDic: [Int : String]! = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +59,8 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     func setupData() {
     
+        self.orderStatusDic = [0 : "创建", 1 : "payCallback", 2 : "unassign", 3 : "assignToMe", 4 : "deliver", 5 : "receipt", 6 : "", 7 : "", 8 : "", 9 : "", 10 : "投诉"]
+        
         self.httpObj.mydelegate = self
         self.httpObj.httpGetApi("trade/query", parameters: ["_id" : self.trade._id], tag: 700)
          SVProgressHUD.showWithStatusWithBlack("请稍等...")
@@ -84,18 +90,27 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         self.goodNumber.text = "数量：\(item.numTrades)"
         self.goodTotal.text = "合计：\(item.price * Float(self.trade.quantity))"
         
-        self.linkTitle.text = self.role == .buyyer ? "买家信息" : "卖家信息"
-        self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
-        self.personName.text = "\(UserModel.shared.nickname)"
-        self.orderTime.text = "接单：\(UserModel.shared.create)"
+        if self.role == .buyyer {
+            self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
+            self.personName.text = "\(UserModel.shared.nickname)"
+            self.orderTime.text = "接单：\(UserModel.shared.create)"
+            self.linkTitle.text = "买家信息"
+        } else {
+            self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
+            self.personName.text = "\(self.assigneeModel.nickname)"
+            self.orderTime.text = "接单：\(self.assigneeModel.create)"
+            self.linkTitle.text = "卖家信息"
+        }
         
         if self.receiver != nil {
             self.reveicerName.text = "收货人：\(self.receiver.name)"
             self.reveicerPhone.text = "\(self.receiver.phone)"
             self.reveicerAddress.text = "收货地址：\(self.receiver.province + self.receiver.address)"
         }
-        self.orderState.text = "\(self.trade.statusOrder)"
-        self.orderReveicedTime.text = "接单时间：\(UserModel.shared.update)"
+        
+        let orderState = self.orderStatus.last
+        self.orderState.text = self.orderStatusDic[(orderState?.status)!]
+        self.orderReveicedTime.text = "接单时间：\((orderState?.create)!)"
         
         self.revokeButton.setTitle("我要撤单", forState: UIControlState.Normal)
     }
@@ -157,13 +172,28 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
                 
                 let assigneeRef = (tradeData as! NSDictionary).objectForKey("assigneeRef")
                 if assigneeRef != nil {
-                    let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
-                        return (itemObj as ReceiverModel).isDefault == true;
-                    }
+//                    let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+//                        return (itemObj as ReceiverModel).isDefault == true;
+//                    }
+//                    
+//                    if(result.count>0) {
+//                        
+//                        self.receiver = result[0] as ReceiverModel
+//                    }
+                    self.assigneeModel = AssigneeModel(dic: assigneeRef as! NSDictionary)
+                }
+                
+                let statusLogs = (tradeData as! NSDictionary).objectForKey("statusLogs")
+                if statusLogs != nil {
                     
-                    if(result.count>0) {
-                        
-                        self.receiver = result[0] as ReceiverModel
+                    if(orderStatus != nil && orderStatus.count>0)
+                    {
+                        self.orderStatus.removeAll();
+                        self.orderStatus = [];
+                    }
+
+                    for statusLog in statusLogs as! NSArray {
+                        self.orderStatus.append(OrderStatusModel(dic: statusLog as! NSDictionary))
                     }
                 }
             }
@@ -181,4 +211,9 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 
+    // MARK: -  Unit
+    
+    func changeOrderStatus(status: Int) {
+    
+    }
 }

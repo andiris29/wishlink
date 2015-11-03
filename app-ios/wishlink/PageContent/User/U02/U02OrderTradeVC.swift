@@ -26,14 +26,17 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        prepareScrollViewSubVC()
-        buyerSellerButtonStatus(.Buyer)
+        self.prepareScrollViewSubVC()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.adjustScrollViewUI()
+        
+        //        dispatch_after(3, dispatch_get_main_queue()) { () -> Void in
+        self.buyerSellerButtonStatus(.Buyer)
+        //        }
     }
     
     // MARK: - View
@@ -62,6 +65,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.sellerTradeVC.view.center = center
         
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 2, height: 0)
+        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: false)
     }
     
     // MARK: - Action
@@ -82,9 +86,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
             buyerButton.backgroundColor = MainColor()
             sellerButton.backgroundColor = RGBC(160)
             
-            dispatch_after(1, dispatch_get_main_queue()) { () -> Void in
-                self.sellerTradeVC.getSellerTrade()
-            }
+            self.sellerTradeVC.getSellerTrade()
         } else {
         
             buyerButton.backgroundColor = RGBC(160)
