@@ -15,6 +15,7 @@ var rUserRecommendedItems = require('../../model/rUserRecommendedItem');
 // Service
 var NotificationService = require('../service/NotificationService');
 var RecommendationService = require('../service/RecommendationService');
+var SmsService = require('../service/SmsService');
 
 // Helper
 var RequestHelper = require('../helper/RequestHelper');
@@ -39,6 +40,10 @@ var _encrypt = function(value) {
     var enc = cipher.update(value, 'utf8', 'hex');
     enc += cipher.final('hex');
     return enc;
+};
+
+var _generateCode = function() {
+    return Math.floor(Math.random() * (999999 - 100000)) + 100000;
 };
 
 var _downloadHeadIcon = function(path, callback) {
@@ -822,7 +827,7 @@ user.removeAllRecommendedItems = {
  * @method post
  * @param {string} req.mobile
  *
- * @return {string} res.metadata.err.code
+ * @return {string} res.data.code
  *      ERR_INVALID_MOBILE
  *      ERR_FREQUENT_REQUEST
  */
@@ -830,6 +835,35 @@ user.requestBindMobile = {
     methdo: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
+        var now = new Date();
+        var param = req.body;
+        if (param.mobile == null || param.mobile.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_INVALID_MOBILE);
+            return;
+        }
+        if (req.session.mobileVerification != null) {
+            if ((now.getTime() - req.session.mobileVerification.create.getTime()) < (60 * 1000)) {
+                ResponseHelper.response(res, ServerError.ERR_FREQUENT_REQUEST);
+                return;
+            }
+        }
+
+        var mobileVerification = {
+            mobile: param.mobile,
+            code: '' + _generateCode()
+        };
+
+        SmsService.send(param.mobile, mobileVerification.code, function(error) {
+            if (error) {
+                ResponseHelper.response(res, error);
+            } else {
+                mobileVerification.create = new Date();
+                req.session.mobileVerification = mobileVerification;
+                ResponseHelper.response(res, null, {
+                    code: mobileVerification.code
+                });
+            }
+        });
     }
 };
 
@@ -847,6 +881,59 @@ user.bindMobile = {
     methdo: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
+        var param = req.body;
+        if (param.code == null || param.code.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+
+        if (param.code != req.session.mobileVerification.code) {
+            ResponseHelper.response(res, ServerError.ERR_INVALID_CODE);
+            return;
+        }
+
+        async.waterfall([function(callback) {
+            Users.find({
+                mobile: req.session.mobileVerification.mobile
+            }).exec(function(error, users) {
+                if (error) {
+                    callback(error);
+                } else if (users != null && users.length > 0) {
+                    callback(null);
+                } else {
+                    callback(ServerError.ERR_MOBILE_ALREADY_EXIST);
+                }
+            });
+        }, function(callback) {
+            Users.findOne({
+                _id: req.currentUserId
+            }, function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_USER_NOT_EXIST);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }, function(user, callback) {
+            user.mobile = req.session.mobileVerification.mobile;
+            user.role = 1;
+            user.save(function(error, user) {
+                if (error) {
+                    callback(error);
+                } else if (!user) {
+                    callback(ServerError.ERR_UNKNOWN);
+                } else {
+                    callback(null, user);
+                }
+            });
+        }], function(error, user) {
+            delete req.session.mobileVerification;
+            ResponseHelper.response(res, error, {
+                user: user
+            });
+        });
     }
 };
 
@@ -943,6 +1030,21 @@ user.fetch = {
     methdo: 'get',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
+        var param = req.body;
+        if (param._ids == null || param._ids.length === 0) {
+            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
+            return;
+        }
+
+        Users.find({
+            _id: {
+                '$in': RequestHelper.parseIds(param._ids);
+            }
+        }).exec(function(error, users) {
+            ResponseHelper.response(res, error, {
+                users: users
+            });
+        });
     }
 };
 

@@ -24,7 +24,7 @@ var _base64 = function(value) {
 /**
  * 通过 容联云 发送短消息给该手机
  */
-SmsService.send = function(mobile, code) {
+SmsService.send = function(mobile, code, callback) {
     // get cloopen's config from config file
     var config = global.config.api.cloopen;
     var sid = config.sid;
@@ -71,6 +71,16 @@ SmsService.send = function(mobile, code) {
             }
         }
     };
-    request(options, function(error) {
+    request(options, function(error, response, body) {
+        if (error) {
+            callback(error);
+        } else {
+            var json = JSON.parse(body);
+            if (json.statusCode != '000000') {
+                callback(json);
+            } else {
+                callback();
+            }
+        }
     });
 };
