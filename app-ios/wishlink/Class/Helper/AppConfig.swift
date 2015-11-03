@@ -196,6 +196,57 @@ class AppConfig: NSObject
         return strFullToken
     }
     
+    ///从缓存目录中读取图片信息
+    func readImgFromCachePath(url:String)->UIImage!
+    {
+        var img:UIImage!
+        
+        if(url != "" && url.trim().length>0)
+        {
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+//                
+//                autoreleasepool({ () -> () in
+//                    
+            
+                    let  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
+                    //判断文件路径是否存在，不存在则创建
+                    var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
+                    
+                    let fm:NSFileManager = NSFileManager.defaultManager();
+                    if(!fm.fileExistsAtPath(imagepath))
+                    {
+                        do {
+                            try fm.createDirectoryAtPath(imagepath, withIntermediateDirectories: true, attributes: nil)
+                        } catch _ {
+                        }
+                    }
+                    //检测本读是否有该图片缓存
+                    imagepath = imagepath+"/"+encodeName
+                    if(fm.fileExistsAtPath(imagepath))
+                    {
+                        
+                        let imageData:NSData!
+                        do {
+                            try imageData = NSData(contentsOfURL: NSURL(fileURLWithPath: imagepath), options: NSDataReadingOptions.DataReadingUncached)
+                            let  image = UIImage(data: imageData!);
+                            if (image != nil) {
+//                                img = image;
+                                return image;
+                            }
+                            
+                        } catch {
+                            // deal with error
+                        }
+                    }
+                   
+//                })
+//            })
+        }
+        return img
+//        return result;
+    
+    }
+    
     //给btn假圆角
     func buildButtonFilletStyleWithRadius(btn:UIButton,borderColor:UIColor,titleColor:UIColor,radius:CGFloat)
     {

@@ -103,11 +103,11 @@ class T06Cell: UITableViewCell {
                 {
                     self.lbUserName.text = name;
                 }
-                if(imgUrl != nil && imgUrl.trim().length>1)
-                {
-                    WebRequestHelper().renderImageView(self.iv_userImg, url: imgUrl, defaultName: "T03aaa")
-                    
-                }
+//                if(imgUrl != nil && imgUrl.trim().length>1)
+//                {
+//                    WebRequestHelper().renderImageView(self.iv_userImg, url: imgUrl, defaultName: "T03aaa")
+//                    
+//                }
             }
         }
 
