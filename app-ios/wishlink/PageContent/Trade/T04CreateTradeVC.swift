@@ -278,10 +278,30 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                             }
                             else
                             {
+                                let metaDic:NSDictionary! =  json.objectForKey("metadata") as? NSDictionary
+                                var errorMsg = "提交数据失败！"
+                                if(metaDic != nil && metaDic.count>0)
+                                {
                                 
-                                SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
+                                    var errCode  = 0;
+                                    var errDesc = "";
+                                    let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
+                                    if(errDic.count>0)
+                                    {
+                                        errCode =  errDic.objectForKey("errorCode") as! Int;
+                                        errDesc =  errDic.objectForKey("description") as! String;
+                                        errorMsg = "ErrorCode:\(errCode) \(errDesc)";
+                                    }
+                                    
+                                    if(errCode == 1001 || errDesc == "ERR_NOT_LOGGED_IN")
+                                    {
+                                        UserModel.shared.logout()
+                                    }
+                                }
+                                
+                                SVProgressHUD.showErrorWithStatusWithBlack(errorMsg);
                                 self.view.userInteractionEnabled = true;
-                                NSLog("Fail:")
+                                NSLog("Fail:"+errorMsg);
                                 
                             }
                         case .Failure(let error):
