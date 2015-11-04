@@ -832,7 +832,7 @@ user.removeAllRecommendedItems = {
  *      ERR_FREQUENT_REQUEST
  */
 user.requestBindMobile = {
-    methdo: 'post',
+    method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         var now = new Date();
@@ -878,7 +878,7 @@ user.requestBindMobile = {
  *      ERR_MOBILE_ALREADY_EXIST
  */
 user.bindMobile = {
-    methdo: 'post',
+    method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         var param = req.body;
@@ -945,7 +945,7 @@ user.bindMobile = {
  * @return {db.user} res.data.user
  */
 user.bindRegistrationId = {
-    methdo: 'post',
+    method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         if (req.body.registrationId == null || req.body.registrationId.length === 0) {
@@ -986,7 +986,7 @@ user.bindRegistrationId = {
  * @return {db.user} res.data.user
  */
 user.unbindRegistrationId = {
-    methdo: 'post',
+    method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         if (req.body.registrationId == null || req.body.registrationId.length === 0) {
@@ -1027,10 +1027,10 @@ user.unbindRegistrationId = {
  * @return {db.user[]} res.data.user
  */
 user.fetch = {
-    methdo: 'get',
+    method: 'get',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
-        var param = req.body;
+        var param = req.queryString;
         var criteral = {};
         if (param._ids == null || param._ids.length === 0) {
             criteral = {};
@@ -1057,7 +1057,7 @@ user.fetch = {
  * @return {db.user} res.data.user
  */
 user.loginAsGuest = {
-    methdo: 'get',
+    method: 'get',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         var user = new Users({
@@ -1093,7 +1093,7 @@ user.loginAsGuest = {
  *
  */
 user.register = {
-    methdo: 'post',
+    method: 'post',
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         var param = req.body;
