@@ -45,12 +45,12 @@ trend.brand = {
 };
 
 /**
- * 调用 SearchTrendService.queryItems
+ * 调用 SearchTrendService.queryCategories
  */
 trend.category = {
     method : 'get',
     func : function(req, res) {
-        _handleTrendWithService(SearchTrendService.queryItems, req, res);
+        _handleTrendWithService(SearchTrendService.queryCategories, req, res);
     }
 };
 
