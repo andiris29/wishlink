@@ -1031,16 +1031,18 @@ user.fetch = {
     permissionValidators: ['validateLogin'],
     func: function(req, res) {
         var param = req.body;
+        var criteral = {};
         if (param._ids == null || param._ids.length === 0) {
-            ResponseHelper.response(res, ServerError.ERR_NOT_ENOUGH_PARAM);
-            return;
+            criteral = {};
+        } else {
+            criteral = {
+                _id: {
+                    '$in': RequestHelper.parseIds(param._ids)
+                }
+            };
         }
 
-        Users.find({
-            _id: {
-                '$in': RequestHelper.parseIds(param._ids);
-            }
-        }).exec(function(error, users) {
+        Users.find(criteral).exec(function(error, users) {
             ResponseHelper.response(res, error, {
                 users: users
             });

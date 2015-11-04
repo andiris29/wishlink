@@ -3,10 +3,10 @@
  */
 var express = require('express');
 var fs = require('fs');
-var cookieParser = require("cookie-parser");
-var credentials = require("./credentials");
+var cookieParser = require('cookie-parser');
+var credentials = require('./credentials');
 var connect = require('connect');
-var sessionMongoose = require("session-mongoose");
+var sessionMongoose = require('session-mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 var _ = require('underscore');
@@ -16,18 +16,18 @@ var ftp = require('../runtime/ftp');
 
 //Services Name
 var servicesNames = ['item', 'user', 'trend', 'suggestion', 'tradeFeeding', 'trade', 'report', 'itemFeeding', 'geo', 'search'];
-var services = servicesNames.map(function (path) {
+var services = servicesNames.map(function(path) {
     return {
-        'path' : path,
-        'module' : require('./app/' + path)
+        'path': path,
+        'module': require('./app/' + path)
     };
 });
 
-var wrapCallback = function (fullpath, callback) {
-    return function (req, res) {
+var wrapCallback = function(fullpath, callback) {
+    return function(req, res) {
         res.qsPerformance = {
-            'fullpath' : fullpath,
-            'start' : Date.now()
+            'fullpath': fullpath,
+            'start': Date.now()
         };
         var f = require('path').join(__dirname, 'performance.js');
         if (req.queryString && req.queryString.qsPerformance) {
@@ -45,22 +45,21 @@ var wrapCallback = function (fullpath, callback) {
     };
 };
 
-var mkdirUploads = function (config) {
+var mkdirUploads = function(config) {
     for (var key in config) {
         var value = config[key];
         if (_.isObject(value)) {
             mkdirUploads(value);
         } else {
             if (value.indexOf('http://') !== 0) {
-                ftp.getConnection().mkdir(value, true, function (err){});
+                ftp.getConnection().mkdir(value, true, function(err) {
+                });
             }
         }
     }
 };
 
-
-
-module.exports = function (config, db) {
+module.exports = function(config, db) {
     var app = express();
     global.config = config;
     app.listen(config.server.port);

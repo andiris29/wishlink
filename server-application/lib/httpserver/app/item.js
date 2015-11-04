@@ -97,7 +97,7 @@ item.create = {
                             price: RequestHelper.parseNumber(param.price),
                             notes: param.notes,
                             brandRef: brandRef._id,
-                            countryRef: countryRef._id
+                            countryRef: countryRef._id,
                             images: []
                         });
                         files.forEach(function(file) {
