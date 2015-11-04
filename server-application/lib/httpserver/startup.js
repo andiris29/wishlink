@@ -68,7 +68,7 @@ module.exports = function(config, db) {
     mkdirUploads(config.uploads);
 
     // Cross domain
-    app.use(function (req, res, next) {
+    app.use(function(req, res, next) {
         // Set header for cross domain
         res.header('Access-Control-Allow-Credentials', true);
         res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -77,39 +77,41 @@ module.exports = function(config, db) {
         next();
     });
 
-//Cookie
+    // Cookie
     app.use(cookieParser(credentials.cookieSecret));
-//Session
+    // Session
     var SessionStore = sessionMongoose(connect);
     var session = require('express-session')({
-        store : new SessionStore({
-            interval : 24 * 60 * 60 * 1000,
-            connection : db.getConnection(),
-            modelName : "sessionStores"
+        store: new SessionStore({
+            interval: 24 * 60 * 60 * 1000,
+            connection: db.getConnection(),
+            modelName: 'sessionStores'
         }),
-        cookie : {
-            maxAge : 365 * 24 * 60 * 60 * 1000
+        cookie: {
+            maxAge: 365 * 24 * 60 * 60 * 1000
         },
-        resave : false,
-        saveUninitialized : false,
-        secret : credentials.sessionSecret
+        resave: false,
+        saveUninitialized: false,
+        secret: credentials.sessionSecret
     });
     app.use(session);
 
     app.use(require('./middleware/queryStringParser'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
-        extended : true
+        extended: true
     }));
     app.use(require('./middleware/sessionParser'));
     app.use(require('./middleware/permissionValidator')(services));
     app.use(require('./middleware/errorHandler'));
-// Regist http services
+    // Regist http services
     services.forEach(function(service) {
-        var module = service.module, path = service.path;
+        var module = service.module;
+        var path = service.path;
         for (var id in module) {
             var fullpath = '/services/' + path + '/' + id;
-            var method = module[id].method, callback = module[id];
+            var method = module[id].method;
+            var callback = module[id];
             if (method === 'get') {
                 app.get(fullpath, wrapCallback(fullpath, callback));
             } else if (method === 'post') {
@@ -119,3 +121,4 @@ module.exports = function(config, db) {
     });
     winston.info('Http server startup complete!');
 };
+
