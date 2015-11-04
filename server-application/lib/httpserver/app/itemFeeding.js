@@ -18,6 +18,7 @@ var ContextHelper = require('../helper/ContextHelper');
 
 // Service
 var SearchService = require('../service/search/SearchService');
+var SearchTrendService = require('../service/search/SearchTrendService');
 
 var itemFeeding = module.exports;
 
@@ -133,3 +134,39 @@ itemFeeding.search = {
         });
     }
 };
+
+itemFeeding.hot = {
+    method: 'get',
+    func: function(req, res) {
+        var param = req.queryString;
+        var keyword = param.keyword;
+        async.waterfall([function(callback) {
+            SearchService.saveHistory(keyword, req.currentUserId, function(err) {
+                //ignore error of save history
+                callback();
+            });
+        }], function(err) {
+            ServiceHelper.queryPaging(req, res, function(param, callback) {
+                var pageNo = param.pageNo;
+                var pageSize = param.pageSize;
+                SearchTrendService.queryItems(pageNo, pageSize, callback);
+            }, function(models) {
+                return {
+                    items: models
+                };
+            }, {
+                afterQuery: function(param, currentPageModels, numTotal, callback) {
+                    async.series([function(cb) {
+                        Items.populate(currentPageModels, {
+                            path: 'countryRef',
+                            model: 'countries'
+                        }, cb);
+                    }, function(cb) {
+                        ContextHelper.appendItemContext(req.currentUserId, currentPageModels, cb);
+                    }], callback);
+                }
+            });
+        });
+    }
+};
+
