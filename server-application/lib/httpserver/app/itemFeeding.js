@@ -138,46 +138,24 @@ itemFeeding.search = {
 itemFeeding.hot = {
     method: 'get',
     func: function(req, res) {
-        var param = req.queryString;
-        var keyword = param.keyword;
-        async.waterfall([function(callback) {
-            SearchService.saveHistory(keyword, req.currentUserId, function(err) {
-                //ignore error of save history
-                callback();
-            });
-        }], function(err) {
-            ServiceHelper.queryPaging(req, res, function(param, callback) {
-                var pageNo = param.pageNo;
-                var pageSize = param.pageSize;
-                SearchTrendService.queryItems(pageNo, pageSize, function(error, currentModels) {
-                    var _ids = [];
-                    _.each(currentModels, function(element) {
-                        _ids.push(element._id);
-                    });
-                    Items.find({
-                        _id: {
-                            '$in': _ids
-                        }
-                    }).exec(function(error, items) {
-                        callback(error, items);
-                    });
-                });
-            }, function(models) {
-                return {
-                    items: models
-                };
-            }, {
-                afterQuery: function(param, currentPageModels, numTotal, callback) {
-                    async.series([function(cb) {
-                        Items.populate(currentPageModels, {
-                            path: 'countryRef',
-                            model: 'countries'
-                        }, cb);
-                    }, function(cb) {
-                        ContextHelper.appendItemContext(req.currentUserId, currentPageModels, cb);
-                    }], callback);
-                }
-            });
+        ServiceHelper.queryPaging(req, res, function(param, callback) {
+            var criteria = {};
+            MongoHelper.queryPaging(Items.find(criteria).populate('targetRef').sort({weight: -1}), rUserRecommendedItems.find(criteria), param.pageNo, param.pageSize, callback);
+        }, function(models) {
+            return {
+                items: models
+            };
+        }, {
+            afterQuery: function(param, currentPageModels, numTotal, callback) {
+                async.series([function(cb) {
+                    Items.populate(currentPageModels, {
+                        'path': 'countryRef',
+                        'model': 'countries'
+                    }, cb);
+                }, function(cb) {
+                    ContextHelper.appendItemContext(req.currentUserId, currentPageModels, callback);
+                }], callback);
+            }
         });
     }
 };
