@@ -4,14 +4,14 @@ require('./users');
 
 var Schema = mongoose.Schema;
 var jPushAudiencesSchema = Schema({
-    peopleRef : {
-        type : Schema.Types.ObjectId,
-        ref : 'users'
+    userRef: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     },
-    registrationId : String,
-    create : {
-        type : Date,
-        'default' : Date.now
+    registrationId: String,
+    create: {
+        type: Date,
+        'default': Date.now
     }
 });
 

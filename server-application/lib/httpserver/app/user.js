@@ -899,9 +899,9 @@ user.bindMobile = {
                 if (error) {
                     callback(error);
                 } else if (users != null && users.length > 0) {
-                    callback(null);
-                } else {
                     callback(ServerError.ERR_MOBILE_ALREADY_EXIST);
+                } else {
+                    callback(null);
                 }
             });
         }, function(callback) {
@@ -918,18 +918,17 @@ user.bindMobile = {
             });
         }, function(user, callback) {
             user.mobile = req.session.mobileVerification.mobile;
-            user.role = 1;
             user.save(function(error, user) {
                 if (error) {
                     callback(error);
                 } else if (!user) {
                     callback(ServerError.ERR_UNKNOWN);
                 } else {
+                    delete req.session.mobileVerification;
                     callback(null, user);
                 }
             });
         }], function(error, user) {
-            delete req.session.mobileVerification;
             ResponseHelper.response(res, error, {
                 user: user
             });
@@ -955,7 +954,7 @@ user.bindRegistrationId = {
 
         var userId = req.currentUserId;
         async.waterfall([function(callback) {
-            User.findOne({
+            Users.findOne({
                 _id: userId
             }, function(error, user) {
                 if (error) {
@@ -996,7 +995,7 @@ user.unbindRegistrationId = {
 
         var userId = req.currentUserId;
         async.waterfall([function(callback) {
-            User.findOne({
+            Users.findOne({
                 _id: userId
             }, function(error, user) {
                 if (error) {
@@ -1111,7 +1110,7 @@ user.register = {
             return;
         }
 
-        async.waterfall([function(calllback) {
+        async.waterfall([function(callback) {
             Users.findOne({
                 _id: req.currentUserId
             }, function(error, user) {
@@ -1149,6 +1148,10 @@ user.register = {
                 } else {
                     callback(null, target);
                 }
+            });
+        }, function(user, callback) {
+            RecommendationService.recommendItems(user._id, function(error) {
+                callback(error, user);
             });
         }], function(error, user) {
             ResponseHelper.response(res, error, {

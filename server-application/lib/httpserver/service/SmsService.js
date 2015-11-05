@@ -64,20 +64,17 @@ SmsService.send = function(mobile, code, callback) {
         json: true,
         body: {
             to: mobile,
-            appid: appid,
-            datas: {
-                data: code,
-                data: 1
-            }
+            appId: appid,
+            templateId: appSetting.templateId,
+            datas: [code, '1']
         }
     };
     request(options, function(error, response, body) {
         if (error) {
             callback(error);
         } else {
-            var json = JSON.parse(body);
-            if (json.statusCode != '000000') {
-                callback(json);
+            if (body.statusCode != '000000') {
+                callback(body);
             } else {
                 callback();
             }
