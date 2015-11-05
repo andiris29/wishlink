@@ -1057,8 +1057,7 @@ user.fetch = {
  * @return {db.user} res.data.user
  */
 user.loginAsGuest = {
-    method: 'get',
-    permissionValidators: ['validateLogin'],
+    method: 'post',
     func: function(req, res) {
         var user = new Users({
             role: 0
@@ -1070,6 +1069,8 @@ user.loginAsGuest = {
             } else if (!target) {
                 ResponseHelper.response(res, ServerError.ERR_UNKNOWN);
             } else {
+                req.session.userId = target._id;
+                req.session.loginDate = new Date();
                 ResponseHelper.response(res, null, {
                     user: target
                 });
