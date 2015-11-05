@@ -54,7 +54,7 @@ class U02LogisticsTipView: UIView {
     
     func prepareUI() {
         self.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.6)
-        var tipView = UIView()
+        let tipView = UIView()
         tipView.center = self.center
         tipView.bounds = CGRectMake(0, 0, tipViewWidth, tipViewHeight)
         tipView.backgroundColor = UIColor.whiteColor()
@@ -63,28 +63,28 @@ class U02LogisticsTipView: UIView {
         self.addSubview(tipView)
         
         // nameLabel
-        var nameLabelX = CGFloat(24)
-        var nameLabelY = CGFloat(40)
-        var nameLabelWidth = tipViewWidth - nameLabelX * 2
-        var nameLabelHeight = labelHeight
+        let nameLabelX = CGFloat(24)
+        let nameLabelY = CGFloat(40)
+        let nameLabelWidth = tipViewWidth - nameLabelX * 2
+        let nameLabelHeight = labelHeight
         self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, nameLabelHeight)
         self.nameLabel.text = self.name
         tipView.addSubview(self.nameLabel)
         
         // orderNumberLabel
-        var orderLabelX = nameLabelX
-        var orderLabelY = CGRectGetMaxY(self.nameLabel.frame) + 10
-        var orderLabelWidth = nameLabelWidth
-        var orderLabelHeight = labelHeight
+        let orderLabelX = nameLabelX
+        let orderLabelY = CGRectGetMaxY(self.nameLabel.frame) + 10
+        let orderLabelWidth = nameLabelWidth
+        let orderLabelHeight = labelHeight
         self.orderNumberLabel.frame = CGRectMake(orderLabelX, orderLabelY, orderLabelWidth, orderLabelHeight)
         self.orderNumberLabel.text = self.orderNumber
         tipView.addSubview(self.orderNumberLabel)
         
-        var confirmBtn = UIButton(type: .Custom)
-        var btnHeight = CGFloat(35)
-        var btnY = tipViewHeight - btnHeight
+        let confirmBtn = UIButton(type: .Custom)
+        let btnHeight = CGFloat(35)
+        let btnY = tipViewHeight - btnHeight
         var btnWidth = tipViewWidth
-        var btnX = 0
+        _ = 0
         confirmBtn.frame = CGRectMake(0, btnY, btnWidth, btnHeight)
         confirmBtn.setTitleColor(RGB(123, g: 2, b: 90), forState: .Normal)
         confirmBtn.setTitle("确定", forState: .Normal)

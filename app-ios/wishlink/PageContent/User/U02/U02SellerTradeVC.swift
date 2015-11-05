@@ -234,7 +234,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
             self.view.userInteractionEnabled = true

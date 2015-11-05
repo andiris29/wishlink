@@ -16,6 +16,7 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
         }
     }
     var _id: String = ""
+    var role:Int = 0;
     var isLogin: Bool = false
     var nickname: String = ""
     var password: String = ""
@@ -67,8 +68,20 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
             return  
         }
         print(self.userDic)
-        self.isLogin = true
         self._id = getStringValue("_id", dic: self.userDic)
+        
+        self.role =  getIntValue("role", dic: self.userDic)
+        
+        if(self.role == 1)
+        {
+            self.isLogin = true
+        }
+        else
+        {
+            
+            self.isLogin = false;
+        }
+        self.nickname = getStringValue("nickname", dic: self.userDic)
         self.nickname = getStringValue("nickname", dic: self.userDic)
         self.update = getStringValue("update", dic: self.userDic)
         self.create = getStringValue("create", dic: self.userDic)

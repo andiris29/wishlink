@@ -9,7 +9,7 @@ import Foundation
 @objc protocol WebRequestDelegate  {
     
     func requestDataComplete(response:AnyObject,tag:Int)
-    func requestDataFailed(error:String)
+    func requestDataFailed(error:String,tag:Int)
     optional func complateImgDownload(tag:Int,downloadImg:UIImage)
 }
 
@@ -42,7 +42,7 @@ class WebRequestHelper:NSObject {
                 case .Success:
                     self.handleHttpResponse(result.value!, tag: tag)
                 case .Failure(_, let error):
-                    self.mydelegate?.requestDataFailed("网络不给力哦");
+                    self.mydelegate?.requestDataFailed("网络不给力哦",tag:tag);
                     print(error)
                 }
         }
@@ -59,7 +59,7 @@ class WebRequestHelper:NSObject {
                 case .Success:
                     self.handleHttpResponse(result.value!, tag: tag)
                 case .Failure(_, let error):
-                    self.mydelegate?.requestDataFailed("网络不给力哦");
+                    self.mydelegate?.requestDataFailed("网络不给力哦",tag:tag);
                     print(error)
                 }
         }
@@ -72,41 +72,62 @@ class WebRequestHelper:NSObject {
     func handleHttpResponse(body:AnyObject,tag:Int) {
 
         let dataDir:NSDictionary = body as! NSDictionary
-        
+        var isError:Bool! = false;
         if( dataDir.objectForKey("data") != nil)
         {
-            self.mydelegate?.requestDataComplete(dataDir.objectForKey("data")!, tag: tag);
-            
+            isError = false;
+            if let respDic = dataDir.objectForKey("data")  as? NSDictionary
+            {
+                if(respDic.count == 0)
+                {
+                    isError = true;
+                }
+            }
         }
         else
         {
+            isError = true;
+        }
+        
+        if(isError == false)
+        {   
+            self.mydelegate?.requestDataComplete(dataDir.objectForKey("data")!, tag: tag);
+        }
+        else if(isError == true)
+        {
             //解析metadata
             var errorMsg = "返回数据无效";
-            let metaDic = dataDir.objectForKey("metadata")  as! NSDictionary
-            if(metaDic.count>0)
+            if let metaDic = dataDir.objectForKey("metadata")  as? NSDictionary
             {
-                var errCode  = 0;
-                var errDesc = "";
-//                var errCode = metaDic.objectForKey("error");
-                let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
-                if(errDic.count>0)
+                if(metaDic.count>0)
                 {
-                    errCode =  errDic.objectForKey("errorCode") as! Int;
-                    errDesc =  errDic.objectForKey("description") as! String;
-                    errorMsg = "ErrorCode:\(errCode) \(errDesc)";
+                    var errCode  = 0;
+                    var errDesc = "";
+                    //                var errCode = metaDic.objectForKey("error");
+                    let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
+                    if(errDic.count>0)
+                    {
+                        errCode =  errDic.objectForKey("errorCode") as! Int;
+                        errDesc =  errDic.objectForKey("description") as! String;
+                        errorMsg = "ErrorCode:\(errCode) \(errDesc)";
+                    }
+                    
+                    if(errCode == 1001 || errDesc == "ERR_NOT_LOGGED_IN")
+                    {
+                        UserModel.shared.logout()
+                    }
+                    
+                    self.mydelegate?.requestDataFailed(errorMsg,tag:tag)
+                }else {
+                    self.mydelegate?.requestDataComplete(dataDir, tag: tag)
                 }
-                
-                if(errCode == 1001 || errDesc == "ERR_NOT_LOGGED_IN")
-                {
-                    UserModel.shared.logout()
-                }
-                
-                self.mydelegate?.requestDataFailed(errorMsg)
-            }else {
-                self.mydelegate?.requestDataComplete(dataDir, tag: tag)
             }
-            
+            else
+            {
+                self.mydelegate?.requestDataFailed("NO ERROE MESSAGE",tag:tag)
+            }
         }
+        isError = nil;
     }
     
     

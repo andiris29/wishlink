@@ -685,7 +685,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
         }
     }
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         SVProgressHUD.dismiss();
         UIHEPLER.alertErrMsg(error);

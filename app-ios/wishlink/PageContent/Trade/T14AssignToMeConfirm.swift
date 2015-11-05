@@ -153,7 +153,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }

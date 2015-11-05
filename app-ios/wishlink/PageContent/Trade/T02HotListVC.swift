@@ -274,7 +274,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         self.maskView.hidden = false;
         self.lbTipMessage.text = "暂无数据"

@@ -256,13 +256,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
 
         
     }
+    //MARK:NetWork delegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         
         NSLog("post geo/trace Success!")
         
     }
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         NSLog("post geo/trace fail:%@",error)
 
     }

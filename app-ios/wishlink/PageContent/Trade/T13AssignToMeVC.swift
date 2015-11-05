@@ -401,7 +401,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }

@@ -145,7 +145,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         SVProgressHUD.showErrorWithStatusWithBlack("获取用户信息失败！");
     }

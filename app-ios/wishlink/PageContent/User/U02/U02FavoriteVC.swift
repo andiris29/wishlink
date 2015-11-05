@@ -89,7 +89,7 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         print(error)
     }
     

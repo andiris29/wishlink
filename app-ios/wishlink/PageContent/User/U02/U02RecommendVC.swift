@@ -107,7 +107,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         
     }
     
-    func requestDataFailed(error: String) {
+    //MARK:network delegate
+    func requestDataFailed(error: String,tag:Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
             self.view.userInteractionEnabled = true

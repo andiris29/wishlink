@@ -103,7 +103,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
     }
     

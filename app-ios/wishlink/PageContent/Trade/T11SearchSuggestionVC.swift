@@ -219,7 +219,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             self.searchTableView.reloadData()
         }
     }
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         print("T11RequestDataFailed: \(error)")
     }

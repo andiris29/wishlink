@@ -435,7 +435,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }

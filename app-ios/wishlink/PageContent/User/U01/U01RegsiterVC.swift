@@ -18,9 +18,11 @@ class U01RegsiterVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     
+    var verifyCode = "";
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    
         self.initData()
         self.initView()
     }
@@ -43,6 +45,7 @@ class U01RegsiterVC: RootVC, WebRequestDelegate {
     
     func initData() {
         
+        self.verifyCode = "";
         self.httpObj.mydelegate = self
     }
 
@@ -92,27 +95,27 @@ class U01RegsiterVC: RootVC, WebRequestDelegate {
             return
         }
         
-        guard let phone = self.phonecheckTextField.text else {
+        guard let phone = self.phoneTextField.text else {
             SVProgressHUD.showWithStatusWithBlack("手机号不能为空。")
             return
         }
         
+//        guard let verifition = self.phonecheckTextField.text else {
+//            SVProgressHUD.showWithStatusWithBlack("验证码不能为空。")
+//            return
+//        }
+        
         let para = ["nickname": username, "password": password, "mobile": phone]
         self.httpObj.httpPostApi("user/register", parameters: para, tag: 100)
         
-        
-        guard let verifition = self.phonecheckTextField.text else {
-            SVProgressHUD.showWithStatusWithBlack("验证码不能为空。")
-            return
-        }
 
-        let parameters = ["code": verifition]
-        self.httpObj.httpPostApi("user/bindMobile", parameters: parameters, tag: 101)
     }
     
     @IBAction func sendVerificationCodeButtonAction(sender: UIButton) {
         
-        guard let phone = self.phonecheckTextField.text else {
+        
+        
+        guard let phone = self.phoneTextField.text else {
             SVProgressHUD.showWithStatusWithBlack("手机号不能为空。")
             return
         }
@@ -125,17 +128,32 @@ class U01RegsiterVC: RootVC, WebRequestDelegate {
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
-        if tag == 100 {
-        
-        } else if tag == 101 {
-        
-        } else if tag == 102 {
+        if tag == 100 {//注册用户
+            print(response);
+
+        } else if tag == 101 {//绑定手机号
+            print(response);
+
+            
+        } else if tag == 102 {//发送验证码
+         
+            if let  reDic = response as? NSDictionary
+            {
+                if(reDic.count>0)
+                {
+                    verifyCode =   reDic.objectForKey("code") as! String;
+                    
+                    let parameters = ["code": verifyCode]
+                    self.httpObj.httpPostApi("user/bindMobile", parameters: parameters, tag: 101)
+                }
+            }
             
         }
         
     }
     
-    func requestDataFailed(error: String) {
-        
+    func requestDataFailed(error: String,tag:Int) {
+        print(error);
+
     }
 }

@@ -48,11 +48,16 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.searchBgImageView.layer.borderColor = RGBC(67).CGColor
         self.searchBgImageView.layer.masksToBounds = true
         self.searchBgImageView.layer.cornerRadius = self.searchBgImageView.frame.size.height / 2.0
+
         
-        if UserModel.shared.isLogin == false
-        {
-            UIHEPLER.showLoginPage(self);
-        }
+        
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        httpObj.httpGetApi("user/get", parameters: nil, tag: 101)
+        
+//        if UserModel.shared.isLogin == false
+//        {
+//            UIHEPLER.showLoginPage(self);
+//        }
 
     }
     
@@ -265,10 +270,33 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     }
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        SVProgressHUD.dismiss();
         
-        if(tag == 10)
+        if(tag == 101 || tag == 102)
         {
+            if let userDic = response["user"] as? NSDictionary
+            {
+                if(userDic.count>0)
+                {
+                    
+                    SVProgressHUD.dismiss();
+                    UserModel.shared.userDic = userDic as! [String: AnyObject]
+                }
+                else
+                {
+                    httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
+                    
+                }
+            }
+            else
+            {
+                
+                SVProgressHUD.dismiss();
+            }
+        }
+        else if(tag == 10)
+        {
+            SVProgressHUD.dismiss();
+            
             let trendsArr = (response as! NSDictionary).objectForKey("trends") as! NSArray
             if(trendsArr.count>0)
             {
@@ -291,13 +319,18 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         }
         else  if(tag == 11)
         {
+            SVProgressHUD.dismiss();
+            
             let numTrades = (response as! NSDictionary).objectForKey("numTrades") as! Int
             let numCompleteTrades = (response as! NSDictionary).objectForKey("numCompleteTrades") as! Int
             self.lbAllCount.text = String(numTrades);
             self.lbComplateCount.text = String(numCompleteTrades);
             
-        } else if( tag == 12)
+        }
+        else if( tag == 12)
         {
+            SVProgressHUD.dismiss();
+            
 //            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
 //            if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
 //            {
@@ -316,6 +349,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         }
         else if(tag  == 13)
         {
+            SVProgressHUD.dismiss();
+            
             let dic = response as! NSDictionary;
             if (dic.objectForKey("suggestions") != nil)
             {
@@ -345,7 +380,18 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
 
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
+        
+        if(tag == 101)
+        {
+            httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
+        }
+        
+        if(error == "ErrorCode:1001 ERR_NOT_LOGGED_IN")
+        {
+            
+            SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        }
         NSLog("Error in page T01 :%@", error)
     }
     

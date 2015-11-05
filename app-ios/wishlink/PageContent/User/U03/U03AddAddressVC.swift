@@ -91,12 +91,13 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPicker
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SVProgressHUD.dismiss()
         })
     }
     
+    //MARK: textField DELEGATE
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField == self.nameTextField {

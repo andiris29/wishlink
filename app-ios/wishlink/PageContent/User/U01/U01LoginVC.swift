@@ -134,6 +134,20 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     }
     
     @IBAction func loginButtonAction(sender: AnyObject) {
+        
+        var userName = self.userNameTextField.text?.trim();
+        var pwd = self.passWordTextField.text?.trim();
+        
+        if(userName?.trim().length == 0 || pwd?.trim().length == 0)
+        {
+            UIHEPLER.alertErrMsg("请输入用户名和密码")
+        }
+        else
+        {
+            self.httpObj.httpPostApi("user/login", parameters: ["nickname": userName!, "password": pwd!], tag: 10)
+        }
+        userName = nil;
+        pwd = nil;
     }
     
     // MARK: - prive method
@@ -153,7 +167,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     }
     @IBAction func testLoginAction(sender: AnyObject) {
         
-        self.httpObj.httpPostApi("user/login", parameters: ["nickname": "testtest", "password": "testtest"], tag: 10)
+        self.httpObj.httpPostApi("user/login", parameters: ["nickname": "12345678901", "password": "testtest"], tag: 10)
     }
     
     func wxLogin() {
@@ -170,6 +184,8 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     func registerNotification() {
         NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
+            
+            
             let temp = noti.object as! WBAuthorizeResponse
             if temp.statusCode == .Success {
                 self.wbToekn = temp.accessToken
@@ -214,7 +230,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             self.dismissViewControllerAnimated(true, completion: nil);
         })
     }
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             UIHEPLER.alertErrMsg(error);
             SVProgressHUD.dismiss();

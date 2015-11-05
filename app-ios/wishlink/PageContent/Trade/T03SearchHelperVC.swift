@@ -157,7 +157,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         }
     }
     
-    func requestDataFailed(error: String) {
+    func requestDataFailed(error: String,tag:Int) {
         
     }
     
