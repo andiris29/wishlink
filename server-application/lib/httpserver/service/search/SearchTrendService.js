@@ -85,11 +85,23 @@ SearchTrendService.queryKeywords = function(pageNo, pageSize, callback) {
  * 将 items 包装成 object 返回
  */
 SearchTrendService.queryItems = function(pageNo, pageSize, callback) {
+    pageNo = pageNo || 1;
+    pageSize = pageSize || 10;
     async.waterfall([
         function (callback) {
-            _aggregateWithName('items', pageNo, pageSize, callback);
-        }, function (results, callback) {
-            _postHandleItem(results, items, callback);
+            MongoHelper.queryPaging(items.find().sort({
+                weight : 1
+            }), items.find(), pageNo, pageSize, callback);
+        }, function (resultItems, callback) {
+            var objs = resultItems.map(function (i) {
+                return {
+                    _id : i._id,
+                    name : i.name,
+                    icon : i.images && i.images[0],
+                    weight : i.weight
+                };
+            });
+            callback(null, objs);
         }
     ], callback);
 };
