@@ -149,7 +149,19 @@ itemFeeding.hot = {
             ServiceHelper.queryPaging(req, res, function(param, callback) {
                 var pageNo = param.pageNo;
                 var pageSize = param.pageSize;
-                SearchTrendService.queryItems(pageNo, pageSize, callback);
+                SearchTrendService.queryItems(pageNo, pageSize, function(error, currentModels) {
+                    var _ids = [];
+                    _.each(currentModels, function(element) {
+                        _ids.push(element._id);
+                    });
+                    Items.find({
+                        _id: {
+                            '$in': _ids
+                        }
+                    }).exec(function(error, items) {
+                        callback(error, items);
+                    });
+                });
             }, function(models) {
                 return {
                     items: models
