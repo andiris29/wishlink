@@ -215,7 +215,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             self.t02VC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         }
         self.t02VC.keyword = strKeyWord;
-        self.t02VC.isNeedShowNavi = true;
+        self.t02VC.pagemodel  = .search;
         self.navigationController?.pushViewController(self.t02VC, animated: true);
         self.removeTimer();
     }

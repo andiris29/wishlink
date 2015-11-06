@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum t02model:Int
+{
+    case hot = 0,
+    search=1
+}
+
+
 class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
     @IBOutlet weak var maskView: UIView!
@@ -17,9 +24,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     let itemCellIde = "U02ItemCell"
    
-    var keyword = "奶粉";
-    var isNeedShowNavi = false;
-    
+    var keyword = "";
+    var pagemodel = t02model.hot;
     var currentItemCell: U02ItemCell = U02ItemCell()
     var searchTextField: UITextField!
     var topView = UIImageView()
@@ -64,13 +70,20 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         
         self.navigationController?.navigationBarHidden = false;
         
-        let para:[String : AnyObject] = ["pageNo":1,
-            "pageSize":10,
-        "keyword":self.keyword]
+       
         self.maskView.hidden = false;
-        self.lbTipMessage.text = "正在搜索中..."
-        
-        self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
+//        self.lbTipMessage.text = "正在搜索中..."
+        if(self.pagemodel == .search)
+        {
+            let para:[String : AnyObject] = ["pageNo":1,
+                "pageSize":10,
+                "keyword":self.keyword]
+            self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
+        }
+        else
+        {
+            self.httpObj.httpGetApi("itemFeeding/hot", parameters: nil , tag: 10);
+        }
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
     }
     
@@ -154,7 +167,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 7.5, right: 10)
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
         self.collectionView.scrollEnabled = true;
-        if(isNeedShowNavi)
+        if(self.pagemodel == .search)
         {
             self.loadComNaviLeftBtn()
             self.loadComNavTitle(self.keyword)
@@ -232,6 +245,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         SVProgressHUD.dismiss();
         if(tag == 10)
         {
+            print(response)
             if(response as! NSDictionary).objectForKey("items") != nil{
             
                 if( self.dataArr != nil &&  self.dataArr.count>0)
@@ -268,8 +282,9 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
                 self.lbTipMessage.text = "没有搜索到数据"
             }
             
-        } else if (tag == 21) {
-        
+        }
+        else if (tag == 21)//收藏 or 取消收藏
+        {
             self.currentItemCell.favoriteBtn.selected = !self.currentItemCell.favoriteBtn.selected
         }
     }

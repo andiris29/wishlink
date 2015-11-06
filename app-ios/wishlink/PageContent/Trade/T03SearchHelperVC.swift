@@ -138,7 +138,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     {
         var vc:T02HotListVC! = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
         vc.keyword = keyWord
-        vc.isNeedShowNavi = true;
+        vc.pagemodel  = .search;
         self.nextVC = vc
         
         self.navigationController?.pushViewController( self.nextVC, animated: true);

@@ -300,9 +300,9 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         {
             for item_trade in self.followArr
             {
-                if(item_trade.owner != nil)
+                if(item_trade.owner != nil && item_trade.owner?.count>0)
                 {
-                  if  let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
+                  if  let imgUrl:String! = item_trade.owner!.objectForKey("portrait") as? String
                   {
                         if(imgUrl != nil && imgUrl!.trim().length>1)
                         {

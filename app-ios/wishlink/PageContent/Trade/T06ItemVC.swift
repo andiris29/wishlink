@@ -196,9 +196,15 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     {
         if(self.followArr != nil && followArr.count>0)
         {
-            self.goodNumberLabel.text = "数量：\(self.trade.quantity)";
-            let totalFree = Float(self.trade.quantity) * self.item.price
-            self.goodTotalLabel.text = "合计：\(totalFree)";
+            
+            self.goodNumberLabel.text = "数量：--";
+            self.goodTotalLabel.text = "合计：--";
+            if(self.trade != nil)
+            {
+                self.goodNumberLabel.text = "数量：\(self.trade.quantity)";
+                let totalFree = Float(self.trade.quantity) * self.item.price
+                self.goodTotalLabel.text = "合计：\(totalFree)";
+            }
             
         }
         
@@ -238,17 +244,17 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                     isHaveData = true;
                 }
             }
-            if(isHaveData)
-            {
+//            if(isHaveData)
+//            {
                 self.sv.hidden = false;
                 self.bindData();
-            }
-            else
-            {
-             
-                UIHEPLER.alertErrMsg("获取数据失败")
-                self.navigationController?.popViewControllerAnimated(true);
-            }
+//            }
+//            else
+//            {
+            
+//                UIHEPLER.alertErrMsg("获取数据失败")
+//                self.navigationController?.popViewControllerAnimated(true);
+//            }
             
         } else if(tag == 61) {//跟单
             
