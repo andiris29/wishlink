@@ -16,9 +16,10 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
         }
     }
     var _id: String = ""
-    var role:Int = 0;
+    var role:Int!;
     var isLogin: Bool = false
     var nickname: String = ""
+    var mobile :String = "";
     var password: String = ""
     var update: String = ""
     var create: String = ""
@@ -70,9 +71,17 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
         print(self.userDic)
         self._id = getStringValue("_id", dic: self.userDic)
         
-        self.role =  getIntValue("role", dic: self.userDic)
+        if let _role = self.userDic["role"] as? Int
+        {
+            
+            self.role =  _role
+        }
+//        else
+//        {
+//            self.role = 1
+//        }
         
-        if(self.role == 1)
+        if(self.role != nil && self.role == 1)
         {
             self.isLogin = true
         }
@@ -82,7 +91,7 @@ class UserModel: BaseModel, RCIMUserInfoDataSource {
             self.isLogin = false;
         }
         self.nickname = getStringValue("nickname", dic: self.userDic)
-        self.nickname = getStringValue("nickname", dic: self.userDic)
+        self.mobile = getStringValue("mobile", dic: self.userDic)
         self.update = getStringValue("update", dic: self.userDic)
         self.create = getStringValue("create", dic: self.userDic)
         self.portrait = getStringValue("portrait", dic: self.userDic)

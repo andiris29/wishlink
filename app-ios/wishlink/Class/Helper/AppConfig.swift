@@ -81,6 +81,9 @@ class AppConfig: NSObject
     
     var profileDetailDictionary:NSDictionary!;
     
+    
+        var defaultWaitSecond = 10;
+    
     var Latitude:CGFloat = 0.0
     var Longitude:CGFloat = 0.0
     var languageVer = LanguageVersion.ZH_CN

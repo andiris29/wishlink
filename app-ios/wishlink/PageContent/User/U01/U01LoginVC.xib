@@ -157,7 +157,7 @@
                                                         <constraint firstAttribute="width" constant="44" id="j7r-eg-hsM"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入昵称或手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qtr-dC-quv">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qtr-dC-quv">
                                                     <rect key="frame" x="44" y="0.0" width="206" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -165,7 +165,7 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="9TA-hM-fPc"/>
                                                         <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="U53-cP-mCg"/>
@@ -208,7 +208,7 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <connections>
                                                         <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="ZBF-ZL-ssL"/>
                                                         <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="jJf-KD-6lW"/>

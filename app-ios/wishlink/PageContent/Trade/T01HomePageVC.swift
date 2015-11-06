@@ -387,11 +387,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
         }
         
-        if(error == "ErrorCode:1001 ERR_NOT_LOGGED_IN")
-        {
-            
-            SVProgressHUD.showWithStatusWithBlack("请稍等...")
-        }
+//        if(error == "ErrorCode:1001 ERR_NOT_LOGGED_IN")
+//        {
+//            
+//            SVProgressHUD.showWithStatusWithBlack("请稍等...")
+//        }
         NSLog("Error in page T01 :%@", error)
     }
     

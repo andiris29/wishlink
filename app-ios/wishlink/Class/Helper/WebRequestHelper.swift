@@ -107,8 +107,32 @@ class WebRequestHelper:NSObject {
                     let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
                     if(errDic.count>0)
                     {
-                        errCode =  errDic.objectForKey("errorCode") as! Int;
-                        errDesc =  errDic.objectForKey("description") as! String;
+                        if let _errCode =  errDic.objectForKey("errorCode") as? Int
+                        {
+                            errCode =  _errCode
+                        }
+                        if let _errDesc =  errDic.objectForKey("description") as? String
+                        {
+                            errDesc =  _errDesc
+                        }
+                        
+                        //发送验证码接口时候错误码解析
+                        if let _errDesc =  errDic.objectForKey("description") as? NSDictionary
+                        {
+                            if let _errCode =  _errDesc.objectForKey("statusCode") as? Int
+                            {
+                                errCode =  _errCode
+                            }
+                            if let _errCode =  _errDesc.objectForKey("statusCode") as? String
+                            {
+                                errCode = Int(_errCode)!
+                            }
+                            if let _errDesc =  _errDesc.objectForKey("statusMsg") as? String
+                            {
+                                errDesc =  _errDesc
+                            }
+                        }
+                        
                         errorMsg = "ErrorCode:\(errCode) \(errDesc)";
                     }
                     

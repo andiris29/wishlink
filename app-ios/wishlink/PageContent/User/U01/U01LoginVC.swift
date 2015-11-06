@@ -22,6 +22,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
     
+    var nextVC:UIViewController!
     var wxCode: String!
     var wbToekn: String!
     var wbUserID: String!
@@ -119,7 +120,9 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     
     @IBAction func skipAction(sender: AnyObject) {
-        print("跳过")
+    
+        
+        
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     
@@ -128,10 +131,15 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     @IBAction func registerButtonAction(sender: AnyObject) {
         
-        let regsiterVC = U01RegsiterVC(nibName: "U01RegsiterVC", bundle: NSBundle.mainBundle())
-        self.presentViewController(regsiterVC, animated: true) { () -> Void in
+        if(self.nextVC != nil)
+        {
+            self.nextVC = nil;
+        }
+        self.nextVC = U06RegsiterVC(nibName: "U06RegsiterVC", bundle: NSBundle.mainBundle())
+        self.presentViewController( self.nextVC, animated: true) { () -> Void in
         }
     }
+    
     
     @IBAction func loginButtonAction(sender: AnyObject) {
         
@@ -144,7 +152,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         }
         else
         {
-            self.httpObj.httpPostApi("user/login", parameters: ["nickname": userName!, "password": pwd!], tag: 10)
+            self.httpObj.httpPostApi("user/login", parameters: ["mobile": userName!, "password": pwd!], tag: 10)
         }
         userName = nil;
         pwd = nil;
@@ -155,8 +163,10 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     func wbLogin() {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         var registrationId = ""
-        if APService.registrationID() != nil {
-            registrationId = APService.registrationID()
+        var rid = APService.registrationID()
+        if  rid != nil {
+            registrationId = rid
+            rid = nil;
         }
         let parametersDic = [
             "access_token" : self.wbToekn,
@@ -167,14 +177,15 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     }
     @IBAction func testLoginAction(sender: AnyObject) {
         
-        self.httpObj.httpPostApi("user/login", parameters: ["nickname": "12345678901", "password": "testtest"], tag: 10)
+        self.httpObj.httpPostApi("user/login", parameters: ["mobile": "18601746164", "password": "123456"], tag: 10)
     }
     
     func wxLogin() {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         var registrationId = ""
-        if APService.registrationID().length != 0 {
-            registrationId = APService.registrationID()
+        var rid = APService.registrationID()
+        if rid.length != 0 {
+            registrationId = rid
         }
         let parametersDic = [
             "code" : self.wxCode,
@@ -206,29 +217,51 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         }
     }
     
-    func parseUserData(data: AnyObject!) {
-        NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
-        SVProgressHUD.dismiss();
-        UserModel.shared.userDic = data["user"] as! [String: AnyObject]
-        
-        //存储用户ID
-        APPCONFIG.Uid = UserModel.shared._id;
-        print(data)
-    }
+
     
     // MARK: - setter and getter
 
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
 
-        self.parseUserData(response)
-        
+     
+    
+        print(response)
+        NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
+        SVProgressHUD.dismiss();
+        UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+        //存储用户ID
+        APPCONFIG.Uid = UserModel.shared._id;
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName(LoginSuccessNotification, object: nil)
-            SVProgressHUD.dismiss();
-            self.dismissViewControllerAnimated(true, completion: nil);
+            
         })
+        if(tag == 10 || tag == 20)
+        {
+            if(!UserModel.shared.isLogin)
+            {
+                if(self.nextVC != nil)
+                {
+                    self.nextVC = nil;
+                }
+                var vc:U06RegsiterVC! = U06RegsiterVC(nibName: "U06RegsiterVC", bundle: NSBundle.mainBundle())
+                vc.isRegisterModel = false
+                self.nextVC = vc;
+                self.presentViewController( self.nextVC, animated: true) { () -> Void in
+                }
+                vc = nil;
+            }
+            else
+            {
+                self.dismissViewControllerAnimated(true, completion: nil);
+            }
+        }
+        else
+        {
+            self.dismissViewControllerAnimated(true, completion: nil);
+        }
+        
     }
     func requestDataFailed(error: String,tag:Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
