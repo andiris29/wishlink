@@ -229,13 +229,21 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func itemCell(cell: U02ItemCell, clickType: ItemCellButtonClickType) {
         
-        var urlSub: String = "item/favorite"
-        if (cell.favoriteBtn.selected) {
-            urlSub = "item/unfavorite"
+        if(UserModel.shared.isLogin)
+        {
+        
+            var urlSub: String = "item/favorite"
+            if (cell.favoriteBtn.selected) {
+                urlSub = "item/unfavorite"
+            }
+            let para = ["_id" : cell.item._id]
+            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
+            self.currentItemCell = cell
         }
-        let para = ["_id" : cell.item._id]
-        self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
-        self.currentItemCell = cell
+        else
+        {
+            UIHEPLER.showLoginPage(self, isToHomePage: false);
+        }
     }
     
     //MARK:WebRequestDelegate
@@ -293,7 +301,14 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         
         self.maskView.hidden = false;
         self.lbTipMessage.text = "暂无数据"
-        SVProgressHUD.showErrorWithStatusWithBlack(error);
+        if(tag == 10)
+        {
+              SVProgressHUD.dismiss();
+        }
+        else
+        {
+            SVProgressHUD.showErrorWithStatusWithBlack(error);
+        }
     }
 
     
