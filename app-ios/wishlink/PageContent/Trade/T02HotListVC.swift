@@ -300,10 +300,10 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     func requestDataFailed(error: String,tag:Int) {
         
         self.maskView.hidden = false;
-        self.lbTipMessage.text = "暂无数据"
         if(tag == 10)
         {
-              SVProgressHUD.dismiss();
+            SVProgressHUD.dismiss();
+            self.lbTipMessage.text = "暂无数据"
         }
         else
         {
