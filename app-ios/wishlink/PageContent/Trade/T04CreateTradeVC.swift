@@ -590,8 +590,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         if(textField.tag>3 || textField.tag == 0)
         {
-            
-//            self.sv.contentOffset.y = self.sv.contentOffset.y + 200
             return true;
         }
         else
@@ -615,13 +613,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             return false;
         }
     }
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {//结束编辑
-        if(textField.tag>3 || textField.tag == 0)
-        {
-//            self.sv.contentOffset.y = self.sv.contentOffset.y - 200
-        }
-        return true
-    }
+
     
     //MARK:UItextViewDelegate
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -637,30 +629,21 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         return true;
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        
-  
+
+    func textViewDidBeginEditing(textView: UITextView) {
         let viewframe: CGRect = textView.convertRect(view.frame, toView: self.sv)
         let spaceY = ScreenHeight - viewframe.origin.y
-        
-        if spaceY < 300 {
-            self.sv.setContentOffset(CGPoint(x: 0, y:  spaceY), animated: true)
-        }
-        
-        
         if(textView.text.trim() == defaultRemark )
         {
             textView.text = "";
             textView.textColor = UIColor.blackColor();
         }
+        if spaceY < 300 {
+            self.sv.setContentOffset(CGPoint(x: 0, y:  spaceY), animated: true)
+        }
 
-        
-        return true
     }
-    func textViewShouldEndEditing(textView: UITextView) -> Bool {
-        
-//        self.sv.contentOffset.y = self.sv.contentOffset.y - 200
-        
+    func textViewDidEndEditing(textView: UITextView) {
         if(textView.text.trim() == "")
         {
             
@@ -669,8 +652,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
         
         self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        return true
     }
+
     
     
     //T11SelectSuggestionDelegate
