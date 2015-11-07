@@ -103,8 +103,11 @@ U03AddressCellDelegate, WebRequestDelegate{
         }else if tag == 2{
             // 选中
             let receiver = self.addressArray[indexPath.row]
-            if receiver == self.selectedReciver {
-                return
+            if(self.selectedReciver != nil)
+            {
+                if receiver == self.selectedReciver {
+                    return
+                }
             }
             self.setDefaultReceiver(receiver)
         }else {

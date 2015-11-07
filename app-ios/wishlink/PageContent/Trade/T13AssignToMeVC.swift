@@ -43,7 +43,16 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         
         self.loadComNaviLeftBtn()
         self.loadComNavTitle("抢单列表")
+        
+    
+        self.clearFootView(tradeTableView);
     }
+    func clearFootView(tableView:UITableView)
+    {
+        let footView = UIView();
+        tableView.tableFooterView = footView;
+    }
+
     
     deinit{
         
@@ -87,9 +96,9 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if(followArr.count>0)
-        {
-            let last: Int = followArr.count - 1
+//        if(followArr.count>0)
+//        {
+            let last: Int = followArr.count+2 - 1
             
             switch indexPath.row {
             case 0:
@@ -99,12 +108,12 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             default :
                 return 90
             }
-        }
-        else
-        {
-            
-            return 568+20+65;
-        }
+//        }
+//        else
+//        {
+//            
+//            return 568+20+65;
+//        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -114,13 +123,13 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return followArr.count
+        return followArr.count+2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
-        let last: Int = followArr.count - 1
+        let last: Int = followArr.count + 2 - 1
         
         
         switch indexPath.row {
@@ -220,7 +229,10 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                     }
                     index+=1;
                 }
-                self.selectArr.removeAtIndex(index);
+                if(self.selectArr.count>index)
+                {
+                    self.selectArr.removeAtIndex(index);
+                }
             }
             
         }
@@ -366,12 +378,15 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                 for  itemObj in tradesObj!
                 {
                     let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
-//                    if(tradeItem.item != nil && tradeItem.item._id == self.item._id)
-//                    {
-//                        self.trade = tradeItem
-//                    }
+                    if(tradeItem.item != nil && tradeItem._id == self.trade._id)//remove soma trade
+                    {
+                        //self.trade = tradeItem
+                    }
+                    else
+                    {
 
                     self.followArr.append(tradeItem);
+                    }
                 }
                 
                 self.loadAllUserImage();
