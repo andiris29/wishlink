@@ -151,7 +151,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             }
             else
             {
-                UIHEPLER.showLoginPage(self);
+                UIHEPLER.showLoginPage(self,isToHomePage: false);
             }
             
         } else if sender.tag == 61 { //抢单
@@ -171,12 +171,20 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         if sender.tag == 62 { //fav
             
-            var urlSub: String = "item/favorite"
-            if (self.isFav) {
-                urlSub = "item/unfavorite"
+            if(UserModel.shared.isLogin)
+            {
+            
+                var urlSub: String = "item/favorite"
+                if (self.isFav) {
+                    urlSub = "item/unfavorite"
+                }
+                let para = ["_id" : self.item._id]
+                self.httpObj.httpPostApi(urlSub , parameters:para, tag: 63);
             }
-            let para = ["_id" : self.item._id]
-            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 63);
+            else
+            {
+                UIHEPLER.showLoginPage(self, isToHomePage: false);
+            }
      
 
             

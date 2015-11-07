@@ -116,7 +116,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         tababarController.selectedIndex = 0;
         let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
         vc?.navigationController?.popToRootViewControllerAnimated(false)
-        UIHEPLER.showLoginPage(vc!);
+        UIHEPLER.showLoginPage(vc!,isToHomePage: true);
     }
     
     // MARK: -- UITextField delegate

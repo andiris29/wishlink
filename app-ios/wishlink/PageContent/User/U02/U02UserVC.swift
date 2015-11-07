@@ -31,11 +31,13 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     var favoriteVC: U02FavoriteVC!
     var settingVC: U03SettingVC!
     
-    lazy var loginVC: U01LoginVC = {
-        let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
-        vc.hideSkipBtn = true
-        return vc
-    }()
+//    lazy var loginVC: U01LoginVC = {
+//        let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
+//        vc.hideSkipBtn = true
+//        return vc
+//    }()
+    
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
             self.fillDataForUI()
-            self.loginVC.view.removeFromSuperview()
+//            self.loginVC.view.removeFromSuperview()
         }
         NSNotificationCenter.defaultCenter().addObserverForName(LogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
 //            self.view.addSubview(self.loginVC.view)
@@ -56,27 +58,30 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.hidden = true;
-//        self.navigationController?.navigationBar.frame = CGRectMake(0, -100.0, ScreenWidth, 44)
-        self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight)
-        self.fillDataForUI()
+
+        if self.userModel.isLogin == false {//弹出登陆窗体
+            
+            
+//            let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
+//            vc?.navigationController?.popToRootViewControllerAnimated(true)
+//            UIHEPLER.showLoginPage(vc!,isToHomePage: true);
+            
+            self.view.hidden = true;
+            UIHEPLER.showLoginPage(self, isToHomePage: true);
+            
+        }
+        else
+        {
+            
+            self.view.hidden = false;
+            self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight)
+            self.fillDataForUI()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if self.userModel.isLogin == false {//弹出登陆窗体
 
-            let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-            tababarController.selectedIndex = 0;
-            let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
-            vc?.navigationController?.popToRootViewControllerAnimated(false)
-            UIHEPLER.showLoginPage(vc!);
-            
-            
-//            self.loginVC.hideSkipBtn = true
-//            self.view.addSubview(self.loginVC.view)
-        }else {
-            self.loginVC.view.removeFromSuperview()
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,15 +101,26 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         if tag == 10 {
             if let userDic = response["user"] as? [String: AnyObject] {
                 self.userModel.userDic = userDic
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.fillDataForUI()
-                })
+                
+                if(self.userModel.isLogin)
+                {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.fillDataForUI()
+                    })
+                }
+                else
+                {
+                    
+                }
             }
         }
     }
     
     func requestDataFailed(error: String,tag:Int) {
-        
+        if(tag == 10)
+        {
+            httpObj.httpGetApi("user/loginAsGuest", tag: 10);
+        }
     }
     
     // MARK: - response event
@@ -157,16 +173,15 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     // MARK: - prive method
     
     func getUser() {
-        if self.userModel._id.length != 0 {
+        if self.userModel.isLogin == true {
             return
         }
-        var registrationId = ""
-        if APService.registrationID().length != 0 {
-            registrationId = APService.registrationID()
-        }
-        let parametersDic = [
-            "registrationId" : registrationId]
-        self.httpObj.httpGetApi("user/get", parameters: parametersDic, tag: 10)
+//        var registrationId = ""
+//        var rid = APService.registrationID()
+//        if rid.length != 0 {
+//            registrationId = rid;
+//        }
+        self.httpObj.httpGetApi("user/get", parameters: nil, tag: 10)
     }
     
     func prepareData() {
@@ -234,6 +249,8 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.prepareSubVC()
         self.selectedBtn = self.orderBtn
         self.orderBtnAction(self.orderBtn)
+        
+   
     }
     
     // MARK: - setter and getter

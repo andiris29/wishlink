@@ -195,10 +195,29 @@ class UIHelper {
    
         return imageData;
     }
-    func showLoginPage(target:UIViewController)
+    var loginVC:U01LoginVC!
+    
+    func showLoginPage(target:UIViewController,isToHomePage:Bool)
     {
-        let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
-        target.presentViewController(vc, animated: true, completion: nil)
+        if(self.loginVC == nil)
+        {
+            loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
+        }
+        
+        
+        target.presentViewController(loginVC, animated: true, completion: { () -> Void in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+
+            if(isToHomePage)
+            {
+                let tababarController =  self.GetAppDelegate().window!.rootViewController as! UITabBarController
+                tababarController.selectedIndex = 0;
+            }
+          
+            
+            })
+        })
         
     }
     //跳转到U02选项卡

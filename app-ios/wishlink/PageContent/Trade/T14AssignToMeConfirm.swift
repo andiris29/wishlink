@@ -107,7 +107,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
             }
             else
             {
-                UIHEPLER.showLoginPage(self);
+                UIHEPLER.showLoginPage(self,isToHomePage: false);
             }
 
         }
