@@ -55,7 +55,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     
     var imgEmpty:UIImage! = UIImage(named: "T08bbb");
     var imgSelect:UIImage! = UIImage(named: "T04_Img_Select");
-    
+    var defaultRemark="填写其他补充信息";
   
     //MARK:System func
     override func viewDidLoad() {
@@ -71,7 +71,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.txtSize.delegate = self;
         self.txtBuyArea.delegate = self;
         self.httpObj.mydelegate = self;
-        
+        self.txtRemark.text = defaultRemark;
   
         self.constrain_ImgBtn_Width.constant = (ScreenWidth - (7*8))/5
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
@@ -192,8 +192,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 {
                     if(self.imgArr.count == 1)
                     {
-                        let imgName = "item_a.jpg"
-                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[0]);
+                        let imgName = "item_a"
+                        let imageData = UIHEPLER.compressionImageToDate(self.iv1.image!);
                         
                         let imgStream  = NSInputStream(data: imageData);
                         let len =   UInt64(imageData.length)
@@ -203,8 +203,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                     if(self.imgArr.count>1)
                     {
                         
-                        let imgName = "item_b.jpg"
-                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[1]);
+                        let imgName = "item_b"
+                        let imageData = UIHEPLER.compressionImageToDate(self.iv2.image!);
                         
                         let imgStream  = NSInputStream(data: imageData);
                         let len =   UInt64(imageData.length)
@@ -213,8 +213,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                     }
                     if(self.imgArr.count>2)
                     {
-                        let imgName = "item_c.jpg"
-                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[2]);
+                        let imgName = "item_c"
+                        let imageData = UIHEPLER.compressionImageToDate(self.iv3.image!);
                         
                         let imgStream  = NSInputStream(data: imageData);
                         let len =   UInt64(imageData.length)
@@ -223,8 +223,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                     }
                     if(self.imgArr.count>3)
                     {
-                        let imgName = "item_d.jpg"
-                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[3]);
+                        let imgName = "item_d"
+                        let imageData = UIHEPLER.compressionImageToDate(self.iv4.image!);
                         
                         let imgStream  = NSInputStream(data: imageData);
                         let len =   UInt64(imageData.length)
@@ -233,8 +233,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                     }
                     if(self.imgArr.count>4)
                     {
-                        let imgName = "item_e.jpg"
-                        let imageData = UIHEPLER.compressionImageToDate(self.imgArr[4]);
+                        let imgName = "item_e"
+                        let imageData = UIHEPLER.compressionImageToDate(self.iv5.image!);
                         
                         let imgStream  = NSInputStream(data: imageData);
                         let len =   UInt64(imageData.length)
@@ -368,6 +368,8 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             self.selectTag = tag;
             if(tag >= 41 && tag <= 45)//上传图片
             {
+                self.dismissKeyboard();
+                self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true);
                 actionSheet.show(true)
                 
             }
@@ -466,6 +468,20 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
     }
     
+    @IBAction func textFieldBegin(sender: UITextField) {
+        
+        let viewframe: CGRect = sender.convertRect(view.frame, toView: self.sv)
+        let spaceY = ScreenHeight - viewframe.origin.y
+        
+        if spaceY < 300 {
+            self.sv.setContentOffset(CGPoint(x: 0, y: 345 - spaceY), animated: true)
+        }
+    }
+    @IBAction func textFieldEnd(sender: UITextField) {
+        
+        self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
     //MARK:弹出图片上传选择框
     func imgHeadChange(index: Int) {
         
@@ -560,6 +576,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         imgHeadChange(index)
     }
     
+    
+    
+    
     //MARK:UItextFiledDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
@@ -572,7 +591,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         if(textField.tag>3 || textField.tag == 0)
         {
             
-            self.sv.contentOffset.y = self.sv.contentOffset.y + 200
+//            self.sv.contentOffset.y = self.sv.contentOffset.y + 200
             return true;
         }
         else
@@ -599,7 +618,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {//结束编辑
         if(textField.tag>3 || textField.tag == 0)
         {
-            self.sv.contentOffset.y = self.sv.contentOffset.y - 200
+//            self.sv.contentOffset.y = self.sv.contentOffset.y - 200
         }
         return true
     }
@@ -613,18 +632,43 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
             return false;
         }
+
         
         return true;
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         
-        self.sv.contentOffset.y = self.sv.contentOffset.y + 200
+  
+        let viewframe: CGRect = textView.convertRect(view.frame, toView: self.sv)
+        let spaceY = ScreenHeight - viewframe.origin.y
+        
+        if spaceY < 300 {
+            self.sv.setContentOffset(CGPoint(x: 0, y:  spaceY), animated: true)
+        }
+        
+        
+        if(textView.text.trim() == defaultRemark )
+        {
+            textView.text = "";
+            textView.textColor = UIColor.blackColor();
+        }
+
+        
         return true
     }
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
         
-        self.sv.contentOffset.y = self.sv.contentOffset.y - 200
+//        self.sv.contentOffset.y = self.sv.contentOffset.y - 200
+        
+        if(textView.text.trim() == "")
+        {
+            
+            textView.text = defaultRemark
+            textView.textColor = UIColor.grayColor();
+        }
+        
+        self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         return true
     }
     

@@ -181,18 +181,19 @@ class UIHelper {
     func compressionImageToDate(img:UIImage)->NSData
     {
         var imageData:NSData = UIImageJPEGRepresentation(img, 1)!
-        print(imageData.length, terminator: "");
+//        print(imageData.length, terminator: "");
+        NSLog("orgin img file size:%d", imageData.length)
         var rate:CGFloat = 1
         while( imageData.length > 40 * 1000)
         {
             rate-=0.1
             imageData = UIImageJPEGRepresentation(img, rate)!
-            if(rate<=0.189)
+            if(rate<=0.19)
             {
                 break;
             }
         }
-   
+        NSLog("after compression-> img file size:%d", imageData.length)
         return imageData;
     }
     var loginVC:U01LoginVC!

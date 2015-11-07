@@ -72,6 +72,10 @@ class ItemModel: BaseModel {
         {
             self.price = priceFloat
         }
+        if let priceFloat = dict.objectForKey("price") as? Int
+        {
+            self.price = Float(priceFloat)
+        }
         
         if let tempDic = dict["__context"] as? NSDictionary {
             

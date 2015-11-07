@@ -88,7 +88,11 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         self.goodFormat.text = "规格：\(item.spec)"
         self.goodPrice.text = "价格：￥\(item.price)/件"
         self.goodNumber.text = "数量：\(item.numTrades)"
-        self.goodTotal.text = "合计：\(item.price * Float(self.trade.quantity))"
+        
+        if(item != nil && item.price != nil)
+        {
+            self.goodTotal.text = "合计：\(item.price * Float(self.trade.quantity))"
+        }
         
         if self.role == .buyyer {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)

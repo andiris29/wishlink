@@ -135,12 +135,23 @@ class U02TradeCell: UICollectionViewCell {
         self.buyerTradeIdLabel.text = "订单号：\(self.trade._id)"
         self.sellerTradeIdLabel.text = "订单号：\(self.trade._id)"
         
-        self.itemNameLabel.text = "品名：" + self.trade.item.name
-        self.itemCountryLabel.text = "购买地：" + self.trade.item.country
-        self.itemPriceLabel.text = "出价：￥\(self.trade.item.price)"
+       
         self.itemCountryLabel.text = "数量：" + "\(self.trade.quantity)"
-        let totalPrice: Float = Float(self.trade.quantity) * self.trade.item.price
-        self.itemTotalPrice.text = "合计：" + "\(totalPrice)"
+        if(self.trade.item != nil)
+        {
+            if(self.trade.item.price != nil)
+            {
+                let totalPrice: Float = Float(self.trade.quantity) * self.trade.item.price
+                self.itemTotalPrice.text = "合计：" + "\(totalPrice)"
+                self.itemPriceLabel.text = "出价：￥\(self.trade.item.price)"
+            }
+            self.itemCountryLabel.text = "购买地：" + self.trade.item.country
+            self.itemNameLabel.text = "品名：" + self.trade.item.name
+        }
+        else
+        {
+            self.itemTotalPrice.text = "合计：--"
+        }
         if self.trade.owner != nil {
             self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
         }

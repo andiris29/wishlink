@@ -94,6 +94,13 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         self.lbSpec.text = "";
         self.lbPrice.text = "";
         self.numbersTextField.text = "0";
+        
+        if(self.trade != nil && self.trade._id != "")
+        {
+            self.numbersTextField.text = String(self.trade.quantity)
+            goodsNumbers = self.trade.quantity
+        }
+        
         if(self.item != nil)
         {
             self.lbName.text = self.item.name;
@@ -109,11 +116,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                  self.lbTotalFree.text = "¥" + self.item.price.format(".2");
             }
         }
-        if(self.trade != nil && self.trade._id != "")
-        {
-            self.numbersTextField.text = String(self.trade.quantity)
-            goodsNumbers = self.trade.quantity
-        }
+     
         
          self.decreaseButton.enabled = goodsNumbers > 1
         self.lbReceverName.text = "";

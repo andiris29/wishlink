@@ -91,6 +91,10 @@
                                                     <rect key="frame" x="80" y="0.0" width="287" height="37"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="OKz-5p-l5w"/>
+                                                        <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="O1f-7X-gIK"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -168,6 +172,10 @@
                                                     <rect key="frame" x="80" y="0.0" width="287" height="37"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="6iY-3o-dUa"/>
+                                                        <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="Lox-ks-Pi3"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -246,6 +254,10 @@
                                                     <rect key="frame" x="80" y="0.0" width="287" height="37"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="BLQ-tg-Wck"/>
+                                                        <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="sbO-SD-Mmb"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -324,6 +336,10 @@
                                                     <rect key="frame" x="80" y="0.0" width="287" height="37"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="eHu-y3-1BI"/>
+                                                        <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="zbu-QA-0RR"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -417,6 +433,10 @@
                                                     <rect key="frame" x="80" y="0.0" width="287" height="37"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="2sN-jx-4Zi"/>
+                                                        <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="oeK-ee-tK7"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -497,6 +517,10 @@
                                                     <rect key="frame" x="80" y="0.0" width="287" height="37"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldBegin:" destination="-1" eventType="editingDidBegin" id="UPg-xX-NXj"/>
+                                                        <action selector="textFieldEnd:" destination="-1" eventType="editingDidEnd" id="O4I-Fa-Hql"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
