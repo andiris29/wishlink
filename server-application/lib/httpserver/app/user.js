@@ -850,20 +850,26 @@ user.requestBindMobile = {
 
         var mobileVerification = {
             mobile: param.mobile,
-            code: '' + _generateCode()
+            //code: '' + _generateCode()
+            code: '111111'
         };
-
-        SmsService.send(param.mobile, mobileVerification.code, function(error) {
-            if (error) {
-                ResponseHelper.response(res, error);
-            } else {
-                mobileVerification.create = new Date();
-                req.session.mobileVerification = mobileVerification;
-                ResponseHelper.response(res, null, {
-                    code: mobileVerification.code
-                });
-            }
+        mobileVerification.create = new Date();
+        req.session.mobileVerification = mobileVerification;
+        ResponseHelper.response(res, null, {
+            code: mobileVerification.code
         });
+
+        //SmsService.send(param.mobile, mobileVerification.code, function(error) {
+        //    if (error) {
+        //        ResponseHelper.response(res, error);
+        //    } else {
+        //        mobileVerification.create = new Date();
+        //        req.session.mobileVerification = mobileVerification;
+        //        ResponseHelper.response(res, null, {
+        //            code: mobileVerification.code
+        //        });
+        //    }
+        //});
     }
 };
 
