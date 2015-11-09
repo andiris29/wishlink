@@ -10,6 +10,8 @@ import UIKit
 
 class U06RegsiterVC: RootVC, WebRequestDelegate {
 
+    
+    
     @IBOutlet weak var inputFillView: UIView!
     @IBOutlet weak var scrollerView: UIScrollView!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -21,6 +23,8 @@ class U06RegsiterVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var lb_VerifyWaitSecond: UILabel!
     @IBOutlet weak var view_verifyMask: UIView!
     @IBOutlet weak var btnSendVerifyCode: UIButton!
+    
+    let RegisterSuccessNotification: String = "RegisterSuccess"
     var isRegisterModel = true;
     var verifyCode = "";
     var timer:NSTimer!
@@ -97,9 +101,9 @@ class U06RegsiterVC: RootVC, WebRequestDelegate {
     
     @IBAction func backButtonAction(sender: UIButton) {
      
-        self.backToLoginPage();
+        self.backToLoginPage(false);
     }
-    func backToLoginPage()
+    func backToLoginPage(isRegisterComplate:Bool)
     {
         
         self.scrollerView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
@@ -108,9 +112,21 @@ class U06RegsiterVC: RootVC, WebRequestDelegate {
             self.removeTimer();
             self.timer = nil;
         }
-        self.dismissViewControllerAnimated(true) { () -> Void in
+       
+        if(isRegisterComplate)
+        {
+            self.dismissViewControllerAnimated(false) { () -> Void in
+            }
             
+            NSNotificationCenter.defaultCenter().postNotificationName(RegisterSuccessNotification, object: nil)
         }
+        else
+        {
+            self.dismissViewControllerAnimated(true) { () -> Void in
+            }
+        }
+
+        
         
     }
     
@@ -187,9 +203,20 @@ class U06RegsiterVC: RootVC, WebRequestDelegate {
             if let userDic = response as? NSDictionary//注册用户信息成功
             {
                 print(userDic);
-                UIHEPLER.alertErrMsg("注册账户成功！");
                 
-                self.backToLoginPage();
+                NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
+                SVProgressHUD.dismiss();
+                UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+                //存储用户ID
+                APPCONFIG.Uid = UserModel.shared._id;
+                
+//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+//                })
+                
+     
+                self.backToLoginPage(true);
+
             }
 
         } else if tag == 101 {//根据验证码绑定手机号

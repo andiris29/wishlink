@@ -108,7 +108,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.view.userInteractionEnabled = false;
-        let apiurl = SERVICE_ROOT_PATH + "trade/complaint"
+        let apiurl = APPCONFIG.SERVICE_ROOT_PATH + "trade/complaint"
         upload(
             .POST,
             apiurl,

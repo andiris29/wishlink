@@ -34,6 +34,8 @@ let ScreenWidth = UIScreen.mainScreen().bounds.width
 let ScreenHeight = UIScreen.mainScreen().bounds.height
 let KeyWindow = APPLICATION.keyWindow!
 
+let SERVER_BASE_URL = "http://121.41.162.102"
+
 
 func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a) }
 func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return RGBA(r, g: g, b: b, a: 1.0) }
@@ -49,23 +51,40 @@ let APPCONFIG =  AppConfig.sharedAppConfig;
 
 class AppConfig: NSObject
 {
-    //微信支付成功发送到通知
-    let NotificationActionPayResult="NotificationActionPayResult"
+    //服务端接口前缀
+    let  SERVICE_ROOT_PATH =  SERVER_BASE_URL + "/services/"
     
-    static var  mapAPIKey:String = "64cb7cd4d44935d006e8d30d5684021a";
+    //微信登录相关信息
     static var  wxAppKey:String = "wx7d2407c862aeda7b";
     static var  wxAppSecret:String = "8f4bb1d0bf4d71024b9d11825e80c771"
+    //微博登陆相关信息
     static var  wbAppKey:String = "3764189536"
     static var  wbAppSecret:String = "36bdb49defb6765bce3b831c7e18fa86"
     static var  wbRedirectURI:String = "https://api.weibo.com/oauth2/default.html"
-    static var  rcAppKey: String = "pvxdm17jxrm5r"      // 融云AppKey
+    // 融云AppKey
+    static var  rcAppKey: String = "pvxdm17jxrm5r"
+    
+    /*微信支付相关信息*/
+    let WX_Pay_APP_ID          = "wx7d2407c862aeda7b"
+    let WX_Pay_APP_SECRET      = "8f4bb1d0bf4d71024b9d11825e80c771"
+    //商户号，填写商户对应参数
+    let WX_Pay_MCH_ID          = "1273718601"
+    //商户API密钥，填写相应参数
+    let WX_Pay_PARTNER_ID      = "1qaz2wsx3edc4rfv1234qwerasdfzxcv"
+    //支付结果回调页面
+    let WX_Pay_NOTIFY_URL      = SERVER_BASE_URL + "/wishlink-payment/wechat/callback"
+    //获取服务器端支付数据地址（商户自定义）
+    let WX_Pay_SP_URL          = "http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php"
+    
     
     /*支付宝相关参数*/
-    var alipay_callback_url="http://121.41.162.102/wishlink-payment/alipay/callback";
-    var alipay_partner = "2088021598577909"
-    var alipay_seller = "ledsed@qq.com"
+    let alipay_callback_url = SERVER_BASE_URL + "/wishlink-payment/alipay/callback";
+    let alipay_partner = "2088021598577909"
+    let alipay_seller = "ledsed@qq.com"
+    
+    
     //pkcs8
-    var alipay_privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMwf59KHQGYH9aL1ViXhc28IfJ4ddbMiRwmcYnu3ZW6Vyu75EuJ66k+LCpjmVogQRGso5VdYV9HCvXIWmDXvMrvvaKmRSdm5jxkGiY9Y8RBYJYTpalti4beKmf2swcngxYqimxMdDaJ43IU4Vm4KwG7uIAOiP1W6PvWK994J85ULAgMBAAECgYBa1E+phHmJbT1GN/kPfhSJcbNSADXhcf0+L5I7Ds5ZuNnGIJrgoGUm4+3hP419mg93x4jVpv/c3NTDsX4lcbyWzF9hc0R7B9K5pdDJdS9quTwB9fuCnvh+AC5BWp0RAnrS4z74Va/qX61ZR8HljNLw4NsiFOdn6wEBo7qMMN9iwQJBAOo3gfwgDytkps+jSA+FH3+jJZAb6/IOhARl03/4LW8GWaSFReqJAzBk1fBLncgQxSyELR0PMQKua/NzuHP+prECQQDfG+39XX6Hy3MI7mVuvYeIVk+rouEwXPaYX4RtqEYDxUoLvu7HPfRQz0BGl5wlC6W4Tapho7JvL6baY7g1zN57AkB5z0yG95VsF/i5XE4J5E4xb4QFor/fL7VxJBQPJd9bMo5EhhuKkp9Z99dcFbeFaVNih4t+5XuzzUrPXou7p+DBAkAfo8hWXAHrpBCGPbiowbwMu6DEyG6C+0wFQ9Z17p0vP7VGgSc/niudoiaNXEbKgiJYRrtY6WwOlIVnBylCh/EtAkEApvb2fEks0lxOEbX9ZPPjM0sZtRrt+vyD/EqMvWOUCOjNyTG3RuSPJEOElspIhAeB2tgpKIN73z9aW9bmHJDCjQ=="
+    let alipay_privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMwf59KHQGYH9aL1ViXhc28IfJ4ddbMiRwmcYnu3ZW6Vyu75EuJ66k+LCpjmVogQRGso5VdYV9HCvXIWmDXvMrvvaKmRSdm5jxkGiY9Y8RBYJYTpalti4beKmf2swcngxYqimxMdDaJ43IU4Vm4KwG7uIAOiP1W6PvWK994J85ULAgMBAAECgYBa1E+phHmJbT1GN/kPfhSJcbNSADXhcf0+L5I7Ds5ZuNnGIJrgoGUm4+3hP419mg93x4jVpv/c3NTDsX4lcbyWzF9hc0R7B9K5pdDJdS9quTwB9fuCnvh+AC5BWp0RAnrS4z74Va/qX61ZR8HljNLw4NsiFOdn6wEBo7qMMN9iwQJBAOo3gfwgDytkps+jSA+FH3+jJZAb6/IOhARl03/4LW8GWaSFReqJAzBk1fBLncgQxSyELR0PMQKua/NzuHP+prECQQDfG+39XX6Hy3MI7mVuvYeIVk+rouEwXPaYX4RtqEYDxUoLvu7HPfRQz0BGl5wlC6W4Tapho7JvL6baY7g1zN57AkB5z0yG95VsF/i5XE4J5E4xb4QFor/fL7VxJBQPJd9bMo5EhhuKkp9Z99dcFbeFaVNih4t+5XuzzUrPXou7p+DBAkAfo8hWXAHrpBCGPbiowbwMu6DEyG6C+0wFQ9Z17p0vP7VGgSc/niudoiaNXEbKgiJYRrtY6WwOlIVnBylCh/EtAkEApvb2fEks0lxOEbX9ZPPjM0sZtRrt+vyD/EqMvWOUCOjNyTG3RuSPJEOElspIhAeB2tgpKIN73z9aW9bmHJDCjQ=="
     
 //     var alipay_privateKey = "MIICXAIBAAKBgQDMH+fSh0BmB/Wi9VYl4XNvCHyeHXWzIkcJnGJ7t2Vulcru+RLieupPiwqY5laIEERrKOVXWFfRwr1yFpg17zK772ipkUnZuY8ZBomPWPEQWCWE6WpbYuG3ipn9rMHJ4MWKopsTHQ2ieNyFOFZuCsBu7iADoj9Vuj71ivfeCfOVCwIDAQABAoGAWtRPqYR5iW09Rjf5D34UiXGzUgA14XH9Pi+SOw7OWbjZxiCa4KBlJuPt4T+NfZoPd8eI1ab/3NzUw7F+JXG8lsxfYXNEewfSuaXQyXUvark8AfX7gp74fgAuQVqdEQJ60uM++FWv6l+tWUfB5YzS8ODbIhTnZ+sBAaO6jDDfYsECQQDqN4H8IA8rZKbPo0gPhR9/oyWQG+vyDoQEZdN/+C1vBlmkhUXqiQMwZNXwS53IEMUshC0dDzECrmvzc7hz/qaxAkEA3xvt/V1+h8tzCO5lbr2HiFZPq6LhMFz2mF+EbahGA8VKC77uxz30UM9ARpecJQuluE2qYaOyby+m2mO4NczeewJAec9MhveVbBf4uVxOCeROMW+EBaK/3y+1cSQUDyXfWzKORIYbipKfWffXXBW3hWlTYoeLfuV7s81Kz16Lu6fgwQJAH6PIVlwB66QQhj24qMG8DLugxMhugvtMBUPWde6dLz+1RoEnP54rnaImjVxGyoIiWEa7WOlsDpSFZwcpQofxLQJBAKb29nxJLNJcThG1/WTz4zNLGbUa7fr8g/xKjL1jlAjozckxt0bkjyRDhJbKSIQHgdrYKSiDe98/WlvW5hyQwo0="
     
@@ -81,11 +100,13 @@ class AppConfig: NSObject
     
     var profileDetailDictionary:NSDictionary!;
     
-    
-        var defaultWaitSecond = 10;
-    
+    //验证码发送时间间隔
+    var defaultWaitSecond = 60;
+    //经纬度信息
     var Latitude:CGFloat = 0.0
     var Longitude:CGFloat = 0.0
+    
+    //默认语言
     var languageVer = LanguageVersion.ZH_CN
     
     class var sharedAppConfig : AppConfig {

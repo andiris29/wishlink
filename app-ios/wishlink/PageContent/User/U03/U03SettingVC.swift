@@ -216,7 +216,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     func updatePortrait() {
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         self.view.userInteractionEnabled = false
-        let apiurl = SERVICE_ROOT_PATH + "user/updatePortrait"
+        let apiurl = APPCONFIG.SERVICE_ROOT_PATH + "user/updatePortrait"
         upload(.POST, apiurl, headers: nil, multipartFormData: {
             (multipartFormData) -> Void in
             let imageName = "portrait"
@@ -256,7 +256,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     func updateBackground() {
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         self.view.userInteractionEnabled = false
-        let apiurl = SERVICE_ROOT_PATH + "user/updateBackground"
+        let apiurl = APPCONFIG.SERVICE_ROOT_PATH + "user/updateBackground"
         upload(.POST, apiurl, headers: nil, multipartFormData: {
             (multipartFormData) -> Void in
             let imageName = "background"

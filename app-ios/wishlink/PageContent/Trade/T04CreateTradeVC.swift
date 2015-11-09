@@ -175,7 +175,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.view.userInteractionEnabled = false;
-        let apiurl = SERVICE_ROOT_PATH + "item/create"
+        let apiurl = APPCONFIG.SERVICE_ROOT_PATH + "item/create"
         upload(
             .POST,
             apiurl,

@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
     
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
         if response is WBAuthorizeResponse {
-            NSNotificationCenter.defaultCenter().postNotificationName(WBLoginSuccessNotification, object: response)
+            NSNotificationCenter.defaultCenter().postNotificationName(WBloginSuccessNotification, object: response)
         }
     }
     // MARK: --WeiXin delegate--
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
         
         print(resp);
         if resp is SendAuthResp {
-            NSNotificationCenter.defaultCenter().postNotificationName(WXLoginSuccessNotification, object: resp)
+            NSNotificationCenter.defaultCenter().postNotificationName(WXloginSuccessNotification, object: resp)
 
         }
      

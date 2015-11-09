@@ -8,9 +8,10 @@
 
 import UIKit
 
-let WBLoginSuccessNotification: String = "WBLoginSuccess"
-let WXLoginSuccessNotification: String = "WXLoginSuccess"
+let WBloginSuccessNotification: String = "WBLoginSuccess"
+let WXloginSuccessNotification: String = "WXLoginSuccess"
 let LoginSuccessNotification: String = "LoginSuccess"
+let RegisterSuccessNotification: String = "RegisterSuccess"
 
 class U01LoginVC: RootVC,WebRequestDelegate {
     
@@ -135,7 +136,9 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         {
             self.nextVC = nil;
         }
+
         self.nextVC = U06RegsiterVC(nibName: "U06RegsiterVC", bundle: NSBundle.mainBundle())
+
         self.presentViewController( self.nextVC, animated: true) { () -> Void in
         }
     }
@@ -194,7 +197,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     }
     
     func registerNotification() {
-        NSNotificationCenter.defaultCenter().addObserverForName(WBLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
+        NSNotificationCenter.defaultCenter().addObserverForName(WBloginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
             
             
             let temp = noti.object as! WBAuthorizeResponse
@@ -206,7 +209,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(WXLoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(WXloginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
             let temp = noti.object as! SendAuthResp
             print("\(temp.errCode)")
             if temp.errCode != -2 {
@@ -215,6 +218,20 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             }
             
         }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(RegisterSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) -> Void in
+            
+           
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+               
+                if(self.nextVC != nil)
+                {
+                    self.nextVC = nil;
+                }
+            });
+            
+        }
+
     }
     
 

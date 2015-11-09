@@ -15,15 +15,15 @@ import Foundation
 
 import UIKit
 
-let SERVICE_ROOT_PATH = "http://121.41.162.102/services/"
+//let SERVICE_ROOT_PATH =  APPCONFIG.SERVICE_ROOT_PATH;
 
 class WebRequestHelper:NSObject {
     
-     weak var mydelegate:WebRequestDelegate?
+    weak var mydelegate:WebRequestDelegate?
     
     let headers = [
         "Content-Type": "application/json;charset=utf-8",
-//        "Cookie": APPCONFIG.cookieStr
+        //        "Cookie": APPCONFIG.cookieStr
     ];
     
     /*
@@ -31,7 +31,7 @@ class WebRequestHelper:NSObject {
     */
     func httpPostApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
         
-        let apiurl = SERVICE_ROOT_PATH + apiName
+        let apiurl = APPCONFIG.SERVICE_ROOT_PATH + apiName
         NSLog(" request(POST) url: %@", apiurl)
         
         request(.POST, apiurl, parameters: parameters, encoding: .JSON, headers: self.headers)
@@ -50,11 +50,11 @@ class WebRequestHelper:NSObject {
     
     func httpGetApi(apiName:String,parameters: [String: AnyObject]? = nil,tag:Int) {
         
-        let apiurl = SERVICE_ROOT_PATH + apiName
+        let apiurl = APPCONFIG.SERVICE_ROOT_PATH + apiName
         NSLog("request url: %@", apiurl)
         
-            request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
-                .responseJSON{ _, respore, result in
+        request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
+            .responseJSON{ _, respore, result in
                 switch result {
                 case .Success:
                     self.handleHttpResponse(result.value!, tag: tag)
@@ -70,7 +70,7 @@ class WebRequestHelper:NSObject {
     
     */
     func handleHttpResponse(body:AnyObject,tag:Int) {
-
+        
         let dataDir:NSDictionary = body as! NSDictionary
         var isError:Bool! = false;
         if( dataDir.objectForKey("data") != nil)
@@ -90,7 +90,7 @@ class WebRequestHelper:NSObject {
         }
         
         if(isError == false)
-        {   
+        {
             self.mydelegate?.requestDataComplete(dataDir.objectForKey("data")!, tag: tag);
         }
         else if(isError == true)
@@ -172,8 +172,6 @@ class WebRequestHelper:NSObject {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
                 
                 autoreleasepool({ () -> () in
-                    
-                    
                     print("------------")
                     print(NSDate())
                     
@@ -195,18 +193,10 @@ class WebRequestHelper:NSObject {
                     
                     if(fm.fileExistsAtPath(imagepath))
                     {
-                     
-                         let imageData:NSData!
-                        
-                        
-                        
-                        
+                        let imageData:NSData!
                         do {
                             try imageData = NSData(contentsOfURL: NSURL(fileURLWithPath: imagepath), options: NSDataReadingOptions.DataReadingUncached)
-
-//                            imageData =   fm.contentsAtPath(imagepath)
-                            
-                          let  image = UIImage(data: imageData!);
+                            let  image = UIImage(data: imageData!);
                             if (image != nil) {
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     
@@ -217,30 +207,10 @@ class WebRequestHelper:NSObject {
                                 })
                                 return;
                             }
-
-                           
-                            
                         } catch {
                             // deal with error
                         }
-                        
-                        
-                        
-                        
-//                        let imageData:NSData = NSData(contentsOfFile: imagepath)!
-//                        let image = UIImage(data: imageData);
-//                        if (image != nil) {
-//                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                                
-//                                
-//                                print("***********")
-//                                print(NSDate())
-//                                iv.image = image;
-//                            })
-//                            return;
-//                        }
-                        
-                    }                    
+                    }
                     request(.GET, url).response(){
                         
                         (_, _, data, error) in
