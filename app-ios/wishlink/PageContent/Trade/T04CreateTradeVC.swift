@@ -18,6 +18,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var txtCount: UITextField!
     @IBOutlet weak var txtSize: UITextField!
     @IBOutlet weak var txtBuyArea: UITextField!
+    @IBOutlet weak var txtUnit: UITextField!
     
     @IBOutlet weak var iv1_bg: UIImageView!
     @IBOutlet weak var iv2_bg: UIImageView!
@@ -184,7 +185,12 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 multipartFormData.appendBodyPart(data: self.txtName.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "name")
                 multipartFormData.appendBodyPart(data: self.txtCategory.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "brand")
                 multipartFormData.appendBodyPart(data: self.txtBuyArea.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
-                multipartFormData.appendBodyPart(data: self.txtPrice.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
+                
+                
+                var price =    self.txtPrice.text!.trim().uppercaseString.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
+
+                
+                multipartFormData.appendBodyPart(data: price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
                 multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                 multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
 //                if(self.imagrArr.count>0)
@@ -428,34 +434,34 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         let result = "";
         self.dismissKeyboard();
-        let category = txtCategory.text!.trim();
-        if(category.length == 0)
+        
+        if(txtCategory.text!.trim().length == 0)
         {
             return "品牌不能为空"
         }
-        let name = txtName.text!.trim();
-        if(name.length == 0)
+        if(txtName.text!.trim().length == 0)
         {
             return "品名不能为空"
         }
-        let country = txtBuyArea.text!.trim();
-        if(country.length == 0)
+        if(txtBuyArea.text!.trim().length == 0)
         {
             return "购买地不能为空"
         }
-        let price = txtPrice.text!.trim();
-        if(price.length == 0)
+        if(txtPrice.text!.trim().length == 0)
         {
             return "出价不能为空"
         }
-        let spec = txtSize.text!.trim();
-        if(spec.length == 0)
+        if(txtUnit.text!.trim().length == 0)
+        {
+            return "单位不能为空"
+        }
+        
+        if(txtSize.text!.trim().length == 0)
         {
             return "规格不能为空"
         }
         
-        let count = txtCount.text!.trim();
-        if(count.length == 0)
+        if(txtCount.text!.trim().length == 0)
         {
             return "数量不能为空"
         }
@@ -473,12 +479,32 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         let viewframe: CGRect = sender.convertRect(view.frame, toView: self.sv)
         let spaceY = ScreenHeight - viewframe.origin.y
         
+        if(sender.tag == 4)//价格自动去掉RMB，
+        {
+            var orginStr=sender.text?.trim().uppercaseString;
+            if(orginStr?.length>0)
+            {
+                orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
+                sender.text = orginStr
+            }
+            
+        }
+        
         if spaceY < 300 {
             self.sv.setContentOffset(CGPoint(x: 0, y: 345 - spaceY), animated: true)
         }
     }
     @IBAction func textFieldEnd(sender: UITextField) {
-        
+        if(sender.tag == 4)
+        {
+            var orginStr=sender.text?.trim().uppercaseString
+            
+            orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
+            
+            
+            sender.text = orginStr! + "/RMB";
+            
+        }
         self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
