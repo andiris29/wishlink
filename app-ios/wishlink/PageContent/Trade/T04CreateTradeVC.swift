@@ -84,9 +84,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     override func viewWillAppear(animated: Bool) {
         
-     
-        
-        
         if(self.t05VC != nil)
         {
             self.t05VC.view.removeFromSuperview();
@@ -482,9 +479,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         if(sender.tag == 4)//价格自动去掉RMB，
         {
             var orginStr=sender.text?.trim().uppercaseString;
-            if(orginStr?.length>0)
+            if(orginStr?.length > 0)
             {
-                orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
+                orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "")
+                orginStr = orginStr?.componentsSeparatedByString("/")[0]
                 sender.text = orginStr
             }
             
@@ -495,14 +493,33 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
     }
     @IBAction func textFieldEnd(sender: UITextField) {
-        if(sender.tag == 4)
-        {
+        
+        if(sender.tag == 4) {
+            
             var orginStr=sender.text?.trim().uppercaseString
+            if orginStr?.length < 1 { return }
             
-            orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
+            orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "")
+            orginStr = orginStr?.componentsSeparatedByString("/")[0]
+            orginStr = "RMB " + orginStr!
+            sender.text = orginStr
             
+            let unit: String = (self.sv.viewWithTag(5) as! UITextField).text!
+            if unit.length < 1 { return }
+            orginStr = orginStr! + "/" + unit
+            sender.text = orginStr
             
-            sender.text = orginStr! + "/RMB";
+        } else if (sender.tag == 5){
+            
+            let orginStr=sender.text?.trim()
+            if orginStr?.length < 1 { return }
+            
+            let unitTextField: UITextField = self.sv.viewWithTag(4) as! UITextField
+            var unit: String = unitTextField.text!
+            if unit.length < 1 { return }
+            unit = unit.componentsSeparatedByString("/")[0]
+            unit = unit + "/" + orginStr!
+            unitTextField.text = unit
             
         }
         self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
@@ -614,30 +631,30 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     var lastSelectTextFiledTag = -1;
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        if(textField.tag>3 || textField.tag == 0)
-        {
+//        if(textField.tag>3 || textField.tag == 0)
+//        {
             return true;
-        }
-        else
-        {
-            self.lastSelectTextFiledTag = textField.tag;
-            let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
-            vc.myDelegate = self;
-            if(textField.tag == 1)
-            {
-                vc.searchType = .brand;
-            }
-            else if(textField.tag == 2)
-            {
-                vc.searchType = .name;
-            }
-            else if(textField.tag == 3)
-            {
-                vc.searchType = .country;
-            }
-            self.presentViewController(vc, animated: true, completion: nil);
-            return false;
-        }
+//        }
+//        else
+//        {
+//            self.lastSelectTextFiledTag = textField.tag;
+//            let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
+//            vc.myDelegate = self;
+//            if(textField.tag == 1)
+//            {
+//                vc.searchType = .brand;
+//            }
+//            else if(textField.tag == 2)
+//            {
+//                vc.searchType = .name;
+//            }
+//            else if(textField.tag == 3)
+//            {
+//                vc.searchType = .country;
+//            }
+//            self.presentViewController(vc, animated: true, completion: nil);
+//            return false;
+//        }
     }
 
     

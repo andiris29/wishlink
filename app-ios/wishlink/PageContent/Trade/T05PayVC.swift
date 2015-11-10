@@ -109,7 +109,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             self.lbPrice.text = self.item.price.format(".2");
             if(goodsNumbers>0)
             {
-                self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
+                self.lbTotalFree.text = "¥ " + (self.item.price * Float(goodsNumbers)).format(".2");
             }
             else
             {
@@ -118,7 +118,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         }
      
         
-         self.decreaseButton.enabled = goodsNumbers > 1
+        self.decreaseButton.enabled = goodsNumbers > 1
         self.lbReceverName.text = "";
         self.lbReceverMobile.text = "";
         self.lbRecevierAddress.text = "";
