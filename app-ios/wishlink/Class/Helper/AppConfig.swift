@@ -53,7 +53,8 @@ class AppConfig: NSObject
 {
     //服务端接口前缀
     let  SERVICE_ROOT_PATH =  SERVER_BASE_URL + "/services/"
-    
+    let NotificationActionPayResult="NotificationActionPayResult"
+
     //微信登录相关信息
     static var  wxAppKey:String = "wx7d2407c862aeda7b";
     static var  wxAppSecret:String = "8f4bb1d0bf4d71024b9d11825e80c771"
