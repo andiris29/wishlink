@@ -15,7 +15,7 @@ extension UITabBarItem {
         NSFontAttributeName
         let selectedDic = [
             NSFontAttributeName : UIHEPLER.getCustomFont(true, fontSsize: 12),
-            NSForegroundColorAttributeName : UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0),
+            NSForegroundColorAttributeName : MainColorRed(),
             
         ]
         tabBarItem.setTitleTextAttributes(selectedDic, forState: .Selected)

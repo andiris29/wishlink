@@ -161,6 +161,8 @@
 		D24485D81B8E10B500CD97D5 /* T10MessagingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24485D61B8E10B500CD97D5 /* T10MessagingVC.swift */; };
 		D24485D91B8E10B500CD97D5 /* T10MessagingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24485D71B8E10B500CD97D5 /* T10MessagingVC.xib */; };
 		D24604C81BAAE22B00D7CE44 /* CSDorpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24604C71BAAE22B00D7CE44 /* CSDorpListView.swift */; };
+		D25E02451BF313DB004659C9 /* U06RegsiterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25E02431BF313DB004659C9 /* U06RegsiterVC.swift */; settings = {ASSET_TAGS = (); }; };
+		D25E02461BF313DB004659C9 /* U06RegsiterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25E02441BF313DB004659C9 /* U06RegsiterVC.xib */; settings = {ASSET_TAGS = (); }; };
 		D2600B8E1BD65D88002E850F /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = D2600B891BD65D88002E850F /* ApiXml.mm */; };
 		D2600B8F1BD65D88002E850F /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = D2600B8B1BD65D88002E850F /* payRequsestHandler.mm */; };
 		D2600B901BD65D88002E850F /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D2600B8D1BD65D88002E850F /* WXUtil.mm */; };
@@ -178,8 +180,6 @@
 		D29662311BE11FE100BDEDB9 /* T06ItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296622F1BE11FE100BDEDB9 /* T06ItemVC.xib */; };
 		D29662341BE130C000BDEDB9 /* T14AssignToMeConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29662321BE130C000BDEDB9 /* T14AssignToMeConfirm.swift */; };
 		D29662351BE130C000BDEDB9 /* T14AssignToMeConfirm.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29662331BE130C000BDEDB9 /* T14AssignToMeConfirm.xib */; };
-		D2A08B7C1BE518BD00605ACA /* U06RegsiterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A08B7A1BE518BD00605ACA /* U06RegsiterVC.swift */; };
-		D2A08B7D1BE518BD00605ACA /* U06RegsiterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A08B7B1BE518BD00605ACA /* U06RegsiterVC.xib */; };
 		D2A150DB1B99784F00F9A433 /* FZLanTingHeiS-EL-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */; };
 		D2A150DC1B99784F00F9A433 /* HelveticaInserat-Roman-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */; };
 		D2ABA11B1BD922A100CFA42E /* T01SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */; };
@@ -473,6 +473,8 @@
 		D24485D61B8E10B500CD97D5 /* T10MessagingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T10MessagingVC.swift; sourceTree = "<group>"; };
 		D24485D71B8E10B500CD97D5 /* T10MessagingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T10MessagingVC.xib; sourceTree = "<group>"; };
 		D24604C71BAAE22B00D7CE44 /* CSDorpListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSDorpListView.swift; sourceTree = "<group>"; };
+		D25E02431BF313DB004659C9 /* U06RegsiterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U06RegsiterVC.swift; sourceTree = "<group>"; };
+		D25E02441BF313DB004659C9 /* U06RegsiterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U06RegsiterVC.xib; sourceTree = "<group>"; };
 		D2600B881BD65D88002E850F /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
 		D2600B891BD65D88002E850F /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
 		D2600B8A1BD65D88002E850F /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
@@ -500,8 +502,6 @@
 		D296622F1BE11FE100BDEDB9 /* T06ItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06ItemVC.xib; sourceTree = "<group>"; };
 		D29662321BE130C000BDEDB9 /* T14AssignToMeConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T14AssignToMeConfirm.swift; sourceTree = "<group>"; };
 		D29662331BE130C000BDEDB9 /* T14AssignToMeConfirm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T14AssignToMeConfirm.xib; sourceTree = "<group>"; };
-		D2A08B7A1BE518BD00605ACA /* U06RegsiterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = U06RegsiterVC.swift; path = ../U01/U06RegsiterVC.swift; sourceTree = "<group>"; };
-		D2A08B7B1BE518BD00605ACA /* U06RegsiterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = U06RegsiterVC.xib; path = ../U01/U06RegsiterVC.xib; sourceTree = "<group>"; };
 		D2A150D91B99775600F9A433 /* FZLanTingHeiS-EL-GB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZLanTingHeiS-EL-GB.ttf"; sourceTree = "<group>"; };
 		D2A150DA1B99775600F9A433 /* HelveticaInserat-Roman-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaInserat-Roman-SemiBold.ttf"; sourceTree = "<group>"; };
 		D2ABA1191BD922A100CFA42E /* T01SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T01SearchCell.swift; sourceTree = "<group>"; };
@@ -839,7 +839,6 @@
 				A132BB911B863342004EAB47 /* U01 */,
 				A132BB941B863342004EAB47 /* U02 */,
 				A132BB9B1B863342004EAB47 /* U03 */,
-				A17C33FB1BECF8D900F2D3FD /* U06 */,
 				769565561BA0910800A6AD10 /* LoginHelper.h */,
 				769565571BA0910800A6AD10 /* LoginHelper.mm */,
 			);
@@ -851,6 +850,8 @@
 			children = (
 				A132BB921B863342004EAB47 /* U01LoginVC.swift */,
 				A132BB931B863342004EAB47 /* U01LoginVC.xib */,
+				D25E02431BF313DB004659C9 /* U06RegsiterVC.swift */,
+				D25E02441BF313DB004659C9 /* U06RegsiterVC.xib */,
 			);
 			path = U01;
 			sourceTree = "<group>";
@@ -919,15 +920,6 @@
 				A1C8EA5D1BCA05DA00ED9910 /* Validation.swift */,
 			);
 			path = Alamofire;
-			sourceTree = "<group>";
-		};
-		A17C33FB1BECF8D900F2D3FD /* U06 */ = {
-			isa = PBXGroup;
-			children = (
-				D2A08B7A1BE518BD00605ACA /* U06RegsiterVC.swift */,
-				D2A08B7B1BE518BD00605ACA /* U06RegsiterVC.xib */,
-			);
-			path = U06;
 			sourceTree = "<group>";
 		};
 		A18A0DCF1BB0637200A09A0D /* SVProgressHUD */ = {
@@ -1322,6 +1314,7 @@
 				7661BD611BB98F9000E01DBC /* PushConfig.plist in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
 				76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */,
+				D25E02461BF313DB004659C9 /* U06RegsiterVC.xib in Resources */,
 				765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */,
 				76B86E6B1BD0030A00DA29E3 /* RongCloud.bundle in Resources */,
 				D2E6BE941B96D62F0050C177 /* T11SearchSuggestionCell.xib in Resources */,
@@ -1342,7 +1335,6 @@
 				A18A06751BAF1504005ADFFA /* ScanVC.xib in Resources */,
 				A132BBAB1B863448004EAB47 /* T02HotListVC.xib in Resources */,
 				D24485D91B8E10B500CD97D5 /* T10MessagingVC.xib in Resources */,
-				D2A08B7D1BE518BD00605ACA /* U06RegsiterVC.xib in Resources */,
 				A1C36CA91B87A4E300EFCB57 /* T03SearchHelperVC.xib in Resources */,
 				7684F3C41B8DFA4D00B7D7DC /* U02TradeCell.xib in Resources */,
 				D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */,
@@ -1380,7 +1372,6 @@
 				A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */,
 				A1F3D3571BCEB4340007B7CE /* MD5DataSigner.m in Sources */,
 				A18A06741BAF1504005ADFFA /* ScanVC.swift in Sources */,
-				D2A08B7C1BE518BD00605ACA /* U06RegsiterVC.swift in Sources */,
 				D24485D81B8E10B500CD97D5 /* T10MessagingVC.swift in Sources */,
 				A132BB9E1B863342004EAB47 /* U01LoginVC.swift in Sources */,
 				A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */,
@@ -1394,6 +1385,7 @@
 				A1C8EA631BCA05DA00ED9910 /* ParameterEncoding.swift in Sources */,
 				D2E6BE871B96D36D0050C177 /* T11SearchSuggestionVC.swift in Sources */,
 				A1F3D35A1BCEB4340007B7CE /* RSADataSigner.m in Sources */,
+				D25E02451BF313DB004659C9 /* U06RegsiterVC.swift in Sources */,
 				A132BB8F1B863328004EAB47 /* TabBarItem.swift in Sources */,
 				D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */,
 				D2C3D6E21BDE643F000EE182 /* U02OrderTradeVC.swift in Sources */,
