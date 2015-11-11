@@ -11,6 +11,8 @@ import UIKit
 class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate, CSActionSheetDelegate,WebRequestDelegate,T11SearchSuggestionDelegate {
 
     @IBOutlet weak var sv: UIScrollView!
+    @IBOutlet weak var selectPhotoView: UIView!
+    
     @IBOutlet weak var txtCategory: UITextField!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtPrice: UITextField!
@@ -20,13 +22,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var txtBuyArea: UITextField!
     @IBOutlet weak var txtUnit: UITextField!
     
-    @IBOutlet weak var iv1_bg: UIImageView!
+    @IBOutlet weak var iv1_bg: UIImageView! // tag:61
     @IBOutlet weak var iv2_bg: UIImageView!
     @IBOutlet weak var iv3_bg: UIImageView!
     @IBOutlet weak var iv4_bg: UIImageView!
     @IBOutlet weak var iv5_bg: UIImageView!
     
-    @IBOutlet weak var iv1: UIImageView!
+    @IBOutlet weak var iv1: UIImageView! // tag:51
     @IBOutlet weak var iv2: UIImageView!
     @IBOutlet weak var iv3: UIImageView!
     @IBOutlet weak var iv4: UIImageView!
@@ -184,7 +186,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 multipartFormData.appendBodyPart(data: self.txtBuyArea.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "country")
                 
                 
-                var price =    self.txtPrice.text!.trim().uppercaseString.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
+                let price =    self.txtPrice.text!.trim().uppercaseString.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
 
                 
                 multipartFormData.appendBodyPart(data: price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
@@ -389,42 +391,22 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
  
     
     @IBAction func buttonLongPressAction(sender: AnyObject) {
-        print("==>>:\(sender)")
         
-      
-        var isShowDel = false;
-            if(self.iv1.image != nil)
-            {
-                self.btn1_del.hidden = false;
-                isShowDel = true
-            }
-            if(self.iv2.image != nil)
-            {
-                self.btn2_del.hidden = false;
-                isShowDel = true
-            }
-            if(self.iv3.image != nil)
-            {
-                self.btn3_del.hidden = false;
-                isShowDel = true
-            }
-            if(self.iv4.image != nil)
-            {
-                self.btn4_del.hidden = false;
-                isShowDel = true
-            }
-            if(self.iv5.image != nil)
-            {
-                self.btn5_del.hidden = false;
-                isShowDel = true
-            }
-            if(!isShowDel)
-            {
-                actionSheet.show(true)
-            }
-       
+        let button: UIButton = sender.view as! UIButton
+        let deleteButtonTag: Int = button.tag / 10 * 100 + button.tag % 40
+        let deleteButton: UIButton = self.selectPhotoView.viewWithTag(deleteButtonTag) as! UIButton
+        let iv: UIImageView = self.selectPhotoView.viewWithTag(button.tag + 10) as! UIImageView
         
-        
+        if iv.image != nil {
+            
+            for var index = 401; index <= 405; index++ {
+                
+                let deleteButton: UIButton = self.selectPhotoView.viewWithTag(index) as! UIButton
+                deleteButton.hidden = true
+            }
+            
+            deleteButton.hidden = false
+        }
     }
     
       func checkInput()->String{

@@ -57,6 +57,7 @@
                 <outlet property="iv4_bg" destination="N74-Ws-pEV" id="lvg-EO-LQM"/>
                 <outlet property="iv5" destination="XwT-rW-qui" id="BES-FZ-ahm"/>
                 <outlet property="iv5_bg" destination="0J0-NY-grk" id="xf8-ld-DCo"/>
+                <outlet property="selectPhotoView" destination="3Wx-8h-K4E" id="pDh-cO-Zdv"/>
                 <outlet property="sv" destination="o3w-0s-duu" id="LDZ-eO-RQl"/>
                 <outlet property="txtBuyArea" destination="9Oj-cU-ZNQ" id="yEe-ZO-zcc"/>
                 <outlet property="txtCategory" destination="r0m-RX-DBV" id="NN2-DW-cg3"/>
@@ -831,14 +832,14 @@
                                             <color key="textColor" red="0.97254901959999995" green="0.24313725489999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXq-3d-ja6" userLabel="v1">
+                                        <view tag="4001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXq-3d-ja6" userLabel="v1">
                                             <rect key="frame" x="8" y="37" width="60" height="60"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="H2C-PP-vk6" userLabel="iv1_bg">
+                                                <imageView userInteractionEnabled="NO" tag="61" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="H2C-PP-vk6" userLabel="iv1_bg">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <animations/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2CK-ZG-fXQ" userLabel="iv1">
+                                                <imageView userInteractionEnabled="NO" tag="51" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2CK-ZG-fXQ" userLabel="iv1">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
                                                     <animations/>
                                                 </imageView>
@@ -857,10 +858,10 @@
                                                 <constraint firstItem="2CK-ZG-fXQ" firstAttribute="leading" secondItem="pXq-3d-ja6" secondAttribute="leading" constant="4" id="ssT-60-VWm"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjw-uP-C6Q" userLabel="v2">
+                                        <view tag="4002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjw-uP-C6Q" userLabel="v2">
                                             <rect key="frame" x="76" y="37" width="60" height="60"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="1EX-rE-6re" userLabel="iv2_bg">
+                                                <imageView userInteractionEnabled="NO" tag="62" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="1EX-rE-6re" userLabel="iv2_bg">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <animations/>
                                                     <constraints>
@@ -872,7 +873,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poQ-wP-lqd" userLabel="iv2">
+                                                <imageView userInteractionEnabled="NO" tag="52" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poQ-wP-lqd" userLabel="iv2">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
                                                     <animations/>
                                                     <constraints>
@@ -904,10 +905,10 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51w-6c-ETM" userLabel="v3">
+                                        <view tag="4003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51w-6c-ETM" userLabel="v3">
                                             <rect key="frame" x="144" y="37" width="60" height="60"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="5fw-Xu-AXN" userLabel="iv3_bg">
+                                                <imageView userInteractionEnabled="NO" tag="63" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="5fw-Xu-AXN" userLabel="iv3_bg">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <animations/>
                                                     <constraints>
@@ -919,7 +920,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFb-7v-Wbz" userLabel="iv3">
+                                                <imageView userInteractionEnabled="NO" tag="53" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFb-7v-Wbz" userLabel="iv3">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
                                                     <animations/>
                                                     <constraints>
@@ -951,10 +952,10 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HlI-IN-pxx" userLabel="v4">
+                                        <view tag="4004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HlI-IN-pxx" userLabel="v4">
                                             <rect key="frame" x="212" y="37" width="60" height="60"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="N74-Ws-pEV" userLabel="iv4_bg">
+                                                <imageView userInteractionEnabled="NO" tag="64" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="N74-Ws-pEV" userLabel="iv4_bg">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <animations/>
                                                     <constraints>
@@ -966,7 +967,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y2M-TQ-O32" userLabel="iv4">
+                                                <imageView userInteractionEnabled="NO" tag="54" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y2M-TQ-O32" userLabel="iv4">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
                                                     <animations/>
                                                     <constraints>
@@ -998,10 +999,10 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRC-Ag-6uX" userLabel="v5">
+                                        <view tag="4005" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRC-Ag-6uX" userLabel="v5">
                                             <rect key="frame" x="280" y="37" width="60" height="60"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="0J0-NY-grk" userLabel="iv5_bg">
+                                                <imageView userInteractionEnabled="NO" tag="65" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T08bbb" translatesAutoresizingMaskIntoConstraints="NO" id="0J0-NY-grk" userLabel="iv5_bg">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <animations/>
                                                     <constraints>
@@ -1013,7 +1014,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XwT-rW-qui" userLabel="iv5">
+                                                <imageView userInteractionEnabled="NO" tag="55" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XwT-rW-qui" userLabel="iv5">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
                                                     <animations/>
                                                     <constraints>
