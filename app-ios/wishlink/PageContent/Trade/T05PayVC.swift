@@ -56,7 +56,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     }
     func receiveWeXinPayResultNotification(obj:NSNotification)
     {
-        var result = obj.object as! PayResp
+        let result = obj.object as! PayResp
         if(result.errCode == 0)
         {
             

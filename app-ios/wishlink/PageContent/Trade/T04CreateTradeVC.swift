@@ -193,9 +193,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                 multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
 //                if(self.imagrArr.count>0)
-                if(self.imgArr != nil && self.imgArr.count>0)
+                if(self.imgArr != nil && self.imgArr.count > 0)
                 {
-                    if(self.imgArr.count == 1)
+                    if(self.imgArr.count > 0)
                     {
                         let imgName = "item_a"
                         let imageData = UIHEPLER.compressionImageToDate(self.iv1.image!);
@@ -205,7 +205,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                         
                         multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                     }
-                    if(self.imgArr.count>1)
+                    if(self.imgArr.count > 1)
                     {
                         
                         let imgName = "item_b"
@@ -216,7 +216,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                         
                         multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                     }
-                    if(self.imgArr.count>2)
+                    if(self.imgArr.count > 2)
                     {
                         let imgName = "item_c"
                         let imageData = UIHEPLER.compressionImageToDate(self.iv3.image!);
@@ -226,7 +226,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                         
                         multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                     }
-                    if(self.imgArr.count>3)
+                    if(self.imgArr.count > 3)
                     {
                         let imgName = "item_d"
                         let imageData = UIHEPLER.compressionImageToDate(self.iv4.image!);
@@ -236,7 +236,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                         
                         multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                     }
-                    if(self.imgArr.count>4)
+                    if(self.imgArr.count > 4)
                     {
                         let imgName = "item_e"
                         let imageData = UIHEPLER.compressionImageToDate(self.iv5.image!);
@@ -264,6 +264,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                         switch resultObj.result {
                         case .Success(let json):
                             
+                            self.view.userInteractionEnabled = true;
                             print("Validation Successful")
                             print(json);
                             let itemData =  json.objectForKey("data") as! NSDictionary

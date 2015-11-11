@@ -112,17 +112,10 @@ class CSImageRollView: UIView, UIScrollViewDelegate {
             scrollerView.addConstraintsVisualFormat("[\(key)(scrollerView)]", views: scrollerViews)
             containerView.addConstraintsVisualFormat("V:|[\(key)(containerView)]|", views: scrollerViews)
         }
-
-        if(self.images.count>0)
-        {
-            self.pageControl.hidden = true;
-        }
-        else
-        {   
-            self.pageControl.hidden = false;
-        }
+        
         //pageControl
         pageControl.currentPage = 0
+        pageControl.hidden = self.images.count < 1;
         pageControl.numberOfPages = self.images.count
         pageControl.addTarget(self, action: Selector("pageControlValueChangeAction:"), forControlEvents: UIControlEvents.ValueChanged)
         self.addConstraintWidthMultiple(4.0, item: self, toItem: pageControl)
