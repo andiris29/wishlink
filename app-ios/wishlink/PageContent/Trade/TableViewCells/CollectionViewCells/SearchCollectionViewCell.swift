@@ -19,6 +19,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var iconButton: UIButton!
+    @IBOutlet weak var iconImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,25 +30,29 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         self.nameLabel.text = model.name;
         self.iconButton.tag = indexPath.row;
+        
+        if(model.icon != nil && model.icon.length > 1)
+        {
+            if(model.icon.containsString("http"))
+            {
+                WebRequestHelper().renderImageView(self.iconImageView, url: model.icon, defaultName: "")
+            }
+        }
     }
     
     var cellSelected:Bool = false;
     func setCellSelectStatus(_selected:Bool)
     {
-        if(_selected != cellSelected)
-        {
+        if(_selected != cellSelected) {
+            
             self.cellSelected = _selected
-            if(self.cellSelected)
-            {
+            if(self.cellSelected) {
                 self.nameLabel.textColor = UIHEPLER.mainColor;
-                self.iconButton.setImage(UIImage(named: "T03eee1"), forState: UIControlState.Normal);
                 self.iconButton.setBackgroundImage(UIImage(named: "T03aaa"), forState: UIControlState.Normal)
             }
-            else
-            {
+            else {
                 
                 self.nameLabel.textColor =  UIColor.lightGrayColor();
-                self.iconButton.setImage(UIImage(named: "T03eee0"), forState: UIControlState.Normal);
                 self.iconButton.setBackgroundImage(UIImage(named: "T03bbb"), forState: UIControlState.Normal)
             }
         }

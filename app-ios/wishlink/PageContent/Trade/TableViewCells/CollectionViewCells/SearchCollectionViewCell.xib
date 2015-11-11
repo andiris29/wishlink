@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -16,22 +16,29 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFg-gl-67u">
                         <rect key="frame" x="0.0" y="0.0" width="64" height="110"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m6A-1K-Bw2">
+                                <rect key="frame" x="5" y="10" width="54" height="54"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <button opaque="NO" tag="200" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S8-0z-VhZ">
                                 <rect key="frame" x="5" y="10" width="54" height="54"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="A1L-Px-ba1"/>
                                     <constraint firstAttribute="height" constant="54" id="wDT-u8-Qtk"/>
                                 </constraints>
-                                <state key="normal" image="T03eee0" backgroundImage="T03bbb">
+                                <state key="normal" backgroundImage="T03bbb">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="T03eee1" backgroundImage="T03aaa"/>
+                                <state key="highlighted" backgroundImage="T03aaa"/>
                                 <connections>
                                     <action selector="buttonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="W7x-Ug-QJi"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="香包" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-PG-7kS">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMA-PG-7kS">
                                 <rect key="frame" x="0.0" y="64" width="64" height="30"/>
+                                <animations/>
                                 <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MXe-wy-cAv"/>
@@ -41,19 +48,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3S8-0z-VhZ" firstAttribute="leading" secondItem="XFg-gl-67u" secondAttribute="leading" constant="5" id="7Lh-yd-UVo"/>
+                            <constraint firstItem="m6A-1K-Bw2" firstAttribute="height" secondItem="3S8-0z-VhZ" secondAttribute="height" id="Juv-Fw-YDZ"/>
                             <constraint firstAttribute="trailing" secondItem="aMA-PG-7kS" secondAttribute="trailing" id="K6M-HQ-3hq"/>
                             <constraint firstItem="aMA-PG-7kS" firstAttribute="leading" secondItem="XFg-gl-67u" secondAttribute="leading" id="e7y-uK-I3T"/>
                             <constraint firstAttribute="trailing" secondItem="3S8-0z-VhZ" secondAttribute="trailing" constant="5" id="g4h-my-vn9"/>
+                            <constraint firstItem="m6A-1K-Bw2" firstAttribute="width" secondItem="3S8-0z-VhZ" secondAttribute="width" id="hQD-re-lk4"/>
+                            <constraint firstItem="m6A-1K-Bw2" firstAttribute="top" secondItem="XFg-gl-67u" secondAttribute="top" constant="10" id="qh3-60-XFV"/>
                             <constraint firstItem="aMA-PG-7kS" firstAttribute="top" secondItem="3S8-0z-VhZ" secondAttribute="bottom" id="rSW-Mt-oCt"/>
+                            <constraint firstItem="m6A-1K-Bw2" firstAttribute="leading" secondItem="XFg-gl-67u" secondAttribute="leading" constant="5" id="rUP-Ut-LmI"/>
                             <constraint firstItem="3S8-0z-VhZ" firstAttribute="top" secondItem="XFg-gl-67u" secondAttribute="top" constant="10" id="syO-Jk-20f"/>
                         </constraints>
                     </view>
                 </subviews>
+                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <animations/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="XFg-gl-67u" secondAttribute="trailing" id="7Ym-5s-aYp"/>
                 <constraint firstAttribute="bottom" secondItem="XFg-gl-67u" secondAttribute="bottom" id="N2C-RL-1c2"/>
@@ -62,6 +76,7 @@
             </constraints>
             <connections>
                 <outlet property="iconButton" destination="3S8-0z-VhZ" id="aA3-Tv-gpc"/>
+                <outlet property="iconImageView" destination="m6A-1K-Bw2" id="AEh-4d-9K3"/>
                 <outlet property="nameLabel" destination="aMA-PG-7kS" id="zfK-KK-OU8"/>
             </connections>
         </collectionViewCell>
@@ -69,7 +84,5 @@
     <resources>
         <image name="T03aaa" width="54" height="54"/>
         <image name="T03bbb" width="54" height="54"/>
-        <image name="T03eee0" width="29" height="30"/>
-        <image name="T03eee1" width="29" height="30"/>
     </resources>
 </document>
