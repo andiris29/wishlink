@@ -214,7 +214,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let gotImage = info[UIImagePickerControllerEditedImage] as! UIImage
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
     

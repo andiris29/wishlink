@@ -129,7 +129,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let gotImage = info[UIImagePickerControllerEditedImage] as! UIImage
         if self.uploadImageType == .Portrait {
             self.headImageView.image = gotImage
             self.updatePortrait()
@@ -327,6 +327,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                 if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
                 {
                     imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                    imagePicker.allowsEditing = true
                     imagePicker.delegate = self;
                     self.userVC.presentViewController(imagePicker, animated: true, completion: nil);
                 }
@@ -336,6 +337,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                 
                 let imagePicker = UIImagePickerController()
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+                imagePicker.allowsEditing = true
                 imagePicker.delegate = self;
                 self.userVC.presentViewController(imagePicker, animated: true, completion: nil);
                 

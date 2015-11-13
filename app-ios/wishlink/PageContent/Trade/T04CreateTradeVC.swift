@@ -515,6 +515,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.allowsEditing = true
             imagePicker.delegate = self;
             self.presentViewController(imagePicker, animated: true, completion: nil);
         } else if index == 1002 {
@@ -522,6 +523,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             let imagePicker = UIImagePickerController()
             if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                imagePicker.allowsEditing = true
                 imagePicker.delegate = self;
                 self.presentViewController(imagePicker, animated: true, completion: nil);
             }
@@ -533,7 +535,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
 //        let icount = self.imagrArr.count;
-        let gotImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let gotImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
