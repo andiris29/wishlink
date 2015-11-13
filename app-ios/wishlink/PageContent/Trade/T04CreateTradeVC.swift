@@ -708,10 +708,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.txtCount.text = "";
         self.txtSize.text = "";
         self.txtBuyArea.text = "";
-//        self.iv0.image = nil;
-//        self.iv1.image = nil;
-//        self.iv2.image = nil;
-//        self.iv3.image = nil;
+        self.txtUnit.text = "";
         self.dataArr = nil;
         self.imgArr = nil;
         loadImagesData();
