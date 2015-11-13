@@ -86,15 +86,13 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         if tag == 10 {
             
             
-            
+            httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
             // 注销
             UserModel.shared.logout()
             AppConfig().userLogout()
             
       
             self.logOutAction();
-
-            
             
         }else if tag == 20 {
             // update user
@@ -105,6 +103,25 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
                     self.fillDataForUI()
                 })
             }
+        }
+        else if(tag == 102)
+        {
+            
+            SVProgressHUD.dismiss();
+            if let userDic = response["user"] as? NSDictionary
+            {
+                if(userDic.count>0)
+                {
+                    
+                    UserModel.shared.userDic = userDic as! [String: AnyObject]
+                }
+                else
+                {
+                    httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
+                    
+                }
+            }
+
         }
     }
     
