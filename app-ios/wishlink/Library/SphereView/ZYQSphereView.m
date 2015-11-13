@@ -71,7 +71,7 @@
 
 -(void)changeView{
     CGPoint normalPoint=self.frame.origin;
-    CGPoint movePoint=CGPointMake(self.frame.origin.x+intervalX, self.frame.origin.y+intervalY);
+    CGPoint movePoint=CGPointMake(self.frame.origin.x+intervalX/4, self.frame.origin.y+intervalY/4);
     
     [self rotateSphereByAngle:1 fromPoint:normalPoint toPoint:movePoint];
 }
@@ -80,7 +80,7 @@
     if (_timer.isValid) {
         [_timer invalidate];
     }
-    self.timer=[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeView) userInfo:nil repeats:YES];
+    self.timer=[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(changeView) userInfo:nil repeats:YES];
 }
 
 -(void)timerStop{

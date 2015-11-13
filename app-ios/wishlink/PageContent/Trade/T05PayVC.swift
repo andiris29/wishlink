@@ -41,7 +41,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var lbSpec: UILabel!
     @IBOutlet weak var numbersTextField: UITextField!
-   
+    
     @IBOutlet weak var lbTotalFree: UILabel!
     @IBOutlet weak var imageRollView: CSImageRollView!
     
@@ -113,10 +113,24 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             }
             else
             {
-                 self.lbTotalFree.text = "¥" + self.item.price.format(".2");
+                self.lbTotalFree.text = "¥" + self.item.price.format(".2");
             }
+            if (item == nil ||  item.images == nil) {return}
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                
+                var images: [UIImage] = []
+                for imageUrl in self.item.images {
+                    let url: NSURL = NSURL(string: imageUrl)!
+                    let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
+                    images.append(image)
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.initImageRollView(images)
+                })
+            })
+            
         }
-     
+        
         
         self.decreaseButton.enabled = goodsNumbers > 1
         self.lbReceverName.text = "";
@@ -135,19 +149,6 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 self.lbReceverMobile.text = defaultAddress.phone;
                 self.lbRecevierAddress.text = defaultAddress.address;
                 
-                if (item == nil ||  item.images == nil) {return}
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    
-                    var images: [UIImage] = [UIImage]()
-                    for imageUrl in self.item.images {
-                        let url: NSURL = NSURL(string: imageUrl)!
-                        let image: UIImage = UIImage(data: NSData(contentsOfURL: url)!)!
-                        images.append(image)
-                    }
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.initImageRollView(images)
-                    })
-                })
             }
         }
     }
@@ -215,14 +216,20 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     }
     @IBAction func btnPayTapped(sender: UIButton) {
         
-      
+        if(self.lbReceverName.text?.trim() == "")
+        {
+            
+            UIAlertView(title: "提示" , message: "请先选择收获地址" , delegate: nil , cancelButtonTitle: " 确定 " ).show()
+            return
+            
+        }
         
         let tag = sender.tag;
         if(tag == 11)//确认支付
         {
             if !(currentButton.tag == selectedButtonWXTag || currentButton.tag == selectedButtonZFBTag) {
                 
-                UIAlertView(title: "提示" , message: "请选择一种支付方式" , delegate: nil , cancelButtonTitle: " 完成 " ).show()
+                UIAlertView(title: "提示" , message: "请选择一种支付方式" , delegate: nil , cancelButtonTitle: " 确定 " ).show()
                 return
             }
             var para = ["_id":self.trade._id,
@@ -292,7 +299,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 {
                     var tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
                     _trade = TradeModel(dict: tradeDic)
-
+                    
                 }
                 new_trade_id = _trade._id;
                 
@@ -302,7 +309,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 order.tradeNO = new_trade_id
                 order.productName = self.item.name
                 order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
-                order.amount = "0.02"// (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
+                order.amount =  (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
                 order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
                 
                 order.service = "mobile.securitypay.pay";
@@ -366,39 +373,39 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                         strPara.UTF8String
                         var md5sign:String! =  WXUtil.md5(strPara as String).uppercaseString;
                         request.sign = md5sign;
-                
+                        
                         WXApi.sendReq(request)
                         ////-------------------方式一 End-------------------／
                         
-    ////-------------------方式二 begin-------------------／
-    //                //创建支付签名对象
-    //                let req: payRequsestHandler = payRequsestHandler()
-    //                //初始化支付签名对象
-    //                req.initWith(APP_ID, mch_id: MCH_ID)
-    //                //设置密钥
-    //                req.setKey(PARTNER_ID)
-    //                //获取到实际调起微信支付的参数后，在app端调起支付
-    //                 let dict = req.sendPayOrderName(self.item.name, orderPrice: "1", nonceString: _trade._id, orderNo: _trade._id, prePayid: _prepayid)
-    //                if (dict == nil) {
-    //                    //错误提示
-    //                    let debug: NSString = req.getDebugifo()
-    //                    NSLog("debug:%@\n\n",debug);
-    //                }else{
-    //                      NSLog("dict:%@\n\n",dict);
-    //                    NSLog("debug:%@\n\n",req.getDebugifo());
-    ////                    调起微信支付
-    //                    let req                 = PayReq()
-    //                    req.openID              = dict["appid"] as? String;
-    //                    req.partnerId           = dict["partnerid"] as? String;
-    //                    req.prepayId            = dict["prepayid"] as? String;
-    //                    req.nonceStr            = dict["noncestr"] as? String;
-    //                    req.timeStamp           = UInt32((dict["timestamp"]?.intValue)!);
-    //                    req.package             = dict["package"] as? String;
-    //                    req.sign                = dict["sign"] as? String;
-    //                    
-    //                    WXApi.sendReq(req)
-    //                }
-    //                    //-------------------方式二 End-------------------／
+                        ////-------------------方式二 begin-------------------／
+                        //                //创建支付签名对象
+                        //                let req: payRequsestHandler = payRequsestHandler()
+                        //                //初始化支付签名对象
+                        //                req.initWith(APP_ID, mch_id: MCH_ID)
+                        //                //设置密钥
+                        //                req.setKey(PARTNER_ID)
+                        //                //获取到实际调起微信支付的参数后，在app端调起支付
+                        //                 let dict = req.sendPayOrderName(self.item.name, orderPrice: "1", nonceString: _trade._id, orderNo: _trade._id, prePayid: _prepayid)
+                        //                if (dict == nil) {
+                        //                    //错误提示
+                        //                    let debug: NSString = req.getDebugifo()
+                        //                    NSLog("debug:%@\n\n",debug);
+                        //                }else{
+                        //                      NSLog("dict:%@\n\n",dict);
+                        //                    NSLog("debug:%@\n\n",req.getDebugifo());
+                        ////                    调起微信支付
+                        //                    let req                 = PayReq()
+                        //                    req.openID              = dict["appid"] as? String;
+                        //                    req.partnerId           = dict["partnerid"] as? String;
+                        //                    req.prepayId            = dict["prepayid"] as? String;
+                        //                    req.nonceStr            = dict["noncestr"] as? String;
+                        //                    req.timeStamp           = UInt32((dict["timestamp"]?.intValue)!);
+                        //                    req.package             = dict["package"] as? String;
+                        //                    req.sign                = dict["sign"] as? String;
+                        //
+                        //                    WXApi.sendReq(req)
+                        //                }
+                        //                    //-------------------方式二 End-------------------／
                         
                         strPara = nil;
                         md5sign = nil;
@@ -420,14 +427,14 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         else if(tag == 99)//交易回调请求（Postpay成后后返回的请求）
         {
             var trade_Dic:NSDictionary! = response as? NSDictionary
-         
+            
             print(trade_Dic)
             if(trade_Dic != nil && trade_Dic.objectForKey("trade") != nil)
             {
-         
-//                let tradeDic:NSDictionary! = trade_Dic.objectForKey("trade") as! NSDictionary
-//                var   _trade_result = TradeModel(dict: tradeDic)
-              
+                
+                //                let tradeDic:NSDictionary! = trade_Dic.objectForKey("trade") as! NSDictionary
+                //                var   _trade_result = TradeModel(dict: tradeDic)
+                
             }
             
             SVProgressHUD.dismiss();
@@ -442,7 +449,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
-
+    
     //MARK:WXApiDelegate
     func onResp(resp: BaseResp!) {
         NSLog("onResp")
@@ -450,5 +457,5 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     func onReq(req: BaseReq!) {
         NSLog("onReq")
     }
- 
+    
 }

@@ -82,8 +82,8 @@ class ItemModel: BaseModel {
             self.numTrades = self.getIntValue("numTrades", dic: tempDic)
             self.isFavorite = self.getBoolValue("favoritedByCurrentUser", dic: tempDic)
         }
-        if(dict.objectForKey("images") != nil)
-        {
+//        if(dict.objectForKey("images") != nil)
+//        {
             if let imgArr = dict.objectForKey("images") as? NSArray
             {
                 if(imgArr.count>0)
@@ -95,6 +95,6 @@ class ItemModel: BaseModel {
                     }
                 }
             }
-        }
+//        }
     }
 }
