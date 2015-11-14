@@ -9,19 +9,30 @@
 import UIKit
 
 
+
 class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 U03AddressCellDelegate, WebRequestDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
     var selectedReciver: ReceiverModel!
-    
-    var addressArray = [ReceiverModel]() {
+ 
+    var addressArray:[ReceiverModel]! = [ReceiverModel]() {
         didSet {
-            if self.addressArray.count > 0 {
+            if (self.addressArray != nil && self.addressArray.count > 0) {
                 self.tableView.reloadData()
             }
         }
+    }
+    var selectDefaultReceiver:((item:ReceiverModel)->Void)!
+
+    deinit
+    {
+        NSLog("U03AddressManagerVC --> deinit");
+   
+        self.dataArr = nil;
+        self.selectedReciver = nil;
+        self.addressArray = nil;
     }
     
     // MARK: - life cycle
@@ -93,6 +104,9 @@ U03AddressCellDelegate, WebRequestDelegate{
             let vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
             vc.operationType = .Edit
             vc.receiver = self.addressArray[indexPath.row]
+            
+            
+            
             vc.hidesBottomBarWhenPushed = true
             self.navigationController!.pushViewController(vc, animated: true)
         }
@@ -106,6 +120,9 @@ U03AddressCellDelegate, WebRequestDelegate{
             if(self.selectedReciver != nil)
             {
                 if receiver == self.selectedReciver {
+                    
+                    
+                    
                     return
                 }
             }
@@ -171,6 +188,9 @@ U03AddressCellDelegate, WebRequestDelegate{
     // MARK: - prive method
     
     func setDefaultReceiver(receiver: ReceiverModel) {
+        
+     
+        
         self.view.userInteractionEnabled = false
         receiver.isDefault = true
         let dic = receiver.keyValuesWithType(.Update)
@@ -209,6 +229,14 @@ U03AddressCellDelegate, WebRequestDelegate{
         
     }
     
+    override func leftNavBtnAction(button: UIButton) {
+        if(self.selectedReciver != nil &&  self.selectDefaultReceiver != nil)
+        {
+            self.selectDefaultReceiver(item:self.selectedReciver)
+           
+        }
+         self.navigationController?.popViewControllerAnimated(true);
+    }
     // MARK: - setter and getter
     
     

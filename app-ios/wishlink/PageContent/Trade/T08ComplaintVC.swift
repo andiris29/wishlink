@@ -23,7 +23,12 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     var currentButton: UIButton!
     var images = Dictionary<String, UIImage>()
     var defaultMsg:String = "在此描述您遇到的具体问题，将有客服人员更快的处理您的申请"
-    
+    deinit{
+        
+        NSLog("T08ComplaintVC -->deinit")
+        
+        self.dataArr = nil;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.contexTextView.delegate = self;

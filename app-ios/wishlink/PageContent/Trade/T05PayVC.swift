@@ -27,7 +27,6 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     var currPayModel:PayModel = .Alipay
     var item:ItemModel!
     var trade:TradeModel!
-    var u03VC:U03AddressManagerVC!
     
     @IBOutlet weak var increaseButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
@@ -155,33 +154,6 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     
     override func viewWillAppear(animated: Bool) {
         
-        
-        if(self.u03VC != nil)
-        {
-            if(self.u03VC.selectedReciver != nil)//更换支付地址
-            {
-                
-                self.lbReceverName.text = self.u03VC.selectedReciver.name
-                self.lbReceverMobile.text = self.u03VC.selectedReciver.phone;
-                self.lbRecevierAddress.text = self.u03VC.selectedReciver.address;
-                
-                let para = ["_id":self.trade._id,
-                    "receiver":[
-                        "name":self.u03VC.selectedReciver.name,
-                        "phone":self.u03VC.selectedReciver.phone,
-                        "province":self.u03VC.selectedReciver.province,
-                        "address":self.u03VC.selectedReciver.address
-                    ]
-                ]
-                
-                //TODU:更换支付地址
-                self.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
-            }
-            self.u03VC.view.removeFromSuperview();
-            self.u03VC.view  = nil;
-            self.u03VC = nil;
-        }
-        
         self.navigationController?.navigationBarHidden = false;
         
         self.increaseButton.enabled = !self.isNewOrder
@@ -248,14 +220,30 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         }
         else
         {
-            if(self.u03VC == nil)
-            {
-                self.u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+           
+            let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+            u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
+            
+                self!.lbReceverName.text = item.name
+                self!.lbReceverMobile.text = item.phone;
+                self!.lbRecevierAddress.text = item.address;
+                
+                let para = ["_id":self!.trade._id,
+                    "receiver":[
+                        "name":item.name,
+                        "phone":item.phone,
+                        "province":item.province,
+                        "address":item.address
+                    ]
+                ]
+                //TODU:更换支付地址
+                self!.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
             }
-            self.navigationController?.pushViewController(self.u03VC, animated: true);
+            self.navigationController?.pushViewController(u03VC, animated: true);
             
         }
     }
+
     
     @IBAction func incrlineOrDecreingButtonPay(sender: UIButton) {
         

@@ -200,9 +200,6 @@ class WebRequestHelper:NSObject {
                             if (image != nil) {
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     
-                                    
-                                    print("***********")
-                                    print(NSDate())
                                     iv.image = image;
                                 })
                                 return;

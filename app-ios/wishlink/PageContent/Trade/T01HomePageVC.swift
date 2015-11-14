@@ -29,7 +29,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     var sphereView: ZYQSphereView!
     var isNeedShowLoin = true;
     var itemContents: NSArray = NSArray()
-    var t02VC:T02HotListVC!
+//    var t02VC:T02HotListVC!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +64,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated);
-        if(self.t02VC != nil)
-        {
-            self.t02VC = nil;
-        }
+//        if(self.t02VC != nil)
+//        {
+//            self.t02VC = nil;
+//        }
 
         self.navigationController?.navigationBarHidden = true
     }
@@ -210,13 +210,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     
     func gotoNextPage(strKeyWord:String)
     {
-        if(self.t02VC == nil)
-        {
-            self.t02VC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        }
-        self.t02VC.keyword = strKeyWord;
-        self.t02VC.pagemodel  = .search;
-        self.navigationController?.pushViewController(self.t02VC, animated: true);
+        var vc:T02HotListVC! =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        vc.keyword = strKeyWord;
+        vc.pagemodel  = .search;
+        self.navigationController?.pushViewController(vc, animated: true);
+        vc = nil;
+
         self.removeTimer();
     }
 

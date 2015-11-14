@@ -30,7 +30,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     var searchTextField: UITextField!
     var topView = UIImageView()
     
-    var t06VC:T06ItemVC!
+//    var t06VC:T06ItemVC!
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -41,38 +41,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.initTopView()
 
         self.httpObj.mydelegate = self;
-    }
-
-    deinit{
         
-        NSLog("T02HotListVC -->deinit")
-        self.collectionView = nil;
-        if(self.dataArr != nil && self.dataArr.count>0)
-        {
-            self.dataArr.removeAll();
-            self.dataArr = nil;
-        }
-    
-        if(self.t06VC != nil)
-        {
-            self.t06VC = nil;
-        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        if(self.t06VC != nil)
-        {
-            self.t06VC = nil;
-        }
-        
-        self.navigationController?.navigationBarHidden = false;
-        
-       
-        self.maskView.hidden = false;
-//        self.lbTipMessage.text = "正在搜索中..."
         if(self.pagemodel == .search)
         {
             let para:[String : AnyObject] = ["pageNo":1,
@@ -84,7 +53,33 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         {
             self.httpObj.httpGetApi("itemFeeding/hot", parameters: nil , tag: 10);
         }
-        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+    }
+
+    deinit{
+        
+        NSLog("T02HotListVC -->deinit")
+      
+        if(self.dataArr != nil && self.dataArr.count>0)
+        {
+            self.dataArr.removeAll();
+            self.dataArr = nil;
+        }
+
+          self.collectionView = nil;
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+
+        
+        self.navigationController?.navigationBarHidden = false;
+        
+       
+//        self.maskView.hidden = false;
+
+//        SVProgressHUD.showWithStatusWithBlack("请稍等...")
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -152,12 +147,11 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        if(self.t06VC == nil)
-        {
-            self.t06VC = T06ItemVC(nibName: "T06ItemVC", bundle: NSBundle.mainBundle());
-        }
-        self.t06VC.item = self.dataArr[indexPath.row] as! ItemModel
-        self.navigationController?.pushViewController(self.t06VC, animated: true);
+        var t06VC:T06ItemVC! = T06ItemVC(nibName: "T06ItemVC", bundle: NSBundle.mainBundle());
+        
+        t06VC.item = self.dataArr[indexPath.row] as! ItemModel
+        self.navigationController?.pushViewController(t06VC, animated: true);
+        t06VC = nil;
     }
     
     

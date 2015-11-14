@@ -20,6 +20,13 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     
     var dorpListView: CSDorpListView!
     
+    deinit{
+        
+        NSLog("T07DeliverEditVC -->deinit")
+        self.dorpListView = nil;
+        
+        self.dataArr = nil;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

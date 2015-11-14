@@ -19,7 +19,13 @@ class T09ComplaintStatusVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var chatTableView: UITableView!
     
     var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
-    
+    deinit{
+        
+        NSLog("T09ComplaintStatusVC -->deinit")
+     
+        
+        self.dataArr = nil;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

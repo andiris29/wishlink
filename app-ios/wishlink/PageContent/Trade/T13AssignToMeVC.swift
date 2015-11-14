@@ -17,15 +17,17 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tradeTableView: UITableView!
     
-    var T14VC:T14AssignToMeConfirm!
+//    var T14VC:T14AssignToMeConfirm!
     
-    var t05VC:T05PayVC!
+//    var t05VC:T05PayVC!
     var item: ItemModel!
     var trade:TradeModel!
     //跟单列表
     var followArr:[TradeModel]! = []
     //选中的抢单列表
     var selectArr:[TradeModel]! = []
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,33 +62,23 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         self.item = nil;
         self.tradeTableView = nil;
         
-        if(self.dataArr != nil && self.dataArr.count>0)
-        {
-            self.dataArr.removeAll();
-            self.dataArr = nil;
-        }
-        if(self.followArr != nil && self.followArr.count>0)
-        {
-            self.followArr.removeAll();
-            self.followArr = nil;
-        }
-        if(self.selectArr != nil && self.selectArr.count>0)
-        {
-            self.selectArr.removeAll();
-            self.selectArr = nil;
-        }
+    
+        self.dataArr = nil;
+    
+        self.followArr = nil;
+        self.selectArr = nil;
         userImage = nil;
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
-        if(self.t05VC != nil)
-        {
-            self.t05VC = nil;
-        }
-        if(self.T14VC != nil)
-        {
-            self.T14VC = nil;
-        }
+//        if(self.t05VC != nil)
+//        {
+//            self.t05VC = nil;
+//        }
+//        if(self.T14VC != nil)
+//        {
+//            self.T14VC = nil;
+//        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -260,12 +252,13 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         if(self.selectArr != nil && self.selectArr.count>0)
         {
         
-             self.T14VC = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
+            var vc:T14AssignToMeConfirm! = T14AssignToMeConfirm(nibName: "T14AssignToMeConfirm", bundle: NSBundle.mainBundle());
             
-            self.T14VC.item = self.item;
-            self.T14VC.followArr = self.selectArr;
-            self.T14VC.selectArr = self.selectArr;
-            self.presentViewController(self.T14VC, animated: true, completion: nil);
+            vc.item = self.item;
+            vc.followArr = self.selectArr;
+            vc.selectArr = self.selectArr;
+            self.presentViewController(vc, animated: true, completion: nil);
+            vc = nil;
        
         }
         else
@@ -404,14 +397,14 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             let dic = response as! NSDictionary;
             let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
             let tradeItem = TradeModel(dict: tradeDic);
-            if( self.t05VC == nil)
-            {
-                self.t05VC = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            }
-            self.t05VC.item = self.item;
-            self.t05VC.trade = tradeItem;
-            self.t05VC.isNewOrder = false;
-            self.navigationController?.pushViewController(self.t05VC, animated: true);
+            
+            var t05VC:T05PayVC! = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            
+            t05VC.item = self.item;
+            t05VC.trade = tradeItem;
+            t05VC.isNewOrder = false;
+            self.navigationController?.pushViewController(t05VC, animated: true);
+            t05VC = nil;
             
         }
     }

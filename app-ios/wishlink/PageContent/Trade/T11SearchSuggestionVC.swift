@@ -31,7 +31,13 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     var searchContext:String = ""
     
     var itemContents: NSArray = NSArray()
-    
+    deinit{
+        
+        NSLog("T11SearchSuggestionVC -->deinit")
+        
+        self.myDelegate = nil;
+        self.dataArr = nil;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

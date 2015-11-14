@@ -36,6 +36,18 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     //选中的抢单列表
     var selectArr:[TradeModel]! = []
     
+    deinit
+    {
+        NSLog("T06ItemVC deinit")
+        
+        self.item = nil;
+        self.trade = nil;
+        
+        self.followArr = nil;
+        self.selectArr = nil;
+        self.imageRollView = nil;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

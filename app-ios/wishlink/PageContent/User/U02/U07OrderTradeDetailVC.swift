@@ -44,6 +44,15 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     var orderStatusDic: [Int : String]! = [:]
     
+    deinit
+    {
+        NSLog("U07OrderTradeDetailVC --> deinit");
+        self.orderStatus = nil;
+        self.assigneeModel = nil;
+        self.receiver = nil;
+        self.trade = nil;
+        self.role = nil;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

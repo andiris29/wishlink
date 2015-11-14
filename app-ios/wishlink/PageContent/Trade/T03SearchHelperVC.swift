@@ -22,7 +22,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var nextVC:UIViewController!
+//    var nextVC:UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,10 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
 
     }
     override func viewWillAppear(animated: Bool) {
-        if(self.nextVC != nil)
-        {
-            self.nextVC = nil;
-        }
+//        if(self.nextVC != nil)
+//        {
+//            self.nextVC = nil;
+//        }
         httpRequest()
     }
     
@@ -139,9 +139,9 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         var vc:T02HotListVC! = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
         vc.keyword = keyWord
         vc.pagemodel  = .search;
-        self.nextVC = vc
+//        self.nextVC = vc
         
-        self.navigationController?.pushViewController( self.nextVC, animated: true);
+        self.navigationController?.pushViewController( vc, animated: true);
         vc = nil;
     }
     

@@ -16,7 +16,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     @IBOutlet weak var tradeTableView: UITableView!
     
     
-    var t05VC:T05PayVC!
+//    var t05VC:T05PayVC!
     var item: ItemModel!
     //跟单列表
     var followArr:[TradeModel]! = []
@@ -27,6 +27,19 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         super.viewDidLoad()
         
         self.initData()
+    }
+    deinit{
+        
+        NSLog("T14AssignToMeConfirm -->deinit")
+        self.item = nil;
+        self.tradeTableView = nil;
+        
+        
+        self.dataArr = nil;
+        
+        self.followArr = nil;
+        self.selectArr = nil;
+        self.tradeTableView = nil;
     }
     
     func initData() {
