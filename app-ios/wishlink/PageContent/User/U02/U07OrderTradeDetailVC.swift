@@ -96,11 +96,11 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         self.goodFrom.text = "购买地：\(item.country)"
         self.goodFormat.text = "规格：\(item.spec)"
         self.goodPrice.text = "价格：￥\(item.price)/件"
-        self.goodNumber.text = "数量：\(item.numTrades)"
+        self.goodNumber.text = "数量：\(trade.quantity)"
         
         if(item != nil && item.price != nil)
         {
-            self.goodTotal.text = "合计：\(item.price * Float(self.trade.quantity))"
+            self.goodTotal.text = "合计：\(item.price * Float(trade.quantity))"
         }
         
         if self.role == .buyyer {
