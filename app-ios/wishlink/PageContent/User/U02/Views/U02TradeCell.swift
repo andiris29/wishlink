@@ -82,10 +82,9 @@ class U02TradeCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.redColor().CGColor
-//        self.prepareBuyerTopView()
-//        self.prepareSellerTopView()
+
+        self.prepareBuyerTopView()
+        self.prepareSellerTopView()
     }
     
     @IBAction func revokeBtnAction(sender: AnyObject) {
@@ -136,7 +135,7 @@ class U02TradeCell: UICollectionViewCell {
         self.sellerTradeIdLabel.text = "订单号：\(self.trade._id)"
         
        
-        self.itemCountryLabel.text = "数量：" + "\(self.trade.quantity)"
+        self.itemCountLabel.text = "数量：" + "\(self.trade.quantity)"
         if(self.trade.item != nil)
         {
             if(self.trade.item.price != nil)
@@ -165,7 +164,7 @@ class U02TradeCell: UICollectionViewCell {
         self.btnChat.setImage(UIImage(named: "u02-contactsell-new"), forState: .Selected)
 
 //        self.hideAllBtns()
-        self.isRead(true)
+        self.isRead(false)
         self.btnComplain.hidden = false
         switch trade.status {
         case 1:
@@ -249,7 +248,7 @@ class U02TradeCell: UICollectionViewCell {
         self.btnChat.setImage(UIImage(named: "u02-contactbuy"), forState: .Normal)
         self.btnChat.setImage(UIImage(named: "u02-contactbuy-new"), forState: .Selected)
 //        self.hideAllBtns()
-        self.isRead(true)
+        self.isRead(false)
         switch trade.status {
         case 3:
             if trade.statusOrder == .c0 {
@@ -296,17 +295,27 @@ class U02TradeCell: UICollectionViewCell {
     
     
     func isRead(isRead: Bool) {
+        
         if isRead {
+            
+            // RGB(253, g: 234, b: 237)
+            self.buyerTopView.backgroundColor = UIColor.whiteColor()
+            self.buyerRoundImageView.hidden = false
+            self.sellerTopView.backgroundColor = UIColor.whiteColor()
+            self.sellerRoundImageView.hidden = false
+            
+            self.layer.borderWidth = 1
+            self.layer.borderColor = UIColor.redColor().CGColor
+        }
+        else {
+            
             self.buyerTopView.backgroundColor = UIColor.whiteColor()
             self.buyerRoundImageView.hidden = true
             self.sellerTopView.backgroundColor = UIColor.whiteColor()
             self.sellerRoundImageView.hidden = true
-        }
-        else {
-            self.buyerTopView.backgroundColor = RGB(253, g: 234, b: 237)
-            self.buyerRoundImageView.hidden = false
-            self.sellerTopView.backgroundColor = RGB(253, g: 234, b: 237)
-            self.sellerRoundImageView.hidden = false
+            
+            self.layer.borderWidth = 1
+            self.layer.borderColor = RGBC(204) .CGColor
         }
     }
     
@@ -322,10 +331,10 @@ class U02TradeCell: UICollectionViewCell {
 //        self.btnComplain.hidden = true
 //    }
 //    
-//    func prepareBuyerTopView() {
-//        self.buyerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.buyerRoundImageView.frame) * 0.5
-//        self.buyerRoundImageView.layer.masksToBounds = true
-//        
+    func prepareBuyerTopView() {
+        self.buyerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.buyerRoundImageView.frame) / 2.0
+        self.buyerRoundImageView.layer.masksToBounds = true
+//
 //        self.buyerRevokeBtn.layer.cornerRadius = kCornerRadius
 //        self.buyerRevokeBtn.layer.masksToBounds = true
 //        self.buyerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
@@ -350,13 +359,13 @@ class U02TradeCell: UICollectionViewCell {
 //        self.buyerRevokeBtn.layer.masksToBounds = true
 //        self.buyerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
 //        self.buyerRevokeBtn.layer.borderWidth = kBorderWidth;
-//    }
-//    
-//    func prepareSellerTopView() {
-//        
-//        self.sellerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.sellerRoundImageView.frame) * 0.5
-//        self.sellerRoundImageView.layer.masksToBounds = true
-//        
+    }
+//
+    func prepareSellerTopView() {
+        
+        self.sellerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.sellerRoundImageView.frame) / 2.0
+        self.sellerRoundImageView.layer.masksToBounds = true
+//
 //        self.sellerRevokeBtn.layer.cornerRadius = kCornerRadius
 //        self.sellerRevokeBtn.layer.masksToBounds = true
 //        self.sellerRevokeBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
@@ -376,7 +385,7 @@ class U02TradeCell: UICollectionViewCell {
 //        self.sellerSendOutBtn.layer.masksToBounds = true
 //        self.sellerSendOutBtn.layer.borderColor = UIColor(red: 123 / 255.0, green: 2 / 255.0, blue: 90 / 255.0, alpha: 1.0).CGColor
 //        self.sellerSendOutBtn.layer.borderWidth = kBorderWidth;
-//    }
+    }
 }
 
 

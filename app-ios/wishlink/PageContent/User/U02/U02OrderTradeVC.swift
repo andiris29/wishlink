@@ -65,7 +65,6 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.sellerTradeVC.view.center = center
         
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 2, height: 0)
-        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: false)
     }
     
     // MARK: - Action
@@ -86,13 +85,13 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
             buyerButton.backgroundColor = MainColor()
             sellerButton.backgroundColor = RGBC(160)
             
-            self.sellerTradeVC.getSellerTrade()
+            self.buyerTradeVC.getBuyerTrade()
         } else {
         
             buyerButton.backgroundColor = RGBC(160)
             sellerButton.backgroundColor = RGB(248, g: 62, b: 91)
             
-            self.buyerTradeVC.getBuyerTrade()
+            self.sellerTradeVC.getSellerTrade()
         }
     }
     
