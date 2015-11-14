@@ -65,6 +65,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
             self.dataArr = nil;
         }
 
+        self.httpObj.mydelegate = nil;
           self.collectionView = nil;
     }
     

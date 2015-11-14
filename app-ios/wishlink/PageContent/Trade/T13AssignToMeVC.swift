@@ -61,7 +61,10 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         NSLog("T06TradeVC -->deinit")
         self.item = nil;
         self.tradeTableView = nil;
-        
+        if(self.httpObj != nil)
+        {
+            self.httpObj.mydelegate = nil;
+        }
     
         self.dataArr = nil;
     

@@ -73,6 +73,8 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     deinit
     {
         NSLog("T05PayVC --> deinit");
+        
+        self.httpObj.mydelegate = nil;
         self.imageRollView.removeFromSuperview();
         self.imageRollView = nil;
         self.item = nil;
@@ -297,7 +299,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 order.tradeNO = new_trade_id
                 order.productName = self.item.name
                 order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
-                order.amount =  (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"")
+                order.amount =  (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"").trim();
                 order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
                 
                 order.service = "mobile.securitypay.pay";

@@ -40,6 +40,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     {
         NSLog("T06ItemVC deinit")
         
+        self.httpObj.mydelegate = nil;
         self.item = nil;
         self.trade = nil;
         
