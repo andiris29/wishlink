@@ -22,6 +22,12 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var goodAllTradeLabel: UILabel!
     @IBOutlet weak var goodTotalLabel   : UILabel!
     
+    
+    @IBOutlet weak var iv_userImg: UIImageView!
+    
+    @IBOutlet weak var lb_CreateTime: UILabel!
+    @IBOutlet weak var lb_CreaterName: UILabel!
+    
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var lbRemark: UILabel!
     var nextVC:UIViewController!
@@ -53,6 +59,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         self.initData()
     }
     override func viewWillAppear(animated: Bool) {
@@ -97,12 +104,12 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         //绑定数据
         self.goodPriceLabel.text = "出价：RMB \(self.item.price.format("0.2"))";
         
-      
+        UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIColor.whiteColor(), borderWidth: 1);
         self.changeBtnFav(self.item.isFavorite);
 //         self.btnFav.selected = self.item.isFavorite
      
 
-        self.goodNameLabel.text = "品名：\(self.item.name) \(self.item.brand)"
+        self.goodNameLabel.text = "品名：\(self.item.brand) \(self.item.name) "
 //        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
         self.goodFormatLabel.text = "规格：\(self.item.spec)";
         self.goodAddressLabel.text = "购买地：\(self.item.country)";
@@ -117,6 +124,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             self.img_tips.hidden = true;
             self.lbRemark.text = ""
         }
+        
+   
   
         if (self.item.images == nil) {return}
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -227,7 +236,24 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 self.goodNumberLabel.text = "数量：\(self.trade.quantity)";
                 let totalFree = Float(self.trade.quantity) * self.item.price
                 self.goodTotalLabel.text = "合计：RMB \(totalFree.format(".2"))";
+                
+                self.lb_CreaterName.text = "";
+                self.lb_CreateTime.text = "";
+                self.iv_userImg.image = nil;
+                if let strNickName = self.trade.owner?.objectForKey("nickname") as? String
+                {
+                    self.lb_CreaterName.text = strNickName;
+                }
+                if let strImgUrl = self.trade.owner?.objectForKey("portrait") as? String
+                {
+                    WebRequestHelper().renderImageView(self.iv_userImg, url: strImgUrl, defaultName: "");
+                }
+                if(self.trade.create != nil)
+                {
+                    self.lb_CreateTime.text = self.trade.create;
+                }
             }
+            
             
         }
         
@@ -306,6 +332,15 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         } else if(tag == 63) {//收藏 or 取消收藏
         
             self.changeBtnFav(!self.isFav);
+            if(self.isFav)
+            {
+                UIHEPLER.alertErrMsg("收藏成功");
+            }
+            else
+            {
+                
+                UIHEPLER.alertErrMsg("取消收藏成功");
+            }
         }
 
         

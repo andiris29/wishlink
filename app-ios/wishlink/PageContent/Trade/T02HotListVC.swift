@@ -295,12 +295,17 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func requestDataFailed(error: String,tag:Int) {
-        
-        self.maskView.hidden = false;
+        if( self.maskView != nil)
+        {
+            self.maskView.hidden = false;
+        }
         if(tag == 10)
         {
             SVProgressHUD.dismiss();
-            self.lbTipMessage.text = "暂无数据"
+            if(self.lbTipMessage != nil)
+            {
+                self.lbTipMessage.text = "暂无数据"
+            }
         }
         else
         {
