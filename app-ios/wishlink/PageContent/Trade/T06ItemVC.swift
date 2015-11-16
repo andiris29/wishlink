@@ -14,7 +14,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var tradeNameLabel   : UILabel!
     @IBOutlet weak var tradeTimeLabel   : UILabel!
     @IBOutlet weak var goodNameLabel    : UILabel!
-    @IBOutlet weak var goodBranchLabel  : UILabel!
+
     @IBOutlet weak var goodFormatLabel  : UILabel!
     @IBOutlet weak var goodAddressLabel : UILabel!
     @IBOutlet weak var goodPriceLabel   : UILabel!
@@ -102,8 +102,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
 //         self.btnFav.selected = self.item.isFavorite
      
 
-        self.goodNameLabel.text = "品名：\(self.item.name)";
-        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
+        self.goodNameLabel.text = "品名：\(self.item.name) \(self.item.brand)"
+//        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
         self.goodFormatLabel.text = "规格：\(self.item.spec)";
         self.goodAddressLabel.text = "购买地：\(self.item.country)";
         self.goodAllTradeLabel.text = "\(self.item.numTrades)";

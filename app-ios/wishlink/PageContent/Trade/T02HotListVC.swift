@@ -121,7 +121,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     //MARK: collectionView Delegete
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
-        let height: CGFloat = 250.0
+        let height: CGFloat = 300.0
         
         return CGSize(width: width, height: height)
     }
@@ -224,21 +224,23 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func itemCell(cell: U02ItemCell, clickType: ItemCellButtonClickType) {
         
-        if(UserModel.shared.isLogin)
-        {
+        //该页面不需要收藏和取消收藏功能
         
-            var urlSub: String = "item/favorite"
-            if (cell.favoriteBtn.selected) {
-                urlSub = "item/unfavorite"
-            }
-            let para = ["_id" : cell.item._id]
-            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
-            self.currentItemCell = cell
-        }
-        else
-        {
-            UIHEPLER.showLoginPage(self, isToHomePage: false);
-        }
+//        if(UserModel.shared.isLogin)
+//        {
+//        
+//            var urlSub: String = "item/favorite"
+//            if (cell.favoriteBtn.selected) {
+//                urlSub = "item/unfavorite"
+//            }
+//            let para = ["_id" : cell.item._id]
+//            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
+//            self.currentItemCell = cell
+//        }
+//        else
+//        {
+//            UIHEPLER.showLoginPage(self, isToHomePage: false);
+//        }
     }
     
     //MARK:WebRequestDelegate
