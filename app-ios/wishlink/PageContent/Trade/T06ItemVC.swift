@@ -14,6 +14,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var tradeNameLabel   : UILabel!
     @IBOutlet weak var tradeTimeLabel   : UILabel!
     @IBOutlet weak var goodNameLabel    : UILabel!
+    @IBOutlet weak var goodBranchLabel  : UILabel!
     @IBOutlet weak var goodFormatLabel  : UILabel!
     @IBOutlet weak var goodAddressLabel : UILabel!
     @IBOutlet weak var goodPriceLabel   : UILabel!
@@ -94,7 +95,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
      
 
         //绑定数据
-        self.goodPriceLabel.text = "出价：\(self.item.price)";
+        self.goodPriceLabel.text = "出价：RMB \(self.item.price.format("0.2"))";
         
       
         self.changeBtnFav(self.item.isFavorite);
@@ -102,7 +103,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
      
 
         self.goodNameLabel.text = "品名：\(self.item.name)";
-        self.goodFormatLabel.text = "规格：\(self.item.name)";
+        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
+        self.goodFormatLabel.text = "规格：\(self.item.spec)";
         self.goodAddressLabel.text = "购买地：\(self.item.country)";
         self.goodAllTradeLabel.text = "\(self.item.numTrades)";
         if(self.item.notes != nil && self.item.notes.trim().length>0)
@@ -224,7 +226,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             {
                 self.goodNumberLabel.text = "数量：\(self.trade.quantity)";
                 let totalFree = Float(self.trade.quantity) * self.item.price
-                self.goodTotalLabel.text = "合计：\(totalFree)";
+                self.goodTotalLabel.text = "合计：RMB \(totalFree.format(".2"))";
             }
             
         }

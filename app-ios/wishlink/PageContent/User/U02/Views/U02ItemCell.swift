@@ -111,7 +111,7 @@ class U02ItemCell: UICollectionViewCell {
         {
             self.lbPrice.text = "￥" + item.price.format(".2");
         }
-        self.lbIntro.text = item.name + " " + item.spec;
+        self.lbIntro.text = item.brand + " " + item.name + " " + item.spec;
         self.lbCount.text = "\(item.numTrades)件"
         self.favoriteBtn.selected = self.item.isFavorite
         

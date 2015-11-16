@@ -204,8 +204,11 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.recommendVC.view.frame = self.subVCView.frame
         self.favoriteVC.view.frame = self.subVCView.frame
         self.settingVC.view.frame = self.subVCView.frame
+        
         self.headImageView.layer.cornerRadius = self.headImageView.w * 0.5
         self.headImageView.layer.masksToBounds = true
+        self.headImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.headImageView.layer.borderWidth = 2.0
         
         var center = CGPoint(x: CGRectGetWidth(self.scrollView.frame) * 0.5, y: CGRectGetHeight(self.scrollView.frame) * 0.5)
         self.orderTradeVC.view.center = center

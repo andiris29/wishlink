@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -112,6 +112,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号：1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7V6-r8-cWv">
                                 <rect key="frame" x="130" y="12" width="230" height="21"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PJG-eD-XBV"/>
@@ -246,6 +247,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号：1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUO-Gj-4YM">
                                 <rect key="frame" x="130" y="12" width="230" height="21"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="4yS-od-08Y"/>
@@ -509,6 +511,7 @@
                 <outlet property="buyerTradeIdLabel" destination="7V6-r8-cWv" id="qtc-pH-AEg"/>
                 <outlet property="itemCountLabel" destination="92N-bH-4gz" id="t8y-iJ-RnV"/>
                 <outlet property="itemCountryLabel" destination="yVE-5B-aYH" id="qzD-4h-8OF"/>
+                <outlet property="itemFromatLabel" destination="rpu-Ci-vSM" id="uIR-gz-Mnl"/>
                 <outlet property="itemImageView" destination="GXY-0y-Jss" id="gR2-xj-5ZL"/>
                 <outlet property="itemNameLabel" destination="Tvt-zd-YFj" id="uyX-FH-AlV"/>
                 <outlet property="itemPriceLabel" destination="xrT-6D-Jmq" id="Saa-wF-60f"/>

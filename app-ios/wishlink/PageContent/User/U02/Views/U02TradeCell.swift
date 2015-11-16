@@ -76,6 +76,7 @@ class U02TradeCell: UICollectionViewCell {
     @IBOutlet weak var itemCountLabel: UILabel!
     @IBOutlet weak var itemTotalPrice: UILabel!
     @IBOutlet weak var ownerNameLabel: UILabel!
+    @IBOutlet weak var itemFromatLabel: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
     
     
@@ -145,6 +146,7 @@ class U02TradeCell: UICollectionViewCell {
                 self.itemPriceLabel.text = "出价：￥\(self.trade.item.price)"
             }
             self.itemCountryLabel.text = "购买地：" + self.trade.item.country
+            self.itemFromatLabel.text = "规格：" + self.trade.item.spec
             self.itemNameLabel.text = "品名：" + self.trade.item.name
         }
         else

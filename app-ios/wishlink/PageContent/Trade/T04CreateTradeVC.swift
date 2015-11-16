@@ -484,6 +484,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
             orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "")
             orginStr = orginStr?.componentsSeparatedByString("/")[0]
+            if let originNumber = Double(orginStr!) {
+                
+                orginStr = NSString(format: "%.2f", originNumber) as String
+            }
             orginStr = "RMB " + orginStr!
             sender.text = orginStr
             
