@@ -15,7 +15,7 @@ var winston = require('winston');
 var ftp = require('../runtime/ftp');
 
 //Services Name
-var servicesNames = ['item', 'user', 'trend', 'suggestion', 'tradeFeeding', 'trade', 'report', 'itemFeeding', 'geo', 'search'];
+var servicesNames = ['item', 'user', 'trend', 'suggestion', 'tradeFeeding', 'trade', 'report', 'itemFeeding', 'geo', 'search', 'maintenance'];
 var services = servicesNames.map(function(path) {
     return {
         'path': path,
