@@ -1,7 +1,7 @@
 
 var async = require('async');
 var Words = require('../../model/words');
-var Items = require('../../model/Items');
+var Items = require('../../model/items');
 var SearchBuildService = require('../service/search/SearchBuildService');
 var ResponseHelper = require('../helper/ResponseHelper');
 
