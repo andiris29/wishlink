@@ -176,6 +176,8 @@
 		D276A9901BA6E69D005CC047 /* T01HomePageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D276A98E1BA6E69D005CC047 /* T01HomePageVC.xib */; };
 		D276A9A71BA6F795005CC047 /* PFGoldenSectionSpiral.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A01BA6F795005CC047 /* PFGoldenSectionSpiral.m */; };
 		D276A9A81BA6F795005CC047 /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A61BA6F795005CC047 /* ZYQSphereView.m */; };
+		D27C59341BFCA87E000B728E /* U01ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C59321BFCA87E000B728E /* U01ForgetPassword.swift */; };
+		D27C59351BFCA87E000B728E /* U01ForgetPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = D27C59331BFCA87E000B728E /* U01ForgetPassword.xib */; };
 		D29662301BE11FE100BDEDB9 /* T06ItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296622E1BE11FE100BDEDB9 /* T06ItemVC.swift */; };
 		D29662311BE11FE100BDEDB9 /* T06ItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D296622F1BE11FE100BDEDB9 /* T06ItemVC.xib */; };
 		D29662341BE130C000BDEDB9 /* T14AssignToMeConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29662321BE130C000BDEDB9 /* T14AssignToMeConfirm.swift */; };
@@ -498,6 +500,8 @@
 		D276A9A41BA6F795005CC047 /* PFRadian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFRadian.h; sourceTree = "<group>"; };
 		D276A9A51BA6F795005CC047 /* ZYQSphereView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQSphereView.h; sourceTree = "<group>"; };
 		D276A9A61BA6F795005CC047 /* ZYQSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQSphereView.m; sourceTree = "<group>"; };
+		D27C59321BFCA87E000B728E /* U01ForgetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U01ForgetPassword.swift; sourceTree = "<group>"; };
+		D27C59331BFCA87E000B728E /* U01ForgetPassword.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U01ForgetPassword.xib; sourceTree = "<group>"; };
 		D296622E1BE11FE100BDEDB9 /* T06ItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T06ItemVC.swift; sourceTree = "<group>"; };
 		D296622F1BE11FE100BDEDB9 /* T06ItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T06ItemVC.xib; sourceTree = "<group>"; };
 		D29662321BE130C000BDEDB9 /* T14AssignToMeConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T14AssignToMeConfirm.swift; sourceTree = "<group>"; };
@@ -850,6 +854,8 @@
 			children = (
 				A132BB921B863342004EAB47 /* U01LoginVC.swift */,
 				A132BB931B863342004EAB47 /* U01LoginVC.xib */,
+				D27C59321BFCA87E000B728E /* U01ForgetPassword.swift */,
+				D27C59331BFCA87E000B728E /* U01ForgetPassword.xib */,
 				D25E02431BF313DB004659C9 /* U06RegsiterVC.swift */,
 				D25E02441BF313DB004659C9 /* U06RegsiterVC.xib */,
 			);
@@ -1323,6 +1329,7 @@
 				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				D29662351BE130C000BDEDB9 /* T14AssignToMeConfirm.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
+				D27C59351BFCA87E000B728E /* U01ForgetPassword.xib in Resources */,
 				D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */,
 				D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
@@ -1371,6 +1378,7 @@
 				A1043E7C1B7F86ED007A237C /* WebRequestHelper.swift in Sources */,
 				A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */,
 				A1F3D3571BCEB4340007B7CE /* MD5DataSigner.m in Sources */,
+				D27C59341BFCA87E000B728E /* U01ForgetPassword.swift in Sources */,
 				A18A06741BAF1504005ADFFA /* ScanVC.swift in Sources */,
 				D24485D81B8E10B500CD97D5 /* T10MessagingVC.swift in Sources */,
 				A132BB9E1B863342004EAB47 /* U01LoginVC.swift in Sources */,
