@@ -48,6 +48,7 @@ var entitySchema = Schema({
     spec: String,
     price: Number,
     notes: String,
+    unit: String,
     create: {
         'type': Date,
         'default': Date.now

@@ -39,6 +39,7 @@ var itemImageResizeOptions = [
  * @param {string} req.country
  * @param {number} req.price
  * @param {string} req.spec
+ * @param {string} req.unit
  * @param {string} [req.comment]
  */
 item.create = {
@@ -59,6 +60,7 @@ item.create = {
                         spec: param.spec,
                         price: RequestHelper.parseNumber(param.price),
                         notes: param.notes,
+                        unit: param.unit,
                         images: []
                     });
                     files.forEach(function(file) {
