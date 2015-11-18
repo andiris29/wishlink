@@ -55,7 +55,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width: CGFloat = (UIScreen.mainScreen().bounds.size.width - 20 - 10) / 2.0;
-        let height: CGFloat = 300.0
+        let height: CGFloat = width+100;
         return CGSize(width: width, height: height)
     }
     
