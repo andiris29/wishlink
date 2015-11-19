@@ -128,6 +128,11 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     }
     
     @IBAction func forgotPasswordButtonAction(sender: AnyObject) {
+        
+        self.nextVC = U01ForgetPassword(nibName: "U01ForgetPassword", bundle: NSBundle.mainBundle())
+        
+        self.presentViewController( self.nextVC, animated: true) { () -> Void in
+        }
     }
     
     @IBAction func registerButtonAction(sender: AnyObject) {

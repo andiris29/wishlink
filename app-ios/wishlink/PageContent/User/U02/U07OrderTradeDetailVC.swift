@@ -43,6 +43,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     var orderStatus: [OrderStatusModel]! = []
     
     var orderStatusDic: [Int : String]! = [:]
+    var orderSellerStatusDic: [Int : String]! = [:]
     
     deinit
     {
@@ -68,7 +69,10 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     func setupData() {
     
-        self.orderStatusDic = [0 : "创建", 1 : "payCallback", 2 : "unassign", 3 : "assignToMe", 4 : "deliver", 5 : "receipt", 6 : "", 7 : "", 8 : "", 9 : "", 10 : "投诉"]
+        // buy
+        self.orderStatusDic = [0 : "N/A", 1 : "未接单", 2 : "未接单", 3 : "已被接单", 4 : "已发货", 5 : "已完成", 6 : "已完成", 7 : "请求撤单中", 8 : "已撤单", 9 : "已撤单", 10 : "投诉处理中", 11 : "已完成", 12 : "未接单", 13 : "TBD", 14 : "TBD"]
+        // seller
+        self.orderSellerStatusDic = [0 : "N/A", 1 : "N/A", 2 : "N/A", 3 : "已抢单", 4 : "已发货", 5 : "已完成", 6 : "已完成", 7 : "买家要求撤单", 8 : "N/A", 9 : "N/A", 10 : "投诉处理中", 11 : "已完成", 12 : "N/A", 13 : "TBD", 14 : "TBD"]
         
         self.httpObj.mydelegate = self
         self.httpObj.httpGetApi("trade/query", parameters: ["_id" : self.trade._id], tag: 700)
@@ -103,16 +107,19 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             self.goodTotal.text = "合计：\(item.price * Float(trade.quantity))"
         }
         
+        let orderState = self.orderStatus.last
         if self.role == .buyyer {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
             self.orderTime.text = "接单：\(UserModel.shared.create)"
             self.linkTitle.text = "买家信息"
+            self.orderState.text = self.orderStatusDic[(orderState?.status)!]
         } else {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
             self.personName.text = "\(self.assigneeModel.nickname)"
             self.orderTime.text = "接单：\(self.assigneeModel.create)"
             self.linkTitle.text = "卖家信息"
+            self.orderState.text = self.orderSellerStatusDic[(orderState?.status)!]
         }
         
         if self.receiver != nil {
@@ -120,11 +127,8 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             self.reveicerPhone.text = "\(self.receiver.phone)"
             self.reveicerAddress.text = "收货地址：\(self.receiver.province + self.receiver.address)"
         }
-        
-        let orderState = self.orderStatus.last
-        self.orderState.text = self.orderStatusDic[(orderState?.status)!]
+    
         self.orderReveicedTime.text = "接单时间：\((orderState?.create)!)"
-        
         self.revokeButton.setTitle("我要撤单", forState: UIControlState.Normal)
     }
     
