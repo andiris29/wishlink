@@ -16,6 +16,7 @@ import UIKit
 class T13CellHeader: UITableViewCell {
     
     
+  
 
     @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var lbName: UILabel!
@@ -44,6 +45,14 @@ class T13CellHeader: UITableViewCell {
         
         UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
     }
+    
+    deinit
+    {
+        NSLog("T13CellHeader deinit");
+        self.item = nil;
+        self.trade = nil;
+        self.myDelegate = nil;
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -70,7 +79,11 @@ class T13CellHeader: UITableViewCell {
         self.lbBranch.text = "品牌：" + self.item.brand
         self.lbCountry.text = self.item.country
         self.lb_trde_country.text = self.item.country
-        self.lbPrice.text = "￥" + self.item.price.format(".2");
+        self.lbPrice.text = "RMB " + self.item.price.format(".2");
+        if(self.item.unit != nil && self.item.unit.trim().length>0)
+        {
+             self.lbPrice.text! += "/\(self.item.unit)"
+        }
         if(self.item.images != nil && self.item.images.count>0)
         {
             WebRequestHelper().renderImageView(self.iv, url: self.item.images[0], defaultName: "");
@@ -107,9 +120,6 @@ class T13CellHeader: UITableViewCell {
 
     }
     
-    deinit
-    {
-        self.item = nil;
-    }
+ 
     
 }

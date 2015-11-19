@@ -31,14 +31,25 @@ class BaseModel: NSObject {
     func getStringValue(strKey:String,dic:NSDictionary)->String!
     {
         var result:String!
-        if(dic.objectForKey(strKey) != nil && dic.objectForKey(strKey)?.description != "<null>")
+        
+        if let strItem = dic.objectForKey(strKey) as? String
         {
-            result = dic.objectForKey(strKey)  as! String
+            result = strItem
         }
         else
         {
-            result = ""
+             result = ""
         }
+      
+        
+//        if(dic.objectForKey(strKey) != nil && dic.objectForKey(strKey)?.description != "<null>")
+//        {
+//            result = dic.objectForKey(strKey)  as! String
+//        }
+//        else
+//        {
+//            result = ""
+//        }
         
         return result;
     }

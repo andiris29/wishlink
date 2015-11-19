@@ -101,8 +101,12 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         self.httpObj.httpGetApi("tradeFeeding/byItem?_id="+self.item._id, parameters: nil, tag: 60)
      
 
+         self.goodPriceLabel.text = "出价：RMB \(self.item.price.format("0.2"))"
         //绑定数据
-        self.goodPriceLabel.text = "出价：RMB \(self.item.price.format("0.2"))";
+        if(self.item.unit != nil && self.item.unit.trim().length>0)
+        {
+            self.goodPriceLabel.text! += "/\(self.item.unit)";
+        }
         
         UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIColor.whiteColor(), borderWidth: 1);
         self.changeBtnFav(self.item.isFavorite);
