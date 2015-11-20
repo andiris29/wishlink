@@ -218,6 +218,13 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             
         } else if sender.tag == 63 { //share
             
+            
+            var shareVC = ShareVC();
+
+ 
+//            shareVC.beginAnimate();
+            
+            
         }
     }
     

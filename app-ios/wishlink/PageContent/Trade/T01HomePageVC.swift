@@ -270,8 +270,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         
+        SVProgressHUD.dismiss();
         if(tag == 101 || tag == 102)
         {
+            
+            
             if let userDic = response["user"] as? NSDictionary
             {
                 if(userDic.count>0)
@@ -288,7 +291,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             }
             else
             {
-                
                 SVProgressHUD.dismiss();
             }
         }
