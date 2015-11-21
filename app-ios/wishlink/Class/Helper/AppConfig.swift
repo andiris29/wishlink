@@ -33,9 +33,9 @@ let MainBundle = NSBundle.mainBundle();
 let ScreenWidth = UIScreen.mainScreen().bounds.width
 let ScreenHeight = UIScreen.mainScreen().bounds.height
 let KeyWindow = APPLICATION.keyWindow!
-
+let UIHEPLER = UIHelper();
+let APPCONFIG =  AppConfig.sharedAppConfig;
 let SERVER_BASE_URL = "http://121.41.162.102"
-
 
 func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat)->UIColor { return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a) }
 func RGB(r:CGFloat, g:CGFloat, b:CGFloat)->UIColor { return RGBA(r, g: g, b: b, a: 1.0) }
@@ -44,8 +44,7 @@ func RGBC(c:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: 1.0)}
 func MainColor() -> UIColor { return RGB(124, g: 0, b: 90)}
 func MainColorRed() -> UIColor { return RGB(248, g: 62, b: 91)}
 
-let UIHEPLER = UIHelper();
-let APPCONFIG =  AppConfig.sharedAppConfig;
+
 
 
 
@@ -55,7 +54,7 @@ class AppConfig: NSObject
     //服务端接口前缀
     let  SERVICE_ROOT_PATH =  SERVER_BASE_URL + "/services/"
     let NotificationActionPayResult="NotificationActionPayResult"
-
+    
     //微信登录相关信息
     static var  wxAppKey:String = "wx7d2407c862aeda7b";
     static var  wxAppSecret:String = "8f4bb1d0bf4d71024b9d11825e80c771"
@@ -88,7 +87,7 @@ class AppConfig: NSObject
     //pkcs8
     let alipay_privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMwf59KHQGYH9aL1ViXhc28IfJ4ddbMiRwmcYnu3ZW6Vyu75EuJ66k+LCpjmVogQRGso5VdYV9HCvXIWmDXvMrvvaKmRSdm5jxkGiY9Y8RBYJYTpalti4beKmf2swcngxYqimxMdDaJ43IU4Vm4KwG7uIAOiP1W6PvWK994J85ULAgMBAAECgYBa1E+phHmJbT1GN/kPfhSJcbNSADXhcf0+L5I7Ds5ZuNnGIJrgoGUm4+3hP419mg93x4jVpv/c3NTDsX4lcbyWzF9hc0R7B9K5pdDJdS9quTwB9fuCnvh+AC5BWp0RAnrS4z74Va/qX61ZR8HljNLw4NsiFOdn6wEBo7qMMN9iwQJBAOo3gfwgDytkps+jSA+FH3+jJZAb6/IOhARl03/4LW8GWaSFReqJAzBk1fBLncgQxSyELR0PMQKua/NzuHP+prECQQDfG+39XX6Hy3MI7mVuvYeIVk+rouEwXPaYX4RtqEYDxUoLvu7HPfRQz0BGl5wlC6W4Tapho7JvL6baY7g1zN57AkB5z0yG95VsF/i5XE4J5E4xb4QFor/fL7VxJBQPJd9bMo5EhhuKkp9Z99dcFbeFaVNih4t+5XuzzUrPXou7p+DBAkAfo8hWXAHrpBCGPbiowbwMu6DEyG6C+0wFQ9Z17p0vP7VGgSc/niudoiaNXEbKgiJYRrtY6WwOlIVnBylCh/EtAkEApvb2fEks0lxOEbX9ZPPjM0sZtRrt+vyD/EqMvWOUCOjNyTG3RuSPJEOElspIhAeB2tgpKIN73z9aW9bmHJDCjQ=="
     
-//     var alipay_privateKey = "MIICXAIBAAKBgQDMH+fSh0BmB/Wi9VYl4XNvCHyeHXWzIkcJnGJ7t2Vulcru+RLieupPiwqY5laIEERrKOVXWFfRwr1yFpg17zK772ipkUnZuY8ZBomPWPEQWCWE6WpbYuG3ipn9rMHJ4MWKopsTHQ2ieNyFOFZuCsBu7iADoj9Vuj71ivfeCfOVCwIDAQABAoGAWtRPqYR5iW09Rjf5D34UiXGzUgA14XH9Pi+SOw7OWbjZxiCa4KBlJuPt4T+NfZoPd8eI1ab/3NzUw7F+JXG8lsxfYXNEewfSuaXQyXUvark8AfX7gp74fgAuQVqdEQJ60uM++FWv6l+tWUfB5YzS8ODbIhTnZ+sBAaO6jDDfYsECQQDqN4H8IA8rZKbPo0gPhR9/oyWQG+vyDoQEZdN/+C1vBlmkhUXqiQMwZNXwS53IEMUshC0dDzECrmvzc7hz/qaxAkEA3xvt/V1+h8tzCO5lbr2HiFZPq6LhMFz2mF+EbahGA8VKC77uxz30UM9ARpecJQuluE2qYaOyby+m2mO4NczeewJAec9MhveVbBf4uVxOCeROMW+EBaK/3y+1cSQUDyXfWzKORIYbipKfWffXXBW3hWlTYoeLfuV7s81Kz16Lu6fgwQJAH6PIVlwB66QQhj24qMG8DLugxMhugvtMBUPWde6dLz+1RoEnP54rnaImjVxGyoIiWEa7WOlsDpSFZwcpQofxLQJBAKb29nxJLNJcThG1/WTz4zNLGbUa7fr8g/xKjL1jlAjozckxt0bkjyRDhJbKSIQHgdrYKSiDe98/WlvW5hyQwo0="
+    //     var alipay_privateKey = "MIICXAIBAAKBgQDMH+fSh0BmB/Wi9VYl4XNvCHyeHXWzIkcJnGJ7t2Vulcru+RLieupPiwqY5laIEERrKOVXWFfRwr1yFpg17zK772ipkUnZuY8ZBomPWPEQWCWE6WpbYuG3ipn9rMHJ4MWKopsTHQ2ieNyFOFZuCsBu7iADoj9Vuj71ivfeCfOVCwIDAQABAoGAWtRPqYR5iW09Rjf5D34UiXGzUgA14XH9Pi+SOw7OWbjZxiCa4KBlJuPt4T+NfZoPd8eI1ab/3NzUw7F+JXG8lsxfYXNEewfSuaXQyXUvark8AfX7gp74fgAuQVqdEQJ60uM++FWv6l+tWUfB5YzS8ODbIhTnZ+sBAaO6jDDfYsECQQDqN4H8IA8rZKbPo0gPhR9/oyWQG+vyDoQEZdN/+C1vBlmkhUXqiQMwZNXwS53IEMUshC0dDzECrmvzc7hz/qaxAkEA3xvt/V1+h8tzCO5lbr2HiFZPq6LhMFz2mF+EbahGA8VKC77uxz30UM9ARpecJQuluE2qYaOyby+m2mO4NczeewJAec9MhveVbBf4uVxOCeROMW+EBaK/3y+1cSQUDyXfWzKORIYbipKfWffXXBW3hWlTYoeLfuV7s81Kz16Lu6fgwQJAH6PIVlwB66QQhj24qMG8DLugxMhugvtMBUPWde6dLz+1RoEnP54rnaImjVxGyoIiWEa7WOlsDpSFZwcpQofxLQJBAKb29nxJLNJcThG1/WTz4zNLGbUa7fr8g/xKjL1jlAjozckxt0bkjyRDhJbKSIQHgdrYKSiDe98/WlvW5hyQwo0="
     
     var AccessToken:String!;
     var Uid = "";
@@ -229,48 +228,48 @@ class AppConfig: NSObject
         
         if(url != "" && url.trim().length>0)
         {
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-//                
-//                autoreleasepool({ () -> () in
-//                    
+            //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            //
+            //                autoreleasepool({ () -> () in
+            //
             
-                    let  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-                    //判断文件路径是否存在，不存在则创建
-                    var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
+            let  encodeName = url.stringByReplacingOccurrencesOfString("/", withString: "_", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
+            //判断文件路径是否存在，不存在则创建
+            var imagepath:String = UIHEPLER.getCachedFilePath("cachedimages");
+            
+            let fm:NSFileManager = NSFileManager.defaultManager();
+            if(!fm.fileExistsAtPath(imagepath))
+            {
+                do {
+                    try fm.createDirectoryAtPath(imagepath, withIntermediateDirectories: true, attributes: nil)
+                } catch _ {
+                }
+            }
+            //检测本读是否有该图片缓存
+            imagepath = imagepath+"/"+encodeName
+            if(fm.fileExistsAtPath(imagepath))
+            {
+                
+                let imageData:NSData!
+                do {
+                    try imageData = NSData(contentsOfURL: NSURL(fileURLWithPath: imagepath), options: NSDataReadingOptions.DataReadingUncached)
+                    let  image = UIImage(data: imageData!);
+                    if (image != nil) {
+                        //                                img = image;
+                        return image;
+                    }
                     
-                    let fm:NSFileManager = NSFileManager.defaultManager();
-                    if(!fm.fileExistsAtPath(imagepath))
-                    {
-                        do {
-                            try fm.createDirectoryAtPath(imagepath, withIntermediateDirectories: true, attributes: nil)
-                        } catch _ {
-                        }
-                    }
-                    //检测本读是否有该图片缓存
-                    imagepath = imagepath+"/"+encodeName
-                    if(fm.fileExistsAtPath(imagepath))
-                    {
-                        
-                        let imageData:NSData!
-                        do {
-                            try imageData = NSData(contentsOfURL: NSURL(fileURLWithPath: imagepath), options: NSDataReadingOptions.DataReadingUncached)
-                            let  image = UIImage(data: imageData!);
-                            if (image != nil) {
-//                                img = image;
-                                return image;
-                            }
-                            
-                        } catch {
-                            // deal with error
-                        }
-                    }
-                   
-//                })
-//            })
+                } catch {
+                    // deal with error
+                }
+            }
+            
+            //                })
+            //            })
         }
         return img
-//        return result;
-    
+        //        return result;
+        
     }
     
     //给btn假圆角
@@ -283,7 +282,7 @@ class AppConfig: NSObject
         btn.setTitleColor(titleColor, forState: UIControlState.Normal)
         
     }
-
+    
     
     
 }
