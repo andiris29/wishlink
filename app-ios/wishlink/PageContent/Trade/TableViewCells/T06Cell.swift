@@ -80,8 +80,16 @@ class T06Cell: UITableViewCell {
         
         self.trade = trade;
         self.item = item;
-        let count = trade.quantity > 0 ? trade.quantity : 1
-        self.lbCount.text = item.price.format(".2") + " * " + String(count)
+        let strCount = trade.quantity > 0 ? String(trade.quantity) : "1"
+        
+      
+        var unitStr = "件";
+        if(self.item.unit != nil && self.item.unit.length>0)
+        {
+            unitStr += self.item.unit;
+        }
+          var countStr = "RMB\(item.price.format(".2"))x\(strCount)\(unitStr)";
+        self.lbCount.text = countStr
         self.lbCountry.text = item.country;
         
         
@@ -90,7 +98,7 @@ class T06Cell: UITableViewCell {
         {
             totalPrice = item.price * Float(trade.quantity)
         }
-        self.lbTotalFree.text = totalPrice.format(".2")
+        self.lbTotalFree.text = "RMB" + totalPrice.format(".2")
         if(self.trade != nil)
         {
             if(self.trade.owner != nil && self.trade.owner!.count>0)

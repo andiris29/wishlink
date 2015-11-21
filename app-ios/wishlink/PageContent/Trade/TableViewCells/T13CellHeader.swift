@@ -110,11 +110,23 @@ class T13CellHeader: UITableViewCell {
                 
             }
             
-            let count = trade.quantity > 0 ? trade.quantity : 1
-            self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+            //let count = trade.quantity > 0 ? trade.quantity : 1
+           // self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+            
+            
+            let strCount = trade.quantity > 0 ? String(trade.quantity) : "1"
+            var unitStr = "件";
+            if(self.item.unit != nil && self.item.unit.length>0)
+            {
+                unitStr += self.item.unit;
+            }
+            self.lbTitle.text = "RMB\(item.price.format(".2"))x\(strCount)\(unitStr)";
+            
+            
             
             let totalFree = self.item.price * Float(self.trade.quantity)
-            self.lb_trade_totalFree.text = totalFree.format(".0");
+            self.lb_trade_totalFree.text = "RMB" + totalFree.format(".2")
+         
             
         }
 

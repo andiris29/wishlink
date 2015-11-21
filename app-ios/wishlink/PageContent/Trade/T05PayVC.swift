@@ -104,17 +104,22 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         
         if(self.item != nil)
         {
-            self.lbName.text = self.item.name;
+            self.lbName.text = self.item.brand + " " + self.item.name;
             self.lbCountry.text = self.item.country;
             self.lbSpec.text = self.item.spec;
-            self.lbPrice.text = self.item.price.format(".2");
+             var unitStr = ""
+            if(self.item.unit != nil)
+            {
+                unitStr = self.item.unit;
+            }
+            self.lbPrice.text = "RMB " + self.item.price.format(".2") + unitStr
             if(goodsNumbers>0)
             {
-                self.lbTotalFree.text = "¥ " + (self.item.price * Float(goodsNumbers)).format(".2");
+                self.lbTotalFree.text = "RMB " + (self.item.price * Float(goodsNumbers)).format(".2");
             }
             else
             {
-                self.lbTotalFree.text = "¥" + self.item.price.format(".2");
+                self.lbTotalFree.text = "RMB " + self.item.price.format(".2");
             }
             if (item == nil ||  item.images == nil) {return}
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
