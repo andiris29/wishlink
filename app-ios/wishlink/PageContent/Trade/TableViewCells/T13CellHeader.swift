@@ -16,6 +16,7 @@ import UIKit
 class T13CellHeader: UITableViewCell {
     
     
+  
 
     @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var lbName: UILabel!
@@ -44,6 +45,14 @@ class T13CellHeader: UITableViewCell {
         
         UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
     }
+    
+    deinit
+    {
+        NSLog("T13CellHeader deinit");
+        self.item = nil;
+        self.trade = nil;
+        self.myDelegate = nil;
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -70,7 +79,11 @@ class T13CellHeader: UITableViewCell {
         self.lbBranch.text = "品牌：" + self.item.brand
         self.lbCountry.text = self.item.country
         self.lb_trde_country.text = self.item.country
-        self.lbPrice.text = "￥" + self.item.price.format(".2");
+        self.lbPrice.text = "RMB " + self.item.price.format(".2");
+        if(self.item.unit != nil && self.item.unit.trim().length>0)
+        {
+             self.lbPrice.text! += "/\(self.item.unit)"
+        }
         if(self.item.images != nil && self.item.images.count>0)
         {
             WebRequestHelper().renderImageView(self.iv, url: self.item.images[0], defaultName: "");
@@ -97,19 +110,28 @@ class T13CellHeader: UITableViewCell {
                 
             }
             
-            let count = trade.quantity > 0 ? trade.quantity : 1
-            self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+            //let count = trade.quantity > 0 ? trade.quantity : 1
+           // self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+            
+            
+            let strCount = trade.quantity > 0 ? String(trade.quantity) : "1"
+            var unitStr = "件";
+            if(self.item.unit != nil && self.item.unit.length>0)
+            {
+                unitStr += self.item.unit;
+            }
+            self.lbTitle.text = "RMB\(item.price.format(".2"))x\(strCount)\(unitStr)";
+            
+            
             
             let totalFree = self.item.price * Float(self.trade.quantity)
-            self.lb_trade_totalFree.text = totalFree.format(".0");
+            self.lb_trade_totalFree.text = "RMB" + totalFree.format(".2")
+         
             
         }
 
     }
     
-    deinit
-    {
-        self.item = nil;
-    }
+ 
     
 }

@@ -23,6 +23,7 @@ class ItemModel: BaseModel {
     var create:String!
     var numTrades:Int!
     var images:[String]!
+    var unit:String!//单位
     var isFavorite: Bool = false
     
     init(dict:NSDictionary) {
@@ -50,14 +51,14 @@ class ItemModel: BaseModel {
         {
              self.countryRef = countryStr
         }
+ 
         
-        
-//        self.countryRef =  self.getStringValue("countryRef", dic: dict);
         self.brandRef =  self.getStringValue("brandRef", dic: dict);
         self.brand =  self.getStringValue("brand", dic: dict);
         self.country =  self.getStringValue("country", dic: dict);
         self.spec =  self.getStringValue("spec", dic: dict);
         self.create =  self.getStringValue("create", dic: dict);
+        self.unit =  self.getStringValue("unit", dic: dict);
         self.notes =  self.getStringValue("notes", dic: dict);
 //        self.price =  self.getFloatValue("price", dic: dict);
         

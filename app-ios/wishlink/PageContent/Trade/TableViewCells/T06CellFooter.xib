@@ -17,23 +17,30 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="QuI-aN-rdg">
                         <rect key="frame" x="8" y="8" width="304" height="48"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-k0-twT">
-                                <rect key="frame" x="22" y="5" width="260" height="38"/>
+                                <rect key="frame" x="8" y="0.0" width="288" height="48"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="CDJ-ot-brE"/>
+                                    <constraint firstAttribute="width" constant="141" id="xNT-8q-CMG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                 <state key="normal" title="马上抢单" backgroundImage="c1_0009">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="CDJ-ot-brE"/>
+                                        <exclude reference="xNT-8q-CMG"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="grabOrderButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bJr-Wn-yqR"/>
                                 </connections>
@@ -43,9 +50,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="e2G-k0-twT" secondAttribute="centerX" id="2CU-Ro-q6z"/>
-                            <constraint firstAttribute="trailing" secondItem="e2G-k0-twT" secondAttribute="trailing" constant="22" id="dRJ-O0-J2c"/>
+                            <constraint firstItem="e2G-k0-twT" firstAttribute="leading" secondItem="QuI-aN-rdg" secondAttribute="leading" constant="8" id="BSb-o0-5q8"/>
+                            <constraint firstItem="e2G-k0-twT" firstAttribute="top" secondItem="QuI-aN-rdg" secondAttribute="top" id="EMq-Vq-kFa"/>
+                            <constraint firstAttribute="trailing" secondItem="e2G-k0-twT" secondAttribute="trailing" constant="8" id="HV2-iq-nTH"/>
+                            <constraint firstAttribute="bottom" secondItem="e2G-k0-twT" secondAttribute="bottom" id="gLj-ch-KPq"/>
                             <constraint firstAttribute="centerY" secondItem="e2G-k0-twT" secondAttribute="centerY" id="t64-7U-0Uf"/>
-                            <constraint firstItem="e2G-k0-twT" firstAttribute="leading" secondItem="QuI-aN-rdg" secondAttribute="leading" constant="22" id="wUs-Vk-ig2"/>
                         </constraints>
                     </view>
                 </subviews>

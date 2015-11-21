@@ -187,12 +187,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
         if indexPath.row == 0 { return }
-        
         self.searchTableView.hidden = true
         self.searchTextField.resignFirstResponder()
         self.searchTextField.text = itemContents[indexPath.row] as? String
+        self.gotoNextPage(self.searchTextField.text!);
+
     }
     
     //MARK: - 标签点击操作
@@ -277,8 +277,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         
+        SVProgressHUD.dismiss();
         if(tag == 101 || tag == 102)
         {
+            
+            
             if let userDic = response["user"] as? NSDictionary
             {
                 if(userDic.count>0)
@@ -295,7 +298,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             }
             else
             {
-                
                 SVProgressHUD.dismiss();
             }
         }

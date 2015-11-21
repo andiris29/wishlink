@@ -192,6 +192,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 multipartFormData.appendBodyPart(data: price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
                 multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                 multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
+                      multipartFormData.appendBodyPart(data: self.txtUnit.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "unit")
 //                if(self.imagrArr.count>0)
                 if(self.imgArr != nil && self.imgArr.count > 0)
                 {

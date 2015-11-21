@@ -106,6 +106,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.searchTextField.layer.cornerRadius = 5
         self.searchTextField.placeholder = "请输入搜索内容"
         self.searchTextField.delegate = self
+        self.searchTextField.returnKeyType  = UIReturnKeyType.Done;
         self.searchTextField.leftViewMode = UITextFieldViewMode.Always
         self.searchTextField.leftView = UIView(frame: CGRectMake(0, 0, 7, 30))
         topView.addSubview(self.searchTextField)
@@ -184,14 +185,23 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        let para:[String : AnyObject] = ["pageNo":1,
-            "pageSize":10,
-            "keyword":self.keyword]
-        self.maskView.hidden = false;
-        self.lbTipMessage.text = "正在搜索中..."
-        
-        self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
-        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        var _keyword = textField.text!;
+        if(_keyword.trim().length>0)
+        {
+            self.keyword = _keyword
+            let para:[String : AnyObject] = ["pageNo":1,
+                "pageSize":10,
+                "keyword":self.keyword]
+            self.maskView.hidden = false;
+            self.lbTipMessage.text = "正在搜索中..."
+//            if(self.pagemodel == .search)
+//            {
+                self.loadComNavTitle(self.keyword)
+//            }
+            
+            self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
+            SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        }
         
         return true
     }

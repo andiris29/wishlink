@@ -110,9 +110,6 @@
                     <rect key="frame" x="0.0" y="185" width="320" height="323"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="jm0-xU-ree"/>
-                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9C-1f-bmd" userLabel="View3">
                     <rect key="frame" x="20" y="508" width="280" height="50"/>
