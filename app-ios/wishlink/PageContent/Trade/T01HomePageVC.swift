@@ -74,8 +74,15 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
  
     override func viewDidAppear(animated: Bool) {
          super.viewDidAppear(animated);
+        
         self.navigationController?.navigationBarHidden = true
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+  
+    }
+    
     func getKeyWordData()
     {
         self.httpObj.httpGetApi("trend/keywords", parameters: nil, tag: 10)
