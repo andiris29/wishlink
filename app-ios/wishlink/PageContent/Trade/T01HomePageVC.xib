@@ -240,6 +240,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Rd0-gb-8Gz" secondAttribute="trailing" id="1vC-ig-abW"/>
                 <constraint firstItem="p3Y-lk-iNj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4uG-bL-UIA"/>
+                <constraint firstItem="Vp8-rA-RkR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="6M0-li-1Gf"/>
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="B48-gA-snJ"/>
                 <constraint firstAttribute="bottom" secondItem="y9C-1f-bmd" secondAttribute="bottom" constant="10" id="Jo4-r2-rqL"/>
                 <constraint firstItem="Vp8-rA-RkR" firstAttribute="top" secondItem="p3Y-lk-iNj" secondAttribute="bottom" id="NrF-9H-n46"/>
@@ -249,9 +250,9 @@
                 <constraint firstAttribute="bottom" secondItem="the-Ei-b4x" secondAttribute="bottom" id="iCg-yT-bUB"/>
                 <constraint firstAttribute="trailing" secondItem="y9C-1f-bmd" secondAttribute="trailing" constant="20" id="lHL-Fn-Y4d"/>
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="top" secondItem="Rd0-gb-8Gz" secondAttribute="bottom" id="mzW-Go-WjP"/>
+                <constraint firstAttribute="trailing" secondItem="Vp8-rA-RkR" secondAttribute="trailing" constant="35" id="n2d-Pt-Ew7"/>
                 <constraint firstItem="the-Ei-b4x" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="p6o-nD-Iau"/>
                 <constraint firstItem="p3Y-lk-iNj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="s5M-gt-Iep"/>
-                <constraint firstItem="Vp8-rA-RkR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="t7z-25-pDW"/>
                 <constraint firstItem="Rd0-gb-8Gz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xPE-OQ-ysg"/>
                 <constraint firstItem="Rd0-gb-8Gz" firstAttribute="top" secondItem="Vp8-rA-RkR" secondAttribute="bottom" id="xoE-In-3fc"/>
             </constraints>
