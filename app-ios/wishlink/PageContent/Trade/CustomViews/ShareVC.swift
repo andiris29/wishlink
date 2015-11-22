@@ -14,7 +14,9 @@ protocol ShareDelegate : NSObjectProtocol {
 }
 class ShareVC: UIWindow {
 
+    var shareAction:((tag:Int)->Void)!
     
+
     private var viewConstraints: Dictionary<String, NSObject>!
     //MARK:点击头部图片时弹出层
 //    var main_imgShowView:UIView!
@@ -45,6 +47,7 @@ class ShareVC: UIWindow {
     }
     
 
+    
     
     func CreateView()
     {
@@ -88,7 +91,7 @@ class ShareVC: UIWindow {
         btnSina.setBackgroundImage(UIImage(named:"shareSina"), forState: UIControlState.Normal);
         btnSina.setTitle("新浪微博", forState: UIControlState.Normal);
         btnSina.tag == 1;
-        btnSina.addTarget(self, action: Selector("btnShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        btnSina.addTarget(self, action: Selector("btnSinaShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         viewConstraints["btnSina"] = btnSina
         shareView.addSubview(btnSina);
         self.addConstraintsVisualFormat("H:|-\(marginTop)-[btnSina(\(width))]", views: viewConstraints);
@@ -110,7 +113,7 @@ class ShareVC: UIWindow {
         btnshareWiXin.translatesAutoresizingMaskIntoConstraints = false
         btnshareWiXin.setBackgroundImage(UIImage(named:"shareWiXin"), forState: UIControlState.Normal);
         btnshareWiXin.tag == 2;
-        btnshareWiXin.addTarget(self, action: Selector("btnShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        btnshareWiXin.addTarget(self, action: Selector("btnWiXinShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
          viewConstraints["btnshareWiXin"] = btnshareWiXin
         shareView.addSubview(btnshareWiXin);
         self.addConstraintsVisualFormat("H:|-\(ScreenWidth/2-width/2)-[btnshareWiXin(\(width))]", views: viewConstraints);
@@ -132,7 +135,7 @@ class ShareVC: UIWindow {
         btnshareMontent.translatesAutoresizingMaskIntoConstraints = false
         btnshareMontent.setBackgroundImage(UIImage(named:"shareMontent"), forState: UIControlState.Normal);
         btnshareMontent.tag == 3;
-        btnshareMontent.addTarget(self, action: Selector("btnShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        btnshareMontent.addTarget(self, action: Selector("btnMontentShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
          viewConstraints["btnshareMontent"] = btnshareMontent
         shareView.addSubview(btnshareMontent);
         self.addConstraintsVisualFormat("H:[btnshareMontent(\(width))]-\(marginTop)-|", views: viewConstraints);
@@ -142,7 +145,7 @@ class ShareVC: UIWindow {
         lbMontent.translatesAutoresizingMaskIntoConstraints = false;
         lbMontent.textColor = UIHEPLER.mainColor
         lbMontent.font = UIHEPLER.getCustomFont(true, fontSsize: 14);
-        lbMontent.text = "微信好友";
+        lbMontent.text = "朋友圈";
         viewConstraints["lbMontent"] = lbMontent
         shareView.addSubview(lbMontent);
         self.addConstraintsVisualFormat("V:[btnshareMontent]-10-[lbMontent]", views: viewConstraints);
@@ -151,10 +154,33 @@ class ShareVC: UIWindow {
 
         
     }
+    func btnMontentShareAction(serder:UIButton)
+    {
+        
+        self.shareActionFun(3);
+    }
     
-    func btnShareAction(sender:UIButton)
+    func btnWiXinShareAction(serder:UIButton)
+    {
+        self.shareActionFun(2);
+        
+    }
+    
+    func btnSinaShareAction(sender:UIButton)
     {
         NSLog("share action");
+        self.shareActionFun(1);
+        
+        
+        
+    }
+    func shareActionFun(kind:Int)
+    {
+        if(self.shareAction != nil)
+        {
+            self.shareAction(tag:kind);
+        }
+
     }
     
     //MARK: - touches

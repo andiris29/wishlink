@@ -224,7 +224,25 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 shareVC = ShareVC.sharedInstance;
                 shareVC.CreateView();
             }
-//            shareVC.beginAnimate();
+       
+            self.shareVC.shareAction = {[weak self](tag:Int)  in
+      
+                if(tag == 1)//新浪微博
+                {
+                    
+                }
+                else  if(tag == 2)//微信好友
+                {
+                    let logo = UIImage(named:"AppIcon");
+                    let url  =  SERVER_BASE_URL + "/share/tid=" + self!.trade._id
+                    WXApiResponseHandler.respLinkURL(url, title: "订单详情", description: "点击查看订单详情等信息", thumbImage: logo);
+                }
+                else  if(tag == 3)//朋友圈
+                {
+                    
+                }
+            
+            }
             shareVC.show(true);
             
             

@@ -24,3 +24,5 @@
 #import <RongIMKit/RongIMKit.h>
 #import "payRequsestHandler.h"
 #import "UIImage+HJBlurView.h"
+
+#import "WXApiResponseHandler.h"

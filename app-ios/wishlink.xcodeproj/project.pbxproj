@@ -96,6 +96,10 @@
 		A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD11BB0637200A09A0D /* SVIndefiniteAnimatedView.m */; };
 		A18A0DD61BB0637200A09A0D /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A18A0DD21BB0637200A09A0D /* SVProgressHUD.bundle */; };
 		A18A0DD71BB0637200A09A0D /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD41BB0637200A09A0D /* SVProgressHUD.m */; };
+		A1B0CB141C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B0CB061C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */; };
+		A1B0CB151C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B0CB081C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */; };
+		A1B0CB161C021DD5005A62A4 /* WXMediaMessage+messageConstruct.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B0CB0A1C021DD5005A62A4 /* WXMediaMessage+messageConstruct.m */; };
+		A1B0CB191C021DD5005A62A4 /* WXApiResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B0CB111C021DD5005A62A4 /* WXApiResponseHandler.m */; };
 		A1C133D51BC6DC57001B6365 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C133D41BC6DC57001B6365 /* Float.swift */; };
 		A1C36CA81B87A4E300EFCB57 /* T03SearchHelperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C36CA61B87A4E300EFCB57 /* T03SearchHelperVC.swift */; };
 		A1C36CA91B87A4E300EFCB57 /* T03SearchHelperVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C36CA71B87A4E300EFCB57 /* T03SearchHelperVC.xib */; };
@@ -327,6 +331,15 @@
 		A18A0DD21BB0637200A09A0D /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		A18A0DD31BB0637200A09A0D /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		A18A0DD41BB0637200A09A0D /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		A1B0CB041C021DD5005A62A4 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		A1B0CB051C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
+		A1B0CB061C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.m"; sourceTree = "<group>"; };
+		A1B0CB071C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SendMessageToWXReq+requestWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
+		A1B0CB081C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SendMessageToWXReq+requestWithTextOrMediaMessage.m"; sourceTree = "<group>"; };
+		A1B0CB091C021DD5005A62A4 /* WXMediaMessage+messageConstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WXMediaMessage+messageConstruct.h"; sourceTree = "<group>"; };
+		A1B0CB0A1C021DD5005A62A4 /* WXMediaMessage+messageConstruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WXMediaMessage+messageConstruct.m"; sourceTree = "<group>"; };
+		A1B0CB101C021DD5005A62A4 /* WXApiResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiResponseHandler.h; sourceTree = "<group>"; };
+		A1B0CB111C021DD5005A62A4 /* WXApiResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiResponseHandler.m; sourceTree = "<group>"; };
 		A1C133D41BC6DC57001B6365 /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		A1C36CA61B87A4E300EFCB57 /* T03SearchHelperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T03SearchHelperVC.swift; sourceTree = "<group>"; };
 		A1C36CA71B87A4E300EFCB57 /* T03SearchHelperVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T03SearchHelperVC.xib; sourceTree = "<group>"; };
@@ -636,6 +649,8 @@
 		7695653B1BA08A4900A6AD10 /* WeChatSDK_1.5 */ = {
 			isa = PBXGroup;
 			children = (
+				A1B0CB031C021DD5005A62A4 /* Helper */,
+				A1B0CB0B1C021DD5005A62A4 /* lib */,
 				D2600B871BD65D88002E850F /* wxzhifu */,
 				7695653C1BA08A4900A6AD10 /* libWeChatSDK.a */,
 				7695653D1BA08A4900A6AD10 /* WXApi.h */,
@@ -944,6 +959,29 @@
 				A18A0DD41BB0637200A09A0D /* SVProgressHUD.m */,
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		A1B0CB031C021DD5005A62A4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				A1B0CB041C021DD5005A62A4 /* Constant.h */,
+				A1B0CB051C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */,
+				A1B0CB061C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */,
+				A1B0CB071C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */,
+				A1B0CB081C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */,
+				A1B0CB091C021DD5005A62A4 /* WXMediaMessage+messageConstruct.h */,
+				A1B0CB0A1C021DD5005A62A4 /* WXMediaMessage+messageConstruct.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		A1B0CB0B1C021DD5005A62A4 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A1B0CB101C021DD5005A62A4 /* WXApiResponseHandler.h */,
+				A1B0CB111C021DD5005A62A4 /* WXApiResponseHandler.m */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		A1C36CAA1B87A50100EFCB57 /* CollectionViewCells */ = {
@@ -1437,14 +1475,17 @@
 				A18A0DD71BB0637200A09A0D /* SVProgressHUD.m in Sources */,
 				A1C8EA611BCA05DA00ED9910 /* Manager.swift in Sources */,
 				A132BB8D1B863310004EAB47 /* TabBarVC.swift in Sources */,
+				A1B0CB191C021DD5005A62A4 /* WXApiResponseHandler.m in Sources */,
 				D2E6BE931B96D62F0050C177 /* T11SearchSuggestionCell.swift in Sources */,
 				D24485D01B8E028B00CD97D5 /* T09CellTextLeft.swift in Sources */,
+				A1B0CB141C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
 				D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */,
 				A1F063AA1BE3CDF400697BE6 /* T13AssignToMeVC.swift in Sources */,
 				A1F3D35B1BCEB4340007B7CE /* RSADataVerifier.m in Sources */,
 				D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */,
 				D2DE57731B84D049000DD691 /* T05PayVC.swift in Sources */,
 				A1043E3D1B7F7CBA007A237C /* String.swift in Sources */,
+				A1B0CB161C021DD5005A62A4 /* WXMediaMessage+messageConstruct.m in Sources */,
 				A1E08D3E1BC81D2C00F22A42 /* keywordModel.swift in Sources */,
 				D23B5DCF1BE90B7E00DB4377 /* OrderStatusModel.swift in Sources */,
 				769564D41BA02ACE00A6AD10 /* ReceiverModel.swift in Sources */,
@@ -1462,6 +1503,7 @@
 				765424811B8B5A56001C607C /* U03AddressManagerVC.swift in Sources */,
 				D24485C81B8DE88300CD97D5 /* T09ComplaintStatusVC.swift in Sources */,
 				A1F3D3581BCEB4340007B7CE /* NSDataEx.m in Sources */,
+				A1B0CB151C021DD5005A62A4 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */,
 				A1C36CAF1B87A50100EFCB57 /* SearchCollectionReusableViewHeader.swift in Sources */,
 				D21E9BA81BAC76D400C55C84 /* CSActionSheet.swift in Sources */,
 				A132BBAA1B863448004EAB47 /* T02HotListVC.swift in Sources */,
@@ -1632,7 +1674,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a96fec4-99f4-46fd-ae5d-fb3541b4baaa";
+				PROVISIONING_PROFILE = "b5922c1f-791c-4e82-8373-8f7b3704b46e";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
