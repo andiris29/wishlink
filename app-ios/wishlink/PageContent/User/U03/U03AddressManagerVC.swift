@@ -14,7 +14,7 @@ class U03AddressManagerVC: RootVC, UITableViewDelegate, UITableViewDataSource,
 U03AddressCellDelegate, WebRequestDelegate{
 
     @IBOutlet weak var tableView: UITableView!
-    
+    var isHiddleEditModel = false;
     var selectedReciver: ReceiverModel!
  
     var addressArray:[ReceiverModel]! = [ReceiverModel]() {
@@ -54,6 +54,13 @@ U03AddressCellDelegate, WebRequestDelegate{
             self.addressArray = array
         }
         self.tableView.reloadData()
+    }
+    override func viewDidAppear(animated: Bool) {
+        self.performSelector(Selector("showcustomTabar"), withObject: nil, afterDelay: 0.01);
+    }
+    func showcustomTabar()
+    {
+        UIHEPLER.showTabBar(true);
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,16 +103,26 @@ U03AddressCellDelegate, WebRequestDelegate{
         if receiver.isDefault == true {
             self.selectedReciver = receiver
         }
+        else
+        {
+            if(self.isHiddleEditModel)
+            {
+                cell.editBtn.hidden = true;
+                cell.deleteBtn.hidden = true;
+            }
+        }
+        cell.isHiddleEditModel = self.isHiddleEditModel;
         return cell
     }
+
     
     func addressCell(cell: U03AddressCell, btnClickWithTag tag: NSInteger, indexPath: NSIndexPath) {
         if tag == 0 {
             let vc = U03AddAddressVC(nibName: "U03AddAddressVC", bundle: NSBundle.mainBundle())
             vc.operationType = .Edit
             vc.receiver = self.addressArray[indexPath.row]
-            
-            
+
+            UIHEPLER.showTabBar(false);
             
             vc.hidesBottomBarWhenPushed = true
             self.navigationController!.pushViewController(vc, animated: true)
@@ -120,9 +137,6 @@ U03AddressCellDelegate, WebRequestDelegate{
             if(self.selectedReciver != nil)
             {
                 if receiver == self.selectedReciver {
-                    
-                    
-                    
                     return
                 }
             }
@@ -181,9 +195,13 @@ U03AddressCellDelegate, WebRequestDelegate{
             self.addressArray.append(receiver)
             self.tableView.reloadData()
         }
+        
+        UIHEPLER.showTabBar(false);
         vc.hidesBottomBarWhenPushed = true
         self.navigationController!.pushViewController(vc, animated: true)
     }
+    
+    
     
     // MARK: - prive method
     

@@ -42,7 +42,8 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         let releaseVC = T04CreateTradeVC(nibName: "T04CreateTradeVC", bundle: NSBundle.mainBundle())
         releaseVC.tabBarItem.title = "发布"
         releaseVC.tabBarItem.tag = 9
-        releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
+      //  releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
+         releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
         
         let createNav =  NavigationPageVC(rootViewController: releaseVC)
  
@@ -74,6 +75,9 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
         self.selectedIndex = 1;
         
+
+
+
     }
     var centerButton:UIButton!
     var centerBtn_Normal:UIImage! = UIImage(named: "tabbar_gray_bg");
@@ -82,18 +86,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
         if(self.centerButton == nil)
         {
-            //中上部自定义BUtton
-            let btnWidth:CGFloat = self.tabBar.frame.height-5;
-            centerButton = UIButton(type: UIButtonType.Custom);
-            centerButton.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin,UIViewAutoresizing.FlexibleBottomMargin,
-                UIViewAutoresizing.FlexibleTopMargin,UIViewAutoresizing.FlexibleRightMargin]
-            centerButton.frame = CGRectMake(0, 0, btnWidth, btnWidth);
-            centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
-            centerButton.addTarget(self, action: Selector("centerBtnAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-            var center = self.tabBar.center;
-            center.y = center.y - 15;
-            centerButton.center = center;
-            self.view.addSubview(centerButton);
+            self.createCenterBtn();
         }
         
         if(isFirstTime)
@@ -102,18 +95,39 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
             self.selectedIndex = 0;
         }
     }
+    func createCenterBtn()
+    {
+        var sIndex = self.selectedIndex;
+        
+        //中上部自定义BUtton
+        let btnWidth:CGFloat = self.tabBar.frame.height-5;
+        centerButton = UIButton(type: UIButtonType.Custom);
+        centerButton.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin,UIViewAutoresizing.FlexibleBottomMargin,
+            UIViewAutoresizing.FlexibleTopMargin,UIViewAutoresizing.FlexibleRightMargin]
+        centerButton.frame = CGRectMake(0, 0, btnWidth, btnWidth);
+        if(sIndex == 2)
+        {
+            centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
+        }
+        else
+        {
+            centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
+        }
+        centerButton.addTarget(self, action: Selector("centerBtnAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        var center = self.tabBar.center;
+        center.y = center.y - 15;
+        centerButton.center = center;
+        self.view.addSubview(centerButton);
+    }
     func centerBtnAction(sender:UIButton)
     {
         self.selectedIndex = 2;
-        
         self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
         self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Highlighted);
-//        self.tabBar(self.tabBar, didSelectItem: self.tabBar.items![2]);
     }
     
     func backToTopVC()
     {
-        
         let navigationController = self.selectedViewController as! UINavigationController
         navigationController.popToRootViewControllerAnimated(true);
     }
@@ -144,6 +158,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
 
        
     }
+
 
  
 

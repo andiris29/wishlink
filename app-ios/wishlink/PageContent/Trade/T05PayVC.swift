@@ -227,8 +227,8 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         }
         else
         {
-           
             let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+            u03VC.isHiddleEditModel = true;
             u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
             
                 self!.lbReceverName.text = item.name

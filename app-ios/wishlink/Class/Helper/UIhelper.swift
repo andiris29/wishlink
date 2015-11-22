@@ -236,4 +236,37 @@ class UIHelper {
           
         }
     }
+    func getTabbar()->TabBarVC!
+    {
+        var result:TabBarVC!
+        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? TabBarVC != nil) {
+            result =  UIHEPLER.GetAppDelegate().window!.rootViewController as! TabBarVC
+        }
+        return result;
+    }
+    func showTabBar(isShow:Bool)
+    {
+        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? TabBarVC != nil) {
+            let tabbar =  UIHEPLER.GetAppDelegate().window!.rootViewController as! TabBarVC
+            var isNeedReload = false
+            if(tabbar.centerButton.hidden)
+            {
+                isNeedReload = true;
+            }
+            if(isShow)
+            {
+                
+                tabbar.view!.bringSubviewToFront(tabbar.centerButton);
+                
+                if(isNeedReload)
+                {
+                    tabbar.createCenterBtn();
+                }
+            }
+            
+            tabbar.centerButton.hidden = !isShow;
+             tabbar.tabBar.hidden = !isShow;
+        }
+
+    }
 }

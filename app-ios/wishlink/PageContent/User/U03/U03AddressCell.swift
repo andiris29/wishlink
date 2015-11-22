@@ -30,7 +30,7 @@ class U03AddressCell: UITableViewCell {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var provinceLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    
+    var isHiddleEditModel = false;
     var defaultReceiver: Bool = false {
         didSet {
             self.adjustUI()
@@ -76,9 +76,25 @@ class U03AddressCell: UITableViewCell {
     }
     
     func adjustUI() {
+        
         self.selectBtn.selected = self.defaultReceiver
         self.editBtn.selected = self.selectBtn.selected
         self.deleteBtn.selected = self.selectBtn.selected
+        
+        if(isHiddleEditModel)
+        {
+            if(!self.defaultReceiver)
+            {
+                self.editBtn.hidden = true;
+                self.deleteBtn.hidden = true;
+            }
+            else
+            {
+                
+                self.editBtn.hidden = false;
+                self.deleteBtn.hidden = false;
+            }
+        }
     }
     
     func fillDataForUI() {

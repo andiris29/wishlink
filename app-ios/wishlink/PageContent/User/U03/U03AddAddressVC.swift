@@ -83,7 +83,7 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPicker
         if tag == 10 {
             UserModel.shared.userDic = response["user"] as! [String: AnyObject]
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let alertView = UIAlertView(title: "温馨提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
+                let alertView = UIAlertView(title: "", message: "保存成功", delegate: nil, cancelButtonTitle: "确定")
                 alertView.show()
                 self.navigationController!.popViewControllerAnimated(true)
             })
