@@ -134,6 +134,8 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
         vc?.navigationController?.popToRootViewControllerAnimated(false)
         UIHEPLER.showLoginPage(vc!,isToHomePage: true);
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
     }
     
     // MARK: -- UITextField delegate
@@ -318,12 +320,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
             UserModel.shared.logout()
             AppConfig().userLogout()
             SVProgressHUD.dismiss()
-            NSNotificationCenter.defaultCenter().postNotificationName(LogoutNotification, object: nil)
-            
             self.logOutAction();
-            
-
-            
         }
     }
     

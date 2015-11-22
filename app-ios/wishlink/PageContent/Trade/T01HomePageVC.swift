@@ -50,6 +50,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.searchBgImageView.layer.cornerRadius = self.searchBgImageView.frame.size.height / 2.0
 
         
+        NSNotificationCenter.defaultCenter().addObserverForName(LogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self](noti) -> Void in
+            self!.searchTextField.text = "";
+        }
+     
         
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         httpObj.httpGetApi("user/get", parameters: nil, tag: 101)

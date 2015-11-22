@@ -49,9 +49,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             self.fillDataForUI()
 //            self.loginVC.view.removeFromSuperview()
         }
-        NSNotificationCenter.defaultCenter().addObserverForName(LogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
-//            self.view.addSubview(self.loginVC.view)
-        }
+
         self.navigationController!.navigationBar.hidden = false
     }
 
