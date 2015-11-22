@@ -193,7 +193,7 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u02ordercountmark" translatesAutoresizingMaskIntoConstraints="NO" id="Tzq-wE-i5I">
-                                                    <rect key="frame" x="237" y="67" width="40" height="15"/>
+                                                    <rect key="frame" x="227" y="67" width="40" height="15"/>
                                                     <animations/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -202,7 +202,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-F6-NC7">
-                                                    <rect key="frame" x="280" y="64" width="85" height="21"/>
+                                                    <rect key="frame" x="270" y="64" width="95" height="21"/>
                                                     <animations/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -270,6 +270,7 @@
                                                 <constraint firstItem="Tzq-wE-i5I" firstAttribute="leading" secondItem="VoT-74-RdT" secondAttribute="trailing" constant="20" id="1jf-kw-HrI"/>
                                                 <constraint firstItem="ir8-In-KGt" firstAttribute="top" secondItem="zZp-6a-tWr" secondAttribute="top" constant="4" id="40F-3m-ZdW"/>
                                                 <constraint firstItem="nXx-5c-Zze" firstAttribute="top" secondItem="b7s-F6-NC7" secondAttribute="bottom" id="8aY-Sh-g9H"/>
+                                                <constraint firstItem="Tzq-wE-i5I" firstAttribute="leading" secondItem="txI-nB-Zft" secondAttribute="leading" id="8xa-Wn-dac"/>
                                                 <constraint firstItem="ir8-In-KGt" firstAttribute="leading" secondItem="zZp-6a-tWr" secondAttribute="leading" constant="10" id="AxQ-40-fGO"/>
                                                 <constraint firstItem="uOQ-Ep-l76" firstAttribute="width" secondItem="aji-lY-Z1I" secondAttribute="width" id="B8V-bc-jlq"/>
                                                 <constraint firstItem="txI-nB-Zft" firstAttribute="leading" secondItem="sr4-Gz-EcB" secondAttribute="trailing" constant="10" id="BSh-Rq-sRD"/>
@@ -303,6 +304,7 @@
                                                     <exclude reference="QbQ-yx-gAq"/>
                                                     <exclude reference="B8V-bc-jlq"/>
                                                     <exclude reference="WSm-yG-O0l"/>
+                                                    <exclude reference="1jf-kw-HrI"/>
                                                 </mask>
                                             </variation>
                                         </view>

@@ -74,7 +74,7 @@ class T13CellHeader: UITableViewCell {
     {
         self.item = _item;
         self.trade = _trade;
-        self.lbName.text = self.item.name
+        self.lbName.text = self.item.brand + " " + self.item.name
         self.lbSpec.text = self.item.spec
         self.lbBranch.text = "品牌：" + self.item.brand
         self.lbCountry.text = self.item.country

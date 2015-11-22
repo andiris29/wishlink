@@ -68,25 +68,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品牌：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVE-ke-EmK">
-                        <rect key="frame" x="131" y="16" width="181" height="16"/>
-                        <animations/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="16" id="baU-oD-yDs"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品名：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcY-F8-wIj">
-                        <rect key="frame" x="131" y="41" width="42" height="16"/>
+                        <rect key="frame" x="131" y="16" width="42" height="16"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阿斯顿发顺风的" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRn-1f-Ujo">
-                        <rect key="frame" x="181" y="41" width="98" height="16"/>
+                        <rect key="frame" x="181" y="16" width="98" height="16"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -188,7 +178,6 @@
                                 <rect key="frame" x="37" y="105" width="7" height="14"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="10"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWp-m1-J7a">
@@ -216,7 +205,6 @@
                                     <constraint firstAttribute="width" constant="75" id="hDb-gz-eYq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="16"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -249,7 +237,7 @@
                                     <constraint firstAttribute="width" constant="150" id="GQy-OS-aRI"/>
                                     <constraint firstAttribute="height" constant="22" id="rdl-El-eM3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -293,10 +281,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="d3V-rG-Mtd"/>
                                 <exclude reference="6eV-Ab-SSh"/>
                                 <exclude reference="Lqe-0h-LNd"/>
                                 <exclude reference="P1E-Pi-CSL"/>
-                                <exclude reference="d3V-rG-Mtd"/>
                             </mask>
                         </variation>
                     </view>
@@ -312,11 +300,9 @@
                     <constraint firstItem="fcY-F8-wIj" firstAttribute="leading" secondItem="kus-FU-PKD" secondAttribute="trailing" constant="8" id="GNf-7T-ae2"/>
                     <constraint firstItem="zRn-1f-Ujo" firstAttribute="leading" secondItem="fcY-F8-wIj" secondAttribute="trailing" constant="8" id="H8a-hi-tzE"/>
                     <constraint firstAttribute="trailing" secondItem="1V0-go-AIA" secondAttribute="trailing" id="IRo-OB-Uue"/>
-                    <constraint firstItem="fcY-F8-wIj" firstAttribute="top" secondItem="kus-FU-PKD" secondAttribute="top" constant="25" id="Jw0-Pz-LO4"/>
-                    <constraint firstItem="WVE-ke-EmK" firstAttribute="leading" secondItem="Dcu-8U-tmj" secondAttribute="trailing" constant="8" id="RNV-2x-Ecw"/>
+                    <constraint firstItem="fcY-F8-wIj" firstAttribute="top" secondItem="kus-FU-PKD" secondAttribute="top" id="Jw0-Pz-LO4"/>
                     <constraint firstItem="7cC-Q5-a5m" firstAttribute="leading" secondItem="CPL-Wi-CdL" secondAttribute="leading" id="RWg-kt-xtl"/>
                     <constraint firstItem="daI-Bo-kzr" firstAttribute="centerY" secondItem="cVB-4P-rfr" secondAttribute="centerY" id="S4L-Bp-WRS"/>
-                    <constraint firstItem="WVE-ke-EmK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Tk6-As-yKw"/>
                     <constraint firstItem="Dcu-8U-tmj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="WXb-Cn-mEW"/>
                     <constraint firstItem="3Zi-la-e39" firstAttribute="top" secondItem="sx9-WF-LhI" secondAttribute="bottom" constant="8" id="Wbz-vg-EPa"/>
                     <constraint firstItem="7cC-Q5-a5m" firstAttribute="centerY" secondItem="3Zi-la-e39" secondAttribute="centerY" id="XQN-YP-9sr"/>
@@ -334,7 +320,6 @@
                     <constraint firstAttribute="trailing" secondItem="VbY-nn-XKg" secondAttribute="trailing" id="kHd-K3-7yQ"/>
                     <constraint firstItem="CPL-Wi-CdL" firstAttribute="centerY" secondItem="sx9-WF-LhI" secondAttribute="centerY" id="ncK-op-hog"/>
                     <constraint firstItem="VbY-nn-XKg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="p8u-9Q-R4h"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="WVE-ke-EmK" secondAttribute="trailing" id="xwz-y4-XqC"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -347,7 +332,6 @@
                 <outlet property="btnSelect" destination="nWp-m1-J7a" id="3Lo-Vi-NzG"/>
                 <outlet property="iv" destination="kus-FU-PKD" id="08q-a8-H94"/>
                 <outlet property="iv_trade" destination="lFO-zq-3Lo" id="v7J-Uu-8cg"/>
-                <outlet property="lbBranch" destination="WVE-ke-EmK" id="8NT-CE-mp7"/>
                 <outlet property="lbCountry" destination="7cC-Q5-a5m" id="ZHU-Y1-gWy"/>
                 <outlet property="lbName" destination="zRn-1f-Ujo" id="t1C-3B-fV9"/>
                 <outlet property="lbPrice" destination="daI-Bo-kzr" id="W61-Rj-sTR"/>

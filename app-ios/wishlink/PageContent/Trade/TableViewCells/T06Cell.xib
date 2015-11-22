@@ -11,6 +11,7 @@
             <string>FZLTXHJW--GB1-0</string>
             <string>FZLTXHJW--GB1-0</string>
             <string>FZLTXHJW--GB1-0</string>
+            <string>FZLTXHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -51,8 +52,7 @@
                             <constraint firstAttribute="width" constant="150" id="SJ2-xR-yau"/>
                             <constraint firstAttribute="height" constant="22" id="fGF-Ry-Nd2"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="16"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -76,15 +76,14 @@
                             <action selector="selectedButtonAction:" destination="you-4l-qHu" eventType="touchUpInside" id="AHI-fQ-9EE"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-iX-DM0">
-                        <rect key="frame" x="139" y="45" width="11" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-iX-DM0">
+                        <rect key="frame" x="139" y="44" width="12" height="20"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="17"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1F-SY-ngx">
-                        <rect key="frame" x="8" y="62" width="90" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1F-SY-ngx">
+                        <rect key="frame" x="8" y="62" width="81" height="21"/>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -92,7 +91,6 @@
                             <constraint firstAttribute="width" constant="90" id="ZbK-pU-UVh"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="10"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -109,7 +107,6 @@
                             <constraint firstAttribute="height" constant="21" id="EOT-13-aId"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="16"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
