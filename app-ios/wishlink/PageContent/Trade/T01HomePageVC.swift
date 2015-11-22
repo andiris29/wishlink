@@ -194,10 +194,11 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         if indexPath.row == 0 { return }
         self.searchTableView.hidden = true
         self.searchTextField.resignFirstResponder()
-        self.searchTextField.text = itemContents[indexPath.row] as? String
-        self.gotoNextPage(self.searchTextField.text!);
-
+        let _strKeyWord = itemContents[indexPath.row] as? String;
+        self.searchTextField.text = _strKeyWord
+        self.gotoNextPage(_strKeyWord!);
     }
+ 
     
     //MARK: - 标签点击操作
     
