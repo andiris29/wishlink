@@ -185,6 +185,12 @@ class U03AddAddressVC: RootVC, UITextFieldDelegate, WebRequestDelegate, UIPicker
         if self.validateContent() == false {
             return
         }
+        
+        if !UIHEPLER.checkPhone(self.phoneTextField.text!) {
+            UIHEPLER.alertErrMsg("请输入正确的手机号码")
+            return
+        }
+        
         self.saveAddress()
     }
     

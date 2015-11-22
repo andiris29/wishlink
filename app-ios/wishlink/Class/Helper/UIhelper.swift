@@ -285,4 +285,13 @@ class UIHelper {
         return result;
         
     }
+    
+    // MARK: - 检测是否是手机号
+    func checkPhone(string: String) -> Bool{
+        
+        let regex = "^1\\d{10}$"
+        let predicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluateWithObject(string)
+    }
+    
 }
