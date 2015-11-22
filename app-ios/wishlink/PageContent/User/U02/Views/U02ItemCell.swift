@@ -39,10 +39,11 @@ class U02ItemCell: UICollectionViewCell {
     
  
     var closure: ((ItemCellButtonClickType, NSIndexPath) -> ())?
+    var deleteButtonClosure: ((ItemCellType, NSIndexPath) -> ())?
     
     var cellType: ItemCellType = .Recommand {
         didSet {
-            if cellType == .Recommand {
+            if cellType == .Recommand || cellType == .Favorite {
                 
                 btnDelete.hidden = false
             } else {
@@ -94,14 +95,12 @@ class U02ItemCell: UICollectionViewCell {
 //        btn.selected = !btn.selected
         if let c = self.closure {
             c(ItemCellButtonClickType.Favorite, self.indexPath)
-//            c(self.indexPath, ItemCellType.Favorite)
         }
         self.delegate?.itemCell(self, clickType: ItemCellButtonClickType.Favorite)
     }
     @IBAction func deleteBtnAction(sender: AnyObject) {
         if let c = self.closure {
             c(ItemCellButtonClickType.Delete, self.indexPath)
-            //            c(self.indexPath, ItemCellType.Favorite)
         }
     }
     
@@ -109,7 +108,7 @@ class U02ItemCell: UICollectionViewCell {
         self.lbCountry.text = item.country;
         if(self.item.price != nil)
         {
-            self.lbPrice.text = "￥" + item.price.format(".2");
+            self.lbPrice.text = "RMB" + item.price.format(".2");
         }
         self.lbIntro.text = item.brand + " " + item.name + " " + item.spec;
         self.lbCount.text = "\(item.numTrades)件"
