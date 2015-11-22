@@ -112,15 +112,17 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
             self.orderTime.text = "接单：" + UIHEPLER.formartTime(UserModel.shared.create)
-            self.linkTitle.text = "买家信息"
+            self.linkTitle.text = "卖家信息"
             self.orderState.text = self.orderStatusDic[(orderState?.status)!]
+            self.linkButton.setImage(UIImage(named: "u02-contactsell"), forState: UIControlState.Normal)
         } else {
             
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
             self.personName.text = "\(self.assigneeModel.nickname)"
             self.orderTime.text = "接单：" + UIHEPLER.formartTime(self.assigneeModel.create)
-            self.linkTitle.text = "卖家信息"
+            self.linkTitle.text = "买家信息"
             self.orderState.text = self.orderSellerStatusDic[(orderState?.status)!]
+            self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
         }
         
         if self.receiver != nil {
