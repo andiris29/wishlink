@@ -11,8 +11,8 @@ import UIKit
 class T06ItemVC: RootVC, WebRequestDelegate {
 
     @IBOutlet weak var btnFav: UIButton!
-    @IBOutlet weak var tradeNameLabel   : UILabel!
-    @IBOutlet weak var tradeTimeLabel   : UILabel!
+//    @IBOutlet weak var tradeNameLabel   : UILabel!
+//    @IBOutlet weak var tradeTimeLabel   : UILabel!
     @IBOutlet weak var goodNameLabel    : UILabel!
 
     @IBOutlet weak var goodFormatLabel  : UILabel!
@@ -241,8 +241,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     func bindData()
     {
         if(self.followArr != nil && followArr.count>0)
-        {
-            
+        {   
             self.goodNumberLabel.text = "数量：--";
             self.goodTotalLabel.text = "合计：--";
             if(self.trade != nil)
@@ -264,11 +263,9 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 }
                 if(self.trade.create != nil)
                 {
-                    self.lb_CreateTime.text = self.trade.create;
+                    self.lb_CreateTime.text = "发布：" + UIHEPLER.formartTime(self.trade.create);
                 }
             }
-            
-            
         }
         
     }

@@ -40,8 +40,6 @@
                 <outlet property="lb_CreateTime" destination="mOL-Ac-0Gc" id="g58-E2-zm1"/>
                 <outlet property="lb_CreaterName" destination="8XE-Rj-boz" id="H7s-o0-qAZ"/>
                 <outlet property="sv" destination="WTo-m3-Ch7" id="Z0l-VU-TEa"/>
-                <outlet property="tradeNameLabel" destination="8XE-Rj-boz" id="fvh-B5-DfU"/>
-                <outlet property="tradeTimeLabel" destination="mOL-Ac-0Gc" id="Cxp-CJ-6xC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

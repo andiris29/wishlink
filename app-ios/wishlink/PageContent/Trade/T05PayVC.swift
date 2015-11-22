@@ -75,7 +75,6 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         NSLog("T05PayVC --> deinit");
         
         self.httpObj.mydelegate = nil;
-        self.imageRollView.removeFromSuperview();
         self.imageRollView = nil;
         self.item = nil;
         self.trade = nil;

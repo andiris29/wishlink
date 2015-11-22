@@ -195,7 +195,24 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             
             self.httpObj.renderImageView(self.headImageView, url: userModel.portrait, defaultName: "")
             self.httpObj.renderImageView(self.bgImageView, url: userModel.background, defaultName: "")
-            self.contryLabel.text = "上海杨浦区国和路555弄"
+            if(self.userModel.receiversArray != nil && self.userModel.receiversArray.count>0)
+            {
+                let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+                    return (itemObj as ReceiverModel).isDefault == true;
+                }
+                if(result.count>0)
+                {
+                    self.contryLabel.text = result[0].province;
+                }
+                else
+                {
+                    self.contryLabel.text = self.userModel.receiversArray[0].province;
+                }
+            }
+            else
+            {
+                self.contryLabel.text = "--"
+            }
         }
     }
     

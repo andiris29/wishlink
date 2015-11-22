@@ -23,7 +23,7 @@ class T13CellHeader: UITableViewCell {
     @IBOutlet weak var lbSpec: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
-    @IBOutlet weak var lbBranch: UILabel!
+//    @IBOutlet weak var lbBranch: UILabel!
     
     @IBOutlet weak var lbTotalNumbers: UILabel!
     @IBOutlet weak var iv_trade: UIImageView!
@@ -76,7 +76,7 @@ class T13CellHeader: UITableViewCell {
         self.trade = _trade;
         self.lbName.text = self.item.brand + " " + self.item.name
         self.lbSpec.text = self.item.spec
-        self.lbBranch.text = "品牌：" + self.item.brand
+//        self.lbBranch.text = "品牌：" + self.item.brand
         self.lbCountry.text = self.item.country
         self.lb_trde_country.text = self.item.country
         self.lbPrice.text = "RMB " + self.item.price.format(".2");

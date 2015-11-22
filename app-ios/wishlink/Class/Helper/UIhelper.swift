@@ -267,6 +267,22 @@ class UIHelper {
             tabbar.centerButton.hidden = !isShow;
              tabbar.tabBar.hidden = !isShow;
         }
-
+    }
+    //MARK:格式化时间
+    func formartTime(dateString:String)->String!
+    {
+          var result  = dateString
+        if(dateString.containsString("T"))
+        {
+          var stringArr =   dateString.componentsSeparatedByString("T")
+            result = stringArr[0];
+        }
+        if(result.containsString("-"))
+        {
+            result = (result as NSString).stringByReplacingOccurrencesOfString("-", withString: ".")
+        }
+    
+        return result;
+        
     }
 }
