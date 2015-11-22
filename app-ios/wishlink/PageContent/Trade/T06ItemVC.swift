@@ -219,15 +219,18 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         } else if sender.tag == 63 { //share
             
             
-            var shareVC = ShareVC();
-
- 
+            if(self.shareVC == nil)
+            {
+                shareVC = ShareVC.sharedInstance;
+                shareVC.CreateView();
+            }
 //            shareVC.beginAnimate();
+            shareVC.show(true);
             
             
         }
     }
-    
+    var shareVC:ShareVC!
     
     // MARK: - T06CellDelegate
     

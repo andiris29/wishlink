@@ -8,137 +8,180 @@
 
 import UIKit
 
-class ShareVC: UIViewController {
-
-    //MARK:点击头部图片时弹出层
-    var main_imgShowView:UIView!
+protocol ShareDelegate : NSObjectProtocol {
     
-    var main_maskView:UIView!
-    var main_tapGesture:UITapGestureRecognizer!
+    func btnTapAction(btntag:Int);
+}
+class ShareVC: UIWindow {
 
+    
+    private var viewConstraints: Dictionary<String, NSObject>!
+    //MARK:点击头部图片时弹出层
+//    var main_imgShowView:UIView!
+    //var main_maskView:UIView!
+    var main_tapGesture:UITapGestureRecognizer!
     var   shareView:UIView!;
     var duration = 0.6;
-    
-    let width = UIHEPLER.resizeHeight(43);
-    let viewHeight = UIHEPLER.resizeHeight(108);
-    
-    
-
-  
-    
+    let width:CGFloat = 45
+    let viewHeight:CGFloat = 108
     
     deinit{
         NSLog("ShareVC deinit")
         main_tapGesture = nil;
- 
-        
+    }
+    
+    class var sharedInstance : ShareVC {
+        struct Static {
+            static let instance: ShareVC = ShareVC(frame: CGRectZero)
+        }
+        return Static.instance
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
 
     
     func CreateView()
     {
-        NSLog("CreateView");
-        if(main_imgShowView == nil)
+        if(self.subviews.count>0)
         {
-            main_imgShowView = UIView(frame: CGRectMake(0, 0, ScreenWidth, ScreenHeight));
-            main_imgShowView.backgroundColor = UIColor.clearColor()
+            for view in self.subviews {
+                view.removeFromSuperview()
+            }
+        }
+
+        NSLog("CreateView");
+        self.frame = KeyWindow.bounds
+        self.windowLevel = UIWindowLevelStatusBar
+        self.backgroundColor = RGBCA(0, a: 0.3)
+        
+        if(shareView == nil)
+        {
+             viewConstraints = Dictionary<String, NSObject>()
+
+            
+            shareView = UIView();
+            shareView.layer.shadowRadius = 1;
+            shareView.layer.shadowColor = UIColor.grayColor().CGColor;
+            shareView.backgroundColor = UIColor.whiteColor()
+            shareView.userInteractionEnabled = true
+            shareView.translatesAutoresizingMaskIntoConstraints = false
+            viewConstraints["shareView"] = shareView
+            self.addSubview(shareView)
+
             
             
-            main_maskView = UIView(frame: CGRectMake(0, 0, ScreenWidth, ScreenHeight));
-            main_maskView.backgroundColor = UIColor.blackColor();
-            main_maskView.alpha = 0.7;
-            
-            shareView = UIView(frame: CGRectMake(0, ScreenHeight, ScreenWidth, self.viewHeight));
-            shareView.backgroundColor = UIColor.whiteColor();
+            self.addConstraintsVisualFormat("H:|[shareView]|", views: viewConstraints);
+            self.addConstraintsVisualFormat("V:[shareView(\(self.viewHeight))]|", views: viewConstraints);
         }
         
         
-        
-        let sinaFrame = CGRectMake(UIHEPLER.resizeHeight(33), UIHEPLER.resizeHeight(23), width, width);
-        let btnSina = UIButton(frame: sinaFrame)
-        btnSina.setBackgroundImage(UIImage(named:"shareSina"), forState: UIControlState.Normal);
-        
-        
-        
-        
-        let wxFrame = CGRectMake((ScreenWidth-width)/2, UIHEPLER.resizeHeight(23), width, width);
-        let btnWx = UIButton(frame: wxFrame)
-        btnWx.setBackgroundImage(UIImage(named:"shareWiXin"), forState: UIControlState.Normal);
-        
-        
-        let wxMonentFrame = CGRectMake(ScreenWidth-UIHEPLER.resizeHeight(23+43), UIHEPLER.resizeHeight(23), width, width);
-        let btnMontent = UIButton(frame: wxMonentFrame)
-        btnMontent.setBackgroundImage(UIImage(named:"shareMontent"), forState: UIControlState.Normal);
-        
-        
-        
-        shareView.addSubview(btnSina);
-        shareView.addSubview(btnWx);
-        shareView.addSubview(btnMontent);
-        
-        main_imgShowView.addSubview(shareView);
-        
-        self.view.backgroundColor = UIColor.clearColor();
-        
-        
-        self.view.addSubview(self.main_maskView)
-        self.view.addSubview(self.main_imgShowView)
-        
-        APPLICATION.keyWindow?.addSubview(self.view);
-    }
-    
-    func beginAnimate()
-    {
-        CreateView();
-        NSLog("beginAnimate");
-        
-        self.main_tapGesture = UITapGestureRecognizer(target: self, action: "endTapGestureHideView:")
-        
-        self.main_imgShowView.addGestureRecognizer(self.main_tapGesture);
- 
-        UIView.animateWithDuration(duration, animations: {
-            
-            }, completion: {
-                
-                [weak self](Bool completion) in
-                
-                if completion {
-                    
-                    self!.shareView.frame = CGRectMake(0, ScreenHeight-self!.viewHeight, ScreenWidth, self!.viewHeight)
+        let marginTop:CGFloat = 23;
 
-                }
-                else {
-                    
-                }
-        })
+        let btnSina = UIButton()
+        btnSina.translatesAutoresizingMaskIntoConstraints = false
+        btnSina.setBackgroundImage(UIImage(named:"shareSina"), forState: UIControlState.Normal);
+        btnSina.setTitle("新浪微博", forState: UIControlState.Normal);
+        btnSina.tag == 1;
+        btnSina.addTarget(self, action: Selector("btnShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        viewConstraints["btnSina"] = btnSina
+        shareView.addSubview(btnSina);
+        self.addConstraintsVisualFormat("H:|-\(marginTop)-[btnSina(\(width))]", views: viewConstraints);
+        self.addConstraintsVisualFormat("V:|-\(marginTop)-[btnSina(\(width))]", views: viewConstraints);
+        
+        let lbSina = UILabel();
+        lbSina.translatesAutoresizingMaskIntoConstraints = false;
+        lbSina.font = UIHEPLER.getCustomFont(true, fontSsize: 14);
+        lbSina.textColor = UIHEPLER.mainColor
+        lbSina.text = "新浪微博";
+        viewConstraints["lbSina"] = lbSina
+        shareView.addSubview(lbSina);
+        self.addConstraintsVisualFormat("V:[btnSina]-10-[lbSina]", views: viewConstraints);
+
+        self.addConstraint(NSLayoutConstraint(item: lbSina, attribute: .CenterX, relatedBy: .Equal, toItem: btnSina, attribute: .CenterX, multiplier: 1, constant: 0));
+        
+        
+        let btnshareWiXin = UIButton()
+        btnshareWiXin.translatesAutoresizingMaskIntoConstraints = false
+        btnshareWiXin.setBackgroundImage(UIImage(named:"shareWiXin"), forState: UIControlState.Normal);
+        btnshareWiXin.tag == 2;
+        btnshareWiXin.addTarget(self, action: Selector("btnShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+         viewConstraints["btnshareWiXin"] = btnshareWiXin
+        shareView.addSubview(btnshareWiXin);
+        self.addConstraintsVisualFormat("H:|-\(ScreenWidth/2-width/2)-[btnshareWiXin(\(width))]", views: viewConstraints);
+        self.addConstraintsVisualFormat("V:|-\(marginTop)-[btnshareWiXin(\(width))]", views: viewConstraints);
+        
+        let lbWiXin = UILabel();
+        lbWiXin.translatesAutoresizingMaskIntoConstraints = false;
+        lbWiXin.font = UIHEPLER.getCustomFont(true, fontSsize: 14);
+        lbWiXin.textColor = UIHEPLER.mainColor
+        lbWiXin.text = "微信好友";
+        viewConstraints["lbWiXin"] = lbWiXin
+        shareView.addSubview(lbWiXin);
+        self.addConstraintsVisualFormat("V:[btnshareWiXin]-10-[lbWiXin]", views: viewConstraints);
+        self.addConstraint(NSLayoutConstraint(item: lbWiXin, attribute: .CenterX, relatedBy: .Equal, toItem: btnshareWiXin, attribute: .CenterX, multiplier: 1, constant: 0));
+        
+        
+        let btnshareMontent = UIButton()
+        btnshareMontent.setTitleColor(UIColor.magentaColor(), forState: UIControlState.Normal)
+        btnshareMontent.translatesAutoresizingMaskIntoConstraints = false
+        btnshareMontent.setBackgroundImage(UIImage(named:"shareMontent"), forState: UIControlState.Normal);
+        btnshareMontent.tag == 3;
+        btnshareMontent.addTarget(self, action: Selector("btnShareAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+         viewConstraints["btnshareMontent"] = btnshareMontent
+        shareView.addSubview(btnshareMontent);
+        self.addConstraintsVisualFormat("H:[btnshareMontent(\(width))]-\(marginTop)-|", views: viewConstraints);
+        self.addConstraintsVisualFormat("V:|-\(marginTop)-[btnshareMontent(\(width))]", views: viewConstraints);
+        
+        let lbMontent = UILabel();
+        lbMontent.translatesAutoresizingMaskIntoConstraints = false;
+        lbMontent.textColor = UIHEPLER.mainColor
+        lbMontent.font = UIHEPLER.getCustomFont(true, fontSsize: 14);
+        lbMontent.text = "微信好友";
+        viewConstraints["lbMontent"] = lbMontent
+        shareView.addSubview(lbMontent);
+        self.addConstraintsVisualFormat("V:[btnshareMontent]-10-[lbMontent]", views: viewConstraints);
+  
+        self.addConstraint(NSLayoutConstraint(item: lbMontent, attribute: .CenterX, relatedBy: .Equal, toItem: btnshareMontent, attribute: .CenterX, multiplier: 1, constant: 0));
+
+        
     }
     
-    func endTapGestureHideView(recognizer:UIGestureRecognizer)
+    func btnShareAction(sender:UIButton)
     {
-        self.main_imgShowView.hidden = true;
-        UIView.animateWithDuration(duration, animations: {
-            
-            self.main_maskView.alpha = 0
-            
-            }, completion: {
-                 [weak self](Bool completion) in
-                if completion {
-                    
-                    self!.main_imgShowView.alpha = 0;
-                    self!.main_imgShowView.removeFromSuperview();
-                    self!.main_maskView.removeFromSuperview();
-                    self!.main_maskView = nil;
-                    self!.main_imgShowView = nil;
-                    self!.main_tapGesture = nil;
-              
-         
-                }
-                else {
-                    
-                }
-        })
+        NSLog("share action");
     }
+    
+    //MARK: - touches
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        show(false)
+    }
+    func show(show: Bool) {
+        
+        if show { self.hidden = !show }
+        
+        backguandImageViewBeginOriginY(!show)
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.backguandImageViewBeginOriginY(show)
+            }) { finish -> Void in
+                if !show { self.hidden = !show }
+        }
+    }
+    func backguandImageViewBeginOriginY(show: Bool) {
+        
+//        self.main_imgShowView.frame.origin.y = show ? self.frame.size.height - main_imgShowView.frame.size.height : self.frame.size.height
+        self.shareView.frame.origin.y = show ? self.frame.size.height - shareView.frame.size.height : self.frame.size.height
+    }
+
+    
+
     //分享按钮
     func btnTapAction(sender:UIButton)
     {
