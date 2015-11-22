@@ -96,30 +96,33 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             self.goodImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.trade.item.images[0])!)!)
         }
         self.tradeIdLabel.text = "订单号：\(item._id)"
-        self.goodName.text = "品名：\(item.name)"
+        self.goodName.text = "品名：\(item.brand) \(item.name)"
         self.goodFrom.text = "购买地：\(item.country)"
         self.goodFormat.text = "规格：\(item.spec)"
-        self.goodPrice.text = "价格：￥\(item.price)/件"
+        self.goodPrice.text = "价格：RMB\(item.price.format(".2"))/件"
         self.goodNumber.text = "数量：\(trade.quantity)"
         
         if(item != nil && item.price != nil)
         {
-            self.goodTotal.text = "合计：\(item.price * Float(trade.quantity))"
+            self.goodTotal.text = "合计：RMB\((item.price * Float(trade.quantity)).format(".2"))"
         }
         
         let orderState = self.orderStatus.last
         if self.role == .buyyer {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
-            self.orderTime.text = "接单：\(UserModel.shared.create)"
-            self.linkTitle.text = "买家信息"
+            self.orderTime.text = "接单：" + UIHEPLER.formartTime(UserModel.shared.create)
+            self.linkTitle.text = "卖家信息"
             self.orderState.text = self.orderStatusDic[(orderState?.status)!]
+            self.linkButton.setImage(UIImage(named: "u02-contactsell"), forState: UIControlState.Normal)
         } else {
+            
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
             self.personName.text = "\(self.assigneeModel.nickname)"
-            self.orderTime.text = "接单：\(self.assigneeModel.create)"
-            self.linkTitle.text = "卖家信息"
+            self.orderTime.text = "接单：" + UIHEPLER.formartTime(self.assigneeModel.create)
+            self.linkTitle.text = "买家信息"
             self.orderState.text = self.orderSellerStatusDic[(orderState?.status)!]
+            self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
         }
         
         if self.receiver != nil {
@@ -128,7 +131,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             self.reveicerAddress.text = "收货地址：\(self.receiver.province + self.receiver.address)"
         }
     
-        self.orderReveicedTime.text = "接单时间：\((orderState?.create)!)"
+        self.orderReveicedTime.text = "接单时间：\(UIHEPLER.formartTime((orderState?.create)!))"
         self.revokeButton.setTitle("我要撤单", forState: UIControlState.Normal)
     }
     

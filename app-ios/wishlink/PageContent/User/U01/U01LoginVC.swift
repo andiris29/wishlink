@@ -154,6 +154,11 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         var userName = self.userNameTextField.text?.trim();
         var pwd = self.passWordTextField.text?.trim();
         
+        if !UIHEPLER.checkPhone(userName!) {
+            UIHEPLER.alertErrMsg("请输入正确的手机号码")
+            return
+        }
+        
         if(userName?.trim().length == 0 || pwd?.trim().length == 0)
         {
             UIHEPLER.alertErrMsg("请输入用户名和密码")

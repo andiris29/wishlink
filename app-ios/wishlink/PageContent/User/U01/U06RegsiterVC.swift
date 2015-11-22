@@ -149,6 +149,12 @@ class U06RegsiterVC: RootVC, WebRequestDelegate {
               UIHEPLER.alertErrMsg("手机号不能为空。")
              return
         }
+        
+        if !UIHEPLER.checkPhone(self.phoneTextField.text!) {
+            UIHEPLER.alertErrMsg("请输入正确的手机号码")
+            return
+        }
+        
         if( self.phonecheckTextField.text?.trim().length == 0)
         {
               UIHEPLER.alertErrMsg("验证码不能为空。")

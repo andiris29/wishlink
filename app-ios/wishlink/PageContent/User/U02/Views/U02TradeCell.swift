@@ -142,12 +142,12 @@ class U02TradeCell: UICollectionViewCell {
             if(self.trade.item.price != nil)
             {
                 let totalPrice: Float = Float(self.trade.quantity) * self.trade.item.price
-                self.itemTotalPrice.text = "合计：" + "\(totalPrice)"
-                self.itemPriceLabel.text = "出价：￥\(self.trade.item.price)"
+                self.itemTotalPrice.text = "合计：RMB" + "\(totalPrice.format(".2"))"
+                self.itemPriceLabel.text = "出价：RMB\(self.trade.item.price.format(".2"))"
             }
             self.itemCountryLabel.text = "购买地：" + self.trade.item.country
             self.itemFromatLabel.text = "规格：" + self.trade.item.spec
-            self.itemNameLabel.text = "品名：" + self.trade.item.name
+            self.itemNameLabel.text = "品名：" +  self.trade.item.brand + " " + self.trade.item.name
         }
         else
         {

@@ -52,8 +52,12 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投诉起诉中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Taj-x1-O8W" userLabel="statusLabel">
-                                <rect key="frame" x="17" y="13" width="75" height="18"/>
+                                <rect key="frame" x="17" y="13.5" width="75" height="17.5"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17.5" id="Z60-h8-A97"/>
+                                    <constraint firstAttribute="width" constant="75" id="yUf-iV-j2J"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                 <color key="textColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -134,12 +138,11 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号：1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7V6-r8-cWv">
-                                <rect key="frame" x="130" y="12" width="230" height="21"/>
+                                <rect key="frame" x="97" y="12" width="263" height="21"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PJG-eD-XBV"/>
-                                    <constraint firstAttribute="width" constant="230" id="WPX-GW-fNX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                 <color key="textColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -152,6 +155,7 @@
                             <constraint firstAttribute="centerY" secondItem="kSu-vJ-EwY" secondAttribute="centerY" id="8Wt-vf-RRX"/>
                             <constraint firstAttribute="trailing" secondItem="kSu-vJ-EwY" secondAttribute="trailing" constant="10" id="8iA-e9-8Dn"/>
                             <constraint firstAttribute="centerY" secondItem="nLR-fh-Tsk" secondAttribute="centerY" id="BZr-ec-tv6"/>
+                            <constraint firstItem="7V6-r8-cWv" firstAttribute="leading" secondItem="Taj-x1-O8W" secondAttribute="trailing" constant="5" id="Dgm-NE-WeG"/>
                             <constraint firstAttribute="centerY" secondItem="Haq-xH-9R5" secondAttribute="centerY" id="MQo-7a-KXA"/>
                             <constraint firstAttribute="centerY" secondItem="Taj-x1-O8W" secondAttribute="centerY" id="SRX-mu-pDX"/>
                             <constraint firstAttribute="height" constant="44" id="TUm-Pc-TI3"/>
@@ -192,6 +196,10 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买家要求退单" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7av-Jq-gzN" userLabel="statusLabel">
                                 <rect key="frame" x="17" y="13" width="90" height="18"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="u9v-ca-OSF"/>
+                                    <constraint firstAttribute="width" constant="90" id="zaP-dE-qAx"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                                 <color key="textColor" red="0.4823529412" green="0.01176470588" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -273,11 +281,10 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号：1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUO-Gj-4YM">
-                                <rect key="frame" x="130" y="12" width="230" height="21"/>
+                                <rect key="frame" x="112" y="12" width="248" height="21"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="4yS-od-08Y"/>
                                     <constraint firstAttribute="height" constant="21" id="jLy-do-1o8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
@@ -297,6 +304,7 @@
                             <constraint firstAttribute="trailing" secondItem="VUO-Gj-4YM" secondAttribute="trailing" constant="15" id="Oyr-Iv-9kd"/>
                             <constraint firstItem="Aql-15-RJi" firstAttribute="leading" secondItem="MK0-dU-U2Y" secondAttribute="leading" constant="5" id="RTe-2i-zWN"/>
                             <constraint firstItem="TW6-RG-IwH" firstAttribute="leading" secondItem="21T-Zy-oKn" secondAttribute="trailing" constant="10" id="SoT-bn-7NT"/>
+                            <constraint firstItem="VUO-Gj-4YM" firstAttribute="leading" secondItem="7av-Jq-gzN" secondAttribute="trailing" constant="5" id="Vb9-wD-MKu"/>
                             <constraint firstAttribute="trailing" secondItem="QJp-jl-7qK" secondAttribute="trailing" constant="5" id="cgY-CT-QJc"/>
                             <constraint firstAttribute="centerY" secondItem="TW6-RG-IwH" secondAttribute="centerY" id="dYD-B6-ir4"/>
                             <constraint firstAttribute="centerY" secondItem="kHO-QA-liz" secondAttribute="centerY" id="eiM-ke-hIl"/>

@@ -78,23 +78,23 @@ class U03AddressCell: UITableViewCell {
     func adjustUI() {
         
         self.selectBtn.selected = self.defaultReceiver
-        self.editBtn.selected = self.selectBtn.selected
-        self.deleteBtn.selected = self.selectBtn.selected
+        self.editBtn.hidden = !self.selectBtn.selected
+        self.deleteBtn.hidden = !self.selectBtn.selected
         
-        if(isHiddleEditModel)
-        {
-            if(!self.defaultReceiver)
-            {
-                self.editBtn.hidden = true;
-                self.deleteBtn.hidden = true;
-            }
-            else
-            {
-                
-                self.editBtn.hidden = false;
-                self.deleteBtn.hidden = false;
-            }
-        }
+//        if(isHiddleEditModel)
+//        {
+//            if(!self.defaultReceiver)
+//            {
+//                self.editBtn.hidden = true;
+//                self.deleteBtn.hidden = true;
+//            }
+//            else
+//            {
+//                
+//                self.editBtn.hidden = false;
+//                self.deleteBtn.hidden = false;
+//            }
+//        }
     }
     
     func fillDataForUI() {
