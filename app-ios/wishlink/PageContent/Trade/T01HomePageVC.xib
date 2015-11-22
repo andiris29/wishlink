@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
@@ -148,6 +147,15 @@
                                         <constraint firstAttribute="height" constant="23" id="auT-gJ-le3"/>
                                     </constraints>
                                 </imageView>
+                                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="32" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="the-Ei-b4x">
+                                    <rect key="frame" x="27" y="-323" width="225" height="383"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="6NE-Zd-BCj"/>
+                                        <outlet property="delegate" destination="-1" id="C81-hS-aCY"/>
+                                    </connections>
+                                </tableView>
                             </subviews>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -225,15 +233,6 @@
                         <constraint firstAttribute="bottom" secondItem="DYD-NG-GLl" secondAttribute="bottom" id="qe3-jr-8r3"/>
                     </constraints>
                 </view>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="32" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="the-Ei-b4x">
-                    <rect key="frame" x="47" y="185" width="225" height="383"/>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="6NE-Zd-BCj"/>
-                        <outlet property="delegate" destination="-1" id="C81-hS-aCY"/>
-                    </connections>
-                </tableView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -244,14 +243,10 @@
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="B48-gA-snJ"/>
                 <constraint firstAttribute="bottom" secondItem="y9C-1f-bmd" secondAttribute="bottom" constant="10" id="Jo4-r2-rqL"/>
                 <constraint firstItem="Vp8-rA-RkR" firstAttribute="top" secondItem="p3Y-lk-iNj" secondAttribute="bottom" id="NrF-9H-n46"/>
-                <constraint firstItem="the-Ei-b4x" firstAttribute="top" secondItem="Vp8-rA-RkR" secondAttribute="bottom" id="RaD-Nx-4on"/>
-                <constraint firstItem="the-Ei-b4x" firstAttribute="width" secondItem="Vp8-rA-RkR" secondAttribute="width" multiplier="0.9" id="Xg0-DQ-smX"/>
                 <constraint firstAttribute="trailing" secondItem="p3Y-lk-iNj" secondAttribute="trailing" id="fy2-f1-qcu"/>
-                <constraint firstAttribute="bottom" secondItem="the-Ei-b4x" secondAttribute="bottom" id="iCg-yT-bUB"/>
                 <constraint firstAttribute="trailing" secondItem="y9C-1f-bmd" secondAttribute="trailing" constant="20" id="lHL-Fn-Y4d"/>
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="top" secondItem="Rd0-gb-8Gz" secondAttribute="bottom" id="mzW-Go-WjP"/>
                 <constraint firstAttribute="trailing" secondItem="Vp8-rA-RkR" secondAttribute="trailing" constant="35" id="n2d-Pt-Ew7"/>
-                <constraint firstItem="the-Ei-b4x" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="p6o-nD-Iau"/>
                 <constraint firstItem="p3Y-lk-iNj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="s5M-gt-Iep"/>
                 <constraint firstItem="Rd0-gb-8Gz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xPE-OQ-ysg"/>
                 <constraint firstItem="Rd0-gb-8Gz" firstAttribute="top" secondItem="Vp8-rA-RkR" secondAttribute="bottom" id="xoE-In-3fc"/>

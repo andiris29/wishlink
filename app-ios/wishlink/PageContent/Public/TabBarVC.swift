@@ -31,11 +31,12 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
         let homeVC =  T01HomePageVC(nibName: "T01HomePageVC", bundle: NSBundle.mainBundle())
         homeVC.tabBarItem = UITabBarItem.tabBarItem("首页", image: UIImage(named: "home_unselect")!, selectedImage: UIImage(named: "home_select")!);
-        
+        homeVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0,-3)
         let homeNav =  NavigationPageVC(rootViewController: homeVC)
         
         let hotVC =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
         hotVC.tabBarItem = UITabBarItem.tabBarItem("最热", image: UIImage(named: "hot")!, selectedImage: UIImage(named: "hot-p")!);
+        hotVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0,-3)
         
         let hotNav =  NavigationPageVC(rootViewController: hotVC)
         
@@ -45,6 +46,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
       //  releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
          releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
         
+          releaseVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0,-3)
         let createNav =  NavigationPageVC(rootViewController: releaseVC)
  
         createNav.tabBarItem.tag = 9;
@@ -52,11 +54,15 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         let searchVC = T03SearchHelperVC(nibName: "T03SearchHelperVC", bundle: NSBundle.mainBundle())
         searchVC.tabBarItem.title = "搜索"
         searchVC.tabBarItem = UITabBarItem.tabBarItem("搜索", image: UIImage(named: "search_unselect")!, selectedImage: UIImage(named: "search_select")!);
+        
+        searchVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0,-3)
         let searchNav =  NavigationPageVC(rootViewController: searchVC)
 
 
         let mineVC = U02UserVC(nibName: "U02UserVC", bundle: NSBundle.mainBundle())
         mineVC.tabBarItem = UITabBarItem.tabBarItem("我的", image: UIImage(named: "me")!, selectedImage: UIImage(named: "me-p")!)
+        
+        mineVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0,-3)
         let mineNav = NavigationPageVC(rootViewController: mineVC)
         
         
