@@ -1112,8 +1112,8 @@
                                                 <outletCollection property="gestureRecognizers" destination="kOD-f5-ANk" appends="YES" id="sB9-N3-82w"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="401" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibq-x2-Ydd" userLabel="btn1_del">
-                                            <rect key="frame" x="59" y="28" width="18" height="18"/>
+                                        <button opaque="NO" tag="401" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibq-x2-Ydd" userLabel="btn1_del">
+                                            <rect key="frame" x="58" y="27" width="20" height="20"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="6U6-Ve-iOY"/>
@@ -1124,8 +1124,8 @@
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="J18-Fm-0TE"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="402" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyM-sS-LqI" userLabel="btn2_del">
-                                            <rect key="frame" x="127" y="28" width="18" height="18"/>
+                                        <button opaque="NO" tag="402" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyM-sS-LqI" userLabel="btn2_del">
+                                            <rect key="frame" x="126" y="27" width="20" height="20"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="ElP-Xc-ke5"/>

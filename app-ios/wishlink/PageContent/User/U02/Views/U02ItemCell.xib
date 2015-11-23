@@ -167,14 +167,19 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KIEHLS科颜氏契尔氏金盏花爽肤水250ML" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aca-aA-ov1" userLabel="nameLabel">
-                                <rect key="frame" x="8" y="35" width="184" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KIEHLS科颜氏契尔氏金盏" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aca-aA-ov1" userLabel="nameLabel">
+                                <rect key="frame" x="8" y="37" width="184" height="14"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="uYW-A0-Fnt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="uYW-A0-Fnt"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeX-4B-Ywt">
                                 <rect key="frame" x="0.0" y="71" width="200" height="30"/>
@@ -225,13 +230,19 @@
                             <constraint firstItem="aca-aA-ov1" firstAttribute="leading" secondItem="TVt-jv-p6W" secondAttribute="leading" constant="8" id="WL5-EC-KSq"/>
                             <constraint firstItem="sjL-qw-Yo2" firstAttribute="leading" secondItem="aca-aA-ov1" secondAttribute="leading" id="k8J-tf-m65"/>
                             <constraint firstItem="de8-Ly-lt1" firstAttribute="leading" secondItem="TVt-jv-p6W" secondAttribute="leading" id="lFF-Ja-fxR"/>
+                            <constraint firstAttribute="bottom" secondItem="aca-aA-ov1" secondAttribute="bottom" constant="24" id="oaC-sf-ho4"/>
                             <constraint firstAttribute="trailing" secondItem="aca-aA-ov1" secondAttribute="trailing" constant="6" id="pPl-qz-8Nd"/>
                             <constraint firstItem="m0L-E6-rID" firstAttribute="trailing" secondItem="aca-aA-ov1" secondAttribute="trailing" constant="5" id="pfx-U5-3Hq"/>
                             <constraint firstAttribute="trailing" secondItem="de8-Ly-lt1" secondAttribute="trailing" constant="-2" id="r50-ao-heC"/>
-                            <constraint firstItem="aca-aA-ov1" firstAttribute="top" secondItem="de8-Ly-lt1" secondAttribute="bottom" id="tfL-fU-5CW"/>
+                            <constraint firstItem="aca-aA-ov1" firstAttribute="top" secondItem="de8-Ly-lt1" secondAttribute="bottom" constant="2" id="tfL-fU-5CW"/>
                             <constraint firstAttribute="bottom" secondItem="VeX-4B-Ywt" secondAttribute="bottom" constant="-2" id="vxi-wf-j52"/>
                             <constraint firstItem="VeX-4B-Ywt" firstAttribute="leading" secondItem="TVt-jv-p6W" secondAttribute="leading" id="zoM-5d-PGC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="oaC-sf-ho4"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <animations/>

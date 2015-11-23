@@ -88,8 +88,8 @@
                                 <action selector="settingBtnAction:" destination="-1" eventType="touchUpInside" id="orL-cP-fbm"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWW-Fn-qUR">
-                            <rect key="frame" x="103" y="50" width="104" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWW-Fn-qUR">
+                            <rect key="frame" x="104" y="50" width="103" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
@@ -122,8 +122,8 @@
                                 <action selector="collectionBtnAction:" destination="-1" eventType="touchUpInside" id="Jx6-VC-amz"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16n-Ja-XGU">
-                            <rect key="frame" x="310" y="50" width="104" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16n-Ja-XGU">
+                            <rect key="frame" x="311" y="50" width="103" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
