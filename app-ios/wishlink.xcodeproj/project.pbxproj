@@ -65,6 +65,8 @@
 		76F5D28D1BB2F4F4000E77E3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769565501BA08C9900A6AD10 /* CoreGraphics.framework */; };
 		76FC7BAE1BCFFB6D00D4445D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FC7BAD1BCFFB6D00D4445D /* libc++.tbd */; };
 		76FC7BB01BCFFBB100D4445D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FC7BAF1BCFFBB100D4445D /* libz.tbd */; };
+		A103393C1C0368BC007F7957 /* T06CellFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B351B84B9E900746229 /* T06CellFooter.xib */; };
+		A103393D1C0368BC007F7957 /* T06CellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B311B84B9CE00746229 /* T06CellHeader.xib */; };
 		A1043DFA1B7F787A007A237C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1043DF91B7F787A007A237C /* AppDelegate.swift */; };
 		A1043E011B7F787A007A237C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1043E001B7F787A007A237C /* Images.xcassets */; };
 		A1043E041B7F787A007A237C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1043E021B7F787A007A237C /* LaunchScreen.xib */; };
@@ -174,9 +176,7 @@
 		D2744B2E1B84A01C00746229 /* T06Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B2C1B84A01C00746229 /* T06Cell.swift */; };
 		D2744B2F1B84A01C00746229 /* T06Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B2D1B84A01C00746229 /* T06Cell.xib */; };
 		D2744B321B84B9CE00746229 /* T06CellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B301B84B9CE00746229 /* T06CellHeader.swift */; };
-		D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B311B84B9CE00746229 /* T06CellHeader.xib */; };
 		D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2744B341B84B9E900746229 /* T06CellFooter.swift */; };
-		D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2744B351B84B9E900746229 /* T06CellFooter.xib */; };
 		D276A98F1BA6E69D005CC047 /* T01HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276A98D1BA6E69D005CC047 /* T01HomePageVC.swift */; };
 		D276A9901BA6E69D005CC047 /* T01HomePageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D276A98E1BA6E69D005CC047 /* T01HomePageVC.xib */; };
 		D276A9A71BA6F795005CC047 /* PFGoldenSectionSpiral.m in Sources */ = {isa = PBXBuildFile; fileRef = D276A9A01BA6F795005CC047 /* PFGoldenSectionSpiral.m */; };
@@ -1305,7 +1305,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = edonesoft;
 				TargetAttributes = {
 					A1043DF31B7F787A007A237C = {
@@ -1355,11 +1355,10 @@
 				A132BBA71B863342004EAB47 /* U03SettingVC.xib in Resources */,
 				76758B711BCB87730087BB58 /* area.json in Resources */,
 				D20B90841B8C8D470017F89C /* T08ComplaintVC.xib in Resources */,
-				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
+				A103393D1C0368BC007F7957 /* T06CellHeader.xib in Resources */,
 				76CD0E8A1B8964B000B04453 /* U02SellerTradeVC.xib in Resources */,
 				D24485D51B8E02A200CD97D5 /* T09CellTextRight.xib in Resources */,
 				A1F063AF1BE3CF7500697BE6 /* T13CellHeader.xib in Resources */,
-				D2744B331B84B9CE00746229 /* T06CellHeader.xib in Resources */,
 				D276A9901BA6E69D005CC047 /* T01HomePageVC.xib in Resources */,
 				A1F063AB1BE3CDF400697BE6 /* T13AssignToMeVC.xib in Resources */,
 				D24485CD1B8E027000CD97D5 /* T09CellTime.xib in Resources */,
@@ -1378,9 +1377,8 @@
 				765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */,
 				76B86E6B1BD0030A00DA29E3 /* RongCloud.bundle in Resources */,
 				D2E6BE941B96D62F0050C177 /* T11SearchSuggestionCell.xib in Resources */,
-				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
+				A103393C1C0368BC007F7957 /* T06CellFooter.xib in Resources */,
 				765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */,
-				D2744B371B84B9E900746229 /* T06CellFooter.xib in Resources */,
 				D29662351BE130C000BDEDB9 /* T14AssignToMeConfirm.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
 				D27C59351BFCA87E000B728E /* U01ForgetPassword.xib in Resources */,
@@ -1580,6 +1578,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1595,7 +1594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1633,7 +1632,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1673,6 +1672,7 @@
 					"-Objc",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.wishlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b5922c1f-791c-4e82-8373-8f7b3704b46e";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
@@ -1713,6 +1713,7 @@
 					"-Objc",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.wishlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "39811d86-f5cb-468c-890a-40bc1a56ae25";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
@@ -1734,6 +1735,7 @@
 				);
 				INFOPLIST_FILE = wishlinkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wishlink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wishlink.app/wishlink";
 			};
@@ -1749,6 +1751,7 @@
 				);
 				INFOPLIST_FILE = wishlinkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wishlink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wishlink.app/wishlink";
 			};

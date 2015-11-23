@@ -252,7 +252,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate, WXApiDe
                 "lng":lastLocation.coordinate.longitude]
         ];
         
-        self.httpObj.httpPostApi("geo/trace", parameters: para as! [String : AnyObject], tag: 0);
+        self.httpObj.httpPostApi("geo/trace", parameters: para as? [String : AnyObject], tag: 0);
 
         
     }

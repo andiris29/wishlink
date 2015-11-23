@@ -286,12 +286,12 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             if (self.currPayModel == .Alipay) {
                 
                 
-                var _tradeDic:NSDictionary! = response as? NSDictionary
+                let _tradeDic:NSDictionary! = response as? NSDictionary
                 var _trade:TradeModel!
-                var _prepayid:String!;
+//                var _prepayid:String!;
                 if(_tradeDic != nil && _tradeDic.objectForKey("trade") != nil)
                 {
-                    var tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
+                    let tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
                     _trade = TradeModel(dict: tradeDic)
                     
                 }
@@ -303,7 +303,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
                 order.tradeNO = new_trade_id
                 order.productName = self.item.name
                 order.productDescription = "wishLink-" +  self.item.name + " " + self.item.spec
-                order.amount =  (self.lbTotalFree.text as! NSString).stringByReplacingOccurrencesOfString("¥", withString:"").trim();
+                order.amount =  (self.lbTotalFree.text! as NSString).stringByReplacingOccurrencesOfString("¥", withString:"").trim();
                 order.notifyURL = APPCONFIG.alipay_callback_url//回调URL
                 
                 order.service = "mobile.securitypay.pay";

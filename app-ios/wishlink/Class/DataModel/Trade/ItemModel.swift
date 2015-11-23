@@ -64,10 +64,10 @@ class ItemModel: BaseModel {
         
         if let priceStr = dict.objectForKey("price") as? String
         {
-            if let pricePic = priceStr as? Float
-            {   
-                self.price = pricePic
-            }
+//            if let pricePic = priceStr as? Float
+//            {   
+                self.price = Float(priceStr)
+//            }
         }
         if let priceFloat = dict.objectForKey("price") as? Float
         {

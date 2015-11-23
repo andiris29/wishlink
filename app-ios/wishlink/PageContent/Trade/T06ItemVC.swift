@@ -296,7 +296,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         if(tag == 60)//加载跟单列表
         {
-            var isHaveData = false;
+//            var isHaveData = false;
             
             let tradesObj:NSArray! = (response as? NSDictionary)?.objectForKey("trades") as? NSArray
             print(tradesObj);
@@ -317,10 +317,10 @@ class T06ItemVC: RootVC, WebRequestDelegate {
 
                     self.followArr.append(tradeItem);
                 }
-                if(self.trade != nil)
-                {
-                    isHaveData = true;
-                }
+//                if(self.trade != nil)
+//                {
+//                    isHaveData = true;
+//                }
             }
 //            if(isHaveData)
 //            {

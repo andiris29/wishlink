@@ -61,9 +61,9 @@ class AssigneeModel: BaseModel {
         var unreadDic = dic["unread"] as! [String: AnyObject]
         let itemRecommendationRefs = unreadDic["itemRecommendationRefs"] as! [ItemModel]
         if itemRecommendationRefs.count != 0 {
-            for item in itemRecommendationRefs {
-                
-            }
+//            for item in itemRecommendationRefs {
+//                
+//            }
         }
         
         if let receivers = dic["searchHistory"] as? NSDictionary {

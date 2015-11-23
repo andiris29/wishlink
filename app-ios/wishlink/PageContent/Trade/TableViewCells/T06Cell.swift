@@ -88,7 +88,8 @@ class T06Cell: UITableViewCell {
         {
             unitStr += self.item.unit;
         }
-          var countStr = "RMB\(item.price.format(".2"))x\(strCount)\(unitStr)";
+        let _totalPrice = item.price.format(".2")
+          let countStr = "RMB\(_totalPrice)x\(strCount)\(unitStr)";
         self.lbCount.text = countStr
         self.lbCountry.text = item.country;
         
@@ -106,7 +107,7 @@ class T06Cell: UITableViewCell {
                 self.lbUserName.text = ""
                 self.iv_userImg.image = nil;
                 let name:String! = self.trade.owner!.objectForKey("nickname") as? String
-                let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
+//                let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
                 if(name != nil)
                 {
                     self.lbUserName.text = name;

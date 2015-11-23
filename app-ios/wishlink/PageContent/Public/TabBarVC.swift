@@ -103,7 +103,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
     }
     func createCenterBtn()
     {
-        var sIndex = self.selectedIndex;
+        let sIndex = self.selectedIndex;
         
         //中上部自定义BUtton
         let btnWidth:CGFloat = self.tabBar.frame.height-5;

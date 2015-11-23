@@ -185,7 +185,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        var _keyword = textField.text!;
+        let _keyword = textField.text!;
         if(_keyword.trim().length>0)
         {
             self.keyword = _keyword

@@ -83,15 +83,15 @@ class U02LogisticsTipView: UIView {
         let confirmBtn = UIButton(type: .Custom)
         let btnHeight = CGFloat(35)
         let btnY = tipViewHeight - btnHeight
-        var btnWidth = tipViewWidth
-        _ = 0
+        let btnWidth = tipViewWidth
+//        _ = 0
         confirmBtn.frame = CGRectMake(0, btnY, btnWidth, btnHeight)
         confirmBtn.setTitleColor(RGB(123, g: 2, b: 90), forState: .Normal)
         confirmBtn.setTitle("确定", forState: .Normal)
         confirmBtn.addTarget(self, action: "confirmBtnAction:", forControlEvents: .TouchUpInside)
         tipView.addSubview(confirmBtn)
         
-        var horizontalLine = UIView(frame: CGRectMake(0, 0, btnWidth, 0.5))
+        let horizontalLine = UIView(frame: CGRectMake(0, 0, btnWidth, 0.5))
         horizontalLine.backgroundColor = UIColor.lightGrayColor()
         confirmBtn.addSubview(horizontalLine)
         

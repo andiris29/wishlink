@@ -196,7 +196,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     func wxLogin() {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
         var registrationId = ""
-        var rid = APService.registrationID()
+        let rid = APService.registrationID()
         if rid.length != 0 {
             registrationId = rid
         }
