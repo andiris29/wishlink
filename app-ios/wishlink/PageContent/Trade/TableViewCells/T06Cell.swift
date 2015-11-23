@@ -89,7 +89,7 @@ class T06Cell: UITableViewCell {
             unitStr += self.item.unit;
         }
         let _totalPrice = item.price.format(".2")
-          let countStr = "RMB\(_totalPrice)x\(strCount)\(unitStr)";
+          let countStr = "RMB\(_totalPrice) x \(strCount)\(unitStr)";
         self.lbCount.text = countStr
         self.lbCountry.text = item.country;
         
@@ -117,6 +117,12 @@ class T06Cell: UITableViewCell {
 //                    WebRequestHelper().renderImageView(self.iv_userImg, url: imgUrl, defaultName: "T03aaa")
 //                    
 //                }
+            }
+            
+            if(self.trade.status != nil && self.trade.status>=3)
+            {
+                self.selectedButton.hidden = true;
+                lbCountry.hidden = true;
             }
         }
 

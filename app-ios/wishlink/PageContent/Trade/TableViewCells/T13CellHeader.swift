@@ -80,10 +80,14 @@ class T13CellHeader: UITableViewCell {
         self.lbCountry.text = self.item.country
         self.lb_trde_country.text = self.item.country
         self.lbPrice.text = "RMB " + self.item.price.format(".2");
+        var strUnit = "件";
         if(self.item.unit != nil && self.item.unit.trim().length>0)
         {
-             self.lbPrice.text! += "/\(self.item.unit)"
+//             self.lbPrice.text! += "/\(self.item.unit)"
+            strUnit = self.item.unit
         }
+        self.lbPrice.text!  += "/\(strUnit)"
+;
         if(self.item.images != nil && self.item.images.count>0)
         {
             WebRequestHelper().renderImageView(self.iv, url: self.item.images[0], defaultName: "");
@@ -109,6 +113,11 @@ class T13CellHeader: UITableViewCell {
                 }
                 
             }
+            if(self.trade.status != nil && self.trade.status>=3)
+            {
+                self.btnSelect.hidden = true;
+                lb_trde_country.hidden = true;
+            }
             
             //let count = trade.quantity > 0 ? trade.quantity : 1
            // self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
@@ -121,7 +130,7 @@ class T13CellHeader: UITableViewCell {
                 unitStr += self.item.unit;
             }
             let _price = item.price.format(".2")
-            self.lbTitle.text = "RMB\(_price)x\(strCount)\(unitStr)";
+            self.lbTitle.text = "RMB\(_price) x \(strCount)\(unitStr)";
             
             
             
