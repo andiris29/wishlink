@@ -120,7 +120,8 @@ class T13CellHeader: UITableViewCell {
             {
                 unitStr += self.item.unit;
             }
-            self.lbTitle.text = "RMB\(item.price.format(".2"))x\(strCount)\(unitStr)";
+            let _price = item.price.format(".2")
+            self.lbTitle.text = "RMB\(_price)x\(strCount)\(unitStr)";
             
             
             
