@@ -803,7 +803,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="pvO-Zv-FBF"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="上传产品图片（1-5张）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mr7-4l-X7O">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传产品图片（1-5张）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mr7-4l-X7O">
                                             <rect key="frame" x="8" y="8" width="159" height="21"/>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -820,7 +820,7 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxD-mi-hja">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxD-mi-hja">
                                             <rect key="frame" x="166" y="8" width="10" height="21"/>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1112,26 +1112,26 @@
                                                 <outletCollection property="gestureRecognizers" destination="kOD-f5-ANk" appends="YES" id="sB9-N3-82w"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="401" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibq-x2-Ydd" userLabel="btn1_del">
-                                            <rect key="frame" x="58" y="27" width="20" height="20"/>
+                                        <button opaque="NO" tag="401" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibq-x2-Ydd" userLabel="btn1_del">
+                                            <rect key="frame" x="59" y="28" width="18" height="18"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="6U6-Ve-iOY"/>
                                                 <constraint firstAttribute="width" secondItem="Ibq-x2-Ydd" secondAttribute="height" multiplier="1:1" id="J97-zb-Sa0"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="T04_del"/>
+                                            <state key="normal" backgroundImage="t04_btndel"/>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="J18-Fm-0TE"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="402" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyM-sS-LqI" userLabel="btn2_del">
-                                            <rect key="frame" x="126" y="27" width="20" height="20"/>
+                                        <button opaque="NO" tag="402" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyM-sS-LqI" userLabel="btn2_del">
+                                            <rect key="frame" x="127" y="28" width="18" height="18"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="ElP-Xc-ke5"/>
                                                 <constraint firstAttribute="width" secondItem="kyM-sS-LqI" secondAttribute="height" multiplier="1:1" id="aUC-0O-TeK"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="T04_del"/>
+                                            <state key="normal" backgroundImage="t04_btndel"/>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="hvS-66-28g"/>
                                             </connections>
@@ -1143,7 +1143,7 @@
                                                 <constraint firstAttribute="width" constant="20" id="F5G-FL-VMG"/>
                                                 <constraint firstAttribute="width" secondItem="adr-4b-6Lm" secondAttribute="height" multiplier="1:1" id="eAn-FY-hQN"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="T04_del"/>
+                                            <state key="normal" backgroundImage="t04_btndel"/>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="tv5-mg-eu3"/>
                                             </connections>
@@ -1155,7 +1155,7 @@
                                                 <constraint firstAttribute="width" secondItem="hmh-SF-RJY" secondAttribute="height" multiplier="1:1" id="9KL-4h-WxH"/>
                                                 <constraint firstAttribute="width" constant="20" id="ojo-rF-Oh7"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="T04_del"/>
+                                            <state key="normal" backgroundImage="t04_btndel"/>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="h0X-st-r9N"/>
                                             </connections>
@@ -1167,7 +1167,7 @@
                                                 <constraint firstAttribute="width" secondItem="bRO-vR-ngC" secondAttribute="height" multiplier="1:1" id="FZ8-C3-Z3K"/>
                                                 <constraint firstAttribute="width" constant="20" id="xOk-xh-vna"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="T04_del"/>
+                                            <state key="normal" backgroundImage="t04_btndel"/>
                                             <connections>
                                                 <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="euU-rI-s1p"/>
                                             </connections>
@@ -1419,10 +1419,10 @@
         </pongPressGestureRecognizer>
     </objects>
     <resources>
-        <image name="T04_del" width="18" height="18"/>
         <image name="T04ccc" width="225" height="38"/>
         <image name="T04ddd" width="274" height="25"/>
         <image name="T08bbb" width="47" height="47"/>
         <image name="c1_0011" width="1" height="1"/>
+        <image name="t04_btndel" width="18" height="18"/>
     </resources>
 </document>

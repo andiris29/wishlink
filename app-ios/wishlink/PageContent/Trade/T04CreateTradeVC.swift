@@ -408,6 +408,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
             
             deleteButton.hidden = false
+            
         }
     }
     
