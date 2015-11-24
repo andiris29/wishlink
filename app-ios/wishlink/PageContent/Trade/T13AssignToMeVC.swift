@@ -428,7 +428,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             
         } else if(tag == 61) {
             
-            UIHEPLER.gotoU02Page();
+            UIHEPLER.gotoU02Page(false);
             
         } else if(tag == 62) {//跟单成功转向支付页面
             

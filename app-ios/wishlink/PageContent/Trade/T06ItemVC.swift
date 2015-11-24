@@ -336,9 +336,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             
         } else if(tag == 61) {//跟单
             
-            
-            
-            UIHEPLER.gotoU02Page();
+            UIHEPLER.gotoU02Page(true);
             
             
         } else if(tag == 62) {//跟单成功转向支付页面

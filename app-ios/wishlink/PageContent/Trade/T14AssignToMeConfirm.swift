@@ -266,8 +266,9 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         if(tag == 141)
         {
             self.dismissViewControllerAnimated(true, completion: nil);
-            UIHEPLER.gotoU02Page();
-            //跳转到卖家订单
+             //跳转到卖家订单
+            UIHEPLER.gotoU02Page(false);
+           
         }
     }
     

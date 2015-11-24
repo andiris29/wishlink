@@ -22,7 +22,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     var sellerTradeVC: U02SellerTradeVC!
     
     weak var userVC: U02UserVC!
-    
+    var currType:BuyerSellerType! = .Buyer
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +35,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.adjustScrollViewUI()
         
         //        dispatch_after(3, dispatch_get_main_queue()) { () -> Void in
-        self.buyerSellerButtonStatus(.Buyer)
+        self.buyerSellerButtonStatus(self.currType)
         //        }
     }
     
@@ -71,9 +71,9 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     
     @IBAction func buyerSellerButtonAction(sender: UIButton) {
 
-        buyerSellerButtonStatus(sender.tag == 500 ? .Buyer : .Seller)
+        self.currType = sender.tag == 500 ? .Buyer : .Seller
+        buyerSellerButtonStatus(self.currType)
         
-        self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * CGFloat(sender.tag - 500), y: 0), animated: true)
     }
     
     // MARK: - Unit
@@ -84,13 +84,13 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         
             buyerButton.backgroundColor = MainColor()
             sellerButton.backgroundColor = RGBC(160)
-            
+               self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             self.buyerTradeVC.getBuyerTrade()
         } else {
         
             buyerButton.backgroundColor = RGBC(160)
             sellerButton.backgroundColor = RGB(248, g: 62, b: 91)
-            
+               self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
             self.sellerTradeVC.getSellerTrade()
         }
     }

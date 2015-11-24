@@ -433,8 +433,9 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             
             SVProgressHUD.dismiss();
             self.navigationController?.popToRootViewControllerAnimated(true);
+            //跳转到买家订单
+            UIHEPLER.gotoU02Page(true);
             
-            UIHEPLER.gotoU02Page();
             trade_Dic = nil;
         }
     }

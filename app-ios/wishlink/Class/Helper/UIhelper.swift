@@ -222,17 +222,28 @@ class UIHelper {
         
     }
     //跳转到U02选项卡
-    func gotoU02Page()
+    func gotoU02Page(isBuyer:Bool)
     {
         if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
             let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-            let vc: U02UserVC! = tababarController.childViewControllers[4] as? U02UserVC
+
+            tababarController.selectedIndex = 4;
+            
+            let vc: U02UserVC! =   (tababarController.childViewControllers[4] as! NavigationPageVC).viewControllers[0] as? U02UserVC
             if(vc != nil)
             {
-                vc.orderBtnAction(vc.orderBtn);
+                if(isBuyer)
+                {
+                    vc.orderListDefaultModel = BuyerSellerType.Buyer
+                }
+                else
+                {
+                    vc.orderListDefaultModel = BuyerSellerType.Seller
+                    
+                }
             }
             
-            tababarController.selectedIndex = 4;
+
           
         }
     }

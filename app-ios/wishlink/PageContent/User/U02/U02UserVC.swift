@@ -31,6 +31,8 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     var favoriteVC: U02FavoriteVC!
     var settingVC: U03SettingVC!
     
+    var orderListDefaultModel:BuyerSellerType!;
+    
 //    lazy var loginVC: U01LoginVC = {
 //        let vc = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle)
 //        vc.hideSkipBtn = true
@@ -128,7 +130,9 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.selectedBtn.selected = false
         self.selectedBtn = sender as! UIButton
         self.selectedBtn.selected = true;
+    
         self.orderTradeVC.resetConditionView()
+   
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
@@ -244,6 +248,10 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         
         self.orderTradeVC = U02OrderTradeVC(nibName: "U02OrderTradeVC", bundle: NSBundle.mainBundle())
         self.orderTradeVC.userVC = self
+        if(orderListDefaultModel != nil)
+        {
+            orderTradeVC.currType = self.orderListDefaultModel;
+        }
         self.orderTradeVC.view.frame = self.scrollView.bounds
         self.scrollView.addSubview(self.orderTradeVC.view)
 
