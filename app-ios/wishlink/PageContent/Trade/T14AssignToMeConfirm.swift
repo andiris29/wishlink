@@ -16,6 +16,9 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     @IBOutlet weak var tradeTableView: UITableView!
     
     
+    var selectItemRemove:((_trade: TradeModel)->Void)!;
+    var reSelectEvent:(()->Void)!
+    
 //    var t05VC:T05PayVC!
     var item: ItemModel!
     //跟单列表
@@ -34,12 +37,13 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         self.item = nil;
         self.tradeTableView = nil;
         
-        
+        self.userImage = nil;
         self.dataArr = nil;
         
         self.followArr = nil;
         self.selectArr = nil;
         self.tradeTableView = nil;
+        
     }
     
     func initData() {
@@ -47,6 +51,8 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         self.httpObj.mydelegate = self
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         
+        
+        self.loadAllUserImage();
         
         
         self.totalLabel.text = "订单总金额："
@@ -58,10 +64,55 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
                 totalFree += (Float(_trade.quantity) * self.item.price)
             }
             
-            self.totalLabel.text = "订单总金额：\(totalFree)";
+            self.totalLabel.text = "订单总金额：RMB \(totalFree.format(".2"))";
         }
 
     }
+    
+    var userImage:[(path:String,img:UIImage!)]!
+    func loadAllUserImage()
+    {
+        self.userImage = nil;
+        if(self.followArr != nil && self.followArr.count>0)
+        {
+            for item_trade in self.followArr
+            {
+                if(item_trade.owner != nil && item_trade.owner?.count>0)
+                {
+                    if  let imgUrl:String! = item_trade.owner!.objectForKey("portrait") as? String
+                    {
+                        if(imgUrl != nil && imgUrl!.trim().length>1)
+                        {
+                            let img_item =   APPCONFIG.readImgFromCachePath(imgUrl!)
+                            if(img_item != nil)
+                            {
+                                if(self.userImage == nil)
+                                {
+                                    userImage = [(path:imgUrl!,img:img_item)]
+                                }
+                                else
+                                {
+                                    
+                                    
+                                    let result_Data = userImage.filter{itemObj -> Bool in
+                                        
+                                        return (itemObj.path == imgUrl);
+                                    }
+                                    if(result_Data.count == 0)
+                                    {
+                                        userImage.append((path:imgUrl!,img:img_item));
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
@@ -81,8 +132,36 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
-
-        cell.loadData(self.followArr[indexPath.row],item:self.item);
+        let tdata = followArr[indexPath.row]
+        cell.loadData(tdata,item:self.item);
+       
+        
+        cell.iv_userImg.image = nil;
+        var imgUrl :String!
+        
+        if(self.userImage != nil && self.userImage.count>0 && tdata.owner != nil && tdata.owner?.count>0)
+        {
+            let result_Data = userImage.filter{itemObj -> Bool in
+                
+                if  let imgpath:String! = tdata.owner!.objectForKey("portrait") as? String
+                {
+                    
+                    imgUrl = imgpath
+                    return (itemObj.path == imgpath);
+                }
+            }
+            
+            if(result_Data.count>0 && result_Data[0].img != nil)
+            {
+                cell.iv_userImg.image = result_Data[0].img;
+            }
+            else
+            {
+                WebRequestHelper().renderImageView( cell.iv_userImg, url: imgUrl, defaultName: "")
+            }
+            
+        }
+        
         cell.selectedButton.selected = true;
         cell.myDelegate = self;
         
@@ -98,6 +177,10 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     @IBAction func tradeButtonAction(sender: UIButton) {
         
         if sender.tag == 500 { //继续抢单
+            if(self.reSelectEvent != nil)
+            {
+                self.reSelectEvent();
+            }
             self.dismissViewControllerAnimated(true, completion: nil);
         } else if sender.tag == 501 { //确定抢单
             //调用抢单接口
@@ -150,6 +233,27 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
                 }
                 self.selectArr.removeAtIndex(index);
             }
+            if(self.selectItemRemove != nil)
+            {
+                self.selectItemRemove(_trade: trade);
+            }
+            
+            if(self.followArr.count>0)
+            {
+                var index = 0;
+                for tradeObj in self.followArr
+                {
+                    if(tradeObj._id == trade._id)
+                    {
+                        break;
+                    }
+                    index+=1;
+                }
+                self.followArr.removeAtIndex(index);
+            }
+            self.tradeTableView.reloadData();
+
+            
             
         }
 
@@ -163,6 +267,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         {
             self.dismissViewControllerAnimated(true, completion: nil);
             UIHEPLER.gotoU02Page();
+            //跳转到卖家订单
         }
     }
     

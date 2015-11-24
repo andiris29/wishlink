@@ -148,6 +148,18 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             let tdata = followArr[indexPath.row - 1]
 
             tCell.loadData(tdata,item:self.item);
+            tCell.selectedButton.selected = false;
+            if(self.selectArr != nil && self.selectArr.count>0)
+            {
+                for selectItem in self.selectArr
+                {
+                    if(selectItem._id == tdata._id)
+                    {
+                        tCell.selectedButton.selected = true;
+                        break;
+                    }
+                }
+            }
             
             tCell.iv_userImg.image = nil;
             var imgUrl :String!
@@ -260,6 +272,29 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             vc.item = self.item;
             vc.followArr = self.selectArr;
             vc.selectArr = self.selectArr;
+            
+            vc.selectItemRemove = {[weak self](_trade) in
+            
+                if(self!.selectArr.count>0)
+                {
+                    var index = 0;
+                    for tradeObj in self!.selectArr
+                    {
+                        if(tradeObj._id == _trade._id)
+                        {
+                            break;
+                        }
+                        index+=1;
+                    }
+                    self!.selectArr.removeAtIndex(index);
+                }
+
+            }
+            vc.reSelectEvent = {() in
+            
+                self.tradeTableView.reloadData();
+            }
+            
             self.presentViewController(vc, animated: true, completion: nil);
             vc = nil;
        
