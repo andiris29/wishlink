@@ -8,7 +8,7 @@
 
 import UIKit
 
-class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate, CSActionSheetDelegate,WebRequestDelegate,T11SearchSuggestionDelegate {
+class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate, CSActionSheetDelegate,WebRequestDelegate,T11SearchSuggestionDelegate,UIGestureRecognizerDelegate {
 
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var selectPhotoView: UIView!
@@ -77,18 +77,45 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.txtRemark.text = defaultRemark;
   
         self.constrain_ImgBtn_Width.constant = (ScreenWidth - (7*8))/5
+        //点击手势
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
+        
+//        
+//        self.sv.addObserver(self, forKeyPath: "panGestureRecognizer.state", options: NSKeyValueObservingOptions.New, context: nil)
+        
         self.loadImagesData();
         csActionSheet()
         
+//        self.sv.contentSize = CGSizeMake(0, ScreenHeight+100);
+        
         
     }
-
+    var contentOffsetY:CGFloat! = 0;
+    var oldContentOffsetY:CGFloat! = 0;
+    var newContentOffsetY:CGFloat! = 0;
+    
+//    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+//        if(self.sv.panGestureRecognizer.state == UIGestureRecognizerState.Began)
+//        {
+//            
+//        }
+//        if(self.sv.panGestureRecognizer.state == UIGestureRecognizerState.Changed)
+//        {
+//            
+//        }
+//        if(self.sv.panGestureRecognizer.state == UIGestureRecognizerState.Ended)
+//        {
+//            
+//        }
+//    }
+    
+    var OrginFrame :CGRect!
     override func viewWillAppear(animated: Bool) {
+        
+        OrginFrame = self.tabBarController?.tabBar.frame;
         
         if(self.t05VC != nil)
         {
-            self.t05VC.view.removeFromSuperview();
             self.t05VC.view  = nil;
             self.t05VC = nil;
         }
@@ -102,9 +129,12 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         self.loadComNavTitle("发布新订单")
         
-        self.navigationController?.navigationBarHidden = false;
         
     }
+    
+//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return
+//    }
     
     //MARK:Customer func
     func loadImagesData()
@@ -601,7 +631,103 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         
         self.dismissKeyboard();
+        contentOffsetY = scrollView.contentOffset.y;
     }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+         oldContentOffsetY = scrollView.contentOffset.y;
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        //NSLog(@"scrollView.contentOffset:%f, %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+        
+        newContentOffsetY = scrollView.contentOffset.y;
+        
+        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY > contentOffsetY) {  // 向上滚动
+            
+            NSLog("up");
+            
+        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY) { // 向下滚动
+            
+            NSLog("down");
+            
+        } else {
+            
+            NSLog("dragging");
+            
+        }
+        if (scrollView.dragging) {  // 拖拽
+            
+            NSLog("scrollView.dragging");
+            NSLog("contentOffsetY: %f", contentOffsetY);
+            NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
+            if ((scrollView.contentOffset.y - contentOffsetY) > 5.0) {  // 向上拖拽
+                // 隐藏导航栏和选项栏
+                
+                // [self layoutView];
+                
+                self.navigationController?.setNavigationBarHidden(true, animated: true);
+                
+//                UIView.animateWithDuration(0.3, animations: {
+//                    self.tabBarController?.tabBar.hidden = false;
+//                    (self.tabBarController as? TabBarVC)?.centerButton.hidden = false;
+//                    self.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-self.OrginFrame!.height);
+//                    
+//                    }, completion: {
+//                        [weak self](Bool completion) in
+//                        if completion {
+//                            (self!.tabBarController as? TabBarVC)?.centerButton.hidden = false;
+//                            self!.tabBarController?.tabBar.hidden = false;
+//                            self!.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-self!.OrginFrame!.height);
+//                        }
+//                        else {
+//                            
+//                        }
+//                    })
+                
+            } else if ((contentOffsetY - scrollView.contentOffset.y) > 5.0) {   // 向下拖拽
+                
+                // 显示导航栏和选项栏
+                
+                self.navigationController?.setNavigationBarHidden(false, animated: true);
+                
+//                UIView.animateWithDuration(0.3, animations: {
+//                    (self.tabBarController as? TabBarVC)?.centerButton.hidden = true;
+//                    self.tabBarController?.tabBar.hidden = true;
+//                    self.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+//                    }, completion: {
+//                        [weak self](Bool completion) in
+//                        if completion {
+//                            (self!.tabBarController as? TabBarVC)?.centerButton.hidden = true;
+//                            self!.tabBarController?.tabBar.hidden = true;
+//                            self!.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-self!.OrginFrame!.height);
+//                            
+//                        }
+//                        else {
+//                            
+//                        }
+//                })
+
+                
+            } else {
+                
+            }
+            
+        }
+        
+
+    }
+ 
+    func hideTabBar(){
+        //Swift中调用animateWithDuration方法
+        self.tabBarController?.tabBar.hidden = true
+        UIView.animateWithDuration(0.5, animations: alphaDown)
+    }
+    func alphaDown(){
+//        bgImageView!.alpha = 0
+        
+    }
+    
     
     //MARK: - CSActionSheetDelegate
     
