@@ -26,3 +26,4 @@
 #import "UIImage+HJBlurView.h"
 
 #import "WXApiResponseHandler.h"
+#import "FXBlurView.h"

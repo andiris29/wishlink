@@ -93,6 +93,7 @@
 		A13474FB1BC55DF0002CD7CB /* TradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13474FA1BC55DF0002CD7CB /* TradeModel.swift */; };
 		A140B0101B94B45500531546 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140B00E1B94B45500531546 /* DefaultCell.swift */; };
 		A140B0111B94B45500531546 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A140B00F1B94B45500531546 /* DefaultCell.xib */; };
+		A164E7231C09F4F9005DF94F /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = A164E7221C09F4F9005DF94F /* FXBlurView.m */; };
 		A18A06741BAF1504005ADFFA /* ScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A06721BAF1504005ADFFA /* ScanVC.swift */; };
 		A18A06751BAF1504005ADFFA /* ScanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A18A06731BAF1504005ADFFA /* ScanVC.xib */; };
 		A18A0DD51BB0637200A09A0D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A0DD11BB0637200A09A0D /* SVIndefiniteAnimatedView.m */; };
@@ -324,6 +325,8 @@
 		A13474FA1BC55DF0002CD7CB /* TradeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeModel.swift; sourceTree = "<group>"; };
 		A140B00E1B94B45500531546 /* DefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultCell.swift; path = cell/DefaultCell.swift; sourceTree = "<group>"; };
 		A140B00F1B94B45500531546 /* DefaultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultCell.xib; path = cell/DefaultCell.xib; sourceTree = "<group>"; };
+		A164E7211C09F4F9005DF94F /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		A164E7221C09F4F9005DF94F /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 		A18A06721BAF1504005ADFFA /* ScanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanVC.swift; sourceTree = "<group>"; };
 		A18A06731BAF1504005ADFFA /* ScanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanVC.xib; sourceTree = "<group>"; };
 		A18A0DD01BB0637200A09A0D /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
@@ -744,6 +747,7 @@
 		A1043E1A1B7F7902007A237C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A164E7201C09F324005DF94F /* FXBlurView */,
 				D29ECDA51C00C7450004842B /* HJBlurView */,
 				76FC7BB11BCFFBFC00D4445D /* RongCloudSDK */,
 				D2EFB15A1BCCE9C400C50315 /* AliSDK */,
@@ -947,6 +951,15 @@
 				A1C8EA5D1BCA05DA00ED9910 /* Validation.swift */,
 			);
 			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		A164E7201C09F324005DF94F /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				A164E7211C09F4F9005DF94F /* FXBlurView.h */,
+				A164E7221C09F4F9005DF94F /* FXBlurView.m */,
+			);
+			path = FXBlurView;
 			sourceTree = "<group>";
 		};
 		A18A0DCF1BB0637200A09A0D /* SVProgressHUD */ = {
@@ -1456,6 +1469,7 @@
 				A1C8EA5F1BCA05DA00ED9910 /* Download.swift in Sources */,
 				7684F3C01B8DFA4D00B7D7DC /* U02ItemCell.swift in Sources */,
 				A1043E411B7F7F85007A237C /* UIhelper.swift in Sources */,
+				A164E7231C09F4F9005DF94F /* FXBlurView.m in Sources */,
 				A1C8EA6A1BCA05DA00ED9910 /* Validation.swift in Sources */,
 				A1F063AE1BE3CF7500697BE6 /* T13CellHeader.swift in Sources */,
 				A132BBA61B863342004EAB47 /* U03SettingVC.swift in Sources */,

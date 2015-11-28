@@ -25,6 +25,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     @IBOutlet weak var lbAllCount: UILabel!
     @IBOutlet weak var lbComplateCount: UILabel!
     
+    @IBOutlet weak var blurView: FXBlurView!
+    
     var lastDataArr:[AnyObject]! = []
     var sphereView: ZYQSphereView!
     var isNeedShowLoin = true;
@@ -57,25 +59,16 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         httpObj.httpGetApi("user/get", parameters: nil, tag: 101)
+
         
-//        if UserModel.shared.isLogin == false
-//        {
-//            UIHEPLER.showLoginPage(self);
-//        }
+        self.blurView.dynamic = true;
+        self.blurView.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        self.blurView.blurRadius = 0.1;
+        self.blurView.contentMode =  UIViewContentMode.Bottom;
+        self.blurView.hidden = true;
 
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        super.viewWillAppear(animated);
-//        if(self.t02VC != nil)
-//        {
-//            self.t02VC = nil;
-//        }
 
-        self.navigationController?.navigationBarHidden = true
-    }
- 
     override func viewDidAppear(animated: Bool) {
          super.viewDidAppear(animated);
         
@@ -161,6 +154,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.searchTableView.hidden = true
+        
+        self.blurView.hidden = true;
         self.searchTextField.resignFirstResponder()
     }
     
@@ -193,6 +188,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row == 0 { return }
         self.searchTableView.hidden = true
+        
+        self.blurView.hidden = true;
         self.searchTextField.resignFirstResponder()
         let _strKeyWord = itemContents[indexPath.row] as? String;
         self.searchTextField.text = _strKeyWord
@@ -269,6 +266,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         self.searchTableView.hidden = true
         
+        self.blurView.hidden = true;
         return true
     }
 
@@ -389,6 +387,12 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 self.searchTableView.reloadData()
             }
             self.searchTableView.hidden = false
+            if(self.itemContents.count>0)
+            {
+                //显示毛玻璃效果
+                self.blurView.hidden = false;
+            }
+            
         }
 
     }

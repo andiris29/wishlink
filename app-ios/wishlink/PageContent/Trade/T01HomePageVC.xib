@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T01HomePageVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="allWishLabel" destination="doE-wo-xdk" id="klE-GO-zVz"/>
+                <outlet property="blurView" destination="Znt-iT-kRd" id="lFg-wC-Dh4"/>
                 <outlet property="finishWishLabel" destination="t2Q-a4-7KL" id="daU-67-P9R"/>
                 <outlet property="heartView" destination="Rd0-gb-8Gz" id="sfs-xP-0oC"/>
                 <outlet property="lbAllCount" destination="doE-wo-xdk" id="XXe-DQ-dGk"/>
@@ -109,6 +110,11 @@
                     <rect key="frame" x="0.0" y="185" width="320" height="323"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Znt-iT-kRd" userLabel="blurView" customClass="FXBlurView">
+                    <rect key="frame" x="40" y="220" width="240" height="128"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9C-1f-bmd" userLabel="View3">
                     <rect key="frame" x="20" y="508" width="280" height="50"/>
@@ -249,17 +255,21 @@
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="top" secondItem="the-Ei-b4x" secondAttribute="bottom" constant="16" id="4jv-dw-QOf"/>
                 <constraint firstItem="p3Y-lk-iNj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4uG-bL-UIA"/>
                 <constraint firstItem="Vp8-rA-RkR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="6M0-li-1Gf"/>
+                <constraint firstItem="Znt-iT-kRd" firstAttribute="centerX" secondItem="Rd0-gb-8Gz" secondAttribute="centerX" id="6TA-b6-J0U"/>
                 <constraint firstItem="the-Ei-b4x" firstAttribute="centerX" secondItem="Hij-Vh-Rb9" secondAttribute="centerX" id="8dl-Lx-mev"/>
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="B48-gA-snJ"/>
                 <constraint firstItem="the-Ei-b4x" firstAttribute="top" secondItem="Hij-Vh-Rb9" secondAttribute="bottom" id="GXn-VN-0Cx"/>
                 <constraint firstAttribute="bottom" secondItem="y9C-1f-bmd" secondAttribute="bottom" constant="10" id="Jo4-r2-rqL"/>
                 <constraint firstItem="Vp8-rA-RkR" firstAttribute="top" secondItem="p3Y-lk-iNj" secondAttribute="bottom" id="NrF-9H-n46"/>
+                <constraint firstItem="Znt-iT-kRd" firstAttribute="height" secondItem="Rd0-gb-8Gz" secondAttribute="height" id="cQ2-1m-e5Q"/>
                 <constraint firstAttribute="trailing" secondItem="p3Y-lk-iNj" secondAttribute="trailing" id="fy2-f1-qcu"/>
                 <constraint firstItem="the-Ei-b4x" firstAttribute="width" secondItem="Hij-Vh-Rb9" secondAttribute="width" id="jd0-g6-kCQ"/>
                 <constraint firstAttribute="trailing" secondItem="y9C-1f-bmd" secondAttribute="trailing" constant="20" id="lHL-Fn-Y4d"/>
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="top" secondItem="Rd0-gb-8Gz" secondAttribute="bottom" id="mzW-Go-WjP"/>
                 <constraint firstAttribute="trailing" secondItem="Vp8-rA-RkR" secondAttribute="trailing" constant="35" id="n2d-Pt-Ew7"/>
                 <constraint firstItem="p3Y-lk-iNj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="s5M-gt-Iep"/>
+                <constraint firstItem="Znt-iT-kRd" firstAttribute="centerY" secondItem="Rd0-gb-8Gz" secondAttribute="centerY" id="uhP-QH-IeN"/>
+                <constraint firstItem="Znt-iT-kRd" firstAttribute="width" secondItem="Rd0-gb-8Gz" secondAttribute="width" id="v9a-mS-cef"/>
                 <constraint firstItem="Rd0-gb-8Gz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xPE-OQ-ysg"/>
                 <constraint firstItem="Rd0-gb-8Gz" firstAttribute="top" secondItem="Vp8-rA-RkR" secondAttribute="bottom" id="xoE-In-3fc"/>
             </constraints>
