@@ -1715,7 +1715,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.wishlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "483ca6fe-5445-4e23-975a-328b771a7714";
+				PROVISIONING_PROFILE = "39811d86-f5cb-468c-890a-40bc1a56ae25";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};

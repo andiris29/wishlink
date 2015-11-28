@@ -134,9 +134,12 @@ class U02TradeCell: UICollectionViewCell {
         
         self.buyerTradeIdLabel.text = "订单号：\(self.trade._id)"
         self.sellerTradeIdLabel.text = "订单号：\(self.trade._id)"
+
+        var strCount:String! = "数量：" + "\(self.trade.quantity)";
+        
         
        
-        self.itemCountLabel.text = "数量：" + "\(self.trade.quantity)"
+        self.itemCountLabel.text = strCount
         if(self.trade.item != nil)
         {
             if(self.trade.item.price != nil)
@@ -148,11 +151,26 @@ class U02TradeCell: UICollectionViewCell {
             self.itemCountryLabel.text = "购买地：" + self.trade.item.country
             self.itemFromatLabel.text = "规格：" + self.trade.item.spec
             self.itemNameLabel.text = "品名：" +  self.trade.item.brand + " " + self.trade.item.name
+            
+            
+            if(self.trade.item.unit != nil && self.trade.item.unit != "")
+            {
+                self.itemCountLabel.text = strCount + self.trade.item.unit;
+            }
+            else
+            {
+                
+                self.itemCountLabel.text = strCount + "件";
+                
+            }
+            
+            
         }
         else
         {
             self.itemTotalPrice.text = "合计：--"
         }
+        strCount = nil;
         if self.trade.owner != nil {
             self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
         }

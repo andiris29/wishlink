@@ -51,14 +51,13 @@ class U02ItemCell: UICollectionViewCell {
                 btnDelete.hidden = true
             }
             
+            
+            iconContryView.backgroundColor = UIColor.clearColor()
             if cellType == .Hot {
-                
                 favoriteBtn.hidden = false
-                iconContryView.backgroundColor = UIColor.clearColor()
             } else {
                 
                 favoriteBtn.hidden = true
-                iconContryView.backgroundColor = UIColor.whiteColor()
             }
         }
     }
@@ -111,7 +110,14 @@ class U02ItemCell: UICollectionViewCell {
             self.lbPrice.text = "RMB" + item.price.format(".2");
         }
         self.lbIntro.text = item.brand + " " + item.name + " " + item.spec;
-        self.lbCount.text = "\(item.numTrades)件"
+        if(self.item.unit != nil && self.item.unit != "")
+        {
+            self.lbCount.text = "\(item.numTrades)"+self.item.unit;
+        }
+        else
+        {
+            self.lbCount.text = "\(item.numTrades)件"
+        }
         self.favoriteBtn.selected = self.item.isFavorite
         
         self.iv_country.image = nil;

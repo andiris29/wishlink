@@ -36,6 +36,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="td4-7t-Fgx">
                                 <rect key="frame" x="8" y="10" width="49" height="19"/>
                                 <subviews>
+                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T0p-Oo-jyd" userLabel="v_bg">
+                                        <rect key="frame" x="-96" y="-54" width="240" height="128"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="american" translatesAutoresizingMaskIntoConstraints="NO" id="HYi-LH-MhZ">
                                         <rect key="frame" x="2" y="2" width="15" height="15"/>
                                         <animations/>
@@ -58,10 +63,14 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="T0p-Oo-jyd" firstAttribute="width" secondItem="td4-7t-Fgx" secondAttribute="width" id="35j-3c-0vE"/>
                                     <constraint firstItem="wfE-vE-uMR" firstAttribute="leading" secondItem="HYi-LH-MhZ" secondAttribute="trailing" constant="3" id="KEz-av-jli"/>
                                     <constraint firstAttribute="trailing" secondItem="wfE-vE-uMR" secondAttribute="trailing" constant="3" id="L8A-AP-flq"/>
                                     <constraint firstItem="HYi-LH-MhZ" firstAttribute="top" secondItem="td4-7t-Fgx" secondAttribute="top" constant="2" id="LGc-Lr-i17"/>
                                     <constraint firstItem="wfE-vE-uMR" firstAttribute="top" secondItem="td4-7t-Fgx" secondAttribute="top" constant="2" id="LVN-Re-KN9"/>
+                                    <constraint firstItem="T0p-Oo-jyd" firstAttribute="height" secondItem="td4-7t-Fgx" secondAttribute="height" id="TKE-bG-Ph2"/>
+                                    <constraint firstItem="T0p-Oo-jyd" firstAttribute="centerX" secondItem="td4-7t-Fgx" secondAttribute="centerX" id="Tf2-Ho-wNG"/>
+                                    <constraint firstItem="T0p-Oo-jyd" firstAttribute="centerY" secondItem="td4-7t-Fgx" secondAttribute="centerY" id="dpP-0g-Wje"/>
                                     <constraint firstAttribute="height" constant="19" id="dxE-rh-1QR"/>
                                     <constraint firstItem="HYi-LH-MhZ" firstAttribute="leading" secondItem="td4-7t-Fgx" secondAttribute="leading" constant="2" id="xcd-KC-lfc"/>
                                 </constraints>

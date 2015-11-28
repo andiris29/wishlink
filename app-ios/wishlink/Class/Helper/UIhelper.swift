@@ -205,6 +205,8 @@ class UIHelper {
             loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
         }
         
+     
+        
         
         target.presentViewController(loginVC, animated: true, completion: { () -> Void in
             
@@ -214,6 +216,8 @@ class UIHelper {
             {
                 let tababarController =  self.GetAppDelegate().window!.rootViewController as! UITabBarController
                 tababarController.selectedIndex = 0;
+                tababarController.childViewControllers[0].navigationController?.navigationBarHidden = true;
+           
             }
           
             
@@ -226,8 +230,9 @@ class UIHelper {
     {
         if( UIHEPLER.GetAppDelegate().window!.rootViewController as? UITabBarController != nil) {
             let tababarController =  UIHEPLER.GetAppDelegate().window!.rootViewController as! UITabBarController
-
+            
             tababarController.selectedIndex = 4;
+            
             
             let vc: U02UserVC! =   (tababarController.childViewControllers[4] as! NavigationPageVC).viewControllers[0] as? U02UserVC
             if(vc != nil)
