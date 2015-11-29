@@ -34,7 +34,9 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     var currentStatus: BuyerTradeFilterStatus = .All
     var tradeArray: [TradeModel] = []
     var currentTradeIndex: Int = -1
-
+    
+    var scrolling:((isUp:Bool)->Void)!
+//    var scorlling:(isUp:Bool)!;
     
     var seletedConditionBtn: UIButton!
     
@@ -85,11 +87,73 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         }
     }
     
+    //MARK:ScrollView delegate
+    var contentOffsetY:CGFloat! = 0;
+    var oldContentOffsetY:CGFloat! = 0;
+    var newContentOffsetY:CGFloat! = 0;
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        
+        contentOffsetY = scrollView.contentOffset.y;
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        oldContentOffsetY = scrollView.contentOffset.y;
+        
+        
+        NSLog("end dragging");
+        
+        if(self.lastDraging != self._isUp)
+        {
+            if(self.scrolling != nil)
+            {
+                self.scrolling(isUp:_isUp);
+            }
+            self.lastDraging = _isUp
+        }
+    }
+    
+    var lastDraging:Bool!
+    var _isUp:Bool!
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        newContentOffsetY = scrollView.contentOffset.y;
+        
+        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY > contentOffsetY) {  // 向上滚动
+            
+            NSLog("up");
+            
+        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY) { // 向下滚动
+            
+            NSLog("down");
+            
+        } else {
+            
+            
+        }
+        if (scrollView.dragging) {  // 拖拽
+            
+            NSLog("scrollView.dragging");
+            NSLog("contentOffsetY: %f", contentOffsetY);
+            NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
+            if ((scrollView.contentOffset.y - contentOffsetY) > 20.0) {  // 向上拖拽
+                
+                self._isUp = true;
+                NSLog("drag up");
+              
+            } else if ((contentOffsetY - scrollView.contentOffset.y) > 20.0) {   // 向下拖拽
+               
+                
+                self._isUp = false;
+                NSLog("drag down");
+                
+            } else {
+                
+            }
+        }
+    }
+
+    
     // MARK: - delegate
-    
-    
-    
-    
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width: CGFloat = UIScreen.mainScreen().bounds.size.width - 20;

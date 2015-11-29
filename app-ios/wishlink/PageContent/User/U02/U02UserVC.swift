@@ -22,6 +22,8 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    @IBOutlet weak var v_baseInfo: UIView!
+    
     
     var selectedBtn: UIButton!
     var userModel: UserModel = UserModel.shared
@@ -52,8 +54,54 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
 //            self.loginVC.view.removeFromSuperview()
         }
 
+        
+//        var reGesture = UITapGestureRecognizer (target: self, action: "handleGesture:")
+//    
+//        self.bgImageView.addGestureRecognizer(reGesture);
+//        self.v_baseInfo.addGestureRecognizer(reGesture);
+//        self.scrollView.addGestureRecognizer(reGesture);
         self.navigationController!.navigationBar.hidden = false
+        
     }
+    
+    var isTop = false;
+//    func handleGesture(sender:UITapGestureRecognizer) {
+//        
+//        NSLog("handleGesture");
+////        if(sender.direction == UISwipeGestureRecognizerDirection.Up)
+////        {//向上滑动
+//        if(!isTop)
+//        {
+//            UIView.animateWithDuration(0.5, animations: { () -> Void in
+//                self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight+245);
+//                
+//                }, completion: { (finish) -> Void in
+//                    if(finish)
+//                    {
+//                        
+//                    }
+//            })
+//            isTop = true;
+//        }
+//        else
+//        {
+////        }
+////        else if(sender.direction == UISwipeGestureRecognizerDirection.Up)
+////        {//向下滑动
+//            UIView.animateWithDuration(0.5, animations: { () -> Void in
+//                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+//                
+//                }, completion: { (finish) -> Void in
+//                    if(finish)
+//                    {
+//                        
+//                    }
+//            })
+////        }
+//            
+//            isTop = false;
+//        }
+//    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -81,7 +129,9 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
+        
+        self.scrollView.delegate = self;
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -252,6 +302,9 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         {
             orderTradeVC.currType = self.orderListDefaultModel;
         }
+        self.orderTradeVC.orderListScrolling = {[weak self](isup:Bool) in
+            self!.scrolling(isup);
+        }
         self.orderTradeVC.view.frame = self.scrollView.bounds
         self.scrollView.addSubview(self.orderTradeVC.view)
 
@@ -269,6 +322,45 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         
         self.adjustUI()
     }
+    var animDuration = 0.3
+   func scrolling(isUp:Bool)
+   {
+        NSLog("scrolling on U02UserVC");
+        if(!isTop)
+        {
+            
+            UIView.animateWithDuration(animDuration, animations: { () -> Void in
+                self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight+245-(self.tabBarController?.tabBar.frame.height)!);
+                
+                }, completion: { [weak self](finish) -> Void in
+                    if(finish)
+                    {
+                        
+                        self!.isTop = true;
+                    }
+            })
+
+            
+            
+        }
+        else
+        {
+            UIView.animateWithDuration(animDuration, animations: { () -> Void in
+                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+                
+                }, completion: { [weak self](finish) -> Void in
+                    if(finish)
+                    {
+                        
+                        self!.isTop = false;
+                    }
+            })
+
+            
+        }
+    
+    
+    }
     
     func prepareUI() {
         
@@ -280,6 +372,72 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     }
     
     // MARK: - setter and getter
+    
+    //MARK:ScrollView delegate
+//    var contentOffsetY:CGFloat! = 0;
+//    var oldContentOffsetY:CGFloat! = 0;
+//    var newContentOffsetY:CGFloat! = 0;
+//    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+//        
+//        contentOffsetY = scrollView.contentOffset.y;
+//    }
+//    
+//    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        oldContentOffsetY = scrollView.contentOffset.y;
+//    }
+//    
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        //NSLog(@"scrollView.contentOffset:%f, %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+//        
+//        newContentOffsetY = scrollView.contentOffset.y;
+//        
+//        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY > contentOffsetY) {  // 向上滚动
+//            
+//            NSLog("up");
+//            
+//        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY) { // 向下滚动
+//            
+//            NSLog("down");
+//            
+//        } else {
+//            
+//            NSLog("dragging");
+//            
+//        }
+//        if (scrollView.dragging) {  // 拖拽
+//            
+//            NSLog("scrollView.dragging");
+//            NSLog("contentOffsetY: %f", contentOffsetY);
+//            NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
+//            if ((scrollView.contentOffset.y - contentOffsetY) > 5.0) {  // 向上拖拽
+//                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+//                        self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight);
+//                        
+//                        }, completion: { (finish) -> Void in
+//                            if(finish)
+//                            {
+//                                
+//                            }
+//                    })
+//                
+//            } else if ((contentOffsetY - scrollView.contentOffset.y) > 5.0) {   // 向下拖拽
+//                
+//                UIView.animateWithDuration(0.5, animations: { () -> Void in
+//                    self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+//                    
+//                    }, completion: { (finish) -> Void in
+//                        if(finish)
+//                        {
+//                            
+//                        }
+//                })
+//            } else {
+//                
+//            }
+//        }
+//    }
+//    
+
 
 }
 

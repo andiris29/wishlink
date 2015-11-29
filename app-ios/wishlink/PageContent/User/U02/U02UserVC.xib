@@ -28,6 +28,7 @@
                 <outlet property="scrollView" destination="url-5o-K8E" id="8aS-8D-Kpe"/>
                 <outlet property="settingBtn" destination="16n-Ja-XGU" id="80K-Co-bJs"/>
                 <outlet property="subVCView" destination="HKj-l9-Sb5" id="fzO-41-twC"/>
+                <outlet property="v_baseInfo" destination="nX4-0C-q0U" id="5uK-IC-Y4p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

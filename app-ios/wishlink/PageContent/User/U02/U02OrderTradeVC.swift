@@ -23,6 +23,11 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     
     weak var userVC: U02UserVC!
     var currType:BuyerSellerType! = .Buyer
+    
+    
+    var scrolling:((isUp:Bool)->Void)!
+    
+    var orderListScrolling:((isUp:Bool)->Void)!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,10 +51,25 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.buyerTradeVC = U02BuyerTradeVC(nibName: "U02BuyerTradeVC", bundle: NSBundle.mainBundle())
         self.buyerTradeVC.userVC = self.userVC
         self.buyerTradeVC.view.frame = self.scrollView.bounds
+        
+        self.buyerTradeVC.scrolling = {[weak self](isup:Bool) in
+            if(self?.orderListScrolling != nil)
+            {
+                self?.orderListScrolling(isUp: isup);
+            }
+        };
         self.scrollView.addSubview(self.buyerTradeVC.view)
+        
         
         self.sellerTradeVC = U02SellerTradeVC(nibName: "U02SellerTradeVC", bundle: NSBundle.mainBundle())
         self.sellerTradeVC.userVC = self.userVC
+        self.buyerTradeVC.scrolling = {[weak self](isup:Bool) in
+
+        if(self?.orderListScrolling != nil)
+        {
+            self?.orderListScrolling(isUp: isup);
+        }
+        }
         self.scrollView.addSubview(self.sellerTradeVC.view)
     }
     

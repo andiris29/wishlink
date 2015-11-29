@@ -231,7 +231,7 @@
                     </constraints>
                 </view>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="32" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="the-Ei-b4x">
-                    <rect key="frame" x="45" y="175" width="230" height="317"/>
+                    <rect key="frame" x="45" y="177" width="230" height="315"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -258,7 +258,7 @@
                 <constraint firstItem="Znt-iT-kRd" firstAttribute="centerX" secondItem="Rd0-gb-8Gz" secondAttribute="centerX" id="6TA-b6-J0U"/>
                 <constraint firstItem="the-Ei-b4x" firstAttribute="centerX" secondItem="Hij-Vh-Rb9" secondAttribute="centerX" id="8dl-Lx-mev"/>
                 <constraint firstItem="y9C-1f-bmd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="B48-gA-snJ"/>
-                <constraint firstItem="the-Ei-b4x" firstAttribute="top" secondItem="Hij-Vh-Rb9" secondAttribute="bottom" id="GXn-VN-0Cx"/>
+                <constraint firstItem="the-Ei-b4x" firstAttribute="top" secondItem="Hij-Vh-Rb9" secondAttribute="bottom" constant="2" id="GXn-VN-0Cx"/>
                 <constraint firstAttribute="bottom" secondItem="y9C-1f-bmd" secondAttribute="bottom" constant="10" id="Jo4-r2-rqL"/>
                 <constraint firstItem="Vp8-rA-RkR" firstAttribute="top" secondItem="p3Y-lk-iNj" secondAttribute="bottom" id="NrF-9H-n46"/>
                 <constraint firstItem="Znt-iT-kRd" firstAttribute="height" secondItem="Rd0-gb-8Gz" secondAttribute="height" id="cQ2-1m-e5Q"/>
