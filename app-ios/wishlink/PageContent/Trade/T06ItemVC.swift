@@ -9,32 +9,23 @@
 import UIKit
 
 class T06ItemVC: RootVC, WebRequestDelegate {
-
+    
     @IBOutlet weak var btnFav: UIButton!
-//    @IBOutlet weak var tradeNameLabel   : UILabel!
-//    @IBOutlet weak var tradeTimeLabel   : UILabel!
     @IBOutlet weak var goodNameLabel    : UILabel!
-
     @IBOutlet weak var goodFormatLabel  : UILabel!
     @IBOutlet weak var goodAddressLabel : UILabel!
     @IBOutlet weak var goodPriceLabel   : UILabel!
     @IBOutlet weak var goodNumberLabel  : UILabel!
     @IBOutlet weak var goodAllTradeLabel: UILabel!
     @IBOutlet weak var goodTotalLabel   : UILabel!
-    
-    
     @IBOutlet weak var iv_userImg: UIImageView!
-    
     @IBOutlet weak var lb_CreateTime: UILabel!
     @IBOutlet weak var lb_CreaterName: UILabel!
-    
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var lbRemark: UILabel!
-    var nextVC:UIViewController!
-    
     @IBOutlet weak var img_tips: UIImageView!
     @IBOutlet weak var imageRollView: CSImageRollView!
-    
+    //var nextVC:UIViewController!
     
     var item: ItemModel!
     var trade: TradeModel!
@@ -50,7 +41,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         self.httpObj.mydelegate = nil;
         self.item = nil;
         self.trade = nil;
-        
         self.followArr = nil;
         self.selectArr = nil;
         self.imageRollView = nil;
@@ -58,22 +48,18 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         self.initData()
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated);
-        if(self.nextVC != nil)
-        {
-            self.nextVC = nil
-        }
-        self.navigationController?.navigationBarHidden = true;
-    }
-    override func viewDidAppear(animated: Bool) {
-        
-        self.navigationController?.navigationBarHidden = true;
-    }
+    //    override func viewWillAppear(animated: Bool) {
+    //        super.viewWillAppear(animated);
+    //        if(self.nextVC != nil)
+    //        {
+    //            self.nextVC = nil
+    //        }
+    //    }
+    
     var isFav = false;
     func changeBtnFav(_isFav:Bool)
     {
@@ -91,17 +77,17 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         }
         
     }
-
+    
     func initData() {
         
+        self.loadComNaviLeftBtn()
+        self.loadComNavTitle( "商品详情");
+        
         self.httpObj.mydelegate = self
-    
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         self.sv.hidden = true;
         self.httpObj.httpGetApi("tradeFeeding/byItem?_id="+self.item._id, parameters: nil, tag: 60)
-     
-
-         self.goodPriceLabel.text = "出价：RMB \(self.item.price.format("0.2"))"
+        self.goodPriceLabel.text = "出价：RMB \(self.item.price.format("0.2"))"
         //绑定数据
         if(self.item.unit != nil && self.item.unit.trim().length>0)
         {
@@ -110,11 +96,11 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIColor.whiteColor(), borderWidth: 1);
         self.changeBtnFav(self.item.isFavorite);
-//         self.btnFav.selected = self.item.isFavorite
-     
-
+        //         self.btnFav.selected = self.item.isFavorite
+        
+        
         self.goodNameLabel.text = "品名：\(self.item.brand) \(self.item.name) "
-//        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
+        //        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
         self.goodFormatLabel.text = "规格：\(self.item.spec)";
         self.goodAddressLabel.text = "购买地：\(self.item.country)";
         self.goodAllTradeLabel.text = "\(self.item.numTrades)";
@@ -129,8 +115,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             self.lbRemark.text = ""
         }
         
-   
-  
+        
+        
         if (self.item.images == nil) {return}
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
@@ -144,13 +130,13 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 self.initImageRollView(images)
             })
         })
-
-    
-
         
-
+        
+        
+        
+        
     }
-
+    
     
     func initImageRollView(images:[UIImage]) {
         
@@ -184,13 +170,10 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             
         } else if sender.tag == 61 { //抢单
             
-            
             var vc:T13AssignToMeVC!  = T13AssignToMeVC(nibName: "T13AssignToMeVC", bundle: NSBundle.mainBundle());
-            
             vc.item = self.item;
             vc.trade = self.trade;
-            self.nextVC = vc;
-            self.navigationController?.pushViewController(self.nextVC, animated: true);
+            self.navigationController?.pushViewController(vc, animated: true);
             vc = nil;
         }
     }
@@ -201,7 +184,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             
             if(UserModel.shared.isLogin)
             {
-            
+                
                 var urlSub: String = "item/favorite"
                 if (self.isFav) {
                     urlSub = "item/unfavorite"
@@ -213,8 +196,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             {
                 UIHEPLER.showLoginPage(self, isToHomePage: false);
             }
-     
-
+            
+            
             
         } else if sender.tag == 63 { //share
             
@@ -224,9 +207,9 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 shareVC = ShareVC.sharedInstance;
                 shareVC.CreateView();
             }
-       
+            
             self.shareVC.shareAction = {[weak self](tag:Int)  in
-      
+                
                 if(tag == 1)//新浪微博
                 {
                     
@@ -241,7 +224,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 {
                     
                 }
-            
+                
             }
             shareVC.show(true);
             
@@ -259,7 +242,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     func bindData()
     {
         if(self.followArr != nil && followArr.count>0)
-        {   
+        {
             self.goodNumberLabel.text = "数量：--";
             self.goodTotalLabel.text = "合计：--";
             if(self.trade != nil)
@@ -287,7 +270,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         }
         
     }
-
+    
     // MARK: - WebRequestDelegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
@@ -296,7 +279,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         if(tag == 60)//加载跟单列表
         {
-//            var isHaveData = false;
+            //            var isHaveData = false;
             
             let tradesObj:NSArray! = (response as? NSDictionary)?.objectForKey("trades") as? NSArray
             print(tradesObj);
@@ -314,25 +297,25 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                     {
                         self.trade = tradeItem
                     }
-
+                    
                     self.followArr.append(tradeItem);
                 }
-//                if(self.trade != nil)
-//                {
-//                    isHaveData = true;
-//                }
+                //                if(self.trade != nil)
+                //                {
+                //                    isHaveData = true;
+                //                }
             }
-//            if(isHaveData)
-//            {
-                self.sv.hidden = false;
-                self.bindData();
-//            }
-//            else
-//            {
+            //            if(isHaveData)
+            //            {
+            self.sv.hidden = false;
+            self.bindData();
+            //            }
+            //            else
+            //            {
             
-//                UIHEPLER.alertErrMsg("获取数据失败")
-//                self.navigationController?.popViewControllerAnimated(true);
-//            }
+            //                UIHEPLER.alertErrMsg("获取数据失败")
+            //                self.navigationController?.popViewControllerAnimated(true);
+            //            }
             
         } else if(tag == 61) {//跟单
             
@@ -344,20 +327,17 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             let dic = response as! NSDictionary;
             let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
             let tradeItem = TradeModel(dict: tradeDic);
-            self.nextVC = nil;
-          
-            var vc:T05PayVC!  = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
             
+            var vc:T05PayVC!  = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
             vc.item = self.item;
             vc.trade = tradeItem;
             vc.isNewOrder = false;
-            self.nextVC = vc;
-            self.navigationController?.pushViewController(self.nextVC, animated: true);
+            self.navigationController?.pushViewController(vc, animated: true);
             vc = nil;
             
             
         } else if(tag == 63) {//收藏 or 取消收藏
-        
+            
             self.changeBtnFav(!self.isFav);
             if(self.isFav)
             {
@@ -369,7 +349,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 UIHEPLER.alertErrMsg("取消收藏成功");
             }
         }
-
+        
         
     }
     

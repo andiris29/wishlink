@@ -85,15 +85,15 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
 
 
     }
-    var centerButton:UIButton!
-    var centerBtn_Normal:UIImage! = UIImage(named: "tabbar_gray_bg");
-    var centerBtn_HightLight:UIImage! = UIImage(named: "tabbar_red_bg");
+//    var centerButton:UIButton!
+//    var centerBtn_Normal:UIImage! = UIImage(named: "tabbar_gray_bg");
+//    var centerBtn_HightLight:UIImage! = UIImage(named: "tabbar_red_bg");
     override func viewWillAppear(animated: Bool) {
         
-        if(self.centerButton == nil)
-        {
-            self.createCenterBtn();
-        }
+//        if(self.centerButton == nil)
+//        {
+//            self.createCenterBtn();
+//        }
         
         if(isFirstTime)
         {
@@ -101,36 +101,36 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
             self.selectedIndex = 0;
         }
     }
-    func createCenterBtn()
-    {
-        let sIndex = self.selectedIndex;
-        
-        //中上部自定义BUtton
-        let btnWidth:CGFloat = self.tabBar.frame.height-5;
-        centerButton = UIButton(type: UIButtonType.Custom);
-        centerButton.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin,UIViewAutoresizing.FlexibleBottomMargin,
-            UIViewAutoresizing.FlexibleTopMargin,UIViewAutoresizing.FlexibleRightMargin]
-        centerButton.frame = CGRectMake(0, 0, btnWidth, btnWidth);
-        if(sIndex == 2)
-        {
-            centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
-        }
-        else
-        {
-            centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
-        }
-        centerButton.addTarget(self, action: Selector("centerBtnAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-        var center = self.tabBar.center;
-        center.y = center.y - 15;
-        centerButton.center = center;
-        self.view.addSubview(centerButton);
-    }
-    func centerBtnAction(sender:UIButton)
-    {
-        self.selectedIndex = 2;
-        self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
-        self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Highlighted);
-    }
+//    func createCenterBtn()
+//    {
+//        let sIndex = self.selectedIndex;
+//        
+//        //中上部自定义BUtton
+//        let btnWidth:CGFloat = self.tabBar.frame.height-5;
+//        centerButton = UIButton(type: UIButtonType.Custom);
+//        centerButton.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin,UIViewAutoresizing.FlexibleBottomMargin,
+//            UIViewAutoresizing.FlexibleTopMargin,UIViewAutoresizing.FlexibleRightMargin]
+//        centerButton.frame = CGRectMake(0, 0, btnWidth, btnWidth);
+//        if(sIndex == 2)
+//        {
+//            centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
+//        }
+//        else
+//        {
+//            centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
+//        }
+//        centerButton.addTarget(self, action: Selector("centerBtnAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+//        var center = self.tabBar.center;
+//        center.y = center.y - 15;
+//        centerButton.center = center;
+//        self.view.addSubview(centerButton);
+//    }
+//    func centerBtnAction(sender:UIButton)
+//    {
+//        self.selectedIndex = 2;
+//        self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
+//        self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Highlighted);
+//    }
     
     func backToTopVC()
     {
@@ -148,19 +148,19 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
     
     
         NSLog(" tag:%d",item.tag);
-        if(self.centerButton != nil)
-        {
-            if(item.tag == 9)
-            {
-                self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
-                self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Highlighted);
-            }
-            else
-            {
-                self.centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
-                self.centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Highlighted);
-            }
-        }
+//        if(self.centerButton != nil)
+//        {
+//            if(item.tag == 9)
+//            {
+//                self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Normal);
+//                self.centerButton.setBackgroundImage(centerBtn_HightLight, forState: UIControlState.Highlighted);
+//            }
+//            else
+//            {
+//                self.centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Normal);
+//                self.centerButton.setBackgroundImage(centerBtn_Normal, forState: UIControlState.Highlighted);
+//            }
+//        }
 
        
     }

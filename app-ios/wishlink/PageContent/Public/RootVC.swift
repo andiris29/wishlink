@@ -70,10 +70,10 @@ class RootVC: UIViewController {
     //MARK: reDesign Navigation
     func loadComNavTitle(strTitle:String)
     {
-        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 40, 30))
+        let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 30, 30))
         titleLabel.text = strTitle
-        titleLabel.textColor = UIHEPLER.mainColor;
-        titleLabel.font = UIHEPLER.mainChineseFont15;
+        titleLabel.textColor = UIColor.blackColor(); //UIHEPLER.mainColor;
+        titleLabel.font = UIHEPLER.getCustomFont(true, fontSsize: 20);
         titleLabel.textAlignment = NSTextAlignment.Center
         self.navigationItem.titleView = titleLabel
         self.navigationController?.navigationBarHidden = false;
@@ -106,7 +106,7 @@ class RootVC: UIViewController {
     
     func loadComNaviLeftBtn()
     {   
-        self.loadSpecNaviLeftBtn("u02-back", imgHighLight: "u02-back-w", _selecotr: "leftNavBtnAction:");
+        self.loadSpecNaviLeftBtn("nav_back", imgHighLight: "nav_back", _selecotr: "leftNavBtnAction:");
     }
     
     func leftNavBtnAction(button: UIButton){

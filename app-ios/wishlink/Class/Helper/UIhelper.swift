@@ -75,23 +75,51 @@ class UIHelper {
         return UIImage(contentsOfFile:strResure!)!
         //    return [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:nil]];
     }
+    
+    /*给View增加圆角*/
+    func buildUIViewWithRadius(target:UIView, radius:CGFloat,borderColor:UIColor,borderWidth:CGFloat)
+    {
+        target.layer.cornerRadius = radius;
+        target.layer.masksToBounds = true
+        target.layer.borderWidth = CGFloat(borderWidth);
+        target.layer.borderColor = borderColor.CGColor;
+    }
+
+    
+    //MARK: 设置Label的行间距
+    func setLabelLineSpan(label:UILabel, lineSpacing:CGFloat)
+    {
+        let attributedString = NSMutableAttributedString(string: label.text!);
+        let paragraphStyle = NSMutableParagraphStyle();
+        paragraphStyle.lineSpacing = lineSpacing;
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, label.text!.length))
+        
+        label.attributedText = attributedString;
+    }
+    
     //给btn加圆角
     func buildButtonFilletStyleWithRadius(btn:UIButton,borderColor:UIColor,titleColor:UIColor,radius:CGFloat)
     {
-        btn.layer.cornerRadius = radius;
-        btn.layer.masksToBounds=true
-        btn.layer.borderWidth = 1;
-        btn.layer.borderColor = borderColor.CGColor;
+//        btn.layer.cornerRadius = radius;
+//        btn.layer.masksToBounds=true
+//        btn.layer.borderWidth = 1;
+//        btn.layer.borderColor = borderColor.CGColor;
+        
+        
+        self.buildUIViewWithRadius(btn , radius: radius, borderColor: borderColor, borderWidth: 1)
+        
         btn.setTitleColor(titleColor, forState: UIControlState.Normal)
         
     }
     //给Image加圆角
-    func buildImageViewWithRadius(image:UIImageView,borderColor:UIColor,borderWidth:Int)
+    func buildImageViewWithRadius(image:UIImageView,borderColor:UIColor,borderWidth:CGFloat)
     {
-        image.layer.cornerRadius = image.frame.width/2;
-        image.layer.masksToBounds=true
-        image.layer.borderWidth = CGFloat(borderWidth);
-        image.layer.borderColor = mainColor.CGColor;
+//        image.layer.cornerRadius = image.frame.width/2;
+//        image.layer.masksToBounds=true
+//        image.layer.borderWidth = CGFloat(borderWidth);
+//        image.layer.borderColor = mainColor.CGColor;
+        
+        self.buildUIViewWithRadius(image , radius: image.frame.width/2, borderColor: borderColor, borderWidth: borderWidth)
     }
     func GetDeviceModel()->DeviceEnum
     {
@@ -264,23 +292,23 @@ class UIHelper {
     {
         if( UIHEPLER.GetAppDelegate().window!.rootViewController as? TabBarVC != nil) {
             let tabbar =  UIHEPLER.GetAppDelegate().window!.rootViewController as! TabBarVC
-            var isNeedReload = false
-            if(tabbar.centerButton.hidden)
-            {
-                isNeedReload = true;
-            }
-            if(isShow)
-            {
-                
-                tabbar.view!.bringSubviewToFront(tabbar.centerButton);
-                
-                if(isNeedReload)
-                {
-                    tabbar.createCenterBtn();
-                }
-            }
-            
-            tabbar.centerButton.hidden = !isShow;
+//            var isNeedReload = false
+//            if(tabbar.centerButton.hidden)
+//            {
+//                isNeedReload = true;
+//            }
+//            if(isShow)
+//            {
+//                
+//                tabbar.view!.bringSubviewToFront(tabbar.centerButton);
+//                
+//                if(isNeedReload)
+//                {
+//                    tabbar.createCenterBtn();
+//                }
+//            }
+//            
+//            tabbar.centerButton.hidden = !isShow;
              tabbar.tabBar.hidden = !isShow;
         }
     }

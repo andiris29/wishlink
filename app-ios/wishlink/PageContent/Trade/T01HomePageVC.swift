@@ -38,6 +38,8 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         
+//        UIHEPLER.buildUIViewWithRadius(self.searchTableView, radius: 10, borderColor: UIColor.clearColor(), borderWidth: 0.5);
+        
         self.searchTextField.delegate = self;
         self.httpObj.mydelegate = self;
         
@@ -106,6 +108,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 sphereView.frame = CGRectMake(0, 0, 300, 300)
                 sphereView.frame.origin.x = (windowWidth - sphereView.frame.size.width) / 2.0
                 heartView.addSubview(sphereView)
+                
             }
             
             // clear

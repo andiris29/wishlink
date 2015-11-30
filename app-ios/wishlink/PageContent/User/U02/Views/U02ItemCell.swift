@@ -77,6 +77,10 @@ class U02ItemCell: UICollectionViewCell {
         
         self.iconContryView.layer.masksToBounds = true
         self.iconContryView.layer.cornerRadius = self.iconContryView.frame.size.height / 2.0
+        
+
+        
+        
     }
     deinit{
         
@@ -110,6 +114,9 @@ class U02ItemCell: UICollectionViewCell {
             self.lbPrice.text = "RMB" + item.price.format(".2");
         }
         self.lbIntro.text = item.brand + " " + item.name + " " + item.spec;
+        self.lbIntro.numberOfLines = 0;
+        UIHEPLER.setLabelLineSpan(self.lbIntro, lineSpacing: 7);
+        
         if(self.item.unit != nil && self.item.unit != "")
         {
             self.lbCount.text = "\(item.numTrades)"+self.item.unit;

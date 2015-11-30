@@ -152,6 +152,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         var t06VC:T06ItemVC! = T06ItemVC(nibName: "T06ItemVC", bundle: NSBundle.mainBundle());
         
         t06VC.item = self.dataArr[indexPath.row] as! ItemModel
+        t06VC.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(t06VC, animated: true);
         t06VC = nil;
     }
