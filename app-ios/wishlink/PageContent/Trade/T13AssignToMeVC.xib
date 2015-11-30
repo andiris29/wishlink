@@ -4,26 +4,63 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
+            <string>FZLTXHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T13AssignToMeVC" customModule="wishlink" customModuleProvider="target">
             <connections>
-                <outlet property="tradeTableView" destination="hUs-2I-6bG" id="nJh-MJ-OEg"/>
-                <outlet property="view" destination="hUs-2I-6bG" id="iT3-c8-Nz4"/>
+                <outlet property="btnGetOrder" destination="Qb9-Ee-DU0" id="KUL-Lw-T9R"/>
+                <outlet property="tradeTableView" destination="hUs-2I-6bG" id="lUY-jh-9ej"/>
+                <outlet property="view" destination="q2r-yN-PvS" id="hp2-Yx-SMm"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hUs-2I-6bG">
+        <view contentMode="scaleToFill" id="q2r-yN-PvS">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUs-2I-6bG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="IXy-MW-gJ5"/>
+                        <outlet property="delegate" destination="-1" id="DId-XJ-kSs"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb9-Ee-DU0">
+                    <rect key="frame" x="0.0" y="612" width="375" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="cZw-Qm-Q7n"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
+                    <state key="normal" title="马上抢单">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnGetOrderAction:" destination="-1" eventType="touchUpInside" id="1za-8p-2K1"/>
+                    </connections>
+                </button>
+            </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hUs-2I-6bG" secondAttribute="trailing" id="2w8-Zw-dtm"/>
+                <constraint firstItem="Qb9-Ee-DU0" firstAttribute="leading" secondItem="q2r-yN-PvS" secondAttribute="leading" id="B9f-n5-Iae"/>
+                <constraint firstAttribute="bottom" secondItem="hUs-2I-6bG" secondAttribute="bottom" id="FsU-nR-HpW"/>
+                <constraint firstItem="hUs-2I-6bG" firstAttribute="top" secondItem="q2r-yN-PvS" secondAttribute="top" id="RgY-St-9dW"/>
+                <constraint firstAttribute="bottom" secondItem="Qb9-Ee-DU0" secondAttribute="bottom" id="Rjz-sB-8z7"/>
+                <constraint firstAttribute="trailing" secondItem="Qb9-Ee-DU0" secondAttribute="trailing" id="TOj-tv-w9U"/>
+                <constraint firstItem="hUs-2I-6bG" firstAttribute="leading" secondItem="q2r-yN-PvS" secondAttribute="leading" id="qXt-0z-SMv"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <color key="separatorColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
-            <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-            <connections>
-                <outlet property="dataSource" destination="-1" id="IXy-MW-gJ5"/>
-                <outlet property="delegate" destination="-1" id="DId-XJ-kSs"/>
-            </connections>
-        </tableView>
+        </view>
     </objects>
 </document>

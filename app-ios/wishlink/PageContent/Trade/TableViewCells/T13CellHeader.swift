@@ -18,22 +18,18 @@ class T13CellHeader: UITableViewCell {
     
   
 
-    @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbSpec: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
-//    @IBOutlet weak var lbBranch: UILabel!
-    
     @IBOutlet weak var lbTotalNumbers: UILabel!
-    @IBOutlet weak var iv_trade: UIImageView!
     
-    @IBOutlet weak var lb_userName: UILabel!
-    
-    @IBOutlet weak var lbTitle: UILabel!
-    
-    @IBOutlet weak var lb_trde_country: UILabel!
-    @IBOutlet weak var lb_trade_totalFree: UILabel!
+//    @IBOutlet weak var btnSelect: UIButton!
+//    @IBOutlet weak var iv_trade: UIImageView!
+//    @IBOutlet weak var lb_userName: UILabel!
+//    @IBOutlet weak var lbTitle: UILabel!
+//    @IBOutlet weak var lb_trde_country: UILabel!
+//    @IBOutlet weak var lb_trade_totalFree: UILabel!
     var item:ItemModel!
     var trade:TradeModel!
     weak var myDelegate:T13CellHeaderDelegate!
@@ -43,7 +39,7 @@ class T13CellHeader: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
+      // UIHEPLER.buildImageViewWithRadius(self.iv_trade, borderColor: UIHEPLER.mainColor, borderWidth: 1);
     }
     
     deinit
@@ -78,7 +74,7 @@ class T13CellHeader: UITableViewCell {
         self.lbSpec.text = self.item.spec
 //        self.lbBranch.text = "品牌：" + self.item.brand
         self.lbCountry.text = self.item.country
-        self.lb_trde_country.text = self.item.country
+     //   self.lb_trde_country.text = self.item.country
         self.lbPrice.text = "RMB " + self.item.price.format(".2");
         var strUnit = "件";
         if(self.item.unit != nil && self.item.unit.trim().length>0)
@@ -93,52 +89,52 @@ class T13CellHeader: UITableViewCell {
             WebRequestHelper().renderImageView(self.iv, url: self.item.images[0], defaultName: "");
         }
         self.lbTotalNumbers.text =  String(self.item.numTrades)
-        if(self.trade != nil)
-        {
-            if(self.trade.owner != nil && self.trade.owner!.count>0)
-            {
-                self.lb_userName.text = ""
-                self.iv_trade.image = nil;
-                let name:String! = self.trade.owner!.objectForKey("nickname") as? String
-                let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
-                if(name != nil)
-                {
-                    self.lb_userName.text = name;
-                }
-                
-                if(imgUrl != nil && imgUrl.trim().length>1)
-                {
-                    WebRequestHelper().renderImageView(self.iv_trade, url: imgUrl, defaultName: "T03aaa")
-                    
-                }
-                
-            }
-            if(self.trade.status != nil && self.trade.status>=3)
-            {
-                self.btnSelect.hidden = true;
-                lb_trde_country.hidden = true;
-            }
-            
-            //let count = trade.quantity > 0 ? trade.quantity : 1
-           // self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
-            
-            
-            let strCount = trade.quantity > 0 ? String(trade.quantity) : "1"
-            var unitStr = "件";
-            if(self.item.unit != nil && self.item.unit.length>0)
-            {
-                unitStr += self.item.unit;
-            }
-            let _price = item.price.format(".2")
-            self.lbTitle.text = "RMB\(_price) x \(strCount)\(unitStr)";
-            
-            
-            
-            let totalFree = self.item.price * Float(self.trade.quantity)
-            self.lb_trade_totalFree.text = "RMB" + totalFree.format(".2")
-         
-            
-        }
+//        if(self.trade != nil)
+//        {
+//            if(self.trade.owner != nil && self.trade.owner!.count>0)
+//            {
+//                self.lb_userName.text = ""
+//                self.iv_trade.image = nil;
+//                let name:String! = self.trade.owner!.objectForKey("nickname") as? String
+//                let imgUrl:String! = self.trade.owner!.objectForKey("portrait") as? String
+//                if(name != nil)
+//                {
+//                    self.lb_userName.text = name;
+//                }
+//                
+//                if(imgUrl != nil && imgUrl.trim().length>1)
+//                {
+//                    WebRequestHelper().renderImageView(self.iv_trade, url: imgUrl, defaultName: "T03aaa")
+//                    
+//                }
+//                
+//            }
+//            if(self.trade.status != nil && self.trade.status>=3)
+//            {
+//                self.btnSelect.hidden = true;
+//                lb_trde_country.hidden = true;
+//            }
+//            
+//            //let count = trade.quantity > 0 ? trade.quantity : 1
+//           // self.lbTitle.text = (item.price.format(".2") + " * " + String(count))
+//            
+//            
+//            let strCount = trade.quantity > 0 ? String(trade.quantity) : "1"
+//            var unitStr = "件";
+//            if(self.item.unit != nil && self.item.unit.length>0)
+//            {
+//                unitStr += self.item.unit;
+//            }
+//            let _price = item.price.format(".2")
+//            self.lbTitle.text = "RMB\(_price) x \(strCount)\(unitStr)";
+//            
+//            
+//            
+//            let totalFree = self.item.price * Float(self.trade.quantity)
+//            self.lb_trade_totalFree.text = "RMB" + totalFree.format(".2")
+//         
+//            
+//        }
 
     }
     

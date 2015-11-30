@@ -33,14 +33,14 @@ class DefaultCell: UITableViewCell {
         // Configure the view for the selected state
     }
     override func  drawRect(rect: CGRect) {
-//        var context:CGContextRef = UIGraphicsGetCurrentContext()!;
+        var context:CGContextRef = UIGraphicsGetCurrentContext()!;
         
-//        if(isShowBottonLine)
-//        {
-//            //下分割线
-//            CGContextSetStrokeColorWithColor(context, UIColor.lightGrayColor());
-//            CGContextStrokeRect(context, CGRectMake(bottonLine_OffSet_X, rect.size.height, rect.size.width - 2*bottonLine_OffSet_X, 1));
-//        }
+        if(isShowBottonLine)
+        {
+            //下分割线
+            CGContextSetStrokeColorWithColor(context, UIColor.lightGrayColor().CGColor);
+            CGContextStrokeRect(context, CGRectMake(bottonLine_OffSet_X, rect.size.height, rect.size.width - 2*bottonLine_OffSet_X, 0.5));
+        }
     }
     
 }

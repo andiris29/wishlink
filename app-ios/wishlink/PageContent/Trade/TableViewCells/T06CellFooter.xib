@@ -21,17 +21,18 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="QuI-aN-rdg">
-                        <rect key="frame" x="8" y="8" width="304" height="48"/>
+                        <rect key="frame" x="0.0" y="8" width="320" height="48"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-k0-twT">
-                                <rect key="frame" x="8" y="0.0" width="288" height="48"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                                 <animations/>
+                                <color key="backgroundColor" red="0.48627450980392156" green="0.0" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="CDJ-ot-brE"/>
                                     <constraint firstAttribute="width" constant="141" id="xNT-8q-CMG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
-                                <state key="normal" title="马上抢单" backgroundImage="c1_0009">
+                                <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
+                                <state key="normal" title="马上抢单">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -50,22 +51,38 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="e2G-k0-twT" secondAttribute="centerX" id="2CU-Ro-q6z"/>
-                            <constraint firstItem="e2G-k0-twT" firstAttribute="leading" secondItem="QuI-aN-rdg" secondAttribute="leading" constant="8" id="BSb-o0-5q8"/>
+                            <constraint firstItem="e2G-k0-twT" firstAttribute="leading" secondItem="QuI-aN-rdg" secondAttribute="leading" id="BSb-o0-5q8"/>
                             <constraint firstItem="e2G-k0-twT" firstAttribute="top" secondItem="QuI-aN-rdg" secondAttribute="top" id="EMq-Vq-kFa"/>
-                            <constraint firstAttribute="trailing" secondItem="e2G-k0-twT" secondAttribute="trailing" constant="8" id="HV2-iq-nTH"/>
+                            <constraint firstAttribute="trailing" secondItem="e2G-k0-twT" secondAttribute="trailing" id="HV2-iq-nTH"/>
                             <constraint firstAttribute="bottom" secondItem="e2G-k0-twT" secondAttribute="bottom" id="gLj-ch-KPq"/>
+                            <constraint firstItem="e2G-k0-twT" firstAttribute="leading" secondItem="QuI-aN-rdg" secondAttribute="leading" id="j4c-XQ-NhL"/>
+                            <constraint firstAttribute="trailing" secondItem="e2G-k0-twT" secondAttribute="trailing" id="lHV-B3-PDR"/>
                             <constraint firstAttribute="centerY" secondItem="e2G-k0-twT" secondAttribute="centerY" id="t64-7U-0Uf"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="BSb-o0-5q8"/>
+                                <exclude reference="HV2-iq-nTH"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="QuI-aN-rdg" secondAttribute="trailing" id="3hW-jf-aSn"/>
+                    <constraint firstItem="QuI-aN-rdg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5IV-UG-EmD"/>
                     <constraint firstAttribute="bottomMargin" secondItem="QuI-aN-rdg" secondAttribute="bottom" id="KYu-6T-aE2"/>
                     <constraint firstItem="QuI-aN-rdg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="L49-Vr-prC"/>
                     <constraint firstItem="QuI-aN-rdg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="iyj-ub-Cpt"/>
+                    <constraint firstAttribute="trailing" secondItem="QuI-aN-rdg" secondAttribute="trailing" id="vF4-I7-M7V"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="3hW-jf-aSn"/>
+                        <exclude reference="iyj-ub-Cpt"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
@@ -73,7 +90,4 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="c1_0009" width="141" height="38"/>
-    </resources>
 </document>

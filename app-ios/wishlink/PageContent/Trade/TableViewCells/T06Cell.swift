@@ -14,7 +14,7 @@ import UIKit
     func selectItemChange(trade:TradeModel,isSelected:Bool);
 }
 
-class T06Cell: UITableViewCell {
+class T06Cell: DefaultCell {
 
     @IBOutlet weak var selectedButton: UIButton!
     
@@ -31,6 +31,7 @@ class T06Cell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.isShowBottonLine = true;
         
         UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIHEPLER.mainColor, borderWidth: 1);
         

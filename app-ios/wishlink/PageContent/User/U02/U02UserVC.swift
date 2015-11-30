@@ -53,67 +53,22 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             self.fillDataForUI()
 //            self.loginVC.view.removeFromSuperview()
         }
+//        self.loadComNaviLeftBtn()
+        self.loadComNavTitle("我的wishlink");
 
-        
-//        var reGesture = UITapGestureRecognizer (target: self, action: "handleGesture:")
-//    
-//        self.bgImageView.addGestureRecognizer(reGesture);
-//        self.v_baseInfo.addGestureRecognizer(reGesture);
-//        self.scrollView.addGestureRecognizer(reGesture);
-        self.navigationController!.navigationBar.hidden = false
+
         
     }
     
     var isTop = false;
-//    func handleGesture(sender:UITapGestureRecognizer) {
-//        
-//        NSLog("handleGesture");
-////        if(sender.direction == UISwipeGestureRecognizerDirection.Up)
-////        {//向上滑动
-//        if(!isTop)
-//        {
-//            UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight+245);
-//                
-//                }, completion: { (finish) -> Void in
-//                    if(finish)
-//                    {
-//                        
-//                    }
-//            })
-//            isTop = true;
-//        }
-//        else
-//        {
-////        }
-////        else if(sender.direction == UISwipeGestureRecognizerDirection.Up)
-////        {//向下滑动
-//            UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-//                
-//                }, completion: { (finish) -> Void in
-//                    if(finish)
-//                    {
-//                        
-//                    }
-//            })
-////        }
-//            
-//            isTop = false;
-//        }
-//    }
+
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.hidden = true;
+        
+//        self.navigationController!.navigationBar.hidden = true;
 
         if self.userModel.isLogin == false {//弹出登陆窗体
-            
-            
-//            let vc = UIHEPLER.GetAppDelegate().window?.rootViewController
-//            vc?.navigationController?.popToRootViewControllerAnimated(true)
-//            UIHEPLER.showLoginPage(vc!,isToHomePage: true);
-            
             self.view.hidden = true;
             UIHEPLER.showLoginPage(self, isToHomePage: true);
             
@@ -329,9 +284,10 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         if(!isTop)
         {
             
+            
+//            self.navigationController?.setNavigationBarHidden(true, animated: true);
             UIView.animateWithDuration(animDuration, animations: { () -> Void in
                 self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight+245-(self.tabBarController?.tabBar.frame.height)!);
-                
                 }, completion: { [weak self](finish) -> Void in
                     if(finish)
                     {
@@ -345,6 +301,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         }
         else
         {
+//              self.navigationController?.setNavigationBarHidden(false, animated: true);
             UIView.animateWithDuration(animDuration, animations: { () -> Void in
                 self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
                 
@@ -352,6 +309,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
                     if(finish)
                     {
                         
+//
                         self!.isTop = false;
                     }
             })

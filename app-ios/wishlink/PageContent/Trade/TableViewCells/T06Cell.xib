@@ -17,7 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="you-4l-qHu" customClass="T06Cell" customModule="wishlink" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="90" id="you-4l-qHu" customClass="T06Cell" customModule="wishlink" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="you-4l-qHu" id="W4O-h0-g88">
@@ -113,19 +113,31 @@
                             </mask>
                         </variation>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOA-fD-0QZ" userLabel="line">
+                        <rect key="frame" x="8" y="88" width="304" height="1"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="9D7-Pk-ePU"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <animations/>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="G0F-LY-7Y4" firstAttribute="top" secondItem="W4O-h0-g88" secondAttribute="topMargin" constant="11" id="1vS-wq-QWd"/>
                     <constraint firstItem="LFs-XX-jZP" firstAttribute="top" secondItem="G0F-LY-7Y4" secondAttribute="bottom" id="6H6-YU-fCu"/>
                     <constraint firstItem="4qP-oc-21l" firstAttribute="leading" secondItem="W4O-h0-g88" secondAttribute="leadingMargin" constant="90" id="8ji-ZO-llV"/>
                     <constraint firstItem="hkY-Fp-Xdr" firstAttribute="top" secondItem="W4O-h0-g88" secondAttribute="topMargin" constant="7" id="ATz-gp-KZH"/>
+                    <constraint firstItem="oOA-fD-0QZ" firstAttribute="trailing" secondItem="W4O-h0-g88" secondAttribute="trailingMargin" id="LJJ-fQ-AuR"/>
                     <constraint firstItem="hkY-Fp-Xdr" firstAttribute="leading" secondItem="W4O-h0-g88" secondAttribute="leadingMargin" constant="17" id="LY5-ok-hi0"/>
                     <constraint firstItem="cU2-jU-ApT" firstAttribute="top" secondItem="4qP-oc-21l" secondAttribute="bottom" id="Lm4-D0-lpf"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="oOA-fD-0QZ" secondAttribute="bottom" id="OyJ-NH-LyB"/>
                     <constraint firstItem="F1F-SY-ngx" firstAttribute="centerX" secondItem="hkY-Fp-Xdr" secondAttribute="centerX" id="Q8R-IQ-gwD"/>
+                    <constraint firstAttribute="bottom" secondItem="oOA-fD-0QZ" secondAttribute="bottom" id="UcZ-mj-vv5"/>
                     <constraint firstItem="LFs-XX-jZP" firstAttribute="centerX" secondItem="G0F-LY-7Y4" secondAttribute="centerX" id="VaF-yv-CV4"/>
                     <constraint firstItem="LFs-XX-jZP" firstAttribute="trailing" secondItem="W4O-h0-g88" secondAttribute="trailingMargin" id="ZXF-ja-46n"/>
+                    <constraint firstItem="oOA-fD-0QZ" firstAttribute="leading" secondItem="W4O-h0-g88" secondAttribute="leadingMargin" id="bWy-0v-Nbp"/>
                     <constraint firstItem="4qP-oc-21l" firstAttribute="top" secondItem="W4O-h0-g88" secondAttribute="topMargin" constant="12" id="crY-n1-KqS"/>
                     <constraint firstItem="F1F-SY-ngx" firstAttribute="top" secondItem="hkY-Fp-Xdr" secondAttribute="bottom" id="hht-Hc-tCc"/>
                     <constraint firstItem="NkM-iX-DM0" firstAttribute="leading" secondItem="cU2-jU-ApT" secondAttribute="trailing" constant="-7" id="je4-mn-m6p"/>
@@ -134,6 +146,11 @@
                     <constraint firstItem="cU2-jU-ApT" firstAttribute="leading" secondItem="W4O-h0-g88" secondAttribute="leadingMargin" constant="90" id="rCQ-sY-cvW"/>
                     <constraint firstItem="F1F-SY-ngx" firstAttribute="leading" secondItem="W4O-h0-g88" secondAttribute="leadingMargin" id="rdt-Ba-R3U"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="OyJ-NH-LyB"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

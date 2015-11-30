@@ -25,6 +25,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var lbRemark: UILabel!
     @IBOutlet weak var img_tips: UIImageView!
     @IBOutlet weak var imageRollView: CSImageRollView!
+    @IBOutlet weak var view_btn: UIView!
     //var nextVC:UIViewController!
     
     var item: ItemModel!
@@ -83,6 +84,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         self.loadComNaviLeftBtn()
         self.loadComNavTitle( "商品详情");
         
+        self.view_btn.hidden = true;
         self.httpObj.mydelegate = self
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         self.sv.hidden = true;
@@ -276,11 +278,8 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         SVProgressHUD.dismiss();
-        
         if(tag == 60)//加载跟单列表
         {
-            //            var isHaveData = false;
-            
             let tradesObj:NSArray! = (response as? NSDictionary)?.objectForKey("trades") as? NSArray
             print(tradesObj);
             if(tradesObj != nil && tradesObj!.count>0)
@@ -297,30 +296,16 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                     {
                         self.trade = tradeItem
                     }
-                    
                     self.followArr.append(tradeItem);
                 }
-                //                if(self.trade != nil)
-                //                {
-                //                    isHaveData = true;
-                //                }
             }
-            //            if(isHaveData)
-            //            {
             self.sv.hidden = false;
             self.bindData();
-            //            }
-            //            else
-            //            {
-            
-            //                UIHEPLER.alertErrMsg("获取数据失败")
-            //                self.navigationController?.popViewControllerAnimated(true);
-            //            }
+            self.view_btn.hidden = false;
             
         } else if(tag == 61) {//跟单
             
             UIHEPLER.gotoU02Page(true);
-            
             
         } else if(tag == 62) {//跟单成功转向支付页面
             

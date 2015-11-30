@@ -53,7 +53,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var constraint_viewHeight: NSLayoutConstraint!
     var actionSheet: CSActionSheet!
     var item:ItemModel!
-    var t05VC:T05PayVC!
+//    var t05VC:T05PayVC!
     var imgArr:[UIImage]!
     
     var imgEmpty:UIImage! = UIImage(named: "T08bbb");
@@ -114,11 +114,11 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         OrginFrame = self.tabBarController?.tabBar.frame;
         
-        if(self.t05VC != nil)
-        {
-            self.t05VC.view  = nil;
-            self.t05VC = nil;
-        }
+//        if(self.t05VC != nil)
+//        {
+//            self.t05VC.view  = nil;
+//            self.t05VC = nil;
+//        }
         
         self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(50.0);
         self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(120);
@@ -858,14 +858,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             let tradeDic = dic.objectForKey("trade") as!  NSDictionary;
             let tradeItem = TradeModel(dict: tradeDic);
             
-            if(self.t05VC == nil)
-            {
-                self.t05VC = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
-            }
-            self.t05VC.item = self.item;
-            self.t05VC.trade = tradeItem;
-            self.t05VC.isNewOrder = true;
-            self.navigationController?.pushViewController(self.t05VC, animated: true);
+            var vc:T05PayVC! = T05PayVC(nibName: "T05PayVC", bundle: NSBundle.mainBundle());
+            
+            vc.item = self.item;
+            vc.trade = tradeItem;
+            vc.isNewOrder = true;
+            vc.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(vc, animated: true);
+            vc = nil;
             
         }
     }

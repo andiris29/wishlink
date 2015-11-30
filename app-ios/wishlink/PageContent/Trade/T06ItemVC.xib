@@ -41,6 +41,7 @@
                 <outlet property="lb_CreaterName" destination="8XE-Rj-boz" id="H7s-o0-qAZ"/>
                 <outlet property="sv" destination="WTo-m3-Ch7" id="Z0l-VU-TEa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view_btn" destination="aZY-AT-LqQ" id="o3w-uC-7Qp"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -388,13 +389,13 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-AT-LqQ">
-                    <rect key="frame" x="0.0" y="612" width="375" height="55"/>
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3Z-wk-Y6g">
-                            <rect key="frame" x="0.0" y="0.0" width="188" height="55"/>
+                            <rect key="frame" x="0.0" y="0.0" width="188" height="50"/>
                             <subviews>
                                 <button opaque="NO" tag="60" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sRA-ZQ-998">
-                                    <rect key="frame" x="0.0" y="0.0" width="184" height="55"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
                                     <animations/>
                                     <color key="backgroundColor" red="0.97254901960784312" green="0.24313725490196078" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -426,7 +427,7 @@
                                 <constraint firstAttribute="height" constant="60" id="WdQ-BV-52d"/>
                                 <constraint firstAttribute="height" constant="60" id="eyd-FX-Ztr"/>
                                 <constraint firstItem="sRA-ZQ-998" firstAttribute="top" secondItem="M3Z-wk-Y6g" secondAttribute="top" id="kge-3v-9yu"/>
-                                <constraint firstAttribute="trailing" secondItem="sRA-ZQ-998" secondAttribute="trailing" constant="4" id="ta2-sC-H6x"/>
+                                <constraint firstAttribute="trailing" secondItem="sRA-ZQ-998" secondAttribute="trailing" constant="2" id="ta2-sC-H6x"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -437,10 +438,10 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecd-Mh-Fbc">
-                            <rect key="frame" x="188" y="0.0" width="187" height="55"/>
+                            <rect key="frame" x="188" y="0.0" width="187" height="50"/>
                             <subviews>
                                 <button opaque="NO" tag="61" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIt-QE-Wn4">
-                                    <rect key="frame" x="2" y="0.0" width="185" height="55"/>
+                                    <rect key="frame" x="2" y="0.0" width="185" height="50"/>
                                     <animations/>
                                     <color key="backgroundColor" red="0.48627450980392156" green="0.0" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -492,7 +493,7 @@
                         <constraint firstAttribute="trailing" secondItem="ecd-Mh-Fbc" secondAttribute="trailing" id="FvL-7X-hnv"/>
                         <constraint firstAttribute="bottom" secondItem="M3Z-wk-Y6g" secondAttribute="bottom" id="KdV-b6-U5k"/>
                         <constraint firstItem="ecd-Mh-Fbc" firstAttribute="centerY" secondItem="aZY-AT-LqQ" secondAttribute="centerY" id="Oim-VJ-8Jm"/>
-                        <constraint firstAttribute="height" constant="55" id="UNX-OM-tzE"/>
+                        <constraint firstAttribute="height" constant="50" id="UNX-OM-tzE"/>
                         <constraint firstAttribute="bottom" secondItem="M3Z-wk-Y6g" secondAttribute="bottom" id="UiH-Y2-hag"/>
                         <constraint firstItem="M3Z-wk-Y6g" firstAttribute="centerY" secondItem="aZY-AT-LqQ" secondAttribute="centerY" id="XOZ-mv-IBf"/>
                         <constraint firstItem="ecd-Mh-Fbc" firstAttribute="leading" secondItem="M3Z-wk-Y6g" secondAttribute="trailing" id="nz3-j0-6Ib"/>
