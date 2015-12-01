@@ -140,7 +140,7 @@ itemFeeding.hot = {
     func: function(req, res) {
         ServiceHelper.queryPaging(req, res, function(param, callback) {
             var criteria = {};
-            MongoHelper.queryPaging(Items.find(criteria).populate('targetRef').sort({weight: -1}), rUserRecommendedItems.find(criteria), param.pageNo, param.pageSize, callback);
+            MongoHelper.queryPaging(Items.find(criteria).sort({weight: -1}), Items.find(criteria), param.pageNo, param.pageSize, callback);
         }, function(models) {
             return {
                 items: models
