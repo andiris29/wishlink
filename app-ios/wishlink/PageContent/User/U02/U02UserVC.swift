@@ -287,7 +287,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             
 //            self.navigationController?.setNavigationBarHidden(true, animated: true);
             UIView.animateWithDuration(animDuration, animations: { () -> Void in
-                self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight+245-(self.tabBarController?.tabBar.frame.height)!);
+                self.view.frame = CGRectMake(0, -180, ScreenWidth, ScreenHeight+180-(self.tabBarController?.tabBar.frame.height)!);
                 }, completion: { [weak self](finish) -> Void in
                     if(finish)
                     {

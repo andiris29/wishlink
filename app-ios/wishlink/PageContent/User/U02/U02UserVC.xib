@@ -253,13 +253,13 @@
         <image name="u02-headimage" width="73" height="73"/>
         <image name="u02-setup" width="86" height="26"/>
         <image name="u02-topbg" width="512" height="233"/>
-        <image name="u02collecticon0" width="25" height="21"/>
-        <image name="u02collecticon1" width="25" height="21"/>
-        <image name="u02commend0" width="25" height="25"/>
-        <image name="u02commend1" width="25" height="25"/>
-        <image name="u02order0" width="20" height="25"/>
-        <image name="u02order1" width="20" height="25"/>
-        <image name="u02setting0" width="25" height="25"/>
-        <image name="u02setting1" width="25" height="25"/>
+        <image name="u02collecticon0" width="32" height="32"/>
+        <image name="u02collecticon1" width="32" height="32"/>
+        <image name="u02commend0" width="32" height="32"/>
+        <image name="u02commend1" width="32" height="32"/>
+        <image name="u02order0" width="32" height="32"/>
+        <image name="u02order1" width="32" height="32"/>
+        <image name="u02setting0" width="32" height="32"/>
+        <image name="u02setting1" width="32" height="32"/>
     </resources>
 </document>
