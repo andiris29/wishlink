@@ -134,7 +134,9 @@ class U02ItemCell: UICollectionViewCell {
             {
                 if(self.item._countryRef.icon.containsString("http"))
                 {
-                    WebRequestHelper().renderImageView(self.iv_country, url: self.item._countryRef.icon, defaultName: "")
+//                    WebRequestHelper().renderImageView(self.iv_country, url: self.item._countryRef.icon, defaultName: "")
+                    
+                    self.iv_country.sd_setImageWithURL(NSURL(string: self.item._countryRef.icon), placeholderImage:  UIHEPLER.noneImg)
                 }
             }
             

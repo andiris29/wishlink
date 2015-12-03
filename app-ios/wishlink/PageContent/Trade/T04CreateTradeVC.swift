@@ -51,6 +51,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var constraint_topViewHieght: NSLayoutConstraint!
     //通用View高度约束
     @IBOutlet weak var constraint_viewHeight: NSLayoutConstraint!
+    @IBOutlet weak var constrat_remarkView_Height: NSLayoutConstraint!
     var actionSheet: CSActionSheet!
     var item:ItemModel!
 //    var t05VC:T05PayVC!
@@ -80,13 +81,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         //点击手势
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
         
-//        
-//        self.sv.addObserver(self, forKeyPath: "panGestureRecognizer.state", options: NSKeyValueObservingOptions.New, context: nil)
+        self.constraint_viewHeight.constant = UIHEPLER.ResizeHeightWithFullScreen(50.0);
+        self.constrat_remarkView_Height.constant = UIHEPLER.ResizeHeightWithFullScreen(65.0);
+        self.constraint_topViewHieght.constant=UIHEPLER.ResizeHeightWithFullScreen(120);
         
         self.loadImagesData();
         csActionSheet()
         
-//        self.sv.contentSize = CGSizeMake(0, ScreenHeight+100);
         
         
     }
@@ -94,47 +95,26 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     var oldContentOffsetY:CGFloat! = 0;
     var newContentOffsetY:CGFloat! = 0;
     
-//    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-//        if(self.sv.panGestureRecognizer.state == UIGestureRecognizerState.Began)
-//        {
-//            
-//        }
-//        if(self.sv.panGestureRecognizer.state == UIGestureRecognizerState.Changed)
-//        {
-//            
-//        }
-//        if(self.sv.panGestureRecognizer.state == UIGestureRecognizerState.Ended)
-//        {
-//            
-//        }
-//    }
+
     
     var OrginFrame :CGRect!
     override func viewWillAppear(animated: Bool) {
         
         OrginFrame = self.tabBarController?.tabBar.frame;
-        
-//        if(self.t05VC != nil)
-//        {
-//            self.t05VC.view  = nil;
-//            self.t05VC = nil;
-//        }
-        
-        self.constraint_viewHeight.constant = UIHEPLER.resizeHeight(50.0);
-        self.constraint_topViewHieght.constant=UIHEPLER.resizeHeight(120);
-        
+    
         self.navigationController?.navigationBarHidden = false;
-        
         self.item = nil;
-        
         self.loadComNavTitle("发布新订单")
+        self.loadComNaviLeftBtn()
         
         
     }
+    override func leftNavBtnAction(button: UIButton) {
+        var tvc:TabBarVC! =  self.tabBarController as? TabBarVC
+        tvc!.selectedIndex = tvc!.lastIndex ;
+        
+    }
     
-//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return
-//    }
     
     //MARK:Customer func
     func loadImagesData()
@@ -363,17 +343,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
 
     
     var selectTag:Int!
-//    var startTime:Double = 0;
-//    @IBAction func touchDownAction(sender: AnyObject) {
-//        self.selectTag = (sender as! UIButton).tag;
-//   
-//        
-//        let timeNow:NSTimeInterval = NSDate().timeIntervalSince1970;
-//        self.startTime = timeNow;
-//        
-//        print("touchDownAction")
-//        //开启定时器
-//    }
     @IBAction func btnAction(sender: UIButton) {
         //关闭定时器
         print("btnAction")
@@ -665,49 +634,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 // 隐藏导航栏和选项栏
                 
                 // [self layoutView];
+//                self.navigationController?.setNavigationBarHidden(true, animated: true);
                 
-                self.navigationController?.setNavigationBarHidden(true, animated: true);
-                
-//                UIView.animateWithDuration(0.3, animations: {
-//                    self.tabBarController?.tabBar.hidden = false;
-//                    (self.tabBarController as? TabBarVC)?.centerButton.hidden = false;
-//                    self.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-self.OrginFrame!.height);
-//                    
-//                    }, completion: {
-//                        [weak self](Bool completion) in
-//                        if completion {
-//                            (self!.tabBarController as? TabBarVC)?.centerButton.hidden = false;
-//                            self!.tabBarController?.tabBar.hidden = false;
-//                            self!.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-self!.OrginFrame!.height);
-//                        }
-//                        else {
-//                            
-//                        }
-//                    })
+
                 
             } else if ((contentOffsetY - scrollView.contentOffset.y) > 5.0) {   // 向下拖拽
                 
                 // 显示导航栏和选项栏
-                
-                self.navigationController?.setNavigationBarHidden(false, animated: true);
-                
-//                UIView.animateWithDuration(0.3, animations: {
-//                    (self.tabBarController as? TabBarVC)?.centerButton.hidden = true;
-//                    self.tabBarController?.tabBar.hidden = true;
-//                    self.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-//                    }, completion: {
-//                        [weak self](Bool completion) in
-//                        if completion {
-//                            (self!.tabBarController as? TabBarVC)?.centerButton.hidden = true;
-//                            self!.tabBarController?.tabBar.hidden = true;
-//                            self!.sv.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-self!.OrginFrame!.height);
-//                            
-//                        }
-//                        else {
-//                            
-//                        }
-//                })
-
+//                self.navigationController?.setNavigationBarHidden(false, animated: true);
                 
             } else {
                 

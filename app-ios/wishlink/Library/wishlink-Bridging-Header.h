@@ -27,3 +27,5 @@
 
 #import "WXApiResponseHandler.h"
 #import "FXBlurView.h"
+
+#import "UIImageView+WebCache.h"

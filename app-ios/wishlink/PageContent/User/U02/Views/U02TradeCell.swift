@@ -175,6 +175,8 @@ class U02TradeCell: UICollectionViewCell {
             self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
         }
         if self.trade.item.images != nil && self.trade.item.images.count != 0 {
+         
+            
             WebRequestHelper().renderImageView(self.itemImageView, url: self.trade.item.images[0], defaultName: "T07-bgimg")
         }
     }

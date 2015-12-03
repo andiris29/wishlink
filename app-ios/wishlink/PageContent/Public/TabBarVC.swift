@@ -45,6 +45,7 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         releaseVC.tabBarItem.tag = 9
       //  releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
          releaseVC.tabBarItem = UITabBarItem.tabBarItem("发布", image: UIImage(named: "release_unselect")!, selectedImage: UIImage(named: "release_select")!);
+        releaseVC.hidesBottomBarWhenPushed = true;
         
           releaseVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0,-3)
         let createNav =  NavigationPageVC(rootViewController: releaseVC)
@@ -142,12 +143,20 @@ class TabBarVC: UITabBarController,UITabBarControllerDelegate {
         
     }
    
+    var lastIndex = 0;
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
       
-        self.backToTopVC();
-    
-    
-        NSLog(" tag:%d",item.tag);
+        if(self.selectedIndex != lastIndex)
+        {
+            self.backToTopVC();
+            NSLog(" tag:%d",item.tag);
+            self.lastIndex = self.selectedIndex;
+            if(item.tag == 9)
+            {
+                
+            }
+        }
+        
 //        if(self.centerButton != nil)
 //        {
 //            if(item.tag == 9)

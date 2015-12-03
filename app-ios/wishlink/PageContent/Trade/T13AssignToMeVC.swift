@@ -73,7 +73,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         
         self.followArr = nil;
         self.selectArr = nil;
-        userImage = nil;
+//        userImage = nil;
     }
 
     override func viewDidLayoutSubviews() {
@@ -148,29 +148,9 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             }
             
             tCell.iv_userImg.image = nil;
-            var imgUrl :String!
-            if(self.userImage != nil && self.userImage.count>0 && tdata.owner != nil && tdata.owner?.count>0)
-            {
-                let result_Data = userImage.filter{itemObj -> Bool in
-                    
-                    if  let imgpath:String! = tdata.owner!.objectForKey("portrait") as? String
-                    {
-                        
-                        imgUrl = imgpath
-                        return (itemObj.path == imgpath);
-                    }
-                }
-                
-                if(result_Data.count>0 && result_Data[0].img != nil)
-                {
-                    tCell.iv_userImg.image = result_Data[0].img;
-                }
-                else
-                {
-                    WebRequestHelper().renderImageView( tCell.iv_userImg, url: imgUrl, defaultName: "T03aaa")
-                }
-                
-            }
+            let imgUrl :String! =   tdata.owner!.objectForKey("portrait") as? String
+            WebRequestHelper().renderImageView( tCell.iv_userImg, url: imgUrl, defaultName: "T03aaa")
+
             tCell.myDelegate = self;
             cell = tCell;
             
@@ -302,49 +282,49 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         
     }
     
-    var userImage:[(path:String,img:UIImage!)]!
-    func loadAllUserImage()
-    {
-        self.userImage = nil;
-        if(self.followArr != nil && self.followArr.count>0)
-        {
-            for item_trade in self.followArr
-            {
-                if(item_trade.owner != nil && item_trade.owner?.count>0)
-                {
-                    if  let imgUrl:String! = item_trade.owner!.objectForKey("portrait") as? String
-                    {
-                        if(imgUrl != nil && imgUrl!.trim().length>1)
-                        {
-                            let img_item =   APPCONFIG.readImgFromCachePath(imgUrl!)
-                            if(img_item != nil)
-                            {
-                                if(self.userImage == nil)
-                                {
-                                    userImage = [(path:imgUrl!,img:img_item)]
-                                }
-                                else
-                                {
-                                    
-                                    
-                                    let result_Data = userImage.filter{itemObj -> Bool in
-                                        
-                                        return (itemObj.path == imgUrl);
-                                    }
-                                    if(result_Data.count == 0)
-                                    {
-                                        userImage.append((path:imgUrl!,img:img_item));
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-                
-            }
-        }
-    }
+   // var userImage:[(path:String,img:UIImage!)]!
+//    func loadAllUserImage()
+//    {
+//        self.userImage = nil;
+//        if(self.followArr != nil && self.followArr.count>0)
+//        {
+//            for item_trade in self.followArr
+//            {
+//                if(item_trade.owner != nil && item_trade.owner?.count>0)
+//                {
+//                    if  let imgUrl:String! = item_trade.owner!.objectForKey("portrait") as? String
+//                    {
+//                        if(imgUrl != nil && imgUrl!.trim().length>1)
+//                        {
+//                            let img_item =   APPCONFIG.readImgFromCachePath(imgUrl!)
+//                            if(img_item != nil)
+//                            {
+//                                if(self.userImage == nil)
+//                                {
+//                                    userImage = [(path:imgUrl!,img:img_item)]
+//                                }
+//                                else
+//                                {
+//                                    
+//                                    
+//                                    let result_Data = userImage.filter{itemObj -> Bool in
+//                                        
+//                                        return (itemObj.path == imgUrl);
+//                                    }
+//                                    if(result_Data.count == 0)
+//                                    {
+//                                        userImage.append((path:imgUrl!,img:img_item));
+//                                    }
+//                                }
+//                            }
+//                            
+//                        }
+//                    }
+//                }
+//                
+//            }
+//        }
+//    }
     
     
     //MARK: - T06CellFooterDelegate
@@ -384,7 +364,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                         self.followArr.append(tradeItem);
                     }
                 }
-                self.loadAllUserImage();
+//                self.loadAllUserImage();
                 self.tradeTableView.reloadData();
             }
             self.btnGetOrder.hidden = false;

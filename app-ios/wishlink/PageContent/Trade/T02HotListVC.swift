@@ -256,8 +256,10 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-        
-        self.lbTipMessage.text = ""
+        if( self.lbTipMessage != nil)
+        {
+            self.lbTipMessage.text = ""
+        }
         SVProgressHUD.dismiss();
         if(tag == 10)
         {

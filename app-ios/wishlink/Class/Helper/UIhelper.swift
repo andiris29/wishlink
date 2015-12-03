@@ -26,6 +26,14 @@ class UIHelper {
     let Iphone6Height:CGFloat = 667.0;
     let Iphone6PHeight:CGFloat = 736.0;
     
+    /// Iphone6屏幕的宽度 单位：pt
+    let Iphone6_Width_PT:CGFloat      = 375.0;
+    
+    //默认图片
+    var noneImgName   =  "placeholder";
+    //默认图片
+    var noneImg   = UIImage(named: "placeholder");
+    
     //系统主色调{大部分字体颜色 }
      var mainColor:UIColor = UIColor(red: 124/255.0, green: 0/255.0, blue: 90.0/255.0, alpha: 1)
     
@@ -164,6 +172,11 @@ class UIHelper {
         }
         let newHeigt:Int = Int(height)
         return CGFloat(newHeigt);
+    }
+    
+    func ResizeHeightWithFullScreen(orginHeightInIphone6:CGFloat)->CGFloat
+    {
+        return (ScreenWidth/self.Iphone6_Width_PT) * orginHeightInIphone6;
     }
     
     //读取本地图片
