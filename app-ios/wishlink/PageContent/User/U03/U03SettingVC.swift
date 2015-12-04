@@ -15,11 +15,16 @@ enum SettingVCUploadImageType {
 let LogoutNotification: String = "LogoutNotification"
 
 class U03SettingVC: RootVC, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
+UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScrollViewDelegate{
     
+    @IBOutlet weak var sv: UIScrollView!
+    @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var nicknameTextField: UITextField!
+    
+    var scrolling:((isUp:Bool)->Void)!
+    
     var uploadImageRequest: Request!
     var uploadImageType: SettingVCUploadImageType = .None
     var isUploadHeadImage: Bool!
@@ -32,6 +37,10 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
         super.viewDidLoad()
         self.httpObj.mydelegate = self
         self.fillDataForUI()
+        
+        self.sv.delegate = self;
+        
+        UIHEPLER.buildUIViewWithRadius(self.btnLogout, radius: 4, borderColor: UIColor.clearColor(), borderWidth: 1)
         // Do any additional setup after loading the view.
     }
     
@@ -167,6 +176,75 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate{
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+ 
+    
+    //MARK:ScrollView delegate
+    var contentOffsetY:CGFloat! = 0;
+    var oldContentOffsetY:CGFloat! = 0;
+    var newContentOffsetY:CGFloat! = 0;
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        
+        contentOffsetY = scrollView.contentOffset.y;
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        oldContentOffsetY = scrollView.contentOffset.y;
+        
+        
+        NSLog("end dragging");
+        
+        if(self.lastDraging != self._isUp)
+        {
+            if(self.scrolling != nil)
+            {
+                self.scrolling(isUp:_isUp);
+            }
+            self.lastDraging = _isUp
+        }
+    }
+
+    
+    var lastDraging:Bool!
+    var _isUp:Bool!
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        newContentOffsetY = scrollView.contentOffset.y;
+        
+        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY > contentOffsetY) {  // 向上滚动
+            
+            NSLog("up");
+            
+        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY) { // 向下滚动
+            
+            NSLog("down");
+            
+        } else {
+            
+            
+        }
+        if (scrollView.dragging) {  // 拖拽
+            
+            NSLog("scrollView.dragging");
+            NSLog("contentOffsetY: %f", contentOffsetY);
+            NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
+            if ((scrollView.contentOffset.y - contentOffsetY) > 20.0) {  // 向上拖拽
+                
+                self._isUp = true;
+                NSLog("drag up");
+                
+            } else if ((contentOffsetY - scrollView.contentOffset.y) > 20.0) {   // 向下拖拽
+                
+                
+                self._isUp = false;
+                NSLog("drag down");
+                
+            } else {
+                
+            }
+        }
+    }
+
+    
     
     // MARK: - response event
     

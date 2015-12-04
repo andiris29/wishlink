@@ -23,7 +23,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
     
-    var nextVC:UIViewController!
+//    var nextVC:UIViewController!
     var wxCode: String!
     var wbToekn: String!
     var wbUserID: String!
@@ -129,22 +129,18 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     
     @IBAction func forgotPasswordButtonAction(sender: AnyObject) {
         
-        self.nextVC = U01ForgetPassword(nibName: "U01ForgetPassword", bundle: NSBundle.mainBundle())
+        let vc = U01ForgetPassword(nibName: "U01ForgetPassword", bundle: NSBundle.mainBundle())
         
-        self.presentViewController( self.nextVC, animated: true) { () -> Void in
+        self.presentViewController( vc, animated: true) { () -> Void in
         }
     }
     
     @IBAction func registerButtonAction(sender: AnyObject) {
         
-        if(self.nextVC != nil)
-        {
-            self.nextVC = nil;
-        }
+       
+        let nextVC = U06RegsiterVC(nibName: "U06RegsiterVC", bundle: NSBundle.mainBundle())
 
-        self.nextVC = U06RegsiterVC(nibName: "U06RegsiterVC", bundle: NSBundle.mainBundle())
-
-        self.presentViewController( self.nextVC, animated: true) { () -> Void in
+        self.presentViewController( nextVC, animated: true) { () -> Void in
         }
     }
     
@@ -209,7 +205,6 @@ class U01LoginVC: RootVC,WebRequestDelegate {
     func registerNotification() {
         NSNotificationCenter.defaultCenter().addObserverForName(WBloginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti: NSNotification) in
             
-            
             let temp = noti.object as! WBAuthorizeResponse
             if temp.statusCode == .Success {
                 self.wbToekn = temp.accessToken
@@ -233,11 +228,7 @@ class U01LoginVC: RootVC,WebRequestDelegate {
             
            
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
-               
-                if(self.nextVC != nil)
-                {
-                    self.nextVC = nil;
-                }
+       
             });
             
         }
@@ -250,8 +241,6 @@ class U01LoginVC: RootVC,WebRequestDelegate {
 
     //MARK:WebRequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-
-     
     
         print(response)
         NSHTTPCookieStorage.sharedHTTPCookieStorage().cookieAcceptPolicy = .Always
@@ -268,14 +257,9 @@ class U01LoginVC: RootVC,WebRequestDelegate {
         {
             if(!UserModel.shared.isLogin)
             {
-                if(self.nextVC != nil)
-                {
-                    self.nextVC = nil;
-                }
                 var vc:U06RegsiterVC! = U06RegsiterVC(nibName: "U06RegsiterVC", bundle: NSBundle.mainBundle())
                 vc.isRegisterModel = false
-                self.nextVC = vc;
-                self.presentViewController( self.nextVC, animated: true) { () -> Void in
+                self.presentViewController(vc, animated: true) { () -> Void in
                 }
                 vc = nil;
             }

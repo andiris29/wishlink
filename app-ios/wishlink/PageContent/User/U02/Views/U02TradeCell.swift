@@ -49,6 +49,7 @@ class U02TradeCell: UICollectionViewCell {
     
     weak var delegate: U02TradeCellDelegate?
     
+    @IBOutlet weak var view_bg: UIView!
     @IBOutlet weak var buyerTopView: UIView!
     @IBOutlet weak var buyerRoundImageView: UIImageView!
     @IBOutlet weak var buyerStatusLabel: UILabel!
@@ -84,6 +85,7 @@ class U02TradeCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
 
+        UIHEPLER.buildUIViewWithRadius(self.view_bg, radius: 8, borderColor: UIColor.grayColor(), borderWidth: 1);
         self.prepareBuyerTopView()
         self.prepareSellerTopView()
     }
@@ -326,8 +328,9 @@ class U02TradeCell: UICollectionViewCell {
             self.sellerTopView.backgroundColor = UIColor.whiteColor()
             self.sellerRoundImageView.hidden = false
             
-            self.layer.borderWidth = 1
-            self.layer.borderColor = UIColor.redColor().CGColor
+           
+             self.view_bg.layer.borderWidth = 1
+             self.view_bg.layer.borderColor = UIColor.redColor().CGColor
         }
         else {
             
@@ -336,8 +339,8 @@ class U02TradeCell: UICollectionViewCell {
             self.sellerTopView.backgroundColor = UIColor.whiteColor()
             self.sellerRoundImageView.hidden = true
             
-            self.layer.borderWidth = 1
-            self.layer.borderColor = RGBC(204) .CGColor
+             self.view_bg.layer.borderWidth = 1
+             self.view_bg.layer.borderColor = RGBC(204) .CGColor
         }
     }
     

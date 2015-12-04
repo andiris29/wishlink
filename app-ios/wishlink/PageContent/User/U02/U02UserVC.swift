@@ -258,6 +258,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             orderTradeVC.currType = self.orderListDefaultModel;
         }
         self.orderTradeVC.orderListScrolling = {[weak self](isup:Bool) in
+             self!.isSetting = false;
             self!.scrolling(isup);
         }
         self.orderTradeVC.view.frame = self.scrollView.bounds
@@ -272,52 +273,51 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.scrollView.addSubview(self.favoriteVC.view)
 
         self.settingVC = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
+        
+        settingVC.scrolling = {[weak self](isup:Bool) in
+            self!.isSetting = true;
+            self!.scrolling(isup);
+        }
+        
         self.settingVC.userVC = self
         self.scrollView.addSubview(self.settingVC.view)
         
         self.adjustUI()
     }
     var animDuration = 0.3
+    var isSetting = false;
    func scrolling(isUp:Bool)
    {
         NSLog("scrolling on U02UserVC");
+    
+        var scroHeight:CGFloat = 180;
+        if(isSetting)
+        {
+            scroHeight = 120;
+        }
         if(!isTop)
         {
-            
-            
-//            self.navigationController?.setNavigationBarHidden(true, animated: true);
             UIView.animateWithDuration(animDuration, animations: { () -> Void in
-                self.view.frame = CGRectMake(0, -180, ScreenWidth, ScreenHeight+180-(self.tabBarController?.tabBar.frame.height)!);
+                self.view.frame = CGRectMake(0, 0-scroHeight, ScreenWidth, ScreenHeight+scroHeight-(self.tabBarController?.tabBar.frame.height)!);
                 }, completion: { [weak self](finish) -> Void in
                     if(finish)
                     {
-                        
                         self!.isTop = true;
                     }
             })
-
-            
-            
         }
         else
         {
-//              self.navigationController?.setNavigationBarHidden(false, animated: true);
             UIView.animateWithDuration(animDuration, animations: { () -> Void in
                 self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
                 
                 }, completion: { [weak self](finish) -> Void in
                     if(finish)
                     {
-                        
-//
                         self!.isTop = false;
                     }
             })
-
-            
         }
-    
-    
     }
     
     func prepareUI() {

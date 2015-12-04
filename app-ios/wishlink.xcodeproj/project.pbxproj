@@ -79,6 +79,8 @@
 		A1043E8C1B7F920F007A237C /* NavigationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1043E8B1B7F920F007A237C /* NavigationPageVC.swift */; };
 		A1044F921BE6FAA400A75887 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1044F911BE6FAA400A75887 /* CountryModel.swift */; };
 		A107EE951BD9305A00617A14 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = A107EE941BD9305A00617A14 /* Order.m */; };
+		A11573D31C11FFA400E57CD5 /* U01BindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11573D11C11FFA400E57CD5 /* U01BindVC.swift */; };
+		A11573D41C11FFA400E57CD5 /* U01BindVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11573D21C11FFA400E57CD5 /* U01BindVC.xib */; };
 		A132BB8D1B863310004EAB47 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132BB8C1B863310004EAB47 /* TabBarVC.swift */; };
 		A132BB8F1B863328004EAB47 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132BB8E1B863328004EAB47 /* TabBarItem.swift */; };
 		A132BB9E1B863342004EAB47 /* U01LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132BB921B863342004EAB47 /* U01LoginVC.swift */; };
@@ -327,6 +329,8 @@
 		A1044F911BE6FAA400A75887 /* CountryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		A107EE931BD9305A00617A14 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		A107EE941BD9305A00617A14 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		A11573D11C11FFA400E57CD5 /* U01BindVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U01BindVC.swift; sourceTree = "<group>"; };
+		A11573D21C11FFA400E57CD5 /* U01BindVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U01BindVC.xib; sourceTree = "<group>"; };
 		A132BB8C1B863310004EAB47 /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		A132BB8E1B863328004EAB47 /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		A132BB921B863342004EAB47 /* U01LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U01LoginVC.swift; sourceTree = "<group>"; };
@@ -933,6 +937,8 @@
 				D27C59331BFCA87E000B728E /* U01ForgetPassword.xib */,
 				D25E02431BF313DB004659C9 /* U06RegsiterVC.swift */,
 				D25E02441BF313DB004659C9 /* U06RegsiterVC.xib */,
+				A11573D11C11FFA400E57CD5 /* U01BindVC.swift */,
+				A11573D21C11FFA400E57CD5 /* U01BindVC.xib */,
 			);
 			path = U01;
 			sourceTree = "<group>";
@@ -1475,6 +1481,7 @@
 				7695653A1BA0891E00A6AD10 /* WeiboSDK.bundle in Resources */,
 				7661BD611BB98F9000E01DBC /* PushConfig.plist in Resources */,
 				A132BBA51B863342004EAB47 /* U02UserVC.xib in Resources */,
+				A11573D41C11FFA400E57CD5 /* U01BindVC.xib in Resources */,
 				76CD0E8E1B89655B00B04453 /* U02RecommendVC.xib in Resources */,
 				D25E02461BF313DB004659C9 /* U06RegsiterVC.xib in Resources */,
 				765424821B8B5A56001C607C /* U03AddressManagerVC.xib in Resources */,
@@ -1545,6 +1552,7 @@
 				A1043E811B7F8BDF007A237C /* RootVC.swift in Sources */,
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1F7C1421BB1A6090045C125 /* ItemModel.swift in Sources */,
+				A11573D31C11FFA400E57CD5 /* U01BindVC.swift in Sources */,
 				A1AA6EC61C1087550066EF9A /* MKAnnotationView+WebCache.m in Sources */,
 				D23B5DCD1BE90B4A00DB4377 /* AssigneeModel.swift in Sources */,
 				A1C8EA641BCA05DA00ED9910 /* Request.swift in Sources */,

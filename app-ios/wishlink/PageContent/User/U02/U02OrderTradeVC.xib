@@ -25,28 +25,30 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-EX-Lmx">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                    <rect key="frame" x="0.0" y="4" width="324" height="35"/>
                     <subviews>
                         <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovm-b2-oey">
-                            <rect key="frame" x="0.0" y="0.0" width="158" height="35"/>
+                            <rect key="frame" x="-4" y="0.0" width="162" height="35"/>
                             <animations/>
                             <color key="backgroundColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
-                            <state key="normal" title="买家订单">
+                            <state key="normal" title="自购订单" image="u02OrderList0">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" image="u02OrderList1"/>
                             <connections>
                                 <action selector="buyerSellerButtonAction:" destination="-1" eventType="touchUpInside" id="MKu-kU-rsa"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8n-4D-x3t">
-                            <rect key="frame" x="162" y="0.0" width="158" height="35"/>
+                            <rect key="frame" x="162" y="0.0" width="162" height="35"/>
                             <animations/>
                             <color key="backgroundColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
-                            <state key="normal" title="卖家订单">
+                            <state key="normal" title="服务订单" image="u02OrderList0">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" image="u02OrderList1"/>
                             <connections>
                                 <action selector="buyerSellerButtonAction:" destination="-1" eventType="touchUpInside" id="wMO-0M-pKk"/>
                             </connections>
@@ -59,7 +61,7 @@
                         <constraint firstAttribute="height" constant="35" id="Jvt-h6-6fo"/>
                         <constraint firstAttribute="trailing" secondItem="S8n-4D-x3t" secondAttribute="trailing" id="UBk-q2-Kim"/>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="top" secondItem="edQ-EX-Lmx" secondAttribute="top" id="UoI-0d-weU"/>
-                        <constraint firstItem="ovm-b2-oey" firstAttribute="leading" secondItem="edQ-EX-Lmx" secondAttribute="leading" id="bVL-94-qtV"/>
+                        <constraint firstItem="ovm-b2-oey" firstAttribute="leading" secondItem="edQ-EX-Lmx" secondAttribute="leading" constant="-4" id="bVL-94-qtV"/>
                         <constraint firstAttribute="bottom" secondItem="S8n-4D-x3t" secondAttribute="bottom" id="eIN-Sg-F8V"/>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="leading" secondItem="ovm-b2-oey" secondAttribute="trailing" constant="4" id="efq-aC-x1F"/>
                         <constraint firstItem="ovm-b2-oey" firstAttribute="top" secondItem="edQ-EX-Lmx" secondAttribute="top" id="lkw-uo-Le0"/>
@@ -77,17 +79,21 @@
                 </scrollView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="edQ-EX-Lmx" secondAttribute="trailing" id="5Nz-eU-KTg"/>
+                <constraint firstAttribute="trailing" secondItem="edQ-EX-Lmx" secondAttribute="trailing" constant="-4" id="5Nz-eU-KTg"/>
                 <constraint firstAttribute="bottom" secondItem="caU-T2-bug" secondAttribute="bottom" id="8gw-8Z-1BE"/>
                 <constraint firstItem="edQ-EX-Lmx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I7T-vM-7rw"/>
-                <constraint firstItem="edQ-EX-Lmx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SoW-zx-hIl"/>
-                <constraint firstItem="caU-T2-bug" firstAttribute="top" secondItem="edQ-EX-Lmx" secondAttribute="bottom" id="U9o-fh-4yt"/>
+                <constraint firstItem="edQ-EX-Lmx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="4" id="SoW-zx-hIl"/>
+                <constraint firstItem="edQ-EX-Lmx" firstAttribute="bottom" secondItem="caU-T2-bug" secondAttribute="top" constant="4" id="U9o-fh-4yt"/>
                 <constraint firstAttribute="trailing" secondItem="caU-T2-bug" secondAttribute="trailing" id="mh6-N9-Vre"/>
                 <constraint firstItem="caU-T2-bug" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o9j-O5-WPX"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="u02OrderList0" width="20" height="17"/>
+        <image name="u02OrderList1" width="21" height="17"/>
+    </resources>
 </document>

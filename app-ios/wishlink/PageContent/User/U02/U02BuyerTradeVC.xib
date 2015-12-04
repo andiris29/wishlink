@@ -66,7 +66,7 @@
                         </button>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" red="0.91764705879999997" green="0.87058823529999996" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" secondItem="UXB-ha-kZR" secondAttribute="height" id="23o-0g-6pd"/>
                         <constraint firstAttribute="height" constant="35" id="SI0-t5-AO6"/>

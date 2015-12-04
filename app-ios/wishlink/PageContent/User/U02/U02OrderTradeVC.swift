@@ -31,6 +31,9 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UIHEPLER.buildUIViewWithRadius(self.buyerButton, radius: 6, borderColor: UIColor.clearColor(), borderWidth: 1);
+        
+        UIHEPLER.buildUIViewWithRadius(self.sellerButton, radius: 6, borderColor: UIColor.clearColor(), borderWidth: 1);
         self.prepareScrollViewSubVC()
     }
 
@@ -101,15 +104,28 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     func buyerSellerButtonStatus(type: BuyerSellerType) {
     
         if type == .Buyer {
-        
-            buyerButton.backgroundColor = MainColor()
-            sellerButton.backgroundColor = RGBC(160)
-               self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            
+            buyerButton.backgroundColor = UIColor.whiteColor()
+            buyerButton.setTitleColor(MainColor(), forState: UIControlState.Normal);
+            buyerButton.setImage(UIImage(named: "u02OrderList1"), forState: UIControlState.Normal)
+            
+            sellerButton.backgroundColor = UIColor.lightGrayColor();
+            sellerButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal);
+            sellerButton.setImage(UIImage(named: "u02OrderList0"), forState: UIControlState.Normal)
+            
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             self.buyerTradeVC.getBuyerTrade()
         } else {
         
-            buyerButton.backgroundColor = RGBC(160)
-            sellerButton.backgroundColor = RGB(248, g: 62, b: 91)
+            sellerButton.backgroundColor = UIColor.whiteColor()
+            sellerButton.setTitleColor(MainColor(), forState: UIControlState.Normal);
+            sellerButton.setImage(UIImage(named: "u02OrderList1"), forState: UIControlState.Normal)
+            
+            buyerButton.backgroundColor = UIColor.lightGrayColor();
+            buyerButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal);
+            buyerButton.setImage(UIImage(named: "u02OrderList0"), forState: UIControlState.Normal)
+            
+            
                self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
             self.sellerTradeVC.getSellerTrade()
         }
