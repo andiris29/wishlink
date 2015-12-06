@@ -91,7 +91,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     func initViewData() {
         
         let item = self.trade.item
-        
+        self.revokeButton.hidden = true;
         if(item != nil  && item._id != "")
         {
             if (item.images != nil && item.images.count > 0) {
@@ -156,6 +156,8 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
                 self.revokeButton.hidden = true;
             }
         } else {
+            
+            
             if(self.assigneeModel != nil)
             {
                 self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
@@ -166,17 +168,23 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
                 self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
             }
             
-            if(orderState != 3 || orderState != 7)
+            if(orderState == 3 || orderState == 7)
             {
                 
                 self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("取消抢单", forState: UIControlState.Normal);
             }
-            else if(orderState != 4)
+            else if(orderState == 4)
             {
                 
                 self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("确认收货", forState: UIControlState.Normal);
+                self.revokeButton.setTitle("编辑发货信息", forState: UIControlState.Normal);
+            }
+            else if(orderState == 10 || orderState == 11)
+            {
+                
+                self.revokeButton.hidden = false;
+                self.revokeButton.setTitle("查看投诉", forState: UIControlState.Normal);
             }
             else
             {

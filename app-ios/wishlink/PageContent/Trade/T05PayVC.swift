@@ -14,7 +14,7 @@ enum PayModel{
 }
 
 
-class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
+class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate,UIScrollViewDelegate {
     
     let selectedButtonWXTag: Int = 1000
     let selectedButtonZFBTag: Int = 1001
@@ -28,12 +28,23 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     var item:ItemModel!
     var trade:TradeModel!
     
+    @IBOutlet weak var btnWeChatPay: UIButton!
+    @IBOutlet weak var btnAliPay: UIButton!
+    
     @IBOutlet weak var increaseButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
     
-    @IBOutlet weak var lbReceverName: UILabel!
-    @IBOutlet weak var lbReceverMobile: UILabel!
-    @IBOutlet weak var lbRecevierAddress: UILabel!
+//    @IBOutlet weak var lbReceverName: UILabel!
+//    @IBOutlet weak var lbReceverMobile: UILabel!
+//    @IBOutlet weak var lbRecevierAddress: UILabel!
+    
+    @IBOutlet weak var sv: UIScrollView!
+    @IBOutlet weak var locationView: UIView!
+    @IBOutlet weak var locationPickView: UIPickerView!
+    @IBOutlet weak var txtReviceArea: UITextField!
+    @IBOutlet weak var txtReciveName: UITextField!
+    @IBOutlet weak var txtReviceMobile: UITextField!
+    @IBOutlet weak var txtAddress: UITextField!
     
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbCountry: UILabel!
@@ -46,13 +57,54 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     
     private var new_trade_id:String!
     
+    var provinceDic: NSDictionary!
+    var cityDic: NSDictionary!
+    var districtDic: NSDictionary!
+    var provinceCodeArray: [String] = []
+    var cityArray: [[String]] = []
+    var districArray: [[String]] = []
+    
+    //MARK:Method
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self;
         self.loadData();
+        self.prepareData()
+        UIHEPLER.buildUIViewWithRadius(self.btnAliPay, radius: 6, borderColor: UIHEPLER.mainColor , borderWidth: 1);
+        UIHEPLER.buildUIViewWithRadius(self.btnWeChatPay, radius: 6, borderColor: UIColor.lightGrayColor(), borderWidth: 1);
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("receiveWeXinPayResultNotification:"), name: APPCONFIG.NotificationActionPayResult, object: nil)
         
     }
+    func prepareData() {
+        
+        locationPickView.dataSource = self;
+        locationPickView.delegate = self;
+        self.locationView.hidden = true;
+        
+        self.txtReciveName.delegate = self;
+        self.txtAddress.delegate = self;
+        self.txtReviceArea.delegate = self;
+        self.txtReviceMobile.delegate = self;
+        
+        let fileName = NSBundle.mainBundle().pathForResource("area.json", ofType: nil)
+        let data = NSData(contentsOfFile: fileName!)
+        do {
+            let dic = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
+            self.provinceDic = dic["area0"] as! NSDictionary
+            self.cityDic = dic["area1"] as! NSDictionary
+            self.districtDic = dic["area2"] as! NSDictionary
+            self.provinceCodeArray = (self.provinceDic.allKeys as! [String]).sort(<)
+            
+            let provinceCode = self.provinceCodeArray[0]
+            self.bindCity(provinceCode)
+            self.bindDistrict(0)
+            
+        }catch _ {
+            print("error")
+        }
+    }
+
     func receiveWeXinPayResultNotification(obj:NSNotification)
     {
         let result = obj.object as! PayResp
@@ -94,6 +146,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         self.lbSpec.text = "";
         self.lbPrice.text = "";
         self.numbersTextField.text = "0";
+
         
         if(self.trade != nil && self.trade._id != "")
         {
@@ -114,11 +167,11 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             self.lbPrice.text = "RMB " + self.item.price.format(".2") + unitStr
             if(goodsNumbers>0)
             {
-                self.lbTotalFree.text = "RMB " + (self.item.price * Float(goodsNumbers)).format(".2");
+                self.lbTotalFree.text = "¥" + (self.item.price * Float(goodsNumbers)).format(".2");
             }
             else
             {
-                self.lbTotalFree.text = "RMB " + self.item.price.format(".2");
+                self.lbTotalFree.text = "¥" + self.item.price.format(".2");
             }
             if (item == nil ||  item.images == nil) {return}
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -138,9 +191,9 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         
         
         self.decreaseButton.enabled = goodsNumbers > 1
-        self.lbReceverName.text = "";
-        self.lbReceverMobile.text = "";
-        self.lbRecevierAddress.text = "";
+//        self.lbReceverName.text = "";
+//        self.lbReceverMobile.text = "";
+//        self.lbRecevierAddress.text = "";
         if( UserModel.shared.isLogin && UserModel.shared.receiversArray != nil && UserModel.shared.receiversArray.count>0)
         {
             let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
@@ -150,9 +203,9 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             {
                 let defaultAddress = result[0] as ReceiverModel
                 
-                self.lbReceverName.text = defaultAddress.name
-                self.lbReceverMobile.text = defaultAddress.phone;
-                self.lbRecevierAddress.text = defaultAddress.address;
+//                self.lbReceverName.text = defaultAddress.name
+//                self.lbReceverMobile.text = defaultAddress.phone;
+//                self.lbRecevierAddress.text = defaultAddress.address;
                 
             }
         }
@@ -175,40 +228,69 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         self.loadComNaviLeftBtn()
         self.loadComNavTitle(self.isNewOrder ? "发布" : "我要跟单")
     }
-    
-    var currentButton: UIButton = UIButton()
-    @IBAction func selectedButtonPay(sender: UIButton) {
-        
-        sender.selected = !sender.selected
-        
-        if sender.tag == selectedButtonWXTag {
-            
-            self.currPayModel = .Weixin
-        } else if sender.tag == selectedButtonZFBTag {
-            
-            self.currPayModel = .Alipay
-        }
-        // single select
-        if currentButton != sender { currentButton.selected = false }
-        currentButton = sender
+
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+        self.locationView.hidden = true
     }
+    @IBAction func locationBtnAction(sender: AnyObject) {
+        
+        self.view.endEditing(true)
+        
+        self.locationView.hidden = false
+        self.txtReviceArea.text = self.locationString()
+    }
+    
+    @IBAction func selectPayAction(sender: AnyObject) {
+        
+        var tag = (sender as! UIButton).tag
+        if(tag == 1)
+        {
+            currPayModel = .Weixin;
+            self.btnWeChatPay.layer.borderColor = UIHEPLER.mainColor.CGColor
+            self.btnAliPay.layer.borderColor = UIColor.lightGrayColor().CGColor
+        }
+        else if(tag == 2)
+        {
+            currPayModel = .Alipay
+            self.btnAliPay.layer.borderColor = UIHEPLER.mainColor.CGColor
+            self.btnWeChatPay.layer.borderColor = UIColor.lightGrayColor().CGColor
+            
+        }
+        
+    }
+//    var currentButton: UIButton = UIButton()
+//    @IBAction func selectedButtonPay(sender: UIButton) {
+//        
+//        sender.selected = !sender.selected
+//        
+//        if sender.tag == selectedButtonWXTag {
+//            
+//            self.currPayModel = .Weixin
+//        } else if sender.tag == selectedButtonZFBTag {
+//            
+//            self.currPayModel = .Alipay
+//        }
+//        // single select
+//        if currentButton != sender { currentButton.selected = false }
+//        currentButton = sender
+//    }
     @IBAction func btnPayTapped(sender: UIButton) {
         
-        if(self.lbReceverName.text?.trim() == "")
-        {
-            
-            UIAlertView(title: "提示" , message: "请先选择收获地址" , delegate: nil , cancelButtonTitle: " 确定 " ).show()
-            return
-            
-        }
+//        if(self.lbReceverName.text?.trim() == "")
+//        {
+//            
+//            UIAlertView(title: "提示" , message: "请先选择收获地址" , delegate: nil , cancelButtonTitle: " 确定 " ).show()
+//            return
+//            
+//        }
         
         let tag = sender.tag;
         if(tag == 11)//确认支付
         {
-            if !(currentButton.tag == selectedButtonWXTag || currentButton.tag == selectedButtonZFBTag) {
-                
-                UIAlertView(title: "提示" , message: "请选择一种支付方式" , delegate: nil , cancelButtonTitle: " 确定 " ).show()
-                return
+            if(!validateContent())
+            {
+                return;
             }
             var para = ["_id":self.trade._id,
                 "pay": [
@@ -224,15 +306,15 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
             SVProgressHUD.showWithStatusWithBlack("请稍等...")
             self.httpObj.httpPostApi("trade/prepay", parameters: para as? [String : AnyObject], tag: 88)
         }
-        else
+        else//修改收货地址
         {
             let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
             u03VC.isHiddleEditModel = true;
             u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
             
-                self!.lbReceverName.text = item.name
-                self!.lbReceverMobile.text = item.phone;
-                self!.lbRecevierAddress.text = item.address;
+//                self!.lbReceverName.text = item.name
+//                self!.lbReceverMobile.text = item.phone;
+//                self!.lbRecevierAddress.text = item.address;
                 
                 let para = ["_id":self!.trade._id,
                     "receiver":[
@@ -250,6 +332,52 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         }
     }
 
+    func bindCity(key: String) {
+        self.cityArray = self.cityDic[key] as! [[String]]
+    }
+    
+    func bindDistrict(row: Int) {
+        let tempCity = self.cityArray[row]
+        let key =  tempCity[1]
+        self.districArray = self.districtDic[key] as! [[String]]
+    }
+    
+    func locationString() -> String {
+        var string = ""
+        let provinceRow = self.locationPickView.selectedRowInComponent(0)
+        string += self.provinceDic[self.provinceCodeArray[provinceRow]] as! String + " "
+        
+        let cityRow = self.locationPickView.selectedRowInComponent(1)
+        string += self.cityArray[cityRow][0] + " "
+        
+        let districtRow = self.locationPickView.selectedRowInComponent(2)
+        string += self.districArray[districtRow][0]
+        return string
+    }
+    
+    func validateContent() -> Bool {
+        var msg = ""
+        if self.txtReciveName.text!.length == 0 {
+            msg = "收货人姓名不能为空"
+        }else if self.txtReviceArea.text!.length == 0 {
+            msg = "收货地区不能为空"
+        }else if self.txtAddress.text!.length == 0{
+            msg = "收货地址不能为空"
+        } else if self.txtReviceMobile.text!.length == 0 {
+            msg = "收货人电话不能为空"
+        } else {
+            
+        }
+        if msg.length == 0 {
+            return true
+        }else {
+            let alertView = UIAlertView(title: "", message: msg, delegate: nil, cancelButtonTitle: "确定")
+            alertView.show()
+            return false
+        }
+    }
+
+    
     
     @IBAction func incrlineOrDecreingButtonPay(sender: UIButton) {
         
@@ -266,7 +394,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
         self.lbTotalFree.text =  "¥\(totalfree)";
     }
     
-    //WebRequesrDelegate
+    //MARK:WebRequesrDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         if(tag == 10)
@@ -452,5 +580,168 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate {
     func onReq(req: BaseReq!) {
         NSLog("onReq")
     }
+    
+    //MARK:UIPIckViewDelegate   
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            let provinceCode = self.provinceCodeArray[row]
+            self.bindCity(provinceCode)
+            self.locationPickView.reloadComponent(1)
+            self.locationPickView.selectRow(0, inComponent: 1, animated: false)
+        }else if component == 1 {
+            self.bindDistrict(row)
+            self.locationPickView.reloadComponent(2)
+            self.locationPickView.selectRow(0, inComponent: 2, animated: false)
+        }else if component == 2 {
+            
+        }else {
+            
+        }
+        self.txtReviceArea.text = self.locationString()
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return self.provinceCodeArray.count
+        }else if component == 1 {
+            return self.cityArray.count
+        }else if component == 2 {
+            return self.districArray.count
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        var label: UILabel;
+        if let tempLabel = view as? UILabel {
+            label = tempLabel
+        }else {
+            
+            label = UILabel(frame: CGRectMake(0, 0, 0, 0))
+            label.textColor = UIColor.blackColor()
+            label.textAlignment = .Center
+            label.adjustsFontSizeToFitWidth = true
+        }
+        var string = ""
+        if component == 0 {
+            string = self.provinceDic[self.provinceCodeArray[row]] as! String
+        }else if component == 1 {
+            let tempCityArray = self.cityArray[row]
+            string = tempCityArray[0]
+        }else if component == 2 {
+            let tempDistrictArray = self.districArray[row]
+            string = tempDistrictArray[0]
+        }
+        else {
+            string = ""
+        }
+        label.text = string
+        return label
+    }
+
+    //MARK:TextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        if textField == self.txtReciveName {
+            
+            self.view.endEditing(true)
+            self.locationView.hidden = false
+            self.txtReviceArea.text = self.locationString()
+            self.txtReviceArea.becomeFirstResponder()
+        }else if textField == self.txtReviceMobile {
+            
+        }else if textField == self.txtReviceArea {
+            self.txtAddress.becomeFirstResponder()
+            
+        }
+        if textField == self.txtAddress {
+            self.txtReviceMobile.becomeFirstResponder()
+        }
+        return true
+    }
+    @IBAction func textFieldBegin(sender: UITextField) {
+        
+        let viewframe: CGRect = sender.convertRect(view.frame, toView: self.sv)
+        let spaceY = ScreenHeight - viewframe.origin.y
+        
+        if(sender.tag == 4)//价格自动去掉RMB，
+        {
+            var orginStr=sender.text?.trim().uppercaseString;
+            if(orginStr?.length > 0)
+            {
+                orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "")
+                orginStr = orginStr?.componentsSeparatedByString("/")[0]
+                sender.text = orginStr
+            }
+            
+        }
+        
+        if spaceY < 300 {
+            self.sv.setContentOffset(CGPoint(x: 0, y: 345 - spaceY), animated: true)
+        }
+    }
+    @IBAction func textFieldEnd(sender: UITextField) {
+        
+        if(sender.tag == 4) {
+            
+            var orginStr=sender.text?.trim().uppercaseString
+            if orginStr?.length < 1 { return }
+            
+            orginStr = orginStr?.stringByReplacingOccurrencesOfString("RMB", withString: "")
+            orginStr = orginStr?.componentsSeparatedByString("/")[0]
+            if let originNumber = Double(orginStr!) {
+                
+                orginStr = NSString(format: "%.2f", originNumber) as String
+            }
+            orginStr = "RMB " + orginStr!
+            sender.text = orginStr
+            
+            let unit: String = (self.sv.viewWithTag(5) as! UITextField).text!
+            if unit.length < 1 { return }
+            orginStr = orginStr! + "/" + unit
+            sender.text = orginStr
+            
+        } else if (sender.tag == 5){
+            
+            let orginStr=sender.text?.trim()
+            if orginStr?.length < 1 { return }
+            
+            let unitTextField: UITextField = self.sv.viewWithTag(4) as! UITextField
+            var unit: String = unitTextField.text!
+            if unit.length < 1 { return }
+            unit = unit.componentsSeparatedByString("/")[0]
+            unit = unit + "/" + orginStr!
+            unitTextField.text = unit
+            
+        }
+        self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
+
+    
+    
+    //MARK: scrollViewDelegate: hidden keyboard
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        
+        self.dismissKeyboard();
+    }
+    
+    func dismissKeyboard()
+    {
+        self.txtAddress.resignFirstResponder();
+        self.txtReciveName.resignFirstResponder();
+        self.txtReviceArea.resignFirstResponder();
+        self.txtReviceMobile.resignFirstResponder();
+        self.locationView.hidden = true;
+    }
+    
+    
     
 }
