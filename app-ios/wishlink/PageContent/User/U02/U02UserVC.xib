@@ -67,7 +67,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JON-ID-wW5">
-                            <rect key="frame" x="107" y="26" width="191" height="15"/>
+                            <rect key="frame" x="107" y="26" width="297" height="15"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,10 +90,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWW-Fn-qUR">
-                            <rect key="frame" x="104" y="50" width="103" height="50"/>
+                            <rect key="frame" x="103.5" y="50" width="103.5" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
+                            <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="20" minY="-15" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="推荐" image="u02commend0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,10 +107,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZE-0A-WLl">
-                            <rect key="frame" x="207" y="50" width="104" height="50"/>
+                            <rect key="frame" x="207" y="50" width="103.5" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
+                            <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="20" minY="-15" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="收藏" image="u02collecticon0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -124,10 +124,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16n-Ja-XGU">
-                            <rect key="frame" x="311" y="50" width="103" height="50"/>
+                            <rect key="frame" x="310.5" y="50" width="103.5" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="-26" minY="0.0" maxX="0.0" maxY="-32"/>
+                            <inset key="titleEdgeInsets" minX="-32" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="-26" maxY="0.0"/>
                             <state key="normal" title="设置" image="u02setting0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -141,13 +141,13 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-vc-SWe">
-                            <rect key="frame" x="0.0" y="50" width="104" height="50"/>
+                            <rect key="frame" x="0.0" y="50" width="103.5" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="L9i-QF-W4k"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="-22" minY="0.0" maxX="0.0" maxY="-32"/>
+                            <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="20" minY="-15" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="订单" image="u02order0">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,10 +172,10 @@
                         <constraint firstItem="GWW-Fn-qUR" firstAttribute="bottom" secondItem="HVM-vc-SWe" secondAttribute="bottom" id="N0M-fw-W50"/>
                         <constraint firstItem="GWW-Fn-qUR" firstAttribute="leading" secondItem="HVM-vc-SWe" secondAttribute="trailing" id="Nlt-iU-4pE"/>
                         <constraint firstAttribute="bottom" secondItem="GWW-Fn-qUR" secondAttribute="bottom" id="TTH-5L-ckY"/>
+                        <constraint firstAttribute="trailing" secondItem="JON-ID-wW5" secondAttribute="trailing" constant="10" id="TrU-mj-YVr"/>
                         <constraint firstItem="OZE-0A-WLl" firstAttribute="bottom" secondItem="HVM-vc-SWe" secondAttribute="bottom" id="UpO-ih-eNh"/>
                         <constraint firstAttribute="trailing" secondItem="16n-Ja-XGU" secondAttribute="trailing" id="Wt2-vw-GFP"/>
                         <constraint firstItem="16n-Ja-XGU" firstAttribute="leading" secondItem="OZE-0A-WLl" secondAttribute="trailing" id="Y7y-hW-s9P"/>
-                        <constraint firstItem="5gW-Ny-x2c" firstAttribute="leading" secondItem="JON-ID-wW5" secondAttribute="trailing" constant="15" id="Yzk-uM-EVj"/>
                         <constraint firstAttribute="bottom" secondItem="16n-Ja-XGU" secondAttribute="bottom" id="bYW-Lf-HJo"/>
                         <constraint firstAttribute="bottom" secondItem="OZE-0A-WLl" secondAttribute="bottom" id="dzi-EK-1QY"/>
                         <constraint firstItem="5gW-Ny-x2c" firstAttribute="leading" secondItem="xts-Fw-eK5" secondAttribute="trailing" constant="15" id="e9G-lS-58k"/>
