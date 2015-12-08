@@ -24,6 +24,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
     @IBOutlet weak var nicknameTextField: UITextField!
     
     var scrolling:((isUp:Bool)->Void)!
+    var draging:((isUp:Bool,offsetY:CGFloat)->Void)!
     
     var uploadImageRequest: Request!
     var uploadImageType: SettingVCUploadImageType = .None
@@ -198,8 +199,16 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
             if(self.scrolling != nil)
             {
                 self.scrolling(isUp:_isUp);
+                
+             
+            }
+            if(self.draging != nil && self._isUp != nil)
+            {
+                self.draging(isUp:self._isUp,offsetY:scrollView.contentOffset.y);
             }
             self.lastDraging = _isUp
+            
+            
         }
     }
 
@@ -224,6 +233,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
         }
         if (scrollView.dragging) {  // 拖拽
             
+            
             NSLog("scrollView.dragging");
             NSLog("contentOffsetY: %f", contentOffsetY);
             NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
@@ -242,6 +252,11 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
                 
             }
         }
+        
+//        if(self.draging != nil && self._isUp != nil)
+//        {
+//            self.draging(isUp:self._isUp,offsetY:scrollView.contentOffset.y);
+//        }
     }
 
     

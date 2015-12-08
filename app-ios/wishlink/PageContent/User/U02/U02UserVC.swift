@@ -22,6 +22,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    @IBOutlet weak var v_TopView: UIView!
     @IBOutlet weak var v_baseInfo: UIView!
     
     
@@ -47,13 +48,16 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         super.viewDidLoad()
         self.prepareData()
         self.prepareUI()
+        
+        
+        var bar = self.navigationController?.navigationBar;
+        bar?.tintColor = UIColor.whiteColor();
+        self.navigationController?.automaticallyAdjustsScrollViewInsets = true;
 
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
             self.fillDataForUI()
-//            self.loginVC.view.removeFromSuperview()
         }
-//        self.loadComNaviLeftBtn()
         self.loadComNavTitle("我的wishlink");
 
 
@@ -278,11 +282,57 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             self!.isSetting = true;
             self!.scrolling(isup);
         }
+        settingVC.draging = {[weak self](isup:Bool,offsetY:CGFloat) in
+            self!.draging(isup,offsetY: offsetY);
+        }
         
         self.settingVC.userVC = self
         self.scrollView.addSubview(self.settingVC.view)
         
         self.adjustUI()
+    }
+    
+    var orginFrame = CGRectMake(0, 0, ScreenWidth, 300);
+    func draging(isUp:Bool,offsetY:CGFloat)
+    {
+        NSLog("_**_Draging View:"+String(offsetY));
+        if(offsetY>0 && offsetY<=300)
+        {
+//            self.sv.contentOffset.y = offsetY;
+            
+//            self.v_TopView.frame = CGRectMake(0, 0-offsetY, ScreenWidth, 300);
+//            self.view.frame = CGRectMake(0, 0-offsetY, ScreenWidth, ScreenHeight+offsetY);
+//
+            
+//            self.constrain_TopView_MarginTop.constant = 0-offsetY
+//            self.v_TopView.bounds = CGRectMake(0,0, ScreenWidth, 300)
+//
+//            self.settingVC.view.frame = CGRectMake(0, 300-offsetY, ScreenWidth, ScreenHeight-300+offsetY);
+            
+        }
+        else if(offsetY == 0)
+        {
+//            self.constrain_TopView_MarginTop.constant = 0
+            
+//            self.v_TopView.frame = CGRectMake(0, 0, ScreenWidth, 300);
+//                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+//           self.settingVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+
+//
+//            self.v_TopView.bounds = CGRectMake(0,0, ScreenWidth, 300)
+//
+//        self.scrollView.frame = CGRectMake(0, 300, ScreenWidth, ScreenHeight-300);
+            
+        }
+//        else
+//        {
+//            if(self.v_TopView.frame.origin.y<0)
+//            {
+//                var newFrame = CGRectMake(0, 0-offsetY, ScreenWidth, 300);
+//                self.v_TopView.frame = newFrame;
+//                
+//            }
+//        }
     }
     var animDuration = 0.3
     var isSetting = false;
@@ -290,34 +340,34 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
    {
         NSLog("scrolling on U02UserVC");
     
-        var scroHeight:CGFloat = 180;
-        if(isSetting)
-        {
-            scroHeight = 120;
-        }
-        if(!isTop)
-        {
-            UIView.animateWithDuration(animDuration, animations: { () -> Void in
-                self.view.frame = CGRectMake(0, 0-scroHeight, ScreenWidth, ScreenHeight+scroHeight-(self.tabBarController?.tabBar.frame.height)!);
-                }, completion: { [weak self](finish) -> Void in
-                    if(finish)
-                    {
-                        self!.isTop = true;
-                    }
-            })
-        }
-        else
-        {
-            UIView.animateWithDuration(animDuration, animations: { () -> Void in
-                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-                
-                }, completion: { [weak self](finish) -> Void in
-                    if(finish)
-                    {
-                        self!.isTop = false;
-                    }
-            })
-        }
+//        var scroHeight:CGFloat = 180;
+//        if(isSetting)
+//        {
+//            scroHeight = 120;
+//        }
+//        if(!isTop)
+//        {
+//            UIView.animateWithDuration(animDuration, animations: { () -> Void in
+//                self.view.frame = CGRectMake(0, 0-scroHeight, ScreenWidth, ScreenHeight+scroHeight-(self.tabBarController?.tabBar.frame.height)!);
+//                }, completion: { [weak self](finish) -> Void in
+//                    if(finish)
+//                    {
+//                        self!.isTop = true;
+//                    }
+//            })
+//        }
+//        else
+//        {
+//            UIView.animateWithDuration(animDuration, animations: { () -> Void in
+//                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+//                
+//                }, completion: { [weak self](finish) -> Void in
+//                    if(finish)
+//                    {
+//                        self!.isTop = false;
+//                    }
+//            })
+//        }
     }
     
     func prepareUI() {
