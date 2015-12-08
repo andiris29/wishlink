@@ -49,10 +49,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.prepareData()
         self.prepareUI()
         
-        
-        var bar = self.navigationController?.navigationBar;
-        bar?.tintColor = UIColor.whiteColor();
-        self.navigationController?.automaticallyAdjustsScrollViewInsets = true;
+
 
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
@@ -70,7 +67,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.navigationController!.navigationBar.hidden = true;
+       self.navigationController!.navigationBar.hidden = true;
 
         if self.userModel.isLogin == false {//弹出登陆窗体
             self.view.hidden = true;
