@@ -12,7 +12,7 @@ var GeoService = module.exports;
 /**
  * 通过 Google reverseGeocoding api 查询地理位置。
  * 和 db.countries 进行比对后返回。
- * 
+ *
  * @param {object} location
  * @param {number} location.lat
  * @param {number} location.lng
@@ -28,7 +28,7 @@ GeoService.reverseGeocoding = function(location, callback) {
     winston.info(new Date(), 'call google map api url=' + url);
     request.get({
         'url': url,
-        'proxy': 'http://47.88.23.92:8888'
+        'proxy': 'http://47.88.29.208:8888'
     }, function(error, response, body) {
         if (error) {
             callback(error);
