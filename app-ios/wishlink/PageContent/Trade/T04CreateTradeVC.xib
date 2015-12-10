@@ -1187,28 +1187,8 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHF-1B-PNj" userLabel="View9">
                                     <rect key="frame" x="0.0" y="485" width="375" height="49"/>
-                                    <subviews>
-                                        <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoR-5v-IRQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
-                                            <state key="normal" title="确定发布">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="Prt-tK-a86"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="MoR-5v-IRQ" secondAttribute="bottom" id="CAy-3u-Aqi"/>
-                                        <constraint firstItem="MoR-5v-IRQ" firstAttribute="leading" secondItem="bHF-1B-PNj" secondAttribute="leading" id="e6x-hD-wa1"/>
-                                        <constraint firstAttribute="trailing" secondItem="MoR-5v-IRQ" secondAttribute="trailing" id="fg5-BP-B0E"/>
-                                        <constraint firstItem="MoR-5v-IRQ" firstAttribute="top" secondItem="bHF-1B-PNj" secondAttribute="top" id="jZt-lh-mIy"/>
-                                    </constraints>
                                 </view>
                             </subviews>
                             <animations/>
@@ -1289,14 +1269,49 @@
                         <constraint firstAttribute="trailing" secondItem="D5R-BZ-QtE" secondAttribute="trailing" id="iv8-0f-DGj"/>
                     </constraints>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNj-oD-c2H">
+                    <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                    <subviews>
+                        <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoR-5v-IRQ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
+                            <state key="normal" title="确定发布">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="Prt-tK-a86"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="VXa-4a-LIm"/>
+                        <constraint firstAttribute="trailing" secondItem="MoR-5v-IRQ" secondAttribute="trailing" id="VuT-9h-ufE"/>
+                        <constraint firstAttribute="bottom" secondItem="MoR-5v-IRQ" secondAttribute="bottom" id="WoF-Ih-1qo"/>
+                        <constraint firstItem="MoR-5v-IRQ" firstAttribute="leading" secondItem="qNj-oD-c2H" secondAttribute="leading" id="qeL-96-mhH"/>
+                        <constraint firstItem="MoR-5v-IRQ" firstAttribute="top" secondItem="qNj-oD-c2H" secondAttribute="top" id="v0T-qt-0JY"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="VXa-4a-LIm"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="qNj-oD-c2H" secondAttribute="bottom" id="5GM-yA-Sqm"/>
                 <constraint firstItem="o3w-0s-duu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1" id="5Ng-Cg-wf9"/>
+                <constraint firstItem="qNj-oD-c2H" firstAttribute="height" secondItem="C3d-BZ-lRY" secondAttribute="height" id="8PE-ut-9M5"/>
+                <constraint firstItem="qNj-oD-c2H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CAg-zS-674"/>
                 <constraint firstAttribute="trailing" secondItem="o3w-0s-duu" secondAttribute="trailing" id="CO8-bY-pna"/>
                 <constraint firstAttribute="bottom" secondItem="o3w-0s-duu" secondAttribute="bottom" id="FVg-fh-tTf"/>
                 <constraint firstItem="o3w-0s-duu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="G6E-z5-jmX"/>
+                <constraint firstAttribute="trailing" secondItem="qNj-oD-c2H" secondAttribute="trailing" id="bLl-O5-2in"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="113.5" y="249.5"/>

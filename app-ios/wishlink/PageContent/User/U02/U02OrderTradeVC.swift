@@ -37,6 +37,9 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.prepareScrollViewSubVC()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

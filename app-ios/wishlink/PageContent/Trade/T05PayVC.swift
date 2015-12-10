@@ -276,22 +276,15 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
 //        currentButton = sender
 //    }
     @IBAction func btnPayTapped(sender: UIButton) {
-        
-//        if(self.lbReceverName.text?.trim() == "")
-//        {
-//            
-//            UIAlertView(title: "提示" , message: "请先选择收获地址" , delegate: nil , cancelButtonTitle: " 确定 " ).show()
-//            return
-//            
-//        }
+        if(!validateContent())
+        {
+            return;
+        }
         
         let tag = sender.tag;
         if(tag == 11)//确认支付
         {
-            if(!validateContent())
-            {
-                return;
-            }
+
             var para = ["_id":self.trade._id,
                 "pay": [
                     "alipay":NSDictionary()
@@ -306,30 +299,31 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
             SVProgressHUD.showWithStatusWithBlack("请稍等...")
             self.httpObj.httpPostApi("trade/prepay", parameters: para as? [String : AnyObject], tag: 88)
         }
-        else//修改收货地址
-        {
-            let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
-            u03VC.isHiddleEditModel = true;
-            u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
-            
-//                self!.lbReceverName.text = item.name
-//                self!.lbReceverMobile.text = item.phone;
-//                self!.lbRecevierAddress.text = item.address;
-                
-                let para = ["_id":self!.trade._id,
-                    "receiver":[
-                        "name":item.name,
-                        "phone":item.phone,
-                        "province":item.province,
-                        "address":item.address
-                    ]
-                ]
-                //TODU:更换支付地址
-                self!.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
-            }
-            self.navigationController?.pushViewController(u03VC, animated: true);
-            
-        }
+//        else//修改收货地址
+//        {
+//            let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+//            u03VC.isHiddleEditModel = true;
+//            u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
+//            
+////                self!.lbReceverName.text = item.name
+////                self!.lbReceverMobile.text = item.phone;
+////                self!.lbRecevierAddress.text = item.address;
+//                
+//                let para = ["_id":self!.trade._id,
+//                    "receiver":[
+//                        "name":item.name,
+//                        "phone":item.phone,
+//                        "province":item.province,
+//                        "address":item.address
+//                    ]
+//                ]
+//                //TODU:更换支付地址
+//                self!.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
+//            }
+//            self.navigationController?.pushViewController(u03VC, animated: true);
+//            
+//        }
+        
     }
 
     func bindCity(key: String) {
@@ -424,6 +418,32 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
                     
                 }
                 new_trade_id = _trade._id;
+                
+                
+                let addressPara:[String : AnyObject] = [
+                    "name":(self.txtReciveName.text?.trim())!,
+                    "phone":(self.txtReviceMobile.text?.trim())!,
+                    "province":(self.txtReviceArea.text?.trim())!,
+                    "address":(self.txtAddress.text?.trim())!
+                ]
+
+                
+                
+                let address_para:[String : AnyObject] = ["_id":new_trade_id,"receiver": addressPara ]
+                //TODU:更换支付地址
+                self.httpObj.httpPostApi("trade/updateReceiver", parameters: address_para, tag: 51)
+                
+//                let addressPara = ["_id" : new_trade_id,
+//                    "receiver":[
+//                        "name":self.txtReciveName.text?,
+//                        "phone":self.txtReviceMobile.text?,
+//                        "province":self.txtReviceArea.text?,
+//                        "address":self.txtAddress.text?
+//                    ]
+//                ]
+//                //TODU:更换支付地址
+//                self.httpObj.httpPostApi("trade/updateReceiver", parameters: addressPara as? [String : AnyObject], tag: 51)
+                
                 
                 let order = Order()
                 order.partner = APPCONFIG.alipay_partner;

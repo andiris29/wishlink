@@ -328,6 +328,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     // 根据状态筛选卖家订单
     func filterBuyerTrade() {
+        NSLog("filterBuyerTrade")
         self.tradeArray.removeAll()
         var dic: [String: AnyObject]
         switch self.currentStatus {

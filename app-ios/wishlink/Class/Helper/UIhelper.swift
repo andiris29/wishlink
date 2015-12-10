@@ -301,30 +301,7 @@ class UIHelper {
         }
         return result;
     }
-    func showTabBar(isShow:Bool)
-    {
-        if( UIHEPLER.GetAppDelegate().window!.rootViewController as? TabBarVC != nil) {
-            let tabbar =  UIHEPLER.GetAppDelegate().window!.rootViewController as! TabBarVC
-//            var isNeedReload = false
-//            if(tabbar.centerButton.hidden)
-//            {
-//                isNeedReload = true;
-//            }
-//            if(isShow)
-//            {
-//                
-//                tabbar.view!.bringSubviewToFront(tabbar.centerButton);
-//                
-//                if(isNeedReload)
-//                {
-//                    tabbar.createCenterBtn();
-//                }
-//            }
-//            
-//            tabbar.centerButton.hidden = !isShow;
-             tabbar.tabBar.hidden = !isShow;
-        }
-    }
+
     //MARK:格式化时间
     func formartTime(dateString:String)->String!
     {

@@ -55,13 +55,7 @@ U03AddressCellDelegate, WebRequestDelegate{
         }
         self.tableView.reloadData()
     }
-    override func viewDidAppear(animated: Bool) {
-        self.performSelector(Selector("showcustomTabar"), withObject: nil, afterDelay: 0.01);
-    }
-    func showcustomTabar()
-    {
-        UIHEPLER.showTabBar(true);
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -122,7 +116,7 @@ U03AddressCellDelegate, WebRequestDelegate{
             vc.operationType = .Edit
             vc.receiver = self.addressArray[indexPath.row]
 
-            UIHEPLER.showTabBar(false);
+      
             
             vc.hidesBottomBarWhenPushed = true
             self.navigationController!.pushViewController(vc, animated: true)
@@ -195,8 +189,7 @@ U03AddressCellDelegate, WebRequestDelegate{
             self.addressArray.append(receiver)
             self.tableView.reloadData()
         }
-        
-        UIHEPLER.showTabBar(false);
+
         vc.hidesBottomBarWhenPushed = true
         self.navigationController!.pushViewController(vc, animated: true)
     }
