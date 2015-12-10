@@ -23,6 +23,9 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     weak var userVC: U02UserVC!
     var dataArray: [ItemModel] = []
     var currentIndex: Int = -1   // 执行unFavorite时的item对应的index
+    
+    var scrolling:((changePoint: CGPoint) -> Void)!
+    
     // MARK: - life cycle
 
     override func viewDidLoad() {
@@ -75,17 +78,12 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         return cell
     }
     
+    // MARK: - UIScrollViewDelegate
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.dragging == false {
-            if scrollView.contentOffset.y < -40 {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    var inset = self.collectionView.contentInset
-                    inset.top = 40
-                    self.collectionView.contentInset = inset
-                    self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
-                    //                    scrollView.setContentOffset(CGPointMake(0, -50), animated: false)
-                })
-            }
+        
+        if let point = self.scrolling {
+            point(changePoint: scrollView.contentOffset)
         }
     }
     
@@ -167,6 +165,8 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         self.clearView.addSubview(self.clearBtn)
         
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 7.5, left: 10, bottom: 7.5, right: 10)
+        self.collectionView.contentInset = UIEdgeInsetsMake(340, 0, 0, 0)
+        self.collectionView.showsVerticalScrollIndicator = false
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
     }
 

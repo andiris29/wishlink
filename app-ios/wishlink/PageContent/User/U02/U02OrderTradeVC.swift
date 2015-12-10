@@ -17,6 +17,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     @IBOutlet weak var buyerButton: UIButton!
     @IBOutlet weak var sellerButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var topView: UIView!
     
     var buyerTradeVC: U02BuyerTradeVC!
     var sellerTradeVC: U02SellerTradeVC!
@@ -24,10 +25,8 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     weak var userVC: U02UserVC!
     var currType:BuyerSellerType! = .Buyer
     
+    var scrolling:((changePoint: CGPoint) -> Void)!
     
-    var scrolling:((isUp:Bool)->Void)!
-    
-    var orderListScrolling:((isUp:Bool)->Void)!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,11 +34,13 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         
         UIHEPLER.buildUIViewWithRadius(self.sellerButton, radius: 6, borderColor: UIColor.clearColor(), borderWidth: 1);
         self.prepareScrollViewSubVC()
+        
     }
 
     override func viewWillAppear(animated: Bool) {
         
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -58,25 +59,24 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.buyerTradeVC.userVC = self.userVC
         self.buyerTradeVC.view.frame = self.scrollView.bounds
         
-        self.buyerTradeVC.scrolling = {[weak self](isup:Bool) in
-            if(self?.orderListScrolling != nil)
-            {
-                self?.orderListScrolling(isUp: isup);
-            }
-        };
         self.scrollView.addSubview(self.buyerTradeVC.view)
         
         
         self.sellerTradeVC = U02SellerTradeVC(nibName: "U02SellerTradeVC", bundle: NSBundle.mainBundle())
         self.sellerTradeVC.userVC = self.userVC
-        self.buyerTradeVC.scrolling = {[weak self](isup:Bool) in
-
-        if(self?.orderListScrolling != nil)
-        {
-            self?.orderListScrolling(isUp: isup);
-        }
-        }
+     
         self.scrollView.addSubview(self.sellerTradeVC.view)
+        
+        
+        self.buyerTradeVC.scrolling = {
+            
+            [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
+        }
+        
+        self.sellerTradeVC.scrolling = {
+            
+            [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
+        }
     }
     
     func adjustScrollViewUI() {
@@ -91,6 +91,10 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.sellerTradeVC.view.center = center
         
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 2, height: 0)
+        
+        var rect: CGRect = self.topView.frame
+        rect.origin.y = 300
+        self.topView.frame = rect
     }
     
     // MARK: - Action
@@ -129,7 +133,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
             buyerButton.setImage(UIImage(named: "u02OrderList0"), forState: UIControlState.Normal)
             
             
-               self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
+            self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
             self.sellerTradeVC.getSellerTrade()
         }
     }
@@ -139,6 +143,20 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.sellerTradeVC.resetConditionView()
         self.buyerTradeVC.resetConditionView()
 
+    }
+    
+    func topViewScrollerChangePoint(point: CGPoint) {
+//        print("===>>:\(point.y)")
+        
+        let changeY = point.y
+        var rect: CGRect = self.topView.frame
+        rect.origin.y = -changeY
+        self.topView.frame = rect
+        
+        
+        if let pointTemp = self.scrolling {
+            pointTemp(changePoint: point)
+        }
     }
     
 }

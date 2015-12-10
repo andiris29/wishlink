@@ -19,6 +19,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var conditionView: UIView!
     @IBOutlet weak var filterBtn: UIButton!
@@ -35,8 +36,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     var tradeArray: [TradeModel] = []
     var currentTradeIndex: Int = -1
     
-    var scrolling:((isUp:Bool)->Void)!
-//    var scorlling:(isUp:Bool)!;
+    var scrolling:((changePoint: CGPoint) -> Void)!
     
     var seletedConditionBtn: UIButton!
     
@@ -73,12 +73,25 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     }
     
     override func viewDidLayoutSubviews() {
+        
         super.viewDidLayoutSubviews()
+        
         self.conditionView.layer.shadowOffset = CGSizeMake(5, 5)
         self.conditionView.layer.shadowColor = UIColor.blackColor().CGColor
         self.conditionView.layer.shadowOpacity = 0.7
         self.conditionView.layer.shadowRadius = 5
+     
+        var topViewRect: CGRect = self.topView.frame
+        topViewRect.origin.y = 300
+        self.topView.frame = topViewRect
         
+        var coverViewRect: CGRect = self.coverView.frame
+        coverViewRect.origin.y = 300
+        self.coverView.frame = coverViewRect
+        
+        var conditionViewRect: CGRect = self.conditionView.frame
+        conditionViewRect.origin.y = 300
+        self.conditionView.frame = conditionViewRect
     }
     
     func resetConditionView() {
@@ -87,72 +100,29 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         }
     }
     
-    //MARK:ScrollView delegate
-    var contentOffsetY:CGFloat! = 0;
-    var oldContentOffsetY:CGFloat! = 0;
-    var newContentOffsetY:CGFloat! = 0;
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        
-        contentOffsetY = scrollView.contentOffset.y;
-    }
+    // MARK: - UIScrollViewDelegate
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        oldContentOffsetY = scrollView.contentOffset.y;
-        
-        
-        NSLog("end dragging");
-        
-        if(self.lastDraging != self._isUp)
-        {
-            if(self.scrolling != nil)
-            {
-                self.scrolling(isUp:_isUp);
-            }
-            self.lastDraging = _isUp
-        }
-    }
-    
-    var lastDraging:Bool!
-    var _isUp:Bool!
     func scrollViewDidScroll(scrollView: UIScrollView) {
+//        print("==>>:\(scrollView.contentOffset.y)")
         
-        newContentOffsetY = scrollView.contentOffset.y;
+        let changeY = scrollView.contentOffset.y
+        var topViewRect: CGRect = self.topView.frame
+        topViewRect.origin.y = -changeY
+        self.topView.frame = topViewRect
         
-        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY > contentOffsetY) {  // 向上滚动
-            
-            NSLog("up");
-            
-        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY) { // 向下滚动
-            
-            NSLog("down");
-            
-        } else {
-            
-            
-        }
-        if (scrollView.dragging) {  // 拖拽
-            
-            NSLog("scrollView.dragging");
-            NSLog("contentOffsetY: %f", contentOffsetY);
-            NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
-            if ((scrollView.contentOffset.y - contentOffsetY) > 20.0) {  // 向上拖拽
-                
-                self._isUp = true;
-                NSLog("drag up");
-              
-            } else if ((contentOffsetY - scrollView.contentOffset.y) > 20.0) {   // 向下拖拽
-               
-                
-                self._isUp = false;
-                NSLog("drag down");
-                
-            } else {
-                
-            }
+        var coverViewRect: CGRect = self.coverView.frame
+        coverViewRect.origin.y = -changeY
+        self.coverView.frame = coverViewRect
+        
+        var conditionViewRect: CGRect = self.conditionView.frame
+        conditionViewRect.origin.y = -changeY
+        self.conditionView.frame = conditionViewRect
+        
+        if let point = self.scrolling {
+            point(changePoint: scrollView.contentOffset)
         }
     }
 
-    
     // MARK: - delegate
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -409,6 +379,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     func prepareCollectionView() {
         
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 7.5, left: 10, bottom: 7.5, right: 10)
+        self.collectionView.contentInset = UIEdgeInsetsMake(300, 0, 0, 0)
         self.collectionView.registerNib(UINib(nibName: "U02TradeCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: tradeCellIde)
     }
 

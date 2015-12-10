@@ -29,6 +29,7 @@
                 <outlet property="filterBtn" destination="UXB-ha-kZR" id="NhE-mQ-qoe"/>
                 <outlet property="finishedBtn" destination="Yqs-GU-aEi" id="4SL-1n-KFA"/>
                 <outlet property="sendedOutBtn" destination="Q20-Jp-Joh" id="lof-Uf-rHb"/>
+                <outlet property="topView" destination="icH-pt-9Ha" id="hh3-UK-hhk"/>
                 <outlet property="tradedBtn" destination="FMQ-Rl-61x" id="xrt-Jk-rO3"/>
                 <outlet property="unTradeBtn" destination="zZZ-rE-lto" id="ERj-Ir-h5o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -39,6 +40,21 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3ZX-SY-QGx">
+                    <rect key="frame" x="0.0" y="35" width="375" height="632"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EI0-GK-DQf">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="msM-ax-wnj"/>
+                        <outlet property="delegate" destination="-1" id="vUV-QE-n06"/>
+                    </connections>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icH-pt-9Ha">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                     <subviews>
@@ -74,21 +90,6 @@
                         <constraint firstAttribute="centerY" secondItem="UXB-ha-kZR" secondAttribute="centerY" id="hFE-AA-Pqh"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3ZX-SY-QGx">
-                    <rect key="frame" x="0.0" y="35" width="375" height="632"/>
-                    <animations/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EI0-GK-DQf">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="msM-ax-wnj"/>
-                        <outlet property="delegate" destination="-1" id="vUV-QE-n06"/>
-                    </connections>
-                </collectionView>
                 <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Cy-yC-JXv" userLabel="coverView">
                     <rect key="frame" x="0.0" y="35" width="375" height="632"/>
                     <animations/>

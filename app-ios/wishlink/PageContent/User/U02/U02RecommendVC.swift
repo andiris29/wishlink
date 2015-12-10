@@ -23,6 +23,9 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     var currentItemIndex: Int = -1
     var pageNo: Int = 1
     var pageSize: Int = 10
+    
+    var scrolling:((changePoint: CGPoint) -> Void)!
+    
     // MARK: - life cycle
 
     override func viewDidLoad() {
@@ -86,25 +89,13 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         return cell
     }
     
+    // MARK: - UIScrollViewDelegate
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.dragging == false {
-            if scrollView.contentOffset.y < -40 {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    var inset = self.collectionView.contentInset
-                    inset.top = 40
-                    self.collectionView.contentInset = inset
-                    self.collectionView.setContentOffset(CGPointMake(0, -inset.top), animated: false)
-                    //                    scrollView.setContentOffset(CGPointMake(0, -50), animated: false)
-                })
-            }else if scrollView.contentOffset.y - scrollView.contentSize.height > 10{
-//                self.loadMoreRecommendation()
-                
-                print("11111111")
-            }
+        
+        if let point = self.scrolling {
+            point(changePoint: scrollView.contentOffset)
         }
-        
-        print("y: \(scrollView.contentOffset.y) \n height:\(scrollView.contentSize.height)")
-        
     }
     
     //MARK:network delegate
@@ -281,6 +272,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         self.clearView.addSubview(self.clearBtn)
         
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 7.5, left: 10, bottom: 7.5, right: 10)
+        self.collectionView.contentInset = UIEdgeInsetsMake(300, 0, 0, 0)
+        self.collectionView.showsVerticalScrollIndicator = false
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
     }
 

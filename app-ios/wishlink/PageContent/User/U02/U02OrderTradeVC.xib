@@ -16,6 +16,7 @@
                 <outlet property="buyerButton" destination="ovm-b2-oey" id="h2L-DI-McF"/>
                 <outlet property="scrollView" destination="caU-T2-bug" id="yBO-Zz-vZg"/>
                 <outlet property="sellerButton" destination="S8n-4D-x3t" id="zrl-aa-izl"/>
+                <outlet property="topView" destination="edQ-EX-Lmx" id="H1l-tW-45c"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,6 +25,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caU-T2-bug">
+                    <rect key="frame" x="0.0" y="35" width="320" height="533"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="G20-5V-OhZ"/>
+                    </connections>
+                </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-EX-Lmx">
                     <rect key="frame" x="0.0" y="4" width="324" height="35"/>
                     <subviews>
@@ -69,14 +78,6 @@
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="width" secondItem="ovm-b2-oey" secondAttribute="width" id="zeE-hr-fnu"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caU-T2-bug">
-                    <rect key="frame" x="0.0" y="35" width="320" height="533"/>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="G20-5V-OhZ"/>
-                    </connections>
-                </scrollView>
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>

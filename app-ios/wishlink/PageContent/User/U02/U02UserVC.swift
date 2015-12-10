@@ -46,10 +46,9 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.prepareData()
         self.prepareUI()
-        
-
 
         self.getUser()
         NSNotificationCenter.defaultCenter().addObserverForName(LoginSuccessNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (noti) -> Void in
@@ -57,13 +56,8 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         }
         self.loadComNavTitle("我的wishlink");
 
-
-        
     }
     
-    var isTop = false;
-
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -76,30 +70,30 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         }
         else
         {
-            
             self.view.hidden = false;
             self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight)
             self.fillDataForUI()
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.scrollView.delegate = self;
-        
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         self.adjustUI()
-
     }
 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func prepareUI() {
+        
+        self.prepareSubVC()
+        
+        self.selectedBtn = self.orderBtn
+        self.orderBtnAction(self.orderBtn)
     }
     
     // MARK: - delegate
@@ -193,7 +187,9 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     }
     
     func prepareData() {
+        
         self.httpObj.mydelegate = self
+        self.scrollView.delegate = self;
     }
     
     // 根据用户数据填充界面
@@ -248,6 +244,27 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.settingVC.view.center = center
 
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 4, height: 0)
+        
+
+        self.orderTradeVC.scrolling = {
+            
+            [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
+        }
+        
+        self.recommendVC.scrolling = {
+            
+            [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
+        }
+        
+        self.favoriteVC.scrolling = {
+            
+            [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
+        }
+        
+        self.settingVC.scrolling = {
+            
+            [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
+        }
     }
     
     func prepareSubVC() {
@@ -258,10 +275,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         {
             orderTradeVC.currType = self.orderListDefaultModel;
         }
-        self.orderTradeVC.orderListScrolling = {[weak self](isup:Bool) in
-             self!.isSetting = false;
-            self!.scrolling(isup);
-        }
+
         self.orderTradeVC.view.frame = self.scrollView.bounds
         self.scrollView.addSubview(self.orderTradeVC.view)
 
@@ -275,175 +289,27 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
 
         self.settingVC = U03SettingVC(nibName: "U03SettingVC", bundle: NSBundle.mainBundle())
         
-        settingVC.scrolling = {[weak self](isup:Bool) in
-            self!.isSetting = true;
-            self!.scrolling(isup);
-        }
-        settingVC.draging = {[weak self](isup:Bool,offsetY:CGFloat) in
-            self!.draging(isup,offsetY: offsetY);
-        }
-        
         self.settingVC.userVC = self
         self.scrollView.addSubview(self.settingVC.view)
         
         self.adjustUI()
     }
     
-    var orginFrame = CGRectMake(0, 0, ScreenWidth, 300);
-    func draging(isUp:Bool,offsetY:CGFloat)
-    {
-        NSLog("_**_Draging View:"+String(offsetY));
-        if(offsetY>0 && offsetY<=300)
-        {
-//            self.sv.contentOffset.y = offsetY;
-            
-//            self.v_TopView.frame = CGRectMake(0, 0-offsetY, ScreenWidth, 300);
-//            self.view.frame = CGRectMake(0, 0-offsetY, ScreenWidth, ScreenHeight+offsetY);
-//
-            
-//            self.constrain_TopView_MarginTop.constant = 0-offsetY
-//            self.v_TopView.bounds = CGRectMake(0,0, ScreenWidth, 300)
-//
-//            self.settingVC.view.frame = CGRectMake(0, 300-offsetY, ScreenWidth, ScreenHeight-300+offsetY);
-            
-        }
-        else if(offsetY == 0)
-        {
-//            self.constrain_TopView_MarginTop.constant = 0
-            
-//            self.v_TopView.frame = CGRectMake(0, 0, ScreenWidth, 300);
-//                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-//           self.settingVC.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-
-//
-//            self.v_TopView.bounds = CGRectMake(0,0, ScreenWidth, 300)
-//
-//        self.scrollView.frame = CGRectMake(0, 300, ScreenWidth, ScreenHeight-300);
-            
-        }
-//        else
-//        {
-//            if(self.v_TopView.frame.origin.y<0)
-//            {
-//                var newFrame = CGRectMake(0, 0-offsetY, ScreenWidth, 300);
-//                self.v_TopView.frame = newFrame;
-//                
-//            }
-//        }
-    }
-    var animDuration = 0.3
-    var isSetting = false;
-   func scrolling(isUp:Bool)
-   {
-        NSLog("scrolling on U02UserVC");
-    
-//        var scroHeight:CGFloat = 180;
-//        if(isSetting)
-//        {
-//            scroHeight = 120;
-//        }
-//        if(!isTop)
-//        {
-//            UIView.animateWithDuration(animDuration, animations: { () -> Void in
-//                self.view.frame = CGRectMake(0, 0-scroHeight, ScreenWidth, ScreenHeight+scroHeight-(self.tabBarController?.tabBar.frame.height)!);
-//                }, completion: { [weak self](finish) -> Void in
-//                    if(finish)
-//                    {
-//                        self!.isTop = true;
-//                    }
-//            })
-//        }
-//        else
-//        {
-//            UIView.animateWithDuration(animDuration, animations: { () -> Void in
-//                self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-//                
-//                }, completion: { [weak self](finish) -> Void in
-//                    if(finish)
-//                    {
-//                        self!.isTop = false;
-//                    }
-//            })
-//        }
-    }
-    
-    func prepareUI() {
+    func topViewScrollerChangePoint(point: CGPoint) {
+//        print("===>>:\(point.y + 300)")
         
-        self.prepareSubVC()
-        self.selectedBtn = self.orderBtn
-        self.orderBtnAction(self.orderBtn)
+        let changeY = point.y + 300
+        var rect: CGRect = self.v_TopView.frame
         
-   
+        if changeY > 0 {
+            
+            rect.origin.y = -changeY
+        } else {
+        
+            rect.origin.y = 0
+        }
+        self.v_TopView.frame = rect
     }
-    
-    // MARK: - setter and getter
-    
-    //MARK:ScrollView delegate
-//    var contentOffsetY:CGFloat! = 0;
-//    var oldContentOffsetY:CGFloat! = 0;
-//    var newContentOffsetY:CGFloat! = 0;
-//    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-//        
-//        contentOffsetY = scrollView.contentOffset.y;
-//    }
-//    
-//    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        oldContentOffsetY = scrollView.contentOffset.y;
-//    }
-//    
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        //NSLog(@"scrollView.contentOffset:%f, %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
-//        
-//        newContentOffsetY = scrollView.contentOffset.y;
-//        
-//        if (newContentOffsetY > oldContentOffsetY && oldContentOffsetY > contentOffsetY) {  // 向上滚动
-//            
-//            NSLog("up");
-//            
-//        } else if (newContentOffsetY < oldContentOffsetY && oldContentOffsetY < contentOffsetY) { // 向下滚动
-//            
-//            NSLog("down");
-//            
-//        } else {
-//            
-//            NSLog("dragging");
-//            
-//        }
-//        if (scrollView.dragging) {  // 拖拽
-//            
-//            NSLog("scrollView.dragging");
-//            NSLog("contentOffsetY: %f", contentOffsetY);
-//            NSLog("newContentOffsetY: %f", scrollView.contentOffset.y);
-//            if ((scrollView.contentOffset.y - contentOffsetY) > 5.0) {  // 向上拖拽
-//                    UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                        self.view.frame = CGRectMake(0, -245, ScreenWidth, ScreenHeight);
-//                        
-//                        }, completion: { (finish) -> Void in
-//                            if(finish)
-//                            {
-//                                
-//                            }
-//                    })
-//                
-//            } else if ((contentOffsetY - scrollView.contentOffset.y) > 5.0) {   // 向下拖拽
-//                
-//                UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                    self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-//                    
-//                    }, completion: { (finish) -> Void in
-//                        if(finish)
-//                        {
-//                            
-//                        }
-//                })
-//            } else {
-//                
-//            }
-//        }
-//    }
-//    
-
-
 }
 
 
