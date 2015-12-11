@@ -25,6 +25,7 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
     var pageSize: Int = 10
     
     var scrolling:((changePoint: CGPoint) -> Void)!
+    var resetScrollPoint:((point: CGPoint) -> Void)!
     
     // MARK: - life cycle
 
@@ -195,6 +196,8 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
             "pageSize": self.pageSize
         ]
         self.httpObj.httpGetApi("itemFeeding/recommendation", parameters: dic, tag: 10)
+        
+        self.resetScollerPoint()
     }
     
     func loadMoreRecommendation() {
@@ -277,4 +280,14 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
     }
 
+    func resetScollerPoint() {
+        
+        var rect: CGRect = self.collectionView.frame
+        rect.origin.y = -300
+        self.collectionView.scrollRectToVisible(rect, animated: false)
+        
+        if let resetPoint = self.resetScrollPoint {
+            resetPoint(point: CGPointZero)
+        }
+    }
 }

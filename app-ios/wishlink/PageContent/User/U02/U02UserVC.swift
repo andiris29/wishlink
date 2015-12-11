@@ -165,6 +165,7 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         self.orderTradeVC.resetConditionView()
         self.settingVC.fillDataForUI()
         self.scrollView.setContentOffset(CGPoint(x: ScreenWidth * 3, y: 0), animated: true)
+        self.settingVC.gettingSet()
     }
     
 //    @IBAction func settingBtnAction(sender: AnyObject) {
@@ -265,6 +266,27 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
             
             [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
         }
+        
+        
+        self.orderTradeVC.resetScrollPoint = {
+            
+            [weak self](point: CGPoint) in self?.resetScrollerChangePoint(point)
+        }
+        
+        self.recommendVC.resetScrollPoint = {
+            
+            [weak self](point: CGPoint) in self?.resetScrollerChangePoint(point)
+        }
+        
+        self.favoriteVC.resetScrollPoint = {
+            
+            [weak self](point: CGPoint) in self?.resetScrollerChangePoint(point)
+        }
+        
+        self.settingVC.resetScrollPoint = {
+            
+            [weak self](point: CGPoint) in self?.resetScrollerChangePoint(point)
+        }
     }
     
     func prepareSubVC() {
@@ -298,7 +320,13 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
     func topViewScrollerChangePoint(point: CGPoint) {
 //        print("===>>:\(point.y + 300)")
         
-        let changeY = point.y + 300
+        var changeY = point.y + 300
+        if self.selectedBtn.tag == 500 { // order
+            changeY += 75
+        } else if self.selectedBtn.tag == 503 { // setting
+            changeY += 5
+        }
+        
         var rect: CGRect = self.v_TopView.frame
         
         if changeY > 0 {
@@ -308,6 +336,13 @@ class U02UserVC: RootVC, WebRequestDelegate, UIScrollViewDelegate {
         
             rect.origin.y = 0
         }
+        self.v_TopView.frame = rect
+    }
+    
+    func resetScrollerChangePoint(point: CGPoint) {
+        
+        var rect: CGRect = self.v_TopView.frame
+        rect.origin.y = 0
         self.v_TopView.frame = rect
     }
 }

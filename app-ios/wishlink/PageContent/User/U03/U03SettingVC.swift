@@ -29,6 +29,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
     var userModel = UserModel.shared
     
     var scrolling:((changePoint: CGPoint) -> Void)!
+    var resetScrollPoint:((point: CGPoint) -> Void)!
     
     weak var userVC: U02UserVC!
     
@@ -40,7 +41,7 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
         
         self.sv.delegate = self;
         self.sv.showsVerticalScrollIndicator = false
-        self.sv.contentInset = UIEdgeInsetsMake(300, 0, 0, 0)
+        self.sv.contentInset = UIEdgeInsetsMake(305, 0, 0, 0)
         
         UIHEPLER.buildUIViewWithRadius(self.btnLogout, radius: 4, borderColor: UIColor.clearColor(), borderWidth: 1)
         // Do any additional setup after loading the view.
@@ -78,6 +79,11 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func gettingSet() {
+        
+        self.resetScollerPoint()
     }
     
     // MARK: - delegate
@@ -393,6 +399,16 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
         }
     }
 
+    func resetScollerPoint() {
+        
+        var rect: CGRect = self.sv.frame
+        rect.origin.y = -305
+        self.sv.scrollRectToVisible(rect, animated: false)
+        
+        if let resetPoint = self.resetScrollPoint {
+            resetPoint(point: CGPointZero)
+        }
+    }
 }
 
 

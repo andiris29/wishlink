@@ -114,7 +114,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWW-Fn-qUR">
+                                <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWW-Fn-qUR">
                                     <rect key="frame" x="80" y="45" width="80" height="50"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
@@ -131,7 +131,7 @@
                                         <action selector="recommendBtnAction:" destination="-1" eventType="touchUpInside" id="Nna-Pc-M65"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16n-Ja-XGU">
+                                <button opaque="NO" tag="503" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16n-Ja-XGU">
                                     <rect key="frame" x="240" y="45" width="80" height="50"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
@@ -148,7 +148,7 @@
                                         <action selector="settingBtnAction:" destination="-1" eventType="touchUpInside" id="Ey8-6j-Pow"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-vc-SWe">
+                                <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-vc-SWe">
                                     <rect key="frame" x="0.0" y="45" width="80" height="50"/>
                                     <animations/>
                                     <constraints>
@@ -168,7 +168,7 @@
                                         <action selector="orderBtnAction:" destination="-1" eventType="touchUpInside" id="MNc-7Q-BXo"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZE-0A-WLl">
+                                <button opaque="NO" tag="502" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZE-0A-WLl">
                                     <rect key="frame" x="160" y="45" width="80" height="50"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="11"/>
@@ -241,6 +241,14 @@
                                 <constraint firstAttribute="width" constant="77" id="dBX-6z-Z81"/>
                             </constraints>
                         </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Mc-PY-8Gb" userLabel="LineImageView">
+                            <rect key="frame" x="0.0" y="299" width="320" height="1"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="18M-dZ-fGW"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -253,6 +261,9 @@
                         <constraint firstAttribute="height" constant="300" id="P5R-c6-iUG"/>
                         <constraint firstItem="nX4-0C-q0U" firstAttribute="leading" secondItem="YKZ-7j-MIE" secondAttribute="leading" id="Vec-hT-7IA"/>
                         <constraint firstItem="T5l-Ys-p2A" firstAttribute="top" secondItem="YKZ-7j-MIE" secondAttribute="top" constant="8" id="acc-u5-dJa"/>
+                        <constraint firstAttribute="bottom" secondItem="8Mc-PY-8Gb" secondAttribute="bottom" id="bCy-ZE-wQX"/>
+                        <constraint firstAttribute="trailing" secondItem="8Mc-PY-8Gb" secondAttribute="trailing" id="gn3-sh-Ffb"/>
+                        <constraint firstItem="8Mc-PY-8Gb" firstAttribute="leading" secondItem="YKZ-7j-MIE" secondAttribute="leading" id="oYT-eH-Zp7"/>
                         <constraint firstAttribute="trailing" secondItem="AaG-2f-XMB" secondAttribute="trailing" id="qre-fB-fRJ"/>
                         <constraint firstItem="AaG-2f-XMB" firstAttribute="leading" secondItem="YKZ-7j-MIE" secondAttribute="leading" id="uOf-2O-oX0"/>
                         <constraint firstAttribute="trailing" secondItem="nX4-0C-q0U" secondAttribute="trailing" id="xOX-TP-WBl"/>

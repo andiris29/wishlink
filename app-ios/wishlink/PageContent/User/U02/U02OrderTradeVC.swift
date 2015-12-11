@@ -26,6 +26,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     var currType:BuyerSellerType! = .Buyer
     
     var scrolling:((changePoint: CGPoint) -> Void)!
+    var resetScrollPoint:((point: CGPoint) -> Void)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,16 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
             
             [weak self](changePoint: CGPoint) in self?.topViewScrollerChangePoint(changePoint)
         }
+        
+        self.buyerTradeVC.resetScrollPoint = {
+        
+            [weak self](point: CGPoint) in self?.resetScrollerChangePoint(point)
+        }
+        
+        self.sellerTradeVC.resetScrollPoint = {
+            
+            [weak self](point: CGPoint) in self?.resetScrollerChangePoint(point)
+        }
     }
     
     func adjustScrollViewUI() {
@@ -93,7 +104,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 2, height: 0)
         
         var rect: CGRect = self.topView.frame
-        rect.origin.y = 300
+        rect.origin.y = 305
         self.topView.frame = rect
     }
     
@@ -103,7 +114,6 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
 
         self.currType = sender.tag == 500 ? .Buyer : .Seller
         buyerSellerButtonStatus(self.currType)
-        
     }
     
     // MARK: - Unit
@@ -142,13 +152,14 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         
         self.sellerTradeVC.resetConditionView()
         self.buyerTradeVC.resetConditionView()
-
+        
+        self.resetScrollerChangePoint(CGPointZero)
     }
     
     func topViewScrollerChangePoint(point: CGPoint) {
 //        print("===>>:\(point.y)")
         
-        let changeY = point.y
+        let changeY = point.y + 70
         var rect: CGRect = self.topView.frame
         rect.origin.y = -changeY
         self.topView.frame = rect
@@ -156,6 +167,13 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         
         if let pointTemp = self.scrolling {
             pointTemp(changePoint: point)
+        }
+    }
+    
+    func resetScrollerChangePoint(point: CGPoint) {
+        
+        if let resetPoint = self.resetScrollPoint {
+            resetPoint(point: CGPointZero)
         }
     }
     

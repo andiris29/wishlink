@@ -26,18 +26,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caU-T2-bug">
-                    <rect key="frame" x="0.0" y="35" width="320" height="533"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="G20-5V-OhZ"/>
                     </connections>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edQ-EX-Lmx">
-                    <rect key="frame" x="0.0" y="4" width="324" height="35"/>
+                    <rect key="frame" x="0.0" y="4" width="324" height="30"/>
                     <subviews>
                         <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovm-b2-oey">
-                            <rect key="frame" x="-4" y="0.0" width="162" height="35"/>
+                            <rect key="frame" x="-4" y="0.0" width="162" height="30"/>
                             <animations/>
                             <color key="backgroundColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
@@ -50,7 +50,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8n-4D-x3t">
-                            <rect key="frame" x="162" y="0.0" width="162" height="35"/>
+                            <rect key="frame" x="162" y="0.0" width="162" height="30"/>
                             <animations/>
                             <color key="backgroundColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
@@ -67,7 +67,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="height" secondItem="ovm-b2-oey" secondAttribute="height" id="G81-VO-LH4"/>
-                        <constraint firstAttribute="height" constant="35" id="Jvt-h6-6fo"/>
+                        <constraint firstAttribute="height" constant="30" id="Jvt-h6-6fo"/>
                         <constraint firstAttribute="trailing" secondItem="S8n-4D-x3t" secondAttribute="trailing" id="UBk-q2-Kim"/>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="top" secondItem="edQ-EX-Lmx" secondAttribute="top" id="UoI-0d-weU"/>
                         <constraint firstItem="ovm-b2-oey" firstAttribute="leading" secondItem="edQ-EX-Lmx" secondAttribute="leading" constant="-4" id="bVL-94-qtV"/>
@@ -86,7 +86,7 @@
                 <constraint firstAttribute="bottom" secondItem="caU-T2-bug" secondAttribute="bottom" id="8gw-8Z-1BE"/>
                 <constraint firstItem="edQ-EX-Lmx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I7T-vM-7rw"/>
                 <constraint firstItem="edQ-EX-Lmx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="4" id="SoW-zx-hIl"/>
-                <constraint firstItem="edQ-EX-Lmx" firstAttribute="bottom" secondItem="caU-T2-bug" secondAttribute="top" constant="4" id="U9o-fh-4yt"/>
+                <constraint firstItem="caU-T2-bug" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="f3f-0a-aHS"/>
                 <constraint firstAttribute="trailing" secondItem="caU-T2-bug" secondAttribute="trailing" id="mh6-N9-Vre"/>
                 <constraint firstItem="caU-T2-bug" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o9j-O5-WPX"/>
             </constraints>

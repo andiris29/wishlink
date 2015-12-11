@@ -37,6 +37,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     var currentTradeIndex: Int = -1
     
     var scrolling:((changePoint: CGPoint) -> Void)!
+    var resetScrollPoint:((point: CGPoint) -> Void)!
     
     var seletedConditionBtn: UIButton!
     
@@ -81,45 +82,12 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         self.conditionView.layer.shadowOpacity = 0.7
         self.conditionView.layer.shadowRadius = 5
      
-        var topViewRect: CGRect = self.topView.frame
-        topViewRect.origin.y = 300
-        self.topView.frame = topViewRect
-        
-        var coverViewRect: CGRect = self.coverView.frame
-        coverViewRect.origin.y = 300
-        self.coverView.frame = coverViewRect
-        
-        var conditionViewRect: CGRect = self.conditionView.frame
-        conditionViewRect.origin.y = 300
-        self.conditionView.frame = conditionViewRect
+        self.resetScollerPoint()
     }
     
     func resetConditionView() {
         if !self.conditionView.hidden {
             self.filterBtnAction(self.filterBtn)
-        }
-    }
-    
-    // MARK: - UIScrollViewDelegate
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        print("==>>:\(scrollView.contentOffset.y)")
-        
-        let changeY = scrollView.contentOffset.y
-        var topViewRect: CGRect = self.topView.frame
-        topViewRect.origin.y = -changeY
-        self.topView.frame = topViewRect
-        
-        var coverViewRect: CGRect = self.coverView.frame
-        coverViewRect.origin.y = -changeY
-        self.coverView.frame = coverViewRect
-        
-        var conditionViewRect: CGRect = self.conditionView.frame
-        conditionViewRect.origin.y = -changeY
-        self.conditionView.frame = conditionViewRect
-        
-        if let point = self.scrolling {
-            point(changePoint: scrollView.contentOffset)
         }
     }
 
@@ -293,7 +261,9 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     // MARK: - private method
     
     func getBuyerTrade() {
+        
         self.filterBuyerTrade()
+        self.resetScollerPoint()
     }
     
     // 根据状态筛选卖家订单
@@ -379,8 +349,55 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     func prepareCollectionView() {
         
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 7.5, left: 10, bottom: 7.5, right: 10)
-        self.collectionView.contentInset = UIEdgeInsetsMake(300, 0, 0, 0)
+        self.collectionView.contentInset = UIEdgeInsetsMake(375, 5, 0, 5)
         self.collectionView.registerNib(UINib(nibName: "U02TradeCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: tradeCellIde)
     }
 
+    
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        //        print("==>>:\(scrollView.contentOffset.y)")
+        
+        let changeY = scrollView.contentOffset.y + 40
+        var topViewRect: CGRect = self.topView.frame
+        topViewRect.origin.y = -changeY
+        self.topView.frame = topViewRect
+        
+        var coverViewRect: CGRect = self.coverView.frame
+        coverViewRect.origin.y = -changeY
+        self.coverView.frame = coverViewRect
+        
+        var conditionViewRect: CGRect = self.conditionView.frame
+        conditionViewRect.origin.y = -changeY
+        self.conditionView.frame = conditionViewRect
+        
+        if let point = self.scrolling {
+            point(changePoint: scrollView.contentOffset)
+        }
+    }
+    
+    func resetScollerPoint() {
+        
+        var rect: CGRect = self.collectionView.frame
+        rect.origin.y = -375
+        self.conditionView.frame = rect
+        self.collectionView.scrollRectToVisible(rect, animated: false)
+
+        var topViewRect: CGRect = self.topView.frame
+        topViewRect.origin.y = 340
+        self.topView.frame = topViewRect
+        
+        var coverViewRect: CGRect = self.coverView.frame
+        coverViewRect.origin.y = 340
+        self.coverView.frame = coverViewRect
+        
+        var conditionViewRect: CGRect = self.conditionView.frame
+        conditionViewRect.origin.y = 340
+        self.conditionView.frame = conditionViewRect
+        
+        if let resetPoint = self.resetScrollPoint {
+            resetPoint(point: CGPointZero)
+        }
+    }
 }

@@ -39,7 +39,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Raf-Qg-rVg">
-                    <rect key="frame" x="0.0" y="35" width="320" height="533"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nPH-1z-q6K">
@@ -284,11 +284,11 @@
                 <constraint firstItem="xpL-5T-Mxt" firstAttribute="top" secondItem="cok-jY-6sp" secondAttribute="bottom" constant="-5" id="Bls-1T-y8W"/>
                 <constraint firstItem="vwh-Q3-OwN" firstAttribute="top" secondItem="cok-jY-6sp" secondAttribute="bottom" id="IDu-dr-n2U"/>
                 <constraint firstItem="vwh-Q3-OwN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KeM-0J-FoA"/>
+                <constraint firstItem="Raf-Qg-rVg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ncc-z0-Ovb"/>
                 <constraint firstItem="cok-jY-6sp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RgI-TY-59U"/>
                 <constraint firstAttribute="trailing" secondItem="xpL-5T-Mxt" secondAttribute="trailing" constant="15" id="Svi-6j-R8y"/>
                 <constraint firstAttribute="trailing" secondItem="vwh-Q3-OwN" secondAttribute="trailing" id="Tqy-Mt-PNw"/>
                 <constraint firstItem="cok-jY-6sp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aJW-vK-g4S"/>
-                <constraint firstItem="Raf-Qg-rVg" firstAttribute="top" secondItem="cok-jY-6sp" secondAttribute="bottom" id="gRd-to-boA"/>
                 <constraint firstItem="Raf-Qg-rVg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qlt-Cd-9xb"/>
                 <constraint firstAttribute="trailing" secondItem="cok-jY-6sp" secondAttribute="trailing" id="s7W-lu-nZ4"/>
                 <constraint firstAttribute="trailing" secondItem="Raf-Qg-rVg" secondAttribute="trailing" id="yIg-Dg-3mk"/>

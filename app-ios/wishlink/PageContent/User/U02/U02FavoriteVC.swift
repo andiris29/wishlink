@@ -25,6 +25,7 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     var currentIndex: Int = -1   // 执行unFavorite时的item对应的index
     
     var scrolling:((changePoint: CGPoint) -> Void)!
+    var resetScrollPoint:((point: CGPoint) -> Void)!
     
     // MARK: - life cycle
 
@@ -138,6 +139,8 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
     func getFavoriteList() {
         self.dataArray.removeAll()
         self.httpObj.httpGetApi("itemFeeding/favorite", tag: 10)
+        
+        self.resetScollerPoint()
     }
     
     func unFavorite(itemIndex: Int) {
@@ -170,4 +173,14 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
     }
 
+    func resetScollerPoint() {
+        
+        var rect: CGRect = self.collectionView.frame
+        rect.origin.y = -300
+        self.collectionView.scrollRectToVisible(rect, animated: false)
+        
+        if let resetPoint = self.resetScrollPoint {
+            resetPoint(point: CGPointZero)
+        }
+    }
 }
