@@ -90,15 +90,6 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         return cell
     }
     
-    // MARK: - UIScrollViewDelegate
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        if let point = self.scrolling {
-            point(changePoint: scrollView.contentOffset)
-        }
-    }
-    
     //MARK:network delegate
     func requestDataFailed(error: String,tag:Int) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -275,11 +266,27 @@ class U02RecommendVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVi
         self.clearView.addSubview(self.clearBtn)
         
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 7.5, left: 10, bottom: 7.5, right: 10)
-        self.collectionView.contentInset = UIEdgeInsetsMake(300, 0, 0, 0)
+        self.collectionView.contentInset = UIEdgeInsetsMake(340, 0, 0, 0)
         self.collectionView.showsVerticalScrollIndicator = false
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
     }
 
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        print("\(scrollView.contentOffset.y)")
+        if scrollView.contentOffset.y <= -600 {
+            self.resetScollerPoint()
+        }
+        
+        if let point = self.scrolling {
+            point(changePoint: scrollView.contentOffset)
+        }
+    }
+    
+     // MARK: - Unit
+    
     func resetScollerPoint() {
         
         var rect: CGRect = self.collectionView.frame

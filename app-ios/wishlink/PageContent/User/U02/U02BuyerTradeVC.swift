@@ -81,10 +81,8 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         self.conditionView.layer.shadowColor = UIColor.blackColor().CGColor
         self.conditionView.layer.shadowOpacity = 0.7
         self.conditionView.layer.shadowRadius = 5
-     
-        self.resetScollerPoint()
     }
-    
+ 
     func resetConditionView() {
         if !self.conditionView.hidden {
             self.filterBtnAction(self.filterBtn)
@@ -262,8 +260,8 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     func getBuyerTrade() {
         
-        self.filterBuyerTrade()
         self.resetScollerPoint()
+        self.filterBuyerTrade()
     }
     
     // 根据状态筛选卖家订单
@@ -357,7 +355,7 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        //        print("==>>:\(scrollView.contentOffset.y)")
+                print("==>>:\(scrollView.contentOffset.y)")
         
         let changeY = scrollView.contentOffset.y + 40
         var topViewRect: CGRect = self.topView.frame
@@ -379,11 +377,6 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     
     func resetScollerPoint() {
         
-        var rect: CGRect = self.collectionView.frame
-        rect.origin.y = -375
-        self.conditionView.frame = rect
-        self.collectionView.scrollRectToVisible(rect, animated: false)
-
         var topViewRect: CGRect = self.topView.frame
         topViewRect.origin.y = 340
         self.topView.frame = topViewRect
@@ -395,6 +388,10 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         var conditionViewRect: CGRect = self.conditionView.frame
         conditionViewRect.origin.y = 340
         self.conditionView.frame = conditionViewRect
+        
+        var rect: CGRect = self.collectionView.frame
+        rect.origin.y = -375
+        self.collectionView.scrollRectToVisible(rect, animated: false)
         
         if let resetPoint = self.resetScrollPoint {
             resetPoint(point: CGPointZero)

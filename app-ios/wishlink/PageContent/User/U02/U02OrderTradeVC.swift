@@ -135,12 +135,12 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         } else {
         
             sellerButton.backgroundColor = UIColor.whiteColor()
-            sellerButton.setTitleColor(MainColor(), forState: UIControlState.Normal);
-            sellerButton.setImage(UIImage(named: "u02OrderList1"), forState: UIControlState.Normal)
+            sellerButton.setTitleColor(MainColorRed(), forState: UIControlState.Normal);
+            sellerButton.setImage(UIImage(named: "u02OrderList00"), forState: UIControlState.Normal)
             
             buyerButton.backgroundColor = UIColor.lightGrayColor();
             buyerButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal);
-            buyerButton.setImage(UIImage(named: "u02OrderList0"), forState: UIControlState.Normal)
+            buyerButton.setImage(UIImage(named: "u02OrderList10"), forState: UIControlState.Normal)
             
             
             self.scrollView.setContentOffset(CGPoint(x: ScreenWidth, y: 0), animated: true)
@@ -157,7 +157,6 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     }
     
     func topViewScrollerChangePoint(point: CGPoint) {
-//        print("===>>:\(point.y)")
         
         let changeY = point.y + 70
         var rect: CGRect = self.topView.frame

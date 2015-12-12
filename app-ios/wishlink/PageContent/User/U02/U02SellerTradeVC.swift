@@ -64,12 +64,11 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         self.conditionView.layer.shadowOffset = CGSizeMake(5, 5)
         self.conditionView.layer.shadowColor = UIColor.blackColor().CGColor
         self.conditionView.layer.shadowOpacity = 0.7
         self.conditionView.layer.shadowRadius = 5
-        
-        self.resetScollerPoint()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -284,8 +283,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
 
     func getSellerTrade() {
         
-        self.filterSellerTrade()
         self.resetScollerPoint()
+        self.filterSellerTrade()
     }
     
     // 根据状态筛选卖家订单

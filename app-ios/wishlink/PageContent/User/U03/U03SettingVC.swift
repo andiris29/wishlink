@@ -394,11 +394,17 @@ UINavigationControllerDelegate, UITextFieldDelegate, WebRequestDelegate,UIScroll
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
+        if scrollView.contentOffset.y <= -610 {
+            self.resetScollerPoint()
+        }
+        
         if let point = self.scrolling {
             point(changePoint: scrollView.contentOffset)
         }
     }
 
+     // MARK: - Unit
+    
     func resetScollerPoint() {
         
         var rect: CGRect = self.sv.frame

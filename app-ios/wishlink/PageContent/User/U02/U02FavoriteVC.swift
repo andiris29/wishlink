@@ -79,15 +79,6 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         return cell
     }
     
-    // MARK: - UIScrollViewDelegate
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        if let point = self.scrolling {
-            point(changePoint: scrollView.contentOffset)
-        }
-    }
-    
     func requestDataFailed(error: String,tag:Int) {
         print(error)
     }
@@ -173,6 +164,22 @@ class U02FavoriteVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionVie
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
     }
 
+    
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y <= -600 {
+            self.resetScollerPoint()
+        }
+        
+        if let point = self.scrolling {
+            point(changePoint: scrollView.contentOffset)
+        }
+    }
+    
+    // MARK: - Unit
+    
     func resetScollerPoint() {
         
         var rect: CGRect = self.collectionView.frame
