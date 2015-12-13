@@ -87,6 +87,8 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         if !self.conditionView.hidden {
             self.filterBtnAction(self.filterBtn)
         }
+        
+        self.resetScollerPoint()
     }
 
     // MARK: - delegate
@@ -355,9 +357,9 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-                print("==>>:\(scrollView.contentOffset.y)")
+//                print("==>>:\(scrollView.contentOffset.y)")
         
-        let changeY = scrollView.contentOffset.y + 40
+        let changeY = scrollView.contentOffset.y + 35
         var topViewRect: CGRect = self.topView.frame
         topViewRect.origin.y = -changeY
         self.topView.frame = topViewRect
@@ -373,21 +375,22 @@ class U02BuyerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollectionV
         if let point = self.scrolling {
             point(changePoint: scrollView.contentOffset)
         }
+
     }
     
     func resetScollerPoint() {
         
-        var topViewRect: CGRect = self.topView.frame
-        topViewRect.origin.y = 340
-        self.topView.frame = topViewRect
-        
-        var coverViewRect: CGRect = self.coverView.frame
-        coverViewRect.origin.y = 340
-        self.coverView.frame = coverViewRect
-        
-        var conditionViewRect: CGRect = self.conditionView.frame
-        conditionViewRect.origin.y = 340
-        self.conditionView.frame = conditionViewRect
+//        var topViewRect: CGRect = self.topView.frame
+//        topViewRect.origin.y = 340
+//        self.topView.frame = topViewRect
+//        
+//        var coverViewRect: CGRect = self.coverView.frame
+//        coverViewRect.origin.y = 340
+//        self.coverView.frame = coverViewRect
+//        
+//        var conditionViewRect: CGRect = self.conditionView.frame
+//        conditionViewRect.origin.y = 340
+//        self.conditionView.frame = conditionViewRect
         
         var rect: CGRect = self.collectionView.frame
         rect.origin.y = -375

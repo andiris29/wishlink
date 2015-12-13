@@ -104,7 +104,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
         self.scrollView.contentSize = CGSize(width: CGRectGetWidth(self.scrollView.frame) * 2, height: 0)
         
         var rect: CGRect = self.topView.frame
-        rect.origin.y = 305
+        rect.origin.y = 300
         self.topView.frame = rect
     }
     
@@ -158,7 +158,7 @@ class U02OrderTradeVC: RootVC, UIScrollViewDelegate {
     
     func topViewScrollerChangePoint(point: CGPoint) {
         
-        let changeY = point.y + 70
+        let changeY = point.y + 75
         var rect: CGRect = self.topView.frame
         rect.origin.y = -changeY
         self.topView.frame = rect

@@ -93,6 +93,8 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         if !self.conditionView.hidden {
             self.filterBtnAction(self.filterBtn)
         }
+        
+        self.resetScollerPoint()
     }
     
     // MARK: - delegate
@@ -364,7 +366,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        let changeY = scrollView.contentOffset.y + 40
+        let changeY = scrollView.contentOffset.y + 35
         var topViewRect: CGRect = self.topView.frame
         topViewRect.origin.y = -changeY
         self.topView.frame = topViewRect
@@ -388,17 +390,17 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         rect.origin.y = -375
         self.collectionView.scrollRectToVisible(rect, animated: false)
 
-        var topViewRect: CGRect = self.topView.frame
-        topViewRect.origin.y = 340
-        self.topView.frame = topViewRect
-        
-        var coverViewRect: CGRect = self.coverView.frame
-        coverViewRect.origin.y = 340
-        self.coverView.frame = coverViewRect
-        
-        var conditionViewRect: CGRect = self.conditionView.frame
-        conditionViewRect.origin.y = 340
-        self.conditionView.frame = conditionViewRect
+//        var topViewRect: CGRect = self.topView.frame
+//        topViewRect.origin.y = 340
+//        self.topView.frame = topViewRect
+//        
+//        var coverViewRect: CGRect = self.coverView.frame
+//        coverViewRect.origin.y = 340
+//        self.coverView.frame = coverViewRect
+//        
+//        var conditionViewRect: CGRect = self.conditionView.frame
+//        conditionViewRect.origin.y = 340
+//        self.conditionView.frame = conditionViewRect
         
         if let resetPoint = self.resetScrollPoint {
             resetPoint(point: CGPointZero)
