@@ -16,12 +16,8 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tradeTableView: UITableView!
-    
     @IBOutlet weak var btnGetOrder: UIButton!
-    
-    //    var T14VC:T14AssignToMeConfirm!
-    
-    //    var t05VC:T05PayVC!
+
     var item: ItemModel!
     var trade:TradeModel!
     //跟单列表
@@ -30,7 +26,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     var selectArr:[TradeModel]! = []
     
     
-    
+    //MARK:Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self;
@@ -73,28 +69,29 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         
         self.followArr = nil;
         self.selectArr = nil;
-//        userImage = nil;
+        //        userImage = nil;
     }
-
+    
     override func viewDidLayoutSubviews() {
         self.tradeTableView.layoutIfNeeded();
         self.view.layoutIfNeeded();
     }
     
+    //MARK:UITableView Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-  
+        
         let last: Int = followArr.count+2 - 1
         
         switch indexPath.row {
         case 0:
             return 195
-//        case last:
-//            return 65
+            //        case last:
+            //            return 65
         default :
             return 90
         }
-
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -121,13 +118,13 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             tCell.loadData(self.item,_trade: self.trade);
             
             cell = tCell;
-//        case last:
-//            let  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
-//            fcell.delegate = self
-//            
-//            
-//            
-//            cell = fcell;
+            //        case last:
+            //            let  fcell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierFooter, forIndexPath: indexPath) as! T06CellFooter
+            //            fcell.delegate = self
+            //
+            //
+            //
+            //            cell = fcell;
         default:
             let  tCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
             tCell.awakeFromNib()
@@ -150,7 +147,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             tCell.iv_userImg.image = nil;
             let imgUrl :String! =   tdata.owner!.objectForKey("portrait") as? String
             WebRequestHelper().renderImageView( tCell.iv_userImg, url: imgUrl, defaultName: "T03aaa")
-
+            
             tCell.myDelegate = self;
             cell = tCell;
             
@@ -158,6 +155,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         
         return cell
     }
+    
     func t13CellHeaderSelectItemChange(selectTrade:TradeModel,isSelected:Bool)
     {
         if(isSelected)//insert
@@ -210,24 +208,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
             
         }
     }
-    //MARK: - Action
-    //跟单
-    //    func btnFollowAction(sernder:UIButton) {
-    //
-    //        if(UserModel.shared.isLogin)
-    //        {
-    //            SVProgressHUD.showWithStatusWithBlack("请稍后...")
-    //            let para  = ["itemRef":item._id,
-    //                "quantity":"1"];
-    //            self.httpObj.httpPostApi("trade/create", parameters: para, tag: 62);
-    //        }
-    //        else
-    //        {
-    //            UIHEPLER.showLoginPage(self);
-    //        }
-    //    }
-    
-    
+    //MARK: - IBAction
     @IBAction func btnGetOrderAction(sender: AnyObject) {
         self.btnGrabOrderAction((sender as? UIButton)!);
     }
@@ -277,58 +258,10 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     }
     
     //MARK: - T06CellHeaderDelegate
-    
     func dorpListButtonAction(sender: UIButton) {
         
     }
-    
-   // var userImage:[(path:String,img:UIImage!)]!
-//    func loadAllUserImage()
-//    {
-//        self.userImage = nil;
-//        if(self.followArr != nil && self.followArr.count>0)
-//        {
-//            for item_trade in self.followArr
-//            {
-//                if(item_trade.owner != nil && item_trade.owner?.count>0)
-//                {
-//                    if  let imgUrl:String! = item_trade.owner!.objectForKey("portrait") as? String
-//                    {
-//                        if(imgUrl != nil && imgUrl!.trim().length>1)
-//                        {
-//                            let img_item =   APPCONFIG.readImgFromCachePath(imgUrl!)
-//                            if(img_item != nil)
-//                            {
-//                                if(self.userImage == nil)
-//                                {
-//                                    userImage = [(path:imgUrl!,img:img_item)]
-//                                }
-//                                else
-//                                {
-//                                    
-//                                    
-//                                    let result_Data = userImage.filter{itemObj -> Bool in
-//                                        
-//                                        return (itemObj.path == imgUrl);
-//                                    }
-//                                    if(result_Data.count == 0)
-//                                    {
-//                                        userImage.append((path:imgUrl!,img:img_item));
-//                                    }
-//                                }
-//                            }
-//                            
-//                        }
-//                    }
-//                }
-//                
-//            }
-//        }
-//    }
-    
-    
     //MARK: - T06CellFooterDelegate
-    
     func grabOrderButtonAction(sender: UIButton) {
         
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
@@ -337,7 +270,6 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     }
     
     //MARK: - Request delegate
-    
     func requestDataComplete(response: AnyObject, tag: Int) {
         
         SVProgressHUD.dismiss();
@@ -364,7 +296,7 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                         self.followArr.append(tradeItem);
                     }
                 }
-//                self.loadAllUserImage();
+                //                self.loadAllUserImage();
                 self.tradeTableView.reloadData();
             }
             self.btnGetOrder.hidden = false;

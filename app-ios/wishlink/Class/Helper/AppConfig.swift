@@ -18,13 +18,9 @@ enum LanguageVersion:Int
 }
 
 
-
-
+//常用系统函数简写
 let CURR_DEVICE = UIDevice.currentDevice()
-//常用系统函数简写
 
-
-//常用系统函数简写
 let IOS_VERSION = (UIDevice.currentDevice().systemVersion as NSString).intValue;
 let NotificationCenter = NSNotificationCenter.defaultCenter()
 let UserDefaults = NSUserDefaults.standardUserDefaults();
@@ -43,11 +39,6 @@ func RGBCA(c:CGFloat, a:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: a)}
 func RGBC(c:CGFloat) -> UIColor { return RGBA(c, g: c, b: c, a: 1.0)}
 func MainColor() -> UIColor { return RGB(124, g: 0, b: 90)}
 func MainColorRed() -> UIColor { return RGB(248, g: 62, b: 91)}
-
-
-
-
-
 
 class AppConfig: NSObject
 {
@@ -110,6 +101,7 @@ class AppConfig: NSObject
     //默认语言
     var languageVer = LanguageVersion.ZH_CN
     
+    //MARK:PRivate
     class var sharedAppConfig : AppConfig {
         struct Static {
             static var instance : AppConfig?

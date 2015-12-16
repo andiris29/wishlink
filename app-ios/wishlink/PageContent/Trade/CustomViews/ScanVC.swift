@@ -20,7 +20,7 @@ protocol scanDelegate
 class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     
     @IBOutlet weak var scan_input: UIImageView!
-//    @IBOutlet weak var imageVIew_Mask: UIImageView!
+    //    @IBOutlet weak var imageVIew_Mask: UIImageView!
     var device:AVCaptureDevice!;
     var input:AVCaptureDeviceInput!;
     var session:AVCaptureSession!;
@@ -31,7 +31,7 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
     var notiKey = "kScanPhoto";
     
     var myDelegate:scanDelegate!
-    
+    //MARK:Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,28 +65,20 @@ class ScanVC: RootVC,AVCaptureMetadataOutputObjectsDelegate  {
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
     }
     
-//    func clearScanArea()
-//    {
-//        UIGraphicsBeginImageContext(self.view.frame.size);
-//        self.imageVIew_Mask.image?.drawInRect(self.view.bounds)
-//        
-//        CGContextClearRect (UIGraphicsGetCurrentContext(), CGRectMake(self.scan_input.frame.origin.x, self.scan_input.frame.origin.y, self.scan_input.frame.width, self.scan_input.frame.height));
-//        self.imageVIew_Mask.image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//    }
+
     override func  viewDidAppear(animated: Bool) {
         
-//        self.clearScanArea();
+        //        self.clearScanArea();
     }
     
-    
+    //MARK:Private
     func setupCamera()
     {
         if(!UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
         {
             UIAlertView(title: "", message: "设备不支持拍照功能!", delegate: nil, cancelButtonTitle: "确定").show();
             print("设备不支持拍照功能!", terminator: "");
-//            SVProgressHUD.showErrorWithStatusWithBlack("设备不支持拍照功能!")
+            //            SVProgressHUD.showErrorWithStatusWithBlack("设备不支持拍照功能!")
             return;
         }
         device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)

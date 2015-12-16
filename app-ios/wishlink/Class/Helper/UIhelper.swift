@@ -35,12 +35,13 @@ class UIHelper {
     var noneImg   = UIImage(named: "placeholder");
     
     //系统主色调{大部分字体颜色 }
-     var mainColor:UIColor = UIColor(red: 124/255.0, green: 0/255.0, blue: 90.0/255.0, alpha: 1)
+    var mainColor:UIColor = UIColor(red: 124/255.0, green: 0/255.0, blue: 90.0/255.0, alpha: 1)
     
     // 列表背景色
-     var listBgColor:UIColor = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1)
+    var listBgColor:UIColor = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1)
     
     var mainChineseFont15:UIFont = UIFont(name: "FZLanTingHeiS-EL-GB", size: 15)!;
+    //MARK:Private
     /*
     获取自定义字体
     */
@@ -52,7 +53,7 @@ class UIHelper {
     /*
     将图片转换成64位编码
     */
-     func imageToBase64(image:UIImage )->String {
+    func imageToBase64(image:UIImage )->String {
         let imageData:NSData = UIImageJPEGRepresentation(image, 1)!
         return imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
     }
@@ -60,11 +61,11 @@ class UIHelper {
     {
         return APPLICATION.delegate as! AppDelegate
     }
-
+    
     /*
     获取缓存路径
     */
-     func getCachedFilePath(relative:String)->String!
+    func getCachedFilePath(relative:String)->String!
     {
         var strResult = "";
         let paths:NSArray=NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
@@ -76,7 +77,7 @@ class UIHelper {
     /*
     根据图片名称在bundle中搜索该图片
     */
-     func getBundledImage(name:String)->UIImage
+    func getBundledImage(name:String)->UIImage
     {
         
         let strResure =  NSBundle.mainBundle().pathForResource(name, ofType: nil)
@@ -92,7 +93,7 @@ class UIHelper {
         target.layer.borderWidth = CGFloat(borderWidth);
         target.layer.borderColor = borderColor.CGColor;
     }
-
+    
     
     //MARK: 设置Label的行间距
     func setLabelLineSpan(label:UILabel, lineSpacing:CGFloat)
@@ -108,25 +109,12 @@ class UIHelper {
     //给btn加圆角
     func buildButtonFilletStyleWithRadius(btn:UIButton,borderColor:UIColor,titleColor:UIColor,radius:CGFloat)
     {
-//        btn.layer.cornerRadius = radius;
-//        btn.layer.masksToBounds=true
-//        btn.layer.borderWidth = 1;
-//        btn.layer.borderColor = borderColor.CGColor;
-        
-        
         self.buildUIViewWithRadius(btn , radius: radius, borderColor: borderColor, borderWidth: 1)
-        
         btn.setTitleColor(titleColor, forState: UIControlState.Normal)
-        
     }
     //给Image加圆角
     func buildImageViewWithRadius(image:UIImageView,borderColor:UIColor,borderWidth:CGFloat)
     {
-//        image.layer.cornerRadius = image.frame.width/2;
-//        image.layer.masksToBounds=true
-//        image.layer.borderWidth = CGFloat(borderWidth);
-//        image.layer.borderColor = mainColor.CGColor;
-        
         self.buildUIViewWithRadius(image , radius: image.frame.width/2, borderColor: borderColor, borderWidth: borderWidth)
     }
     func GetDeviceModel()->DeviceEnum
@@ -210,7 +198,7 @@ class UIHelper {
         let filePath:String =   docs[0].stringByAppendingString(imgName)//docs[0].stringByAppendingPathComponent(imgName);
         
         print("save editImg to path:" + filePath, terminator: "");
-                let result:Bool = UIImagePNGRepresentation(img)!.writeToFile(filePath, atomically: true);
+        let result:Bool = UIImagePNGRepresentation(img)!.writeToFile(filePath, atomically: true);
         print(result)
     }
     
@@ -222,7 +210,7 @@ class UIHelper {
     func compressionImageToDate(img:UIImage)->NSData
     {
         var imageData:NSData = UIImageJPEGRepresentation(img, 1)!
-//        print(imageData.length, terminator: "");
+        //        print(imageData.length, terminator: "");
         NSLog("orgin img file size:%d", imageData.length)
         var rate:CGFloat = 1
         while( imageData.length > 40 * 1000)
@@ -246,22 +234,22 @@ class UIHelper {
             loginVC = U01LoginVC(nibName: "U01LoginVC", bundle: MainBundle);
         }
         
-     
+        
         
         
         target.presentViewController(loginVC, animated: true, completion: { () -> Void in
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-
-            if(isToHomePage)
-            {
-                let tababarController =  self.GetAppDelegate().window!.rootViewController as! UITabBarController
-                tababarController.selectedIndex = 0;
-                tababarController.childViewControllers[0].navigationController?.navigationBarHidden = true;
-           
-            }
-          
-            
+                
+                if(isToHomePage)
+                {
+                    let tababarController =  self.GetAppDelegate().window!.rootViewController as! UITabBarController
+                    tababarController.selectedIndex = 0;
+                    tababarController.childViewControllers[0].navigationController?.navigationBarHidden = true;
+                    
+                }
+                
+                
             })
         })
         
@@ -289,8 +277,8 @@ class UIHelper {
                 }
             }
             
-
-          
+            
+            
         }
     }
     func getTabbar()->TabBarVC!
@@ -301,21 +289,21 @@ class UIHelper {
         }
         return result;
     }
-
+    
     //MARK:格式化时间
     func formartTime(dateString:String)->String!
     {
-          var result  = dateString
+        var result  = dateString
         if(dateString.containsString("T"))
         {
-          var stringArr =   dateString.componentsSeparatedByString("T")
+            var stringArr =   dateString.componentsSeparatedByString("T")
             result = stringArr[0];
         }
         if(result.containsString("-"))
         {
             result = (result as NSString).stringByReplacingOccurrencesOfString("-", withString: ".")
         }
-    
+        
         return result;
         
     }

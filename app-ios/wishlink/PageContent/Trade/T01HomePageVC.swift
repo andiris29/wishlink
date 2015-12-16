@@ -31,14 +31,14 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
     var sphereView: ZYQSphereView!
     var isNeedShowLoin = true;
     var itemContents: NSArray = NSArray()
-//    var t02VC:T02HotListVC!
     
+    //MARK:LIfe Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
         
-//        UIHEPLER.buildUIViewWithRadius(self.searchTableView, radius: 10, borderColor: UIColor.clearColor(), borderWidth: 0.5);
+        //        UIHEPLER.buildUIViewWithRadius(self.searchTableView, radius: 10, borderColor: UIColor.clearColor(), borderWidth: 0.5);
         
         self.searchTextField.delegate = self;
         self.httpObj.mydelegate = self;
@@ -52,36 +52,64 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.searchBgImageView.layer.borderColor = RGBC(67).CGColor
         self.searchBgImageView.layer.masksToBounds = true
         self.searchBgImageView.layer.cornerRadius = self.searchBgImageView.frame.size.height / 2.0
-
+        
         
         NSNotificationCenter.defaultCenter().addObserverForName(LogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self](noti) -> Void in
             self!.searchTextField.text = "";
         }
-     
+        
         
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         httpObj.httpGetApi("user/get", parameters: nil, tag: 101)
-
+        
         
         self.blurView.dynamic = true;
         self.blurView.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         self.blurView.blurRadius = 0.1;
         self.blurView.contentMode =  UIViewContentMode.Bottom;
         self.blurView.hidden = true;
-
+        
     }
-
+    
     override func viewDidAppear(animated: Bool) {
-         super.viewDidAppear(animated);
+        super.viewDidAppear(animated);
         
         self.navigationController?.navigationBarHidden = true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-  
+        
+    }
+    //MARK: - IBAction
+    
+    func buttonAction(sender: UIButton) {
+        self.gotoNextPage(sender.titleLabel!.text!);
+        print("buttonAction:\(sender.tag)")
     }
     
+    @IBAction func searchButtonAction(sender: UIButton) {
+        self.gotoNextPage(self.searchTextField.text!);
+    }
+    
+    @IBAction func textFieldEndAndExit(sender: UITextField) {
+        
+        //        self.gotoNextPage(sender.text!);
+    }
+    
+    func gotoNextPage(strKeyWord:String)
+    {
+        var vc:T02HotListVC! =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
+        vc.keyword = strKeyWord;
+        vc.pagemodel  = .search;
+        self.navigationController?.pushViewController(vc, animated: true);
+        vc = nil;
+        
+        self.removeTimer();
+    }
+
+    
+    //MARK:Private
     func getKeyWordData()
     {
         self.httpObj.httpGetApi("trend/keywords", parameters: nil, tag: 10)
@@ -96,9 +124,9 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         if(self.dataArr.count>0)
         {
-        
+            
             var colorArray = [RGBA(234, g: 234, b: 234, a: 1.0), RGBA(254, g: 216, b: 222, a: 1.0),RGBA(229, g: 204, b: 222, a: 1.0)]
-  
+            
             let windowWidth = ScreenWidth
             var isfirstTime = false;
             if( self.sphereView == nil)
@@ -134,7 +162,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 button.addTarget(self, action: Selector("buttonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
                 views.addObject(button)
             }
-         
+            
             if(isfirstTime)
             {
                 
@@ -149,7 +177,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 sphereView.appentItems(views as [AnyObject])
             }
         }
-
+        
     }
     
     // MARK: - Touched
@@ -198,46 +226,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.searchTextField.text = _strKeyWord
         self.gotoNextPage(_strKeyWord!);
     }
- 
     
-    //MARK: - 标签点击操作
     
-    func buttonAction(sender: UIButton) {
     
-        
-        self.gotoNextPage(sender.titleLabel!.text!);
-        
-        print("buttonAction:\(sender.tag)")
-    }
-    
-    @IBAction func searchButtonAction(sender: UIButton) {
-        
-        self.gotoNextPage(self.searchTextField.text!);
-    }
-    
-    @IBAction func textFieldEndAndExit(sender: UITextField) {
-        
-//        self.gotoNextPage(sender.text!);
-    }
-    
-    func gotoNextPage(strKeyWord:String)
-    {
-        var vc:T02HotListVC! =  T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle())
-        vc.keyword = strKeyWord;
-        vc.pagemodel  = .search;
-        self.navigationController?.pushViewController(vc, animated: true);
-        vc = nil;
 
-        self.removeTimer();
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     
     // MARK: - UItextFiledDelegate
     
@@ -251,11 +243,10 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 12)
         
-
         return true
     }
     
-
+    
     @IBAction func searchTexfieldValueChange(sender: AnyObject) {
         
         if (sender.text == nil || sender.text!.length <= 0) {return}
@@ -272,7 +263,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         self.blurView.hidden = true;
         return true
     }
-
+    
     //MARK: 手动输入的搜索结果
     func GetSelectValue(inputValue:String)
     {
@@ -299,7 +290,6 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
                 else
                 {
                     httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
-                    
                 }
             }
             else
@@ -345,21 +335,21 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
         {
             SVProgressHUD.dismiss();
             
-//            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
-//            if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
-//            {
-//                let dataArray: NSMutableArray = NSMutableArray()
-//                dataArray.addObject("历史搜索")
-//                
-//                for item in UserModel.shared.searchHistory {
-//                    
-//                    dataArray.addObject(item.keyword);
-//                }
-//                
-//                itemContents = dataArray
-//                self.searchTableView.reloadData()
-//            }
-//            self.searchTableView.hidden = false
+            //            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+            //            if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
+            //            {
+            //                let dataArray: NSMutableArray = NSMutableArray()
+            //                dataArray.addObject("历史搜索")
+            //
+            //                for item in UserModel.shared.searchHistory {
+            //
+            //                    dataArray.addObject(item.keyword);
+            //                }
+            //
+            //                itemContents = dataArray
+            //                self.searchTableView.reloadData()
+            //            }
+            //            self.searchTableView.hidden = false
         }
         else if(tag  == 13)
         {
@@ -397,7 +387,7 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             }
             
         }
-
+        
     }
     
     func requestDataFailed(error: String,tag:Int) {
@@ -407,15 +397,15 @@ class T01HomePageVC: RootVC,UITextFieldDelegate,T11SearchSuggestionDelegate,WebR
             httpObj.httpPostApi("user/loginAsGuest",  tag: 102)
         }
         
-//        if(error == "ErrorCode:1001 ERR_NOT_LOGGED_IN")
-//        {
-//            
-//            SVProgressHUD.showWithStatusWithBlack("请稍等...")
-//        }
+        //        if(error == "ErrorCode:1001 ERR_NOT_LOGGED_IN")
+        //        {
+        //
+        //            SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        //        }
         NSLog("Error in page T01 :%@", error)
     }
     
-    //MARK: 定时器相关
+    //MARK: Timer
     var orderTimer:NSTimer!
     var record = 0;
     func startTimer()

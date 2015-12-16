@@ -14,7 +14,7 @@ class CSActionSheet : UIWindow {
     var delegate: CSActionSheetDelegate?
     var titles: NSArray!
     var backguandImageView: UIImageView!
-
+    
     let ButtonTag: Int = 1000
     var ButtonHeight: CGFloat = 45
     
@@ -24,7 +24,7 @@ class CSActionSheet : UIWindow {
         }
         return Static.instance
     }
-    
+    //MARK:Life Cycle
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -43,7 +43,7 @@ class CSActionSheet : UIWindow {
         for view in self.subviews {
             view.removeFromSuperview()
         }
-            
+        
         self.frame = KeyWindow.bounds
         self.windowLevel = UIWindowLevelStatusBar
         self.backgroundColor = RGBCA(0, a: 0.3)
@@ -58,7 +58,7 @@ class CSActionSheet : UIWindow {
         self.addSubview(backguandImageView)
         
         for var index = 0; index < titles.count; index++ {
-        
+            
             let space: Int = index == 1 ? 5 : 1
             let key: String = "button\(index)"
             
@@ -95,12 +95,12 @@ class CSActionSheet : UIWindow {
         
         backguandImageViewBeginOriginY(!show)
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-           self.backguandImageViewBeginOriginY(show)
-        }) { finish -> Void in
-            if !show { self.hidden = !show }
+            self.backguandImageViewBeginOriginY(show)
+            }) { finish -> Void in
+                if !show { self.hidden = !show }
         }
     }
-
+    
     //MARK: - touches
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -115,7 +115,7 @@ class CSActionSheet : UIWindow {
         self.delegate?.csActionSheetAction(self, selectedIndex: sender.tag)
         
         if sender.tag == ButtonTag {
-           
+            
         }
         
         self.show(false)
@@ -130,6 +130,6 @@ class CSActionSheet : UIWindow {
 }
 
 protocol CSActionSheetDelegate : NSObjectProtocol {
-
-   func csActionSheetAction(view: CSActionSheet, selectedIndex index: Int)
+    
+    func csActionSheetAction(view: CSActionSheet, selectedIndex index: Int)
 }

@@ -19,7 +19,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     @IBOutlet weak var companyTextField: UITextField!
     
     var dorpListView: CSDorpListView!
-    
+    //MARK:Life Cycle
     deinit{
         
         NSLog("T07DeliverEditVC -->deinit")
@@ -57,16 +57,12 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 71)
     }
     
-    //MARK: - override
-    
+    //MARK: - Ibaction
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         scanTextField.resignFirstResponder()
         companyTextField.resignFirstResponder()
     }
-    
-    //MARK: - Action
-    
     @IBAction func btnAction(sender: UIButton) {
         
         let btnTag = sender.tag;
@@ -85,28 +81,19 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
             self.httpObj.httpPostApi("trade/deliver", parameters: ["company": companyTextField.text!, "trackingId": scanTextField.text!], tag: 70)
         }
     }
-    
     @IBAction func textFieldEditEnd(sender: UITextField) {
-        
         sender.resignFirstResponder()
     }
     
     
     @IBAction func scancompanyTextFieldButtonAction(sender: UIButton) {
-        
-        
-        
-        
         let btnTag = sender.tag;
         if(btnTag == 20) {//company
             dorpListView.show(companyTextField)
         } else if (btnTag == 21) {//scan
-            
             let vc = ScanVC(nibName: "ScanVC", bundle: NSBundle.mainBundle())
-            
             vc.myDelegate = self;
             self.navigationController?.pushViewController(vc, animated: true)
- 
         }
     }
     func scanCodeResult(code:String)
@@ -116,16 +103,12 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
 
 
     //MARK: - CSDorpListViewDelegate
-    
     func dorpListButtonItemAction(sender: UIButton!) {
-        
         companyTextField.text = sender.titleLabel?.text
     }
     
     //MARK: - Request delegate
-    
     func requestDataComplete(response: AnyObject, tag: Int) {
-        
         print(response, terminator: "")
         
         if(tag == 70) {
@@ -143,17 +126,14 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
             if(result.count>0) {
                 
                 let defaultAddress = result[0] as ReceiverModel
-                
                 self.phoneLabel.text = defaultAddress.phone
                 self.personLabel.text = defaultAddress.name;
                 self.addressLabel.text = defaultAddress.address;
-                
             }
         }
     }
     
     func requestDataFailed(error: String,tag:Int) {
-        
         SVProgressHUD.showErrorWithStatusWithBlack("获取用户信息失败！");
     }
 }

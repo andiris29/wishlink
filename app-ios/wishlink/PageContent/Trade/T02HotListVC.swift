@@ -23,14 +23,14 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
     let itemCellIde = "U02ItemCell"
-   
+    
     var keyword = "";
     var pagemodel = t02model.hot;
     var currentItemCell: U02ItemCell = U02ItemCell()
     var searchTextField: UITextField!
     var topView = UIImageView()
     
-//    var t06VC:T06ItemVC!
+    //    var t06VC:T06ItemVC!
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         
         self.preparePage()
         self.initTopView()
-
+        
         self.httpObj.mydelegate = self;
         
         if(self.pagemodel == .search)
@@ -54,33 +54,33 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
             self.httpObj.httpGetApi("itemFeeding/hot", parameters: nil , tag: 10);
         }
     }
-
+    
     deinit{
         
         NSLog("T02HotListVC -->deinit")
-      
+        
         if(self.dataArr != nil && self.dataArr.count>0)
         {
             self.dataArr.removeAll();
             self.dataArr = nil;
         }
-
+        
         self.httpObj.mydelegate = nil;
-          self.collectionView = nil;
+        self.collectionView = nil;
     }
     
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
         
-
+        
         
         self.navigationController?.navigationBarHidden = false;
         
-       
-//        self.maskView.hidden = false;
-
-//        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        
+        //        self.maskView.hidden = false;
+        
+        //        SVProgressHUD.showWithStatusWithBlack("请稍等...")
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -89,14 +89,14 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func initTopView() {
-    
+        
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(44, 10, 10, 10)
         
         topView.backgroundColor = RGB(247, g: 247, b: 247)
         topView.frame = CGRectMake(0, 0, ScreenWidth, 44)
         topView.userInteractionEnabled = true
         self.collectionView.addSubview(topView)
-
+        
         
         self.searchTextField = UITextField()
         self.searchTextField.frame = CGRectMake(10, 7, ScreenWidth - 20, 30)
@@ -111,7 +111,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         self.searchTextField.leftView = UIView(frame: CGRectMake(0, 0, 7, 30))
         topView.addSubview(self.searchTextField)
     }
-
+    
     // MARK: - Touch
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -160,7 +160,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     // MARK: - prive method
     func preparePage() {
-
+        
         self.collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 7.5, right: 10)
         self.collectionView.registerNib(UINib(nibName: "U02ItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: itemCellIde)
         self.collectionView.scrollEnabled = true;
@@ -175,7 +175,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         }
     }
     
-    // MARK: - Action 
+    // MARK: - IBAction
     
     func backButtonAction(button: UIButton){
         
@@ -183,7 +183,6 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     // MARK: - UITextFieldDelegate
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         let _keyword = textField.text!;
@@ -195,10 +194,10 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
                 "keyword":self.keyword]
             self.maskView.hidden = false;
             self.lbTipMessage.text = "正在搜索中..."
-//            if(self.pagemodel == .search)
-//            {
-                self.loadComNavTitle(self.keyword)
-//            }
+            //            if(self.pagemodel == .search)
+            //            {
+            self.loadComNavTitle(self.keyword)
+            //            }
             
             self.httpObj.httpGetApi("itemFeeding/search", parameters: para , tag: 10);
             SVProgressHUD.showWithStatusWithBlack("请稍等...")
@@ -210,9 +209,9 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-                
-        if (scrollView.contentOffset.y < 0) {
         
+        if (scrollView.contentOffset.y < 0) {
+            
             var topViewRect = self.topView.frame
             topViewRect.origin.y = scrollView.contentOffset.y
             self.topView.frame = topViewRect
@@ -220,7 +219,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-
+        
         if scrollView.contentOffset.y < 10.0 {
             
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
@@ -230,28 +229,28 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
             scrollView.setContentOffset(CGPoint(x: 0, y: 38.0), animated: true)
         }
     }
-
-    //MARK: - U02ItemCellDelegate 
+    
+    //MARK: - U02ItemCellDelegate
     
     func itemCell(cell: U02ItemCell, clickType: ItemCellButtonClickType) {
         
         //该页面不需要收藏和取消收藏功能
         
-//        if(UserModel.shared.isLogin)
-//        {
-//        
-//            var urlSub: String = "item/favorite"
-//            if (cell.favoriteBtn.selected) {
-//                urlSub = "item/unfavorite"
-//            }
-//            let para = ["_id" : cell.item._id]
-//            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
-//            self.currentItemCell = cell
-//        }
-//        else
-//        {
-//            UIHEPLER.showLoginPage(self, isToHomePage: false);
-//        }
+        //        if(UserModel.shared.isLogin)
+        //        {
+        //
+        //            var urlSub: String = "item/favorite"
+        //            if (cell.favoriteBtn.selected) {
+        //                urlSub = "item/unfavorite"
+        //            }
+        //            let para = ["_id" : cell.item._id]
+        //            self.httpObj.httpPostApi(urlSub , parameters:para, tag: 21);
+        //            self.currentItemCell = cell
+        //        }
+        //        else
+        //        {
+        //            UIHEPLER.showLoginPage(self, isToHomePage: false);
+        //        }
     }
     
     //MARK:WebRequestDelegate
@@ -265,7 +264,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
         {
             print(response)
             if(response as! NSDictionary).objectForKey("items") != nil{
-            
+                
                 if( self.dataArr != nil &&  self.dataArr.count>0)
                 {
                     self.dataArr.removeAll(keepCapacity: false);
@@ -325,7 +324,7 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
             SVProgressHUD.showErrorWithStatusWithBlack(error);
         }
     }
-
+    
     
 }
 

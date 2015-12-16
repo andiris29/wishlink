@@ -9,12 +9,13 @@
 import UIKit
 /*所有ViewController的父类，里面放一些全局类的变量活着方法*/
 class RootVC: UIViewController {
-
+    
     var userStatusChangeKey = "login-status-changed"
     var userLogOutKey = "user-login-logout"
     var httpObj:WebRequestHelper!
     var dataArr:[AnyObject]! = []
-
+    
+    //MARK:Life Cycle
     deinit
     {
         NSLog("RootVC ->deinit")
@@ -40,7 +41,7 @@ class RootVC: UIViewController {
         
         super.viewDidLoad()
         httpObj =  WebRequestHelper();
-
+        
         
         if((UIDevice.currentDevice().systemVersion as NSString).floatValue >= 7.0)
         {
@@ -48,7 +49,7 @@ class RootVC: UIViewController {
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-
+        
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -59,15 +60,13 @@ class RootVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:Private
     func userLogOut(notification:NSNotification)
     {
         NSNotificationCenter.defaultCenter().postNotificationName(self.userStatusChangeKey, object: nil)
     }
- 
     
- 
-    
-    //MARK: reDesign Navigation
+    //reDesign Navigation
     func loadComNavTitle(strTitle:String)
     {
         let titleLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 30, 30))
@@ -105,7 +104,7 @@ class RootVC: UIViewController {
     
     
     func loadComNaviLeftBtn()
-    {   
+    {
         self.loadSpecNaviLeftBtn("nav_back", imgHighLight: "nav_back", _selecotr: "leftNavBtnAction:");
     }
     
@@ -119,7 +118,7 @@ class RootVC: UIViewController {
         if(AppConfig.sharedAppConfig.isUserLogin())
         {
             //同步用户信息
-//            AppConfig.sharedAppConfig.syncUserInfo();
+            //            AppConfig.sharedAppConfig.syncUserInfo();
         }
     }
 }

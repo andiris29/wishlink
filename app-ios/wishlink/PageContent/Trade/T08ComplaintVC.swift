@@ -9,7 +9,7 @@
 import UIKit
 
 class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
-
+    
     @IBOutlet weak var contexTextView: UITextView!
     
     @IBOutlet weak var btnImage5: UIButton!
@@ -23,6 +23,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     var currentButton: UIButton!
     var images = Dictionary<String, UIImage>()
     var defaultMsg:String = "在此描述您遇到的具体问题，将有客服人员更快的处理您的申请"
+    //MARK:Life Cycle
     deinit{
         
         NSLog("T08ComplaintVC -->deinit")
@@ -41,8 +42,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         self.navigationController?.navigationBarHidden = false;
     }
     
-    //MARK: - override
-    
+    //MARK: - IBAction
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         contexTextView.resignFirstResponder()
@@ -61,8 +61,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             
             let actionSheet: UIActionSheet = UIActionSheet(title: "上传照片", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从相册中选取")
             actionSheet.showInView(self.view)
-
-
+            
         }
         else if(tag == 10)
         {
@@ -78,28 +77,27 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         }
         else if(tag == 11)
         {
-//            self.httpObj.httpPostApi("trade/complaint", parameters: ["problem": contexTextView.text], tag: 80)
             submit()
         }
         else if(tag == 22)
         {
-//            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
-//            self.navigationController!.pushViewController(vc, animated: true)
+            //            var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+            //            self.navigationController!.pushViewController(vc, animated: true)
             
-
+            
         } else if(tag == 30) {
             
             let strUrl:NSURL = NSURL(string: "telprompt://18601746164")!
             UIApplication.sharedApplication().openURL(strUrl);
-
+            
             
         } else if(tag == 31) {
             let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle());
-           
+            
             
             if(self.navigationController != nil)
             {
-                 self.navigationController?.pushViewController(vc, animated: true);
+                self.navigationController?.pushViewController(vc, animated: true);
             }
             else
             {
@@ -119,9 +117,9 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             apiurl,
             multipartFormData: {
                 multipartFormData in
-                 multipartFormData.appendBodyPart(data: self.tradeid.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "_id")
+                multipartFormData.appendBodyPart(data: self.tradeid.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "_id")
                 multipartFormData.appendBodyPart(data: self.contexTextView.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "problem")
- 
+                
                 for var index = self.btnImage1.tag; index <= self.btnImage5.tag; index++ {
                     
                     let image = self.images["T08Complaint_\(index)"]
@@ -135,7 +133,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
                         multipartFormData.appendBodyPart(stream:imgStream, length:len, name: imgName, fileName: imgName, mimeType: "image/jpeg")
                     }
                 }
-            
+                
             },
             encodingCompletion: {
                 encodingResult in
@@ -146,7 +144,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
                     _upload.responseJSON { _response in
                         
                         let resultObj:(request:NSURLRequest?, respon:NSHTTPURLResponse?, result:Result) = _response;
-
+                        
                         switch resultObj.result {
                         case .Success(let json):
                             
@@ -165,7 +163,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
                             print(json);
                             let itemData =  json.objectForKey("data") as! NSDictionary
                             if(itemData.objectForKey("trade") != nil) {
-
+                                
                             } else {
                                 
                                 SVProgressHUD.showErrorWithStatusWithBlack("提交数据失败！");
@@ -215,14 +213,14 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
             actionSheet.dismissWithClickedButtonIndex(0, animated: true)
         }
     }
-
+    
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let gotImage = info[UIImagePickerControllerEditedImage] as! UIImage
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
-    
+            
             self.images["T08Complaint_\(self.currentButton.tag)"] = gotImage
             self.currentButton.setImage(gotImage, forState: UIControlState.Normal);
             UIHEPLER.saveImageToLocal(gotImage, strName: "T08Complaint_\(self.currentButton.tag).jpg")
@@ -233,7 +231,7 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
     }
     var currMsgLength = 0;
     
-    //textViewDelegate
+    //MARK:textViewDelegate
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         return CalculationLenght();
@@ -296,20 +294,14 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
         }
         return resut;
     }
-
+    
     //MARK: - Request delegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
-        
         SVProgressHUD.dismiss();
-//        if(tag == 80) {
-//            self.navigationController?.popViewControllerAnimated(true);
-//            //             self.dismissViewControllerAnimated(true, completion: nil);
-//        }
     }
     
     func requestDataFailed(error: String,tag:Int) {
-        
         SVProgressHUD.dismiss();
     }
 }

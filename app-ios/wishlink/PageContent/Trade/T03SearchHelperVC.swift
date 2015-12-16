@@ -11,7 +11,7 @@ let HttpTag: Int = 1000
 import UIKit
 
 class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, WebRequestDelegate, SearchCollectionViewCellDelegate {
-
+    
     let cellIdentifier = "SearchCollectionViewCell"
     let cellHeaderIdentifier = "SearchCollectionReusableViewHeader"
     
@@ -22,32 +22,28 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
-//    var nextVC:UIViewController!
-    
+    //MARK:Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionCellRegisterNib()
         initWithData()
         initWithView()
-
+        
     }
     override func viewWillAppear(animated: Bool) {
-//        if(self.nextVC != nil)
-//        {
-//            self.nextVC = nil;
-//        }
         httpRequest()
     }
     
-    func collectionCellRegisterNib() {
-    
-        self.collectionView.registerNib(UINib(nibName: "SearchCollectionViewCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: cellIdentifier)
-        self.collectionView.registerNib(UINib(nibName: "SearchCollectionReusableViewHeader", bundle: NSBundle.mainBundle()), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: cellHeaderIdentifier)
-        
-
+    func initWithData() {
+        marks = ["country", "category", "brand"]
+        titles = ["国家和地区", "种类", "热门品牌"]
+        goods = NSMutableDictionary(capacity: marks.count);
     }
     
+    func initWithView() {
+        self.loadComNavTitle("搜索");
+    }
     func httpRequest() {
         
         self.httpObj.mydelegate = self;
@@ -58,19 +54,15 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
             self.httpObj.httpGetApi("trend/\(marks[index])", parameters: parameter, tag: HttpTag + index);
         }
     }
-    
-    func initWithData() {
-     
-        marks = ["country", "category", "brand"]
-        titles = ["国家和地区", "种类", "热门品牌"]
-        goods = NSMutableDictionary(capacity: marks.count);
+    func collectionCellRegisterNib() {
+        
+        self.collectionView.registerNib(UINib(nibName: "SearchCollectionViewCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: cellIdentifier)
+        self.collectionView.registerNib(UINib(nibName: "SearchCollectionReusableViewHeader", bundle: NSBundle.mainBundle()), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: cellHeaderIdentifier)
+        
+        
     }
     
-    func initWithView() {
     
-        self.loadComNavTitle("搜索");
-    }
-
     //MARK: - UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -78,8 +70,8 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         var reusableView: UICollectionReusableView!
         
         if kind == UICollectionElementKindSectionHeader {
-        
-            reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellHeaderIdentifier, forIndexPath: indexPath) 
+            
+            reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellHeaderIdentifier, forIndexPath: indexPath)
             
             let label: UILabel = reusableView.viewWithTag(100) as! UILabel
             label.text = titles[indexPath.section] as? String
@@ -122,7 +114,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         self.searchTextField.resignFirstResponder()
     }
     
-    //MARK: - Action
+    //MARK: - IBAction
     
     @IBAction func searchButtonAction(sender: AnyObject) {
         
@@ -139,13 +131,13 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         var vc:T02HotListVC! = T02HotListVC(nibName: "T02HotListVC", bundle: NSBundle.mainBundle());
         vc.keyword = keyWord
         vc.pagemodel  = .search;
-//        self.nextVC = vc
+        //        self.nextVC = vc
         
         self.navigationController?.pushViewController( vc, animated: true);
         vc = nil;
     }
     
-    //MARK: - WebRequestDelegate 
+    //MARK: - WebRequestDelegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
         
@@ -161,10 +153,10 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         
     }
     
-    //MARK: - Unit
+    //MARK: - reload data
     
     func modelConversionFormData(dataArray: NSArray!, tag: Int) {
-       
+        
         if (dataArray != nil && dataArray.count > 0) {
             
             let temp: NSMutableArray = NSMutableArray();
@@ -182,7 +174,7 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         }
     }
     
-    //MARK: - SearchCollectionViewCellDelegate 
+    //MARK: - SearchCollectionViewCellDelegate
     var selectCell:SearchCollectionViewCell!
     func searchCollectionViewCell(cell: SearchCollectionViewCell, title: NSString, buttonIndex: Int) {
         
@@ -195,15 +187,11 @@ class T03SearchHelperVC: RootVC, UICollectionViewDataSource,UICollectionViewDele
         self.selectCell.setCellSelectStatus(true);
         self.searchTextField.text = title as String
         
-    
+        
         self.gotoSearchResultPage(title as String)
-    
-    }
-    
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
     }
+    
 
+    
 }

@@ -35,6 +35,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     //选中的抢单列表
     var selectArr:[TradeModel]! = []
     
+    //MARK:Life Cycle
     deinit
     {
         NSLog("T06ItemVC deinit")
@@ -53,13 +54,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         self.initData()
     }
-    //    override func viewWillAppear(animated: Bool) {
-    //        super.viewWillAppear(animated);
-    //        if(self.nextVC != nil)
-    //        {
-    //            self.nextVC = nil
-    //        }
-    //    }
     
     var isFav = false;
     func changeBtnFav(_isFav:Bool)
@@ -98,11 +92,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         
         UIHEPLER.buildImageViewWithRadius(self.iv_userImg, borderColor: UIColor.whiteColor(), borderWidth: 1);
         self.changeBtnFav(self.item.isFavorite);
-        //         self.btnFav.selected = self.item.isFavorite
-        
-        
         self.goodNameLabel.text = "品名：\(self.item.brand) \(self.item.name) "
-        //        self.goodBranchLabel.text = "品牌：\(self.item.brand)";
         self.goodFormatLabel.text = "规格：\(self.item.spec)";
         self.goodAddressLabel.text = "购买地：\(self.item.country)";
         self.goodAllTradeLabel.text = "\(self.item.numTrades)";
@@ -116,9 +106,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
             self.img_tips.hidden = true;
             self.lbRemark.text = ""
         }
-        
-        
-        
         if (self.item.images == nil) {return}
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
@@ -132,11 +119,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
                 self.initImageRollView(images)
             })
         })
-        
-        
-        
-        
-        
     }
     
     
@@ -147,8 +129,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
         imageRollView.setpageIndicatorTintColor(UIColor(red: 124.0 / 255.0, green: 0, blue: 90.0 / 255.0, alpha: 1))
     }
     
-    // MARK: - Action
-    
+    // MARK: - IBAction
     @IBAction func backButtonAction(sender: UIButton) {
         
         self.navigationController?.popViewControllerAnimated(true);
@@ -236,7 +217,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     var shareVC:ShareVC!
     
     // MARK: - T06CellDelegate
-    
     func selectItemChange(trade: TradeModel, isSelected: Bool) {
         
     }
@@ -274,9 +254,7 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     }
     
     // MARK: - WebRequestDelegate
-    
     func requestDataComplete(response: AnyObject, tag: Int) {
-        
         SVProgressHUD.dismiss();
         if(tag == 60)//加载跟单列表
         {

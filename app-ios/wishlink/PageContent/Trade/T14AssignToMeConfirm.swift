@@ -11,21 +11,17 @@ import UIKit
 class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, WebRequestDelegate, T06CellDelegate {
     
     let cellIdentifier = "T06Cell"
-    
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tradeTableView: UITableView!
-    
-    
     var selectItemRemove:((_trade: TradeModel)->Void)!;
     var reSelectEvent:(()->Void)!
-    
-//    var t05VC:T05PayVC!
     var item: ItemModel!
     //跟单列表
     var followArr:[TradeModel]! = []
     //选中的抢单列表
     var selectArr:[TradeModel]! = []
     
+    //MARK:Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +43,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     }
     
     func initData() {
-    
+        
         self.httpObj.mydelegate = self
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         
@@ -66,9 +62,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
             
             self.totalLabel.text = "订单总金额：RMB \(totalFree.format(".2"))";
         }
-
     }
-    
     var userImage:[(path:String,img:UIImage!)]!
     func loadAllUserImage()
     {
@@ -112,20 +106,18 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
             }
         }
     }
-
     
+    //MARK:UITableView Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         return 88
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return followArr.count
     }
     
@@ -134,8 +126,6 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
         let tdata = followArr[indexPath.row]
         cell.loadData(tdata,item:self.item);
-       
-        
         cell.iv_userImg.image = nil;
         var imgUrl :String!
         
@@ -159,7 +149,6 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
             {
                 WebRequestHelper().renderImageView( cell.iv_userImg, url: imgUrl, defaultName: "")
             }
-            
         }
         
         cell.selectedButton.selected = true;
@@ -168,7 +157,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         return cell
     }
     
-    // MARK: - Action
+    // MARK: - IBAction
     
     @IBAction func closeButtonAction(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil);
@@ -189,7 +178,7 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
                 if(self.selectArr.count>0)
                 {
                     SVProgressHUD.showWithStatusWithBlack("请稍后...")
-    
+                    
                     for tradeItem in self.selectArr
                     {
                         self.httpObj.httpPostApi("trade/assignToMe", parameters: ["_id":tradeItem._id], tag: 141)
@@ -199,19 +188,18 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
                 {
                     UIHEPLER.alertErrMsg("请先选择");
                 }
-              
+                
             }
             else
             {
                 UIHEPLER.showLoginPage(self,isToHomePage: false);
             }
-
+            
         }
     }
     
     
     // MARK: - T06CellDelegate
-    
     func selectItemChange(trade: TradeModel, isSelected: Bool) {
         
         if(isSelected)//insert
@@ -252,29 +240,22 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
                 self.followArr.removeAtIndex(index);
             }
             self.tradeTableView.reloadData();
-
-            
-            
         }
-
     }
     
-    // MARK: - WebRequestDelegate
-    
+    // MARK: - web request Delegate
     func requestDataComplete(response: AnyObject, tag: Int) {
         SVProgressHUD.dismiss();
         if(tag == 141)
         {
             self.dismissViewControllerAnimated(true, completion: nil);
-             //跳转到卖家订单
+            //跳转到卖家订单
             UIHEPLER.gotoU02Page(false);
-           
         }
     }
     
     func requestDataFailed(error: String,tag:Int) {
-        
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
-
+    
 }

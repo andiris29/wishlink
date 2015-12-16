@@ -13,9 +13,9 @@ class CSDorpListView: UIWindow {
     private var scrollerView:  UIScrollView!
     private var containerView: UIView!
     private var titleView: UIView!
-        
-//    private var inputTextField: UITextField!
-//    private var dorpButton: UIButton!
+    
+    //    private var inputTextField: UITextField!
+    //    private var dorpButton: UIButton!
     
     private var baseView: UIView!
     
@@ -75,7 +75,7 @@ class CSDorpListView: UIWindow {
         baseView = UIView()
         baseView.userInteractionEnabled = true
         baseView.backgroundColor = UIColor.whiteColor()
-//        baseView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //        baseView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.addSubview(baseView)
         
         titleView      = UIView()
@@ -83,18 +83,18 @@ class CSDorpListView: UIWindow {
         titleView.translatesAutoresizingMaskIntoConstraints = false
         baseView.addSubview(titleView)
         
-//        dorpButton     = UIButton()
-//        dorpButton.backgroundColor = UIColor.clearColor()
-//        dorpButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        dorpButton.setTitle("上", forState: UIControlState.Normal)
-//        dorpButton.setTitle("下", forState: UIControlState.Selected)
-//        dorpButton.addTarget(self, action: Selector("dorpButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-//        titleView.addSubview(dorpButton)
-//        
-//        inputTextField = UITextField()
-//        inputTextField.backgroundColor = UIColor.clearColor()
-//        inputTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        titleView.addSubview(inputTextField)
+        //        dorpButton     = UIButton()
+        //        dorpButton.backgroundColor = UIColor.clearColor()
+        //        dorpButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //        dorpButton.setTitle("上", forState: UIControlState.Normal)
+        //        dorpButton.setTitle("下", forState: UIControlState.Selected)
+        //        dorpButton.addTarget(self, action: Selector("dorpButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        //        titleView.addSubview(dorpButton)
+        //
+        //        inputTextField = UITextField()
+        //        inputTextField.backgroundColor = UIColor.clearColor()
+        //        inputTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //        titleView.addSubview(inputTextField)
         
         containerView  = UIView()
         containerView.backgroundColor = UIColor.clearColor()
@@ -112,31 +112,31 @@ class CSDorpListView: UIWindow {
     }
     
     func bindWithList(titles: NSArray, delegate: CSDorpListViewDelegate?) {
-
+        
         self.titles = titles
         self.delegate = delegate
-
+        
         for view in containerView.subviews {
             view.removeFromSuperview()
         }
         
         viewConstraints = Dictionary<String, NSObject>()
-//        viewConstraints["inputTextField"] = inputTextField
+        //        viewConstraints["inputTextField"] = inputTextField
         viewConstraints["containerView"] = containerView
         viewConstraints["scrollerView"] = scrollerView
-//        viewConstraints["dorpButton"] = dorpButton
+        //        viewConstraints["dorpButton"] = dorpButton
         viewConstraints["titleView"] = titleView
-//        viewConstraints["baseView"] = baseView
+        //        viewConstraints["baseView"] = baseView
         
         //titleView
         baseView.addConstraintsVisualFormat("H:|[titleView]|", views: viewConstraints)
         baseView.addConstraintsVisualFormat("V:|[titleView]", views: viewConstraints)
         
         //dorpButton inputTextField
-//        titleView.addConstraintWidthAndHeightMultiple(1.0, item: dorpButton)
-//        titleView.addConstraintsVisualFormat("V:|[dorpButton]|", views: viewConstraints)
-//        titleView.addConstraintsVisualFormat("V:|[inputTextField]|", views: viewConstraints)
-//        titleView.addConstraintsVisualFormat("H:|-8-[inputTextField][dorpButton]|", views: viewConstraints)
+        //        titleView.addConstraintWidthAndHeightMultiple(1.0, item: dorpButton)
+        //        titleView.addConstraintsVisualFormat("V:|[dorpButton]|", views: viewConstraints)
+        //        titleView.addConstraintsVisualFormat("V:|[inputTextField]|", views: viewConstraints)
+        //        titleView.addConstraintsVisualFormat("H:|-8-[inputTextField][dorpButton]|", views: viewConstraints)
         
         //scrollerView
         baseView.addConstraintsVisualFormat("H:|[scrollerView]|", views: viewConstraints)
@@ -145,11 +145,11 @@ class CSDorpListView: UIWindow {
         //containerView
         scrollerView.addConstraintsVisualFormat("V:|[containerView]|", views: viewConstraints)
         scrollerView.addConstraintsVisualFormat("H:|[containerView(scrollerView)]|", views: viewConstraints)
-//        scrollerView.addConstraintHeightMultiple(CGFloat(self.titles.count), item: containerView, toItem: scrollerView)
+        //        scrollerView.addConstraintHeightMultiple(CGFloat(self.titles.count), item: containerView, toItem: scrollerView)
         scrollerView.addConstraintHeightMultiple(1.0, item: containerView, toItem: scrollerView)
         
         for var index = 0; index < self.titles.count; index++ {
-        
+            
             let key: String = "button\(index)"
             let button: UIButton = UIButton()
             button.backgroundColor = UIColor.clearColor()
@@ -189,23 +189,23 @@ class CSDorpListView: UIWindow {
     
     //MARK: - Action
     
-//    func dorpButtonAction(sender: UIButton) {
-//        
-//        sender.selected = !sender.selected
-//        
-//        var viewHeight: CGFloat = 0.0
-//        
-//        if sender.selected {
-//
-//            viewHeight = self.frame.size.height * CGFloat(self.titles.count + 1)
-//            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]|", views: viewConstraints)
-//        } else {
-//            viewHeight = self.frame.size.height / CGFloat(self.titles.count + 1)
-//            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]", views: viewConstraints)
-//        }
-//        self.frame.size.height = viewHeight
-//        self.setNeedsDisplay()
-//    }
+    //    func dorpButtonAction(sender: UIButton) {
+    //
+    //        sender.selected = !sender.selected
+    //
+    //        var viewHeight: CGFloat = 0.0
+    //
+    //        if sender.selected {
+    //
+    //            viewHeight = self.frame.size.height * CGFloat(self.titles.count + 1)
+    //            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]|", views: viewConstraints)
+    //        } else {
+    //            viewHeight = self.frame.size.height / CGFloat(self.titles.count + 1)
+    //            self.addConstraintsVisualFormat("V:|[titleView][scrollerView]", views: viewConstraints)
+    //        }
+    //        self.frame.size.height = viewHeight
+    //        self.setNeedsDisplay()
+    //    }
     
     func dorpListButtonAction(sender: UIButton) {
         

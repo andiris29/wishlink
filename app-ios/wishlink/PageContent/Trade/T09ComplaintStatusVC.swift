@@ -19,10 +19,11 @@ class T09ComplaintStatusVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var chatTableView: UITableView!
     
     var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
+    //MARK:Life Cycle
     deinit{
         
         NSLog("T09ComplaintStatusVC -->deinit")
-     
+        
         
         self.dataArr = nil;
     }
@@ -41,8 +42,9 @@ class T09ComplaintStatusVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         self.navigationController?.navigationBarHidden = false;
     }
     
+    //MARK:UITableView Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    
+        
         switch indexPath.row {
         case 0:
             return 30
@@ -52,19 +54,16 @@ class T09ComplaintStatusVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return itemContents.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
-        
         switch indexPath.row {
         case 0:
             let  leftCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierTime, forIndexPath: indexPath) as! T09CellTime

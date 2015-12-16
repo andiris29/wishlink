@@ -19,11 +19,9 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var chatTableView: UITableView!
     
     var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
+    //MARK:Life Cycle
     deinit{
-        
         NSLog("T10MessagingVC -->deinit")
-        
-        
         self.dataArr = nil;
     }
     override func viewDidLoad() {
@@ -36,9 +34,9 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
-                self.hidesBottomBarWhenPushed = true;
+        self.hidesBottomBarWhenPushed = true;
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,10 +44,10 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.navigationBar.hidden = false
-           self.hidesBottomBarWhenPushed = true;
+        self.hidesBottomBarWhenPushed = true;
         self.loadComNaviLeftBtn()
     }
-
+    //MARk:UITableView Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         switch indexPath.row {
@@ -59,17 +57,12 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
             return 90
         }
     }
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return itemContents.count
     }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell

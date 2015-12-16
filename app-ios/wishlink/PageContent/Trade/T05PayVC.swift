@@ -18,10 +18,8 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
     
     let selectedButtonWXTag: Int = 1000
     let selectedButtonZFBTag: Int = 1001
-    
     let increingButtonTag: Int = 2001
     let declineButtonTag: Int = 2000
-    
     var goodsNumbers: Int = 0
     var isNewOrder: Bool = true
     var currPayModel:PayModel = .Alipay
@@ -33,12 +31,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
     
     @IBOutlet weak var increaseButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
-    
-//    @IBOutlet weak var lbReceverName: UILabel!
-//    @IBOutlet weak var lbReceverMobile: UILabel!
-//    @IBOutlet weak var lbRecevierAddress: UILabel!
-    
-    @IBOutlet weak var sv: UIScrollView!
+      @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var locationPickView: UIPickerView!
     @IBOutlet weak var txtReviceArea: UITextField!
@@ -64,7 +57,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
     var cityArray: [[String]] = []
     var districArray: [[String]] = []
     
-    //MARK:Method
+    //MARK:Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.httpObj.mydelegate = self;
@@ -76,7 +69,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("receiveWeXinPayResultNotification:"), name: APPCONFIG.NotificationActionPayResult, object: nil)
         
     }
-    func prepareData() {
+      func prepareData() {
         
         locationPickView.dataSource = self;
         locationPickView.delegate = self;
@@ -104,7 +97,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
             print("error")
         }
     }
-
+    
     func receiveWeXinPayResultNotification(obj:NSNotification)
     {
         let result = obj.object as! PayResp
@@ -131,7 +124,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         self.item = nil;
         self.trade = nil;
     }
-    
+ 
     func initImageRollView(images:[UIImage]) {
         
         imageRollView.initWithImages(images)
@@ -146,7 +139,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         self.lbSpec.text = "";
         self.lbPrice.text = "";
         self.numbersTextField.text = "0";
-
+        
         
         if(self.trade != nil && self.trade._id != "")
         {
@@ -159,7 +152,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
             self.lbName.text = self.item.brand + " " + self.item.name;
             self.lbCountry.text = self.item.country;
             self.lbSpec.text = self.item.spec;
-             var unitStr = ""
+            var unitStr = ""
             if(self.item.unit != nil)
             {
                 unitStr = self.item.unit;
@@ -191,9 +184,9 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         
         
         self.decreaseButton.enabled = goodsNumbers > 1
-//        self.lbReceverName.text = "";
-//        self.lbReceverMobile.text = "";
-//        self.lbRecevierAddress.text = "";
+        //        self.lbReceverName.text = "";
+        //        self.lbReceverMobile.text = "";
+        //        self.lbRecevierAddress.text = "";
         if( UserModel.shared.isLogin && UserModel.shared.receiversArray != nil && UserModel.shared.receiversArray.count>0)
         {
             let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
@@ -203,9 +196,9 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
             {
                 let defaultAddress = result[0] as ReceiverModel
                 
-//                self.lbReceverName.text = defaultAddress.name
-//                self.lbReceverMobile.text = defaultAddress.phone;
-//                self.lbRecevierAddress.text = defaultAddress.address;
+                //                self.lbReceverName.text = defaultAddress.name
+                //                self.lbReceverMobile.text = defaultAddress.phone;
+                //                self.lbRecevierAddress.text = defaultAddress.address;
                 
             }
         }
@@ -228,7 +221,8 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         self.loadComNaviLeftBtn()
         self.loadComNavTitle(self.isNewOrder ? "发布" : "我要跟单")
     }
-
+    
+    //MARK:IBAction
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
         self.locationView.hidden = true
@@ -240,7 +234,6 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         self.locationView.hidden = false
         self.txtReviceArea.text = self.locationString()
     }
-    
     @IBAction func selectPayAction(sender: AnyObject) {
         
         var tag = (sender as! UIButton).tag
@@ -259,22 +252,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         }
         
     }
-//    var currentButton: UIButton = UIButton()
-//    @IBAction func selectedButtonPay(sender: UIButton) {
-//        
-//        sender.selected = !sender.selected
-//        
-//        if sender.tag == selectedButtonWXTag {
-//            
-//            self.currPayModel = .Weixin
-//        } else if sender.tag == selectedButtonZFBTag {
-//            
-//            self.currPayModel = .Alipay
-//        }
-//        // single select
-//        if currentButton != sender { currentButton.selected = false }
-//        currentButton = sender
-//    }
+
     @IBAction func btnPayTapped(sender: UIButton) {
         if(!validateContent())
         {
@@ -284,7 +262,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         let tag = sender.tag;
         if(tag == 11)//确认支付
         {
-
+            
             var para = ["_id":self.trade._id,
                 "pay": [
                     "alipay":NSDictionary()
@@ -299,33 +277,33 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
             SVProgressHUD.showWithStatusWithBlack("请稍等...")
             self.httpObj.httpPostApi("trade/prepay", parameters: para as? [String : AnyObject], tag: 88)
         }
-//        else//修改收货地址
-//        {
-//            let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
-//            u03VC.isHiddleEditModel = true;
-//            u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
-//            
-////                self!.lbReceverName.text = item.name
-////                self!.lbReceverMobile.text = item.phone;
-////                self!.lbRecevierAddress.text = item.address;
-//                
-//                let para = ["_id":self!.trade._id,
-//                    "receiver":[
-//                        "name":item.name,
-//                        "phone":item.phone,
-//                        "province":item.province,
-//                        "address":item.address
-//                    ]
-//                ]
-//                //TODU:更换支付地址
-//                self!.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
-//            }
-//            self.navigationController?.pushViewController(u03VC, animated: true);
-//            
-//        }
+        //        else//修改收货地址
+        //        {
+        //            let u03VC = U03AddressManagerVC(nibName: "U03AddressManagerVC", bundle: NSBundle.mainBundle())
+        //            u03VC.isHiddleEditModel = true;
+        //            u03VC.selectDefaultReceiver  = {[weak self](item:ReceiverModel) in
+        //
+        ////                self!.lbReceverName.text = item.name
+        ////                self!.lbReceverMobile.text = item.phone;
+        ////                self!.lbRecevierAddress.text = item.address;
+        //
+        //                let para = ["_id":self!.trade._id,
+        //                    "receiver":[
+        //                        "name":item.name,
+        //                        "phone":item.phone,
+        //                        "province":item.province,
+        //                        "address":item.address
+        //                    ]
+        //                ]
+        //                //TODU:更换支付地址
+        //                self!.httpObj.httpPostApi("trade/updateReceiver", parameters: para as? [String : AnyObject], tag: 51)
+        //            }
+        //            self.navigationController?.pushViewController(u03VC, animated: true);
+        //
+        //        }
         
     }
-
+    
     func bindCity(key: String) {
         self.cityArray = self.cityDic[key] as! [[String]]
     }
@@ -370,7 +348,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
             return false
         }
     }
-
+    
     
     
     @IBAction func incrlineOrDecreingButtonPay(sender: UIButton) {
@@ -410,7 +388,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
                 
                 let _tradeDic:NSDictionary! = response as? NSDictionary
                 var _trade:TradeModel!
-//                var _prepayid:String!;
+                //                var _prepayid:String!;
                 if(_tradeDic != nil && _tradeDic.objectForKey("trade") != nil)
                 {
                     let tradeDic:NSDictionary! = _tradeDic.objectForKey("trade") as! NSDictionary
@@ -426,23 +404,20 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
                     "province":(self.txtReviceArea.text?.trim())!,
                     "address":(self.txtAddress.text?.trim())!
                 ]
-
-                
-                
                 let address_para:[String : AnyObject] = ["_id":new_trade_id,"receiver": addressPara ]
                 //TODU:更换支付地址
                 self.httpObj.httpPostApi("trade/updateReceiver", parameters: address_para, tag: 51)
                 
-//                let addressPara = ["_id" : new_trade_id,
-//                    "receiver":[
-//                        "name":self.txtReciveName.text?,
-//                        "phone":self.txtReviceMobile.text?,
-//                        "province":self.txtReviceArea.text?,
-//                        "address":self.txtAddress.text?
-//                    ]
-//                ]
-//                //TODU:更换支付地址
-//                self.httpObj.httpPostApi("trade/updateReceiver", parameters: addressPara as? [String : AnyObject], tag: 51)
+                //                let addressPara = ["_id" : new_trade_id,
+                //                    "receiver":[
+                //                        "name":self.txtReciveName.text?,
+                //                        "phone":self.txtReviceMobile.text?,
+                //                        "province":self.txtReviceArea.text?,
+                //                        "address":self.txtAddress.text?
+                //                    ]
+                //                ]
+                //                //TODU:更换支付地址
+                //                self.httpObj.httpPostApi("trade/updateReceiver", parameters: addressPara as? [String : AnyObject], tag: 51)
                 
                 
                 let order = Order()
@@ -601,7 +576,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         NSLog("onReq")
     }
     
-    //MARK:UIPIckViewDelegate   
+    //MARK:UIPIckViewDelegate
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             let provinceCode = self.provinceCodeArray[row]
@@ -664,7 +639,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         label.text = string
         return label
     }
-
+    
     //MARK:TextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
@@ -744,7 +719,7 @@ class T05PayVC: RootVC,WebRequestDelegate,WXApiDelegate,UIPickerViewDelegate, UI
         self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
-
+    
     
     
     //MARK: scrollViewDelegate: hidden keyboard

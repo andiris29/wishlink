@@ -31,6 +31,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
     var searchContext:String = ""
     
     var itemContents: NSArray = NSArray()
+    //MARK:Life Cycle
     deinit{
         
         NSLog("T11SearchSuggestionVC -->deinit")
@@ -42,8 +43,8 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         super.viewDidLoad()
         
         self.httpObj.mydelegate = self;
-   
-//        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+        
+        //        SVProgressHUD.showWithStatusWithBlack("请稍后...")
         self.httpObj.httpGetApi("user/get", parameters: ["req.registrationId":APPCONFIG.Uid], tag: 110)
         
         self.searchTableView.registerNib(UINib(nibName: cellIdentifierSearch, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierSearch)
@@ -52,7 +53,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         
         initView()
     }
-
+    
     func initView() {
         
         self.searchView.layer.masksToBounds = true
@@ -67,18 +68,17 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         self.searchTexfield.becomeFirstResponder()
     }
     // MARK: - Table view data source
-
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-      
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
-
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return itemContents.count
     }
-
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierSearch, forIndexPath: indexPath) as! T11SearchSuggestionCell
         cell.labelName.text = itemContents[indexPath.row] as? String
@@ -92,13 +92,13 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         return cell
         
     }
-
-
+    
+    
     // Override to support conditional rearranging of the table view.
-//     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        // Return NO if you do not want the item to be re-orderable.
-//        return true
-//    }
+    //     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    //        // Return NO if you do not want the item to be re-orderable.
+    //        return true
+    //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -113,16 +113,16 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         }
         
     }
-
-
+    
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
-
+    
     
     //MARK: - Action
     
@@ -161,7 +161,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
         if(self.myDelegate != nil)
         {
             self.myDelegate!.GetSelectValue(textField.text!);
-             self.dismissViewControllerAnimated(true, completion: nil);
+            self.dismissViewControllerAnimated(true, completion: nil);
         }
         
         return false;
@@ -175,7 +175,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             let respDic  = response as! NSDictionary;
             if(respDic.objectForKey("user") != nil)
             {
-            
+                
                 UserModel.shared.userDic = respDic["user"] as! [String: AnyObject]
                 if(UserModel.shared.searchHistory != nil && UserModel.shared.searchHistory.count>0)
                 {
@@ -183,7 +183,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
                     dataArray.addObject("历史搜索")
                     
                     for item in UserModel.shared.searchHistory {
-                   
+                        
                         dataArray.addObject(item.keyword);
                     }
                     dataArray.addObject("清空历史搜索")
@@ -220,7 +220,7 @@ class T11SearchSuggestionVC: RootVC, UITableViewDelegate, UITableViewDataSource,
             }
             
         } else if (tag == 112) {
-        
+            
             itemContents = [];
             self.searchTableView.reloadData()
         }

@@ -9,7 +9,7 @@
 import UIKit
 
 class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate, CSActionSheetDelegate,WebRequestDelegate,T11SearchSuggestionDelegate,UIGestureRecognizerDelegate {
-
+    
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var selectPhotoView: UIView!
     
@@ -54,14 +54,18 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     @IBOutlet weak var constrat_remarkView_Height: NSLayoutConstraint!
     var actionSheet: CSActionSheet!
     var item:ItemModel!
-//    var t05VC:T05PayVC!
+    //    var t05VC:T05PayVC!
     var imgArr:[UIImage]!
     
     var imgEmpty:UIImage! = UIImage(named: "T08bbb");
     var imgSelect:UIImage! = UIImage(named: "T04_Img_Select");
     var defaultRemark="填写其他补充信息";
-  
-    //MARK:System func
+    
+    var contentOffsetY:CGFloat! = 0;
+    var oldContentOffsetY:CGFloat! = 0;
+    var newContentOffsetY:CGFloat! = 0;
+    var OrginFrame :CGRect!
+    //MARK:Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -76,7 +80,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.txtBuyArea.delegate = self;
         self.httpObj.mydelegate = self;
         self.txtRemark.text = defaultRemark;
-  
+        
         self.constrain_ImgBtn_Width.constant = (ScreenWidth - (7*8))/5
         //点击手势
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
@@ -91,17 +95,10 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         
     }
-    var contentOffsetY:CGFloat! = 0;
-    var oldContentOffsetY:CGFloat! = 0;
-    var newContentOffsetY:CGFloat! = 0;
-    
 
-    
-    var OrginFrame :CGRect!
     override func viewWillAppear(animated: Bool) {
         
         OrginFrame = self.tabBarController?.tabBar.frame;
-    
         self.navigationController?.navigationBarHidden = false;
         self.item = nil;
         self.loadComNavTitle("发布新订单")
@@ -116,7 +113,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     }
     
     
-    //MARK:Customer func
+    //MARK:Private
     func loadImagesData()
     {
         self.btn1_del.hidden = true;
@@ -136,7 +133,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.iv4_bg.image = imgEmpty
         self.iv5_bg.image = imgEmpty
         
-    
+        
         if(self.imgArr != nil && self.imgArr.count>0)
         {
             
@@ -169,17 +166,86 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
         }
     }
-
     
-
-
     func csActionSheet() {
-        
         let titles: Array<String> = ["取消", "从手机相册中选择", "拍照"]
         actionSheet = CSActionSheet.sharedInstance
         actionSheet.bindWithData(titles, delegate: self)
     }
-    
+    func checkInput()->String{
+        
+        let result = "";
+        self.dismissKeyboard();
+        
+        if(txtCategory.text!.trim().length == 0)
+        {
+            return "品牌不能为空"
+        }
+        if(txtName.text!.trim().length == 0)
+        {
+            return "品名不能为空"
+        }
+        if(txtBuyArea.text!.trim().length == 0)
+        {
+            return "购买地不能为空"
+        }
+        if(txtPrice.text!.trim().length == 0)
+        {
+            return "出价不能为空"
+        }
+        if(txtUnit.text!.trim().length == 0)
+        {
+            return "单位不能为空"
+        }
+        
+        if(txtSize.text!.trim().length == 0)
+        {
+            return "规格不能为空"
+        }
+        
+        if(txtCount.text!.trim().length == 0)
+        {
+            return "数量不能为空"
+        }
+        
+        if(self.imgArr == nil || self.imgArr.count == 0)
+        {
+            return "请上传图片"
+        }
+        return result;
+        
+    }
+    //T11SelectSuggestionDelegate
+    func GetSelectValue(inputValue: String) {
+        if(self.lastSelectTextFiledTag == 1)
+        {
+            txtCategory.text = inputValue;
+        }
+        else if(self.lastSelectTextFiledTag == 2)
+        {
+            txtName.text =  inputValue;
+        }
+        else if(self.lastSelectTextFiledTag == 3)
+        {
+            txtBuyArea.text = inputValue;
+        }
+        
+        self.lastSelectTextFiledTag = -1;
+    }
+    func clearInput()
+    {
+        self.txtCategory.text = "";
+        self.txtName.text = "";
+        self.txtPrice.text = "";
+        self.txtRemark.text = "";
+        self.txtCount.text = "";
+        self.txtSize.text = "";
+        self.txtBuyArea.text = "";
+        self.txtUnit.text = "";
+        self.dataArr = nil;
+        self.imgArr = nil;
+        loadImagesData();
+    }
     func submit()
     {
         SVProgressHUD.showWithStatusWithBlack("请稍后...")
@@ -197,13 +263,13 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 
                 
                 let price =    self.txtPrice.text!.trim().uppercaseString.stringByReplacingOccurrencesOfString("RMB", withString: "").stringByReplacingOccurrencesOfString("/", withString: "");
-
+                
                 
                 multipartFormData.appendBodyPart(data: price.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "price")
                 multipartFormData.appendBodyPart(data: self.txtSize.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "spec")
                 multipartFormData.appendBodyPart(data: self.txtRemark.text.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "notes")
-                      multipartFormData.appendBodyPart(data: self.txtUnit.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "unit")
-//                if(self.imagrArr.count>0)
+                multipartFormData.appendBodyPart(data: self.txtUnit.text!.trim().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "unit")
+                //                if(self.imagrArr.count>0)
                 if(self.imgArr != nil && self.imgArr.count > 0)
                 {
                     if(self.imgArr.count > 0)
@@ -299,7 +365,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                                 var errorMsg = "提交数据失败！"
                                 if(metaDic != nil && metaDic.count>0)
                                 {
-                                
+                                    
                                     var errCode  = 0;
                                     var errDesc = "";
                                     let errDic = metaDic.objectForKey("devInfo") as! NSDictionary;
@@ -338,19 +404,17 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 }
             }
         )
-
+        
     }
-
+    
     
     var selectTag:Int!
+    //IBAction
     @IBAction func btnAction(sender: UIButton) {
         //关闭定时器
         print("btnAction")
-        
-        
-        
         let tag = sender.tag;
-        if(tag==11)//确定发布   
+        if(tag==11)//确定发布
         {
             let errmsg =  checkInput();
             if(errmsg != "")
@@ -389,7 +453,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
         }
     }
- 
+    
     
     @IBAction func buttonLongPressAction(sender: AnyObject) {
         
@@ -411,49 +475,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         }
     }
     
-      func checkInput()->String{
-        
-        let result = "";
-        self.dismissKeyboard();
-        
-        if(txtCategory.text!.trim().length == 0)
-        {
-            return "品牌不能为空"
-        }
-        if(txtName.text!.trim().length == 0)
-        {
-            return "品名不能为空"
-        }
-        if(txtBuyArea.text!.trim().length == 0)
-        {
-            return "购买地不能为空"
-        }
-        if(txtPrice.text!.trim().length == 0)
-        {
-            return "出价不能为空"
-        }
-        if(txtUnit.text!.trim().length == 0)
-        {
-            return "单位不能为空"
-        }
-        
-        if(txtSize.text!.trim().length == 0)
-        {
-            return "规格不能为空"
-        }
-        
-        if(txtCount.text!.trim().length == 0)
-        {
-            return "数量不能为空"
-        }
-        
-        if(self.imgArr == nil || self.imgArr.count == 0)
-        {
-            return "请上传图片"
-        }
-        return result;
-        
-    }
+ 
     
     @IBAction func textFieldBegin(sender: UITextField) {
         
@@ -513,7 +535,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
-    //MARK:弹出图片上传选择框
+    //弹出图片上传选择框
     func imgHeadChange(index: Int) {
         
         if index == 1001 {
@@ -534,17 +556,16 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             }
         }
     }
-//    var pickImageCount = 0;
     
     //MARK: UIImagePickerController delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-//        let icount = self.imagrArr.count;
+        //        let icount = self.imagrArr.count;
         let gotImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         picker.dismissViewControllerAnimated(true, completion: {
             () -> Void in
-
+            
             
             if(self.imgArr == nil || self.imgArr == [] || self.imgArr.count == 0)
             {
@@ -578,7 +599,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 self.iv5_bg.image = self.imgSelect
             }
             
-//            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
+            //            var imgData = UIImageJPEGRepresentation(gotImage, 1.0)
         })
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -604,7 +625,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-         oldContentOffsetY = scrollView.contentOffset.y;
+        oldContentOffsetY = scrollView.contentOffset.y;
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -634,14 +655,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
                 // 隐藏导航栏和选项栏
                 
                 // [self layoutView];
-//                self.navigationController?.setNavigationBarHidden(true, animated: true);
+                //                self.navigationController?.setNavigationBarHidden(true, animated: true);
                 
-
+                
                 
             } else if ((contentOffsetY - scrollView.contentOffset.y) > 5.0) {   // 向下拖拽
                 
                 // 显示导航栏和选项栏
-//                self.navigationController?.setNavigationBarHidden(false, animated: true);
+                //                self.navigationController?.setNavigationBarHidden(false, animated: true);
                 
             } else {
                 
@@ -649,16 +670,16 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
             
         }
         
-
+        
     }
- 
+    
     func hideTabBar(){
         //Swift中调用animateWithDuration方法
         self.tabBarController?.tabBar.hidden = true
         UIView.animateWithDuration(0.5, animations: alphaDown)
     }
     func alphaDown(){
-//        bgImageView!.alpha = 0
+        //        bgImageView!.alpha = 0
         
     }
     
@@ -670,9 +691,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         imgHeadChange(index)
     }
     
-    
-    
-    
     //MARK:UItextFiledDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
@@ -680,50 +698,19 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         return true;
     }
     var lastSelectTextFiledTag = -1;
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        
-//        if(textField.tag>3 || textField.tag == 0)
-//        {
-            return true;
-//        }
-//        else
-//        {
-//            self.lastSelectTextFiledTag = textField.tag;
-//            let vc =  T11SearchSuggestionVC(nibName: "T11SearchSuggestionVC", bundle: NSBundle.mainBundle())
-//            vc.myDelegate = self;
-//            if(textField.tag == 1)
-//            {
-//                vc.searchType = .brand;
-//            }
-//            else if(textField.tag == 2)
-//            {
-//                vc.searchType = .name;
-//            }
-//            else if(textField.tag == 3)
-//            {
-//                vc.searchType = .country;
-//            }
-//            self.presentViewController(vc, animated: true, completion: nil);
-//            return false;
-//        }
-    }
-
+ 
     
     //MARK:UItextViewDelegate
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n")
         {
-            
             self.txtRemark.resignFirstResponder();
-            
             return false;
         }
-
-        
         return true;
     }
     
-
+    
     func textViewDidBeginEditing(textView: UITextView) {
         let viewframe: CGRect = textView.convertRect(view.frame, toView: self.sv)
         let spaceY = ScreenHeight - viewframe.origin.y
@@ -735,7 +722,7 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         if spaceY < 300 {
             self.sv.setContentOffset(CGPoint(x: 0, y:  spaceY), animated: true)
         }
-
+        
     }
     func textViewDidEndEditing(textView: UITextView) {
         if(textView.text.trim() == "")
@@ -747,44 +734,14 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         
         self.sv.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-
     
     
-    //T11SelectSuggestionDelegate
-    func GetSelectValue(inputValue: String) {
-        if(self.lastSelectTextFiledTag == 1)
-        {
-            txtCategory.text = inputValue;
-        }
-        else if(self.lastSelectTextFiledTag == 2)
-        {
-            txtName.text =  inputValue;
-        }
-        else if(self.lastSelectTextFiledTag == 3)
-        {
-            txtBuyArea.text = inputValue;
-        }
-        
-        self.lastSelectTextFiledTag = -1;
-    }
-    func clearInput()
-    {
-        self.txtCategory.text = "";
-        self.txtName.text = "";
-        self.txtPrice.text = "";
-        self.txtRemark.text = "";
-        self.txtCount.text = "";
-        self.txtSize.text = "";
-        self.txtBuyArea.text = "";
-        self.txtUnit.text = "";
-        self.dataArr = nil;
-        self.imgArr = nil;
-        loadImagesData();
-    }
-
+    
+    
+    
     //MARK: WebrequestDelegate
     func requestDataComplete(response: AnyObject, tag: Int) {
-     if(tag == 12)//trade创建成功,准备页面跳转
+        if(tag == 12)//trade创建成功,准备页面跳转
         {
             self.clearInput();
             SVProgressHUD.dismiss();
@@ -809,6 +766,6 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         UIHEPLER.alertErrMsg(error);
         
     }
-
+    
     
 }
