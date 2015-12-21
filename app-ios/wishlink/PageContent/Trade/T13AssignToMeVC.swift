@@ -246,8 +246,8 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                 
                 self.tradeTableView.reloadData();
             }
-            
-            self.presentViewController(vc, animated: true, completion: nil);
+            self.navigationController?.pushViewController(vc, animated: true);
+//            self.presentViewController(vc, animated: true, completion: nil);
             vc = nil;
             
         }

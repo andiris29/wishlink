@@ -17,6 +17,7 @@ enum t02model:Int
 
 class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
+    @IBOutlet weak var view_moveTop: UIView!
     @IBOutlet weak var maskView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lbTipMessage: UILabel!
@@ -36,6 +37,8 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.view_moveTop.hidden = true;
         
         self.preparePage()
         self.initTopView()
@@ -177,6 +180,17 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     
     // MARK: - IBAction
     
+    @IBAction func btnMoveToTopAction(sender: AnyObject) {
+        
+        UIView.animateWithDuration(0.3, animations: { [weak self]() -> Void in
+            self!.collectionView.contentOffset.y = 0;
+            }) { finish -> Void in
+           
+        }
+
+  
+        
+    }
     func backButtonAction(button: UIButton){
         
         self.navigationController?.popViewControllerAnimated(true);
@@ -209,6 +223,16 @@ class T02HotListVC: RootVC, U02ItemCellDelegate, WebRequestDelegate, UICollectio
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        print(scrollView.contentOffset.y);
+        if(scrollView.contentOffset.y>=ScreenHeight-100)
+        {
+            self.view_moveTop.hidden = false;
+        }
+        else
+        {
+            self.view_moveTop.hidden = true;
+        }
         
         if (scrollView.contentOffset.y < 0) {
             

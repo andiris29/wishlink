@@ -10,8 +10,12 @@ import UIKit
 
 class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, WebRequestDelegate, T06CellDelegate {
     
+    @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var lbCountry: UILabel!
+    @IBOutlet weak var lbSpec: UILabel!
+    @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var iv_item: UIImageView!
     let cellIdentifier = "T06Cell"
-    @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tradeTableView: UITableView!
     var selectItemRemove:((_trade: TradeModel)->Void)!;
     var reSelectEvent:(()->Void)!
@@ -32,26 +36,35 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         NSLog("T14AssignToMeConfirm -->deinit")
         self.item = nil;
         self.tradeTableView = nil;
-        
-        self.userImage = nil;
         self.dataArr = nil;
-        
         self.followArr = nil;
         self.selectArr = nil;
         self.tradeTableView = nil;
-        
     }
     
     func initData() {
         
         self.httpObj.mydelegate = self
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+
+        if(self.item != nil)
+        {
+            self.lbTitle.text = self.item.name;
+            UIHEPLER.setLabelLineSpan( self.lbTitle, lineSpacing: 6);
+            self.lbSpec.text = "规格：\(self.item.spec)";
+            self.lbPrice.text = "出价：\(self.item.price.format(".2"))/\(self.item.unit)";
+            self.lbCountry.text = "购买地：\(self.item.country)";
+            if(self.item.images != nil && self.item.images.count>0)
+            {
+                self.iv_item.sd_setImageWithURL(NSURL(string: self.item.images[0]), placeholderImage:  UIHEPLER.noneImg)
+            }
+        }
+
         
         
-        self.loadAllUserImage();
+        self.loadComNaviLeftBtn()
+        self.loadComNavTitle("确认订单")
         
-        
-        self.totalLabel.text = "订单总金额："
         if(self.followArr != nil && self.followArr.count>0)
         {
             var totalFree:Float = 0;
@@ -60,53 +73,8 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
                 totalFree += (Float(_trade.quantity) * self.item.price)
             }
             
-            self.totalLabel.text = "订单总金额：RMB \(totalFree.format(".2"))";
         }
     }
-    var userImage:[(path:String,img:UIImage!)]!
-    func loadAllUserImage()
-    {
-        self.userImage = nil;
-        if(self.followArr != nil && self.followArr.count>0)
-        {
-            for item_trade in self.followArr
-            {
-                if(item_trade.owner != nil && item_trade.owner?.count>0)
-                {
-                    if  let imgUrl:String! = item_trade.owner!.objectForKey("portrait") as? String
-                    {
-                        if(imgUrl != nil && imgUrl!.trim().length>1)
-                        {
-                            let img_item =   APPCONFIG.readImgFromCachePath(imgUrl!)
-                            if(img_item != nil)
-                            {
-                                if(self.userImage == nil)
-                                {
-                                    userImage = [(path:imgUrl!,img:img_item)]
-                                }
-                                else
-                                {
-                                    
-                                    
-                                    let result_Data = userImage.filter{itemObj -> Bool in
-                                        
-                                        return (itemObj.path == imgUrl);
-                                    }
-                                    if(result_Data.count == 0)
-                                    {
-                                        userImage.append((path:imgUrl!,img:img_item));
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-                
-            }
-        }
-    }
-    
     //MARK:UITableView Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
@@ -126,31 +94,20 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! T06Cell
         let tdata = followArr[indexPath.row]
         cell.loadData(tdata,item:self.item);
+     
         cell.iv_userImg.image = nil;
-        var imgUrl :String!
-        
-        if(self.userImage != nil && self.userImage.count>0 && tdata.owner != nil && tdata.owner?.count>0)
+   
+        if(tdata.owner != nil)
         {
-            let result_Data = userImage.filter{itemObj -> Bool in
-                
-                if  let imgpath:String! = tdata.owner!.objectForKey("portrait") as? String
-                {
-                    
-                    imgUrl = imgpath
-                    return (itemObj.path == imgpath);
-                }
-            }
-            
-            if(result_Data.count>0 && result_Data[0].img != nil)
+            if  let imgUrl:String! = tdata.owner!.objectForKey("portrait") as? String
             {
-                cell.iv_userImg.image = result_Data[0].img;
+                WebRequestHelper().renderImageView( cell.iv_userImg, url: imgUrl!, defaultName: "")
             }
             else
             {
-                WebRequestHelper().renderImageView( cell.iv_userImg, url: imgUrl, defaultName: "")
+                cell.iv_userImg.image = UIHEPLER.noneImg;
             }
         }
-        
         cell.selectedButton.selected = true;
         cell.myDelegate = self;
         
@@ -159,9 +116,9 @@ class T14AssignToMeConfirm: RootVC, UITableViewDataSource, UITableViewDelegate, 
     
     // MARK: - IBAction
     
-    @IBAction func closeButtonAction(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil);
-    }
+//    @IBAction func closeButtonAction(sender: UIButton) {
+//        self.dismissViewControllerAnimated(true, completion: nil);
+//    }
     
     @IBAction func tradeButtonAction(sender: UIButton) {
         

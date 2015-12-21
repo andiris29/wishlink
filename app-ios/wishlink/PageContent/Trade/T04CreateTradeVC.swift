@@ -85,9 +85,9 @@ class T04CreateTradeVC: RootVC,UIImagePickerControllerDelegate,UINavigationContr
         //点击手势
         self.sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"));
         
-        self.constraint_viewHeight.constant = UIHEPLER.ResizeHeightWithFullScreen(50.0);
-        self.constrat_remarkView_Height.constant = UIHEPLER.ResizeHeightWithFullScreen(65.0);
-        self.constraint_topViewHieght.constant=UIHEPLER.ResizeHeightWithFullScreen(120);
+        self.constraint_viewHeight.constant = 50;//UIHEPLER.ResizeHeightWithFullScreen(50.0);
+        self.constrat_remarkView_Height.constant = 65//UIHEPLER.ResizeHeightWithFullScreen(65.0);
+        self.constraint_topViewHieght.constant=120//UIHEPLER.ResizeHeightWithFullScreen(120);
         
         self.loadImagesData();
         csActionSheet()

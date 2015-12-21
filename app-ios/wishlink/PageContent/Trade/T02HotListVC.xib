@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
@@ -17,6 +18,7 @@
                 <outlet property="lbTipMessage" destination="O1G-0A-DWc" id="oNV-39-hgJ"/>
                 <outlet property="maskView" destination="XT0-Na-bTx" id="Qif-cw-38y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view_moveTop" destination="AnF-Kw-hw3" id="78h-Vs-ANy"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -26,7 +28,6 @@
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gwO-00-V21">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N3B-u1-kbI">
                         <size key="itemSize" width="200" height="250"/>
@@ -44,21 +45,40 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无索索结果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-0A-DWc">
                             <rect key="frame" x="102" y="50" width="90" height="18"/>
-                            <animations/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="15"/>
                             <color key="textColor" red="0.48627450980392156" green="0.0" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="O1G-0A-DWc" secondAttribute="centerX" constant="12.5" id="k7o-ZQ-go7"/>
                         <constraint firstItem="O1G-0A-DWc" firstAttribute="top" secondItem="XT0-Na-bTx" secondAttribute="top" constant="50" id="sIe-Qj-8Bq"/>
                     </constraints>
                 </view>
+                <view hidden="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnF-Kw-hw3" userLabel="view_MoveTop">
+                    <rect key="frame" x="272" y="514" width="40" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYw-PJ-lwj">
+                            <rect key="frame" x="2" y="1" width="37" height="37"/>
+                            <state key="normal" image="t02_top"/>
+                            <connections>
+                                <action selector="btnMoveToTopAction:" destination="-1" eventType="touchUpInside" id="D7S-pQ-y1D"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ZYw-PJ-lwj" firstAttribute="leading" secondItem="AnF-Kw-hw3" secondAttribute="leading" id="6vg-3E-nOv"/>
+                        <constraint firstAttribute="width" secondItem="AnF-Kw-hw3" secondAttribute="height" multiplier="1:1" id="79A-12-Y6T"/>
+                        <constraint firstAttribute="trailing" secondItem="ZYw-PJ-lwj" secondAttribute="trailing" id="8yi-gr-hki"/>
+                        <constraint firstItem="ZYw-PJ-lwj" firstAttribute="top" secondItem="AnF-Kw-hw3" secondAttribute="top" id="AMG-8A-JEB"/>
+                        <constraint firstAttribute="width" constant="40" id="JZj-gi-6hA"/>
+                        <constraint firstAttribute="height" constant="40" id="pHK-xN-Xgb"/>
+                        <constraint firstAttribute="bottom" secondItem="ZYw-PJ-lwj" secondAttribute="bottom" id="qv1-CB-E3m"/>
+                    </constraints>
+                </view>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="gwO-00-V21" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1XW-ar-vcG"/>
@@ -69,8 +89,13 @@
                 <constraint firstAttribute="trailing" secondItem="XT0-Na-bTx" secondAttribute="trailing" id="fng-zW-aVC"/>
                 <constraint firstItem="XT0-Na-bTx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gPC-Lc-4nc"/>
                 <constraint firstAttribute="bottom" secondItem="gwO-00-V21" secondAttribute="bottom" id="hzq-YS-gdH"/>
+                <constraint firstAttribute="bottom" secondItem="AnF-Kw-hw3" secondAttribute="bottom" constant="14" id="iZR-G7-yzt"/>
+                <constraint firstAttribute="trailing" secondItem="AnF-Kw-hw3" secondAttribute="trailing" constant="8" id="n95-BL-kpE"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="t02_top" width="37" height="37"/>
+    </resources>
 </document>

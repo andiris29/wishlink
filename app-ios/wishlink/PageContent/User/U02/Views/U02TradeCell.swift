@@ -30,14 +30,14 @@ class U02TradeCell: UICollectionViewCell {
     var indexPath: NSIndexPath!
     var cellType: TradeCellType! {
         didSet {
-            if cellType == .Buyer {
-                self.buyerTopView.hidden = false
-                self.sellerTopView.hidden = true
-            }
-            else {
-                self.buyerTopView.hidden = true
-                self.sellerTopView.hidden = false
-            }
+//           // if cellType == .Buyer {
+//                self.buyerTopView.hidden = false
+//               // self.sellerTopView.hidden = true
+//            }
+//            else {
+//                self.buyerTopView.hidden = true
+//               // self.sellerTopView.hidden = false
+//            }
         }
     }
     
@@ -49,34 +49,35 @@ class U02TradeCell: UICollectionViewCell {
     
     weak var delegate: U02TradeCellDelegate?
     
+    @IBOutlet weak var lbCreateDate: UILabel!
     @IBOutlet weak var view_bg: UIView!
     @IBOutlet weak var buyerTopView: UIView!
     @IBOutlet weak var buyerRoundImageView: UIImageView!
     @IBOutlet weak var buyerStatusLabel: UILabel!
-    @IBOutlet weak var buyerRevokeBtn: UIButton!//
-    @IBOutlet weak var buyerConfirmBtn: UIButton!//
-    @IBOutlet weak var buyerCheckComplaintBtn: UIButton!//
-    @IBOutlet weak var buyerCheckLogisticsBtn: UIButton!//
+//    @IBOutlet weak var buyerRevokeBtn: UIButton!//
+//    @IBOutlet weak var buyerConfirmBtn: UIButton!//
+//    @IBOutlet weak var buyerCheckComplaintBtn: UIButton!//
+//    @IBOutlet weak var buyerCheckLogisticsBtn: UIButton!//
     @IBOutlet weak var buyerTradeIdLabel: UILabel!
     
-    @IBOutlet weak var btnComplain: UIButton!
-    @IBOutlet weak var btnChat: UIButton!
-    
-    @IBOutlet weak var sellerTopView: UIView!
-    @IBOutlet weak var sellerRoundImageView: UIImageView!
-    @IBOutlet weak var sellerStatusLabel: UILabel!
-    @IBOutlet weak var sellerRevokeBtn: UIButton!//
-    @IBOutlet weak var sellerEditItemInfoBtn: UIButton!//
-    @IBOutlet weak var sellerCheckComplaintBtn: UIButton!//
-    @IBOutlet weak var sellerSendOutBtn: UIButton!//
-    @IBOutlet weak var sellerTradeIdLabel: UILabel!
+//    @IBOutlet weak var btnComplain: UIButton!
+//    @IBOutlet weak var btnChat: UIButton!
+//    
+//    @IBOutlet weak var sellerTopView: UIView!
+//    @IBOutlet weak var sellerRoundImageView: UIImageView!
+//    @IBOutlet weak var sellerStatusLabel: UILabel!
+//    @IBOutlet weak var sellerRevokeBtn: UIButton!//
+//    @IBOutlet weak var sellerEditItemInfoBtn: UIButton!//
+//    @IBOutlet weak var sellerCheckComplaintBtn: UIButton!//
+//    @IBOutlet weak var sellerSendOutBtn: UIButton!//
+//    @IBOutlet weak var sellerTradeIdLabel: UILabel!
     
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var itemCountryLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemCountLabel: UILabel!
     @IBOutlet weak var itemTotalPrice: UILabel!
-    @IBOutlet weak var ownerNameLabel: UILabel!
+//    @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var itemFromatLabel: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
     
@@ -90,39 +91,39 @@ class U02TradeCell: UICollectionViewCell {
         self.prepareSellerTopView()
     }
     
-    @IBAction func revokeBtnAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .Revoke)
-
-    }
-    @IBAction func confirmBtnAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .Confirm)
-
-    }
-    @IBAction func checkComplainBtnAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .CheckComplain)
-
-    }
-    @IBAction func checkLogisticsBtnAction(sender: AnyObject) {
-        
-        self.delegate?.tradeCell(self, clickType: .CheckLogistics)
-    }
-    @IBAction func editItemInfoBtnAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .EditItemInfo)
-
-    }
-    @IBAction func sendOutBtnAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .SendOut)
-
-    }
-    @IBAction func btnChatAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .Chat)
-
-    }
-    
-    @IBAction func btnComplainAction(sender: AnyObject) {
-        self.delegate?.tradeCell(self, clickType: .Complain)
-
-    }
+//    @IBAction func revokeBtnAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .Revoke)
+//
+//    }
+//    @IBAction func confirmBtnAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .Confirm)
+//
+//    }
+//    @IBAction func checkComplainBtnAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .CheckComplain)
+//
+//    }
+//    @IBAction func checkLogisticsBtnAction(sender: AnyObject) {
+//        
+//        self.delegate?.tradeCell(self, clickType: .CheckLogistics)
+//    }
+//    @IBAction func editItemInfoBtnAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .EditItemInfo)
+//
+//    }
+//    @IBAction func sendOutBtnAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .SendOut)
+//
+//    }
+//    @IBAction func btnChatAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .Chat)
+//
+//    }
+//    
+//    @IBAction func btnComplainAction(sender: AnyObject) {
+//        self.delegate?.tradeCell(self, clickType: .Complain)
+//
+//    }
 
     
     
@@ -134,12 +135,12 @@ class U02TradeCell: UICollectionViewCell {
             self.adjustSellerTopView()
         }
         
-        self.buyerTradeIdLabel.text = "订单号：\(self.trade._id)"
-        self.sellerTradeIdLabel.text = "订单号：\(self.trade._id)"
+        self.buyerTradeIdLabel.text = "订单号:\(self.trade._id)"
+//        self.sellerTradeIdLabel.text = "订单号：\(self.trade._id)"
 
         var strCount:String! = "数量：" + "\(self.trade.quantity)";
-        
-        
+     
+        self.lbCreateDate.text = "下单日期：\(UIHEPLER.formartTime(self.trade.create))";
        
         self.itemCountLabel.text = strCount
         if(self.trade.item != nil)
@@ -174,7 +175,7 @@ class U02TradeCell: UICollectionViewCell {
         }
         strCount = nil;
         if self.trade.owner != nil {
-            self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
+//            self.ownerNameLabel.text = self.trade.owner!["nickname"] as? String
         }
         if self.trade.item.images != nil && self.trade.item.images.count != 0 {
          
@@ -184,25 +185,25 @@ class U02TradeCell: UICollectionViewCell {
     }
     
     func adjustBuyerTopView() {
-        self.btnChat.setImage(UIImage(named: "u02-contactsell"), forState: .Normal)
-        self.btnChat.setImage(UIImage(named: "u02-contactsell-new"), forState: .Selected)
+//        self.btnChat.setImage(UIImage(named: "u02-contactsell"), forState: .Normal)
+//        self.btnChat.setImage(UIImage(named: "u02-contactsell-new"), forState: .Selected)
 
 //        self.hideAllBtns()
         self.isRead(false)
-        self.btnComplain.hidden = false
+//        self.btnComplain.hidden = false
         switch trade.status {
         case 1:
             if trade.statusOrder == .b0 {
                 self.buyerStatusLabel.text = "未接单"
 //                self.buyerRevokeBtn.hidden = false
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
 
             }
         case 2:
             if trade.statusOrder == .b0 {
                 self.buyerStatusLabel.text = "未接单"
 //                self.buyerRevokeBtn.hidden = false
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
             }
         case 3:
             if trade.statusOrder == .c0 {
@@ -218,12 +219,12 @@ class U02TradeCell: UICollectionViewCell {
         case 5:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "已完成"
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
             }
         case 6:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "已完成"
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
 
             }
         case 7:
@@ -234,26 +235,26 @@ class U02TradeCell: UICollectionViewCell {
         case 8:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "已撤单"
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
             }
         case 9:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "自动撤单"
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
 
             }
         case 10:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "投诉处理中"
 //                self.buyerCheckComplaintBtn.hidden = false
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
                 
             }
         case 11:
             if trade.statusOrder == .d0 {
                 self.buyerStatusLabel.text = "已完成"
 //                self.buyerCheckComplaintBtn.hidden = false
-                self.btnComplain.hidden = true
+//                self.btnComplain.hidden = true
                 
             }
         case 12:
@@ -269,46 +270,46 @@ class U02TradeCell: UICollectionViewCell {
     }
 
     func adjustSellerTopView() {
-        self.btnChat.setImage(UIImage(named: "u02-contactbuy"), forState: .Normal)
-        self.btnChat.setImage(UIImage(named: "u02-contactbuy-new"), forState: .Selected)
+//        self.btnChat.setImage(UIImage(named: "u02-contactbuy"), forState: .Normal)
+//        self.btnChat.setImage(UIImage(named: "u02-contactbuy-new"), forState: .Selected)
 //        self.hideAllBtns()
         self.isRead(false)
         switch trade.status {
         case 3:
             if trade.statusOrder == .c0 {
-                self.sellerStatusLabel.text = "已抢单"
+             //   self.sellerStatusLabel.text = "已抢单"
 //                self.sellerSendOutBtn.hidden = false
 //                self.sellerRevokeBtn.hidden = false
-                self.btnComplain.hidden = false
+            //    self.btnComplain.hidden = false
             }
         case 4:
             if trade.statusOrder == .c0 {
-                self.sellerStatusLabel.text = "已发货"
+             //   self.sellerStatusLabel.text = "已发货"
 //                self.sellerEditItemInfoBtn.hidden = false
-                self.btnComplain.hidden = false
+             //   self.btnComplain.hidden = false
             }
         case 5:
             if trade.statusOrder == .d0 {
-                self.sellerStatusLabel.text = "已完成"
+              //  self.sellerStatusLabel.text = "已完成"
             }
         case 6:
             if trade.statusOrder == .d0 {
-                self.sellerStatusLabel.text = "已完成"
+             //   self.sellerStatusLabel.text = "已完成"
             }
         case 7:
             if trade.statusOrder == .c0 {
-                self.sellerStatusLabel.text = "买家要求撤单"
+             //   self.sellerStatusLabel.text = "买家要求撤单"
 //                self.sellerRevokeBtn.hidden = false
-                self.btnComplain.hidden = false
+          //      self.btnComplain.hidden = false
             }
         case 10:
             if trade.statusOrder == .d0 {
-                self.sellerStatusLabel.text = "投诉处理中"
+            //    self.sellerStatusLabel.text = "投诉处理中"
 //                self.sellerCheckComplaintBtn.hidden = false
             }
         case 11:
             if trade.statusOrder == .d0 {
-                self.sellerStatusLabel.text = "已完成"
+             //   self.sellerStatusLabel.text = "已完成"
 //                self.sellerCheckComplaintBtn.hidden = false
             }
         default:
@@ -325,8 +326,8 @@ class U02TradeCell: UICollectionViewCell {
             // RGB(253, g: 234, b: 237)
             self.buyerTopView.backgroundColor = UIColor.whiteColor()
             self.buyerRoundImageView.hidden = false
-            self.sellerTopView.backgroundColor = UIColor.whiteColor()
-            self.sellerRoundImageView.hidden = false
+           // self.sellerTopView.backgroundColor = UIColor.whiteColor()
+          //  self.sellerRoundImageView.hidden = false
             
            
              self.view_bg.layer.borderWidth = 1
@@ -336,8 +337,8 @@ class U02TradeCell: UICollectionViewCell {
             
             self.buyerTopView.backgroundColor = UIColor.whiteColor()
             self.buyerRoundImageView.hidden = true
-            self.sellerTopView.backgroundColor = UIColor.whiteColor()
-            self.sellerRoundImageView.hidden = true
+            //self.sellerTopView.backgroundColor = UIColor.whiteColor()
+           // self.sellerRoundImageView.hidden = true
             
              self.view_bg.layer.borderWidth = 1
              self.view_bg.layer.borderColor = RGBC(204) .CGColor
@@ -388,8 +389,8 @@ class U02TradeCell: UICollectionViewCell {
 //
     func prepareSellerTopView() {
         
-        self.sellerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.sellerRoundImageView.frame) / 2.0
-        self.sellerRoundImageView.layer.masksToBounds = true
+      //  self.sellerRoundImageView.layer.cornerRadius = CGRectGetWidth(self.sellerRoundImageView.frame) / 2.0
+       // self.sellerRoundImageView.layer.masksToBounds = true
 //
 //        self.sellerRevokeBtn.layer.cornerRadius = kCornerRadius
 //        self.sellerRevokeBtn.layer.masksToBounds = true

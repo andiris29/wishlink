@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
@@ -24,7 +24,6 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUs-2I-6bG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -34,11 +33,10 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb9-Ee-DU0">
-                    <rect key="frame" x="0.0" y="612" width="375" height="55"/>
-                    <animations/>
+                    <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                     <color key="backgroundColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="cZw-Qm-Q7n"/>
+                        <constraint firstAttribute="height" constant="45" id="cZw-Qm-Q7n"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="18"/>
                     <state key="normal" title="马上抢单">
@@ -49,7 +47,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hUs-2I-6bG" secondAttribute="trailing" id="2w8-Zw-dtm"/>

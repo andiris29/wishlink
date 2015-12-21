@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
@@ -27,7 +27,6 @@
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caU-T2-bug">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="G20-5V-OhZ"/>
@@ -37,8 +36,7 @@
                     <rect key="frame" x="5" y="0.0" width="310" height="40"/>
                     <subviews>
                         <button opaque="NO" tag="500" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovm-b2-oey">
-                            <rect key="frame" x="0.0" y="5" width="153" height="32"/>
-                            <animations/>
+                            <rect key="frame" x="0.0" y="5" width="153" height="35"/>
                             <color key="backgroundColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
                             <state key="normal" title="自购订单" image="u02OrderList0">
@@ -50,8 +48,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="501" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8n-4D-x3t">
-                            <rect key="frame" x="157" y="5" width="153" height="32"/>
-                            <animations/>
+                            <rect key="frame" x="157" y="5" width="153" height="35"/>
                             <color key="backgroundColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="13"/>
                             <state key="normal" title="服务订单" image="u02OrderList0">
@@ -63,7 +60,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="height" secondItem="ovm-b2-oey" secondAttribute="height" id="G81-VO-LH4"/>
@@ -71,15 +67,14 @@
                         <constraint firstAttribute="trailing" secondItem="S8n-4D-x3t" secondAttribute="trailing" id="UBk-q2-Kim"/>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="top" secondItem="edQ-EX-Lmx" secondAttribute="top" constant="5" id="UoI-0d-weU"/>
                         <constraint firstItem="ovm-b2-oey" firstAttribute="leading" secondItem="edQ-EX-Lmx" secondAttribute="leading" id="bVL-94-qtV"/>
-                        <constraint firstAttribute="bottom" secondItem="S8n-4D-x3t" secondAttribute="bottom" constant="3" id="eIN-Sg-F8V"/>
+                        <constraint firstAttribute="bottom" secondItem="S8n-4D-x3t" secondAttribute="bottom" id="eIN-Sg-F8V"/>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="leading" secondItem="ovm-b2-oey" secondAttribute="trailing" constant="4" id="efq-aC-x1F"/>
                         <constraint firstItem="ovm-b2-oey" firstAttribute="top" secondItem="edQ-EX-Lmx" secondAttribute="top" constant="5" id="lkw-uo-Le0"/>
-                        <constraint firstAttribute="bottom" secondItem="ovm-b2-oey" secondAttribute="bottom" constant="3" id="oAW-nw-L4Z"/>
+                        <constraint firstAttribute="bottom" secondItem="ovm-b2-oey" secondAttribute="bottom" id="oAW-nw-L4Z"/>
                         <constraint firstItem="S8n-4D-x3t" firstAttribute="width" secondItem="ovm-b2-oey" secondAttribute="width" id="zeE-hr-fnu"/>
                     </constraints>
                 </view>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="edQ-EX-Lmx" secondAttribute="trailing" constant="5" id="5Nz-eU-KTg"/>
