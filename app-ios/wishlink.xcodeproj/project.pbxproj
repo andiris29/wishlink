@@ -172,6 +172,8 @@
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
 		D21038AF1B860E1300406873 /* T07DeliverEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */; };
 		D21E9BA81BAC76D400C55C84 /* CSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21E9BA71BAC76D400C55C84 /* CSActionSheet.swift */; };
+		D2300A201C2ED42300900FD0 /* U01ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2300A1E1C2ED42300900FD0 /* U01ResetPasswordVC.swift */; };
+		D2300A211C2ED42300900FD0 /* U01ResetPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2300A1F1C2ED42300900FD0 /* U01ResetPasswordVC.xib */; };
 		D23B5DCD1BE90B4A00DB4377 /* AssigneeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */; };
 		D23B5DCF1BE90B7E00DB4377 /* OrderStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */; };
 		D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */; };
@@ -532,6 +534,8 @@
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
 		D21038AD1B860E1300406873 /* T07DeliverEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T07DeliverEditVC.xib; sourceTree = "<group>"; };
 		D21E9BA71BAC76D400C55C84 /* CSActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSActionSheet.swift; sourceTree = "<group>"; };
+		D2300A1E1C2ED42300900FD0 /* U01ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U01ResetPasswordVC.swift; sourceTree = "<group>"; };
+		D2300A1F1C2ED42300900FD0 /* U01ResetPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U01ResetPasswordVC.xib; sourceTree = "<group>"; };
 		D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssigneeModel.swift; sourceTree = "<group>"; };
 		D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusModel.swift; sourceTree = "<group>"; };
 		D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U07OrderTradeDetailVC.swift; sourceTree = "<group>"; };
@@ -939,6 +943,8 @@
 				D25E02441BF313DB004659C9 /* U06RegsiterVC.xib */,
 				A11573D11C11FFA400E57CD5 /* U01BindVC.swift */,
 				A11573D21C11FFA400E57CD5 /* U01BindVC.xib */,
+				D2300A1E1C2ED42300900FD0 /* U01ResetPasswordVC.swift */,
+				D2300A1F1C2ED42300900FD0 /* U01ResetPasswordVC.xib */,
 			);
 			path = U01;
 			sourceTree = "<group>";
@@ -1494,6 +1500,7 @@
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
 				D27C59351BFCA87E000B728E /* U01ForgetPassword.xib in Resources */,
 				D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */,
+				D2300A211C2ED42300900FD0 /* U01ResetPasswordVC.xib in Resources */,
 				D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
 				D2E6BE881B96D36D0050C177 /* T11SearchSuggestionVC.xib in Resources */,
@@ -1581,6 +1588,7 @@
 				76E905001BD15DF100A95A99 /* T10SimpleMessagingVC.swift in Sources */,
 				76CD0E911B89657200B04453 /* U02FavoriteVC.swift in Sources */,
 				76DC96661B8993E100270969 /* UIView.swift in Sources */,
+				D2300A201C2ED42300900FD0 /* U01ResetPasswordVC.swift in Sources */,
 				A1F3D3541BCEB4340007B7CE /* base64.m in Sources */,
 				765424851B8B5A9E001C607C /* U03AddressCell.swift in Sources */,
 				A1AA6ED11C1087550066EF9A /* UIImage+MultiFormat.m in Sources */,
