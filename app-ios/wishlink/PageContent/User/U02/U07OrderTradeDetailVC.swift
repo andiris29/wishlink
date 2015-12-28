@@ -22,7 +22,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     @IBOutlet weak var goodNumber: UILabel!
     @IBOutlet weak var goodTotal: UILabel!
     
-    @IBOutlet weak var linkTitle: UILabel!
+//    @IBOutlet weak var linkTitle: UILabel!
     @IBOutlet weak var avterImageView: UIImageView!
     @IBOutlet weak var personName: UILabel!
     @IBOutlet weak var orderTime: UILabel!
@@ -91,7 +91,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     func initViewData() {
         
         let item = self.trade.item
-        self.revokeButton.hidden = true;
+//        self.revokeButton.hidden = true;
         if(item != nil  && item._id != "")
         {
             if (item.images != nil && item.images.count > 0) {
@@ -118,15 +118,15 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
             self.orderTime.text = "接单：" + UIHEPLER.formartTime(UserModel.shared.create)
-            self.linkTitle.text = "卖家信息"
+//            self.linkTitle.text = "卖家信息"
             self.orderState.text = self.orderStatusDic[orderState]
             self.linkButton.setImage(UIImage(named: "u02-contactsell"), forState: UIControlState.Normal)
             
             
-            self.revokeButton.hidden = true;
+//            self.revokeButton.hidden = true;
             if(orderState == 1 || orderState == 2 || orderState == 3 || orderState == 12)
             {
-                self.revokeButton.hidden = false;
+//                self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("我要撤单", forState: UIControlState.Normal);
                 if(orderState == 3 )
                 {
@@ -136,7 +136,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             else if(orderState == 4)
             {
                 self.loadSpecNaviRightTextBtn("投诉", _selecotr: "navigationRightButtonAction:")
-                self.revokeButton.hidden = false;
+//                self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("确认收货", forState: UIControlState.Normal);
                 
                 
@@ -148,12 +148,12 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             }
             else if(orderState == 10 || orderState == 11)
             {
-                self.revokeButton.hidden = false;
+//                self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("查看投诉", forState: UIControlState.Normal);
             }
             else
             {
-                self.revokeButton.hidden = true;
+//                self.revokeButton.hidden = true;
             }
         } else {
             
@@ -163,7 +163,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
                 self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
                 self.personName.text = "\(self.assigneeModel.nickname)"
                 self.orderTime.text = "接单：" + UIHEPLER.formartTime(self.assigneeModel.create)
-                self.linkTitle.text = "买家信息"
+//                self.linkTitle.text = "买家信息"
                 self.orderState.text = self.orderSellerStatusDic[orderState]
                 self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
             }
@@ -171,24 +171,24 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             if(orderState == 3 || orderState == 7)
             {
                 
-                self.revokeButton.hidden = false;
+//                self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("取消抢单", forState: UIControlState.Normal);
             }
             else if(orderState == 4)
             {
                 
-                self.revokeButton.hidden = false;
+//                self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("编辑发货信息", forState: UIControlState.Normal);
             }
             else if(orderState == 10 || orderState == 11)
             {
                 
-                self.revokeButton.hidden = false;
+//                self.revokeButton.hidden = false;
                 self.revokeButton.setTitle("查看投诉", forState: UIControlState.Normal);
             }
             else
             {
-                self.revokeButton.hidden = true;
+//                self.revokeButton.hidden = true;
             }
 
             
