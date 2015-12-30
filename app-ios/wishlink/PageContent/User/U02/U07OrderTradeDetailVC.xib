@@ -372,6 +372,9 @@
                                         <color key="titleColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="navigationRightButtonAction:" destination="-1" eventType="touchUpInside" id="dAg-At-yis"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7E-ix-I5q">
                                     <rect key="frame" x="120" y="12" width="80" height="35"/>
@@ -381,6 +384,9 @@
                                         <color key="titleColor" red="0.48627450979999998" green="0.0" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="checkLogisticsOrder" destination="-1" eventType="touchUpInside" id="3PO-TP-iro"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdG-Lh-Jv9">
                                     <rect key="frame" x="215" y="12" width="80" height="35"/>

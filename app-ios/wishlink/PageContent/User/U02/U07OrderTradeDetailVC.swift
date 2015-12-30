@@ -117,11 +117,11 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         if self.role == .buyyer {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
-            self.orderTime.text = "接单：" + UIHEPLER.formartTime(UserModel.shared.create)
+            self.orderTimeData()
+//            self.orderTime.text = "接单：" + UIHEPLER.formartTime(UserModel.shared.create)
 //            self.linkTitle.text = "卖家信息"
             self.orderState.text = self.orderStatusDic[orderState]
             self.linkButton.setImage(UIImage(named: "u02-contactsell"), forState: UIControlState.Normal)
-            
             
 //            self.revokeButton.hidden = true;
             if(orderState == 1 || orderState == 2 || orderState == 3 || orderState == 12)
@@ -162,7 +162,8 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             {
                 self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
                 self.personName.text = "\(self.assigneeModel.nickname)"
-                self.orderTime.text = "接单：" + UIHEPLER.formartTime(self.assigneeModel.create)
+                self.orderTimeData()
+//                self.orderTime.text = "接单：" + UIHEPLER.formartTime(self.assigneeModel.create)
 //                self.linkTitle.text = "买家信息"
                 self.orderState.text = self.orderSellerStatusDic[orderState]
                 self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
@@ -220,7 +221,17 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     // MARK: - Action
     
-    func navigationRightButtonAction(sender: UIButton) {
+    @IBAction func checkLogisticsOrder() {
+        //TODO 物流信息
+        if self.receiver != nil {
+            let tipView = U02LogisticsTipView(name: "物流公司：\(self.receiver.name)", orderNumber: "物流单号：\(self.receiver.uuid)")
+            tipView.show()
+        } else {
+            UIHEPLER.alertErrMsg("无物流信息")
+        }
+    }
+    
+    @IBAction func navigationRightButtonAction(sender: UIButton) {
     
         let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
         vc.tradeid = self.trade._id;
@@ -348,5 +359,21 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     func changeOrderStatus(status: Int) {
     
+    }
+    
+    func orderTimeData() {
+        
+        if(UserModel.shared.receiversArray != nil && UserModel.shared.receiversArray.count>0) {
+            let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+                return (itemObj as ReceiverModel).isDefault == true;
+            }
+            if(result.count>0) {
+                self.orderTime.text = result[0].province;
+            } else {
+                self.orderTime.text = UserModel.shared.receiversArray[0].province;
+            }
+        } else {
+            self.orderTime.text = "--"
+        }
     }
 }
