@@ -18,6 +18,7 @@ class T09ComplaintStatusVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet var chatTableView: UITableView!
     
+    var trade:TradeModel!
     var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
     //MARK:Life Cycle
     deinit{

@@ -19,6 +19,7 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     @IBOutlet weak var companyTextField: UITextField!
     
     var dorpListView: CSDorpListView!
+    var trade:TradeModel!
     //MARK:Life Cycle
     deinit{
         
@@ -100,6 +101,17 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
     {
         self.scanTextField.text = code;
     }
+    
+//    func bindData()
+//    {
+////        if(result.count>0) {
+//        
+//            let defaultAddress = result[0] as ReceiverModel
+//            self.phoneLabel.text = defaultAddress.phone
+//            self.personLabel.text = defaultAddress.name;
+//            self.addressLabel.text = defaultAddress.address;
+////        }
+//    }
 
 
     //MARK: - CSDorpListViewDelegate
@@ -132,6 +144,8 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
             }
         }
     }
+    
+    
     
     func requestDataFailed(error: String,tag:Int) {
         SVProgressHUD.showErrorWithStatusWithBlack("获取用户信息失败！");

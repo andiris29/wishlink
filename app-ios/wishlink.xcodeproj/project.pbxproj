@@ -167,6 +167,8 @@
 		A1F3D35A1BCEB4340007B7CE /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F3D34C1BCEB4340007B7CE /* RSADataSigner.m */; };
 		A1F3D35B1BCEB4340007B7CE /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F3D34E1BCEB4340007B7CE /* RSADataVerifier.m */; };
 		A1F7C1421BB1A6090045C125 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7C1411BB1A6090045C125 /* ItemModel.swift */; };
+		A1F96E291C3418750091D935 /* U07OrderTradeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F96E271C3418750091D935 /* U07OrderTradeDetailVC.swift */; };
+		A1F96E2A1C3418750091D935 /* U07OrderTradeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1F96E281C3418750091D935 /* U07OrderTradeDetailVC.xib */; };
 		D20B90831B8C8D470017F89C /* T08ComplaintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20B90811B8C8D470017F89C /* T08ComplaintVC.swift */; };
 		D20B90841B8C8D470017F89C /* T08ComplaintVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20B90821B8C8D470017F89C /* T08ComplaintVC.xib */; };
 		D21038AE1B860E1300406873 /* T07DeliverEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */; };
@@ -176,8 +178,6 @@
 		D2300A211C2ED42300900FD0 /* U01ResetPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2300A1F1C2ED42300900FD0 /* U01ResetPasswordVC.xib */; };
 		D23B5DCD1BE90B4A00DB4377 /* AssigneeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */; };
 		D23B5DCF1BE90B7E00DB4377 /* OrderStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */; };
-		D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */; };
-		D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */; };
 		D24485C81B8DE88300CD97D5 /* T09ComplaintStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24485C61B8DE88300CD97D5 /* T09ComplaintStatusVC.swift */; };
 		D24485C91B8DE88300CD97D5 /* T09ComplaintStatusVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24485C71B8DE88300CD97D5 /* T09ComplaintStatusVC.xib */; };
 		D24485CC1B8E027000CD97D5 /* T09CellTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24485CA1B8E027000CD97D5 /* T09CellTime.swift */; };
@@ -529,6 +529,8 @@
 		A1F3D34D1BCEB4340007B7CE /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
 		A1F3D34E1BCEB4340007B7CE /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		A1F7C1411BB1A6090045C125 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		A1F96E271C3418750091D935 /* U07OrderTradeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U07OrderTradeDetailVC.swift; sourceTree = "<group>"; };
+		A1F96E281C3418750091D935 /* U07OrderTradeDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U07OrderTradeDetailVC.xib; sourceTree = "<group>"; };
 		D20B90811B8C8D470017F89C /* T08ComplaintVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T08ComplaintVC.swift; sourceTree = "<group>"; };
 		D20B90821B8C8D470017F89C /* T08ComplaintVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T08ComplaintVC.xib; sourceTree = "<group>"; };
 		D21038AC1B860E1300406873 /* T07DeliverEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T07DeliverEditVC.swift; sourceTree = "<group>"; };
@@ -538,8 +540,6 @@
 		D2300A1F1C2ED42300900FD0 /* U01ResetPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U01ResetPasswordVC.xib; sourceTree = "<group>"; };
 		D23B5DCC1BE90B4A00DB4377 /* AssigneeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssigneeModel.swift; sourceTree = "<group>"; };
 		D23B5DCE1BE90B7E00DB4377 /* OrderStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusModel.swift; sourceTree = "<group>"; };
-		D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U07OrderTradeDetailVC.swift; sourceTree = "<group>"; };
-		D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = U07OrderTradeDetailVC.xib; sourceTree = "<group>"; };
 		D24485C61B8DE88300CD97D5 /* T09ComplaintStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T09ComplaintStatusVC.swift; sourceTree = "<group>"; };
 		D24485C71B8DE88300CD97D5 /* T09ComplaintStatusVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T09ComplaintStatusVC.xib; sourceTree = "<group>"; };
 		D24485CA1B8E027000CD97D5 /* T09CellTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T09CellTime.swift; sourceTree = "<group>"; };
@@ -923,6 +923,8 @@
 		A132BB901B863342004EAB47 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				A1F96E251C3418500091D935 /* U06 */,
+				A1F96E261C3418500091D935 /* U07 */,
 				A132BB911B863342004EAB47 /* U01 */,
 				A132BB941B863342004EAB47 /* U02 */,
 				A132BB9B1B863342004EAB47 /* U03 */,
@@ -961,8 +963,6 @@
 				76CD0E881B8964B000B04453 /* U02SellerTradeVC.xib */,
 				D2C3D6E01BDE643F000EE182 /* U02OrderTradeVC.swift */,
 				D2C3D6E11BDE643F000EE182 /* U02OrderTradeVC.xib */,
-				D23C448D1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift */,
-				D23C448E1BDFCBE0004D254F /* U07OrderTradeDetailVC.xib */,
 				76CD0E8B1B89655B00B04453 /* U02RecommendVC.swift */,
 				76CD0E8C1B89655B00B04453 /* U02RecommendVC.xib */,
 				76CD0E8F1B89657200B04453 /* U02FavoriteVC.swift */,
@@ -1224,6 +1224,22 @@
 				A1F3D34E1BCEB4340007B7CE /* RSADataVerifier.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		A1F96E251C3418500091D935 /* U06 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = U06;
+			sourceTree = "<group>";
+		};
+		A1F96E261C3418500091D935 /* U07 */ = {
+			isa = PBXGroup;
+			children = (
+				A1F96E271C3418750091D935 /* U07OrderTradeDetailVC.swift */,
+				A1F96E281C3418750091D935 /* U07OrderTradeDetailVC.xib */,
+			);
+			path = U07;
 			sourceTree = "<group>";
 		};
 		D25A352E1B8081DF000CCD7C /* Trade */ = {
@@ -1494,12 +1510,12 @@
 				76B86E6B1BD0030A00DA29E3 /* RongCloud.bundle in Resources */,
 				A1E9A87A1C108ABB0062202C /* Images.xcassets in Resources */,
 				D2E6BE941B96D62F0050C177 /* T11SearchSuggestionCell.xib in Resources */,
+				A1F96E2A1C3418750091D935 /* U07OrderTradeDetailVC.xib in Resources */,
 				A103393C1C0368BC007F7957 /* T06CellFooter.xib in Resources */,
 				765424861B8B5A9E001C607C /* U03AddressCell.xib in Resources */,
 				D29662351BE130C000BDEDB9 /* T14AssignToMeConfirm.xib in Resources */,
 				A140B0111B94B45500531546 /* DefaultCell.xib in Resources */,
 				D27C59351BFCA87E000B728E /* U01ForgetPassword.xib in Resources */,
-				D23C44901BDFCBE0004D254F /* U07OrderTradeDetailVC.xib in Resources */,
 				D2300A211C2ED42300900FD0 /* U01ResetPasswordVC.xib in Resources */,
 				D2C3D6E31BDE643F000EE182 /* U02OrderTradeVC.xib in Resources */,
 				7654247E1B8B5861001C607C /* U03AddAddressVC.xib in Resources */,
@@ -1560,6 +1576,7 @@
 				A1043E3A1B7F7B75007A237C /* AppConfig.swift in Sources */,
 				A1F7C1421BB1A6090045C125 /* ItemModel.swift in Sources */,
 				A11573D31C11FFA400E57CD5 /* U01BindVC.swift in Sources */,
+				A1F96E291C3418750091D935 /* U07OrderTradeDetailVC.swift in Sources */,
 				A1AA6EC61C1087550066EF9A /* MKAnnotationView+WebCache.m in Sources */,
 				D23B5DCD1BE90B4A00DB4377 /* AssigneeModel.swift in Sources */,
 				A1C8EA641BCA05DA00ED9910 /* Request.swift in Sources */,
@@ -1606,7 +1623,6 @@
 				D2E6BE931B96D62F0050C177 /* T11SearchSuggestionCell.swift in Sources */,
 				D24485D01B8E028B00CD97D5 /* T09CellTextLeft.swift in Sources */,
 				A1B0CB141C021DD5005A62A4 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
-				D23C448F1BDFCBE0004D254F /* U07OrderTradeDetailVC.swift in Sources */,
 				A1F063AA1BE3CDF400697BE6 /* T13AssignToMeVC.swift in Sources */,
 				A1F3D35B1BCEB4340007B7CE /* RSADataVerifier.m in Sources */,
 				D2744B361B84B9E900746229 /* T06CellFooter.swift in Sources */,

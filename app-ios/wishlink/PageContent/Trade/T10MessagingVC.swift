@@ -18,6 +18,12 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet var chatTableView: UITableView!
     
+    @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbSpec: UILabel!
+    @IBOutlet weak var lbTotalFree: UILabel!
+    
+    var trade:TradeModel!
+    
     var itemContents: NSArray = ["item0", "item1", "item2", "item3", "item4"]
     //MARK:Life Cycle
     deinit{
@@ -31,6 +37,7 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTime, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTime)
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTextLeft, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTextLeft)
         self.chatTableView.registerNib(UINib(nibName: cellIdentifierTextRight, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifierTextRight)
+        self.loadData();
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil!);
@@ -46,6 +53,22 @@ class T10MessagingVC: RootVC, UITableViewDelegate,UITableViewDataSource {
         self.navigationController!.navigationBar.hidden = false
         self.hidesBottomBarWhenPushed = true;
         self.loadComNaviLeftBtn()
+    }
+    
+    func loadData()
+    {
+        if(self.trade != nil && self.trade.item != nil)
+        {
+            self.lbName.text  = "品名：\(self.trade.item.brand) \(self.trade.item.name)"
+            self.lbSpec.text = "规格：\(self.trade.item.spec)"
+            self.lbTotalFree.text = "合计：RMB\((self.trade.item.price * Float(self.trade.quantity)).format(".2"))";
+            
+            
+        }
+        else
+        {
+            NSLog("no data in page:T10MessageVC")
+        }
     }
     //MARk:UITableView Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

@@ -22,6 +22,7 @@ class TradeModel: BaseModel {
     var create:String!
     var update:String!
     var statusOrder: TradeStatusOrder = .a0
+    var receiver:ReceiverModel!
     
     var quantity:Int!
     
@@ -54,6 +55,12 @@ class TradeModel: BaseModel {
         self.create =  self.getStringValue("create", dic: dict);
         self.update =  self.getStringValue("update", dic: dict);
         self.quantity =  self.getIntValue("quantity", dic: dict);
+        
+        if let receiverDic = dict["receiver"] as? NSDictionary {
+            if receiverDic.count > 0 {
+                   self.receiver = ReceiverModel(dic: receiverDic)
+            }
+        }
         
     }
     

@@ -11,8 +11,13 @@ import UIKit
 enum U07Role{
     case buyyer, seller
 }
-class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
+class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
 
+    
+    @IBOutlet var optBtn3: UIButton!
+    @IBOutlet var optBtn2: UIButton!
+    @IBOutlet var optBtn1: UIButton!
+    @IBOutlet weak var maskView: UIView!
     @IBOutlet weak var tradeIdLabel: UILabel!
     @IBOutlet weak var goodImageView: UIImageView!
     @IBOutlet weak var goodName: UILabel!
@@ -34,27 +39,28 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     @IBOutlet weak var orderState: UILabel!
     @IBOutlet weak var orderReveicedTime: UILabel!
-    @IBOutlet weak var revokeButton: UIButton!
+
     
     var role: U07Role!
     var trade: TradeModel!
-    var receiver: ReceiverModel!
+//    var receiver: ReceiverModel!
     var assigneeModel: AssigneeModel!
     var orderStatus: [OrderStatusModel]! = []
     
-    var orderStatusDic: [Int : String]! = [:]
-    var orderSellerStatusDic: [Int : String]! = [:]
+    var orderStatusDic: [Int : String]!
+    var orderSellerStatusDic: [Int : String]!
     
     deinit
     {
         NSLog("U07OrderTradeDetailVC --> deinit");
         self.orderStatus = nil;
         self.assigneeModel = nil;
-        self.receiver = nil;
+//        self.receiver = nil;
         self.trade = nil;
         self.role = nil;
     }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         self.setupData()
@@ -68,7 +74,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     }
     
     func setupData() {
-    
+        self.maskView.hidden = false;
         // buy
         self.orderStatusDic = [0 : "N/A", 1 : "未接单", 2 : "未接单", 3 : "已被接单", 4 : "已发货", 5 : "已完成", 6 : "已完成", 7 : "请求撤单中", 8 : "已撤单", 9 : "已撤单", 10 : "投诉处理中", 11 : "已完成", 12 : "未接单", 13 : "TBD", 14 : "TBD"]
         // seller
@@ -76,7 +82,8 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         
         self.httpObj.mydelegate = self
         self.httpObj.httpGetApi("trade/query", parameters: ["_id" : self.trade._id], tag: 700)
-         SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+   
         
         self.loadComNavTitle("订单详情")
         self.loadComNaviLeftBtn()
@@ -90,8 +97,10 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
     
     func initViewData() {
         
+        self.optBtn1.hidden = true;
+        self.optBtn2.hidden = true;
+        self.optBtn3.hidden = true;
         let item = self.trade.item
-//        self.revokeButton.hidden = true;
         if(item != nil  && item._id != "")
         {
             if (item.images != nil && item.images.count > 0) {
@@ -113,47 +122,43 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
             }
         }
         
-        let orderState = self.trade.status
+        let _orderState = self.trade.status
         if self.role == .buyyer {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
             self.orderTimeData()
-//            self.orderTime.text = "接单：" + UIHEPLER.formartTime(UserModel.shared.create)
-//            self.linkTitle.text = "卖家信息"
-            self.orderState.text = self.orderStatusDic[orderState]
+            self.orderState.text = self.orderStatusDic[_orderState]
             self.linkButton.setImage(UIImage(named: "u02-contactsell"), forState: UIControlState.Normal)
             
-//            self.revokeButton.hidden = true;
-            if(orderState == 1 || orderState == 2 || orderState == 3 || orderState == 12)
+            
+            if(_orderState == 1 || _orderState == 2 || _orderState == 3 || _orderState == 12)
             {
-//                self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("我要撤单", forState: UIControlState.Normal);
+                self.optBtn3.hidden = false;
+                self.optBtn3.setTitle("撤单", forState: UIControlState.Normal);
                 if(orderState == 3 )
                 {
-                    self.loadSpecNaviRightTextBtn("投诉", _selecotr: "navigationRightButtonAction:")
+                    self.optBtn1.hidden = false;
+                    self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
                 }
             }
-            else if(orderState == 4)
+            else if(_orderState == 4)
             {
-                self.loadSpecNaviRightTextBtn("投诉", _selecotr: "navigationRightButtonAction:")
-//                self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("确认收货", forState: UIControlState.Normal);
-                
-                
-                self.loadSpecNaviRightTextBtn("投诉", _selecotr: "navigationRightButtonAction:")
+                self.optBtn1.hidden = false;
+                self.optBtn2.hidden = false;
+                self.optBtn3.hidden = false;
+                self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
+                self.optBtn2.setTitle("查看物流", forState: UIControlState.Normal);
+                self.optBtn3.setTitle("确认收货", forState: UIControlState.Normal);
             }
-            if(orderState == 7)
+            if(_orderState == 7)
             {
-                self.loadSpecNaviRightTextBtn("投诉", _selecotr: "navigationRightButtonAction:")
+                self.optBtn1.hidden = false;
+                self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
             }
-            else if(orderState == 10 || orderState == 11)
+            else if(_orderState == 10 || _orderState == 11)
             {
-//                self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("查看投诉", forState: UIControlState.Normal);
-            }
-            else
-            {
-//                self.revokeButton.hidden = true;
+                self.optBtn3.hidden = false;
+                self.optBtn3.setTitle("查看投诉", forState: UIControlState.Normal);
             }
         } else {
             
@@ -163,44 +168,42 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
                 self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: self.assigneeModel.portrait)!)!)
                 self.personName.text = "\(self.assigneeModel.nickname)"
                 self.orderTimeData()
-//                self.orderTime.text = "接单：" + UIHEPLER.formartTime(self.assigneeModel.create)
-//                self.linkTitle.text = "买家信息"
-                self.orderState.text = self.orderSellerStatusDic[orderState]
+                self.orderState.text = self.orderSellerStatusDic[_orderState]
                 self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
             }
             
             if(orderState == 3 || orderState == 7)
             {
-                
-//                self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("取消抢单", forState: UIControlState.Normal);
+                self.optBtn1.hidden = false;
+                self.optBtn3.hidden = false;
+                self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
+                self.optBtn3.setTitle("取消抢单", forState: UIControlState.Normal);
+                if(orderState == 3)
+                {
+                    self.optBtn2.hidden = false;
+                    self.optBtn2.setTitle("发货", forState: UIControlState.Normal);
+                }
             }
             else if(orderState == 4)
             {
-                
-//                self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("编辑发货信息", forState: UIControlState.Normal);
+                self.optBtn1.hidden = false;
+                self.optBtn3.hidden = false;
+                self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
+                self.optBtn3.setTitle("编辑发货信息", forState: UIControlState.Normal);
             }
             else if(orderState == 10 || orderState == 11)
             {
-                
-//                self.revokeButton.hidden = false;
-                self.revokeButton.setTitle("查看投诉", forState: UIControlState.Normal);
+                self.optBtn3.hidden = false;
+                self.optBtn3.setTitle("查看投诉", forState: UIControlState.Normal);
             }
-            else
-            {
-//                self.revokeButton.hidden = true;
-            }
-
-            
         }
-        
-        if self.receiver != nil {
-            self.reveicerName.text = "收货人：\(self.receiver.name)"
-            self.reveicerPhone.text = "\(self.receiver.phone)"
-            self.reveicerAddress.text = "收货地址：\(self.receiver.province + self.receiver.address)"
+        if(self.trade.receiver != nil)
+        {
+     
+            self.reveicerName.text = "收货人：\(self.trade.receiver.name)"
+            self.reveicerPhone.text = "\(self.trade.receiver.phone)"
+            self.reveicerAddress.text = "收货地址：\(self.trade.receiver.province + self.trade.receiver.address)"
         }
-        
         if( self.orderStatus != nil &&  self.orderStatus.count>0)
         {
             var createLogs =  self.orderStatus.filter{itemObj -> Bool in
@@ -219,56 +222,82 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
 //        self.revokeButton.setTitle("我要撤单", forState: UIControlState.Normal)
     }
     
-    // MARK: - Action
-    
-    @IBAction func checkLogisticsOrder() {
-        //TODO 物流信息
-        if self.receiver != nil {
-            let tipView = U02LogisticsTipView(name: "物流公司：\(self.receiver.name)", orderNumber: "物流单号：\(self.receiver.uuid)")
-            tipView.show()
-        } else {
-            UIHEPLER.alertErrMsg("无物流信息")
-        }
-    }
-    
-    @IBAction func navigationRightButtonAction(sender: UIButton) {
-    
+    // MARK: - IBAction
+    //投诉
+    @IBAction func optBtn1Action(sender: UIButton) {
+        
         let vc = T08ComplaintVC(nibName: "T08ComplaintVC", bundle: NSBundle.mainBundle())
         vc.tradeid = self.trade._id;
         self.presentViewController(vc, animated: true, completion: nil);
     }
     
-    @IBAction func linkPersonButtonAction(sender: UIButton) {
+    @IBAction func optBtn2Action() {
         
-        let vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
-        self.navigationController!.pushViewController(vc, animated: true)
+        
+        if self.role == .buyyer {
+            if self.trade.status == 4 {//查看物流
+                
+                let alertView:UIAlertView = UIAlertView();
+                alertView.message = "物流公司:韵达快递 \r\n 物流单号:FSDFSDFSDFSDFSDF";
+                alertView.addButtonWithTitle("取消");
+                alertView.addButtonWithTitle("确认");
+//                alertView.delegate = self;
+                alertView.show()
+            }
+        }
+        else
+        {
+            if self.trade.status == 3//发货
+            {
+                let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+                vc.hidesBottomBarWhenPushed = true
+                vc.trade = self.trade;
+                self.presentViewController(vc, animated: true, completion: nil);
+                return;
+                
+            }
+        }
+        
+
     }
-    
-    @IBAction func revokeButtonAction(sender: UIButton) {
+    @IBAction func optBtn3Action(sender: UIButton) {
     
         var url: String = ""
         var tag: Int = 700
         if self.role == .buyyer {
-            if self.trade .status == 1 ||  self.trade .status == 2 ||  self.trade .status == 3 {
-                
+            if self.trade.status == 1 ||  self.trade .status == 2 ||  self.trade .status == 3 {//撤单
                 url = "trade/cancel"
                 tag = 701
-            } else if self.trade.statusOrder == .b0 {
-                
-                url = "trade/receipt"
+            } else if self.trade.status == 4 {
+                url = "trade/receipt"//确认收货
                 tag = 702
-            } else if self.trade.statusOrder == .c0 {
+            } else if self.trade.status == 10 ||  self.trade .status == 11 {//查看投诉
                 
-            } else if self.trade.statusOrder == .d0 {
+                var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+                vc.hidesBottomBarWhenPushed = true;
+                vc.trade = self.trade;
+                self.navigationController!.pushViewController(vc, animated: true)
+                return;
             }
         } else {
-            if self.trade.status == 3 {
-                
+            if self.trade.status == 3 ||  self.trade.status == 7 {//取消抢单
                 url = "trade/unassign"
                 tag = 705
-            } else if self.trade.statusOrder == .b0 {
-            } else if self.trade.statusOrder == .c0 {
-            } else if self.trade.statusOrder == .d0 {
+            } else if self.trade.status == 4 {//编辑发货信息
+                
+                let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+                vc.hidesBottomBarWhenPushed = true
+                vc.trade = self.trade;
+                self.presentViewController(vc, animated: true, completion: nil);
+                return;
+                
+            }  else if self.trade.status == 10 ||  self.trade .status == 11 {//查看投诉
+                
+                var vc = T09ComplaintStatusVC(nibName: "T09ComplaintStatusVC", bundle: NSBundle.mainBundle())
+                vc.hidesBottomBarWhenPushed = true;
+                vc.trade = self.trade;
+                self.navigationController!.pushViewController(vc, animated: true)
+                return;
             }
         }
         if(url != "")
@@ -282,31 +311,39 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         }
         
     }
+    @IBAction func linkPersonButtonAction(sender: UIButton) {
+        
+        let vc = T10MessagingVC(nibName: "T10MessagingVC", bundle: NSBundle.mainBundle())
+        vc.trade = self.trade;
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
     
     // MARK: - WebRequestDelegate
     
     func requestDataComplete(response: AnyObject, tag: Int) {
-        
+     
         if (tag == 700) {
             let tradeData = (response as! NSDictionary).objectForKey("trade")
             if tradeData != nil {
                 self.trade = TradeModel(dict: tradeData as! NSDictionary)
                 
                 let assigneeRef = (tradeData as! NSDictionary).objectForKey("assigneeRef")
-                if assigneeRef != nil {
-                    self.assigneeModel = AssigneeModel(dic: assigneeRef as! NSDictionary)
+                if let assignDIc  = assigneeRef as? NSDictionary
+                {
+                    self.assigneeModel = AssigneeModel(dic: assignDIc)
                 }
-                
                 let statusLogs = (tradeData as! NSDictionary).objectForKey("statusLogs")
-                if statusLogs != nil {
-                    
+                
+                if let logArr = statusLogs as? NSArray
+                {
                     if(orderStatus != nil && orderStatus.count>0)
                     {
                         self.orderStatus.removeAll();
                         self.orderStatus = [];
                     }
 
-                    for statusLog in statusLogs as! NSArray {
+                    for statusLog in logArr {
+                        
                         self.orderStatus.append(OrderStatusModel(dic: statusLog as! NSDictionary))
                     }
                 }
@@ -346,12 +383,12 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate {
         
             self.navigationController?.popViewControllerAnimated(true)
         }
-        
+        self.maskView.hidden = true;
         SVProgressHUD.dismiss();
     }
     
     func requestDataFailed(error: String,tag:Int) {
-     
+    
         SVProgressHUD.showErrorWithStatusWithBlack(error);
     }
 

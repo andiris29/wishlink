@@ -40,6 +40,10 @@
                 <outlet property="goodPrice" destination="gQP-5O-yT7" id="g4O-bh-9F8"/>
                 <outlet property="goodTotal" destination="nBK-h6-9ka" id="mTV-dD-oKB"/>
                 <outlet property="linkButton" destination="yWS-48-Xvm" id="I2Y-Ry-fW3"/>
+                <outlet property="maskView" destination="VK3-dG-Hnh" id="jev-hd-9Ve"/>
+                <outlet property="optBtn1" destination="HZo-go-PbU" id="tBC-Nc-QpH"/>
+                <outlet property="optBtn2" destination="F7E-ix-I5q" id="hpR-c1-K03"/>
+                <outlet property="optBtn3" destination="UdG-Lh-Jv9" id="jGa-HU-pzs"/>
                 <outlet property="orderReveicedTime" destination="52X-xV-b6l" id="gSA-sq-ZIP"/>
                 <outlet property="orderState" destination="Pmf-ZL-VJ0" id="hY9-9z-JX0"/>
                 <outlet property="orderTime" destination="21v-M2-L53" id="hC5-mb-9r3"/>
@@ -47,7 +51,6 @@
                 <outlet property="reveicerAddress" destination="rt2-nE-lLO" id="r2P-Yo-k64"/>
                 <outlet property="reveicerName" destination="goe-3F-0ku" id="KFd-hl-x9m"/>
                 <outlet property="reveicerPhone" destination="KvE-Af-4xR" id="788-ge-UJh"/>
-                <outlet property="revokeButton" destination="UdG-Lh-Jv9" id="dFn-FL-w6j"/>
                 <outlet property="tradeIdLabel" destination="9BH-rV-vGx" id="azv-wo-mpn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -105,7 +108,7 @@
                                         <constraint firstAttribute="height" constant="21" id="cMw-gl-Ja3"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货人：kelly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goe-3F-0ku">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货人：未知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goe-3F-0ku">
                                     <rect key="frame" x="35" y="15" width="130" height="21"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -114,7 +117,7 @@
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15888888888" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvE-Af-4xR">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvE-Af-4xR">
                                     <rect key="frame" x="165" y="15" width="130" height="21"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -123,8 +126,8 @@
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址：中国上海中山北路999弄13楼102室 小明收 " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rt2-nE-lLO">
-                                    <rect key="frame" x="35" y="36" width="260" height="27.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="收货地址：未知" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rt2-nE-lLO">
+                                    <rect key="frame" x="35" y="36" width="260" height="28"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="FZLTXHJW--GB1-0" family="FZLanTingHeiS-EL-GB" pointSize="12"/>
                                     <nil key="highlightedColor"/>
@@ -319,7 +322,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="接单：2015.10.28" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21v-M2-L53">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21v-M2-L53">
                                     <rect key="frame" x="75" y="39" width="165" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="Gwm-xj-z1w"/>
@@ -373,7 +376,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="navigationRightButtonAction:" destination="-1" eventType="touchUpInside" id="dAg-At-yis"/>
+                                        <action selector="optBtn1Action:" destination="-1" eventType="touchUpInside" id="PDQ-y6-d9U"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7E-ix-I5q">
@@ -385,7 +388,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="checkLogisticsOrder" destination="-1" eventType="touchUpInside" id="3PO-TP-iro"/>
+                                        <action selector="optBtn2Action" destination="-1" eventType="touchUpInside" id="6Wq-Ng-xdO"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdG-Lh-Jv9">
@@ -400,7 +403,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="revokeButtonAction:" destination="-1" eventType="touchUpInside" id="50D-aM-Qfi"/>
+                                        <action selector="optBtn3Action:" destination="-1" eventType="touchUpInside" id="PKZ-tf-Wl1"/>
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-CX-bWC">
@@ -410,6 +413,10 @@
                                         <constraint firstAttribute="height" constant="1" id="O7a-IZ-l7U"/>
                                     </constraints>
                                 </imageView>
+                                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VK3-dG-Hnh">
+                                    <rect key="frame" x="0.0" y="-428" width="320" height="568"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
