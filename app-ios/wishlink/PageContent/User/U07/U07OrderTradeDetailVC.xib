@@ -52,6 +52,7 @@
                 <outlet property="reveicerName" destination="goe-3F-0ku" id="KFd-hl-x9m"/>
                 <outlet property="reveicerPhone" destination="KvE-Af-4xR" id="788-ge-UJh"/>
                 <outlet property="tradeIdLabel" destination="9BH-rV-vGx" id="azv-wo-mpn"/>
+                <outlet property="v_targetUser" destination="Ntn-wM-pTN" id="3Sd-9Q-KIC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

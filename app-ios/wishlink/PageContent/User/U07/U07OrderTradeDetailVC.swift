@@ -14,6 +14,7 @@ enum U07Role{
 class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
 
     
+    @IBOutlet weak var v_targetUser: UIView!
     @IBOutlet var optBtn3: UIButton!
     @IBOutlet var optBtn2: UIButton!
     @IBOutlet var optBtn1: UIButton!
@@ -45,7 +46,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
     var trade: TradeModel!
 //    var receiver: ReceiverModel!
     var assigneeModel: AssigneeModel!
-    var orderStatus: [OrderStatusModel]! = []
+    var orderStatusArr: [OrderStatusModel]! = []
     
     var orderStatusDic: [Int : String]!
     var orderSellerStatusDic: [Int : String]!
@@ -53,7 +54,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
     deinit
     {
         NSLog("U07OrderTradeDetailVC --> deinit");
-        self.orderStatus = nil;
+        self.orderStatusArr = nil;
         self.assigneeModel = nil;
 //        self.receiver = nil;
         self.trade = nil;
@@ -122,14 +123,23 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
             }
         }
         
+        
         let _orderState = self.trade.status
+        
+        if(_orderState == 0 || _orderState == 1 || _orderState == 2 )
+        {
+            self.v_targetUser.hidden = true;
+        }
+        else
+        {
+            self.v_targetUser.hidden = false;
+        }
         if self.role == .buyyer {
             self.avterImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: UserModel.shared.portrait)!)!)
             self.personName.text = "\(UserModel.shared.nickname)"
             self.orderTimeData()
             self.orderState.text = self.orderStatusDic[_orderState]
             self.linkButton.setImage(UIImage(named: "u02-contactsell"), forState: UIControlState.Normal)
-            
             
             if(_orderState == 1 || _orderState == 2 || _orderState == 3 || _orderState == 12)
             {
@@ -172,26 +182,26 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
                 self.linkButton.setImage(UIImage(named: "u02-contactbuy"), forState: UIControlState.Normal)
             }
             
-            if(orderState == 3 || orderState == 7)
+            if(_orderState == 3 || _orderState == 7)
             {
                 self.optBtn1.hidden = false;
                 self.optBtn3.hidden = false;
                 self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
                 self.optBtn3.setTitle("取消抢单", forState: UIControlState.Normal);
-                if(orderState == 3)
+                if(_orderState == 3)
                 {
                     self.optBtn2.hidden = false;
                     self.optBtn2.setTitle("发货", forState: UIControlState.Normal);
                 }
             }
-            else if(orderState == 4)
+            else if(_orderState == 4)
             {
                 self.optBtn1.hidden = false;
                 self.optBtn3.hidden = false;
                 self.optBtn1.setTitle("投诉", forState: UIControlState.Normal);
                 self.optBtn3.setTitle("编辑发货信息", forState: UIControlState.Normal);
             }
-            else if(orderState == 10 || orderState == 11)
+            else if(_orderState == 10 || _orderState == 11)
             {
                 self.optBtn3.hidden = false;
                 self.optBtn3.setTitle("查看投诉", forState: UIControlState.Normal);
@@ -204,9 +214,9 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
             self.reveicerPhone.text = "\(self.trade.receiver.phone)"
             self.reveicerAddress.text = "收货地址：\(self.trade.receiver.province + self.trade.receiver.address)"
         }
-        if( self.orderStatus != nil &&  self.orderStatus.count>0)
+        if( self.orderStatusArr != nil &&  self.orderStatusArr.count>0)
         {
-            var createLogs =  self.orderStatus.filter{itemObj -> Bool in
+            var createLogs =  self.orderStatusArr.filter{itemObj -> Bool in
             return itemObj.status == 3;
             }
             if(createLogs.count > 0)
@@ -336,15 +346,15 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
                 
                 if let logArr = statusLogs as? NSArray
                 {
-                    if(orderStatus != nil && orderStatus.count>0)
+                    if(orderStatusArr != nil && orderStatusArr.count>0)
                     {
-                        self.orderStatus.removeAll();
-                        self.orderStatus = [];
+                        self.orderStatusArr.removeAll();
+                        self.orderStatusArr = [];
                     }
 
                     for statusLog in logArr {
                         
-                        self.orderStatus.append(OrderStatusModel(dic: statusLog as! NSDictionary))
+                        self.orderStatusArr.append(OrderStatusModel(dic: statusLog as! NSDictionary))
                     }
                 }
             }
@@ -366,14 +376,14 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
                 let statusLogs = (tradeData as! NSDictionary).objectForKey("statusLogs")
                 if statusLogs != nil {
                     
-                    if(orderStatus != nil && orderStatus.count>0)
+                    if(orderStatusArr != nil && orderStatusArr.count>0)
                     {
-                        self.orderStatus.removeAll();
-                        self.orderStatus = [];
+                        self.orderStatusArr.removeAll();
+                        self.orderStatusArr = [];
                     }
                     
                     for statusLog in statusLogs as! NSArray {
-                        self.orderStatus.append(OrderStatusModel(dic: statusLog as! NSDictionary))
+                        self.orderStatusArr.append(OrderStatusModel(dic: statusLog as! NSDictionary))
                     }
                 }
 

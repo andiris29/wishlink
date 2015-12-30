@@ -54,8 +54,9 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         self.companyTextField.text = ""
         
         self.httpObj.mydelegate = self;
-        SVProgressHUD.showWithStatusWithBlack("请稍后...")
-        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 71)
+        bindData();
+//        SVProgressHUD.showWithStatusWithBlack("请稍后...")
+//        self.httpObj.httpGetApi("user/get", parameters: ["registrationId":APPCONFIG.Uid], tag: 71)
     }
     
     //MARK: - Ibaction
@@ -102,16 +103,16 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         self.scanTextField.text = code;
     }
     
-//    func bindData()
-//    {
-////        if(result.count>0) {
-//        
-//            let defaultAddress = result[0] as ReceiverModel
-//            self.phoneLabel.text = defaultAddress.phone
-//            self.personLabel.text = defaultAddress.name;
-//            self.addressLabel.text = defaultAddress.address;
-////        }
-//    }
+    func bindData()
+    {
+        if(self.trade != nil && self.trade.receiver != nil) {
+        
+          
+            self.phoneLabel.text = self.trade.receiver.phone
+            self.personLabel.text = self.trade.receiver.name;
+            self.addressLabel.text = "\(self.trade.receiver.province + " " + self.trade.receiver.address)"
+       }
+    }
 
 
     //MARK: - CSDorpListViewDelegate
@@ -126,23 +127,24 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         if(tag == 70) {
             self.navigationController?.popViewControllerAnimated(true);
             //             self.dismissViewControllerAnimated(true, completion: nil);
-        } else if(tag == 71) {
-        
-            SVProgressHUD.dismiss();
-            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
-            
-            let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
-                return (itemObj as ReceiverModel).isDefault == true;
-            }
-            
-            if(result.count>0) {
-                
-                let defaultAddress = result[0] as ReceiverModel
-                self.phoneLabel.text = defaultAddress.phone
-                self.personLabel.text = defaultAddress.name;
-                self.addressLabel.text = defaultAddress.address;
-            }
         }
+//        else if(tag == 71) {
+//        
+//            SVProgressHUD.dismiss();
+//            UserModel.shared.userDic = response["user"] as! [String: AnyObject]
+//            
+//            let result = UserModel.shared.receiversArray.filter{itemObj -> Bool in
+//                return (itemObj as ReceiverModel).isDefault == true;
+//            }
+//            
+//            if(result.count>0) {
+//                
+//                let defaultAddress = result[0] as ReceiverModel
+//                self.phoneLabel.text = defaultAddress.phone
+//                self.personLabel.text = defaultAddress.name;
+//                self.addressLabel.text = defaultAddress.address;
+//            }
+//        }
     }
     
     

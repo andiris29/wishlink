@@ -138,7 +138,6 @@ class T06ItemVC: RootVC, WebRequestDelegate {
     @IBAction func tradeButtonAction(sender: UIButton) {
         
         if sender.tag == 60 { //确认跟单
-            
             if(UserModel.shared.isLogin)
             {
                 SVProgressHUD.showWithStatusWithBlack("请稍后...")

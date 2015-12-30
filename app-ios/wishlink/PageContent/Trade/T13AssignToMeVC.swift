@@ -31,7 +31,6 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
         super.viewDidLoad()
         self.httpObj.mydelegate = self;
         
-        followArr = [];
         SVProgressHUD.showWithStatusWithBlack("请稍等...")
         
         self.tradeTableView.registerNib(UINib(nibName: cellIdentifier, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
@@ -81,13 +80,11 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         
-        let last: Int = followArr.count+2 - 1
+//        let last: Int = followArr.count + 1
         
         switch indexPath.row {
         case 0:
             return 195
-            //        case last:
-            //            return 65
         default :
             return 90
         }
@@ -101,13 +98,13 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return followArr.count
+        return followArr.count+1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
-        let last: Int = followArr.count;// + 2 - 1
+//        let last: Int = followArr.count;// + 2 - 1
         
         
         switch indexPath.row {
@@ -286,15 +283,14 @@ class T13AssignToMeVC: RootVC, UITableViewDelegate,UITableViewDataSource,  T06Ce
                 for  itemObj in tradesObj!
                 {
                     let tradeItem = TradeModel(dict: itemObj as! NSDictionary);
-                    if(tradeItem.item != nil && tradeItem._id == self.trade._id)//remove soma trade
-                    {
-                        //self.trade = tradeItem
-                    }
-                    else
-                    {
-                        
+//                    if(tradeItem.item != nil && tradeItem._id == self.trade._id)//remove soma trade
+//                    {
+//                        //self.trade = tradeItem
+//                    }
+//                    else
+//                    {
                         self.followArr.append(tradeItem);
-                    }
+//                    }
                 }
                 //                self.loadAllUserImage();
                 self.tradeTableView.reloadData();
