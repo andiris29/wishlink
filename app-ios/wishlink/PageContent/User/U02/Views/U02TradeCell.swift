@@ -89,6 +89,17 @@ class U02TradeCell: UICollectionViewCell {
         UIHEPLER.buildUIViewWithRadius(self.view_bg, radius: 8, borderColor: UIColor.grayColor(), borderWidth: 1);
         self.prepareBuyerTopView()
         self.prepareSellerTopView()
+        NotificationCenter.addObserver(self, selector: Selector("selectItemChange:"), name: APPCONFIG.TradeStatusChange_NotifKey, object: nil)
+        
+    }
+    func selectItemChange(obj:NSNotification)
+    {
+        let data:TradeModel! = obj.object as? TradeModel
+        
+        if(self.trade._id == data._id)//是对应项目的时候
+        {
+            self.trade = data
+        }
     }
     
 //    @IBAction func revokeBtnAction(sender: AnyObject) {

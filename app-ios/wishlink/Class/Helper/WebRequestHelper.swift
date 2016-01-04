@@ -52,6 +52,10 @@ class WebRequestHelper:NSObject {
         
         let apiurl = APPCONFIG.SERVICE_ROOT_PATH + apiName
         NSLog("request url: %@", apiurl)
+        if(parameters != nil && parameters?.count>0)
+        {
+            NSLog("get para:%@",(parameters?.description)!)
+        }
         
         request(.GET, apiurl, parameters: parameters, encoding: .URL, headers: self.headers)
             .responseJSON{ _, respore, result in

@@ -140,6 +140,7 @@ class U02SellerTradeVC: RootVC, UICollectionViewDelegateFlowLayout, UICollection
         switch clickType {
         case .EditItemInfo:
             let vc = T07DeliverEditVC(nibName: "T07DeliverEditVC", bundle: NSBundle.mainBundle())
+            vc.trade = cell.trade;
             vc.hidesBottomBarWhenPushed = true
             
             

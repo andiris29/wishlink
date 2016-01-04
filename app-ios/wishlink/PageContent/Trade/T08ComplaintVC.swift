@@ -148,6 +148,9 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
                         switch resultObj.result {
                         case .Success(let json):
                             
+                            
+                            
+                            
                             SVProgressHUD.dismiss();
                             if(self.navigationController != nil)
                             {
@@ -163,6 +166,17 @@ class T08ComplaintVC: RootVC, WebRequestDelegate, UIActionSheetDelegate, UIImage
                             print(json);
                             let itemData =  json.objectForKey("data") as! NSDictionary
                             if(itemData.objectForKey("trade") != nil) {
+                                
+                                let tradeDic:NSDictionary! =  itemData.objectForKey("trade") as? NSDictionary
+                                if(tradeDic != nil)
+                                {
+                                    let _trade = TradeModel(dict: tradeDic)
+                                    if(_trade._id !=  "")
+                                    {
+                                        NotificationCenter.postNotificationName(APPCONFIG.TradeStatusChange_NotifKey, object: _trade);
+                                    }
+                                    
+                                }
                                 
                             } else {
                                 

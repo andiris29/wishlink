@@ -25,6 +25,7 @@ class TradeModel: BaseModel {
     var receiver:ReceiverModel!
     
     var quantity:Int!
+    var complaints:[complaintModel]!
     
     
     init(dict:NSDictionary) {
@@ -59,6 +60,16 @@ class TradeModel: BaseModel {
         if let receiverDic = dict["receiver"] as? NSDictionary {
             if receiverDic.count > 0 {
                    self.receiver = ReceiverModel(dic: receiverDic)
+            }
+        }
+        
+        if let _complaints = dict["complaints"] as? NSArray {
+            if _complaints.count > 0 {
+                self.complaints = []
+                for complaintItem in _complaints {
+                    let itemModel = complaintModel(dict: complaintItem as! NSDictionary)
+                    self.complaints.append(itemModel)
+                }
             }
         }
         

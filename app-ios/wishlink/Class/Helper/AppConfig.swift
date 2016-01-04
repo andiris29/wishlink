@@ -68,6 +68,7 @@ class AppConfig: NSObject
     //获取服务器端支付数据地址（商户自定义）
     let WX_Pay_SP_URL          = "http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php"
     
+    var TradeStatusChange_NotifKey = "TradeStatusChange_NotifKey";
     
     /*支付宝相关参数*/
     let alipay_callback_url = SERVER_BASE_URL + "/wishlink-payment/alipay/callback";

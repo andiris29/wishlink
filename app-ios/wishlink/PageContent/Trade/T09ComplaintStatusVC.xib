@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLanTingHeiS-EL-GB.ttf">
@@ -18,6 +19,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="T09ComplaintStatusVC" customModule="wishlink" customModuleProvider="target">
             <connections>
                 <outlet property="chatTableView" destination="whK-zh-Yzv" id="zho-MY-Krr"/>
+                <outlet property="iv1" destination="yqd-Qo-xX3" id="ctc-G1-43K"/>
+                <outlet property="iv2" destination="MDX-D2-D8k" id="ofj-4O-5N1"/>
+                <outlet property="iv3" destination="Pab-ee-FyB" id="xBW-1r-2op"/>
+                <outlet property="iv4" destination="6lq-YT-xgh" id="tjP-3I-dj3"/>
+                <outlet property="iv5" destination="SVg-Cp-Wje" id="06O-Fv-nHY"/>
+                <outlet property="lbNo" destination="cUY-83-Pfg" id="M2A-EM-BdN"/>
+                <outlet property="lbproblem" destination="Ofj-BV-YW0" id="Eki-EO-57H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -87,6 +95,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewk-sL-wH4" userLabel="View0">
                                     <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yqd-Qo-xX3">
+                                            <rect key="frame" x="10" y="0.0" width="45" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="yqd-Qo-xX3" secondAttribute="height" multiplier="1:1" id="0Gw-mA-XJ1"/>
+                                                <constraint firstAttribute="width" constant="45" id="Veg-E4-KVL"/>
+                                            </constraints>
+                                        </imageView>
                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aj3-yb-N9d" userLabel="Button0">
                                             <rect key="frame" x="10" y="0.0" width="45" height="45"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -101,13 +116,22 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="yqd-Qo-xX3" firstAttribute="top" secondItem="Ewk-sL-wH4" secondAttribute="top" id="G67-xW-e6y"/>
                                         <constraint firstAttribute="centerX" secondItem="Aj3-yb-N9d" secondAttribute="centerX" id="MnX-Zd-ALk"/>
                                         <constraint firstItem="Aj3-yb-N9d" firstAttribute="top" secondItem="Ewk-sL-wH4" secondAttribute="top" id="NyJ-Vq-5Rn"/>
+                                        <constraint firstItem="yqd-Qo-xX3" firstAttribute="centerX" secondItem="Ewk-sL-wH4" secondAttribute="centerX" id="Pvc-b1-Gj9"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-jV-KO7" userLabel="View1">
                                     <rect key="frame" x="65" y="0.0" width="65" height="50"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MDX-D2-D8k">
+                                            <rect key="frame" x="10" y="0.0" width="45" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="45" id="hU7-Nk-teb"/>
+                                                <constraint firstAttribute="width" secondItem="MDX-D2-D8k" secondAttribute="height" multiplier="1:1" id="hXu-hB-ewp"/>
+                                            </constraints>
+                                        </imageView>
                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SvK-SI-Yp6" userLabel="Button1">
                                             <rect key="frame" x="10" y="0.0" width="45" height="45"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -124,6 +148,8 @@
                                     <constraints>
                                         <constraint firstAttribute="centerX" secondItem="SvK-SI-Yp6" secondAttribute="centerX" id="LVw-1W-YFu"/>
                                         <constraint firstItem="SvK-SI-Yp6" firstAttribute="top" secondItem="cbc-jV-KO7" secondAttribute="top" id="Q0P-7T-55k"/>
+                                        <constraint firstItem="MDX-D2-D8k" firstAttribute="top" secondItem="cbc-jV-KO7" secondAttribute="top" id="TjV-x3-Jsl"/>
+                                        <constraint firstItem="MDX-D2-D8k" firstAttribute="centerX" secondItem="cbc-jV-KO7" secondAttribute="centerX" id="hz8-6i-QpC"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILn-g8-Lq9" userLabel="View2">
@@ -140,10 +166,19 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pab-ee-FyB">
+                                            <rect key="frame" x="10" y="0.0" width="45" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="45" id="RIe-df-jUM"/>
+                                                <constraint firstAttribute="width" secondItem="Pab-ee-FyB" secondAttribute="height" multiplier="1:1" id="Y56-7I-2pj"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="Pab-ee-FyB" firstAttribute="top" secondItem="ILn-g8-Lq9" secondAttribute="top" id="06D-Et-LNz"/>
                                         <constraint firstAttribute="centerX" secondItem="hvI-TY-N8K" secondAttribute="centerX" id="9dV-X5-Xzs"/>
+                                        <constraint firstItem="Pab-ee-FyB" firstAttribute="centerX" secondItem="ILn-g8-Lq9" secondAttribute="centerX" id="Uas-QU-AGc"/>
                                         <constraint firstItem="hvI-TY-N8K" firstAttribute="top" secondItem="ILn-g8-Lq9" secondAttribute="top" id="gYn-N3-DCC"/>
                                     </constraints>
                                 </view>
@@ -161,9 +196,18 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6lq-YT-xgh">
+                                            <rect key="frame" x="10" y="0.0" width="45" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="6lq-YT-xgh" secondAttribute="height" multiplier="1:1" id="5ZH-4J-5K2"/>
+                                                <constraint firstAttribute="width" constant="45" id="eUx-gG-BHm"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="6lq-YT-xgh" firstAttribute="centerX" secondItem="asm-a9-Pb8" secondAttribute="centerX" id="K2h-Yf-fiR"/>
+                                        <constraint firstItem="6lq-YT-xgh" firstAttribute="top" secondItem="asm-a9-Pb8" secondAttribute="top" id="LLP-iG-Naz"/>
                                         <constraint firstItem="qA4-9n-yW6" firstAttribute="top" secondItem="asm-a9-Pb8" secondAttribute="top" id="UKT-hr-DHk"/>
                                         <constraint firstAttribute="centerX" secondItem="qA4-9n-yW6" secondAttribute="centerX" id="nHU-Kw-tbk"/>
                                     </constraints>
@@ -182,10 +226,19 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Cp-Wje">
+                                            <rect key="frame" x="10" y="0.0" width="45" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="SVg-Cp-Wje" secondAttribute="height" multiplier="1:1" id="eZ6-dJ-6b1"/>
+                                                <constraint firstAttribute="width" constant="45" id="il2-tM-vYL"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="SVg-Cp-Wje" firstAttribute="centerX" secondItem="XRb-Wb-bYf" secondAttribute="centerX" id="5Ia-8I-Z3u"/>
                                         <constraint firstItem="lww-ZR-Pa6" firstAttribute="top" secondItem="XRb-Wb-bYf" secondAttribute="top" id="Qc4-D4-z4i"/>
+                                        <constraint firstItem="SVg-Cp-Wje" firstAttribute="top" secondItem="XRb-Wb-bYf" secondAttribute="top" id="vbT-qB-gaH"/>
                                         <constraint firstAttribute="centerX" secondItem="lww-ZR-Pa6" secondAttribute="centerX" constant="1" id="wMk-90-vXF"/>
                                     </constraints>
                                 </view>

@@ -80,7 +80,9 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         }
         else if(btnTag == 11)//提交
         {
-            self.httpObj.httpPostApi("trade/deliver", parameters: ["company": companyTextField.text!, "trackingId": scanTextField.text!], tag: 70)
+            var para = ["_id":self.trade._id,"company": companyTextField.text!, "trackingId": scanTextField.text!]
+            
+            self.httpObj.httpPostApi("trade/deliver", parameters: para, tag: 70)
         }
     }
     @IBAction func textFieldEditEnd(sender: UITextField) {
@@ -125,8 +127,15 @@ class T07DeliverEditVC: RootVC, CSDorpListViewDelegate,scanDelegate, WebRequestD
         print(response, terminator: "")
         
         if(tag == 70) {
-            self.navigationController?.popViewControllerAnimated(true);
-            //             self.dismissViewControllerAnimated(true, completion: nil);
+            
+            let tradeData = (response as! NSDictionary).objectForKey("trade")
+            if tradeData != nil {
+                self.trade = TradeModel(dict: tradeData as! NSDictionary)
+                
+                NotificationCenter.postNotificationName(APPCONFIG.TradeStatusChange_NotifKey, object: self.trade );
+            }
+//            self.navigationController?.popViewControllerAnimated(true);
+             self.dismissViewControllerAnimated(true, completion: nil);
         }
 //        else if(tag == 71) {
 //        

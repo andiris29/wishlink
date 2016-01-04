@@ -143,6 +143,7 @@
 		A1C8EA6A1BCA05DA00ED9910 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C8EA5D1BCA05DA00ED9910 /* Validation.swift */; };
 		A1E08D3E1BC81D2C00F22A42 /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E08D3D1BC81D2C00F22A42 /* keywordModel.swift */; };
 		A1E9A87A1C108ABB0062202C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E9A8791C108ABB0062202C /* Images.xcassets */; };
+		A1EFD31D1C395A3D0059A33D /* complaintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EFD31C1C395A3D0059A33D /* complaintModel.swift */; };
 		A1F063AA1BE3CDF400697BE6 /* T13AssignToMeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F063A81BE3CDF300697BE6 /* T13AssignToMeVC.swift */; };
 		A1F063AB1BE3CDF400697BE6 /* T13AssignToMeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1F063A91BE3CDF300697BE6 /* T13AssignToMeVC.xib */; };
 		A1F063AE1BE3CF7500697BE6 /* T13CellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F063AC1BE3CF7500697BE6 /* T13CellHeader.swift */; };
@@ -420,6 +421,7 @@
 		A1C8EA5D1BCA05DA00ED9910 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		A1E08D3D1BC81D2C00F22A42 /* keywordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
 		A1E9A8791C108ABB0062202C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A1EFD31C1C395A3D0059A33D /* complaintModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = complaintModel.swift; sourceTree = "<group>"; };
 		A1F063A81BE3CDF300697BE6 /* T13AssignToMeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T13AssignToMeVC.swift; sourceTree = "<group>"; };
 		A1F063A91BE3CDF300697BE6 /* T13AssignToMeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = T13AssignToMeVC.xib; sourceTree = "<group>"; };
 		A1F063AC1BE3CF7500697BE6 /* T13CellHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T13CellHeader.swift; sourceTree = "<group>"; };
@@ -1116,6 +1118,7 @@
 				A1F0E2851BA31E83005379CD /* TrendModel.swift */,
 				A1F7C1411BB1A6090045C125 /* ItemModel.swift */,
 				A13474FA1BC55DF0002CD7CB /* TradeModel.swift */,
+				A1EFD31C1C395A3D0059A33D /* complaintModel.swift */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -1588,6 +1591,7 @@
 				D25E02451BF313DB004659C9 /* U06RegsiterVC.swift in Sources */,
 				A132BB8F1B863328004EAB47 /* TabBarItem.swift in Sources */,
 				D2E6BE971B96E70A0050C177 /* CSImageRollView.swift in Sources */,
+				A1EFD31D1C395A3D0059A33D /* complaintModel.swift in Sources */,
 				D2C3D6E21BDE643F000EE182 /* U02OrderTradeVC.swift in Sources */,
 				A1AA6ECF1C1087550066EF9A /* UIButton+WebCache.m in Sources */,
 				76DC3B7A1BA85997005DFA23 /* UserModel.swift in Sources */,

@@ -66,11 +66,22 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
 
         self.setupData()
         self.setupView()
+        NotificationCenter.addObserver(self, selector: Selector("selectItemChange:"), name: APPCONFIG.TradeStatusChange_NotifKey, object: nil)
+        
+    }
+    func selectItemChange(obj:NSNotification)
+    {
+        let data:TradeModel! = obj.object as? TradeModel
+        
+        if(self.trade._id == data._id)//是对应项目的时候
+        {
+            requestData();
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+      
         self.navigationController!.navigationBar.hidden = false
     }
     
@@ -81,13 +92,19 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
         // seller
         self.orderSellerStatusDic = [0 : "N/A", 1 : "N/A", 2 : "N/A", 3 : "已抢单", 4 : "已发货", 5 : "已完成", 6 : "已完成", 7 : "买家要求撤单", 8 : "N/A", 9 : "N/A", 10 : "投诉处理中", 11 : "已完成", 12 : "N/A", 13 : "TBD", 14 : "TBD"]
         
-        self.httpObj.mydelegate = self
-        self.httpObj.httpGetApi("trade/query", parameters: ["_id" : self.trade._id], tag: 700)
-        SVProgressHUD.showWithStatusWithBlack("请稍等...")
-   
-        
+      
         self.loadComNavTitle("订单详情")
         self.loadComNaviLeftBtn()
+        
+        self.httpObj.mydelegate = self
+        SVProgressHUD.showWithStatusWithBlack("请稍等...")
+        self.requestData();
+        
+    }
+    func requestData()
+    {
+        self.httpObj.httpGetApi("trade/query", parameters: ["_id" : self.trade._id], tag: 700)
+    
     }
     
     func setupView() {
@@ -275,7 +292,7 @@ class U07OrderTradeDetailVC: RootVC, WebRequestDelegate,UIAlertViewDelegate {
         var url: String = ""
         var tag: Int = 700
         if self.role == .buyyer {
-            if self.trade.status == 1 ||  self.trade .status == 2 ||  self.trade .status == 3 {//撤单
+            if self.trade.status == 1 ||  self.trade .status == 2 ||  self.trade .status == 3 ||  self.trade .status == 12 {//撤单
                 url = "trade/cancel"
                 tag = 701
             } else if self.trade.status == 4 {
