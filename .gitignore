@@ -1,4 +1,7 @@
-
+server-application/.idea
+server-segment/.idea
+*.pyc
+winston.log.*
 .project
 
 # Exclude OS X folder attributes
