@@ -1,0 +1,92 @@
+{
+<<<<<<< HEAD
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3B601C6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++7E6957F" : {
+
+    },
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++13E68DA" : {
+=======
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++8B088A7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++D7CE875" : {
+
+    },
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++4DA0F99" : {
+
+    },
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++06C8C18" : {
+>>>>>>> a18b4ffff7f06165f0bc31fc98e4f4c9229d1484
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+<<<<<<< HEAD
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++13E68DA" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3B601C6" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++7E6957F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "58398B6B-92FB-499B-82C8-A842276A1E6C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++13E68DA" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3B601C6" : "wishlink-iOS\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++7E6957F" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/"
+=======
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++4DA0F99" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++4E3FA70" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++06C8C18" : 0,
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++8B088A7" : 0,
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++D7CE875" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "58398B6B-92FB-499B-82C8-A842276A1E6C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7f69d04d-286e-3648-968a-806926e1464b++2450+++4DA0F99" : "com.wishlink.kelp\/app-ios\/wishlink\/Library\/GTMBase64\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++4E3FA70" : "wishlink-iOS\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++06C8C18" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/",
+    "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++8B088A7" : "com.wishlink.kelp\/",
+    "7f69d04d-286e-3648-968a-806926e1464b++1783+++D7CE875" : "wishlink-iOS\/app-ios\/wishlink\/Library\/SVProgressHUD\/"
+>>>>>>> a18b4ffff7f06165f0bc31fc98e4f4c9229d1484
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "wishlink",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "app-ios\/wishlink.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+<<<<<<< HEAD
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++13E68DA"
+=======
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++06C8C18"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++D7CE875"
+>>>>>>> a18b4ffff7f06165f0bc31fc98e4f4c9229d1484
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/61.152.104.210:9443\/svn\/landi_rnap",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+<<<<<<< HEAD
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++1783+++7E6957F"
+=======
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7f69d04d-286e-3648-968a-806926e1464b++2450+++4DA0F99"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++4E3FA70"
+>>>>>>> a18b4ffff7f06165f0bc31fc98e4f4c9229d1484
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/andiris29\/com.wishlink.kelp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+<<<<<<< HEAD
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++3B601C6"
+=======
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21BCD4C55F5C4BF0F43984E7D9882077126AFA0+++8B088A7"
+>>>>>>> a18b4ffff7f06165f0bc31fc98e4f4c9229d1484
+    }
+  ]
+}
