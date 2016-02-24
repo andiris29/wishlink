@@ -1800,8 +1800,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhongyi Han (M2Y85NHB8N)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Lingshi Cultural Media Co., Ltd (589V53Y9R7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Lingshi Cultural Media Co., Ltd (589V53Y9R7)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/wishlink/Library/AliSDK",
@@ -1828,9 +1828,9 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.wishlink;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.app.wishlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "76266c6b-366b-4bec-9b27-6927bd3a95eb";
+				PROVISIONING_PROFILE = "e1b88c17-f5a8-4c57-bb48-b5f68cf6988e";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
@@ -1869,9 +1869,9 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.wishlink;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ledsed.app.wishlink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f266587-d5d9-4bfc-9f25-9f16fd99c95c";
+				PROVISIONING_PROFILE = "e1b88c17-f5a8-4c57-bb48-b5f68cf6988e";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Library/wishlink-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/wishlink/Library/JPush-1.8-3.5";
 			};
